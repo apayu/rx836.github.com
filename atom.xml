@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-04-27T01:08:54+08:00</updated>
+  <updated>2012-04-27T01:49:27+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[出生以來第一次使用Octopress for windows]]></title>
-    <link href="http://rx836.github.com/blog/2012/04/26/f/"/>
+    <link href="http://rx836.github.com/blog/f/"/>
     <updated>2012-04-26T00:54:00+08:00</updated>
-    <id>http://rx836.github.com/blog/2012/04/26/f</id>
+    <id>http://rx836.github.com/blog/f</id>
     <content type="html"><![CDATA[<p>終於&#8230;</p>
 
 <p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
