@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-04-26T01:57:34+08:00</updated>
+  <updated>2012-04-27T00:53:19+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -32,7 +32,7 @@
 
 <p>2.再來是安裝Octopress</p>
 
-<p>[itsPG.org <a href="http://itspg.github.com/blog/2012/02/29/github-on-windows-tutorial/">[教學] 在windows上安裝octopress 新手教學 / 初學者指南</a></p>
+<p><a href="http://itspg.github.com/blog/2012/02/29/octopress-on-windows-tutorial/">itsPG.org [教學] 在windows上安裝octopress 新手教學 / 初學者指南</a></p>
 
 <p>3.因為Octopress是用Markdown編輯的，所以了解到甚麼是Markdown</p>
 
