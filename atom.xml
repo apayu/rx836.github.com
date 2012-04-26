@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-04-27T02:08:55+08:00</updated>
+  <updated>2012-04-27T02:16:22+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何開啟 Disqus與和常見的指令]]></title>
+    <link href="http://rx836.github.com/blog/octopress-notes-1/"/>
+    <updated>2012-04-27T02:12:00+08:00</updated>
+    <id>http://rx836.github.com/blog/octopress-notes-1</id>
+    <content type="html"><![CDATA[<p>經營Blog不是一件簡單的事情，多的是我需要去尋找資源要去學習的事情</p>
+
+<p>未完&#8230;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[出生以來第一次使用Octopress for windows]]></title>
