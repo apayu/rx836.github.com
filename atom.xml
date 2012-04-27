@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-04-28T01:12:54+08:00</updated>
+  <updated>2012-04-28T01:23:16+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -40,10 +40,40 @@ disqus_show_comment_count: true
 
 <p>然後常用的指令有</p>
 
-<p>**設置Octopress與Github做連結</p>
+<p><strong>設置Octopress與Github做連結</strong></p>
 
 <pre><code>rake setup_github_pages
 </code></pre>
+
+<p><strong>新增文章</strong></p>
+
+<pre><code>rake new_post["title"]
+</code></pre>
+
+<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
+
+<pre><code>rake generate
+</code></pre>
+
+<p><strong>發佈_deploy到Github上</strong></p>
+
+<pre><code>rake deploy
+</code></pre>
+
+<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
+
+<pre><code>set LC_ALL=zh_TW.UTF-8
+set LANG=zh_TW.UTF-8
+</code></pre>
+
+<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
+
+<pre><code>git add .
+git commit -m "your message"
+git push origin source  
+</code></pre>
+
+<p>這還真是一篇＂筆記＂的文章&#8230;</p>
 ]]></content>
   </entry>
   
