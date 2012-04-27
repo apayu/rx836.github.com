@@ -3,9 +3,9 @@
 # ----------------------- #
 
 url: http://rx836.github.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: Rx836
+subtitle: 程式、遊記、還有心得分享 歡迎來交流 最重要的是做個朋友
+author: 阿帕
 simple_search: http://google.com/search
 description:
 
@@ -93,7 +93,7 @@ disqus_short_name: rx836
 disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-31245620-1
 
 # Facebook Like
 facebook_like: false
