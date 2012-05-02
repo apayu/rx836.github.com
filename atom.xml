@@ -1,113 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Rx836</title>
-  <meta name="author" content="阿帕">
-
-  
-  <meta name="description" content="作者:陳文茜 出版者:時報文化出版 地球上青春的眼淚 這是這本書一開始的標題，從標題就可以看出，其實這是本想寫給這一代年輕人的書，一開始就直接講明說，這一代的年輕人所背負的時代命運，因為歐債危機，因為美國華爾街的那些肥貓，因為政治人物的總總行為，最終導致青年的失業率高漲，甚至可能連翻身的機會都沒有 &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://rx836.github.com">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Rx836" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-31245620-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Rx836</a></h1>
-  
-    <h2>程式、遊記、還有心得分享 歡迎來交流 最重要的是做個朋友</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:rx836.github.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Rx836]]></title>
+  <link href="http://rx836.github.com/atom.xml" rel="self"/>
+  <link href="http://rx836.github.com/"/>
+  <updated>2012-05-02T16:40:15+08:00</updated>
+  <id>http://rx836.github.com/</id>
+  <author>
+    <name><![CDATA[阿帕]]></name>
     
-      <h1 class="entry-title"><a href="/blog/book-review-1/">[讀後心得] 只剩下一個角落的繁華</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2012-05-01T21:38:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
-        
-         | <a href="/blog/book-review-1/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>作者:陳文茜</p>
+  <entry>
+    <title type="html"><![CDATA[[讀後心得] 只剩下一個角落的繁華]]></title>
+    <link href="http://rx836.github.com/blog/book-review-1/"/>
+    <updated>2012-05-01T21:38:00+08:00</updated>
+    <id>http://rx836.github.com/blog/book-review-1</id>
+    <content type="html"><![CDATA[<p>作者:陳文茜</p>
 
 <p>出版者:時報文化出版</p>
 
@@ -142,44 +53,15 @@
 <p>或許，把簡單的事情重複一直做，專注於你想專注的事</p>
 
 <p>或許，這會是我們翻身的一個年代</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/octopress-notes-1/">如何開啟 Disqus與和常見的指令</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
-        
-         | <a href="/blog/octopress-notes-1/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
+  <entry>
+    <title type="html"><![CDATA[如何開啟 Disqus與和常見的指令]]></title>
+    <link href="http://rx836.github.com/blog/octopress-notes-1/"/>
+    <updated>2012-04-27T02:12:00+08:00</updated>
+    <id>http://rx836.github.com/blog/octopress-notes-1</id>
+    <content type="html"><![CDATA[<p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
 
 <h2>為什麼我沒有Comments..</h2>
 
@@ -235,44 +117,15 @@ git push origin source
 </code></pre>
 
 <p>這還真是一篇＂筆記＂的文章&#8230;</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/first-octopress/">出生以來第一次使用Octopress for Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-27T01:55:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
-        
-         | <a href="/blog/first-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>終於&#8230;</p>
+  <entry>
+    <title type="html"><![CDATA[出生以來第一次使用Octopress for windows]]></title>
+    <link href="http://rx836.github.com/blog/first-octopress/"/>
+    <updated>2012-04-27T01:55:00+08:00</updated>
+    <id>http://rx836.github.com/blog/first-octopress</id>
+    <content type="html"><![CDATA[<p>終於&#8230;</p>
 
 <p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
 
@@ -301,44 +154,15 @@ git push origin source
 <p>接著就開開心心的使用Octopress</p>
 
 <p>但接下來還有很多東西還要學習與克服，我也會將遭遇到的問題記錄成筆記來當作參考</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/f/">出生以來第一次使用Octopress for Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-26T00:54:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2012</time>
-        
-         | <a href="/blog/f/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>終於&#8230;</p>
+  <entry>
+    <title type="html"><![CDATA[出生以來第一次使用Octopress for windows]]></title>
+    <link href="http://rx836.github.com/blog/f/"/>
+    <updated>2012-04-26T00:54:00+08:00</updated>
+    <id>http://rx836.github.com/blog/f</id>
+    <content type="html"><![CDATA[<p>終於&#8230;</p>
 
 <p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
 
@@ -367,94 +191,7 @@ git push origin source
 <p>接著就開開心心的使用Octopress</p>
 
 <p>但接下來還有很多東西還要學習與克服，我也會將遭遇到的問題記錄成筆記來當作參考</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/book-review-1/">[讀後心得] 只剩下一個角落的繁華</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/octopress-notes-1/">如何開啟 Disqus與和常見的指令</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/first-octopress/">出生以來第一次使用Octopress for windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/f/">出生以來第一次使用Octopress for windows</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - 阿帕 -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'rx836';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>
