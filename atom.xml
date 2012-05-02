@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-05-02T16:58:15+08:00</updated>
+  <updated>2012-05-02T17:00:28+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -65,6 +65,9 @@
     <updated>2012-04-27T02:12:00+08:00</updated>
     <id>http://rx836.github.com/blog/octopress-notes-1</id>
     <content type="html"><![CDATA[<p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
+
+<!-- more  -->
+
 
 <h2>為什麼我沒有Comments..</h2>
 
@@ -131,6 +134,9 @@ git push origin source
     <content type="html"><![CDATA[<p>終於&#8230;</p>
 
 <p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
+
+<!-- more  -->
+
 
 <p>但因為這篇是我第一次用Octopress寫文章，許多設定和細節都還沒掌握，所以我簡單的貼上幾個從google上所找到的教學資源作為筆記與參考</p>
 
