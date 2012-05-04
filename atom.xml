@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-05-04T23:29:46+08:00</updated>
+  <updated>2012-05-04T23:51:41+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -37,15 +37,15 @@
 
 <h3>3.The user de-authorizes your app</h3>
 
-<p>User移除掉你的APP驗證(在帳號設定->應用程式 那邊)</p>
+<p>User移除掉你的APP驗證(在帳號設定->應用程式)</p>
 
 <h3>4.The user logs out of Facebook.</h3>
 
 <p>User登出Facebook</p>
 
-<p>以上四種情況都會導致時效過期，但在新的整合之下，雖然預設只有1-2個小時的時效，但實際上可透過延長來達到60天的期限，以下是我看文件所做的做法</p>
+<p>以上四種情況都會導致時效過期，但在新的整合之下，雖然預設只有1-2個小時的時效，但實際上可透過延長來達到60天的期限</p>
 
-<p>用Javascript SDK用一般取得access tokens的方法</p>
+<p>首先用Javascript SDK用一般取得access tokens的方法</p>
 
 <pre><code>FB.getLoginStatus(function(response) {
         if (response.authResponse) {
@@ -59,6 +59,44 @@
         }
     });
 </code></pre>
+
+<p>取得壽命較短的access tokens(short-lived)以後，再透過GET取得較長的access tokens(long-lived)，已擴展到60天的時效，這裡我用Jquery的$.ajax來取得</p>
+
+<pre><code>save_u = [
+                        { name: "client_id", value: APP_ID },
+                        { name: "client_secret", value: APP_SECRET },
+                        { name: "grant_type", value: 'fb_exchange_token' },
+                        { name: "fb_exchange_token", value: EXISTING_ACCESS_TOKEN  }
+                   ];
+            $.ajax({
+                type: "GET",
+                url: "https://graph.facebook.com/oauth/access_token",
+                data: save_u,
+                success: function(data) {
+                    console.log(data);
+                    });
+                }
+            });
+</code></pre>
+
+<p>APP_ID和APP_SECRET從你設定APP的地方就可以看到，grant_type的值照抄就是fb_exchange_token，而參數fb_exchange_token要給的值就是你剛所取得較短的access tokens</p>
+
+<p>接著Facebook就會回傳一串值回來</p>
+
+<pre><code>access_token=xxxxxxxxxxxxxxxxx&amp;expires=5183914
+</code></pre>
+
+<p>xxx那些就代表著新的並且擁有60天期限的access tokens</p>
+
+<p>而期限5183914就是秒數，算一算剛好差不多是60天的時間沒錯</p>
+
+<p>目前針對時效部分是不是真的可以長時間使用我還在測試中，如果我有新的心得會再上來與大家分享，那如果文章裡有錯誤的話，也請不吝於指正</p>
+
+<p>參考:</p>
+
+<p><a href="https://developers.facebook.com/blog/post/2011/05/13/how-to--handle-expired-access-tokens/">How-To: Handle expired access tokens</a></p>
+
+<p><a href="https://developers.facebook.com/roadmap/offline-access-removal/">Removal of offline_access permission</a></p>
 ]]></content>
   </entry>
   
