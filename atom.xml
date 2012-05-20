@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-05-21T01:07:18+08:00</updated>
+  <updated>2012-05-21T01:15:13+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -23,7 +23,7 @@
 <!--more-->
 
 
-<p>能把這麼丟臉的事情都昭告天下，人就是要認清自己，不會的東西就是要主動去尋求答案，不懂的事情就是不要丟臉怕別人知道，因為我深信，不可能每個人一出生甚麼事情都懂，但唯有不肯面對自己的人&#8230;.ㄟ!話題偏了</p>
+<p>能把這麼丟臉的事情都昭告天下，就是我認為人就是要認清自己，不會的東西就是要主動去尋求答案，不懂的事情也不要怕丟臉被別人知道，因為我深信，不可能每個人一出生就什麼事情都會，但唯有不肯面對自己的人&#8230;.ㄟ!話題偏了</p>
 
 <p>如果你要設定自己的一組Domain，首先必須先去買一組屬於自己的網址，像我因為之前有幫公司在PC HOME買過網址的經驗，所以我就直接挑選PC HOME做為買網址的服務</p>
 
@@ -58,17 +58,19 @@ blog |  rx836.github.com. | CNAME
 
 <p>然後好好睡一覺，等明天打開網址大喊</p>
 
-<h2>爽啦!我終於設定好了</h2>
+<h3>爽啦!我終於設定好了</h3>
 
-<p>可是設定好後，我還是在Google搜尋不到我的文章，Google Analytics[怎麼看都只有我自己的流量，不奢求成為受歡迎的Blog客，但沒人可以一起分享總是覺得孤單，也沒有寫文章的動力</p>
+<p>可是設定好後，我還是在Google搜尋不到我的文章，Google Analytics怎麼看都只有我自己的流量，不奢求成為受歡迎的Blog客，但沒人可以一起分享總是覺得孤單，唱獨角戲的感覺很不真實，也就不會有寫文章的動力</p>
 
-<p>所以我打算主動出擊，直接跑去別人的blog問(<a href="http://zespia.tw" target="_blank">http://zespia.tw/</a>)，果然社群都是很親切大方的，直接告訴我把<strong>sitemap.xml</strong>這個丟到Google上就可以了!</p>
+<p>所以我打算主動出擊，直接跑去別人的blog問(<a href="http://zespia.tw" target="_blank">http://zespia.tw/</a>)，果然社群都是很親切大方的，直接告訴我把<strong>sitemap.xml</strong>檔案這個丟到Google上就可以了!</p>
 
 <p><a href="https://www.google.com/webmasters/tools/" target="_blank">Google 網站管理工具</a></p>
 
-<p>利用網站管理工具先新增一個網站，接著提交sitemap就完成了，一段時間後，你的網站就曝光在網際網路的茫茫大海之中了，但排名或是SEO優化這部分就要看個人造化了</p>
+<p>利用網站管理工具先新增一個網站，接著提交sitemap就完成了，一段時間以後，你的網站就曝光在網際網路的茫茫大海之中，但排名或是SEO優化這部分就要看個人造化了</p>
 
-<p>當你開始經營一個Blog時，你一定不會只在一個地方撰寫Blog，有時候突如其來的想法或是問題分享，會讓你想要立刻打開編輯器做編輯，但Octopress不是一般的Blog，他需要先在本機做產生，再發佈，不像其他的Blog有個後台管理，所以異地編輯就需要花一些功夫，這裡我是用Octopress+Github當教學</p>
+<p>當你開始經營一個Blog時，你一定不會只想在一個地方撰寫Blog，有時候突如其來的想法或是問題分享，會讓你想要立刻打開編輯器做編輯，但Octopress不是一般的Blog，他需要先在本機做產生，再發佈，不像其他的Blog有個後台管理，所以異地編輯就需要花一些功夫</p>
+
+<h3>這裡我是用Octopress+Github當教學</h3>
 
 <p>首先你要有一台已經安裝好Octopress和Github(<a href="http://blog.rx836.tw/blog/first-octopress/" target="_blank">這裡教學</a>)的環境，接著Clone你的Blog到你新的這台電腦裡面</p>
 
@@ -88,7 +90,7 @@ git checkout source
 <pre><code>rake setup_github_pages
 </code></pre>
 
-<p>出現提示以後輸入你的SSH</p>
+<p>出現提示以後再輸入你的SSH</p>
 
 <pre><code>git@github.com:rx836/rx836.github.com.git
 </code></pre>
@@ -98,7 +100,7 @@ git checkout source
 <pre><code>git pull origin source
 </code></pre>
 
-<p>然後就可以一樣的看是要新增文章，還是編輯，產生，發佈，躺著，趴著，跪著，隨便你怎麼做了</p>
+<p>最後就可以看是要新增文章，還是編輯，產生，發佈，躺著，趴著，跪著，隨便怎麼做都可以了</p>
 
 <p>一樣，在發佈Blog以後，別問了記得更新source到你的Github上，這樣另外一台才可以有最新的source可以用喔</p>
 
@@ -107,7 +109,7 @@ git commit m 'mycommit'
 git push origin source
 </code></pre>
 
-<p>以上是參考<a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blank">http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/</a></p>
+<p>參考:<a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blank">http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/</a></p>
 
 <p>以上教學分享，如有疑問或錯誤，歡迎一起討論</p>
 ]]></content>
