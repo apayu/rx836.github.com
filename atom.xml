@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-05-21T01:05:53+08:00</updated>
+  <updated>2012-05-21T01:07:18+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -417,7 +417,7 @@ $.each(a1,function(){
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[如何開啟 Disqus與和常見的指令]]></title>
+    <title type="html"><![CDATA[[Octopress]如何開啟 Disqus與和常見的指令]]></title>
     <link href="http://rx836.github.com/blog/octopress-notes-1/"/>
     <updated>2012-04-27T02:12:00+08:00</updated>
     <id>http://rx836.github.com/blog/octopress-notes-1</id>
@@ -484,7 +484,7 @@ git push origin source
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[出生以來第一次使用Octopress for windows]]></title>
+    <title type="html"><![CDATA[[Octopress]出生以來第一次使用Octopress for windows]]></title>
     <link href="http://rx836.github.com/blog/first-octopress/"/>
     <updated>2012-04-27T01:55:00+08:00</updated>
     <id>http://rx836.github.com/blog/first-octopress</id>
