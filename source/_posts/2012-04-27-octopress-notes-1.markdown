@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "如何開啟 Disqus與和常見的指令"
+title: "[Octopress]如何開啟 Disqus與和常見的指令"
 date: 2012-04-27 02:12
 comments: true
 categories: 
