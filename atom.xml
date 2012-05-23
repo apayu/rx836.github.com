@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-05-24T00:32:41+08:00</updated>
+  <updated>2012-05-24T00:38:22+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -80,7 +80,7 @@ $('.myClass')
 $('p:not(.color1)').addClass('color2');
 </code></pre>
 
-<p><a target="_blank" href="http://jsfiddle.net/bpJct/">http://jsfiddle.net/bpJct/</a></p>
+<p><a target="_blank" href="http://jsfiddle.net/bpJct/3/">http://jsfiddle.net/bpJct/3/</a></p>
 
 <pre><code>//這裡是用正規表示法
 $('a[href^="mailto:"]').addClass('font1');
@@ -112,7 +112,7 @@ $('tr:nth-child(even)').addClass('color2');
 
 <p>就如同剛剛所講的，index起始不同(JavaScript起始為0，CSS為1)，所以雖然都是取偶數，但卻是不同列</p>
 
-<p>再來就一些FORM常用的選擇器 <a target="_blank" href="http://jsfiddle.net/qcXSy/">http://jsfiddle.net/qcXSy/</a></p>
+<p>再來就一些FORM常用的選擇器 <a target="_blank" href="http://jsfiddle.net/qcXSy/3/">http://jsfiddle.net/qcXSy/3/</a></p>
 
 <pre><code>$(':button').click(function(){
      alert('a');
