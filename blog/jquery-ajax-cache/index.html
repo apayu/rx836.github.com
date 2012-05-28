@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[Octopress]出生以來第一次使用Octopress for windows - Rx836</title>
+  <title>[Jquery] AJAX cache讓IE一直抓到舊資料 - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="終於&#8230; 在拼命的鬼打牆之下，我終於架好Octopress，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄 &hellip;">
+  <meta name="description" content="說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了 但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/first-octopress">
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-ajax-cache">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">[Octopress]出生以來第一次使用Octopress for Windows</h1>
+      <h1 class="entry-title">[Jquery] AJAX cache讓IE一直抓到舊資料</h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2012-04-27T01:55:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+<time datetime="2012-05-29T01:24:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -104,38 +104,25 @@
   </header>
 
 
-<div class="entry-content"><p>終於&#8230;</p>
+<div class="entry-content"><p>說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了</p>
 
-<p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
-
-<!-- more  -->
+<!--more-->
 
 
-<p>但因為這篇是我第一次用Octopress寫文章，許多設定和細節都還沒掌握，所以我簡單的貼上幾個從google上所找到的教學資源作為筆記與參考</p>
+<p>但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$.ajax()做AJAX的資料取得，目的是希望User每按一次按鈕就取得一筆新的資料</p>
 
-<p>1.因為我是用Octopress+github，所以首先必須先安裝好github</p>
+<p>誰知道在Firefox和Chrome都正常，唯獨只有IE不管怎麼取都是舊的資料，後來看了<a href="http://blog.darkthread.net/" target="_blank">黑暗執行緒</a>的<a href="http://blog.darkthread.net/post-2009-06-03-about-jquery-ajax-cache-option.aspx" target="_blank">關於jQuery AJAX cache參數</a>我才知道，要在$.axaj()裡的參數cache設成false</p>
 
-<p><a href="http://itspg.github.com/blog/2012/02/29/github-on-windows-tutorial/" target="_blank">itsPG.org [教學] 在windows上使用github 新手教學 / 初學者指南</a></p>
+<pre><code>cache: false
+</code></pre>
 
-<p>這是針對windows，至於其他作業系統例如Mac網路上資源頗多的，這裡就不多加闡述</p>
+<p>這樣就不會再抓cache而讓資料怎麼抓都抓不到新的</p>
 
-<p>2.再來是安裝Octopress</p>
+<p>另外還有這篇關於GET與POST的文章也很值得一讀!</p>
 
-<p><a href="http://itspg.github.com/blog/2012/02/29/octopress-on-windows-tutorial/" target="_blank">itsPG.org [教學] 在windows上安裝octopress 新手教學 / 初學者指南</a></p>
+<p><a href="blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
 
-<p>3.因為Octopress是用Markdown編輯的，所以要了解到甚麼是Markdown</p>
-
-<p><a href="http://markdown.tw/#link" target="_blank">Markdown</a></p>
-
-<p>4.再來就是找一個好編輯Markdown的工具來編輯，當然用記事本也是可以，這邊我選擇的是MarkPad</p>
-
-<p><a href="http://code52.org/DownmarkerWPF/" target="_blank">MarkPad</a></p>
-
-<p>不過要注意的是要先安裝<a href="http://www.microsoft.com/downloads/zh-tw/details.aspx?FamilyID=0a391abd-25c1-4fc0-919f-b21f31ab88b7" target="_blank">Microsoft .NET Framework 4</a></p>
-
-<p>接著就開開心心的使用Octopress</p>
-
-<p>但接下來還有很多東西還要學習與克服，我也會將遭遇到的問題記錄成筆記來當作參考</p>
+<p>以上如有錯誤或疑問，歡迎一起討論喔!</p>
 </div>
 
 
@@ -158,7 +145,7 @@
   
 
 
-<time datetime="2012-04-27T01:55:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+<time datetime="2012-05-29T01:24:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
       
 
 
@@ -166,7 +153,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/first-octopress/" data-via="" data-counturl="http://rx836.github.com/blog/first-octopress/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/jquery-ajax-cache/" data-via="" data-counturl="http://rx836.github.com/blog/jquery-ajax-cache/" >Tweet</a>
   
   
   
@@ -175,8 +162,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/jquery-notes-2/" title="Previous Post: [Jquery]jquery使用筆記(二)-選擇器*開罐器">&laquo; [Jquery]jquery使用筆記(二)-選擇器*開罐器</a>
       
-        <a class="basic-alignment right" href="/blog/octopress-notes-1/" title="Next Post: [Octopress]如何開啟 Disqus與和常見的指令">[Octopress]如何開啟 Disqus與和常見的指令 &raquo;</a>
       
     </p>
   </footer>
@@ -243,8 +230,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/first-octopress/';
-        var disqus_url = 'http://rx836.github.com/blog/first-octopress/';
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-ajax-cache/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-ajax-cache/';
         var disqus_script = 'embed.js';
       
     (function () {
