@@ -13,7 +13,7 @@ categories:
 
 <a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a>
 
-簡單來說就是需先申請<a href="www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在**_config.yml**裡面
+簡單來說就是需先申請<a href="http://www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在**_config.yml**裡面
 
 	disqus_short_name: your_disqus_short_name
 	disqus_show_comment_count: true

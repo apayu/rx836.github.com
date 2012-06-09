@@ -18,7 +18,7 @@ categories:
 
 另外還有這篇關於GET與POST的文章也很值得一讀!
 
-<a href="blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a>
+<a href="http://blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a>
 
 
 以上如有錯誤或疑問，歡迎一起討論喔!
