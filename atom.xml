@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-06-10T03:14:06+08:00</updated>
+  <updated>2012-06-10T03:24:28+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -64,7 +64,7 @@
 
 <p>另外還有這篇關於GET與POST的文章也很值得一讀!</p>
 
-<p><a href="blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
+<p><a href="http://blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
 
 <p>以上如有錯誤或疑問，歡迎一起討論喔!</p>
 ]]></content>
@@ -615,7 +615,7 @@ $.each(a1,function(){
 
 <p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
 
-<p>簡單來說就是需先申請<a href="www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
+<p>簡單來說就是需先申請<a href="http://www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
 
 <pre><code>disqus_short_name: your_disqus_short_name
 disqus_show_comment_count: true
