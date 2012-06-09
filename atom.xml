@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Rx836]]></title>
+  <link href="http://rx836.github.com/atom.xml" rel="self"/>
+  <link href="http://rx836.github.com/"/>
+  <updated>2012-06-10T03:08:08+08:00</updated>
+  <id>http://rx836.github.com/</id>
+  <author>
+    <name><![CDATA[阿帕]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[讀後心得] 疼痛,才叫青春]]></title>
+    <link href="http://rx836.github.com/blog/book-review-2/"/>
+    <updated>2012-06-10T03:06:00+08:00</updated>
+    <id>http://rx836.github.com/blog/book-review-2</id>
+    <content type="html"><![CDATA[<p>作者:金蘭都</p>
+
+<p>出版者:圓神出版社有限公司</p>
+
+<!--more-->
+
+
+<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下而感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
+
+<h2>人生時鐘:你現在的人生是幾點?</h2>
+
+<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所舉道的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
+
+<h2>你想要新人獎還是主角獎?</h2>
+
+<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
+
+<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
+
+<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
+
+<p>如果有不一樣的想法，歡迎一起討論</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Jquery] AJAX cache讓IE一直抓到舊資料]]></title>
+    <link href="http://rx836.github.com/blog/jquery-ajax-cache/"/>
+    <updated>2012-05-29T01:24:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-ajax-cache</id>
+    <content type="html"><![CDATA[<p>說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了</p>
+
+<!--more-->
+
+
+<p>但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$.ajax()做AJAX的資料取得，目的是希望User每按一次按鈕就取得一筆新的資料</p>
+
+<p>誰知道在Firefox和Chrome都正常，唯獨只有IE不管怎麼取都是舊的資料，後來看了<a href="http://blog.darkthread.net/" target="_blank">黑暗執行緒</a>的<a href="http://blog.darkthread.net/post-2009-06-03-about-jquery-ajax-cache-option.aspx" target="_blank">關於jQuery AJAX cache參數</a>我才知道，要在$.axaj()裡的參數cache設成false</p>
+
+<pre><code>cache: false
+</code></pre>
+
+<p>這樣就不會再抓cache而讓資料怎麼抓都抓不到新的</p>
+
+<p>另外還有這篇關於GET與POST的文章也很值得一讀!</p>
+
+<p><a href="blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
+
+<p>以上如有錯誤或疑問，歡迎一起討論喔!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Jquery]jquery使用筆記(二)-選擇器*開罐器]]></title>
+    <link href="http://rx836.github.com/blog/jquery-notes-2/"/>
+    <updated>2012-05-22T00:20:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-notes-2</id>
+    <content type="html"><![CDATA[<p>其實選擇器就像開罐器一樣，會用這個工具的人，自然吃的到甜頭，但不會用這個工具的人，不管罐頭裡面的麵筋土豆有多美味，吃不到就是吃不到，就如同jquery再怎麼強大，也只能看著螢幕，而不知該如何下手，不過雖然選擇器不難，也容易上手，但老實說，我用了一年多下來，還是覺得自己只有用皮毛而已，所以希望藉著這一系列的筆記，讓自己能更長進一些</p>
+
+<!--more-->
+
+
+<h2>DOM怎麼吃</h2>
+
+<p><a href="http://www.ideastar.me/2011/11/htmljs-dom.html" target="_blank">DOM</a>可以說是JavaScript與網頁之間的聯繫管道，他提供了一個模型，讓JavaScript能藉由此模型來改變或操作整個網頁，</p>
+
+<pre><code>&lt;div class="one"&gt;
+    &lt;p&gt;two_1&lt;/p&gt;
+    &lt;p&gt;two_2&lt;/p&gt;
+    &lt;p&gt;two_2&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>我這邊就簡單介紹一下DOM模型，有個元素class名為one的是父元素，底下有三個兒子元素&#60;p&#62;，每個元素都視為一個節點，也可以看成一個樹狀圖，因為我認為有些東西是Google會講得比我好，所以還想知道更多糾結的父子關係&#8230;，可以<a href="http://www.ideastar.me/2011/11/htmljs-dom.html" target="_blank">去這</a>，那邊有很好的說明，這邊就不多加解釋，而當Jquery利用選擇器抓取到DOM元素以後，就會將他包裝成一個Jquery object，並且回傳</p>
+
+<h2>$(&#8216;#MyDiv&#8217;)&#60;&#8211; 他是一個物件</h2>
+
+<p>這裡有個觀念十分重要，因為許多初學者，甚至是一些從Jquery開始學起Javascript的開發者(包括我)，常常會把以下兩個程式碼搞混在一起</p>
+
+<pre><code>//原生JavaScript取id為a的div
+var result1 = document.getElementById('a');
+console.log(result1);
+
+//用jquery取id為a的div
+var result2=$('#a');
+console.log(result2);
+</code></pre>
+
+<p>如果你執行這段程式碼出來，妳會發現console出來的結果，用JavaScript取出來的結果是DOM，可是一樣的div用Jquery取出來的卻是個包裝過後的物件，換句話說，你不能直接對包裝過後的Jquery物件增加<strong>DOM的事件</strong>，而是要用<strong>Jquery提供的事件</strong>，有人會說，那意思是不是說以後只能河水不犯井水，往後互不干涉，從此分道揚鑣呢? 到也不是</p>
+
+<pre><code>var b=$('#a')[0];
+</code></pre>
+
+<p>只要跟上述程式碼一樣就可以取得DOM的元素了</p>
+
+<h2>$()工廠</h2>
+
+<p>不管是如何選擇，我們都會用相同的函式<strong>$()</strong>，就如之前所講的，他能接受CSS選擇器的語法做為參數，而最主要的三個參數分別為tag name、ID與class，當然，這三個參數可以再與其他CSS語法做結合</p>
+
+<pre><code>//tag name
+$('div')
+
+//ID
+$('#myId')
+
+//class
+$('.myClass')
+</code></pre>
+
+<p>而上述函式都會如同第一章所介紹的，都有隱式迭代的特色，而為了做到跨覽器的支援，Jquery的選擇器包含了CSS1-3，所以不用擔心一些比較特別的瀏覽器(對就是IE6)不能執行，除非瀏覽器沒有開啟JavaScript</p>
+
+<p>接著接下來我簡單介紹幾個用法</p>
+
+<p><a target="_blank" href="http://jsfiddle.net/XZnQ7/">http://jsfiddle.net/XZnQ7/</a></p>
+
+<pre><code>//將不含color1 class的p增加一個color2 class
+$('p:not(.color1)').addClass('color2');
+</code></pre>
+
+<p><a target="_blank" href="http://jsfiddle.net/bpJct/3/">http://jsfiddle.net/bpJct/3/</a></p>
+
+<pre><code>//這裡是用正規表示法
+$('a[href^="mailto:"]').addClass('font1');
+$('a[href^="http"]').addClass('font2');
+$('a[href$=".pdf"]').addClass('font3');
+</code></pre>
+
+<p>當然還提供了一些客製化(custom)的選擇器，但一般來說原生(native)的方式會來的效能比較快，如果有注重這塊的朋友，可能要盡量避免使用客製化的選擇器例如以下範例</p>
+
+<p><a target="_blank" href="http://jsfiddle.net/MF8mu/">http://jsfiddle.net/MF8mu/</a></p>
+
+<pre><code>//替index為1的tr加上class
+$('tr:eq(1)').addClass('color1');
+
+//替index為1的tr加上class
+$('tr:nth-child(1)').addClass('color2'); 
+</code></pre>
+
+<p>這裡很特別的是，<strong>為什麼都是替index為1的tr加上class，卻是不同的結果呢?</strong>，因為:eq()算是一個JavaScript陣列，index是0起始，所以才會選到第二個，而nth-child()是CSS選擇器的一種，所以index是以1起始，選到的就是第一個，以下的範例意思相同</p>
+
+<p><a target="_blank" href="http://jsfiddle.net/3PrJt/">http://jsfiddle.net/3PrJt/</a></p>
+
+<pre><code>//選擇偶數的tr增加class
+$('tr:even').addClass('color1');
+
+//選擇偶數的tr增加class
+$('tr:nth-child(even)').addClass('color2');
+</code></pre>
+
+<p>就如同剛剛所講的，index起始不同(JavaScript起始為0，CSS為1)，所以雖然都是取偶數，但卻是不同列</p>
+
+<p>再來就一些FORM常用的選擇器 <a target="_blank" href="http://jsfiddle.net/qcXSy/3/">http://jsfiddle.net/qcXSy/3/</a></p>
+
+<pre><code>$(':button').click(function(){
+     alert('a');
+});
+</code></pre>
+
+<p>這就代表說綁定所有的bitton一個click事件，其他還有像:input、:button、:enabled、:disabled都可以跟其他選擇器一起組合成新的選擇器</p>
+
+<h2>更加強大的.filter()</h2>
+
+<p>當有時候一般的選擇器已經不能不能滿足我們複雜的DOM時，例如要抓div的爸爸的哥哥的兒子的妹婿的二姑的大舅時&#8230;，這時候還可以用一個方法filter，這個方法特別的地方在於他可以帶function進去 <a target="_blank" href="http://jsfiddle.net/wGz3k/">http://jsfiddle.net/wGz3k/</a></p>
+
+<p>可以看到function裡面限制return index == 1才可以增加CSS，這個好處就在於可以在裡面做很多複雜的邏輯運算</p>
+
+<p>當然Jquery還有太多太多選擇器可以使用，像還有.next()、.parent()、.children()一般常用的這幾個，其實就很夠用了我認為，再多的選擇器有時候好像只是展示不同的寫法，但其實只要能抓取到你想要的元素，解決問題</p>
+
+<p>你甚至想要這樣寫$(&#8216;div&#8217;).children().children().children().children().children()也不會有人說不行..</p>
+
+<p>更多的選擇器可以到Jquery的官方網站<a target="_blank" href="http://api.jquery.com/category/selectors/">看文件</a></p>
+
+<p>以上如有錯誤或疑問，歡迎一起討論喔!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Octopress]如何設定自己的Domain與異地編輯設定]]></title>
+    <link href="http://rx836.github.com/blog/octopress-notes-2/"/>
+    <updated>2012-05-20T01:35:00+08:00</updated>
+    <id>http://rx836.github.com/blog/octopress-notes-2</id>
+    <content type="html"><![CDATA[<p>用了將近一個月的Octopress，才慢慢覺得開始步上軌道，好笑的是我竟然誤以為因為Domain沒有設定，才會導致Google搜尋不到我的文章&#8230;，更慘的是，匆忙的利用網銀買了一組自己的Domain回來後，才發現原來我淺到連DNS都不會設定&#8230;</p>
+
+<!--more-->
+
+
+<p>能把這麼丟臉的事情都昭告天下，就是我認為人就是要認清自己，不會的東西就是要主動去尋求答案，不懂的事情也不要怕丟臉被別人知道，因為我深信，不可能每個人一出生就什麼事情都會，但唯有不肯面對自己的人&#8230;.ㄟ!話題偏了</p>
+
+<p>如果你要設定自己的一組Domain，首先必須先去買一組屬於自己的網址，像我因為之前有幫公司在PC HOME買過網址的經驗，所以我就直接挑選PC HOME做為買網址的服務</p>
+
+<p><a href="http://myname.pchome.com.tw/" target="_blank">PC HOME買網址</a></p>
+
+<p>買了網址等到他通知你服務開通，接著就是進去他的管理介面做設定，因為一般來說<strong>DNS的設定大約要24小時</strong>才能好，所以我會先建議這一步先做，但這裡就有血淚史可以講了&#8230;因為我不知道我自己的DNS設定的正不正確，所以都要等上一天，抱著滿懷期待的心情輸入網址，看見那404的畫面..，然後再重新設定一次DNS&#8230;，等24小時&#8230;，再一次的循環&#8230;</p>
+
+<h3>好險國父革命11次，我只革命了七天，算是不幸中的大幸</h3>
+
+<p>回到設定網址，參照官網是要使用<strong>CNAME</strong>的方式來設定網址，參照PC HOME 的說明是指CNAME，意思就是<strong>別名 Aliases</strong>，白話的意思就是將你的網域名稱對應到某個網站，所以我DNS的管理設定如下</p>
+
+<pre><code>主機 / 次網域 | 地址 | 類型
+blog |  rx836.github.com. | CNAME
+</code></pre>
+
+<p>接著就是Octopress的設定，一樣在指令模式下輸入</p>
+
+<pre><code>echo 'your-domain.com' &gt;&gt; source/CNAME
+</code></pre>
+
+<p><strong>your-domain.com</strong>就是你的Domain，例如我的是blog.rx836.tw</p>
+
+<p>然後妳就會在source看到多了一個名叫CNAME的檔案，用記事本打開還會看到你的Domain已經寫在裡面了，再來就是輸入</p>
+
+<pre><code>rake generate
+</code></pre>
+
+<p>接著發佈</p>
+
+<pre><code>rake deploy
+</code></pre>
+
+<p>然後好好睡一覺，等明天打開網址大喊</p>
+
+<h3>爽啦!我終於設定好了</h3>
+
+<p>可是設定好後，我還是在Google搜尋不到我的文章，Google Analytics怎麼看都只有我自己的流量，不奢求成為受歡迎的Blog客，但沒人可以一起分享總是覺得孤單，唱獨角戲的感覺很不真實，也就不會有寫文章的動力</p>
+
+<p>所以我打算主動出擊，直接跑去別人的blog問(<a href="http://zespia.tw" target="_blank">http://zespia.tw/</a>)，果然社群都是很親切大方的，直接告訴我把<strong>sitemap.xml</strong>檔案這個丟到Google上就可以了!</p>
+
+<p><a href="https://www.google.com/webmasters/tools/" target="_blank">Google 網站管理工具</a></p>
+
+<p>利用網站管理工具先新增一個網站，接著提交sitemap就完成了，一段時間以後，你的網站就曝光在網際網路的茫茫大海之中，但排名或是SEO優化這部分就要看個人造化了</p>
+
+<p>當你開始經營一個Blog時，你一定不會只想在一個地方撰寫Blog，有時候突如其來的想法或是問題分享，會讓你想要立刻打開編輯器做編輯，但Octopress不是一般的Blog，他需要先在本機做產生，再發佈，不像其他的Blog有個後台管理，所以異地編輯就需要花一些功夫</p>
+
+<h3>這裡我是用Octopress+Github當教學</h3>
+
+<p>首先你要有一台已經安裝好Octopress和Github(<a href="http://blog.rx836.tw/blog/first-octopress/" target="_blank">這裡教學</a>)的環境，接著Clone你的Blog到你新的這台電腦裡面</p>
+
+<pre><code>git clone git@github.com:rx836/rx836.github.com.git
+</code></pre>
+
+<p>上面是我Github的SSH，你要換成自己的才行</p>
+
+<p>接著要checkout出source</p>
+
+<pre><code>cd rx836.github.com
+git checkout source
+</code></pre>
+
+<p>然後再重新設置github的設定做連結</p>
+
+<pre><code>rake setup_github_pages
+</code></pre>
+
+<p>出現提示以後再輸入你的SSH</p>
+
+<pre><code>git@github.com:rx836/rx836.github.com.git
+</code></pre>
+
+<p>接著在更新你的source</p>
+
+<pre><code>git pull origin source
+</code></pre>
+
+<p>最後就可以看是要新增文章，還是編輯，產生，發佈，躺著，趴著，跪著，隨便怎麼做都可以了</p>
+
+<p>一樣，在發佈Blog以後，別問了記得更新source到你的Github上，這樣另外一台才可以有最新的source可以用喔</p>
+
+<pre><code>git add .
+git commit m 'mycommit'
+git push origin source
+</code></pre>
+
+<p>參考:<a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blank">http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/</a></p>
+
+<p>以上教學分享，如有疑問或錯誤，歡迎一起討論</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Jquery]jquery使用筆記(一)-開始*出發*起航]]></title>
+    <link href="http://rx836.github.com/blog/jquery-notes-1/"/>
+    <updated>2012-05-18T12:17:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-notes-1</id>
+    <content type="html"><![CDATA[<p>從08年那時候剛接觸到jquery，到現在每天都在使用他，總覺得好像不為自己寫一下筆記，也有點不踏實，而且重點是，我好像沒什麼&#8221;材料&#8221;，可以貢獻在廣大的技術社群裡面，只能從我會一點皮毛的地方(Jquery)，開始寫起真正的程式筆記心得，希望我的Blog就從這開始發芽&#8230;.，最後長成大樹(疑?)</p>
+
+<!--more-->
+
+
+<p>近一兩年來，網站越來越重視所謂互動效果，隨著瀏覽器的執行速度越來越快，就也越來越多的特效與動畫，出現在網際網路的世界裡，這邊就直接舉幾個大家可能常看到的</p>
+
+<p><a href="http://jquery.malsup.com/cycle/" target="_blank">jQuery Cycle Plugin</a></p>
+
+<p><a href="http://jquery.malsup.com/block/#page" target="_blank">jQuery BlockUI Plugin (v2)</a></p>
+
+<p>在以前，可能會覺得這非常的酷炫，可是現在似乎已經變成習以為常，剛所貼的都可以用原生的javascript撰寫出來，但在現代凡事求快的情況底下，一個案子可能沒那麼多時間慢慢寫這些東西，更何況還有令人聞之喪膽的跨瀏覽器問題</p>
+
+<p>所以在這個情況下，Jquery就這麼誕生了，不僅解決了跨瀏覽器的問題，更重要的是，他運用了很多HTML與CSS的原理，使的設計人員可以在會一點點的JS情況下，完成這些效果</p>
+
+<p>而對於許多開發人員來說，強大的plugin社群，更是縮減了不少開發時間，就如同剛剛那兩個範例plugin，當然，還有其他更多更好的優點如下</p>
+
+<h4>強大的選擇器、輕鬆找到你要的元素 例:尋找class名稱為myName，底下所有的a標籤</h4>
+
+<pre><code>$('.myName').find(a);
+</code></pre>
+
+<h4>改變頁面的呈現樣式 例:替所有div增加一個名為myStyle的class</h4>
+
+<pre><code>$(div).addClass('myStyle');
+</code></pre>
+
+<h4>改變網頁內容 例:在body底下額外增加html標籤</h4>
+
+<pre><code>$(body).append('&lt;div&gt;my html&lt;/div&gt;');
+</code></pre>
+
+<h4>與使用者做互動 例:點擊button後alert出一個視窗</h4>
+
+<pre><code>$(button).click(function(){
+    alert('good!');
+});
+</code></pre>
+
+<h4>簡單的動畫增加良好的使用者經驗 例:簡單在div做fading效果</h4>
+
+<pre><code>$(div).fadeIn();
+</code></pre>
+
+<h4>支援AJAX效果 例:載入article.html</h4>
+
+<pre><code>$('#a').load('article.html');
+</code></pre>
+
+<h4>利用迭代的特性簡化javascript 例:分別alert出a,b,c</h4>
+
+<pre><code>var a1=["a","b","c"];
+$.each(a1,function(){
+    alert(this);
+});
+</code></pre>
+
+<p>可能有些人會覺得，現在市面上的library 這麼多，為什麼一定要選Jquery?當然，你也可以選擇別的library沒錯，那這篇筆記我們就到這邊吧&#8230;ㄟ!當然不是呀，為什麼Jquery能有這麼廣泛的使用者，一定是有他的原因的是吧?</p>
+
+<h4>利用css的知識原理架構</h4>
+
+<p>Jquery繼承了CSS強大的選擇器，這讓許多網頁設計者，可以利用自有本身的CSS知識來撰寫Jquery，而不用擔心因為程式的門檻關係，而降低使用特效的學習曲線</p>
+
+<h4>支援擴充</h4>
+
+<p>你可以修改別人的plugin，也可以自己撰寫一個plugin，甚至將好幾個plugin合在一起來個大雜燴也可以，減少重造輪子</p>
+
+<h4>解決跨瀏覽器的問題</h4>
+
+<p>我想這不用說了，一切都是IE造就了Jquery的蓬勃發展(誤)</p>
+
+<h4>超方便的隱式迭代(implicit iteration)</h4>
+
+<p>如果要將所有的div做隱藏，在以前我們可能要先將div都找出來，然後再用for迴圈一個一個隱藏，但Jquery說:不用! 只要這樣寫就好了!</p>
+
+<pre><code>$(div).hide();
+</code></pre>
+
+<p>這裡的div其實是所有的div集合，利用這種特性，就可以減少很多程式碼的撰寫</p>
+
+<h4>鍊式(Chaining)語法的魔力</h4>
+
+<p>Jquery可以跟串香腸一樣，把許多動作串成一行程式，增加程式的效率，也不用再定義一堆變數</p>
+
+<pre><code>$(div).show().addClass('a');
+</code></pre>
+
+<h4>富爸爸和全世界強大的社群力量</h4>
+
+<p>這當然是最重要的一部份啦，除了微軟支援他以外，全世界有這麼多人在使用，還怕找不到教學與範例可以直接複製貼上嗎?(誤)</p>
+
+<p>好了，講了那麼概念，還是要動手開始實做一次</p>
+
+<h3>首先下載Jquery</h3>
+
+<p>你可以到<a href="http://docs.jquery.com/Downloading_jQuery" target="_bland">Jquery Download</a>下載Jquery回來，或是使用Google CDN或Microsoft CDN，他有分壓縮過後的版本和沒壓縮過後的版本，一般來說開發階段可以使用沒壓縮過的開發版本</p>
+
+<h3>引入Jquery文件</h3>
+
+<p>將jquery引入到你的web頁面，一般是放在head裡面，底下是引入Google  API CDN</p>
+
+<pre><code>&lt;head&gt;
+    &lt;script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+
+<p>接著在body裡面加上簡單的HTML</p>
+
+<pre><code>&lt;div class="btnClass"&gt;點我&lt;/div&gt;
+    &lt;div class="showClass"&gt;
+        &lt;p&gt;one&lt;/p&gt;
+        &lt;p&gt;two&lt;/p&gt;
+        &lt;p&gt;there&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>然後在script標籤裡面加上這段語法</p>
+
+<pre><code>$(document).ready(function() {
+        $('.btnClass').click(function(){
+            $('.showClass&gt;p').eq(0).hide();
+        });
+});
+</code></pre>
+
+<p>這裡我們做簡單的程式解說，目的是想讓讀者了解如何使用Jquery，詳細的部分都會在未來的筆記多做介紹，首先是Jquery的選擇器$()，你可以在選擇器裡面利用CSS語法字串，來選取你想要的元素，例如選取class名稱為a的元素</p>
+
+<pre><code>$('.a')
+</code></pre>
+
+<p>或是選取ID名為b底下的a標籤</p>
+
+<pre><code>$('#b a')
+</code></pre>
+
+<p>這裡我們所選擇的是class名為btnClass的元素，接著$()會將選取的元素$(&#8216;.btnClass&#8217;)封裝成一個Jquery物件，並且回傳，接著就利用剛剛所講的<strong>鍊式Chaining</strong>，給予他一個click事件，而我們這邊可以綁定一個函式在這個click事件裡面，當點擊btnClass時就可以執行這個function</p>
+
+<pre><code>$('.btnClass').click(function(){
+            //綁定的函式
+        });
+</code></pre>
+
+<p>我們在函式裡面加了$(&#8216;.showClass>p&#8217;).eq(0).hide();這行程式碼，這裡會看到有一個比較特別的方法<strong>eq()</strong>，我們前面曾經提過，$()裡面是包含所選取的元素集合，而eq()這個方法可以透過索引值(index)來指定我們想選取的元素，這裡我們指定的是第一個，但記住JS的索引都是從0開始，接著在Chaining一個hide()的方法，我們就完成基本的程式語法結構</p>
+
+<pre><code>$('.btnClass').click(function(){
+            $('.showClass&gt;p').eq(0).hide();
+        });
+</code></pre>
+
+<h1>等等!</h1>
+
+<p>$(document).ready()是什麼東西?!</p>
+
+<p>說到<strong>$(document).ready()</strong>這個語法常會拿<strong>window.onload</strong>這個語法一起比較，簡單的來說onload是JS的原生事件，是在整個網頁都載下來(包含圖片)時所觸發，而ready()是在DOM元素下載完全之後就先行觸發，他是使用DOM標準的DOMContentLoaded事件，意思就是不需要等圖片載完，好處就是觸發時間比較早，而DOMContentLoaded其實是firefox的DOM事件，IE則是要用其他特殊處理才能達到一樣的效果</p>
+
+<h2>但! Jquery的好處就在這裡，它已經幫你把跨流覽器的問題處理好了!!</h2>
+
+<p>接著我們就可以開啟瀏覽器執行，當你點擊<strong>點我</strong>時，<strong>one</strong>就會消失不見</p>
+
+<p><a href="http://jsfiddle.net/RNCVB/1/" target="_blank">線上範例</a></p>
+
+<p>神奇吧!!只需要這幾行程式碼!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Facebook]關於FB access tokens過期的處理]]></title>
+    <link href="http://rx836.github.com/blog/facebook-expired-access-tokens/"/>
+    <updated>2012-05-04T22:45:00+08:00</updated>
+    <id>http://rx836.github.com/blog/facebook-expired-access-tokens</id>
+    <content type="html"><![CDATA[<p>Facebook已經在5/1號移除offline_access的權限，也就是說之後將不再支援offline_access，小弟我英文不是很好，官方文件沒辦法翻譯完全，但我會將我的解法跟大家分享</p>
+
+<!--more-->
+
+
+<p>如果你的Facebook APP都是User在應用程式裡面<strong>立即</strong>完成動作的話，幾乎不用考慮access tokens時效性的問題，但如果你有一些不是當下立刻執行，而是可能過多久以後才執行動作，例如:<strong>幾小時後發一篇訊息到塗鴉牆</strong>，或是像我一樣，寫了一隻app可以<strong>預約上傳照片的APP</strong>，就有可能面臨到access tokens過期問題</p>
+
+<p>依照Facebook他們的文件所寫，access tokens過期總共會有四種情況</p>
+
+<h3>1.The token expires after expires time (2 hours is the default)</h3>
+
+<p>因為太久沒更新access tokens而導致過期(預設是1-2小時之間)</p>
+
+<h3>2.The user changes her password which invalidates the access token</h3>
+
+<p>User改變登入時的密碼</p>
+
+<h3>3.The user de-authorizes your app</h3>
+
+<p>User移除掉你的APP驗證(在帳號設定->應用程式)</p>
+
+<h3>4.The user logs out of Facebook.</h3>
+
+<p>User登出Facebook</p>
+
+<p>以上四種情況都會導致時效過期，但在新的整合之下，雖然預設只有1-2個小時的時效，但實際上可透過延長來達到60天的期限</p>
+
+<p>首先用Javascript SDK用一般取得access tokens的方法</p>
+
+<pre><code>FB.getLoginStatus(function(response) {
+        if (response.authResponse) {
+            //FB User ID
+            var u_fbid = response.authResponse.userID;                
+            //FB accessToken
+            var access_token = response.authResponse.accessToken;                
+        } else {
+            login();
+            // no user session available, someone you dont know
+        }
+    });
+</code></pre>
+
+<p>取得壽命較短的access tokens(short-lived)以後，再透過GET取得較長的access tokens(long-lived)，已擴展到60天的時效，這裡我用Jquery的$.ajax來取得</p>
+
+<pre><code>save_u = [
+                        { name: "client_id", value: APP_ID },
+                        { name: "client_secret", value: APP_SECRET },
+                        { name: "grant_type", value: 'fb_exchange_token' },
+                        { name: "fb_exchange_token", value: EXISTING_ACCESS_TOKEN  }
+                   ];
+            $.ajax({
+                type: "GET",
+                url: "https://graph.facebook.com/oauth/access_token",
+                data: save_u,
+                success: function(data) {
+                    console.log(data);
+                    });
+                }
+            });
+</code></pre>
+
+<p>APP_ID和APP_SECRET從你設定APP的地方就可以看到，grant_type的值照抄就是fb_exchange_token，而參數fb_exchange_token要給的值就是你剛所取得較短的access tokens</p>
+
+<p>接著Facebook就會回傳一串值回來</p>
+
+<pre><code>access_token=xxxxxxxxxxxxxxxxx&amp;expires=5183914
+</code></pre>
+
+<p>xxx那些就代表著新的並且擁有60天期限的access tokens</p>
+
+<p>而期限5183914就是秒數，算一算剛好差不多是60天的時間沒錯</p>
+
+<p>雖然目前使用都是OK，但如果我有新的心得還是會再上來與大家分享，那如果文章裡有錯誤的話，也請不吝於指正，另外參考連結裡面有PHP的範例可以作為參考</p>
+
+<p>參考:</p>
+
+<p><a href="https://developers.facebook.com/blog/post/2011/05/13/how-to--handle-expired-access-tokens/">How-To: Handle expired access tokens</a></p>
+
+<p><a href="https://developers.facebook.com/roadmap/offline-access-removal/">Removal of offline_access permission</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[讀後心得] 只剩下一個角落的繁華]]></title>
+    <link href="http://rx836.github.com/blog/book-review-1/"/>
+    <updated>2012-05-01T21:38:00+08:00</updated>
+    <id>http://rx836.github.com/blog/book-review-1</id>
+    <content type="html"><![CDATA[<p>作者:陳文茜</p>
+
+<p>出版者:時報文化出版</p>
+
+<!-- more  -->
+
+
+<h2>地球上青春的眼淚</h2>
+
+<p>這是這本書一開始的標題，從標題就可以看出，其實這是本想寫給這一代年輕人的書，一開始就直接講明說，這一代的年輕人所背負的時代命運，因為歐債危機，因為美國華爾街的那些肥貓，因為政治人物的總總行為，最終導致青年的失業率高漲，甚至可能連翻身的機會都沒有</p>
+
+<p>整本書提到從美國的美元和帝國夢，德國的矛盾和歐洲的高傲，龐大的福利壓垮政府的財政(不敢相信 歐洲很多國家每周工時只有30小時&#8230;)，因為德國人的勤奮對比著希臘人的墮落，卻又因為歐元區的未來不得不救希臘，再對比中國人的血汗工廠與華爾街的肥貓和美國印鈔票來享樂，還有阿拉伯世界的革命&#8230;</p>
+
+<p>或許我們很多人可能還是每天過著天亮起床工作，黃昏收工回家的日子，表面上一成不變的生活，但世界上卻到處充滿著暗潮洶湧的變化，2008年的金融海嘯，到今日的這段日子裡，我們到底學到了甚麼?又或著我們感受到了甚麼?</p>
+
+<h2>政治人物應該憑藉著自己的專業從政，而不是一昧的聽取民意&#8230;</h2>
+
+<p>印象最讓我深刻的就是德國總理梅克爾，正為了自己的政治前途和歐洲經濟的未來做抉擇，一方面背負著德國人民並不想要救那些每天不工作又好吃懶做的希臘人，而產生大量的民怨，一方面卻又背負著如果不救希臘，希臘債券一到期，大量的違約將造成德國與其他國家的銀行產生倒閉潮，甚至導致歐元區瓦解</p>
+
+<p>如果你是梅克爾，你會怎麼做?</p>
+
+<p>如果場景轉移到台灣來，台灣的領導人物會怎麼做?</p>
+
+<p>對照今日台灣的油電問題，民生問題，有時候我不得不說，民意固然重要，但就如標題所寫的，政治人物應該憑藉著自己的專業從政，而不是一昧的聽取民意</p>
+
+<p>如果那些政治人物，一昧的享受好處與特權，卻一投票就討好民眾，我們其實一點也不需要那些政治人物，我們要的是公投，公投，再公投</p>
+
+<p>反正民意為大</p>
+
+<h2>最後我想說的是&#8230;</h2>
+
+<p>我們這一代的年輕人都應該勇敢的追尋自己內心與直覺</p>
+
+<p>在這個混亂的時代裡</p>
+
+<p>或許，把簡單的事情重複一直做，專注於你想專注的事</p>
+
+<p>或許，這會是我們翻身的一個年代</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Octopress]如何開啟 Disqus與和常見的指令]]></title>
+    <link href="http://rx836.github.com/blog/octopress-notes-1/"/>
+    <updated>2012-04-27T02:12:00+08:00</updated>
+    <id>http://rx836.github.com/blog/octopress-notes-1</id>
+    <content type="html"><![CDATA[<p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
+
+<!-- more  -->
+
+
+<h2>為什麼我沒有Comments..</h2>
+
+<p>對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡，但對於我這個新手來說，卻是不知如何是好的難題，好險網路上還是有很多人願意紀錄這一切</p>
+
+<p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
+
+<p>簡單來說就是需先申請<a href="www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
+
+<pre><code>disqus_short_name: your_disqus_short_name
+disqus_show_comment_count: true
+</code></pre>
+
+<h2>一些常用的指令</h2>
+
+<p>說來可憐&#8230;，我到現在還不會在不同台電腦編寫我的Octopress，最近嘗試一次結果因為不熟git而把檔案搞得亂七八糟，但最近有找到一篇文章，我是還沒有親自嘗試過，但想要在這邊先記錄下來，以方便我回頭來看</p>
+
+<p><a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blankl">思考的轨迹 : 如何维护Github上博客</a></p>
+
+<p>然後常用的指令有</p>
+
+<p><strong>設置Octopress與Github做連結</strong></p>
+
+<pre><code>rake setup_github_pages
+</code></pre>
+
+<p><strong>新增文章</strong></p>
+
+<pre><code>rake new_post["title"]
+</code></pre>
+
+<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
+
+<pre><code>rake generate
+</code></pre>
+
+<p><strong>發佈_deploy到Github上</strong></p>
+
+<pre><code>rake deploy
+</code></pre>
+
+<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
+
+<pre><code>set LC_ALL=zh_TW.UTF-8
+set LANG=zh_TW.UTF-8
+</code></pre>
+
+<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
+
+<pre><code>git add .
+git commit -m "your message"
+git push origin source  
+</code></pre>
+
+<p>這還真是一篇＂筆記＂的文章&#8230;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Octopress]出生以來第一次使用Octopress for windows]]></title>
+    <link href="http://rx836.github.com/blog/first-octopress/"/>
+    <updated>2012-04-27T01:55:00+08:00</updated>
+    <id>http://rx836.github.com/blog/first-octopress</id>
+    <content type="html"><![CDATA[<p>終於&#8230;</p>
+
+<p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
+
+<!-- more  -->
+
+
+<p>但因為這篇是我第一次用Octopress寫文章，許多設定和細節都還沒掌握，所以我簡單的貼上幾個從google上所找到的教學資源作為筆記與參考</p>
+
+<p>1.因為我是用Octopress+github，所以首先必須先安裝好github</p>
+
+<p><a href="http://itspg.github.com/blog/2012/02/29/github-on-windows-tutorial/" target="_blank">itsPG.org [教學] 在windows上使用github 新手教學 / 初學者指南</a></p>
+
+<p>這是針對windows，至於其他作業系統例如Mac網路上資源頗多的，這裡就不多加闡述</p>
+
+<p>2.再來是安裝Octopress</p>
+
+<p><a href="http://itspg.github.com/blog/2012/02/29/octopress-on-windows-tutorial/" target="_blank">itsPG.org [教學] 在windows上安裝octopress 新手教學 / 初學者指南</a></p>
+
+<p>3.因為Octopress是用Markdown編輯的，所以要了解到甚麼是Markdown</p>
+
+<p><a href="http://markdown.tw/#link" target="_blank">Markdown</a></p>
+
+<p>4.再來就是找一個好編輯Markdown的工具來編輯，當然用記事本也是可以，這邊我選擇的是MarkPad</p>
+
+<p><a href="http://code52.org/DownmarkerWPF/" target="_blank">MarkPad</a></p>
+
+<p>不過要注意的是要先安裝<a href="http://www.microsoft.com/downloads/zh-tw/details.aspx?FamilyID=0a391abd-25c1-4fc0-919f-b21f31ab88b7" target="_blank">Microsoft .NET Framework 4</a></p>
+
+<p>接著就開開心心的使用Octopress</p>
+
+<p>但接下來還有很多東西還要學習與克服，我也會將遭遇到的問題記錄成筆記來當作參考</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[出生以來第一次使用Octopress for windows]]></title>
+    <link href="http://rx836.github.com/blog/f/"/>
+    <updated>2012-04-26T00:54:00+08:00</updated>
+    <id>http://rx836.github.com/blog/f</id>
+    <content type="html"><![CDATA[<p>終於&#8230;</p>
+
+<p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
+
+<p>但因為這篇是我第一次用Octopress寫文章，許多設定和細節都還沒掌握，所以我簡單的貼上幾個從google上所找到的教學資源作為筆記與參考</p>
+
+<p>1.因為我是用Octopress+github，所以首先必須先安裝好github</p>
+
+<p><a href="http://itspg.github.com/blog/2012/02/29/github-on-windows-tutorial/" target="_blank">itsPG.org [教學] 在windows上使用github 新手教學 / 初學者指南</a></p>
+
+<p>這是針對windows，至於其他作業系統例如Mac網路上資源頗多的，這裡就不多加闡述</p>
+
+<p>2.再來是安裝Octopress</p>
+
+<p><a href="http://itspg.github.com/blog/2012/02/29/octopress-on-windows-tutorial/" target="_blank">itsPG.org [教學] 在windows上安裝octopress 新手教學 / 初學者指南</a></p>
+
+<p>3.因為Octopress是用Markdown編輯的，所以要了解到甚麼是Markdown</p>
+
+<p><a href="http://markdown.tw/#link" target="_blank">Markdown</a></p>
+
+<p>4.再來就是找一個好編輯Markdown的工具來編輯，當然用記事本也是可以，這邊我選擇的是MarkPad</p>
+
+<p><a href="http://code52.org/DownmarkerWPF/" target="_blank">MarkPad</a></p>
+
+<p>不過要注意的是要先安裝<a href="http://www.microsoft.com/downloads/zh-tw/details.aspx?FamilyID=0a391abd-25c1-4fc0-919f-b21f31ab88b7" target="_blank">Microsoft .NET Framework 4</a></p>
+
+<p>接著就開開心心的使用Octopress</p>
+
+<p>但接下來還有很多東西還要學習與克服，我也會將遭遇到的問題記錄成筆記來當作參考</p>
+]]></content>
+  </entry>
+  
+</feed>
