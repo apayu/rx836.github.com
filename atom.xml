@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-06-11T18:28:34+08:00</updated>
+  <updated>2012-06-11T18:41:31+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -63,7 +63,7 @@
 
 <p>2.接著在這個function的最後面加上$(&#8216;#your div&#8217;).hide()</p>
 
-<p>意思就是，等所有初始話步驟結束以後，才把div的display設成none</p>
+<p>意思就是，等所有初始化步驟結束以後，才把div的display設成none</p>
 
 <p>其實有很多Jquery Plugin的套用，如果有用到顯示/隱藏的切換，都要注意到先後順序的問題</p>
 
