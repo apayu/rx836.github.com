@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-06-11T01:28:45+08:00</updated>
+  <updated>2012-06-11T18:28:34+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[Jquery] jScrollPane的使用與注意]]></title>
+    <link href="http://rx836.github.com/blog/jquery-jscrollpane-display/"/>
+    <updated>2012-06-11T18:26:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-jscrollpane-display</id>
+    <content type="html"><![CDATA[<p>有些時候客戶會不想要HTML內建的Scrollbar，所以特地去找了一個Jquery Plugin來使用，但注意，如果有使用到display:none，或是類似lightbox視窗效果，要注意一下先後執行的問題</p>
+
+<!--more-->
+
+
+<p>當然，還有其他很多Plugin可以選擇<a href="http://www.net-kit.com/jquery-custom-scrollbar-plugins/" target="_blank">10 jQuery Custom Scrollbar Plugins</a>，這裡我是用jScrollPane，使用方法很簡單，先下載他的檔案回來，在載入到網頁</p>
+
+<p>使用方法</p>
+
+<pre><code>&lt;!-- CSS部分 --&gt;
+&lt;link type="text/css" href="style/jquery.jscrollpane.css" rel="stylesheet" media="all" /&gt;
+
+&lt;!-- 還要載入Jquery 這裡用CDN --&gt;
+&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;
+&lt;/script&gt;
+
+&lt;!-- 載入mousewheel plugin --&gt;
+&lt;script type="text/javascript" src="script/jquery.mousewheel.js"&gt;&lt;/script&gt;
+
+&lt;!-- 載入jScrollPane --&gt;
+&lt;script type="text/javascript" src="script/jquery.jscrollpane.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>接著只要對包覆內容的div加上Jquery語法</p>
+
+<pre><code>$(function()
+{
+    $('.your div').jScrollPane();
+});
+</code></pre>
+
+<p>這樣就可以自製Scrollbar了！很簡單吧</p>
+
+<p>這裡有<a href="http://jscrollpane.kelvinluck.com/#examples" target="_blank">更多範例</a></p>
+
+<p>不過有時候我們會遇到一個狀況，一開始會設div為display:none，然後點了某個元件以後，用lightbox或其他方式秀出div，如下圖</p>
+
+<p><img width="300px" src="https://lh4.googleusercontent.com/-NBEVwEqZHlY/T9XCoGfeq1I/AAAAAAAAAQc/sWHyCp2vi6M/w753-h585-k/a.jpg" /></p>
+
+<p>但會發現，依照正常流程來套用，點開呈現的效果不如預期，那是因為你在還沒套用jScrollPane之前，為了呈現lightbox的效果，就已經先將他display:none，為了避免發生這種情況，必須先不要display:none，然後在jscrollpane套用以後，再將div做隱藏，教學如下</p>
+
+<p>1.先找到function initialise()</p>
+
+<p>2.接著在這個function的最後面加上$(&#8216;#your div&#8217;).hide()</p>
+
+<p>意思就是，等所有初始話步驟結束以後，才把div的display設成none</p>
+
+<p>其實有很多Jquery Plugin的套用，如果有用到顯示/隱藏的切換，都要注意到先後順序的問題</p>
+
+<p>以上如有問題，歡迎一起討論</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[讀後心得] 預見未來]]></title>

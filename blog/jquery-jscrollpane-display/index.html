@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[讀後心得] 疼痛,才叫青春 - Rx836</title>
+  <title>[Jquery] jScrollPane的使用與注意 - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="作者:金蘭都 出版者:圓神出版社有限公司 這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的 人生時鐘:你現在的人生是幾點? 雖然他是寫給剛畢業的新鮮人或是大學生為主， &hellip;">
+  <meta name="description" content="有些時候客戶會不想要HTML內建的Scrollbar，所以特地去找了一個Jquery Plugin來使用，但注意，如果有使用到display:none，或是類似lightbox視窗效果，要注意一下先後執行的問題 當然，還有其他很多Plugin可以選擇10 jQuery Custom &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/book-review-2">
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-jscrollpane-display">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">[讀後心得] 疼痛,才叫青春</h1>
+      <h1 class="entry-title">[Jquery] jScrollPane的使用與注意</h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-06-11T18:26:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -104,28 +104,56 @@
   </header>
 
 
-<div class="entry-content"><p>作者:金蘭都</p>
-
-<p>出版者:圓神出版社有限公司</p>
+<div class="entry-content"><p>有些時候客戶會不想要HTML內建的Scrollbar，所以特地去找了一個Jquery Plugin來使用，但注意，如果有使用到display:none，或是類似lightbox視窗效果，要注意一下先後執行的問題</p>
 
 <!--more-->
 
 
-<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
+<p>當然，還有其他很多Plugin可以選擇<a href="http://www.net-kit.com/jquery-custom-scrollbar-plugins/" target="_blank">10 jQuery Custom Scrollbar Plugins</a>，這裡我是用jScrollPane，使用方法很簡單，先下載他的檔案回來，在載入到網頁</p>
 
-<h2>人生時鐘:你現在的人生是幾點?</h2>
+<p>使用方法</p>
 
-<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所提的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
+<pre><code>&lt;!-- CSS部分 --&gt;
+&lt;link type="text/css" href="style/jquery.jscrollpane.css" rel="stylesheet" media="all" /&gt;
 
-<h2>你想要新人獎還是主角獎?</h2>
+&lt;!-- 還要載入Jquery 這裡用CDN --&gt;
+&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;
+&lt;/script&gt;
 
-<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
+&lt;!-- 載入mousewheel plugin --&gt;
+&lt;script type="text/javascript" src="script/jquery.mousewheel.js"&gt;&lt;/script&gt;
 
-<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
+&lt;!-- 載入jScrollPane --&gt;
+&lt;script type="text/javascript" src="script/jquery.jscrollpane.min.js"&gt;&lt;/script&gt;
+</code></pre>
 
-<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
+<p>接著只要對包覆內容的div加上Jquery語法</p>
 
-<p>如果有不一樣的想法，歡迎一起討論</p>
+<pre><code>$(function()
+{
+    $('.your div').jScrollPane();
+});
+</code></pre>
+
+<p>這樣就可以自製Scrollbar了！很簡單吧</p>
+
+<p>這裡有<a href="http://jscrollpane.kelvinluck.com/#examples" target="_blank">更多範例</a></p>
+
+<p>不過有時候我們會遇到一個狀況，一開始會設div為display:none，然後點了某個元件以後，用lightbox或其他方式秀出div，如下圖</p>
+
+<p><img width="300px" src="https://lh4.googleusercontent.com/-NBEVwEqZHlY/T9XCoGfeq1I/AAAAAAAAAQc/sWHyCp2vi6M/w753-h585-k/a.jpg" /></p>
+
+<p>但會發現，依照正常流程來套用，點開呈現的效果不如預期，那是因為你在還沒套用jScrollPane之前，為了呈現lightbox的效果，就已經先將他display:none，為了避免發生這種情況，必須先不要display:none，然後在jscrollpane套用以後，再將div做隱藏，教學如下</p>
+
+<p>1.先找到function initialise()</p>
+
+<p>2.接著在這個function的最後面加上$(&#8216;#your div&#8217;).hide()</p>
+
+<p>意思就是，等所有初始話步驟結束以後，才把div的display設成none</p>
+
+<p>其實有很多Jquery Plugin的套用，如果有用到顯示/隱藏的切換，都要注意到先後順序的問題</p>
+
+<p>以上如有問題，歡迎一起討論</p>
 </div>
 
 
@@ -148,7 +176,7 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-06-11T18:26:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
       
 
 
@@ -156,7 +184,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/book-review-2/" data-via="" data-counturl="http://rx836.github.com/blog/book-review-2/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/jquery-jscrollpane-display/" data-via="" data-counturl="http://rx836.github.com/blog/jquery-jscrollpane-display/" >Tweet</a>
   
   
   
@@ -165,10 +193,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-ajax-cache/" title="Previous Post: [Jquery] AJAX cache讓IE一直抓到舊資料">&laquo; [Jquery] AJAX cache讓IE一直抓到舊資料</a>
+        <a class="basic-alignment left" href="/blog/book-review-3/" title="Previous Post: [讀後心得] 預見未來">&laquo; [讀後心得] 預見未來</a>
       
-      
-        <a class="basic-alignment right" href="/blog/book-review-3/" title="Next Post: [讀後心得] 預見未來">[讀後心得] 預見未來 &raquo;</a>
       
     </p>
   </footer>
@@ -235,8 +261,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/book-review-2/';
-        var disqus_url = 'http://rx836.github.com/blog/book-review-2/';
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-jscrollpane-display/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-jscrollpane-display/';
         var disqus_script = 'embed.js';
       
     (function () {
