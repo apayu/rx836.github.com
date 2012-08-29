@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-06-24T03:10:19+08:00</updated>
+  <updated>2012-08-29T20:10:19+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2012_08_29_test]]></title>
+    <link href="http://rx836.github.com/blog/2012-08-29-test/"/>
+    <updated>2012-08-29T20:08:00+08:00</updated>
+    <id>http://rx836.github.com/blog/2012-08-29-test</id>
+    <content type="html"><![CDATA[<p>123</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 亞馬遜帝國成功學]]></title>
