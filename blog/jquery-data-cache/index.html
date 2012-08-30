@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[jQuery] 了解$.data - Rx836</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="今天再看別人寫的jQuery Plugin，發現 this[expando] 這個寫法，好奇心驅使下，決定一探究竟 因為不了解expando是甚麼，所以特地去找了一下Google，發現在jQuery裡面有這一段程式碼 expando: "jQuery" + ( jQuery.fn.jquery &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-data-cache">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Rx836" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Rx836</a></h1>
+  
+    <h2>程式、遊記、還有心得分享 歡迎來交流 最重要的是做個朋友</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[jQuery] 了解$.data</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T14:10:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>今天再看別人寫的jQuery Plugin，發現 <strong>this[expando]</strong> 這個寫法，好奇心驅使下，決定一探究竟</p>
+
+<!--more-->
+
+
+<p>因為不了解<strong>expando</strong>是甚麼，所以特地去找了一下Google，發現在jQuery裡面有這一段程式碼</p>
+
+<pre><code>expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" )
+</code></pre>
+
+<p>原來這是在使用$.data時可以做為匹配的id，產生的邏輯就是版本代號+一組亂數，並把非數字的字元用replace替代掉，expando會在每次載入jQuery時直接生成，所以用console.log()看同下面所示</p>
+
+<pre><code>console.log($.expando);
+//jQuery18004247503886623739
+</code></pre>
+
+<p>那$.data又是甚麼呢？在jQuery的文件裡面是這樣寫</p>
+
+<pre><code>Description: Store arbitrary data associated with the matched elements.
+</code></pre>
+
+<p>意思就是以前我們都喜歡將數據存在HTMLElement屬性上，例如下面所示</p>
+
+<pre><code>&lt;div data="some data"&gt;my div&lt;/div&gt;
+&lt;script&gt;
+    div.getAttribute('data'); //some data
+&lt;/script&gt;
+</code></pre>
+
+<p>但如果用這種方式添加數據，往往數據會直接曝露在原始碼當中，從安全性的角度來思考並不太好，另一方面，在DOM的元素中添加這麼多的屬性，其實對瀏覽器來說是沒有意義</p>
+
+<p>所以jQuery很棒的提供了這方面的解決方式給我們，利用cache來緩存我們想要保存的數據，在說明原理之前，我們先來看幾個參數的意義</p>
+
+<p>我們可以在jQuery原始碼底下看到以下這些程式碼</p>
+
+<p>jQuery.extend({</p>
+
+<pre><code>cache: {},
+
+...
+
+// Please use with caution
+uuid: 0,
+
+// Unique for each copy of jQuery on the page
+// Non-digits removed to match rinlinejQuery
+expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" ),
+
+// The following elements throw uncatchable exceptions if you
+// attempt to add expando properties to them.
+noData: {
+    "embed": true,
+    // Ban all objects except for Flash (which handle expandos)
+    "object": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000",
+    "applet": true
+},
+
+hasData: function( elem ) {
+    elem = elem.nodeType ? jQuery.cache[ elem[jQuery.expando] ] : elem[ jQuery.expando ];
+    return !!elem &amp;&amp; !isEmptyDataObject( elem );
+},
+
+...
+
+});
+</code></pre>
+
+<p><strong>jQuery.cache</strong>:空物件，用來做緩存</p>
+
+<p><strong>jQuery.uuid</strong>:一個seed，會遞增，用來標示每個cache</p>
+
+<p><strong>jQuery.expando</strong>:一組字串，如前面所說，由Math.random生成，同時也是DOM的屬性名稱，裡面會對映到jQuery.uuid</p>
+
+<p><strong>jQuery.noData</strong>:檢查元素是否能使用$.data，預設是embed、object、applet不能使用</p>
+
+<p><strong>jQuery.hasData</strong>:判斷元素是否已經擁有data</p>
+
+<p>接下來是範例講解</p>
+
+<pre><code>&lt;div&gt;test&lt;/div&gt;
+&lt;script&gt;
+    console.log($.expando);
+    //jQuery180010448733290775436 
+    //載入jQuery就會生成一組字串
+
+    var div = document.getElementsByTagName('div')[0];
+
+    console.log($.hasData(div));
+    //false
+    //因為div還沒使用$.data，所以為false
+
+    $.data(div,'divName','name1');
+
+    console.log($.hasData(div));        
+    //true
+    //div已經有包含data，所以為true
+
+    console.log($.uuid);
+    //1
+    //第一個cache，此時seed遞增為1
+
+    var div2 = document.getElementsByTagName('div')[1];     
+
+    $.data(div2,'divName','name2');
+
+    console.log($.uuid);
+    //2
+    //第二個chche，此時seed遞增為2
+
+    var myObj = {};
+
+    $.data(myObj, 'objName','name3');       
+
+    console.log($.data(myObj, 'objName'));
+    //name3
+    //不只是HTMLElement可以使用$.data，物件也可以使用$.data
+
+    console.log(myObj);     
+    //myObj ={
+    //  jQuery180010448733290775436:{
+    //      objName:name3
+    //  }
+    //}
+    //不過物件並沒有將data緩存到$.cache裡面，而是直接在物件裡面新增一個屬性
+    //屬性名稱為$.expando，值為剛剛設定的緩存值
+
+    console.log(div[$.expando]);
+    //1
+    //再回頭看看元素div會發現裡面已經添加屬性，屬性名稱就叫$.expando也就是最前面那串字串
+    //而屬性值就是1       
+
+    console.log($.cache);
+    //1:{divName:'name1'}
+    //2:{divName:'name2'}       
+    //只有HTMLElement元素才會將值緩存到$.cache裡面，而且會發現屬性值為1可以匹配到$.cache裡面的屬性
+&lt;/script&gt;
+</code></pre>
+
+<p>用圖表示關係如下</p>
+
+<p><img src="https://lh5.googleusercontent.com/-t5d07KuRuJk/UD8Yz5NlG6I/AAAAAAAABYg/cd1cmEgctH8/s748/1.jpg" width="700px" /></p>
+
+<p>巧妙的使用$.data，就可以不必替DOM元素新增一堆屬性了</p>
+
+<p>參考資料:</p>
+
+<p><a src="http://api.jquery.com/data/" target="_blank">jQuery $.data</a></p>
+
+<p><a src="http://www.jb51.net/article/27433.htm" target="_blank">http://www.jb51.net/article/27433.htm</a></p>
+
+<p><a src="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T14:10:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/jquery-data-cache/" data-via="" data-counturl="http://rx836.github.com/blog/jquery-data-cache/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/work-1/" title="Previous Post: [學習筆記] 亞馬遜帝國成功學">&laquo; [學習筆記] 亞馬遜帝國成功學</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/jquery-data-cache/">[jQuery] 了解$.data</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/work-1/">[學習筆記] 亞馬遜帝國成功學</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/book-review-4/">[讀後心得] 社群效應:小圈圈如何改變世界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-waterfall-infinitescroll/">[Jquery] 做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/facebook-app-create-getfbid/">[Facebook] 如何建立facebook App 且取得FB ID</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-data-cache/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-data-cache/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
