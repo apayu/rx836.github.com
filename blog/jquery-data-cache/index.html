@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[jQuery] 了解$.data - Rx836</title>
+  <title>[jQuery] $.data原理 - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="今天再看別人寫的jQuery Plugin，發現 this[expando] 這個寫法，好奇心驅使下，決定一探究竟 因為不了解expando是甚麼，所以特地去找了一下Google，發現在jQuery裡面有這一段程式碼 expando: "jQuery" + ( jQuery.fn.jquery &hellip;">
+  <meta name="description" content="今天在看別人寫的jQuery Plugin，發現 this[expando] 這個寫法，好奇心驅使下，決定一探究竟 因為不了解expando是甚麼，所以特地去找了一下Google，發現在jQuery裡面有這一段程式碼 expando: "jQuery" + ( jQuery.fn.jquery &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">[jQuery] 了解$.data</h1>
+      <h1 class="entry-title">[jQuery] $.data原理</h1>
     
     
       <p class="meta">
@@ -104,17 +104,17 @@
   </header>
 
 
-<div class="entry-content"><p>今天再看別人寫的jQuery Plugin，發現 <strong>this[expando]</strong> 這個寫法，好奇心驅使下，決定一探究竟</p>
+<div class="entry-content"><p>今天在看別人寫的jQuery Plugin，發現 <strong>this[expando]</strong> 這個寫法，好奇心驅使下，決定一探究竟</p>
 
 <!--more-->
 
 
 <p>因為不了解<strong>expando</strong>是甚麼，所以特地去找了一下Google，發現在jQuery裡面有這一段程式碼</p>
 
-<pre><code>expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" )
+<pre><code>expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" );
 </code></pre>
 
-<p>原來這是在使用$.data時可以做為匹配的id，產生的邏輯就是版本代號+一組亂數，並把非數字的字元用replace替代掉，expando會在每次載入jQuery時直接生成，所以用console.log()看同下面所示</p>
+<p>原來這是在使用$.data時可以做為匹配的id，產生的邏輯就是版本代號+一組亂數，並把非數字的字元用replace替代掉，expando會在每次載入jQuery時直接生成，所以用console.log()看如下面所示</p>
 
 <pre><code>console.log($.expando);
 //jQuery18004247503886623739
@@ -135,38 +135,36 @@
 
 <p>但如果用這種方式添加數據，往往數據會直接曝露在原始碼當中，從安全性的角度來思考並不太好，另一方面，在DOM的元素中添加這麼多的屬性，其實對瀏覽器來說是沒有意義</p>
 
-<p>所以jQuery很棒的提供了這方面的解決方式給我們，利用cache來緩存我們想要保存的數據，在說明原理之前，我們先來看幾個參數的意義</p>
+<p>所以jQuery很棒的提供了這方面的解決方式給我們，利用$.cache來緩存我們想要保存的數據，在說明原理之前，我們先來看幾個參數的意義，在jQuery原始碼底下看到以下這些程式碼</p>
 
-<p>我們可以在jQuery原始碼底下看到以下這些程式碼</p>
+<pre><code>jQuery.extend({
 
-<p>jQuery.extend({</p>
+    cache: {},
 
-<pre><code>cache: {},
+    ...
 
-...
+    // Please use with caution
+    uuid: 0,
 
-// Please use with caution
-uuid: 0,
+    // Unique for each copy of jQuery on the page
+    // Non-digits removed to match rinlinejQuery
+    expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" ),
 
-// Unique for each copy of jQuery on the page
-// Non-digits removed to match rinlinejQuery
-expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" ),
+    // The following elements throw uncatchable exceptions if you
+    // attempt to add expando properties to them.
+    noData: {
+        "embed": true,
+        // Ban all objects except for Flash (which handle expandos)
+        "object": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000",
+        "applet": true
+    },
 
-// The following elements throw uncatchable exceptions if you
-// attempt to add expando properties to them.
-noData: {
-    "embed": true,
-    // Ban all objects except for Flash (which handle expandos)
-    "object": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000",
-    "applet": true
-},
+    hasData: function( elem ) {
+        elem = elem.nodeType ? jQuery.cache[ elem[jQuery.expando] ] : elem[ jQuery.expando ];
+        return !!elem &amp;&amp; !isEmptyDataObject( elem );
+    },
 
-hasData: function( elem ) {
-    elem = elem.nodeType ? jQuery.cache[ elem[jQuery.expando] ] : elem[ jQuery.expando ];
-    return !!elem &amp;&amp; !isEmptyDataObject( elem );
-},
-
-...
+    ...
 
 });
 </code></pre>
@@ -250,11 +248,11 @@ hasData: function( elem ) {
 
 <p>參考資料:</p>
 
-<p><a src="http://api.jquery.com/data/" target="_blank">jQuery $.data</a></p>
+<p><a href="http://api.jquery.com/data/" target="_blank">jQuery $.data</a></p>
 
-<p><a src="http://www.jb51.net/article/27433.htm" target="_blank">http://www.jb51.net/article/27433.htm</a></p>
+<p><a href="http://www.jb51.net/article/27433.htm" target="_blank">http://www.jb51.net/article/27433.htm</a></p>
 
-<p><a src="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
+<p><a href="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
 
 <p>如有錯誤，歡迎指正</p>
 </div>
@@ -318,7 +316,7 @@ hasData: function( elem ) {
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/jquery-data-cache/">[jQuery] 了解$.data</a>
+        <a href="/blog/jquery-data-cache/">[jQuery] $.data原理</a>
       </li>
     
       <li class="post">
