@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-08-31T18:41:43+08:00</updated>
+  <updated>2012-08-31T18:53:45+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,14 +18,14 @@
     <link href="http://rx836.github.com/blog/parallax-scrolling/"/>
     <updated>2012-08-31T17:55:00+08:00</updated>
     <id>http://rx836.github.com/blog/parallax-scrolling</id>
-    <content type="html"><![CDATA[<p>在Facebook看到有人分享<a href="http://www.milwaukeepolicenews.com/#menu=home-page" target="_blank">這個網站</a>，有人提到是用parallax scroll來實做，因為對這個不熟悉，趕緊做了一些功課看看怎麼做</p>
+    <content type="html"><![CDATA[<p>在Facebook看到有人分享<a href="http://www.milwaukeepolicenews.com/#menu=home-page" target="_blank">這個網站</a>，有人提到是用parallax scroll來實做，因為對這個不熟悉，所以趕緊做了一些功課來看看怎麼做</p>
 
 <!--more-->
 
 
-<p>parallax scroll中文叫做視差滾動效果，意思就是指讓多層背景以不同的速度移動，形成立體的景深效果，讓User有豐富的視覺體驗，像<a href="http://www.nikebetterworld.com/" target="_blank">Nike</a>一直對這方面運用相當的好，還有<a href="http://www.hksilicon.com/kb/articles/57516/30Parallax-Scrolling" target="_blank">『30個讓人興奮的視差滾動（Parallax Scrolling）效果網站』</a>也收集了很多相關方面的網站</p>
+<p>parallax scroll中文叫做<strong>視差滾動效果</strong>，意思就是指讓多層背景以不同的速度移動，形成立體的景深效果，使User有豐富的視覺體驗，像<a href="http://www.nikebetterworld.com/" target="_blank">Nike</a>一直對這方面運用的相當好，還有<a href="http://www.hksilicon.com/kb/articles/57516/30Parallax-Scrolling" target="_blank">『30個讓人興奮的視差滾動（Parallax Scrolling）效果網站』</a>也收集了很多相關方面的網站</p>
 
-<p>為了能夠實做，找到了<a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin" target="_blank">JQUERY SCROLL PARALLAX</a>這個plugin，用法蠻簡單的，首先準備ab兩張圖，a圖長方形(例如200x2000)，顏色隨意，b圖正方形(例如100x100)，顏色隨意，只要不要跟a圖一樣就可以，方便辨識</p>
+<p>為了能夠實做，找到了<a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin" target="_blank">JQUERY SCROLL PARALLAX</a>這個plugin，用法蠻簡單的，首先準備ab兩張圖，a圖長方形(例如200x2000)，顏色隨意，b圖正方形(例如100x100)，顏色隨意，注意不要跟a圖一樣就可以，方便辨識</p>
 
 <p>接著HTML如下:</p>
 
@@ -85,7 +85,7 @@
 
 <p>參考資料:</p>
 
-<p><a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin target="_blank">JQUERY SCROLL PARALLAX PLUGIN</a></p>
+<p><a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin" target="_blank">JQUERY SCROLL PARALLAX PLUGIN</a></p>
 ]]></content>
   </entry>
   
