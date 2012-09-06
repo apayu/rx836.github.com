@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-06T15:32:38+08:00</updated>
+  <updated>2012-09-06T15:38:36+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -23,7 +23,7 @@
 <!--more-->
 
 
-<p>因為已經有<a href="tympanus.net/Development/BookBlock/BookBlock.zip" target="_blank">範例檔</a>可以用，所以就不詳細講太多程式碼細節，首先先載入CSS和Modernizr，這兩隻檔案在範例檔裡面都有，分別在css和ja的資料夾裡面</p>
+<p>因為已經有<a href="http://tympanus.net/Development/BookBlock/BookBlock.zip" target="_blank">範例檔</a>可以用，所以就不詳細講太多程式碼細節，首先先載入CSS和Modernizr，這兩隻檔案在範例檔裡面都有，分別在css和ja的資料夾裡面</p>
 
 <pre><code>&lt;link rel="stylesheet" type="text/css" href="style.css" /&gt;
 &lt;link rel="stylesheet" type="text/css" href="custom.css" /&gt;
@@ -41,7 +41,7 @@
 
 <p>其中jquerypp.custom.js是<a href="http://jquerypp.com/" target="_blank">jQuery++</a>，擴充了<strong>swipe even</strong>這個功能，讓行動裝置用手指滑動也能觸發翻頁的效果</p>
 
-<p>而jquery.bookblock.js就是fli plugin，我們可以看到裡面其中一行是</p>
+<p>而jquery.bookblock.js就是Flip Plugin，我們可以看到裡面其中一行是</p>
 
 <pre><code>this.support = Modernizr.csstransitions &amp;&amp; Modernizr.csstransforms3d;
 </code></pre>
@@ -133,7 +133,7 @@ onEndFlip   : function( page, isLimit ) { return false; },
 onBeforeFlip: function( page ) { return false; }
 </code></pre>
 
-<p>再綁定下一頁和上一頁的事件裡面，除了可以直接在<strong>bookblock()</strong>添加以外</p>
+<p>在綁定下一頁和上一頁的事件裡面，除了可以直接在<strong>bookblock()</strong>添加以外</p>
 
 <pre><code>$( '#bb-bookblock' ).bookblock( {
     speed               : 800,
@@ -180,10 +180,6 @@ config.$navPrev.on( 'click', function() {
 <p>參考資料:</p>
 
 <p><a href="http://modernizr.com/docs/#features-css" target="_blank">Modernizr Documentation</a></p>
-
-<p><a href="http://www.jb51.net/article/27433.htm" target="_blank">http://www.jb51.net/article/27433.htm</a></p>
-
-<p><a href="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
 
 <p>如有錯誤，歡迎指正</p>
 ]]></content>
