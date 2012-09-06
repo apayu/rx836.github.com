@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin - Rx836</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="在網路上看到翻書效果感覺蠻有趣的，是利用CSS3 Transitions和CSS3 3D Transforms的效果實現，這裡我是用Flip Plugin 因為已經有範例檔可以用，所以就不詳細講太多程式碼細節，首先先載入CSS和Modernizr，這兩隻檔案在範例檔裡面都有， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-css3-flip-plugin">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Rx836" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Rx836</a></h1>
+  
+    <h2>程式、遊記、還有心得分享 歡迎來交流 最重要的是做個朋友</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T12:04:00+08:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>在網路上看到<a href="http://tympanus.net/Development/BookBlock/" target="_blank">翻書效果</a>感覺蠻有趣的，是利用<a href="http://www.w3schools.com/css3/css3_transitions.asp" target="_blank">CSS3 Transitions</a>和<a href="http://www.w3schools.com/css3/css3_3dtransforms.asp" target="_blank">CSS3 3D Transforms</a>的效果實現，這裡我是用<a href="http://tympanus.net/codrops/2012/09/03/bookblock-a-content-flip-plugin/" target="_blank">Flip Plugin</a></p>
+
+<!--more-->
+
+
+<p>因為已經有<a href="tympanus.net/Development/BookBlock/BookBlock.zip" target="_blank">範例檔</a>可以用，所以就不詳細講太多程式碼細節，首先先載入CSS和Modernizr，這兩隻檔案在範例檔裡面都有，分別在css和ja的資料夾裡面</p>
+
+<pre><code>&lt;link rel="stylesheet" type="text/css" href="style.css" /&gt;
+&lt;link rel="stylesheet" type="text/css" href="custom.css" /&gt;
+&lt;script type="text/javascript" src="modernizr.custom.79639.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>可以看到CSS其實就是一開始先將第一張照片秀出，其他都先<strong>display : none</strong>，至於modernizr是因為為了要支援IE9以下所用的，因為IE9以下不支援CSS3 Transitions和CSS3 3D Transforms，所以要利用modernizr來偵測User所用瀏覽器的支援程度來決定實現的效果</p>
+
+<p>接下來要引用其他三支js進來</p>
+
+<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquerypp.custom.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.bookblock.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>其中jquerypp.custom.js是<a href="http://jquerypp.com/" target="_blank">jQuery++</a>，擴充了<strong>swipe even</strong>這個功能，讓行動裝置用手指滑動也能觸發翻頁的效果</p>
+
+<p>而jquery.bookblock.js就是fli plugin，我們可以看到裡面其中一行是</p>
+
+<pre><code>this.support = Modernizr.csstransitions &amp;&amp; Modernizr.csstransforms3d;
+</code></pre>
+
+<p>這行就是利用Modernizr在檢查User現在的瀏覽器支援程度，所以下面就會有if判斷</p>
+
+<pre><code>if( !this.support ) {
+
+    this._layoutNoSupport( dir );
+
+}
+else {
+
+    this._layout( dir );
+
+}
+</code></pre>
+
+<p>假如不支援的話，就會用.hide() or .show()來實現換頁效果，如果有支援就會使用CSS3 3D Transforms</p>
+
+<p>接著是基本HTML架構</p>
+
+<pre><code>&lt;div id="bb-bookblock" class="bb-bookblock"&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- custom content --&gt;
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- ... --&gt;
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- ... --&gt;
+    &lt;/div&gt;
+    &lt;!-- ... --&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><strong>bb-item</strong>就是裡面每一頁要放的內容，可以是圖片或文字</p>
+
+<p>而js部分可以這樣寫</p>
+
+<pre><code>$(function() {
+
+    $( '#bb-bookblock' ).bookblock();
+
+});
+</code></pre>
+
+<p>裡面的options設定如下</p>
+
+<pre><code>// speed for the flip transition in ms.
+speed       : 1000,
+
+// easing for the flip transition.
+easing      : 'ease-in-out',
+
+// if set to true, both the flipping page and the sides will have an overlay to simulate shadows
+shadows     : true,
+
+// opacity value for the "shadow" on both sides (when the flipping page is over it).
+// value : 0.1 - 1
+shadowSides : 0.2,
+
+// opacity value for the "shadow" on the flipping page (while it is flipping).
+// value : 0.1 - 1
+shadowFlip  : 0.1,
+
+// perspective value
+perspective : 1300,
+
+// if we should show the first item after reaching the end.
+circular    : false,
+
+// if we want to specify a selector that triggers the next() function. example: '#bb-nav-next'.
+nextEl      : '',
+
+// if we want to specify a selector that triggers the prev() function.
+prevEl      : '',
+
+// callback after the flip transition.
+// page is the current item's index.
+// isLimit is true if the current page is the last one (or the first one).
+onEndFlip   : function( page, isLimit ) { return false; },
+
+// callback before the flip transition.
+// page is the current item's index.
+onBeforeFlip: function( page ) { return false; }
+</code></pre>
+
+<p>再綁定下一頁和上一頁的事件裡面，除了可以直接在<strong>bookblock()</strong>添加以外</p>
+
+<pre><code>$( '#bb-bookblock' ).bookblock( {
+    speed               : 800,
+    shadowSides : 0.8,
+    shadowFlip  : 0.7,
+    nextEl      : '#bb-nav-next', //綁定下一頁事件
+    prevEl      : '#bb-nav-prev'  //綁定上一頁事件
+} )
+</code></pre>
+
+<p>也可以按照範例裡面的寫法</p>
+
+<pre><code>var config = {
+    $bookBlock: $( '#bb-bookblock' ),
+    $navNext    : $( '#bb-nav-next' ),
+    $navPrev    : $( '#bb-nav-prev' ),
+    $navJump    : $( '#bb-nav-jump' ),
+    bb              : $( '#bb-bookblock' ).bookblock( {
+        speed               : 800,
+        shadowSides : 0.8,
+        shadowFlip  : 0.7
+    } )
+}
+
+config.$navNext.on( 'click', function() {
+
+    config.bb.next();
+    return false;
+
+} );
+
+config.$navPrev.on( 'click', function() {
+
+    config.bb.prev();
+    return false;
+
+} );
+</code></pre>
+
+<p>另外自己綁定click在上一頁和下一頁的DOM元素裡面</p>
+
+<p>範例完成以後我特地拿iPone來測試swipe even的效果，還蠻頓的，而且不是很靈敏，可能有細節要再調整，也有可能是手機本身的問題，這方面就要請各位要應用在行動裝置的朋友們再多多測試了</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://modernizr.com/docs/#features-css" target="_blank">Modernizr Documentation</a></p>
+
+<p><a href="http://www.jb51.net/article/27433.htm" target="_blank">http://www.jb51.net/article/27433.htm</a></p>
+
+<p><a href="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T12:04:00+08:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/jquery-css3-flip-plugin/" data-via="" data-counturl="http://rx836.github.com/blog/jquery-css3-flip-plugin/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/parallax-scrolling/" title="Previous Post: [jQuery] jQuery scroll parallax plugin">&laquo; [jQuery] jQuery scroll parallax plugin</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/jquery-css3-flip-plugin/">[jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/parallax-scrolling/">[jQuery] jQuery scroll parallax plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-data-cache/">[jQuery] $.data原理</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/work-1/">[學習筆記] 亞馬遜帝國成功學</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/book-review-4/">[讀後心得] 社群效應:小圈圈如何改變世界</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-css3-flip-plugin/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-css3-flip-plugin/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
