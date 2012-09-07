@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-08T01:38:22+08:00</updated>
+  <updated>2012-09-08T01:47:00+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,7 +18,7 @@
     <link href="http://rx836.github.com/blog/javascript-patterns-1/"/>
     <updated>2012-09-07T23:57:00+08:00</updated>
     <id>http://rx836.github.com/blog/javascript-patterns-1</id>
-    <content type="html"><![CDATA[<p>最近在看一本書叫做<strong>JavaScript 設計模式</strong>，英文名稱是JavaScript Patterns，裡面很完整的告訴你如何寫好JavaScript，他不適合初學者看，因為他並不會從很基礎的觀念開始談起，但他卻非常適合像我這種已經知道基礎，而且正要開始往上爬的人看</p>
+    <content type="html"><![CDATA[<p>最近在看一本書叫做<strong>JavaScript 設計模式</strong>，英文名稱是JavaScript Patterns，裡面很完整的告訴你如何寫好JavaScript，他不適合初學者看，因為他並不會從很基礎的觀念開始談起，但他卻非常適合像我這種已經知道基礎，並且正要開始往上爬的人閱讀</p>
 
 <!--more-->
 
@@ -27,11 +27,15 @@
 
 <p>JavaScript是一個物件導向的語言，在程式碼裡面大部份你所看到的都可以說是物件，除了五種原始型別不是以外，分別如下</p>
 
-<p>1.數值
-2.字串
-3.布林
-4.null
-5.undefined</p>
+<p>1.數值</p>
+
+<p>2.字串</p>
+
+<p>3.布林</p>
+
+<p>4.null</p>
+
+<p>5.undefined</p>
 
 <p>雖然數值、字串和布林不是物件，但如果需要的話，還是可以很容易的轉換成物件來使用</p>
 
@@ -45,7 +49,7 @@
 
 <p>而物件建立了以後，並不是就說完全不能動他，你還是可以修改他，看是新增或移除裡面的屬性和方法都可以，再來要特別提到的是，有兩種主要的物件要認識一下</p>
 
-<p>第一種叫做原生物件(Native)，也可以叫做內建物件，例如Array、Date或是使用者自行定義var o = {}(後面會提到)</p>
+<p>第一種叫做原生物件(Native)，也可以叫做內建物件，例如Array、Date或是使用者自行定義(後面會提到)</p>
 
 <p>第二種叫做宿主物件(Host)，例如window物件和所有DOM物件</p>
 
@@ -81,12 +85,15 @@ cat.getName = function() {
 
 <p>可能一開始會不太習慣這種寫法，但用久了，你會慢慢喜歡這種寫法，而外面大部份的寫法也都是用實字模式，也是比較推薦的寫法，後面也會提到為什麼推薦，而以下是物件實字的特點</p>
 
-<p>1.將物件用大括號包起來{ }
-2.逗號分隔每個屬性和物件，而最後可以不用逗號
-3.用分號分隔屬性名稱和屬性值
-4.最後別忘了要在最後面的}加上分號</p>
+<p>1.將物件用大括號包起來{ }</p>
 
-<p>第二個要來談的是用建構式來建立物件</p>
+<p>2.逗號分隔每個屬性和物件，而最後可以不用逗號</p>
+
+<p>3.用分號分隔屬性名稱和屬性值</p>
+
+<p>4.最後別忘了要在最後面的}加上分號</p>
+
+<p>第二個要來談的是用<strong>建構式</strong>來建立物件</p>
 
 <p>雖然JavaScript沒有class，但他卻有一個很相似class的語法，叫做建構式函式(constructor functions)，你可以用建構式函式來建立物件，或著，使用內建的建構式(例如:Object()、Date()、String())，用法如下</p>
 
