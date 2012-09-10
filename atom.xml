@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-11T01:37:42+08:00</updated>
+  <updated>2012-09-11T02:01:46+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -808,15 +808,6 @@ config.$navPrev.on( 'click', function() {
 <p><a href="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
 
 <p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2012_08_29_test]]></title>
-    <link href="http://rx836.github.com/blog/2012-08-29-test/"/>
-    <updated>2012-08-29T20:08:00+08:00</updated>
-    <id>http://rx836.github.com/blog/2012-08-29-test</id>
-    <content type="html"><![CDATA[<p>123</p>
 ]]></content>
   </entry>
   
@@ -1826,6 +1817,73 @@ $.each(a1,function(){
 <p>或許，把簡單的事情重複一直做，專注於你想專注的事</p>
 
 <p>或許，這會是我們翻身的一個年代</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Octopress]如何開啟 Disqus與和常見的指令]]></title>
+    <link href="http://rx836.github.com/blog/octopress-notes-1/"/>
+    <updated>2012-04-27T02:12:00+08:00</updated>
+    <id>http://rx836.github.com/blog/octopress-notes-1</id>
+    <content type="html"><![CDATA[<p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
+
+<!-- more  -->
+
+
+<h2>為什麼我沒有Comments..</h2>
+
+<p>對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡，但對於我這個新手來說，卻是不知如何是好的難題，好險網路上還是有很多人願意紀錄這一切</p>
+
+<p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
+
+<p>簡單來說就是需先申請<a href="http://www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
+
+<pre><code>disqus_short_name: your_disqus_short_name
+disqus_show_comment_count: true
+</code></pre>
+
+<h2>一些常用的指令</h2>
+
+<p>說來可憐&#8230;，我到現在還不會在不同台電腦編寫我的Octopress，最近嘗試一次結果因為不熟git而把檔案搞得亂七八糟，但最近有找到一篇文章，我是還沒有親自嘗試過，但想要在這邊先記錄下來，以方便我回頭來看</p>
+
+<p><a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blankl">思考的轨迹 : 如何维护Github上博客</a></p>
+
+<p>然後常用的指令有</p>
+
+<p><strong>設置Octopress與Github做連結</strong></p>
+
+<pre><code>rake setup_github_pages
+</code></pre>
+
+<p><strong>新增文章</strong></p>
+
+<pre><code>rake new_post["title"]
+</code></pre>
+
+<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
+
+<pre><code>rake generate
+</code></pre>
+
+<p><strong>發佈_deploy到Github上</strong></p>
+
+<pre><code>rake deploy
+</code></pre>
+
+<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
+
+<pre><code>set LC_ALL=zh_TW.UTF-8
+set LANG=zh_TW.UTF-8
+</code></pre>
+
+<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
+
+<pre><code>git add .
+git commit -m "your message"
+git push origin source  
+</code></pre>
+
+<p>這還真是一篇＂筆記＂的文章&#8230;</p>
 ]]></content>
   </entry>
   
