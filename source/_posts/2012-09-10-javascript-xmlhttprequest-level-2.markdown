@@ -1,0 +1,174 @@
+---
+layout: post
+title: "[HTML5] 淺談XMLHttpRequest Level 2"
+date: 2012-09-10 15:24
+comments: true
+categories: 
+---
+
+HTML5近來可說是越來越火紅，在諸多優點裡面，最讓開發者期待的就是他的標準化，讓各家瀏覽器不再是各自為王，各自為政，這對於網頁開發者來說，可以說是一大利多(前提是微軟真正的統一?不過看IE10頗有那個味道)，今天要來看的是新的標準化-**XMLHttpReuest Level 2**
+
+<!--more-->
+
+XMLHttpRequest其實是一個物件，也是AJAX的核心，微軟的IE5是最早支援這個物件，後來在Google大量應用之下，讓AJAX這項技術開始爆紅，也讓各家瀏覽器開始相繼支援，不過因為XMLHttpRequest(底下簡稱XHR)並不是標準，所以導致實做上必須小心各家瀏覽器的差異
+
+早些時候我們要寫AJAX我們可能會這樣寫
+
+	var xhr;
+	
+	// 依照不同的瀏覽器，取得XMLHttpRequest物件
+	function CreateAJAX() {
+	　if (window.ActiveXObject) {
+	　　try {
+	　　　return new ActiveXObject("Msxml2.XMLHTTP");
+	　　} catch (e) {
+	　　　try {
+	　　　　return new ActiveXObject("Microsoft.XMLHTTP");
+	　　　} catch (e2) {
+	　　　　return null;
+	　　　}
+	　　}
+	　} else if (window.XMLHttpRequest) {
+	　　return new XMLHttpRequest();
+	　} else {
+	　　return null;
+	　}
+	}
+	
+	//回傳資料
+	function onReponseData () {
+	　if (xhr.readyState == 4) {
+	　　if (xhr.status == 200) {
+	
+		  //do something
+		  //console.log(xhr.responseText);
+	
+	　　} else {
+	　　　alert ("伺服器處理錯誤");
+	　　}
+	　} 
+	}
+	
+	//送出資料
+	function ajaxSendRequest(uri) {
+	  xhr = CreateAJAX() ;
+	　if (!xhr) {
+	　　alert ('瀏覽器不支援！');
+	　　return 0;
+	　}
+
+	  xhr.onreadystatechange = onReponseData;
+	  xhr.open ("GET", uri, true);
+	  xhr.send ("");
+	}
+	
+HTML部分
+
+	<input type="button" value="執行" onclick="ajaxSendRequest('index.php')" >
+	
+大概提一下幾個重要屬性
+
+1.xhr.readyState:XMLHttpRequest狀態，等於4表示數據已經接收完畢
+
+2.xhr.status:狀態碼，200表示正常
+
+3.xhr.responseText:server回應的文字數據
+
+不過假如有時候要取得跨網域的API資料，受限於安全問題，會因為<a href="http://en.wikipedia.org/wiki/Same_origin_policy" target="_blank">同源限制(Same Origin Policy)</a>的關係而受阻，因此有些人可能會使用<a href="http://zh.wikipedia.org/wiki/JSONP" target="_blank">JSONP</a>來解決此類問題，不過未來在新的標準XMLHttpRequest Level 2會有解決方法
+
+新的XHR的特點如下
+
+1.可以設置HTTP請求時限
+
+2.可以使用FormData管理表單數據
+
+3.可以上傳檔案
+
+4.可以跨網域請求
+
+5.可以獲得server端二進制數據
+
+6.可以獲得數據傳輸的進度訊息
+
+這裡礙於篇幅只介紹請求時限和跨網域請求部分
+
+## Setting and handling timeouts
+
+有時候我們在做AJAX時，常會無法預知會花多少時間，如果網路速度一慢，User可能會等上好一段時間，甚至會認為網站當掉而離去，這其實不是個好的User Experience
+
+所以在新的標準裡面我們可以這樣做
+
+	xhr.timeout = 3000;
+	
+整個範例程式大概如下
+
+	function makeRequest() {
+	  var url = 'index.php';
+	  var onLoadHandler = function(event){
+		 // Parse the JSON and build a list.
+	  }
+	  var onTimeOutHandler = function(event){
+		var content = document.getElementById('content'),
+		  p = document.createElement('p'),
+		  msg = document.createTextNode('Just a little bit longer!');
+		  p.appendChild(msg);
+		  content.appendChild(p);
+
+		  // Restarts the request.
+		  event.target.open('GET',url);
+
+		  // Optionally, set a longer timeout to override the original.
+		  event.target.timeout = 6000;
+		  event.target.send();
+	  }
+	  var xhr = new XMLHttpRequest();
+	  xhr.open('GET',url);
+	  xhr.timeout = 3000;
+	  xhr.onload = onLoadHandler;
+	  xhr.ontimeout = onTimeOutHandler;
+	  xhr.send();
+	}
+	
+	makeRequest();
+	
+可以在index.php裡面寫延遲4秒，會發現第一次請求時，會出現**Just a little bit longer!**的提示文字，第二次才順利取得資料，這是因為一開始的等待時間是設定三秒，第二次是六秒
+
+*備註:Chrome和Safari尚未支援XHR timeouts，只有Oprea和Firefox還有IE10有，IE8和IE9有支援不過用的是XDomainRequest物件*
+
+## Requesting data from another domain
+
+跨網域的請求問題(Cross-origin resource sharing，簡稱CORS)，在新的XMLHttpRequest Level 2得到解答，可以針對不同的網域發出請求，但使用時除了要注意瀏覽器是否支援以外，同時Server端也要允許存取才行，而程式寫法其實跟以前一樣
+
+這裡有個<a href="http://devfiles.myopera.com/articles/9482/xhr-credentials.html" target="_blank">範例</a>可以看看
+
+進去範例打開開發者工具，點下Make request的按鈕，查看回應標頭
+
+<img src="https://lh3.googleusercontent.com/-gcWY8Edjbn8/UE2qKLxkU1I/AAAAAAAABdk/67b8otL39m8/s492/1.jpg" width="492px" />
+
+會發現**Access-Control-Allow-Origin**的值是**http://devfiles.myopera.com**，也就是此範例的網域，代表只允許此網域的請求，另外**access-control-allow-credentials**的值為ture，表示允許跨網域請求
+
+為了驗證限制某個網域的請求(Access-Control-Allow-Origin)，我自己寫了一個js去對範例中請求的server做Request
+
+<img src="https://lh3.googleusercontent.com/-SpkH2Sjk8Bo/UE2tLkTlrWI/AAAAAAAABd0/9sB5KOXXVE0/s707/2.jpg" width="600px" />
+
+會發現雖然狀態碼為200，但實際上根本就沒有東西回應
+
+*備註:除了IE8與IE9，其他主流瀏覽器都支援此項功能*
+
+HTML5裡面實在太多可以玩了，也難怪會被譽為殺手級的技術，大家記得在使用這些功能前先查查瀏覽器支援的程度，畢竟HTML5的標準都還在制定中
+
+參考資料:
+
+<a href="http://dev.opera.com/articles/view/xhr2/" target="_blank">Introduction to XMLHttpRequest Level 2</a>
+
+<a href="http://dev.opera.com/articles/view/dom-access-control-using-cross-origin-resource-sharing/" target="_blank">DOM access control using cross-origin resource sharing</a>
+
+<a href="http://www.ruanyifeng.com/blog/2012/09/xmlhttprequest_level_2.html" target="_blank">XMLHttpRequest Level 2 使用指南</a>
+
+<a href="http://jck11.pixnet.net/blog/post/11624882-ajax%E6%A0%B8%E5%BF%83-xmlhttprequest%5B%E7%AD%86%E8%A8%98%5D" target="_blank">AJAX核心-XMLHttpRequest[筆記]</a>
+
+<a href="http://caterpillar.onlyfun.net/Gossip/JavaScript/SecurityConstraint.html" target="_blank">JavaScript Essence: 安全限制</a>
+
+<a href="http://design2u.me/blog/936/cross-domain-ajax-cross-domain-data-has-been-retrieved-jsonp" target="_blank">Cross Domain Ajax 跨網域抓取資料(JSONP)</a>
+
+如有錯誤，歡迎指正
