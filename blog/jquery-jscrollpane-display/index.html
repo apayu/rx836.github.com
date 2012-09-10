@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[Octopress]如何開啟 Disqus與和常見的指令 - Rx836</title>
+  <title>[Jquery] jScrollPane的使用與注意 - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來 為什麼我沒有Comments.. 對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡， &hellip;">
+  <meta name="description" content="有些時候客戶會不想要HTML內建的Scrollbar，所以特地去找了一個Jquery Plugin來使用，但注意，如果有使用到display:none，或是類似lightbox視窗效果，要注意一下先後執行的問題 當然，還有其他很多Plugin可以選擇10 jQuery Custom &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/octopress-notes-1">
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-jscrollpane-display">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">[Octopress]如何開啟 Disqus與和常見的指令</h1>
+      <h1 class="entry-title">[Jquery] jScrollPane的使用與注意</h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+<time datetime="2012-06-11T18:26:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -104,65 +104,56 @@
   </header>
 
 
-<div class="entry-content"><p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
+<div class="entry-content"><p>有些時候客戶會不想要HTML內建的Scrollbar，所以特地去找了一個Jquery Plugin來使用，但注意，如果有使用到display:none，或是類似lightbox視窗效果，要注意一下先後執行的問題</p>
 
-<!-- more  -->
+<!--more-->
 
 
-<h2>為什麼我沒有Comments..</h2>
+<p>當然，還有其他很多Plugin可以選擇<a href="http://www.net-kit.com/jquery-custom-scrollbar-plugins/" target="_blank">10 jQuery Custom Scrollbar Plugins</a>，這裡我是用jScrollPane，使用方法很簡單，先下載他的檔案回來，在載入到網頁</p>
 
-<p>對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡，但對於我這個新手來說，卻是不知如何是好的難題，好險網路上還是有很多人願意紀錄這一切</p>
+<p>使用方法</p>
 
-<p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
+<pre><code>&lt;!-- CSS部分 --&gt;
+&lt;link type="text/css" href="style/jquery.jscrollpane.css" rel="stylesheet" media="all" /&gt;
 
-<p>簡單來說就是需先申請<a href="http://www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
+&lt;!-- 還要載入Jquery 這裡用CDN --&gt;
+&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;
+&lt;/script&gt;
 
-<pre><code>disqus_short_name: your_disqus_short_name
-disqus_show_comment_count: true
+&lt;!-- 載入mousewheel plugin --&gt;
+&lt;script type="text/javascript" src="script/jquery.mousewheel.js"&gt;&lt;/script&gt;
+
+&lt;!-- 載入jScrollPane --&gt;
+&lt;script type="text/javascript" src="script/jquery.jscrollpane.min.js"&gt;&lt;/script&gt;
 </code></pre>
 
-<h2>一些常用的指令</h2>
+<p>接著只要對包覆內容的div加上Jquery語法</p>
 
-<p>說來可憐&#8230;，我到現在還不會在不同台電腦編寫我的Octopress，最近嘗試一次結果因為不熟git而把檔案搞得亂七八糟，但最近有找到一篇文章，我是還沒有親自嘗試過，但想要在這邊先記錄下來，以方便我回頭來看</p>
-
-<p><a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blankl">思考的轨迹 : 如何维护Github上博客</a></p>
-
-<p>然後常用的指令有</p>
-
-<p><strong>設置Octopress與Github做連結</strong></p>
-
-<pre><code>rake setup_github_pages
+<pre><code>$(function()
+{
+    $('.your div').jScrollPane();
+});
 </code></pre>
 
-<p><strong>新增文章</strong></p>
+<p>這樣就可以自製Scrollbar了！很簡單吧</p>
 
-<pre><code>rake new_post["title"]
-</code></pre>
+<p>這裡有<a href="http://jscrollpane.kelvinluck.com/#examples" target="_blank">更多範例</a></p>
 
-<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
+<p>不過有時候我們會遇到一個狀況，一開始會設div為display:none，然後點了某個元件以後，用lightbox或其他方式秀出div，如下圖</p>
 
-<pre><code>rake generate
-</code></pre>
+<p><img width="300px" src="https://lh4.googleusercontent.com/-NBEVwEqZHlY/T9XCoGfeq1I/AAAAAAAAAQc/sWHyCp2vi6M/w753-h585-k/a.jpg" /></p>
 
-<p><strong>發佈_deploy到Github上</strong></p>
+<p>但會發現，依照正常流程來套用，點開呈現的效果不如預期，那是因為你在還沒套用jScrollPane之前，為了呈現lightbox的效果，就已經先將他display:none，為了避免發生這種情況，必須先不要display:none，然後在jscrollpane套用以後，再將div做隱藏，教學如下</p>
 
-<pre><code>rake deploy
-</code></pre>
+<p>1.先找到function initialise()</p>
 
-<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
+<p>2.接著在這個function的最後面加上$(&#8216;#your div&#8217;).hide()</p>
 
-<pre><code>set LC_ALL=zh_TW.UTF-8
-set LANG=zh_TW.UTF-8
-</code></pre>
+<p>意思就是，等所有初始化步驟結束以後，才把div的display設成none</p>
 
-<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
+<p>其實有很多Jquery Plugin的套用，如果有用到顯示/隱藏的切換，都要注意到先後順序的問題</p>
 
-<pre><code>git add .
-git commit -m "your message"
-git push origin source  
-</code></pre>
-
-<p>這還真是一篇＂筆記＂的文章&#8230;</p>
+<p>以上如有問題，歡迎一起討論</p>
 </div>
 
 
@@ -185,7 +176,7 @@ git push origin source
   
 
 
-<time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+<time datetime="2012-06-11T18:26:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2012</time>
       
 
 
@@ -193,7 +184,7 @@ git push origin source
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/octopress-notes-1/" data-via="" data-counturl="http://rx836.github.com/blog/octopress-notes-1/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/jquery-jscrollpane-display/" data-via="" data-counturl="http://rx836.github.com/blog/jquery-jscrollpane-display/" >Tweet</a>
   
   
   
@@ -202,10 +193,10 @@ git push origin source
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/first-octopress/" title="Previous Post: [Octopress]出生以來第一次使用Octopress for windows">&laquo; [Octopress]出生以來第一次使用Octopress for windows</a>
+        <a class="basic-alignment left" href="/blog/book-review-3/" title="Previous Post: [讀後心得] 預見未來">&laquo; [讀後心得] 預見未來</a>
       
       
-        <a class="basic-alignment right" href="/blog/book-review-1/" title="Next Post: [讀後心得] 只剩下一個角落的繁華">[讀後心得] 只剩下一個角落的繁華 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/facebook-app-create-getfbid/" title="Next Post: [Facebook] 如何建立facebook App 且取得FB ID">[Facebook] 如何建立facebook App 且取得FB ID &raquo;</a>
       
     </p>
   </footer>
@@ -272,8 +263,8 @@ git push origin source
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/octopress-notes-1/';
-        var disqus_url = 'http://rx836.github.com/blog/octopress-notes-1/';
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-jscrollpane-display/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-jscrollpane-display/';
         var disqus_script = 'embed.js';
       
     (function () {

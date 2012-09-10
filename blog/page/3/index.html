@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[Octopress]如何開啟 Disqus與和常見的指令 - Rx836</title>
+  <title>Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來 為什麼我沒有Comments.. 對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡， &hellip;">
+  <meta name="description" content="經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/octopress-notes-1">
+  <link rel="canonical" href="http://rx836.github.com/blog/page/3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -74,12 +74,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">[Octopress]如何開啟 Disqus與和常見的指令</h1>
+      <h1 class="entry-title"><a href="/blog/octopress-notes-1/">[Octopress]如何開啟 Disqus與和常見的指令</a></h1>
     
     
       <p class="meta">
@@ -97,128 +100,79 @@
 
 <time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/blog/octopress-notes-1/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
+  <div class="entry-content"><p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
 
-<!-- more  -->
-
-
-<h2>為什麼我沒有Comments..</h2>
-
-<p>對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡，但對於我這個新手來說，卻是不知如何是好的難題，好險網路上還是有很多人願意紀錄這一切</p>
-
-<p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
-
-<p>簡單來說就是需先申請<a href="http://www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
-
-<pre><code>disqus_short_name: your_disqus_short_name
-disqus_show_comment_count: true
-</code></pre>
-
-<h2>一些常用的指令</h2>
-
-<p>說來可憐&#8230;，我到現在還不會在不同台電腦編寫我的Octopress，最近嘗試一次結果因為不熟git而把檔案搞得亂七八糟，但最近有找到一篇文章，我是還沒有親自嘗試過，但想要在這邊先記錄下來，以方便我回頭來看</p>
-
-<p><a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blankl">思考的轨迹 : 如何维护Github上博客</a></p>
-
-<p>然後常用的指令有</p>
-
-<p><strong>設置Octopress與Github做連結</strong></p>
-
-<pre><code>rake setup_github_pages
-</code></pre>
-
-<p><strong>新增文章</strong></p>
-
-<pre><code>rake new_post["title"]
-</code></pre>
-
-<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
-
-<pre><code>rake generate
-</code></pre>
-
-<p><strong>發佈_deploy到Github上</strong></p>
-
-<pre><code>rake deploy
-</code></pre>
-
-<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
-
-<pre><code>set LC_ALL=zh_TW.UTF-8
-set LANG=zh_TW.UTF-8
-</code></pre>
-
-<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
-
-<pre><code>git add .
-git commit -m "your message"
-git push origin source  
-</code></pre>
-
-<p>這還真是一篇＂筆記＂的文章&#8230;</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
-
-      
-
-
-
-
-
-
-
-
+  
+    <footer>
+      <a rel="full-article" href="/blog/octopress-notes-1/">more&#8230;</a>
+    </footer>
   
 
 
-<time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+    </article>
+  
+  
+    <article>
       
-
-
-    </p>
+  <header>
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/octopress-notes-1/" data-via="" data-counturl="http://rx836.github.com/blog/octopress-notes-1/" >Tweet</a>
-  
-  
-  
-</div>
-
+      <h1 class="entry-title"><a href="/blog/first-octopress/">[Octopress]出生以來第一次使用Octopress for Windows</a></h1>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/first-octopress/" title="Previous Post: [Octopress]出生以來第一次使用Octopress for windows">&laquo; [Octopress]出生以來第一次使用Octopress for windows</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/book-review-1/" title="Next Post: [讀後心得] 只剩下一個角落的繁華">[讀後心得] 只剩下一個角落的繁華 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
+    
+      <p class="meta">
+        
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-27T01:55:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+        
+         | <a href="/blog/first-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>終於&#8230;</p>
+
+<p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
+
 </div>
-  </section>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/first-octopress/">more&#8230;</a>
+    </footer>
+  
 
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -256,7 +210,6 @@ git push origin source
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -271,10 +224,7 @@ git push origin source
       var disqus_shortname = 'rx836';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/octopress-notes-1/';
-        var disqus_url = 'http://rx836.github.com/blog/octopress-notes-1/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[Octopress]如何開啟 Disqus與和常見的指令 - Rx836</title>
+  <title>[jQuery] jQuery scroll parallax plugin - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來 為什麼我沒有Comments.. 對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡， &hellip;">
+  <meta name="description" content="在Facebook看到有人分享這個網站，有人提到是用parallax scroll來實做，因為對這個不熟悉，所以趕緊做了一些功課來看看怎麼做 parallax scroll中文叫做視差滾動效果，意思就是指讓多層背景以不同的速度移動，形成立體的景深效果，使User有豐富的視覺體驗， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/octopress-notes-1">
+  <link rel="canonical" href="http://rx836.github.com/blog/parallax-scrolling">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">[Octopress]如何開啟 Disqus與和常見的指令</h1>
+      <h1 class="entry-title">[jQuery] jQuery Scroll Parallax Plugin</h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+<time datetime="2012-08-31T17:55:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -104,65 +104,74 @@
   </header>
 
 
-<div class="entry-content"><p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
+<div class="entry-content"><p>在Facebook看到有人分享<a href="http://www.milwaukeepolicenews.com/#menu=home-page" target="_blank">這個網站</a>，有人提到是用parallax scroll來實做，因為對這個不熟悉，所以趕緊做了一些功課來看看怎麼做</p>
 
-<!-- more  -->
+<!--more-->
 
 
-<h2>為什麼我沒有Comments..</h2>
+<p>parallax scroll中文叫做<strong>視差滾動效果</strong>，意思就是指讓多層背景以不同的速度移動，形成立體的景深效果，使User有豐富的視覺體驗，像<a href="http://www.nikebetterworld.com/" target="_blank">Nike</a>一直對這方面運用的相當好，還有<a href="http://www.hksilicon.com/kb/articles/57516/30Parallax-Scrolling" target="_blank">『30個讓人興奮的視差滾動（Parallax Scrolling）效果網站』</a>也收集了很多相關方面的網站</p>
 
-<p>對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡，但對於我這個新手來說，卻是不知如何是好的難題，好險網路上還是有很多人願意紀錄這一切</p>
+<p>為了能夠實做，找到了<a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin" target="_blank">JQUERY SCROLL PARALLAX</a>這個plugin，用法蠻簡單的，首先準備ab兩張圖，a圖長方形(例如200x2000)，顏色隨意，b圖正方形(例如100x100)，顏色隨意，注意不要跟a圖一樣就可以，方便辨識</p>
 
-<p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
+<p>接著HTML如下:</p>
 
-<p>簡單來說就是需先申請<a href="http://www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
-
-<pre><code>disqus_short_name: your_disqus_short_name
-disqus_show_comment_count: true
+<pre><code>&lt;div class="item"&gt;
+    &lt;div class="inner"&gt;&lt;/div&gt;       
+&lt;/div&gt;
 </code></pre>
 
-<h2>一些常用的指令</h2>
+<p>CSS如下:</p>
 
-<p>說來可憐&#8230;，我到現在還不會在不同台電腦編寫我的Octopress，最近嘗試一次結果因為不熟git而把檔案搞得亂七八糟，但最近有找到一篇文章，我是還沒有親自嘗試過，但想要在這邊先記錄下來，以方便我回頭來看</p>
+<pre><code>.item{
+    width:100%;
+    overflow:hidden;
+    position:relative;
+    height:2000px;
+    background: white url(a.png) 0px 0px fixed no-repeat;
+}
 
-<p><a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blankl">思考的轨迹 : 如何维护Github上博客</a></p>
-
-<p>然後常用的指令有</p>
-
-<p><strong>設置Octopress與Github做連結</strong></p>
-
-<pre><code>rake setup_github_pages
+.inner{
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:1;
+    background: url(b.png) 150px 200px fixed no-repeat;
+}
 </code></pre>
 
-<p><strong>新增文章</strong></p>
+<p>會看到我將.inner的背景圖設置了座標150,200，200就是等會js負責控制的地方，經由控制背景圖的位置來達到視差滾輪的效果</p>
 
-<pre><code>rake new_post["title"]
+<p>接著引用js</p>
+
+<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"&gt;&lt;/script&gt;    
+&lt;script src="jquery.inview.js"&gt;&lt;/script&gt;
+&lt;script src="jquery.scrollParallax.js"&gt;&lt;/script&gt;
 </code></pre>
 
-<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
+<p>共有兩個js要載，一個就是<a href="https://github.com/davecranwell/jQuery-scroll-parallax" target="_blank">scrollParallax.js</a>，另一個是<a href="https://github.com/protonet/jquery.inview" target="_blank">inview.js</a>，inview.js簡單的說也是一個plugin，藉由inview.js可以抓取目前scroll的位置和秀出對應的效果，例如『把scroll拉到最底就出現回到最上方的方塊』</p>
 
-<pre><code>rake generate
+<p>接著是js程式碼部分</p>
+
+<pre><code>$(function(){       
+    $('.item').scrollParallax({
+        'speed': 0
+    });
+
+    $('.item .inner').scrollParallax({
+        'speed': 0.8        
+    });
+});
 </code></pre>
 
-<p><strong>發佈_deploy到Github上</strong></p>
+<p>speed是調整移動的數度，只要將每個圖速度設定不一樣，就會呈現不一樣的景深效果</p>
 
-<pre><code>rake deploy
-</code></pre>
+<p>很容易吧！有興趣的人可以下載試試看，而且都有DEMO範例，方便理解</p>
 
-<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
+<p>如有錯誤，歡迎指證</p>
 
-<pre><code>set LC_ALL=zh_TW.UTF-8
-set LANG=zh_TW.UTF-8
-</code></pre>
+<p>參考資料:</p>
 
-<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
-
-<pre><code>git add .
-git commit -m "your message"
-git push origin source  
-</code></pre>
-
-<p>這還真是一篇＂筆記＂的文章&#8230;</p>
+<p><a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin" target="_blank">JQUERY SCROLL PARALLAX PLUGIN</a></p>
 </div>
 
 
@@ -185,7 +194,7 @@ git push origin source
   
 
 
-<time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+<time datetime="2012-08-31T17:55:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
       
 
 
@@ -193,7 +202,7 @@ git push origin source
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/octopress-notes-1/" data-via="" data-counturl="http://rx836.github.com/blog/octopress-notes-1/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rx836.github.com/blog/parallax-scrolling/" data-via="" data-counturl="http://rx836.github.com/blog/parallax-scrolling/" >Tweet</a>
   
   
   
@@ -202,10 +211,10 @@ git push origin source
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/first-octopress/" title="Previous Post: [Octopress]出生以來第一次使用Octopress for windows">&laquo; [Octopress]出生以來第一次使用Octopress for windows</a>
+        <a class="basic-alignment left" href="/blog/jquery-data-cache/" title="Previous Post: [jQuery] $.data原理">&laquo; [jQuery] $.data原理</a>
       
       
-        <a class="basic-alignment right" href="/blog/book-review-1/" title="Next Post: [讀後心得] 只剩下一個角落的繁華">[讀後心得] 只剩下一個角落的繁華 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/jquery-css3-flip-plugin/" title="Next Post: [jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin">[jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin &raquo;</a>
       
     </p>
   </footer>
@@ -272,8 +281,8 @@ git push origin source
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/octopress-notes-1/';
-        var disqus_url = 'http://rx836.github.com/blog/octopress-notes-1/';
+        var disqus_identifier = 'http://rx836.github.com/blog/parallax-scrolling/';
+        var disqus_url = 'http://rx836.github.com/blog/parallax-scrolling/';
         var disqus_script = 'embed.js';
       
     (function () {

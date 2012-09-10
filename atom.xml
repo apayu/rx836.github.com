@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-05-29T01:26:38+08:00</updated>
+  <updated>2012-09-11T01:37:42+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,1266 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] 建立物件的第三招-自訂建構式函式]]></title>
+    <link href="http://rx836.github.com/blog/javascript-custom-function/"/>
+    <updated>2012-09-11T00:43:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-custom-function</id>
+    <content type="html"><![CDATA[<p>在前面一篇文章<a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a>，裡面有講到關於物件的建立，不過礙於篇幅，只談到<strong>實字模式(literal patterns)</strong>和<strong>建構式函式(constructor functions)</strong>，但其實還有一個建立物件的方法，那就是<strong>自訂建構式函式</strong></p>
+
+<!--more-->
+
+
+<p>用自定義的建構式函式來建立物件，直接用範例來說明</p>
+
+<pre><code>var kitty = new Cat('Kitty');
+var kitty.say(); // "kitty:喵~"
+</code></pre>
+
+<p>跟之前的建構式不同的地方在於，之前是用內建的new Object()，這裡我們是用new Cat()，這種模式很像Java使用一個class Cat來建立物件，語法非常的相似，但其實JavaScript並沒有class，Cat只是一個函式</p>
+
+<p>Cat的建構式定義如下</p>
+
+<pre><code>var Cat = function (name){
+    this.name = name;
+    this.say = function(){
+        return name+":喵~";
+    }
+};
+</code></pre>
+
+<p>但其實真正背後運作的方式是這樣，註解為JavaScript實際上還有做一些我們看不到的事情</p>
+
+<pre><code>var Cat = function (name){
+
+    //建立物件實字, 一個空物件
+    //var this = {};
+
+    //接著替this加入屬性和方法
+    this.name = name;
+    this.say = function(){
+        return name+":喵~";
+    }
+
+    //最後return this
+};
+</code></pre>
+
+<p>整個的流程首先會建立一個空物件，參考至this變數，藉由this的參考，將屬性和方法加入到此物件(this)，最後再將物件隱含的回傳出去(這邊要注意的是，回傳的情況是假設<strong>沒有其他物件被明確的指定回傳</strong>，後面則會提到)</p>
+
+<p>範例中say()是直接加入至this，不過真正實務中，當你每次new Cat()的時候，就會建立一個新函式到記憶體裡面，很明顯的會浪費記憶體效能，所以最好的方式是加入到原型(prototype)中</p>
+
+<pre><code>//只可以重複利用，都應該放進原型裡面
+Cat.prototype.say = function(){
+    return this.name+":喵~";
+};
+</code></pre>
+
+<p>不過這裡有個問題，假如忘記加上new會發生甚麼事情？其實是不會有語法或執行上的錯誤，但卻會導致非預期的錯誤發生，因為沒有加new以後，所有的this都指向全域物件去了！(例如window)</p>
+
+<pre><code>function cat(){
+    this.name = "kitty";
+}
+
+var kitty = new Cat();
+console.log(typeof kitty); // "object" 為物件
+console.log(kitty.name);
+
+var kitty2 = Cat();
+console.log(typeof kitty2); // undefined 忘了new, 不會有物件this回傳, 變成全域
+console.log(window.name); //全域變數
+</code></pre>
+
+<p>不過為了預防這種情況發生，可以利用以下寫法</p>
+
+<pre><code>function cat(){
+
+    //還是一樣會建立一個this
+    //var this = {};
+
+    var _self = {};     
+    _self.name = "kitty";
+
+    //不過return被_self取代了
+    return _self;
+}
+</code></pre>
+
+<p>所以不管User怎麼呼叫，都一定會回傳一個物件，也就是強制new的做法</p>
+
+<pre><code>var kitty = new Cat();  
+console.log(kitty.name); // "kitty"
+
+var kitty2 = Cat(); 
+console.log(kitty2.name); // "kitty"
+</code></pre>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[HTML5] 淺談XMLHttpRequest Level 2]]></title>
+    <link href="http://rx836.github.com/blog/javascript-xmlhttprequest-level-2/"/>
+    <updated>2012-09-10T15:24:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-xmlhttprequest-level-2</id>
+    <content type="html"><![CDATA[<p>HTML5近來可說是越來越火紅，在諸多優點裡面，最讓開發者期待的就是他的標準化，讓各家瀏覽器不再是各自為王，各自為政，這對於網頁開發者來說，可以說是一大利多(前提是微軟真正的統一?不過看IE10頗有那個味道)，今天要來看的是新的標準化-<strong>XMLHttpReuest Level 2</strong></p>
+
+<!--more-->
+
+
+<p>XMLHttpRequest其實是一個物件，也是AJAX的核心，微軟的IE5是最早支援這個物件，後來在Google大量應用之下，讓AJAX這項技術開始爆紅，也讓各家瀏覽器開始相繼支援，不過因為XMLHttpRequest(底下簡稱XHR)並不是標準，所以導致實做上必須小心各家瀏覽器的差異</p>
+
+<p>早些時候我們要寫AJAX我們可能會這樣寫</p>
+
+<pre><code>var xhr;
+
+// 依照不同的瀏覽器，取得XMLHttpRequest物件
+function CreateAJAX() {
+　if (window.ActiveXObject) {
+　　try {
+　　　return new ActiveXObject("Msxml2.XMLHTTP");
+　　} catch (e) {
+　　　try {
+　　　　return new ActiveXObject("Microsoft.XMLHTTP");
+　　　} catch (e2) {
+　　　　return null;
+　　　}
+　　}
+　} else if (window.XMLHttpRequest) {
+　　return new XMLHttpRequest();
+　} else {
+　　return null;
+　}
+}
+
+//回傳資料
+function onReponseData () {
+　if (xhr.readyState == 4) {
+　　if (xhr.status == 200) {
+
+      //do something
+      //console.log(xhr.responseText);
+
+　　} else {
+　　　alert ("伺服器處理錯誤");
+　　}
+　} 
+}
+
+//送出資料
+function ajaxSendRequest(uri) {
+  xhr = CreateAJAX() ;
+　if (!xhr) {
+　　alert ('瀏覽器不支援！');
+　　return 0;
+　}
+
+  xhr.onreadystatechange = onReponseData;
+  xhr.open ("GET", uri, true);
+  xhr.send ("");
+}
+</code></pre>
+
+<p>HTML部分</p>
+
+<pre><code>&lt;input type="button" value="執行" onclick="ajaxSendRequest('index.php')" &gt;
+</code></pre>
+
+<p>大概提一下幾個重要屬性</p>
+
+<p>1.xhr.readyState:XMLHttpRequest狀態，等於4表示數據已經接收完畢</p>
+
+<p>2.xhr.status:狀態碼，200表示正常</p>
+
+<p>3.xhr.responseText:server回應的文字數據</p>
+
+<p>不過假如有時候要取得跨網域的API資料，受限於安全問題，會因為<a href="http://en.wikipedia.org/wiki/Same_origin_policy" target="_blank">同源限制(Same Origin Policy)</a>的關係而受阻，因此有些人可能會使用<a href="http://zh.wikipedia.org/wiki/JSONP" target="_blank">JSONP</a>來解決此類問題，不過未來在新的標準XMLHttpRequest Level 2會有解決方法</p>
+
+<p>新的XHR的特點如下</p>
+
+<p>1.可以設置HTTP請求時限</p>
+
+<p>2.可以使用FormData管理表單數據</p>
+
+<p>3.可以上傳檔案</p>
+
+<p>4.可以跨網域請求</p>
+
+<p>5.可以獲得server端二進制數據</p>
+
+<p>6.可以獲得數據傳輸的進度訊息</p>
+
+<p>這裡礙於篇幅只介紹請求時限和跨網域請求部分</p>
+
+<h2>Setting and handling timeouts</h2>
+
+<p>有時候我們在做AJAX時，常會無法預知會花多少時間，如果網路速度一慢，User可能會等上好一段時間，甚至會認為網站當掉而離去，這其實不是個好的User Experience</p>
+
+<p>所以在新的標準裡面我們可以這樣做</p>
+
+<pre><code>xhr.timeout = 3000;
+</code></pre>
+
+<p>整個範例程式大概如下</p>
+
+<pre><code>function makeRequest() {
+  var url = 'index.php';
+  var onLoadHandler = function(event){
+     // Parse the JSON and build a list.
+  }
+  var onTimeOutHandler = function(event){
+    var content = document.getElementById('content'),
+      p = document.createElement('p'),
+      msg = document.createTextNode('Just a little bit longer!');
+      p.appendChild(msg);
+      content.appendChild(p);
+
+      // Restarts the request.
+      event.target.open('GET',url);
+
+      // Optionally, set a longer timeout to override the original.
+      event.target.timeout = 6000;
+      event.target.send();
+  }
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET',url);
+  xhr.timeout = 3000;
+  xhr.onload = onLoadHandler;
+  xhr.ontimeout = onTimeOutHandler;
+  xhr.send();
+}
+
+makeRequest();
+</code></pre>
+
+<p>可以在index.php裡面寫延遲4秒，會發現第一次請求時，會出現<strong>Just a little bit longer!</strong>的提示文字，第二次才順利取得資料，這是因為一開始的等待時間是設定三秒，第二次是六秒</p>
+
+<p><em>備註:Chrome和Safari尚未支援XHR timeouts，只有Oprea和Firefox還有IE10有，IE8和IE9有支援不過用的是XDomainRequest物件</em></p>
+
+<h2>Requesting data from another domain</h2>
+
+<p>跨網域的請求問題(Cross-origin resource sharing，簡稱CORS)，在新的XMLHttpRequest Level 2得到解答，可以針對不同的網域發出請求，但使用時除了要注意瀏覽器是否支援以外，同時Server端也要允許存取才行，而程式寫法其實跟以前一樣</p>
+
+<p>這裡有個<a href="http://devfiles.myopera.com/articles/9482/xhr-credentials.html" target="_blank">範例</a>可以看看</p>
+
+<p>進去範例打開開發者工具，點下Make request的按鈕，查看回應標頭</p>
+
+<p><img src="https://lh3.googleusercontent.com/-gcWY8Edjbn8/UE2qKLxkU1I/AAAAAAAABdk/67b8otL39m8/s492/1.jpg" width="492px" /></p>
+
+<p>會發現<strong>Access-Control-Allow-Origin</strong>的值是<strong>http://devfiles.myopera.com</strong>，也就是此範例的網域，代表只允許此網域的請求，另外<strong>access-control-allow-credentials</strong>的值為ture，表示允許跨網域請求</p>
+
+<p>為了驗證限制某個網域的請求(Access-Control-Allow-Origin)，我自己寫了一個js去對範例中請求的server做Request</p>
+
+<p><img src="https://lh3.googleusercontent.com/-SpkH2Sjk8Bo/UE2tLkTlrWI/AAAAAAAABd0/9sB5KOXXVE0/s707/2.jpg" width="600px" /></p>
+
+<p>會發現雖然狀態碼為200，但實際上根本就沒有東西回應</p>
+
+<p><em>備註:除了IE8與IE9，其他主流瀏覽器都支援此項功能</em></p>
+
+<p>HTML5裡面實在太多可以玩了，也難怪會被譽為殺手級的技術，大家記得在使用這些功能前先查查瀏覽器支援的程度，畢竟HTML5的標準都還在制定中</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://dev.opera.com/articles/view/xhr2/" target="_blank">Introduction to XMLHttpRequest Level 2</a></p>
+
+<p><a href="http://dev.opera.com/articles/view/dom-access-control-using-cross-origin-resource-sharing/" target="_blank">DOM access control using cross-origin resource sharing</a></p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2012/09/xmlhttprequest_level_2.html" target="_blank">XMLHttpRequest Level 2 使用指南</a></p>
+
+<p><a href="http://jck11.pixnet.net/blog/post/11624882-ajax%E6%A0%B8%E5%BF%83-xmlhttprequest%5B%E7%AD%86%E8%A8%98%5D" target="_blank">AJAX核心-XMLHttpRequest[筆記]</a></p>
+
+<p><a href="http://caterpillar.onlyfun.net/Gossip/JavaScript/SecurityConstraint.html" target="_blank">JavaScript Essence: 安全限制</a></p>
+
+<p><a href="http://design2u.me/blog/936/cross-domain-ajax-cross-domain-data-has-been-retrieved-jsonp" target="_blank">Cross Domain Ajax 跨網域抓取資料(JSONP)</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] 談物件, 實字與建構式]]></title>
+    <link href="http://rx836.github.com/blog/javascript-patterns-1/"/>
+    <updated>2012-09-07T23:57:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-patterns-1</id>
+    <content type="html"><![CDATA[<p>最近在看一本書叫做<strong>JavaScript 設計模式</strong>，英文名稱是JavaScript Patterns，裡面很完整的告訴你如何寫好JavaScript，他不適合初學者看，因為他並不會從很基礎的觀念開始談起，但他卻非常適合像我這種已經知道基礎，並且正要開始往上爬的人閱讀</p>
+
+<!--more-->
+
+
+<p>所以如果有了基礎後再來看這本書，會發現收穫非常的多，就因為太多了，所以開始紀錄一些學習這本書的心得，讓我可以持續成長，而這篇要講的就是關於JavaScript『物件』這個東西</p>
+
+<p>JavaScript是一個物件導向的語言，在程式碼裡面大部份你所看到的都可以說是物件，除了五種原始型別不是以外，分別如下</p>
+
+<p>1.數值</p>
+
+<p>2.字串</p>
+
+<p>3.布林</p>
+
+<p>4.null</p>
+
+<p>5.undefined</p>
+
+<p>雖然數值、字串和布林不是物件，但如果需要的話，還是可以很容易的轉換成物件來使用</p>
+
+<p>其實當我們在做定義變數這個動作的時候，就已經接觸到物件，因為當定義變數的時候自然會成為『Activation Object』的一個屬性，另外，如果是定義全域變數，也就變成『全域物件』的屬性，更重要的是，其實變數本身也是個物件，因為他自己也擁有屬性</p>
+
+<p>那麼講了那麼多，『物件』到底是甚麼?</p>
+
+<p>其實物件非常的簡單，他只是一堆具名屬性的集合，或是名值對的清單，而且屬性可以是函式，這種時候我們就會叫這個函式為方法</p>
+
+<p><img src="https://lh5.googleusercontent.com/-s9ewb766mCo/UEoidMi9O3I/AAAAAAAABa4/YsFTCbWwRpo/s416/1.jpg" width="416px" /></p>
+
+<p>而物件建立了以後，並不是就說完全不能動他，你還是可以修改他，看是新增或移除裡面的屬性和方法都可以，再來要特別提到的是，有兩種主要的物件要認識一下</p>
+
+<p>第一種叫做原生物件(Native)，也可以叫做內建物件，例如Array、Date或是使用者自行定義(後面會提到)</p>
+
+<p>第二種叫做宿主物件(Host)，例如window物件和所有DOM物件</p>
+
+<p>怎麼去分辨這兩種物件，只要看看物件能不能在瀏覽器底下執行就可以，如果只能在瀏覽器底下執行，就是Host物件，如果在非瀏覽器的地方也可以執行，那就是Native</p>
+
+<p>什麼？你是不是覺得一直講物件物件的，是不是好像少一個東西？沒錯，JavaScript沒有Class，這對於熟悉其他語言來說是個新觀念，要試著去忘掉Class這個東西，當然，沒有了Class，也就沒有繼承，不過卻可以用其他方式來實現，最常見的就是使用原型(Prototype)，不過在往後的文章才會提到原型這個概念</p>
+
+<h2>實字與建構式</h2>
+
+<p>接下來我們就要開始講到如何建立物件，我們都知道物件簡單的來思考就是名值對(key-value pairs)的雜湊表，有點像是關聯式陣列(associative arrays)，而物件就包含了屬性和方法(函式)，建立物件有三種方式，不過本篇文章只會提到兩種，『自訂建構式函式』我們留到以後再說，我們先來談第一種物件實字(literal notation)</p>
+
+<pre><code>//首先建立一個空物件
+var cat = {};
+
+//增加一個屬性
+cat.name = "kitty";
+
+//增加一個方法
+cat.getName = function() {
+    return cat.name;
+}
+</code></pre>
+
+<p>以上就是一個物件實字模式的建立方式，除了以上的寫法，你還可以這樣寫</p>
+
+<pre><code>var cat = {
+    name : "kitty",
+    getName : function() {
+        return this.name;
+    }
+};
+</code></pre>
+
+<p>可能一開始會不太習慣這種寫法，但用久了，你會慢慢喜歡這種寫法，而外面大部份的寫法也都是用實字模式，也是比較推薦的寫法，後面也會提到為什麼推薦，而以下是物件實字的特點</p>
+
+<p>1.將物件用大括號包起來{ }</p>
+
+<p>2.逗號分隔每個屬性和物件，而最後可以不用逗號</p>
+
+<p>3.用分號分隔屬性名稱和屬性值</p>
+
+<p>4.最後別忘了要在最後面的}加上分號</p>
+
+<p>第二個要來談的是用<strong>建構式</strong>來建立物件</p>
+
+<p>雖然JavaScript沒有class，但他卻有一個很相似class的語法，叫做建構式函式(constructor functions)，你可以用建構式函式來建立物件，或著，使用內建的建構式(例如:Object()、Date()、String())，用法如下</p>
+
+<pre><code>var cat = new Object();
+cat.name = "kitty";
+</code></pre>
+
+<p>從以上程式碼你就可以看到，很明顯的實字程式碼比較短，建構式會比較長，而且實字比較像單純的雜湊表，不用像建構式一樣還要new一個東西出來，感覺上就來的複雜，除了這些以外，建構式其實背後還隱藏了陷阱存在，例如建立物件時有傳遞參數是動態，會導致以下情況發生</p>
+
+<pre><code>//記住, 以下寫法都不好
+//這是一個空物件
+var o = new Object();
+console.log(o.constructor === Object); // true
+
+//突然變成Number
+var o = new Object(1);
+console.log(o.constructor === Number); // true  
+
+//又變成字串
+var o = new Object("I am a string");
+console.log(o.constructor === String); // true      
+</code></pre>
+
+<p>從以上可以看出，依照參數的不同，會得到來自不同的建構式物件，造成非預期的結果產生，所以再次強調強烈建議使用<strong>實字模式</strong></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin]]></title>
+    <link href="http://rx836.github.com/blog/jquery-css3-flip-plugin/"/>
+    <updated>2012-09-06T12:04:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-css3-flip-plugin</id>
+    <content type="html"><![CDATA[<p>在網路上看到<a href="http://tympanus.net/Development/BookBlock/" target="_blank">翻書效果</a>感覺蠻有趣的，是利用<a href="http://www.w3schools.com/css3/css3_transitions.asp" target="_blank">CSS3 Transitions</a>和<a href="http://www.w3schools.com/css3/css3_3dtransforms.asp" target="_blank">CSS3 3D Transforms</a>的效果實現，這裡我是用<a href="http://tympanus.net/codrops/2012/09/03/bookblock-a-content-flip-plugin/" target="_blank">Flip Plugin</a></p>
+
+<!--more-->
+
+
+<p>因為已經有<a href="http://tympanus.net/Development/BookBlock/BookBlock.zip" target="_blank">範例檔</a>可以用，所以就不詳細講太多程式碼細節，首先先載入CSS和Modernizr，這兩隻檔案在範例檔裡面都有，分別在css和ja的資料夾裡面</p>
+
+<pre><code>&lt;link rel="stylesheet" type="text/css" href="style.css" /&gt;
+&lt;link rel="stylesheet" type="text/css" href="custom.css" /&gt;
+&lt;script type="text/javascript" src="modernizr.custom.79639.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>可以看到CSS其實就是一開始先將第一張照片秀出，其他都先<strong>display : none</strong>，至於modernizr是因為為了要支援IE9以下所用的，因為IE9以下不支援CSS3 Transitions和CSS3 3D Transforms，所以要利用modernizr來偵測User所用瀏覽器的支援程度來決定實現的效果</p>
+
+<p>接下來要引用其他三支js進來</p>
+
+<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquerypp.custom.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.bookblock.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>其中jquerypp.custom.js是<a href="http://jquerypp.com/" target="_blank">jQuery++</a>，擴充了<strong>swipe even</strong>這個功能，讓行動裝置用手指滑動也能觸發翻頁的效果</p>
+
+<p>而jquery.bookblock.js就是Flip Plugin，我們可以看到裡面其中一行是</p>
+
+<pre><code>this.support = Modernizr.csstransitions &amp;&amp; Modernizr.csstransforms3d;
+</code></pre>
+
+<p>這行就是利用Modernizr在檢查User現在的瀏覽器支援程度，所以下面就會有if判斷</p>
+
+<pre><code>if( !this.support ) {
+
+    this._layoutNoSupport( dir );
+
+}
+else {
+
+    this._layout( dir );
+
+}
+</code></pre>
+
+<p>假如不支援的話，就會用.hide() or .show()來實現換頁效果，如果有支援就會使用CSS3 3D Transforms</p>
+
+<p>接著是基本HTML架構</p>
+
+<pre><code>&lt;div id="bb-bookblock" class="bb-bookblock"&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- custom content --&gt;
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- ... --&gt;
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- ... --&gt;
+    &lt;/div&gt;
+    &lt;!-- ... --&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><strong>bb-item</strong>就是裡面每一頁要放的內容，可以是圖片或文字</p>
+
+<p>而js部分可以這樣寫</p>
+
+<pre><code>$(function() {
+
+    $( '#bb-bookblock' ).bookblock();
+
+});
+</code></pre>
+
+<p>裡面的options設定如下</p>
+
+<pre><code>// speed for the flip transition in ms.
+speed       : 1000,
+
+// easing for the flip transition.
+easing      : 'ease-in-out',
+
+// if set to true, both the flipping page and the sides will have an overlay to simulate shadows
+shadows     : true,
+
+// opacity value for the "shadow" on both sides (when the flipping page is over it).
+// value : 0.1 - 1
+shadowSides : 0.2,
+
+// opacity value for the "shadow" on the flipping page (while it is flipping).
+// value : 0.1 - 1
+shadowFlip  : 0.1,
+
+// perspective value
+perspective : 1300,
+
+// if we should show the first item after reaching the end.
+circular    : false,
+
+// if we want to specify a selector that triggers the next() function. example: '#bb-nav-next'.
+nextEl      : '',
+
+// if we want to specify a selector that triggers the prev() function.
+prevEl      : '',
+
+// callback after the flip transition.
+// page is the current item's index.
+// isLimit is true if the current page is the last one (or the first one).
+onEndFlip   : function( page, isLimit ) { return false; },
+
+// callback before the flip transition.
+// page is the current item's index.
+onBeforeFlip: function( page ) { return false; }
+</code></pre>
+
+<p>在綁定下一頁和上一頁的事件裡面，除了可以直接在<strong>bookblock()</strong>添加以外</p>
+
+<pre><code>$( '#bb-bookblock' ).bookblock( {
+    speed               : 800,
+    shadowSides : 0.8,
+    shadowFlip  : 0.7,
+    nextEl      : '#bb-nav-next', //綁定下一頁事件
+    prevEl      : '#bb-nav-prev'  //綁定上一頁事件
+} )
+</code></pre>
+
+<p>也可以按照範例裡面的寫法</p>
+
+<pre><code>var config = {
+    $bookBlock: $( '#bb-bookblock' ),
+    $navNext    : $( '#bb-nav-next' ),
+    $navPrev    : $( '#bb-nav-prev' ),
+    $navJump    : $( '#bb-nav-jump' ),
+    bb              : $( '#bb-bookblock' ).bookblock( {
+        speed               : 800,
+        shadowSides : 0.8,
+        shadowFlip  : 0.7
+    } )
+}
+
+config.$navNext.on( 'click', function() {
+
+    config.bb.next();
+    return false;
+
+} );
+
+config.$navPrev.on( 'click', function() {
+
+    config.bb.prev();
+    return false;
+
+} );
+</code></pre>
+
+<p>另外自己綁定click在上一頁和下一頁的DOM元素裡面</p>
+
+<p>範例完成以後我特地拿iPone來測試swipe even的效果，還蠻頓的，而且不是很靈敏，可能有細節要再調整，也有可能是手機本身的問題，這方面就要請各位要應用在行動裝置的朋友們再多多測試了</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://modernizr.com/docs/#features-css" target="_blank">Modernizr Documentation</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] jQuery scroll parallax plugin]]></title>
+    <link href="http://rx836.github.com/blog/parallax-scrolling/"/>
+    <updated>2012-08-31T17:55:00+08:00</updated>
+    <id>http://rx836.github.com/blog/parallax-scrolling</id>
+    <content type="html"><![CDATA[<p>在Facebook看到有人分享<a href="http://www.milwaukeepolicenews.com/#menu=home-page" target="_blank">這個網站</a>，有人提到是用parallax scroll來實做，因為對這個不熟悉，所以趕緊做了一些功課來看看怎麼做</p>
+
+<!--more-->
+
+
+<p>parallax scroll中文叫做<strong>視差滾動效果</strong>，意思就是指讓多層背景以不同的速度移動，形成立體的景深效果，使User有豐富的視覺體驗，像<a href="http://www.nikebetterworld.com/" target="_blank">Nike</a>一直對這方面運用的相當好，還有<a href="http://www.hksilicon.com/kb/articles/57516/30Parallax-Scrolling" target="_blank">『30個讓人興奮的視差滾動（Parallax Scrolling）效果網站』</a>也收集了很多相關方面的網站</p>
+
+<p>為了能夠實做，找到了<a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin" target="_blank">JQUERY SCROLL PARALLAX</a>這個plugin，用法蠻簡單的，首先準備ab兩張圖，a圖長方形(例如200x2000)，顏色隨意，b圖正方形(例如100x100)，顏色隨意，注意不要跟a圖一樣就可以，方便辨識</p>
+
+<p>接著HTML如下:</p>
+
+<pre><code>&lt;div class="item"&gt;
+    &lt;div class="inner"&gt;&lt;/div&gt;       
+&lt;/div&gt;
+</code></pre>
+
+<p>CSS如下:</p>
+
+<pre><code>.item{
+    width:100%;
+    overflow:hidden;
+    position:relative;
+    height:2000px;
+    background: white url(a.png) 0px 0px fixed no-repeat;
+}
+
+.inner{
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:1;
+    background: url(b.png) 150px 200px fixed no-repeat;
+}
+</code></pre>
+
+<p>會看到我將.inner的背景圖設置了座標150,200，200就是等會js負責控制的地方，經由控制背景圖的位置來達到視差滾輪的效果</p>
+
+<p>接著引用js</p>
+
+<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"&gt;&lt;/script&gt;    
+&lt;script src="jquery.inview.js"&gt;&lt;/script&gt;
+&lt;script src="jquery.scrollParallax.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>共有兩個js要載，一個就是<a href="https://github.com/davecranwell/jQuery-scroll-parallax" target="_blank">scrollParallax.js</a>，另一個是<a href="https://github.com/protonet/jquery.inview" target="_blank">inview.js</a>，inview.js簡單的說也是一個plugin，藉由inview.js可以抓取目前scroll的位置和秀出對應的效果，例如『把scroll拉到最底就出現回到最上方的方塊』</p>
+
+<p>接著是js程式碼部分</p>
+
+<pre><code>$(function(){       
+    $('.item').scrollParallax({
+        'speed': 0
+    });
+
+    $('.item .inner').scrollParallax({
+        'speed': 0.8        
+    });
+});
+</code></pre>
+
+<p>speed是調整移動的數度，只要將每個圖速度設定不一樣，就會呈現不一樣的景深效果</p>
+
+<p>很容易吧！有興趣的人可以下載試試看，而且都有DEMO範例，方便理解</p>
+
+<p>如有錯誤，歡迎指證</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin" target="_blank">JQUERY SCROLL PARALLAX PLUGIN</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] $.data原理]]></title>
+    <link href="http://rx836.github.com/blog/jquery-data-cache/"/>
+    <updated>2012-08-30T14:10:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-data-cache</id>
+    <content type="html"><![CDATA[<p>今天在看別人寫的jQuery Plugin，發現 <strong>this[expando]</strong> 這個寫法，好奇心驅使下，決定一探究竟</p>
+
+<!--more-->
+
+
+<p>因為不了解<strong>expando</strong>是甚麼，所以特地去找了一下Google，發現在jQuery裡面有這一段程式碼</p>
+
+<pre><code>expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" );
+</code></pre>
+
+<p>原來這是在使用$.data時可以做為匹配的id，產生的邏輯就是版本代號+一組亂數，並把非數字的字元用replace替代掉，expando會在每次載入jQuery時直接生成，所以用console.log()看如下面所示</p>
+
+<pre><code>console.log($.expando);
+//jQuery18004247503886623739
+</code></pre>
+
+<p>那$.data又是甚麼呢？在jQuery的文件裡面是這樣寫</p>
+
+<pre><code>Description: Store arbitrary data associated with the matched elements.
+</code></pre>
+
+<p>意思就是以前我們都喜歡將數據存在HTMLElement屬性上，例如下面所示</p>
+
+<pre><code>&lt;div data="some data"&gt;my div&lt;/div&gt;
+&lt;script&gt;
+    div.getAttribute('data'); //some data
+&lt;/script&gt;
+</code></pre>
+
+<p>但如果用這種方式添加數據，往往數據會直接曝露在原始碼當中，從安全性的角度來思考並不太好，另一方面，在DOM的元素中添加這麼多的屬性，其實對瀏覽器來說是沒有意義</p>
+
+<p>所以jQuery很棒的提供了這方面的解決方式給我們，利用$.cache來緩存我們想要保存的數據，在說明原理之前，我們先來看幾個參數的意義，在jQuery原始碼底下看到以下這些程式碼</p>
+
+<pre><code>jQuery.extend({
+
+    cache: {},
+
+    ...
+
+    // Please use with caution
+    uuid: 0,
+
+    // Unique for each copy of jQuery on the page
+    // Non-digits removed to match rinlinejQuery
+    expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" ),
+
+    // The following elements throw uncatchable exceptions if you
+    // attempt to add expando properties to them.
+    noData: {
+        "embed": true,
+        // Ban all objects except for Flash (which handle expandos)
+        "object": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000",
+        "applet": true
+    },
+
+    hasData: function( elem ) {
+        elem = elem.nodeType ? jQuery.cache[ elem[jQuery.expando] ] : elem[ jQuery.expando ];
+        return !!elem &amp;&amp; !isEmptyDataObject( elem );
+    },
+
+    ...
+
+});
+</code></pre>
+
+<p><strong>jQuery.cache</strong>:空物件，用來做緩存</p>
+
+<p><strong>jQuery.uuid</strong>:一個seed，會遞增，用來標示每個cache</p>
+
+<p><strong>jQuery.expando</strong>:一組字串，如前面所說，由Math.random生成，同時也是DOM的屬性名稱，裡面會對映到jQuery.uuid</p>
+
+<p><strong>jQuery.noData</strong>:檢查元素是否能使用$.data，預設是embed、object、applet不能使用</p>
+
+<p><strong>jQuery.hasData</strong>:判斷元素是否已經擁有data</p>
+
+<p>接下來是範例講解</p>
+
+<pre><code>&lt;div&gt;test&lt;/div&gt;
+&lt;script&gt;
+    console.log($.expando);
+    //jQuery180010448733290775436 
+    //載入jQuery就會生成一組字串
+
+    var div = document.getElementsByTagName('div')[0];
+
+    console.log($.hasData(div));
+    //false
+    //因為div還沒使用$.data，所以為false
+
+    $.data(div,'divName','name1');
+
+    console.log($.hasData(div));        
+    //true
+    //div已經有包含data，所以為true
+
+    console.log($.uuid);
+    //1
+    //第一個cache，此時seed遞增為1
+
+    var div2 = document.getElementsByTagName('div')[1];     
+
+    $.data(div2,'divName','name2');
+
+    console.log($.uuid);
+    //2
+    //第二個chche，此時seed遞增為2
+
+    var myObj = {};
+
+    $.data(myObj, 'objName','name3');       
+
+    console.log($.data(myObj, 'objName'));
+    //name3
+    //不只是HTMLElement可以使用$.data，物件也可以使用$.data
+
+    console.log(myObj);     
+    //myObj ={
+    //  jQuery180010448733290775436:{
+    //      objName:name3
+    //  }
+    //}
+    //不過物件並沒有將data緩存到$.cache裡面，而是直接在物件裡面新增一個屬性
+    //屬性名稱為$.expando，值為剛剛設定的緩存值
+
+    console.log(div[$.expando]);
+    //1
+    //再回頭看看元素div會發現裡面已經添加屬性，屬性名稱就叫$.expando也就是最前面那串字串
+    //而屬性值就是1       
+
+    console.log($.cache);
+    //1:{divName:'name1'}
+    //2:{divName:'name2'}       
+    //只有HTMLElement元素才會將值緩存到$.cache裡面，而且會發現屬性值為1可以匹配到$.cache裡面的屬性
+&lt;/script&gt;
+</code></pre>
+
+<p>用圖表示關係如下</p>
+
+<p><img src="https://lh5.googleusercontent.com/-t5d07KuRuJk/UD8Yz5NlG6I/AAAAAAAABYg/cd1cmEgctH8/s748/1.jpg" width="700px" /></p>
+
+<p>巧妙的使用$.data，就可以不必替DOM元素新增一堆屬性了</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://api.jquery.com/data/" target="_blank">jQuery $.data</a></p>
+
+<p><a href="http://www.jb51.net/article/27433.htm" target="_blank">http://www.jb51.net/article/27433.htm</a></p>
+
+<p><a href="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[2012_08_29_test]]></title>
+    <link href="http://rx836.github.com/blog/2012-08-29-test/"/>
+    <updated>2012-08-29T20:08:00+08:00</updated>
+    <id>http://rx836.github.com/blog/2012-08-29-test</id>
+    <content type="html"><![CDATA[<p>123</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[學習筆記] 亞馬遜帝國成功學]]></title>
+    <link href="http://rx836.github.com/blog/work-1/"/>
+    <updated>2012-06-24T02:27:00+08:00</updated>
+    <id>http://rx836.github.com/blog/work-1</id>
+    <content type="html"><![CDATA[<p>今天看到商業周刊1283期，裡面提到Amazon的成功學，讓我著實上了一課，其實應該是說六課，每一課都充滿了智慧在裡面，不僅可以套用在工作，事業，甚至是人生的規劃，都是非常好的借鏡</p>
+
+<!--more-->
+
+
+<h2>第一課:做對的事，比做有效率的事重要</h2>
+
+<p>亞馬遜在擴建倉庫的時候，其實一般人都很不看好，大家都認為，你做網路的，為什麼要跑去建倉庫？一堆人覺得很笨，可是Amazon就堅持做對的事情，他不在乎被人長期誤解，認為只有建倉庫，才能免去消費者的等待，幾年後，事實也證明，Amazon是對的，不為了效率搶快，而是做對的事情，就算需要的時間較長，也十分值得</p>
+
+<p>同樣用在自己的身上，你想做對的事情(長遠)，還是一昧追求效率(短期)？</p>
+
+<h2>第二課:想未來如何改變，根本白費力氣</h2>
+
+<p>很多人只會問，未來會怎麼變，但卻很少人問，未來5~10年，什麼是不變的基礎？掌握這些基礎，長期的投入，將會帶來可觀的收穫，這句話並不是要你不看未來，不去掌握趨勢，而是要你換另外一個角度，去想想，未來什麼是長期不變的，而不是針對那些每天都在變動的東西去思考，因為根本來不及追求</p>
+
+<p>何不想想，甚麼東西是未來20年都不會變的需求？</p>
+
+<h2>第三課:要創新，先懂兩個披薩原則</h2>
+
+<p>這意思是說，要求團隊只要10人左右即可(差不多兩份披薩的人數)，不管是開會還是如何，都希望每個人都能提出意見，共同參與，而不是有些人盯著台上的人不講話，才不會浪費人力資源，要讓大家人無不言，言無不盡，會議才會有深度</p>
+
+<h2>第四課:把Way Not？當口頭禪</h2>
+
+<p>許多人分配到任務，最常講的是，為什麼要做？而不是為何不做？Amazon認為他們最常犯的錯，就是<strong>沒去做的錯</strong>，因為沒去做，錯失很多機會，反覆的問自己，為什麼不做？而且要想辦法去做，才能提升自己的競爭能力</p>
+
+<h2>第五課:不必管對手，掏錢的不是他</h2>
+
+<p>常常人們犯最多的錯誤，就是迷失焦點，因為別人的一舉一動，就當成影響自己的原因，但當你跟別人或是別家公司比較的時候，有沒有想過，你自己的人生，為何要跟別人比較？別人過的如何？會實質影響到你的人生嗎？</p>
+
+<p>就如同公司，一直注意對手再幹什麼，卻忘記了，最後掏錢的是客戶，而不是對手，不要把焦點放在對手，而是要將專注力放在顧客身上，做專注的事情</p>
+
+<h2>第六課:獲利不重要，現金才是王道</h2>
+
+<p>保留給自己彈性，能應付各種突發狀況，我想這是每個人都應該做的風險管理，就跟企業一樣，留有保命的銀彈，不只可以不用擔心突然的景氣衰退，也可以不用一直看銀行臉色，不管做什麼都可以立即馬上實行，增加了企業改變很大的彈性，這點從Apple(蘋果)身上，也可以印證</p>
+
+<p>對於我們自己來說，更不應該把所有的錢投入在股匯市上面，因為你永遠不知道明天會發生什麼事情，要給自己容錯的機會</p>
+
+<p>Amazon的六堂課，每堂課都值得細細品嘗</p>
+
+<p>如有疑問，歡迎一起討論</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[讀後心得] 社群效應:小圈圈如何改變世界]]></title>
+    <link href="http://rx836.github.com/blog/book-review-4/"/>
+    <updated>2012-06-20T23:13:00+08:00</updated>
+    <id>http://rx836.github.com/blog/book-review-4</id>
+    <content type="html"><![CDATA[<p>作者:Paul Adams</p>
+
+<p>出版者:基峯資訊股份有限公司</p>
+
+<!--more-->
+
+
+<p>我一直對於社群這個詞感到興趣 ，也覺得這個世界會因為社群的關係 ，而有非常劇烈的改變 ，這程度甚至不亞於網路的興起 ，這本書其實一開始我並沒有關注到 ，是因為Facebook社團裡面的前輩所推薦(沒錯 ，Facebook幾乎可以說是改變我一生) ，才引起我的興趣</p>
+
+<h2>我們分享的是感受 ，而非事實</h2>
+
+<p>書裡面提到的很多觀念 ，是我以前不知道的 ，還有一些是 ，平常我就有感覺到的  ，像Facebook最常看到的是 ，大家分享某項資訊 ，會帶入個人自己的感受 ，或是照片 ，也會加上自己的評論進去 ，因為往往我們會被這種有包含朋友的觀點在裡面的事物所吸引</p>
+
+<h2>你是唯一的途徑</h2>
+
+<p>另一個讓我所沒想過的是 ，原來我的朋友群之間 ，真的是只有我做為唯一的連結點 ，如果沒有我 ，我的朋友群跟群之間 ，根本不可能會交會到 ，這在裡面提到的另一個重點 ，不要迷信尋找『有影響力』的人 ，而應該針對那些有連結『創意樞紐』的人 ，下足經營的工夫</p>
+
+<h2>偏頗如何影響我們</h2>
+
+<p>以前我就聽過人們是非理性，我一直認為怎麼會？但看完這章節後，裡面所舉的例子，讓我不得不說，人類真的是如此，我們的腦分為三個部分，意識腦是我們唯一能操控的部分，無意識腦是由兩個部分所組成，處理情緒和主導我們大部分行為的中腦，以及維持我們生命系統的原腦，在這個充斥資訊的世界裡，我們大腦會將意識資訊轉換成無意識的資訊，這就像是學習開車一樣，一開始你會使用意識腦來想每個動作，但久而久之，你可以邊想事情邊開車，就是因為你將開車這個動作轉換成無意識腦的一部份</p>
+
+<p>可是也因為這樣的特性，導致人們常被自己給欺騙，我們很多行為都是出自無意識腦，可是我們不可能記得每一件事情，當記憶是片段的時候，我們的大腦會嘗試補足那些缺口，但那卻都不是真的，這也是為什麼我們大腦都會記得有關連性的原因，同時，外面教人如何快速記憶，大都也是利用關聯性或故事性這種方法來增強記憶，</p>
+
+<p>書中告訴我們一些我們過去的誤解，只有你能掌握這些人與人之間的關係，對於社群的行銷才會事倍功半</p>
+
+<p>還有，不要再期望過去那種干擾式行銷可以為你帶來甚麼效益，消費者也是會進步的，他們已經不信這一套了，在這個以人為本的社群社會裡面，要學習如何抓住這個趨勢</p>
+
+<p>最後我想筆記的四個重點:社交行為、網絡、人們的想法、聚焦獨立的小型朋友群體</p>
+
+<p>如有想法，歡迎一起提出討論</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Jquery] 做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll]]></title>
+    <link href="http://rx836.github.com/blog/jquery-waterfall-infinitescroll/"/>
+    <updated>2012-06-19T00:27:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-waterfall-infinitescroll</id>
+    <content type="html"><![CDATA[<p>相信已經有很多人已經看過<a href="http://pinterest.com/" target="_blank">pinterest</a>這個網站的介面效果，是利用一個稱為<a href="http://www.21andy.com/blog/20120527/2041.html" target="_blank">Waterfall</a>，中文叫做瀑布流布局的效果，原理是算出周圍元素的寬和高，去排列畫面的布局，利用絕對定位的方式來達到隨著螢幕大小來變動整個版面</p>
+
+<!--more-->
+
+
+<p>再加上無限滾輪( Infinite Scroll)的搭配，就可以做出類似Pinterest效果，所以上網去搜尋了一下，找到了<a href="http://masonry.desandro.com/index.html" target="_blank">jQuery Masonry</a>這個Waterfall的Plugin，在jQuery Masonry的官方文件裡面寫可以跟<a href="http://www.infinite-scroll.com/" target="_blank">Infinite scroll</a>這個Plugin一起搭配無限滾輪這個效果，但我找不到Infinite scroll使用向Server端取得元素的方法，例如.NET常用的泛型處理常式，所以我另外找了其他的Infinite Scroll來使用</p>
+
+<p>但其實可以按照個人所需來選擇，這裡有介紹<a href="http://designbeep.com/2011/08/12/12-jquery-infinite-scrollingscroll-read-plugins-for-content-navigation/" target="_blank">12種jQuery Infinite Scrolling</a>，而我這邊是選擇<a href="http://andersonferminiano.com/jqueryscrollpagination/" target="_blank">jQuery ScrollPagination</a>，因為對我來說使用起來很簡單，但缺點就是要稍微修改一下Plugin，對於IE8來說</p>
+
+<p>首先就是先隨意建立一個HTML，但有個比較要注意的地方就是所有的div或是其他元素包含在_container裡面的，都要盡量去宣告width，不然有時候會有不正常的情況發生</p>
+
+<pre><code>&lt;div id="_container" style="height:800px;"&gt;         
+        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic1.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話我要講的話我&lt;/div&gt; &lt;/div&gt;
+        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic2.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話我要講的話我要講的話我要講&lt;/div&gt; &lt;/div&gt;
+        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic4.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話我要講的話我&lt;/div&gt; &lt;/div&gt;
+        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic5.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話我要講的話我要講的話我要講的話我要&lt;/div&gt; &lt;/div&gt;
+        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic6.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話&lt;/div&gt; &lt;/div&gt;         
+&lt;/div&gt;   
+</code></pre>
+
+<p>再來是js的部分，引用Jquery+jQuery Masonry+jQuery ScrollPagination</p>
+
+<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/jquery.masonry.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/scrollpagination.js"&gt;&lt;/script&gt;   
+</code></pre>
+
+<p>接著是要撰寫的部分，首先是Jquery Masonry部分，也就是Waterfall</p>
+
+<pre><code>$('#_container').imagesLoaded(function () {
+        $('#_container').masonry({
+            // options
+            itemSelector: '.item',
+            columnWidth: 240,
+            singleMode: true,
+            animate:true
+        });
+});
+</code></pre>
+
+<p><strong>imagesLoaded()</strong>:這個方法主要是因為一般來說我們用jquery用$(function(){ .. });這個方法來實做，image並不會載完，而是在DOM載完以後就會立刻執行，可是這樣並沒有辦法得知圖片大小，所以必須用imagesLoaded()來防止計算寬度和高度錯誤</p>
+
+<p><strong>itemSelector</strong>:要套用效果的元素</p>
+
+<p><strong>columnWidth</strong>:欄位寬度</p>
+
+<p><strong>singleMode</strong>:因為等會在jQuery ScrollPagination裡面也會再用一次Jquery Masonry(讀取新的元素進來要套用效果)，所以這邊設定true，後面的Jquery Masonry就可以直接使用前面的設定</p>
+
+<p><strong>animate</strong>:打開效果</p>
+
+<p>接著是jQuery ScrollPagination的撰寫部分</p>
+
+<pre><code>$('#_container').scrollPagination({
+        'contentPage': 'GetDynamicGrid.ashx', // the page where you are searching for results
+        'contentData': {  }, // you can pass the children().size() to know where is the pagination
+        'scrollTarget': $(window), // who gonna scroll? in this example, the full window
+        'heightOffset': 10, // how many pixels before reaching end of the page would loading start? positives numbers only please
+        'beforeLoad': function () { // before load, some function, maybe display a preloader div
+
+        },
+        'afterLoad': function (elementsLoaded) { // after loading, some function to animate results and hide a preloader div
+
+            var $newElems = $(elementsLoaded).css({ opacity: 0 });
+            $newElems.imagesLoaded(function () {
+                // show elems now they're ready
+                $newElems.animate({ opacity: 1 });
+                $('#_container').masonry('appended', $newElems, true);
+            });
+        }
+    });
+</code></pre>
+
+<p>這裡就不細翻每個option的解釋，大概的原理就是當算出scroll到底部以後，就會觸發ajax，接著afterLoad()會callback一個參數，裡面就是server端回傳的新元素，再用Jquery Masonry將Waterfall效果套用在新元素上面</p>
+
+<h2>IE8的空白間格問題&#8230;</h2>
+
+<p>但我在實做過程中，就如同之前所講的，IE8會有些許的問題，會發現每當只要滾輪到底部以後，觸發後收到新的元素加到畫面上，都會發現區塊與區塊之間有白色的間隔，問題找了好久，用firebug發現到，IE8每當我滾輪移到底部時，一般都會觸發一次ajax跟server端要資料，可是IE8卻會一次觸發兩次以上，導致Jquery Masonry計算元素的高度和寬度出現誤差，才會出現空白的間隔</p>
+
+<p>為了改善這個原因，我用比較笨的方式來解決，因為我的功力還沒辦法深入了解瀏覽器間的差異，我發現jQuery ScrollPagination它的範例裡面有用過<strong>stopScrollPagination()</strong>這個方法，看了一下Plugin的原始法，發現它是包覆在外層id名為_container的div，加上一個屬性</p>
+
+<pre><code>$(obj).attr('scrollPagination', 'disabled');
+</code></pre>
+
+<p>可以用搜尋在jQuery ScrollPagination的原始碼裡面來尋找，所以它利用判別屬性scrollPagination是disabled還是enabled，就可以知道是不是要繼續觸發滾輪事件</p>
+
+<p>我利用了它寫的這段程式碼，來修改一下，在原始碼這段</p>
+
+<pre><code>$.fn.scrollPagination.loadContent = function (obj, opts) { ... }
+</code></pre>
+
+<p> 我在ajax()前面先將scrollPagination屬性先設為disabled，接著在執行完ajax以後，再將屬性設回enabled，讓滾輪事件重新觸發，以下為修改程式碼片段</p>
+
+<pre><code> $(obj).attr('scrollPagination', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: opts.contentPage,
+                data: opts.contentData,
+                success: function (data) {
+                    $(obj).append(data);
+                    var objectsRendered = $(obj).children('[rel!=loaded]');
+
+                    if (opts.afterLoad != null) {
+                        opts.afterLoad(objectsRendered);
+                    }
+                    $(obj).attr('scrollPagination', 'enabled');
+                },
+                dataType: 'html'
+            });
+</code></pre>
+
+<p>其實這有點偷吃步，並不是真正解決核心的問題所在，但無奈底子差，只能先讓程式可以跑(這是重點呀&#8230;.!)，日後有時間再來好好探討這個問題(其實是希望等著IE8被淘汰的那天&#8230;)</p>
+
+<p>以上如有問題或是錯誤的地方，歡迎大家一起討論</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Facebook] 如何建立facebook App 且取得FB ID]]></title>
+    <link href="http://rx836.github.com/blog/facebook-app-create-getfbid/"/>
+    <updated>2012-06-16T00:36:00+08:00</updated>
+    <id>http://rx836.github.com/blog/facebook-app-create-getfbid</id>
+    <content type="html"><![CDATA[<p>這裡將會紀錄如何建立一個Facebook App，並且讓User授權應用程式，最後取得FB ID來當會員資料或是參加活動的ID識別</p>
+
+<!--more-->
+
+
+<p>首先，你必須是個Facebook App Developers，你可以去<a href="https://developers.facebook.com/" target="_blank">facebook DEVELOPER</a>申請你的身份，我記得以前不用手機驗證，但現在則需要</p>
+
+<p>接著你會看到以下畫面</p>
+
+<p><img src="https://lh3.googleusercontent.com/-qsrR5jf8ieQ/T9tcfJx0g0I/AAAAAAAAAQo/ijDj_DOzoFY/s902/2012-06-15_170640.jpg" width="700px" /></p>
+
+<p>點選右上角的Create New App</p>
+
+<p>會跳出一個POP視窗</p>
+
+<p><img src="https://lh4.googleusercontent.com/-b1KPFkV9kak/T9tdnIs-8LI/AAAAAAAAAQ4/Qa62h_PbpYw/s660/2012-06-15_171009.jpg" width="700px" /></p>
+
+<p><strong>App Name</strong>:指的是你的應用程式名稱</p>
+
+<p><strong>App Namespace</strong>:是你的網址命名</p>
+
+<p><strong>Web Hosting</strong>:如果你有自己的Web Hosting就不用勾選</p>
+
+<p>按下Continue以後會出現填寫驗證碼，填寫完後按下Submit</p>
+
+<p><img src="https://lh6.googleusercontent.com/--MZXrFzYUmo/T9tdnPmoYLI/AAAAAAAAAQw/tjvCiZFjhaU/s664/2012-06-15_171639.jpg" width="700px" /></p>
+
+<p>然後就會看到建立好的App一些資訊和設定</p>
+
+<p><img src="https://lh3.googleusercontent.com/-HmL8gmkIbMo/T9tdnPYDjgI/AAAAAAAAAQ0/aoxRueaQ4uQ/s882/2012-06-15_171904.jpg" width="700px" /></p>
+
+<p>因為雖然是寫Facebook App，但其實Facebook只是提供你API和外框包住你的網頁，所以你還要提供你的網頁所在位置給Facebook</p>
+
+<p><img src="https://lh6.googleusercontent.com/-WAH8_0uqxXY/T9tdnoOUwDI/AAAAAAAAAQ8/Ol4WZwkLFI8/s729/2012-06-15_172431.jpg" width="700px" /></p>
+
+<p>要注意的是Facebook要求<a href="https://developers.facebook.com/blog/post/497/" target="_blank">使用加密的https</a>，所以如果你如果沒有的話，可能要花錢購買這方面的憑證</p>
+
+<p>到這邊為止，已經建立好初步的Facebook App了</p>
+
+<h2>使用JavaScript API做授權</h2>
+
+<p>有了App以後，我們要跟網頁串起來，因為我是.NET開發者，所以我會先建立一個index.aspx，接著一般我都會在&lt;form id=&#8221;form1&#8221; runat=&#8221;server&#8221;&gt;&lt;/form&gt;的後面加上</p>
+
+<pre><code>&lt;div id="fb-root"&gt;&lt;/div&gt;
+&lt;script type="text/javascript" src="https://connect.facebook.net/zh_TW/all.js"&gt;&lt;/script&gt;  
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"&gt;&lt;/script&gt;
+</code></pre>
+
+<p> 注意，如果沒有fb-root的div會導致不能使用Facebook API，另外我還多用了Jquery來方便等一下寫js程式碼</p>
+
+<p>接下來新增一個div做為點選授權</p>
+
+<pre><code>&lt;div id="btn"&gt;點我授權&lt;/div&gt;
+</code></pre>
+
+<p>接著是js初始化部分</p>
+
+<pre><code>$(function () {
+
+        var _app_id = 'Your App ID';
+        var _api_key = '';
+        //驗證            
+        FB.init({
+            appId: _app_id,
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true, // parse XFBML                
+            oauth: true // enable OAuth 2.0
+        });
+        FB.Canvas.setAutoGrow(); //autoResize  → no scrollbar
+
+   });
+</code></pre>
+
+<p><strong>Your App ID</strong>必須填入你建立好的Facebook App裡面的App ID ，接著加上點擊觸發授權的js部分</p>
+
+<pre><code>    $('#btn').click(function () {
+            getLoaginState();
+        });
+
+        //驗證
+        function getLoaginState() {
+            FB.getLoginStatus(function (response) {
+                if (response.authResponse) {
+                    var u_fb_id = response.authResponse.userID;
+                    console.log(u_fb_id);
+                } else {
+                    login();                        
+                }
+            });
+        }
+
+        //跳出登入視窗
+        function login() {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                     var u_fb_id = response.authResponse.userID;
+                     console.log(u_fb_id);
+                } else {
+                    alert('須同意應用程式');
+                }
+            });
+        }
+</code></pre>
+
+<p>這段js是綁定一個click事件，在id為btn的div上，然後去執行getLoaginState()，<strong>FB.getLoginStatus</strong>是看登入狀態，沒有登入則會跳到login()，console是等下能看到我們所取得的FB ID</p>
+
+<p>接著在剛剛App設定網址那邊有個<strong>Canvas Page</strong>，那就是你掛在Facebook底下的網址，後面的網址名稱就是你剛剛設定的App Namespace，進入以後會看到以下畫面</p>
+
+<p><img src="https://lh3.googleusercontent.com/-j1YbMlBI6oU/T9tgEdDILSI/AAAAAAAAARY/noBT1wLBEEs/s1223/2012-06-16_001702.jpg" width="700px" /></p>
+
+<p>按下<strong>點我授權</strong>，就會跳出授權是否同意應用程式視窗</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ul15BASQCTk/T9th2pskfsI/AAAAAAAAARg/E9_uWLPQVFI/s1046/2012-06-16_002409.jpg" width="700px" /></p>
+
+<p>同意以後，就可以在firebug裡面看到我們剛剛所加的console，秀出你的FB ID</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ITJVUoACd3s/T9tirDBGMOI/AAAAAAAAARo/Oy8ICJf03bw/s1008/2012-06-16_002811.jpg" width="700px" /></p>
+
+<p>得到FB ID可以利用<a href="https://developers.facebook.com/docs/reference/api/" target="_blank">Graph API</a>再更進一步取得許多資料，當然也要先授權相關權限才行</p>
+
+<p>以上如有問題，歡迎一起討論</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Jquery] jScrollPane的使用與注意]]></title>
+    <link href="http://rx836.github.com/blog/jquery-jscrollpane-display/"/>
+    <updated>2012-06-11T18:26:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-jscrollpane-display</id>
+    <content type="html"><![CDATA[<p>有些時候客戶會不想要HTML內建的Scrollbar，所以特地去找了一個Jquery Plugin來使用，但注意，如果有使用到display:none，或是類似lightbox視窗效果，要注意一下先後執行的問題</p>
+
+<!--more-->
+
+
+<p>當然，還有其他很多Plugin可以選擇<a href="http://www.net-kit.com/jquery-custom-scrollbar-plugins/" target="_blank">10 jQuery Custom Scrollbar Plugins</a>，這裡我是用jScrollPane，使用方法很簡單，先下載他的檔案回來，在載入到網頁</p>
+
+<p>使用方法</p>
+
+<pre><code>&lt;!-- CSS部分 --&gt;
+&lt;link type="text/css" href="style/jquery.jscrollpane.css" rel="stylesheet" media="all" /&gt;
+
+&lt;!-- 還要載入Jquery 這裡用CDN --&gt;
+&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;
+&lt;/script&gt;
+
+&lt;!-- 載入mousewheel plugin --&gt;
+&lt;script type="text/javascript" src="script/jquery.mousewheel.js"&gt;&lt;/script&gt;
+
+&lt;!-- 載入jScrollPane --&gt;
+&lt;script type="text/javascript" src="script/jquery.jscrollpane.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>接著只要對包覆內容的div加上Jquery語法</p>
+
+<pre><code>$(function()
+{
+    $('.your div').jScrollPane();
+});
+</code></pre>
+
+<p>這樣就可以自製Scrollbar了！很簡單吧</p>
+
+<p>這裡有<a href="http://jscrollpane.kelvinluck.com/#examples" target="_blank">更多範例</a></p>
+
+<p>不過有時候我們會遇到一個狀況，一開始會設div為display:none，然後點了某個元件以後，用lightbox或其他方式秀出div，如下圖</p>
+
+<p><img width="300px" src="https://lh4.googleusercontent.com/-NBEVwEqZHlY/T9XCoGfeq1I/AAAAAAAAAQc/sWHyCp2vi6M/w753-h585-k/a.jpg" /></p>
+
+<p>但會發現，依照正常流程來套用，點開呈現的效果不如預期，那是因為你在還沒套用jScrollPane之前，為了呈現lightbox的效果，就已經先將他display:none，為了避免發生這種情況，必須先不要display:none，然後在jscrollpane套用以後，再將div做隱藏，教學如下</p>
+
+<p>1.先找到function initialise()</p>
+
+<p>2.接著在這個function的最後面加上$(&#8216;#your div&#8217;).hide()</p>
+
+<p>意思就是，等所有初始化步驟結束以後，才把div的display設成none</p>
+
+<p>其實有很多Jquery Plugin的套用，如果有用到顯示/隱藏的切換，都要注意到先後順序的問題</p>
+
+<p>以上如有問題，歡迎一起討論</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[讀後心得] 預見未來]]></title>
+    <link href="http://rx836.github.com/blog/book-review-3/"/>
+    <updated>2012-06-11T01:23:00+08:00</updated>
+    <id>http://rx836.github.com/blog/book-review-3</id>
+    <content type="html"><![CDATA[<p>作者:王伯達</p>
+
+<p>出版者:天下遠見出版股份有限公司</p>
+
+<!--more-->
+
+
+<p>作者王伯達的書之前已經有讀過一本，那本叫做『民國100年大泡沫』，我喜歡讀他的書是因為他不跟隨主流，常用宏觀的角度來看整件事情，而且是從很多角度來看，我們常說，歷史是不斷重覆上演，我非常認同這句話，但並不是說同樣的人事物一直重覆，而是會用不同的形式，但一樣的道理，再一次的發生</p>
+
+<p>這本『遇見未來』，其實主要並不是在講以後會發生甚麼事情，而是教你如何去 <strong>想</strong> 接下來會發生甚麼事情，有點類似激發你的腦力激盪</p>
+
+<p>前面先用九個章節來介紹如何去思考未來的走向，一個一個章節去說明思考步驟，後面章節則是利用前面所教的步驟，去開始預測他自己認為的未來</p>
+
+<p>在現在資訊爆炸的時代，其實我們能接收的資訊都是一樣的多，一樣的快，資訊不對稱的情形只會越來越少，而不會越來越多，但如何去區別你與別人的不同?我覺得能在現有的資訊下，去畫出未來的藍圖，是非常具有競爭能力的一項技能，看看那些百年企業，別的不說，光說小時候最常聽到的柯達(Kodak)，誰會知道他會破產呢?如果柯達的那些高階經理人，要是有掌握到未來的關鍵藍圖，會走到這個地步嗎?</p>
+
+<p>我覺得預測未來並不是什麼特異功能，相反的只要你努力，只要去認真的思考， 認真的去整理資訊，閱讀大量的書籍，這是真的可以實現的</p>
+
+<p>這是學校所沒有教的東西，但是卻可以影響你的人生，有興趣的人可以讀一讀這本書，會有不一樣的收穫</p>
+
+<p>如有不一樣的見解，歡迎提出一起討論</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[讀後心得] 疼痛,才叫青春]]></title>
+    <link href="http://rx836.github.com/blog/book-review-2/"/>
+    <updated>2012-06-10T03:06:00+08:00</updated>
+    <id>http://rx836.github.com/blog/book-review-2</id>
+    <content type="html"><![CDATA[<p>作者:金蘭都</p>
+
+<p>出版者:圓神出版社有限公司</p>
+
+<!--more-->
+
+
+<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
+
+<h2>人生時鐘:你現在的人生是幾點?</h2>
+
+<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所提的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
+
+<h2>你想要新人獎還是主角獎?</h2>
+
+<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
+
+<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
+
+<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
+
+<p>如果有不一樣的想法，歡迎一起討論</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[Jquery] AJAX cache讓IE一直抓到舊資料]]></title>
@@ -34,7 +1294,7 @@
 
 <p>另外還有這篇關於GET與POST的文章也很值得一讀!</p>
 
-<p><a href="blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
+<p><a href="http://blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
 
 <p>以上如有錯誤或疑問，歡迎一起討論喔!</p>
 ]]></content>
@@ -566,113 +1826,6 @@ $.each(a1,function(){
 <p>或許，把簡單的事情重複一直做，專注於你想專注的事</p>
 
 <p>或許，這會是我們翻身的一個年代</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Octopress]如何開啟 Disqus與和常見的指令]]></title>
-    <link href="http://rx836.github.com/blog/octopress-notes-1/"/>
-    <updated>2012-04-27T02:12:00+08:00</updated>
-    <id>http://rx836.github.com/blog/octopress-notes-1</id>
-    <content type="html"><![CDATA[<p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
-
-<!-- more  -->
-
-
-<h2>為什麼我沒有Comments..</h2>
-
-<p>對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡，但對於我這個新手來說，卻是不知如何是好的難題，好險網路上還是有很多人願意紀錄這一切</p>
-
-<p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
-
-<p>簡單來說就是需先申請<a href="www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
-
-<pre><code>disqus_short_name: your_disqus_short_name
-disqus_show_comment_count: true
-</code></pre>
-
-<h2>一些常用的指令</h2>
-
-<p>說來可憐&#8230;，我到現在還不會在不同台電腦編寫我的Octopress，最近嘗試一次結果因為不熟git而把檔案搞得亂七八糟，但最近有找到一篇文章，我是還沒有親自嘗試過，但想要在這邊先記錄下來，以方便我回頭來看</p>
-
-<p><a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blankl">思考的轨迹 : 如何维护Github上博客</a></p>
-
-<p>然後常用的指令有</p>
-
-<p><strong>設置Octopress與Github做連結</strong></p>
-
-<pre><code>rake setup_github_pages
-</code></pre>
-
-<p><strong>新增文章</strong></p>
-
-<pre><code>rake new_post["title"]
-</code></pre>
-
-<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
-
-<pre><code>rake generate
-</code></pre>
-
-<p><strong>發佈_deploy到Github上</strong></p>
-
-<pre><code>rake deploy
-</code></pre>
-
-<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
-
-<pre><code>set LC_ALL=zh_TW.UTF-8
-set LANG=zh_TW.UTF-8
-</code></pre>
-
-<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
-
-<pre><code>git add .
-git commit -m "your message"
-git push origin source  
-</code></pre>
-
-<p>這還真是一篇＂筆記＂的文章&#8230;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Octopress]出生以來第一次使用Octopress for windows]]></title>
-    <link href="http://rx836.github.com/blog/first-octopress/"/>
-    <updated>2012-04-27T01:55:00+08:00</updated>
-    <id>http://rx836.github.com/blog/first-octopress</id>
-    <content type="html"><![CDATA[<p>終於&#8230;</p>
-
-<p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
-
-<!-- more  -->
-
-
-<p>但因為這篇是我第一次用Octopress寫文章，許多設定和細節都還沒掌握，所以我簡單的貼上幾個從google上所找到的教學資源作為筆記與參考</p>
-
-<p>1.因為我是用Octopress+github，所以首先必須先安裝好github</p>
-
-<p><a href="http://itspg.github.com/blog/2012/02/29/github-on-windows-tutorial/" target="_blank">itsPG.org [教學] 在windows上使用github 新手教學 / 初學者指南</a></p>
-
-<p>這是針對windows，至於其他作業系統例如Mac網路上資源頗多的，這裡就不多加闡述</p>
-
-<p>2.再來是安裝Octopress</p>
-
-<p><a href="http://itspg.github.com/blog/2012/02/29/octopress-on-windows-tutorial/" target="_blank">itsPG.org [教學] 在windows上安裝octopress 新手教學 / 初學者指南</a></p>
-
-<p>3.因為Octopress是用Markdown編輯的，所以要了解到甚麼是Markdown</p>
-
-<p><a href="http://markdown.tw/#link" target="_blank">Markdown</a></p>
-
-<p>4.再來就是找一個好編輯Markdown的工具來編輯，當然用記事本也是可以，這邊我選擇的是MarkPad</p>
-
-<p><a href="http://code52.org/DownmarkerWPF/" target="_blank">MarkPad</a></p>
-
-<p>不過要注意的是要先安裝<a href="http://www.microsoft.com/downloads/zh-tw/details.aspx?FamilyID=0a391abd-25c1-4fc0-919f-b21f31ab88b7" target="_blank">Microsoft .NET Framework 4</a></p>
-
-<p>接著就開開心心的使用Octopress</p>
-
-<p>但接下來還有很多東西還要學習與克服，我也會將遭遇到的問題記錄成筆記來當作參考</p>
 ]]></content>
   </entry>
   
