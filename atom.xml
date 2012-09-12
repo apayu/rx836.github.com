@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-11T02:57:33+08:00</updated>
+  <updated>2012-09-13T02:02:06+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[facebook_world_hack]]></title>
+    <link href="http://rx836.github.com/blog/facebook-world-hack/"/>
+    <updated>2012-09-12T23:42:00+08:00</updated>
+    <id>http://rx836.github.com/blog/facebook-world-hack</id>
+    <content type="html"><![CDATA[<p>因為本身的工作是開發Facebook相關社群APP，所以長期下來有在follow<a href="https://developers.facebook.com/blog/" target="_blank">Facebook Developer Blog</a>，看到<a href="https://developers.facebook.com/blog/post/2012/08/08/facebook-developer-world-hack-2012/" target="_blank">Facebook Developer World HACK 2012</a>原本以為應該跟以前一樣，只有幾個大城市才有舉辦，沒想到仔細一看，竟然有Taipei Taiwan！著實嚇了我一大跳，想當然爾是趕緊報名參加</p>
+
+<!--more-->
+
+
+<p>入場費蠻便宜的大概七百多塊，以下是我記錄的一些相片，因為是用手機拍的畫質不是很好多見諒</p>
+
+<p>會場是位於信義區裡的克緹國際總部大樓，因為我是第一次參加這種HACK活動，所以我是事後才知道這大概是目前所有HACK活動場地最高級的一次，光看這個view就知道多棒</p>
+
+<p><img src="https://lh6.googleusercontent.com/-v_dRNzia9Lk/UFC9Tzbpx-I/AAAAAAAABe0/V-eKCYRGiNY/s788/IMG_2992.JPG" width="800px" /></p>
+
+<p>整個會場都是落地窗玻璃，所以一整天參加活動甚至寫code都感到非常的舒服，尤其是下午的時候夕陽真的非常非常的漂亮</p>
+
+<p><img src="https://lh3.googleusercontent.com/-SchSdUumDww/UFDCG6u60OI/AAAAAAAABfc/oHuqMauFcQU/s788/IMG_2985.JPG" width="800px" /></p>
+
+<p>這是在進去會場之前的報到，其實這是個類似天橋的地方，天橋旁有個空地可以看到整個信義區的view，我想跨年煙火在這看應該超HIGH的</p>
+
+<p><img src="https://lh5.googleusercontent.com/-PkjKD0yXXbw/UFC7Oui1G4I/AAAAAAAABeE/8cGsvgtZSP4/s788/IMG_2989.JPG" width="800px" /></p>
+
+<p>進去後可以看到活動的大LOGO，是用中華民國的國旗所拼成的，可見Facebook多麼用心</p>
+
+<p><img src="https://lh6.googleusercontent.com/-nX29nNMaBBA/UFC7Qiw-HVI/AAAAAAAABeM/XDv-YGQnG1k/s788/IMG_2991.JPG" width="800px" /></p>
+
+<p>當然還有領到一些東西，例如專屬徽章、T桖、還有貼紙，左邊那台是口譯機，Facebook相當貼心的請了同步翻譯人員，讓英文較不佳的人也可以知道講者在講什麼，而且是同步翻譯喔！</p>
+
+<p><img src="https://lh6.googleusercontent.com/-Xk3LqAjFKGg/UFC7iRksdEI/AAAAAAAABec/tX_5-Qu3fm8/s903/IMG_2994.JPG" width="800px" /></p>
+
+<p>實體版的憤怒鳥XD，code寫累了可以來憤怒一下</p>
+
+<p><img src="https://lh6.googleusercontent.com/-Zb7ubBYygng/UFC7ZbaPDdI/AAAAAAAABeU/VdE3fIhCaTg/s788/IMG_2993.JPG" width="800px" /></p>
+
+<p>吃不完的零食和喝不完的飲料是必備的，啤酒當然也是少不了</p>
+
+<p><img src="https://lh4.googleusercontent.com/-KdhIaeQwmZE/UFC9Prk4u8I/AAAAAAAABek/l-ZN1zb3XHc/s788/IMG_2998.JPG" width="800px" /></p>
+
+<p>上午主要focus在Graph API部分，告訴大家怎麼利用Facebook做一些第三方的APP，也分享一些範例，但其實我蠻失望的，因為我原本會以為可以知道一些我從官方文件或Blog學不到的東西，不過後來想想也是，這本來就不是技術發表會，這是來推廣Facebook的Open Graph</p>
+
+<p><img src="https://lh3.googleusercontent.com/-u-licm0d5hg/UFC9XRWECvI/AAAAAAAABe8/Z7XsaVUYquE/s788/IMG_3003.JPG" /></p>
+
+<p>然後Berlin也是跟我們台灣一樣11號舉行，但因為時差的關係我們進行到下午他們才正要開始，所以還有視訊同步Say Hello，還聽到有人開玩笑的大喊Hello World！ XDD</p>
+
+<p><img src="https://lh4.googleusercontent.com/-uz0E3PyUkgQ/UFC9R3twXkI/AAAAAAAABes/mWRevtEOLC4/s903/IMG_3001.JPG" /></p>
+
+<p>因為下午時間就是開始寫code，但我大概接近中午的時候就開始寫了，因為我覺得我時間一定不夠，所以我一有想法就趕快開始動手了，順便簡單的分享一下我的心路歷程</p>
+
+<p>第一次參加這種HACK活動，其實本來沒有什麼頭緒，甚至早上還都只是認為來這邊拜大神，吃喝一下就滿足了，可是後來在認識的前輩鼓勵之下，我也想來挑戰一下自己的極限，看看在這種氛圍底下我可以發揮到什麼程度，所以心一橫，我就決定來真的，好好拼一下</p>
+
+<p>因為工作關係平常本來就是FB重度使用者，所以在發想要做啥這個階段，對我來說不是很困難，不過以後參加別的HACK就可能要先想好做什麼了，因為發想其實應該是最困難的，我想做的是因為我平常出去玩很喜歡用手機拍照上傳到FB，可是如果回家要寫BLOG的話，整理照片那些又很麻煩，所以我決定做一個簡單的工具，可以抓取妳出去玩的時候拍照上傳的照片，加上說明文字，並且幫你拼湊成HTML碼然後丟到HTML編輯器裡面，讓你按幾下就可以有一個BLOG的基本範本存在，而就不用煩惱BLOG要怎麼開頭</p>
+
+<p>定好方向以後，就開始查官方文件，並且邊做邊調整細微的功能，並且因為是一人團隊的關係，所以我在ICON方面就用了bootstrap，省去了很多美工，Server端的code我也都沒寫，純粹都是用js來完成這個網站，結果一進入狀態以後，真地時間過超快的，一下就天黑了</p>
+
+<p><img src="https://lh3.googleusercontent.com/-858tykFHwq0/UFC9XtZTnOI/AAAAAAAABfA/j-URBx8q624/s788/IMG_3005.JPG" width="800px" /></p>
+
+<p>到了吃晚飯時間，我起來走了一下，發現還是很多人再拼呀</p>
+
+<p><img src="https://lh6.googleusercontent.com/-nX29nNMaBBA/UFC7Qiw-HVI/AAAAAAAABeM/XDv-YGQnG1k/s788/IMG_2991.JPG" width="800px" /></p>
+
+<p>後來因為我沒注意到要上去DEMO的人要去網站註冊，所以我錯失了上台分享的機會，這讓我覺得蠻可惜的，雖然做的不是很好，但有一個展現自己的機會應該要好好把握</p>
+
+<p><img src="https://lh6.googleusercontent.com/-cJGtuvW_5ss/UFC9YhdCjcI/AAAAAAAABfE/dNz5OY_6rKo/s788/IMG_3007.JPG" width="800px" /></p>
+
+<p>最後總共有30幾隊報名，大家真的都很厲害，而且評分有分好幾種得獎名額，例如最佳mobile或是最佳game，不過只有第一名有機會去矽谷再跟全世界的人比一次</p>
+
+<p>這是我人生的第一個HACK，真的收穫很多，也大開眼界，期許自己有一天能在上舞台分享我的東西，但在那之前可能要好好的加強自己的能力才行:)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] 建立物件的第三招-自訂建構式函式]]></title>
@@ -1817,73 +1889,6 @@ $.each(a1,function(){
 <p>或許，把簡單的事情重複一直做，專注於你想專注的事</p>
 
 <p>或許，這會是我們翻身的一個年代</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Octopress]如何開啟 Disqus與和常見的指令]]></title>
-    <link href="http://rx836.github.com/blog/octopress-notes-1/"/>
-    <updated>2012-04-27T02:12:00+08:00</updated>
-    <id>http://rx836.github.com/blog/octopress-notes-1</id>
-    <content type="html"><![CDATA[<p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
-
-<!-- more  -->
-
-
-<h2>為什麼我沒有Comments..</h2>
-
-<p>對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡，但對於我這個新手來說，卻是不知如何是好的難題，好險網路上還是有很多人願意紀錄這一切</p>
-
-<p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
-
-<p>簡單來說就是需先申請<a href="http://www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
-
-<pre><code>disqus_short_name: your_disqus_short_name
-disqus_show_comment_count: true
-</code></pre>
-
-<h2>一些常用的指令</h2>
-
-<p>說來可憐&#8230;，我到現在還不會在不同台電腦編寫我的Octopress，最近嘗試一次結果因為不熟git而把檔案搞得亂七八糟，但最近有找到一篇文章，我是還沒有親自嘗試過，但想要在這邊先記錄下來，以方便我回頭來看</p>
-
-<p><a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blankl">思考的轨迹 : 如何维护Github上博客</a></p>
-
-<p>然後常用的指令有</p>
-
-<p><strong>設置Octopress與Github做連結</strong></p>
-
-<pre><code>rake setup_github_pages
-</code></pre>
-
-<p><strong>新增文章</strong></p>
-
-<pre><code>rake new_post["title"]
-</code></pre>
-
-<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
-
-<pre><code>rake generate
-</code></pre>
-
-<p><strong>發佈_deploy到Github上</strong></p>
-
-<pre><code>rake deploy
-</code></pre>
-
-<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
-
-<pre><code>set LC_ALL=zh_TW.UTF-8
-set LANG=zh_TW.UTF-8
-</code></pre>
-
-<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
-
-<pre><code>git add .
-git commit -m "your message"
-git push origin source  
-</code></pre>
-
-<p>這還真是一篇＂筆記＂的文章&#8230;</p>
 ]]></content>
   </entry>
   
