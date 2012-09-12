@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-13T02:05:37+08:00</updated>
+  <updated>2012-09-13T02:11:06+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -67,19 +67,17 @@
 
 <p>因為工作關係平常本來就是FB重度使用者，所以在發想要做啥這個階段，對我來說不是很困難，不過以後參加別的HACK就可能要先想好做什麼了，因為發想其實應該是最困難的，我想做的是因為我平常出去玩很喜歡用手機拍照上傳到FB，可是如果回家要寫BLOG的話，整理照片那些又很麻煩，所以我決定做一個簡單的工具，可以抓取妳出去玩的時候拍照上傳的照片，加上說明文字，並且幫你拼湊成HTML碼然後丟到HTML編輯器裡面，讓你按幾下就可以有一個BLOG的基本範本存在，而就不用煩惱BLOG要怎麼開頭</p>
 
-<p>定好方向以後，就開始查官方文件，並且邊做邊調整細微的功能，並且因為是一人團隊的關係，所以我在ICON方面就用了bootstrap，省去了很多美工，Server端的code我也都沒寫，純粹都是用js來完成這個網站，結果一進入狀態以後，真地時間過超快的，一下就天黑了</p>
+<p>定好方向以後，就開始查官方文件，並且邊做邊調整細微的功能，因為是一人團隊的關係，所以我在ICON方面就用了bootstrap，省去了很多美工，Server端的code我也都沒寫，純粹都是用js來完成這個網站，結果一進入狀態以後，時間就過超快的，一下就天黑了</p>
 
 <p><img src="https://lh3.googleusercontent.com/-858tykFHwq0/UFC9XtZTnOI/AAAAAAAABfA/j-URBx8q624/s788/IMG_3005.JPG" width="800px" /></p>
 
-<p>到了吃晚飯時間，我起來走了一下，發現還是很多人再拼呀</p>
-
-<p><img src="https://lh6.googleusercontent.com/-nX29nNMaBBA/UFC7Qiw-HVI/AAAAAAAABeM/XDv-YGQnG1k/s788/IMG_2991.JPG" width="800px" /></p>
+<p>到了吃晚飯時間，我起來走了一下，發現還是很多人在拼呀</p>
 
 <p>後來因為我沒注意到要上去DEMO的人要去網站註冊，所以我錯失了上台分享的機會，這讓我覺得蠻可惜的，雖然做的不是很好，但有一個展現自己的機會應該要好好把握</p>
 
 <p><img src="https://lh6.googleusercontent.com/-cJGtuvW_5ss/UFC9YhdCjcI/AAAAAAAABfE/dNz5OY_6rKo/s788/IMG_3007.JPG" width="800px" /></p>
 
-<p>最後總共有30幾隊報名，大家真的都很厲害，而且評分有分好幾種得獎名額，例如最佳mobile或是最佳game，不過只有第一名有機會去矽谷再跟全世界的人比一次</p>
+<p>最後總共有30幾隊報名，大家真的都很厲害，而且評分有分好幾種得獎名額，例如最佳mobile或是最佳game，而且只要得獎都有IPAD可以拿，超大手筆的！不過只有第一名有機會去矽谷再跟全世界的人比一次</p>
 
 <p>這是我人生的第一個HACK，真的收穫很多，也大開眼界，期許自己有一天能在上舞台分享我的東西，但在那之前可能要好好的加強自己的能力才行:)</p>
 ]]></content>
