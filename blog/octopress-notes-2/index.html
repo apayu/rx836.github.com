@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[Octopress]如何設定自己的Domain與異地編輯設定 - Rx836</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="用了將近一個月的Octopress，才慢慢覺得開始步上軌道，好笑的是我竟然誤以為因為Domain沒有設定，才會導致Google搜尋不到我的文章&#8230;，更慘的是，匆忙的利用網銀買了一組自己的Domain回來後，才發現原來我淺到連DNS都不會設定&#8230; 能把這麼丟臉的事情都昭告天下， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/octopress-notes-2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Rx836" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:app_id" content="416172151763823" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Rx836</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[Octopress]如何設定自己的Domain與異地編輯設定</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-20T01:35:00+08:00" pubdate data-updated="true">May 20<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>用了將近一個月的Octopress，才慢慢覺得開始步上軌道，好笑的是我竟然誤以為因為Domain沒有設定，才會導致Google搜尋不到我的文章&#8230;，更慘的是，匆忙的利用網銀買了一組自己的Domain回來後，才發現原來我淺到連DNS都不會設定&#8230;</p>
+
+<!--more-->
+
+
+<p>能把這麼丟臉的事情都昭告天下，就是我認為人就是要認清自己，不會的東西就是要主動去尋求答案，不懂的事情也不要怕丟臉被別人知道，因為我深信，不可能每個人一出生就什麼事情都會，但唯有不肯面對自己的人&#8230;.ㄟ!話題偏了</p>
+
+<p>如果你要設定自己的一組Domain，首先必須先去買一組屬於自己的網址，像我因為之前有幫公司在PC HOME買過網址的經驗，所以我就直接挑選PC HOME做為買網址的服務</p>
+
+<p><a href="http://myname.pchome.com.tw/" target="_blank">PC HOME買網址</a></p>
+
+<p>買了網址等到他通知你服務開通，接著就是進去他的管理介面做設定，因為一般來說<strong>DNS的設定大約要24小時</strong>才能好，所以我會先建議這一步先做，但這裡就有血淚史可以講了&#8230;因為我不知道我自己的DNS設定的正不正確，所以都要等上一天，抱著滿懷期待的心情輸入網址，看見那404的畫面..，然後再重新設定一次DNS&#8230;，等24小時&#8230;，再一次的循環&#8230;</p>
+
+<h3>好險國父革命11次，我只革命了七天，算是不幸中的大幸</h3>
+
+<p>回到設定網址，參照官網是要使用<strong>CNAME</strong>的方式來設定網址，參照PC HOME 的說明是指CNAME，意思就是<strong>別名 Aliases</strong>，白話的意思就是將你的網域名稱對應到某個網站，所以我DNS的管理設定如下</p>
+
+<pre><code>主機 / 次網域 | 地址 | 類型
+blog |  rx836.github.com. | CNAME
+</code></pre>
+
+<p>接著就是Octopress的設定，一樣在指令模式下輸入</p>
+
+<pre><code>echo 'your-domain.com' &gt;&gt; source/CNAME
+</code></pre>
+
+<p><strong>your-domain.com</strong>就是你的Domain，例如我的是blog.rx836.tw</p>
+
+<p>然後妳就會在source看到多了一個名叫CNAME的檔案，用記事本打開還會看到你的Domain已經寫在裡面了，再來就是輸入</p>
+
+<pre><code>rake generate
+</code></pre>
+
+<p>接著發佈</p>
+
+<pre><code>rake deploy
+</code></pre>
+
+<p>然後好好睡一覺，等明天打開網址大喊</p>
+
+<h3>爽啦!我終於設定好了</h3>
+
+<p>可是設定好後，我還是在Google搜尋不到我的文章，Google Analytics怎麼看都只有我自己的流量，不奢求成為受歡迎的Blog客，但沒人可以一起分享總是覺得孤單，唱獨角戲的感覺很不真實，也就不會有寫文章的動力</p>
+
+<p>所以我打算主動出擊，直接跑去別人的blog問(<a href="http://zespia.tw" target="_blank">http://zespia.tw/</a>)，果然社群都是很親切大方的，直接告訴我把<strong>sitemap.xml</strong>檔案這個丟到Google上就可以了!</p>
+
+<p><a href="https://www.google.com/webmasters/tools/" target="_blank">Google 網站管理工具</a></p>
+
+<p>利用網站管理工具先新增一個網站，接著提交sitemap就完成了，一段時間以後，你的網站就曝光在網際網路的茫茫大海之中，但排名或是SEO優化這部分就要看個人造化了</p>
+
+<p>當你開始經營一個Blog時，你一定不會只想在一個地方撰寫Blog，有時候突如其來的想法或是問題分享，會讓你想要立刻打開編輯器做編輯，但Octopress不是一般的Blog，他需要先在本機做產生，再發佈，不像其他的Blog有個後台管理，所以異地編輯就需要花一些功夫</p>
+
+<h3>這裡我是用Octopress+Github當教學</h3>
+
+<p>首先你要有一台已經安裝好Octopress和Github(<a href="http://blog.rx836.tw/blog/first-octopress/" target="_blank">這裡教學</a>)的環境，接著Clone你的Blog到你新的這台電腦裡面</p>
+
+<pre><code>git clone git@github.com:rx836/rx836.github.com.git
+</code></pre>
+
+<p>上面是我Github的SSH，你要換成自己的才行</p>
+
+<p>接著要checkout出source</p>
+
+<pre><code>cd rx836.github.com
+git checkout source
+</code></pre>
+
+<p>然後再重新設置github的設定做連結</p>
+
+<pre><code>rake setup_github_pages
+</code></pre>
+
+<p>出現提示以後再輸入你的SSH</p>
+
+<pre><code>git@github.com:rx836/rx836.github.com.git
+</code></pre>
+
+<p>接著在更新你的source</p>
+
+<pre><code>git pull origin source
+</code></pre>
+
+<p>最後就可以看是要新增文章，還是編輯，產生，發佈，躺著，趴著，跪著，隨便怎麼做都可以了</p>
+
+<p>一樣，在發佈Blog以後，別問了記得更新source到你的Github上，這樣另外一台才可以有最新的source可以用喔</p>
+
+<pre><code>git add .
+git commit m 'mycommit'
+git push origin source
+</code></pre>
+
+<p>參考:<a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blank">http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/</a></p>
+
+<p>以上教學分享，如有疑問或錯誤，歡迎一起討論</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-20T01:35:00+08:00" pubdate data-updated="true">May 20<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/jquery-notes-1/" title="Previous Post: [Jquery]jquery使用筆記(一)-開始*出發*起航">&laquo; [Jquery]jquery使用筆記(一)-開始*出發*起航</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/jquery-notes-2/" title="Next Post: [Jquery]jquery使用筆記(二)-選擇器*開罐器">[Jquery]jquery使用筆記(二)-選擇器*開罐器 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://rx836.github.com/blog/octopress-notes-2/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/introduce-ted/">[學習筆記] 全世界最會說故事的平台-TED</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/introduce-compass/">[CSS] 用了就無法回頭的Compass</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-happyjs/">[jQuery] 快樂的Happy.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/facebook-world-hack/">[Facebook] Facebook Developer World HACK 2012</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/javascript-custom-function/">[JavaScript] 建立物件的第三招-自訂建構式函式</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/octopress-notes-2/';
+        var disqus_url = 'http://rx836.github.com/blog/octopress-notes-2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=416172151763823&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[Jquery] AJAX cache讓IE一直抓到舊資料 - Rx836</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了 但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-ajax-cache">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Rx836" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:app_id" content="416172151763823" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Rx836</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[Jquery] AJAX cache讓IE一直抓到舊資料</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-29T01:24:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了</p>
+
+<!--more-->
+
+
+<p>但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$.ajax()做AJAX的資料取得，目的是希望User每按一次按鈕就取得一筆新的資料</p>
+
+<p>誰知道在Firefox和Chrome都正常，唯獨只有IE不管怎麼取都是舊的資料，後來看了<a href="http://blog.darkthread.net/" target="_blank">黑暗執行緒</a>的<a href="http://blog.darkthread.net/post-2009-06-03-about-jquery-ajax-cache-option.aspx" target="_blank">關於jQuery AJAX cache參數</a>我才知道，要在$.axaj()裡的參數cache設成false</p>
+
+<pre><code>cache: false
+</code></pre>
+
+<p>這樣就不會再抓cache而讓資料怎麼抓都抓不到新的</p>
+
+<p>另外還有這篇關於GET與POST的文章也很值得一讀!</p>
+
+<p><a href="http://blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
+
+<p>以上如有錯誤或疑問，歡迎一起討論喔!</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-29T01:24:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/jquery-notes-2/" title="Previous Post: [Jquery]jquery使用筆記(二)-選擇器*開罐器">&laquo; [Jquery]jquery使用筆記(二)-選擇器*開罐器</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/book-review-2/" title="Next Post: [讀後心得] 疼痛,才叫青春">[讀後心得] 疼痛,才叫青春 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://rx836.github.com/blog/jquery-ajax-cache/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/introduce-ted/">[學習筆記] 全世界最會說故事的平台-TED</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/introduce-compass/">[CSS] 用了就無法回頭的Compass</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-happyjs/">[jQuery] 快樂的Happy.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/facebook-world-hack/">[Facebook] Facebook Developer World HACK 2012</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/javascript-custom-function/">[JavaScript] 建立物件的第三招-自訂建構式函式</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-ajax-cache/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-ajax-cache/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=416172151763823&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
