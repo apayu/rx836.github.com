@@ -142,6 +142,32 @@ jQuery寫了一陣子，直到最近有個需求，想要做到滑鼠移到圖�
 
 這樣plugin整個看起來就很清楚明瞭，也可以自己嘗試動手寫寫看喔！
 
+## 後記
+
+Aaron大大說plugin寫法有點舊，而且有點囉嗦XD，他建議我新的寫法，在此特別筆記下來
+
+HTML
+
+	<img src="a.jpg" class="resize" width="250"/>
+	
+jQuery
+	
+	var current_h = null;
+	var current_w = null;
+
+	$('.resize').hover(
+		function(){
+			current_h = $(this, 'img').height;
+			current_w = $(this, 'img').width;
+			$(this).stop(true, false).animate({width: (current_w * 1.3), height: (current_h * 1.3)}, 300);
+		},
+		function(){
+			$(this).stop(true, false).animate({width: current_w + 'px', height: current_h + 'px'}, 300);
+		}
+	);
+	
+不要用plugin，直接寫，至於top和left在自己加上就好，跟前面的plugin道理一樣
+
 參考資料:
 
 <a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a>
