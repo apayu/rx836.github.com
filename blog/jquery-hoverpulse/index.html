@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[Octopress]如何開啟 Disqus與和常見的指令 - Rx836</title>
+  <title>[jQuery] hoverpulse 滑鼠移入，圖片縮放 - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來 為什麼我沒有Comments.. 對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡， &hellip;">
+  <meta name="description" content="jQuery寫了一陣子，直到最近有個需求想要做到滑鼠移到圖片上，會微微的放大，才發現，這個很常看到的效果，我到今天都還沒實做過 幸運的是&#8230;，就因為這麼晚才實做，所以早就有人把plugin寫好了，我所用的是hoverpulse，用法相當相當的簡單 首先是HTML部份 &lt;div&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/octopress-notes-1">
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-hoverpulse">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">[Octopress]如何開啟 Disqus與和常見的指令</h1>
+      <h1 class="entry-title">[jQuery] Hoverpulse 滑鼠移入，圖片縮放</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+<time datetime="2012-09-20T23:42:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,65 +107,159 @@
   </header>
 
 
-<div class="entry-content"><p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
+<div class="entry-content"><p>jQuery寫了一陣子，直到最近有個需求想要做到滑鼠移到圖片上，會微微的放大，才發現，這個很常看到的效果，我到今天都還沒實做過</p>
 
-<!-- more  -->
+<!--more-->
 
 
-<h2>為什麼我沒有Comments..</h2>
+<p>幸運的是&#8230;，就因為這麼晚才實做，所以早就有人把plugin寫好了，我所用的是<a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a>，用法相當相當的簡單</p>
 
-<p>對呀&#8230;，為什麼我沒有Comments，沒想到第一個遇到的問題就是這麼看似平凡，但對於我這個新手來說，卻是不知如何是好的難題，好險網路上還是有很多人願意紀錄這一切</p>
+<p>首先是HTML部份</p>
 
-<p><a href="http://gangmax.github.com/blog/2012/01/20/how-to-use-disqus-in-octopress/" target="_blank">Blog of GangMax : How to Use Disqus in Octopress</a></p>
-
-<p>簡單來說就是需先申請<a href="http://www.disqus.com/" target="_blank">disqus</a>帳號，接著將你的disqus_short_name填在<strong>_config.yml</strong>裡面</p>
-
-<pre><code>disqus_short_name: your_disqus_short_name
-disqus_show_comment_count: true
+<pre><code>&lt;div&gt;&lt;img src="a.jpg" /&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src="b.jpg" /&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src="c.jpg" /&gt;&lt;/div&gt;
 </code></pre>
 
-<h2>一些常用的指令</h2>
+<p>再來是jQuery部份</p>
 
-<p>說來可憐&#8230;，我到現在還不會在不同台電腦編寫我的Octopress，最近嘗試一次結果因為不熟git而把檔案搞得亂七八糟，但最近有找到一篇文章，我是還沒有親自嘗試過，但想要在這邊先記錄下來，以方便我回頭來看</p>
-
-<p><a href="http://shanewfx.github.com/blog/2012/02/16/clone-blog-from-github/" target="_blankl">思考的轨迹 : 如何维护Github上博客</a></p>
-
-<p>然後常用的指令有</p>
-
-<p><strong>設置Octopress與Github做連結</strong></p>
-
-<pre><code>rake setup_github_pages
+<pre><code>$(document).ready(function() {
+    $('div img').hoverpulse();
+});
 </code></pre>
 
-<p><strong>新增文章</strong></p>
+<p>這樣就完成了！當然甚麼值都沒有給的情況下是用預設值，但如果想要設定放大的幅度和變化的速度，可以這樣寫</p>
 
-<pre><code>rake new_post["title"]
+<pre><code>$(document).ready(function() {
+    $('div img').hoverpulse({
+        size: 40,  // number of pixels to pulse element (in each direction)
+        speed: 400 // speed of the animation 
+    });
+});
 </code></pre>
 
-<p><strong>產生<em>deploy，也就是將你source裡面的檔案轉換成html放到</em>deploy</strong></p>
+<p>真的簡單又明瞭&#8230;</p>
 
-<pre><code>rake generate
+<p>當然如果你想加入點擊的事件，你可以這樣寫</p>
+
+<pre><code>$(document).ready(function() {
+    $('div img').hoverpulse().each(function() {
+        var $img = $(this);                 
+        $img.click(function() {
+
+            //點每張圖的事件
+
+            return false;
+        });
+    });
+});
 </code></pre>
 
-<p><strong>發佈_deploy到Github上</strong></p>
+<p>接下來是我個人好奇去看他的source code，可以看到他先將每個圖片的width和height存到$.data裡面</p>
 
-<pre><code>rake deploy
+<pre><code>this.each(function() {
+    var $this = $(this);
+    var w = $this.width(), h = $this.height();
+    $this.data('hoverpulse.size', { w: parseInt(w), h: parseInt(h) });
+});
 </code></pre>
 
-<p><strong>假使用UTF-8編碼，必須先設定這兩行</strong></p>
+<p>接著利用到<strong>.hover()</strong>的方法去做出滑鼠移到圖片和移出圖片的效果</p>
 
-<pre><code>set LC_ALL=zh_TW.UTF-8
-set LANG=zh_TW.UTF-8
+<pre><code>// bind hover event for behavior
+return this.hover(
+    // hover over
+    function() {
+        var $this = $(this);
+        $this.parent().css('z-index', opts.zIndexActive);
+
+        var size = $this.data('hoverpulse.size');
+        var w = size.w, h = size.h;
+        $this.stop().animate({ 
+            top:  ('-'+opts.size+'px'), 
+            left: ('-'+opts.size+'px'), 
+            height: (h+2*opts.size)+'px', 
+            width:  (w+2*opts.size)+'px' 
+        }, opts.speed);
+    },
+    // hover out
+    function() {
+        var $this = $(this);
+        var size = $this.data('hoverpulse.size');
+        var w = size.w, h = size.h;
+
+        $this.stop().animate({ 
+            top:  0, 
+            left: 0, 
+            height: (h+'px'), 
+            width:  (w+'px') 
+        }, opts.speed, function() {
+            $this.parent().css('z-index', opts.zIndexNormal);
+        });
+    }
+);
 </code></pre>
 
-<p><strong>將Octopress原始碼放到Github分支Source上(Master是放_deploy)</strong></p>
+<p>在移入部份其中會先將包覆img的div z-index值設到100</p>
 
-<pre><code>git add .
-git commit -m "your message"
-git push origin source  
+<pre><code>$this.parent().css('z-index', opts.zIndexActive);
 </code></pre>
 
-<p>這還真是一篇＂筆記＂的文章&#8230;</p>
+<p>然後從data取出之前放入的圖片width和height，接著用<strong>.animate()</strong>來執行放大效果</p>
+
+<pre><code>$this.stop().animate({ 
+            top:  ('-'+opts.size+'px'), 
+            left: ('-'+opts.size+'px'), 
+            height: (h+2*opts.size)+'px', 
+            width:  (w+2*opts.size)+'px' 
+        }, opts.speed);
+</code></pre>
+
+<p>其實就是把你設定的size放大兩倍，並且為了有感覺從圖片中間點開始放大的效果，所以把位置top和left給予負值，等於整張圖片往左上角移動，速度是<strong>opts.speed</strong>，而圖片的position:absolute在整個plugin就已經設定了</p>
+
+<pre><code>// parent must be relatively positioned
+this.parent().css({ position: 'relative' });
+// pulsing element must be absolutely positioned
+this.css({ position: 'absolute', top: 0, left: 0 });
+</code></pre>
+
+<p>可以看到包覆img的div是relatively，img是absolute</p>
+
+<p>而移開以後只是把值恢復成原來的設定</p>
+
+<pre><code>var $this = $(this);
+var size = $this.data('hoverpulse.size');
+var w = size.w, h = size.h;
+
+$this.stop().animate({ 
+    top:  0, 
+    left: 0, 
+    height: (h+'px'), 
+    width:  (w+'px') 
+}, opts.speed, function() {
+    $this.parent().css('z-index', opts.zIndexNormal);
+});
+</code></pre>
+
+<p>把top和left歸為0，height和width恢復成原來的大小，z-index也設回預設值1</p>
+
+<p>當然預設值在plugin的最下面可以自己修改</p>
+
+<pre><code>$.fn.hoverpulse.defaults = {
+    size:  20,
+    speed: 200,
+    zIndexActive: 100,
+    zIndexNormal: 1
+};
+</code></pre>
+
+<p>這樣plugin整個看起來就很清楚明瞭，也可以自己嘗試動手寫寫看喔！</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a></p>
+
+<p>如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -199,17 +293,15 @@ git push origin source
   
 
 
-<time datetime="2012-04-27T02:12:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
+<time datetime="2012-09-20T23:42:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
       
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/first-octopress/" title="Previous Post: [Octopress]出生以來第一次使用Octopress for windows">&laquo; [Octopress]出生以來第一次使用Octopress for windows</a>
+        <a class="basic-alignment left" href="/blog/facebook-page-tab-scroll/" title="Previous Post: [Facebook] 如何讓Page Tab的Scroll bar消失以及使用錨點?">&laquo; [Facebook] 如何讓Page Tab的Scroll bar消失以及使用錨點?</a>
       
-      
-        <a class="basic-alignment right" href="/blog/book-review-1/" title="Next Post: [讀後心得] 只剩下一個角落的繁華">[讀後心得] 只剩下一個角落的繁華 &raquo;</a>
       
     </p>
   </footer>
@@ -220,7 +312,7 @@ git push origin source
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/octopress-notes-1/" 
+	data-href="http://rx836.github.com/blog/jquery-hoverpulse/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -290,8 +382,8 @@ git push origin source
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/octopress-notes-1/';
-        var disqus_url = 'http://rx836.github.com/blog/octopress-notes-1/';
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-hoverpulse/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-hoverpulse/';
         var disqus_script = 'embed.js';
       
     (function () {

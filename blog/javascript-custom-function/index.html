@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[讀後心得] 疼痛,才叫青春 - Rx836</title>
+  <title>[JavaScript] 建立物件的第三招-自訂建構式函式 - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="作者:金蘭都 出版者:圓神出版社有限公司 這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的 人生時鐘:你現在的人生是幾點? 雖然他是寫給剛畢業的新鮮人或是大學生為主， &hellip;">
+  <meta name="description" content="在前面一篇文章[JavaScript] 談物件, 實字與建構式，裡面有講到關於物件的建立，不過礙於篇幅，只談到實字模式(literal patterns)和建構式函式(constructor functions)，但其實還有一個建立物件的方法，那就是自訂建構式函式 用自定義的建構式函式來建立物件， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/book-review-2">
+  <link rel="canonical" href="http://rx836.github.com/blog/javascript-custom-function">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">[讀後心得] 疼痛,才叫青春</h1>
+      <h1 class="entry-title">[JavaScript] 建立物件的第三招-自訂建構式函式</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-09-11T00:43:00+08:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,28 +107,100 @@
   </header>
 
 
-<div class="entry-content"><p>作者:金蘭都</p>
-
-<p>出版者:圓神出版社有限公司</p>
+<div class="entry-content"><p>在前面一篇文章<a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a>，裡面有講到關於物件的建立，不過礙於篇幅，只談到<strong>實字模式(literal patterns)</strong>和<strong>建構式函式(constructor functions)</strong>，但其實還有一個建立物件的方法，那就是<strong>自訂建構式函式</strong></p>
 
 <!--more-->
 
 
-<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
+<p>用自定義的建構式函式來建立物件，直接用範例來說明</p>
 
-<h2>人生時鐘:你現在的人生是幾點?</h2>
+<pre><code>var kitty = new Cat('Kitty');
+var kitty.say(); // "kitty:喵~"
+</code></pre>
 
-<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所提的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
+<p>跟之前的建構式不同的地方在於，之前是用內建的new Object()，這裡我們是用new Cat()，這種模式很像Java使用一個class Cat來建立物件，語法非常的相似，但其實JavaScript並沒有class，Cat只是一個函式</p>
 
-<h2>你想要新人獎還是主角獎?</h2>
+<p>Cat的建構式定義如下</p>
 
-<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
+<pre><code>var Cat = function (name){
+    this.name = name;
+    this.say = function(){
+        return name+":喵~";
+    }
+};
+</code></pre>
 
-<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
+<p>但其實真正背後運作的方式是這樣，註解為JavaScript實際上還有做一些我們看不到的事情</p>
 
-<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
+<pre><code>var Cat = function (name){
 
-<p>如果有不一樣的想法，歡迎一起討論</p>
+    //建立物件實字, 一個空物件
+    //var this = {};
+
+    //接著替this加入屬性和方法
+    this.name = name;
+    this.say = function(){
+        return name+":喵~";
+    }
+
+    //最後return this
+};
+</code></pre>
+
+<p>整個的流程首先會建立一個空物件，參考至this變數，藉由this的參考，將屬性和方法加入到此物件(this)，最後再將物件隱含的回傳出去(這邊要注意的是，回傳的情況是假設<strong>沒有其他物件被明確的指定回傳</strong>，後面則會提到)</p>
+
+<p>範例中say()是直接加入至this，不過真正實務中，當你每次new Cat()的時候，就會建立一個新函式到記憶體裡面，很明顯的會浪費記憶體效能，所以最好的方式是加入到原型(prototype)中</p>
+
+<pre><code>//只可以重複利用，都應該放進原型裡面
+Cat.prototype.say = function(){
+    return this.name+":喵~";
+};
+</code></pre>
+
+<p>不過這裡有個問題，假如忘記加上new會發生甚麼事情？其實是不會有語法或執行上的錯誤，但卻會導致非預期的錯誤發生，因為沒有加new以後，所有的this都指向全域物件去了！(例如window)</p>
+
+<pre><code>function cat(){
+    this.name = "kitty";
+}
+
+var kitty = new Cat();
+console.log(typeof kitty); // "object" 為物件
+console.log(kitty.name);
+
+var kitty2 = Cat();
+console.log(typeof kitty2); // undefined 忘了new, 不會有物件this回傳, 變成全域
+console.log(window.name); //全域變數
+</code></pre>
+
+<p>不過為了預防這種情況發生，可以利用以下寫法</p>
+
+<pre><code>function cat(){
+
+    //還是一樣會建立一個this
+    //var this = {};
+
+    var _self = {};     
+    _self.name = "kitty";
+
+    //不過return被_self取代了
+    return _self;
+}
+</code></pre>
+
+<p>所以不管User怎麼呼叫，都一定會回傳一個物件，也就是強制new的做法</p>
+
+<pre><code>var kitty = new Cat();  
+console.log(kitty.name); // "kitty"
+
+var kitty2 = Cat(); 
+console.log(kitty2.name); // "kitty"
+</code></pre>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
+
+<p>如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -162,17 +234,17 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-09-11T00:43:00+08:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
       
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-ajax-cache/" title="Previous Post: [Jquery] AJAX cache讓IE一直抓到舊資料">&laquo; [Jquery] AJAX cache讓IE一直抓到舊資料</a>
+        <a class="basic-alignment left" href="/blog/javascript-xmlhttprequest-level-2/" title="Previous Post: [HTML5] 淺談XMLHttpRequest Level 2">&laquo; [HTML5] 淺談XMLHttpRequest Level 2</a>
       
       
-        <a class="basic-alignment right" href="/blog/book-review-3/" title="Next Post: [讀後心得] 預見未來">[讀後心得] 預見未來 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/facebook-world-hack/" title="Next Post: [Facebook] Facebook Developer World HACK 2012">[Facebook] Facebook Developer World HACK 2012 &raquo;</a>
       
     </p>
   </footer>
@@ -183,7 +255,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/book-review-2/" 
+	data-href="http://rx836.github.com/blog/javascript-custom-function/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -253,8 +325,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/book-review-2/';
-        var disqus_url = 'http://rx836.github.com/blog/book-review-2/';
+        var disqus_identifier = 'http://rx836.github.com/blog/javascript-custom-function/';
+        var disqus_url = 'http://rx836.github.com/blog/javascript-custom-function/';
         var disqus_script = 'embed.js';
       
     (function () {

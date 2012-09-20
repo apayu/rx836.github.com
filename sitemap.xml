@@ -2,90 +2,122 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://rx836.github.com/blog/first-octopress/</loc>
-        <lastmod>2012-06-10T03:03:29+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/octopress-notes-1/</loc>
-        <lastmod>2012-06-10T03:22:06+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/book-review-1/</loc>
-        <lastmod>2012-06-10T03:03:30+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/facebook-expired-access-tokens/</loc>
-        <lastmod>2012-06-10T03:03:30+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/jquery-notes-1/</loc>
-        <lastmod>2012-06-10T03:03:30+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/octopress-notes-2/</loc>
-        <lastmod>2012-06-10T03:03:30+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/jquery-notes-2/</loc>
-        <lastmod>2012-06-10T03:03:30+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/jquery-ajax-cache/</loc>
-        <lastmod>2012-06-10T03:19:38+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/book-review-2/</loc>
-        <lastmod>2012-06-10T03:12:49+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/book-review-3/</loc>
-        <lastmod>2012-06-11T01:28:13+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/jquery-jscrollpane-display/</loc>
-        <lastmod>2012-06-11T18:40:48+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/facebook-app-create-getfbid/</loc>
-        <lastmod>2012-06-16T00:52:17+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/jquery-waterfall-infinitescroll/</loc>
-        <lastmod>2012-06-19T00:43:22+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/book-review-4/</loc>
-        <lastmod>2012-06-21T00:07:21+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/work-1/</loc>
-        <lastmod>2012-06-24T03:09:30+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/jquery-data-cache/</loc>
-        <lastmod>2012-08-30T16:02:04+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/parallax-scrolling/</loc>
-        <lastmod>2012-08-31T18:53:28+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/jquery-css3-flip-plugin/</loc>
-        <lastmod>2012-09-06T15:38:22+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/javascript-patterns-1/</loc>
-        <lastmod>2012-09-08T01:45:42+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/javascript-xmlhttprequest-level-2/</loc>
-        <lastmod>2012-09-10T17:26:18+08:00</lastmod>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rx836.github.com/blog/javascript-custom-function/</loc>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rx836.github.com/blog/facebook-world-hack/</loc>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rx836.github.com/blog/jquery-happyjs/</loc>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rx836.github.com/blog/introduce-compass/</loc>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rx836.github.com/blog/introduce-ted/</loc>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rx836.github.com/blog/facebook-page-tab-scroll/</loc>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rx836.github.com/blog/jquery-hoverpulse/</loc>
+        <lastmod>2012-09-21T00:30:14+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://rx836.github.com/about/</loc>
+        <lastmod>2012-09-20T23:40:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/blog/archives/</loc>
-        <lastmod>2012-09-10T17:26:18+08:00</lastmod>
+        <lastmod>2012-09-21T00:30:14+08:00</lastmod>
     </url>
     <url>
         <loc>http://rx836.github.com/</loc>
-        <lastmod>2012-09-10T17:26:18+08:00</lastmod>
+        <lastmod>2012-09-21T00:30:14+08:00</lastmod>
     </url>
 </urlset>

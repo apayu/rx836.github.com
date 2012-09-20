@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[讀後心得] 疼痛,才叫青春 - Rx836</title>
+  <title>[Facebook] 如何讓Page Tab的Scroll bar消失以及使用錨點? - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="作者:金蘭都 出版者:圓神出版社有限公司 這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的 人生時鐘:你現在的人生是幾點? 雖然他是寫給剛畢業的新鮮人或是大學生為主， &hellip;">
+  <meta name="description" content="常常會看到粉絲團裡面的頁籤活動(Page Tab)，都會出現scroll bar，老實說其實有點醜，所以這邊記錄一下怎樣讓Page Tab消失，讓你的頁籤內容有多長，整個Page Tab就有多長，另外順便記錄一下Facebook錨點的問題 要如何讓Facebook不再出現scroll bar &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/book-review-2">
+  <link rel="canonical" href="http://rx836.github.com/blog/facebook-page-tab-scroll">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">[讀後心得] 疼痛,才叫青春</h1>
+      <h1 class="entry-title">[Facebook] 如何讓Page Tab的Scroll Bar消失以及使用錨點?</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-09-19T23:53:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,28 +107,74 @@
   </header>
 
 
-<div class="entry-content"><p>作者:金蘭都</p>
-
-<p>出版者:圓神出版社有限公司</p>
+<div class="entry-content"><p>常常會看到粉絲團裡面的頁籤活動(Page Tab)，都會出現scroll bar，老實說其實有點醜，所以這邊記錄一下怎樣讓Page Tab消失，讓你的頁籤內容有多長，整個Page Tab就有多長，另外順便記錄一下Facebook錨點的問題</p>
 
 <!--more-->
 
 
-<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
+<p>要如何讓Facebook不再出現scroll bar</p>
 
-<h2>人生時鐘:你現在的人生是幾點?</h2>
+<p><img src="https://lh5.googleusercontent.com/-UTpcRBt6434/UFntIvLIR-I/AAAAAAAABhU/QxBuOx2nspc/s803/1.jpg" width="800px"  /></p>
 
-<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所提的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
+<p>這是某個粉絲團裡面的頁籤活動，可以看到有一個scroll bar在右側，消失的方法就是在body裡面加上overflow</p>
 
-<h2>你想要新人獎還是主角獎?</h2>
+<pre><code>&lt;body style="overflow:hidden"&gt;
+</code></pre>
 
-<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
+<p>但這樣其實有個問題，就是scroll bar雖然消失了，但Page Tab被切到了，也就是說下半部的內容會顯示不出來，所以要在加上JavaScript的code上去</p>
 
-<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
+<pre><code>var _app_id = 'xxxx';
+var _api_key = '';
+//初始化
+FB.init({
+    appId: _app_id,
+    status: true, // check login status
+    cookie: true, // enable cookies to allow the server to access the session
+    xfbml: true, // parse XFBML        
+    oauth: true // enable OAuth 2.0
+});
+</code></pre>
 
-<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
+<p>一般來說這是初始化Facebook的JavaScript SDK，緊接著在後面加上</p>
 
-<p>如果有不一樣的想法，歡迎一起討論</p>
+<pre><code>    FB.Canvas.setAutoGrow();
+</code></pre>
+
+<p>這樣就可以讓你Page Tab可以整個顯示出來，而且也不會再出現scroll bar，要注意的是，以前會用<strong>FB.Canvas.setAutoResize</strong>，不過現在不要再用這個語法囉，因為Facebook已經要刪除，不再支援這種寫法</p>
+
+<h2>Facebook 錨點無效</h2>
+
+<p>我們平常寫網頁，我們會這樣設錨點</p>
+
+<pre><code>&lt;a name="h"&gt;我是錨點&lt;/a&gt;
+</code></pre>
+
+<p>接著會下這樣的超連結</p>
+
+<pre><code>&lt;a href="#h"&gt;點我跳到我是錨點&lt;/a&gt;
+</code></pre>
+
+<p>這樣就可以到達網頁設定好的錨點，但是這樣在Facebook是無效的！因為Facebook Page Tab其實是一個iframe，所以Facebook自己有出SDK可以控制scroll的移動，寫法如下</p>
+
+<pre><code>FB.Canvas.scrollTo(0, 0);
+</code></pre>
+
+<p>等於說你可以寫click某個HTML讓他移動到你設定好的座標位置，例如</p>
+
+<pre><code>$('a').click(function(){
+    FB.Canvas.scrollTo(0, 300);
+});
+</code></pre>
+
+<p>這樣意思代表點擊a移動到Page Tab坐標(0, 300)的地方，這樣就可以取代錨點失效的問題了</p>
+
+<p>參考資料:</p>
+
+<p><a href="https://developers.facebook.com/docs/reference/javascript/FB.Canvas.scrollTo/" target="_blank">FB.Canvas.scrollTo</a></p>
+
+<p><a href="https://developers.facebook.com/docs/reference/javascript/FB.Canvas.setAutoGrow/" target="_blank">FB.Canvas.setAutoGrow</a></p>
+
+<p>如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -162,17 +208,17 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-09-19T23:53:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
       
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-ajax-cache/" title="Previous Post: [Jquery] AJAX cache讓IE一直抓到舊資料">&laquo; [Jquery] AJAX cache讓IE一直抓到舊資料</a>
+        <a class="basic-alignment left" href="/blog/introduce-ted/" title="Previous Post: [學習筆記] 全世界最會說故事的平台-TED">&laquo; [學習筆記] 全世界最會說故事的平台-TED</a>
       
       
-        <a class="basic-alignment right" href="/blog/book-review-3/" title="Next Post: [讀後心得] 預見未來">[讀後心得] 預見未來 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/jquery-hoverpulse/" title="Next Post: [jQuery] hoverpulse 滑鼠移入，圖片縮放">[jQuery] hoverpulse 滑鼠移入，圖片縮放 &raquo;</a>
       
     </p>
   </footer>
@@ -183,7 +229,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/book-review-2/" 
+	data-href="http://rx836.github.com/blog/facebook-page-tab-scroll/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -253,8 +299,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/book-review-2/';
-        var disqus_url = 'http://rx836.github.com/blog/book-review-2/';
+        var disqus_identifier = 'http://rx836.github.com/blog/facebook-page-tab-scroll/';
+        var disqus_url = 'http://rx836.github.com/blog/facebook-page-tab-scroll/';
         var disqus_script = 'embed.js';
       
     (function () {
