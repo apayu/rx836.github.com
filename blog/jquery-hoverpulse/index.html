@@ -9,7 +9,7 @@
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="jQuery寫了一陣子，直到最近有個需求想要做到滑鼠移到圖片上，會微微的放大，才發現，這個很常看到的效果，我到今天都還沒實做過 幸運的是&#8230;，就因為這麼晚才實做，所以早就有人把plugin寫好了，我所用的是hoverpulse，用法相當相當的簡單 首先是HTML部份 &lt;div&gt &hellip;">
+  <meta name="description" content="jQuery寫了一陣子，直到最近有個需求，想要做到滑鼠移到圖片上，會微微的放大，才發現這個很常看到的效果，我到今天都還沒實做過 幸運的是&#8230;，就因為這麼晚才實做，所以早就有人把plugin寫好了，我所用的是hoverpulse，用法相當相當的簡單 首先是HTML部份 &lt;div&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,7 +107,7 @@
   </header>
 
 
-<div class="entry-content"><p>jQuery寫了一陣子，直到最近有個需求想要做到滑鼠移到圖片上，會微微的放大，才發現，這個很常看到的效果，我到今天都還沒實做過</p>
+<div class="entry-content"><p>jQuery寫了一陣子，直到最近有個需求，想要做到滑鼠移到圖片上，會微微的放大，才發現這個很常看到的效果，我到今天都還沒實做過</p>
 
 <!--more-->
 
@@ -128,7 +128,7 @@
 });
 </code></pre>
 
-<p>這樣就完成了！當然甚麼值都沒有給的情況下是用預設值，但如果想要設定放大的幅度和變化的速度，可以這樣寫</p>
+<p>這樣就完成了！當然什麼值都沒有給的情況下是用default，但如果想要設定放大的幅度和變化的速度，可以這樣寫</p>
 
 <pre><code>$(document).ready(function() {
     $('div img').hoverpulse({
@@ -140,7 +140,7 @@
 
 <p>真的簡單又明瞭&#8230;</p>
 
-<p>當然如果你想加入點擊的事件，你可以這樣寫</p>
+<p>那如果你想加入點擊的事件，你可以這樣寫</p>
 
 <pre><code>$(document).ready(function() {
     $('div img').hoverpulse().each(function() {
@@ -200,7 +200,7 @@ return this.hover(
 );
 </code></pre>
 
-<p>在移入部份其中會先將包覆img的div z-index值設到100</p>
+<p>在移入部份會先將包覆img的div z-index值設到100</p>
 
 <pre><code>$this.parent().css('z-index', opts.zIndexActive);
 </code></pre>
@@ -215,7 +215,7 @@ return this.hover(
         }, opts.speed);
 </code></pre>
 
-<p>其實就是把你設定的size放大兩倍，並且為了有感覺從圖片中間點開始放大的效果，所以把位置top和left給予負值，等於整張圖片往左上角移動，速度是<strong>opts.speed</strong>，而圖片的position:absolute在整個plugin就已經設定了</p>
+<p>這段code其實就是把你設定的size放大兩倍，並且為了有感覺從圖片中間點開始放大的效果，所以把位置top和left給予負值，等於整張圖片往左上角移動，速度是<strong>opts.speed</strong>，而圖片的position:absolute在整個plugin一開始就已經設定了</p>
 
 <pre><code>// parent must be relatively positioned
 this.parent().css({ position: 'relative' });
@@ -225,7 +225,7 @@ this.css({ position: 'absolute', top: 0, left: 0 });
 
 <p>可以看到包覆img的div是relatively，img是absolute</p>
 
-<p>而移開以後只是把值恢復成原來的設定</p>
+<p>而滑鼠移開之後只是把值恢復成原來的設定</p>
 
 <pre><code>var $this = $(this);
 var size = $this.data('hoverpulse.size');
@@ -241,7 +241,7 @@ $this.stop().animate({
 });
 </code></pre>
 
-<p>把top和left歸為0，height和width恢復成原來的大小，z-index也設回預設值1</p>
+<p>將top和left歸為0，height和width恢復成原來的大小，z-index也設回預設值1</p>
 
 <p>當然預設值在plugin的最下面可以自己修改</p>
 
