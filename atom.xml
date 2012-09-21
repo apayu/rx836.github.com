@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-22T01:38:03+08:00</updated>
+  <updated>2012-09-22T01:44:01+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,16 +18,16 @@
     <link href="http://rx836.github.com/blog/vmware-windows-8/"/>
     <updated>2012-09-21T17:37:00+08:00</updated>
     <id>http://rx836.github.com/blog/vmware-windows-8</id>
-    <content type="html"><![CDATA[<p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是為了只要前100名完成的人就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
+    <content type="html"><![CDATA[<p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
 
 <!--more-->
 
 
-<p>當然前提你可以要先把VM給裝起來，網路上<a href="http://blog.xuite.net/yh96301/blog/53120472" target="_blank">教學還蠻多的</a>，這篇就不多加闡述</p>
+<p>當然前提你必須先把VM給裝起來，網路上<a href="http://blog.xuite.net/yh96301/blog/53120472" target="_blank">教學還蠻多的</a>，這篇就不多加闡述</p>
 
-<p>首先要先去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM</p>
+<p>一開始首先要去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM</p>
 
-<p>開啟VM完以後點選『Create a New Virtual Machine』</p>
+<p>點選『Create a New Virtual Machine』</p>
 
 <p><img src="https://lh5.googleusercontent.com/-otZSLwijQ0U/UFyf4XwFSyI/AAAAAAAABkc/FNIph_J7JHs/s657/1.jpg"  /></p>
 
