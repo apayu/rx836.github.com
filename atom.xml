@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-21T00:37:26+08:00</updated>
+  <updated>2012-09-22T01:38:03+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]]]></title>
+    <link href="http://rx836.github.com/blog/vmware-windows-8/"/>
+    <updated>2012-09-21T17:37:00+08:00</updated>
+    <id>http://rx836.github.com/blog/vmware-windows-8</id>
+    <content type="html"><![CDATA[<p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是為了只要前100名完成的人就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
+
+<!--more-->
+
+
+<p>當然前提你可以要先把VM給裝起來，網路上<a href="http://blog.xuite.net/yh96301/blog/53120472" target="_blank">教學還蠻多的</a>，這篇就不多加闡述</p>
+
+<p>首先要先去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM</p>
+
+<p>開啟VM完以後點選『Create a New Virtual Machine』</p>
+
+<p><img src="https://lh5.googleusercontent.com/-otZSLwijQ0U/UFyf4XwFSyI/AAAAAAAABkc/FNIph_J7JHs/s657/1.jpg"  /></p>
+
+<p>接著點選『I will Install the operating system later』</p>
+
+<p><img src="https://lh5.googleusercontent.com/-xeiYkr8fudM/UFyf8en7F3I/AAAAAAAABls/swewFIyCkmE/s659/2.jpg"  /></p>
+
+<p>作業系統選擇『Microsoft Windows』，接著再選擇『Windows 7』，因為VM沒有Windows 8可以選</p>
+
+<p><img src="https://lh3.googleusercontent.com/-_Co3ZTLZ3bA/UFygAqiA5CI/AAAAAAAABm0/UixQmOxkxiU/s657/3.jpg"  /></p>
+
+<p>輸入虛擬機器的名稱，這邊取名『Windows 8』，再選擇要存放的路徑，然後點選『Next』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-KRAurNJRvLk/UFygBDKQoII/AAAAAAAABm8/YwQLP43AyUQ/s658/4.jpg"  /></p>
+
+<p>接著設定虛擬硬碟的大小，並且設定『Store virtual disk as a single files』，將虛擬硬碟存成一個資料夾，按下『Next』</p>
+
+<p><img src="https://lh3.googleusercontent.com/-EO-2MBYjcEc/UFygBr6bmvI/AAAAAAAABnI/5JjNmotkvEw/s656/5.jpg"  /></p>
+
+<p>再來準備要來設定記憶體和掛載Windows 8映像檔，選擇『Customize Hardware…』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-nbky8ASN0ck/UFygBw-01wI/AAAAAAAABnE/dxdanwgZcjg/s660/6.jpg"  /></p>
+
+<p>調整記憶體，一般來說建議為實體記憶體的3分之1至2分之1之間，官方網站是說至少要1G</p>
+
+<p><img src="https://lh5.googleusercontent.com/-btOEe35_ToI/UFygCdtCjwI/AAAAAAAABnY/P6JM4vBI9Nc/s656/7.jpg"  /></p>
+
+<p>接著選擇『New CD/DVD』的選項，再點『Use ISO image file:』，再按「Browse…」來選擇映像檔</p>
+
+<p><img src="https://lh6.googleusercontent.com/-WxOQRqu4nF8/UFygCyaFR9I/AAAAAAAABng/uQc30JVd0Oo/s658/8.jpg"  /></p>
+
+<p>選擇好映像檔以後就按下『Close』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-v5ICos8qLUQ/UFygC-8bVNI/AAAAAAAABnc/9rp1LeXOO8I/s661/9.jpg"  /></p>
+
+<p>最後按下『Finish』就新增了一個虛擬機器</p>
+
+<p><img src="https://lh6.googleusercontent.com/-5QYBPsTQNwA/UFyf4pX33AI/AAAAAAAABkg/5rhtXII6H1s/s657/10.jpg"  /></p>
+
+<p>按下『Play virtual machine』，開始來進行安裝囉！</p>
+
+<p><img src="https://lh5.googleusercontent.com/-G0VcZ28gqbA/UFyf4laUtKI/AAAAAAAABkk/jvgPOqPFaOE/s659/11.jpg"  /></p>
+
+<p>因為篇幅有點過長，為了方便閱讀，所以分成兩篇來記錄</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.xuite.net/yh96301/blog/58183942" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(一)</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQuery] hoverpulse 滑鼠移入，圖片縮放]]></title>
@@ -165,6 +233,34 @@ $this.stop().animate({
 </code></pre>
 
 <p>這樣plugin整個看起來就很清楚明瞭，也可以自己嘗試動手寫寫看喔！</p>
+
+<h2>後記</h2>
+
+<p>Aaron大大說plugin寫法有點舊，而且有點囉嗦XD，他建議我新的寫法，在此特別筆記下來</p>
+
+<p>HTML</p>
+
+<pre><code>&lt;img src="a.jpg" class="resize" width="250"/&gt;
+</code></pre>
+
+<p>jQuery</p>
+
+<pre><code>var current_h = null;
+var current_w = null;
+
+$('.resize').hover(
+    function(){
+        current_h = $(this, 'img').height;
+        current_w = $(this, 'img').width;
+        $(this).stop(true, false).animate({width: (current_w * 1.3), height: (current_h * 1.3)}, 300);
+    },
+    function(){
+        $(this).stop(true, false).animate({width: current_w + 'px', height: current_h + 'px'}, 300);
+    }
+);
+</code></pre>
+
+<p>不要用plugin，直接寫，至於top和left在自己加上就好，跟前面的plugin道理一樣</p>
 
 <p>參考資料:</p>
 
@@ -1882,33 +1978,6 @@ config.$navPrev.on( 'click', function() {
 <p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
 
 <p>如果有不一樣的想法，歡迎一起討論</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Jquery] AJAX cache讓IE一直抓到舊資料]]></title>
-    <link href="http://rx836.github.com/blog/jquery-ajax-cache/"/>
-    <updated>2012-05-29T01:24:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-ajax-cache</id>
-    <content type="html"><![CDATA[<p>說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了</p>
-
-<!--more-->
-
-
-<p>但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$.ajax()做AJAX的資料取得，目的是希望User每按一次按鈕就取得一筆新的資料</p>
-
-<p>誰知道在Firefox和Chrome都正常，唯獨只有IE不管怎麼取都是舊的資料，後來看了<a href="http://blog.darkthread.net/" target="_blank">黑暗執行緒</a>的<a href="http://blog.darkthread.net/post-2009-06-03-about-jquery-ajax-cache-option.aspx" target="_blank">關於jQuery AJAX cache參數</a>我才知道，要在$.axaj()裡的參數cache設成false</p>
-
-<pre><code>cache: false
-</code></pre>
-
-<p>這樣就不會再抓cache而讓資料怎麼抓都抓不到新的</p>
-
-<p>另外還有這篇關於GET與POST的文章也很值得一讀!</p>
-
-<p><a href="http://blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
-
-<p>以上如有錯誤或疑問，歡迎一起討論喔!</p>
 ]]></content>
   </entry>
   
