@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[jQuery] 快樂的Happy.js - Rx836</title>
+  <title>[JavaScript] 當函式需要傳遞很多參數時 - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="今天看到有人分享Happy.js，因為名字的關係引起了我的興趣，好奇的想說用這個plugin是不是寫起來很快樂，所以決定來玩一下 事實證明&#8230;，其實並沒有特別Happy，當然這只是取名字而已XD，Happy.js其實是一套驗證表單的plugin，官方網站強調的是它相當的輕量且容易擴充， &hellip;">
+  <meta name="description" content="有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230; 不過，有個方法可以解決這個困擾，就是設定值物件，平常我們使用函式可能會這樣寫 function add( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/jquery-happyjs">
+  <link rel="canonical" href="http://rx836.github.com/blog/javascript-simple-object">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">[jQuery] 快樂的Happy.js</h1>
+      <h1 class="entry-title">[JavaScript] 當函式需要傳遞很多參數時</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-09-13T15:45:00+08:00" pubdate data-updated="true">Sep 13<span>th</span>, 2012</time>
+<time datetime="2012-09-25T00:06:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,99 +107,36 @@
   </header>
 
 
-<div class="entry-content"><p>今天看到有人分享<a href="http://happyjs.com/" target="_blank">Happy.js</a>，因為名字的關係引起了我的興趣，好奇的想說用這個plugin是不是寫起來很快樂，所以決定來玩一下</p>
+<div class="entry-content"><p>有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230;</p>
 
 <!--more-->
 
 
-<p>事實證明&#8230;，其實並沒有特別Happy，當然這只是取名字而已XD，Happy.js其實是一套驗證表單的plugin，官方網站強調的是它相當的輕量且容易擴充，而實際檔案大概也只有3kb左右，用法也相當的簡單</p>
+<p>不過，有個方法可以解決這個困擾，就是<strong>設定值物件</strong>，平常我們使用函式可能會這樣寫</p>
 
-<p>首先一樣是引入js部分，分別是jQuery和happy.js還有happy.methods.js，可以直接下載<a href="http://github.com/andyet/Happy.js/zipball/master" target="_blank">範例檔</a></p>
-
-<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script src="happy.js"&gt;&lt;/script&gt;
-&lt;script src="happy.methods.js"&gt;&lt;/script&gt;
+<pre><code>function add(parameter1, parameter2, parameter3, parameter4, parameter5) {...}
 </code></pre>
 
-<p>happy.js是主程式，happy.methods.js是一些擴充的驗證方法</p>
+<p>可是參數一堆真的會又臭又長，還要注意先後順序，但如果改成這樣寫</p>
 
-<p>接著是HTML部分</p>
-
-<pre><code>&lt;form id="awesomeForm" action="/lights/camera" method="post"&gt;
-  &lt;input id="yourName" type="text" name="name" /&gt;
-  &lt;input id="email" type="text" name="email" class="" /&gt;
-  &lt;input type="submit" value="go" /&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>再來就是js部分</p>
-
-<pre><code>$('#awesomeForm').isHappy({
-    fields: {
-      '#yourName': {
-        required: true,
-        message: '忘記填姓名囉！'
-      },
-      '#email': {
-        required: true,
-        message: '忘記填Email囉！',
-        test: happy.email 
-      }
-    }
-  });
-</code></pre>
-
-<p>其實蠻好理解的，主要就是fields裡面要設置需要驗證的欄位，例如像#yourName和#email的input，然後message就是看要出現甚麼錯誤訊息，test這個屬性就是指擴充的驗證方法部分，就是寫在剛剛引用的happy.methods.js裡面，所以你可以除了要求不能空白以外，還可以進一步要求Email的格式</p>
-
-<p>而出現的錯誤訊息就如同下面所示</p>
-
-<pre><code>&lt;span id=​"textInput1_unhappy" class=​"unhappyMessage"&gt;​忘記填Email囉！​&lt;/span&gt;
-</code></pre>
-
-<p>這個span會在發生錯誤時添加，而你會看到類別就叫<strong>unhappyMessage</strong>，作者就說他是認真的，不是開玩笑的，因為這真的不是個很開心的訊息 XD</p>
-
-<p>所以你可以添加一些unhappyMessage的CSS樣式讓錯誤訊息更顯著</p>
-
-<p>當然這不一定只能用在表單部分，如果有時候不是一個FORM而是用div所拼湊的表單，要做AJAX的效果，就可以把預設的submitButton改掉，如下所示</p>
-
-<pre><code>$('#awesomeForm').isHappy({
-    fields: {
-      '#yourName': {
-        required: true,
-        message: '忘記填姓名囉！'
-      },
-      '#email': {
-        required: true,
-        message: '忘記填Email囉！',
-        test: happy.email 
-      }
-    },
-    submitButton:'#subBtn' //自己制定的submitButton
-});
-</code></pre>
-
-<p>不過我後來發現一個小問題，如果是制定的話，再驗證完後要觸發AJAX卻不知道要寫哪裡，所以我後來自己稍微修改了一下原始碼，把要加到AJAX的部分寫在happy.js裡面</p>
-
-<pre><code>function handleSubmit() {
-  var errors = false, i, l;
-  for (i = 0, l = fields.length; i &lt; l; i += 1) {
-    if (!fields[i].testValid(true)) {
-      errors = true;
-    }
-  }
-  if (errors) {
-    if (isFunction(config.unHappy)) config.unHappy();
-    return false;
-  } else if (config.testMode) {
-    if (window.console) console.warn('would have submitted');
-    return false;
-  } else {          //這個else是後來自己加上去的
-                    //代表通過驗證以後要做的事情，把AJAX的code寫在這裡
-  }                 //
+<pre><code>var conf = {
+    parameter1: "a",
+    parameter2: "b",
+    parameter3: "c"
 }
+
+add(conf)
 </code></pre>
 
-<p>當然也可以把這個修改寫得更好看一些，但我用最快的方式來補充這個AJAX的需求</p>
+<p>將參數全部包成一個物件，再傳給函式，不僅可以不用記住先後順序，還可以安全的略過選用參數，也更容易閱讀和維護，當然新增和移除也比較方便</p>
+
+<p>不過缺點就是要特別去知道參數的名稱，而且物件的屬性名稱並無法做最小化處理</p>
+
+<p>不過當你要設定一堆CSS樣式的時候，或是個人資料很多很繁雜的時候，這個方法倒是很好用的:)</p>
+
+<p>參考資料:</p>
+
+<p>JavaScript 設計模式</p>
 
 <p>如有錯誤，歡迎指正</p>
 </div>
@@ -235,17 +172,15 @@
   
 
 
-<time datetime="2012-09-13T15:45:00+08:00" pubdate data-updated="true">Sep 13<span>th</span>, 2012</time>
+<time datetime="2012-09-25T00:06:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2012</time>
       
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/facebook-world-hack/" title="Previous Post: [Facebook] Facebook Developer World HACK 2012">&laquo; [Facebook] Facebook Developer World HACK 2012</a>
+        <a class="basic-alignment left" href="/blog/2-vmware-windows-8/" title="Previous Post: [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]">&laquo; [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]</a>
       
-      
-        <a class="basic-alignment right" href="/blog/introduce-compass/" title="Next Post: [CSS] 用了就無法回頭的Compass">[CSS] 用了就無法回頭的Compass &raquo;</a>
       
     </p>
   </footer>
@@ -256,7 +191,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/jquery-happyjs/" 
+	data-href="http://rx836.github.com/blog/javascript-simple-object/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -326,8 +261,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/jquery-happyjs/';
-        var disqus_url = 'http://rx836.github.com/blog/jquery-happyjs/';
+        var disqus_identifier = 'http://rx836.github.com/blog/javascript-simple-object/';
+        var disqus_url = 'http://rx836.github.com/blog/javascript-simple-object/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[jQuery] 快樂的Happy.js - Rx836</title>
+  <title>[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二] - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="今天看到有人分享Happy.js，因為名字的關係引起了我的興趣，好奇的想說用這個plugin是不是寫起來很快樂，所以決定來玩一下 事實證明&#8230;，其實並沒有特別Happy，當然這只是取名字而已XD，Happy.js其實是一套驗證表單的plugin，官方網站強調的是它相當的輕量且容易擴充， &hellip;">
+  <meta name="description" content="延續上一篇簡單容易，如何在VM裝Windows 8來玩玩[二]，已經在VM裡面建立一個Windows 8的虛擬機器，現在就來開始安裝系統部分 按下『Play virtual machine』以後，就會出現啟動畫面 接著選擇時區『Chinese(Traditional, Taiwan)』， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/jquery-happyjs">
+  <link rel="canonical" href="http://rx836.github.com/blog/2-vmware-windows-8">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">[jQuery] 快樂的Happy.js</h1>
+      <h1 class="entry-title">[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-09-13T15:45:00+08:00" pubdate data-updated="true">Sep 13<span>th</span>, 2012</time>
+<time datetime="2012-09-22T14:33:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,99 +107,82 @@
   </header>
 
 
-<div class="entry-content"><p>今天看到有人分享<a href="http://happyjs.com/" target="_blank">Happy.js</a>，因為名字的關係引起了我的興趣，好奇的想說用這個plugin是不是寫起來很快樂，所以決定來玩一下</p>
+<div class="entry-content"><p>延續上一篇<a href="http://blog.rx836.tw/blog/vmware-windows-8/" target="_blank">簡單容易，如何在VM裝Windows 8來玩玩[二]</a>，已經在VM裡面建立一個Windows 8的虛擬機器，現在就來開始安裝系統部分</p>
 
 <!--more-->
 
 
-<p>事實證明&#8230;，其實並沒有特別Happy，當然這只是取名字而已XD，Happy.js其實是一套驗證表單的plugin，官方網站強調的是它相當的輕量且容易擴充，而實際檔案大概也只有3kb左右，用法也相當的簡單</p>
+<p>按下『Play virtual machine』以後，就會出現啟動畫面</p>
 
-<p>首先一樣是引入js部分，分別是jQuery和happy.js還有happy.methods.js，可以直接下載<a href="http://github.com/andyet/Happy.js/zipball/master" target="_blank">範例檔</a></p>
+<p><img src="https://lh5.googleusercontent.com/-81H0bQbP8eA/UFyf5ev3TRI/AAAAAAAABko/QD4Y-GM2JIk/s903/12.jpg"  /></p>
 
-<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script src="happy.js"&gt;&lt;/script&gt;
-&lt;script src="happy.methods.js"&gt;&lt;/script&gt;
-</code></pre>
+<p>接著選擇時區『Chinese(Traditional, Taiwan)』，語言只有英文可以選擇</p>
 
-<p>happy.js是主程式，happy.methods.js是一些擴充的驗證方法</p>
+<p><img src="https://lh5.googleusercontent.com/-fBKS1fGZlDk/UFyf5xfRyCI/AAAAAAAABk0/G6XGhTOasN0/s903/13.jpg"  /></p>
 
-<p>接著是HTML部分</p>
+<p>按下『Install now』</p>
 
-<pre><code>&lt;form id="awesomeForm" action="/lights/camera" method="post"&gt;
-  &lt;input id="yourName" type="text" name="name" /&gt;
-  &lt;input id="email" type="text" name="email" class="" /&gt;
-  &lt;input type="submit" value="go" /&gt;
-&lt;/form&gt;
-</code></pre>
+<p><img src="https://lh6.googleusercontent.com/-Ax-DPQyxZbc/UFyf57uCRkI/AAAAAAAABk4/rU9T-QxMrro/s903/14.jpg"  /></p>
 
-<p>再來就是js部分</p>
+<p>接著會要你輸入產品序號，這時候去之前的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>下載頁，裡面有產品序號(Product key)</p>
 
-<pre><code>$('#awesomeForm').isHappy({
-    fields: {
-      '#yourName': {
-        required: true,
-        message: '忘記填姓名囉！'
-      },
-      '#email': {
-        required: true,
-        message: '忘記填Email囉！',
-        test: happy.email 
-      }
-    }
-  });
-</code></pre>
+<p><img src="https://lh3.googleusercontent.com/-_d98Gtqnc3c/UFyf6UuvMiI/AAAAAAAABlA/p7N_61eQRGI/s860/15.jpg"  /></p>
 
-<p>其實蠻好理解的，主要就是fields裡面要設置需要驗證的欄位，例如像#yourName和#email的input，然後message就是看要出現甚麼錯誤訊息，test這個屬性就是指擴充的驗證方法部分，就是寫在剛剛引用的happy.methods.js裡面，所以你可以除了要求不能空白以外，還可以進一步要求Email的格式</p>
+<p>貼到序號框裡面</p>
 
-<p>而出現的錯誤訊息就如同下面所示</p>
+<p><img src="https://lh4.googleusercontent.com/-oAOyYz0Eokg/UFyf7GrLx5I/AAAAAAAABlU/y3q_YM9AnO8/s903/16.jpg"  /></p>
 
-<pre><code>&lt;span id=​"textInput1_unhappy" class=​"unhappyMessage"&gt;​忘記填Email囉！​&lt;/span&gt;
-</code></pre>
+<p>勾選『I accept the license terms』，再點『Next』</p>
 
-<p>這個span會在發生錯誤時添加，而你會看到類別就叫<strong>unhappyMessage</strong>，作者就說他是認真的，不是開玩笑的，因為這真的不是個很開心的訊息 XD</p>
+<p><img src="https://lh6.googleusercontent.com/-NfbwsgksSwI/UFyf7X8MNPI/AAAAAAAABlQ/6-uWUpfp9xc/s903/17.jpg"  /></p>
 
-<p>所以你可以添加一些unhappyMessage的CSS樣式讓錯誤訊息更顯著</p>
+<p>點選『Custom: Install Windows only』</p>
 
-<p>當然這不一定只能用在表單部分，如果有時候不是一個FORM而是用div所拼湊的表單，要做AJAX的效果，就可以把預設的submitButton改掉，如下所示</p>
+<p><img src="https://lh6.googleusercontent.com/-Qkt-zeuyf_8/UFyf7r9zNMI/AAAAAAAABlY/bY8Szlo-ibA/s903/18.jpg"  /></p>
 
-<pre><code>$('#awesomeForm').isHappy({
-    fields: {
-      '#yourName': {
-        required: true,
-        message: '忘記填姓名囉！'
-      },
-      '#email': {
-        required: true,
-        message: '忘記填Email囉！',
-        test: happy.email 
-      }
-    },
-    submitButton:'#subBtn' //自己制定的submitButton
-});
-</code></pre>
+<p>直接點『Next』</p>
 
-<p>不過我後來發現一個小問題，如果是制定的話，再驗證完後要觸發AJAX卻不知道要寫哪裡，所以我後來自己稍微修改了一下原始碼，把要加到AJAX的部分寫在happy.js裡面</p>
+<p><img src="https://lh3.googleusercontent.com/-kCW-XYnx_SI/UFyf8Qalj0I/AAAAAAAABl0/9LZ4DNqWYeQ/s903/19.jpg"  /></p>
 
-<pre><code>function handleSubmit() {
-  var errors = false, i, l;
-  for (i = 0, l = fields.length; i &lt; l; i += 1) {
-    if (!fields[i].testValid(true)) {
-      errors = true;
-    }
-  }
-  if (errors) {
-    if (isFunction(config.unHappy)) config.unHappy();
-    return false;
-  } else if (config.testMode) {
-    if (window.console) console.warn('would have submitted');
-    return false;
-  } else {          //這個else是後來自己加上去的
-                    //代表通過驗證以後要做的事情，把AJAX的code寫在這裡
-  }                 //
-}
-</code></pre>
+<p>開始安裝囉！</p>
 
-<p>當然也可以把這個修改寫得更好看一些，但我用最快的方式來補充這個AJAX的需求</p>
+<p><img src="https://lh6.googleusercontent.com/-JFPiO0_vHPo/UFyf8jljh2I/AAAAAAAABlo/X-ZpEfFo5_0/s903/20.jpg"  /></p>
+
+<p>安裝好後進入設定畫面，這裡可以選擇電腦名稱和背景顏色，設定好後一樣按『Next』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-J08q-P3IoD0/UFyf9qrlE9I/AAAAAAAABl8/ZslAPvFNBmg/s903/21.jpg"  /></p>
+
+<p>直接選預設值吧！</p>
+
+<p><img src="https://lh4.googleusercontent.com/-bZOZ2SRntoc/UFyf-HMrfOI/AAAAAAAABmE/a0fcU4Ir3WY/s903/22.jpg"  /></p>
+
+<p>Windows 8可以整合Windows Live Messenger或MSN帳號</p>
+
+<p><img src="https://lh5.googleusercontent.com/-YjC4_qJCucU/UFyf_MjclJI/AAAAAAAABmc/B7zdknpEmD8/s903/23.jpg"  /></p>
+
+<p>輸入密碼</p>
+
+<p><img src="https://lh5.googleusercontent.com/-e7oYsxfVAaM/UFyf_E60dPI/AAAAAAAABmU/pa5aoZVvM_4/s903/24.jpg"  /></p>
+
+<p>確認一些基本資訊，直接點選『Next』</p>
+
+<p><img src="https://lh5.googleusercontent.com/-pZErLzdxSCY/UFyf_4S1FmI/AAAAAAAABmk/cYWchJUWOaU/s903/25.jpg"  /></p>
+
+<p>大功告成！趕快玩玩看吧！</p>
+
+<p><img src="https://lh3.googleusercontent.com/-62nz20DXDUM/UFygAq0QQ6I/AAAAAAAABmw/wkowZ3oShG8/s903/26.jpg"  /></p>
+
+<p>試玩了一下發現真的蠻多東西要重新適應的，包括操作介面和使用習慣，至於好不好用就是見仁見智了:)</p>
+
+<h2>後記</h2>
+
+<p>一定會有人疑惑要怎麼關機，請將滑鼠移到右下角會出現『Settings』，裡面有個『Power』再點『Shut down』即可</p>
+
+<p>其他還有IE10大家也可以玩玩看</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.xuite.net/yh96301/blog/58184430" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(二)</a></p>
 
 <p>如有錯誤，歡迎指正</p>
 </div>
@@ -235,17 +218,17 @@
   
 
 
-<time datetime="2012-09-13T15:45:00+08:00" pubdate data-updated="true">Sep 13<span>th</span>, 2012</time>
+<time datetime="2012-09-22T14:33:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2012</time>
       
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/facebook-world-hack/" title="Previous Post: [Facebook] Facebook Developer World HACK 2012">&laquo; [Facebook] Facebook Developer World HACK 2012</a>
+        <a class="basic-alignment left" href="/blog/vmware-windows-8/" title="Previous Post: [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]">&laquo; [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]</a>
       
       
-        <a class="basic-alignment right" href="/blog/introduce-compass/" title="Next Post: [CSS] 用了就無法回頭的Compass">[CSS] 用了就無法回頭的Compass &raquo;</a>
+        <a class="basic-alignment right" href="/blog/javascript-simple-object/" title="Next Post: [JavaScript] 當函式需要傳遞很多參數時">[JavaScript] 當函式需要傳遞很多參數時 &raquo;</a>
       
     </p>
   </footer>
@@ -256,7 +239,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/jquery-happyjs/" 
+	data-href="http://rx836.github.com/blog/2-vmware-windows-8/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -326,8 +309,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/jquery-happyjs/';
-        var disqus_url = 'http://rx836.github.com/blog/jquery-happyjs/';
+        var disqus_identifier = 'http://rx836.github.com/blog/2-vmware-windows-8/';
+        var disqus_url = 'http://rx836.github.com/blog/2-vmware-windows-8/';
         var disqus_script = 'embed.js';
       
     (function () {

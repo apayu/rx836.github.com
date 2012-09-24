@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-22T01:44:01+08:00</updated>
+  <updated>2012-09-25T00:50:24+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,132 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] 當函式需要傳遞很多參數時]]></title>
+    <link href="http://rx836.github.com/blog/javascript-simple-object/"/>
+    <updated>2012-09-25T00:06:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-simple-object</id>
+    <content type="html"><![CDATA[<p>有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230;</p>
+
+<!--more-->
+
+
+<p>不過，有個方法可以解決這個困擾，就是<strong>設定值物件</strong>，平常我們使用函式可能會這樣寫</p>
+
+<pre><code>function add(parameter1, parameter2, parameter3, parameter4, parameter5) {...}
+</code></pre>
+
+<p>可是參數一堆真的會又臭又長，還要注意先後順序，但如果改成這樣寫</p>
+
+<pre><code>var conf = {
+    parameter1: "a",
+    parameter2: "b",
+    parameter3: "c"
+}
+
+add(conf)
+</code></pre>
+
+<p>將參數全部包成一個物件，再傳給函式，不僅可以不用記住先後順序，還可以安全的略過選用參數，也更容易閱讀和維護，當然新增和移除也比較方便</p>
+
+<p>不過缺點就是要特別去知道參數的名稱，而且物件的屬性名稱並無法做最小化處理</p>
+
+<p>不過當你要設定一堆CSS樣式的時候，或是個人資料很多很繁雜的時候，這個方法倒是很好用的:)</p>
+
+<p>參考資料:</p>
+
+<p>JavaScript 設計模式</p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]]]></title>
+    <link href="http://rx836.github.com/blog/2-vmware-windows-8/"/>
+    <updated>2012-09-22T14:33:00+08:00</updated>
+    <id>http://rx836.github.com/blog/2-vmware-windows-8</id>
+    <content type="html"><![CDATA[<p>延續上一篇<a href="http://blog.rx836.tw/blog/vmware-windows-8/" target="_blank">簡單容易，如何在VM裝Windows 8來玩玩[二]</a>，已經在VM裡面建立一個Windows 8的虛擬機器，現在就來開始安裝系統部分</p>
+
+<!--more-->
+
+
+<p>按下『Play virtual machine』以後，就會出現啟動畫面</p>
+
+<p><img src="https://lh5.googleusercontent.com/-81H0bQbP8eA/UFyf5ev3TRI/AAAAAAAABko/QD4Y-GM2JIk/s903/12.jpg"  /></p>
+
+<p>接著選擇時區『Chinese(Traditional, Taiwan)』，語言只有英文可以選擇</p>
+
+<p><img src="https://lh5.googleusercontent.com/-fBKS1fGZlDk/UFyf5xfRyCI/AAAAAAAABk0/G6XGhTOasN0/s903/13.jpg"  /></p>
+
+<p>按下『Install now』</p>
+
+<p><img src="https://lh6.googleusercontent.com/-Ax-DPQyxZbc/UFyf57uCRkI/AAAAAAAABk4/rU9T-QxMrro/s903/14.jpg"  /></p>
+
+<p>接著會要你輸入產品序號，這時候去之前的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>下載頁，裡面有產品序號(Product key)</p>
+
+<p><img src="https://lh3.googleusercontent.com/-_d98Gtqnc3c/UFyf6UuvMiI/AAAAAAAABlA/p7N_61eQRGI/s860/15.jpg"  /></p>
+
+<p>貼到序號框裡面</p>
+
+<p><img src="https://lh4.googleusercontent.com/-oAOyYz0Eokg/UFyf7GrLx5I/AAAAAAAABlU/y3q_YM9AnO8/s903/16.jpg"  /></p>
+
+<p>勾選『I accept the license terms』，再點『Next』</p>
+
+<p><img src="https://lh6.googleusercontent.com/-NfbwsgksSwI/UFyf7X8MNPI/AAAAAAAABlQ/6-uWUpfp9xc/s903/17.jpg"  /></p>
+
+<p>點選『Custom: Install Windows only』</p>
+
+<p><img src="https://lh6.googleusercontent.com/-Qkt-zeuyf_8/UFyf7r9zNMI/AAAAAAAABlY/bY8Szlo-ibA/s903/18.jpg"  /></p>
+
+<p>直接點『Next』</p>
+
+<p><img src="https://lh3.googleusercontent.com/-kCW-XYnx_SI/UFyf8Qalj0I/AAAAAAAABl0/9LZ4DNqWYeQ/s903/19.jpg"  /></p>
+
+<p>開始安裝囉！</p>
+
+<p><img src="https://lh6.googleusercontent.com/-JFPiO0_vHPo/UFyf8jljh2I/AAAAAAAABlo/X-ZpEfFo5_0/s903/20.jpg"  /></p>
+
+<p>安裝好後進入設定畫面，這裡可以選擇電腦名稱和背景顏色，設定好後一樣按『Next』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-J08q-P3IoD0/UFyf9qrlE9I/AAAAAAAABl8/ZslAPvFNBmg/s903/21.jpg"  /></p>
+
+<p>直接選預設值吧！</p>
+
+<p><img src="https://lh4.googleusercontent.com/-bZOZ2SRntoc/UFyf-HMrfOI/AAAAAAAABmE/a0fcU4Ir3WY/s903/22.jpg"  /></p>
+
+<p>Windows 8可以整合Windows Live Messenger或MSN帳號</p>
+
+<p><img src="https://lh5.googleusercontent.com/-YjC4_qJCucU/UFyf_MjclJI/AAAAAAAABmc/B7zdknpEmD8/s903/23.jpg"  /></p>
+
+<p>輸入密碼</p>
+
+<p><img src="https://lh5.googleusercontent.com/-e7oYsxfVAaM/UFyf_E60dPI/AAAAAAAABmU/pa5aoZVvM_4/s903/24.jpg"  /></p>
+
+<p>確認一些基本資訊，直接點選『Next』</p>
+
+<p><img src="https://lh5.googleusercontent.com/-pZErLzdxSCY/UFyf_4S1FmI/AAAAAAAABmk/cYWchJUWOaU/s903/25.jpg"  /></p>
+
+<p>大功告成！趕快玩玩看吧！</p>
+
+<p><img src="https://lh3.googleusercontent.com/-62nz20DXDUM/UFygAq0QQ6I/AAAAAAAABmw/wkowZ3oShG8/s903/26.jpg"  /></p>
+
+<p>試玩了一下發現真的蠻多東西要重新適應的，包括操作介面和使用習慣，至於好不好用就是見仁見智了:)</p>
+
+<h2>後記</h2>
+
+<p>一定會有人疑惑要怎麼關機，請將滑鼠移到右下角會出現『Settings』，裡面有個『Power』再點『Shut down』即可</p>
+
+<p>其他還有IE10大家也可以玩玩看</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.xuite.net/yh96301/blog/58184430" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(二)</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]]]></title>
@@ -1920,64 +2046,6 @@ config.$navPrev.on( 'click', function() {
 <p>其實有很多Jquery Plugin的套用，如果有用到顯示/隱藏的切換，都要注意到先後順序的問題</p>
 
 <p>以上如有問題，歡迎一起討論</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[讀後心得] 預見未來]]></title>
-    <link href="http://rx836.github.com/blog/book-review-3/"/>
-    <updated>2012-06-11T01:23:00+08:00</updated>
-    <id>http://rx836.github.com/blog/book-review-3</id>
-    <content type="html"><![CDATA[<p>作者:王伯達</p>
-
-<p>出版者:天下遠見出版股份有限公司</p>
-
-<!--more-->
-
-
-<p>作者王伯達的書之前已經有讀過一本，那本叫做『民國100年大泡沫』，我喜歡讀他的書是因為他不跟隨主流，常用宏觀的角度來看整件事情，而且是從很多角度來看，我們常說，歷史是不斷重覆上演，我非常認同這句話，但並不是說同樣的人事物一直重覆，而是會用不同的形式，但一樣的道理，再一次的發生</p>
-
-<p>這本『遇見未來』，其實主要並不是在講以後會發生甚麼事情，而是教你如何去 <strong>想</strong> 接下來會發生甚麼事情，有點類似激發你的腦力激盪</p>
-
-<p>前面先用九個章節來介紹如何去思考未來的走向，一個一個章節去說明思考步驟，後面章節則是利用前面所教的步驟，去開始預測他自己認為的未來</p>
-
-<p>在現在資訊爆炸的時代，其實我們能接收的資訊都是一樣的多，一樣的快，資訊不對稱的情形只會越來越少，而不會越來越多，但如何去區別你與別人的不同?我覺得能在現有的資訊下，去畫出未來的藍圖，是非常具有競爭能力的一項技能，看看那些百年企業，別的不說，光說小時候最常聽到的柯達(Kodak)，誰會知道他會破產呢?如果柯達的那些高階經理人，要是有掌握到未來的關鍵藍圖，會走到這個地步嗎?</p>
-
-<p>我覺得預測未來並不是什麼特異功能，相反的只要你努力，只要去認真的思考， 認真的去整理資訊，閱讀大量的書籍，這是真的可以實現的</p>
-
-<p>這是學校所沒有教的東西，但是卻可以影響你的人生，有興趣的人可以讀一讀這本書，會有不一樣的收穫</p>
-
-<p>如有不一樣的見解，歡迎提出一起討論</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[讀後心得] 疼痛,才叫青春]]></title>
-    <link href="http://rx836.github.com/blog/book-review-2/"/>
-    <updated>2012-06-10T03:06:00+08:00</updated>
-    <id>http://rx836.github.com/blog/book-review-2</id>
-    <content type="html"><![CDATA[<p>作者:金蘭都</p>
-
-<p>出版者:圓神出版社有限公司</p>
-
-<!--more-->
-
-
-<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
-
-<h2>人生時鐘:你現在的人生是幾點?</h2>
-
-<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所提的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
-
-<h2>你想要新人獎還是主角獎?</h2>
-
-<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
-
-<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
-
-<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
-
-<p>如果有不一樣的想法，歡迎一起討論</p>
 ]]></content>
   </entry>
   
