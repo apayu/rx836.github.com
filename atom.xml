@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-25T14:39:07+08:00</updated>
+  <updated>2012-09-25T15:13:32+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -65,7 +65,7 @@ add(conf)
 
 <h3>2012/09/25 補充</h3>
 
-<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具&#8230;，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
+<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具&#8230;，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
 
 <p>按下『Play virtual machine』以後，就會出現啟動畫面</p>
 
@@ -159,7 +159,7 @@ add(conf)
 
 <h3>2012/09/25 補充</h3>
 
-<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具&#8230;，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
+<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具&#8230;，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
 
 <p>點選『Create a New Virtual Machine』</p>
 
