@@ -14,6 +14,10 @@ categories:
 
 一開始首先要去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM
 
+### 2012/09/25 補充
+
+更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具...，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考
+
 點選『Create a New Virtual Machine』
 
 <img src="https://lh5.googleusercontent.com/-otZSLwijQ0U/UFyf4XwFSyI/AAAAAAAABkc/FNIph_J7JHs/s657/1.jpg"  />

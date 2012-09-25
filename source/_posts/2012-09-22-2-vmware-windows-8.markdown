@@ -10,6 +10,10 @@ categories:
 
 <!--more-->
 
+### 2012/09/25 補充
+
+更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具...，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考
+
 按下『Play virtual machine』以後，就會出現啟動畫面
 
 <img src="https://lh5.googleusercontent.com/-81H0bQbP8eA/UFyf5ev3TRI/AAAAAAAABko/QD4Y-GM2JIk/s903/12.jpg"  />
