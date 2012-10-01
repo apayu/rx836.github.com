@@ -16,13 +16,41 @@ categories:
 
 <img src="https://lh3.googleusercontent.com/-RHqEXjgftnI/UGl5vs7qyaI/AAAAAAAABoU/tKc440KDt5Y/s872/a.jpg" />
 
-可以把他們全部放入你的專案裡面，但引入到html時，css和js就只要選擇有沒有壓縮過的版本就好，然後接下來就可以開始使用了！但請注意還是要引入jQuery喔，接下來就是介紹一些使用範例
+可以把他們全部放入你的專案裡面，但引入到html時，css和js就只要選擇有沒有壓縮過的版本就好
+
+	<!DOCTYPE html>
+	<html>
+		<head>	
+			<meta charset="UTF-8" />
+			<title>example</title>
+			<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">		
+		</head>
+		<body>
+			<script src="http://code.jquery.com/jquery-latest.js"></script>
+			<script src="js/bootstrap.min.js"></script>		
+		</body>
+	</html>
+
+然後接下來就可以開始使用了！但請注意還是要引入jQuery喔，接下來就是介紹一些使用範例
 
 ## Base CSS examples
 
 ### Buttons
+	
+	<button class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button> 
+	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button> 
+	<button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Danger <span class="caret"></span></button> 
+	<button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Warning <span class="caret"></span></button> 
+	<button class="btn btn-success dropdown-toggle" data-toggle="dropdown">Success <span class="caret"></span></button> 
+	<button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Info <span class="caret"></span></button> 
+	<button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">Inverse <span class="caret"></span></button>
 
-	<button class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button> <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button> <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Danger <span class="caret"></span></button> <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Warning <span class="caret"></span></button> <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">Success <span class="caret"></span></button> <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Info <span class="caret"></span></button> <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">Inverse <span class="caret"></span></button>
+可以看到只要加上相對應的class以後，就可以秀出相對應的外觀，例如紅色的按鈕class預設為**btn-danger**
 
+<img src="https://lh4.googleusercontent.com/-phDQRFC7UXQ/UGnPIeFHgVI/AAAAAAAABoo/VL2VekJjEVA/s617/123.jpg" />
+
+特別注意的是，按鈕旁邊有個倒三角形是用css做出來的，也同樣只要在span加一個class為caret即可
+
+### Progress bars
 
 
