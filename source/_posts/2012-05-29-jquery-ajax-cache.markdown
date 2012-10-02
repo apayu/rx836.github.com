@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Jquery] AJAX cache讓IE一直抓到舊資料"
+title: "[jQuery] AJAX cache讓IE一直抓到舊資料"
 date: 2012-05-29 01:24
 comments: true
 categories: 

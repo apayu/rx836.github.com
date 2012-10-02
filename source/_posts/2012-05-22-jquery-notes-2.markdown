@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Jquery]jquery使用筆記(二)-選擇器*開罐器"
+title: "[jQuery]jquery使用筆記(二)-選擇器*開罐器"
 date: 2012-05-22 00:20
 comments: true
 categories: 

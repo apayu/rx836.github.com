@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Jquery] jScrollPane的使用與注意"
+title: "[jQuery] jScrollPane的使用與注意"
 date: 2012-06-11 18:26
 comments: true
 categories: 

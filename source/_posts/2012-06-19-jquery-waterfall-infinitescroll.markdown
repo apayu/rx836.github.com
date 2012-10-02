@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Jquery] 做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll"
+title: "[jQuery] 做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll"
 date: 2012-06-19 00:27
 comments: true
 categories: 

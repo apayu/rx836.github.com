@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Jquery]jquery使用筆記(一)-開始*出發*起航"
+title: "[jQuery]jquery使用筆記(一)-開始*出發*起航"
 date: 2012-05-18 12:17
 comments: true
 categories: 
