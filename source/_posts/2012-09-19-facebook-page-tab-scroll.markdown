@@ -3,7 +3,7 @@ layout: post
 title: "[Facebook] 如何讓Page Tab的Scroll bar消失以及使用錨點?"
 date: 2012-09-19 23:53
 comments: true
-categories: 
+categories: Facebook
 ---
 
 常常會看到粉絲團裡面的頁籤活動(Page Tab)，都會出現scroll bar，老實說其實有點醜，所以這邊記錄一下怎樣讓Page Tab消失，讓你的頁籤內容有多長，整個Page Tab就有多長，另外順便記錄一下Facebook錨點的問題

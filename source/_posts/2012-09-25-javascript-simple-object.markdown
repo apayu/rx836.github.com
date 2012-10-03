@@ -3,7 +3,7 @@ layout: post
 title: "[JavaScript] 當函式需要傳遞很多參數時"
 date: 2012-09-25 00:06
 comments: true
-categories: 
+categories: JavaScript
 ---
 
 有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花...

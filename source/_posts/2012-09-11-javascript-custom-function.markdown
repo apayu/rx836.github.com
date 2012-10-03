@@ -3,7 +3,7 @@ layout: post
 title: "[JavaScript] 建立物件的第三招-自訂建構式函式"
 date: 2012-09-11 00:43
 comments: true
-categories: 
+categories: JavaScript
 ---
 
 在前面一篇文章<a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a>，裡面有講到關於物件的建立，不過礙於篇幅，只談到**實字模式(literal patterns)**和**建構式函式(constructor functions)**，但其實還有一個建立物件的方法，那就是**自訂建構式函式**

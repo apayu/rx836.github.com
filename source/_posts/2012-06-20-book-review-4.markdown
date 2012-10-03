@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[讀後心得] 社群效應:小圈圈如何改變世界"
+title: "[好書分享] 社群效應:小圈圈如何改變世界"
 date: 2012-06-20 23:13
 comments: true
-categories: 
+categories: 好書分享
 ---
 作者:Paul Adams
 

@@ -3,7 +3,7 @@ layout: post
 title: "[Octopress]如何開啟 Disqus與和常見的指令"
 date: 2012-04-27 02:12
 comments: true
-categories: 
+categories: Octopress
 ---
 
 經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來

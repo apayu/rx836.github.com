@@ -3,7 +3,7 @@ layout: post
 title: "[Facebook]關於FB access tokens過期的處理"
 date: 2012-05-04 22:45
 comments: true
-categories: 
+categories: Facebook
 ---
 Facebook已經在5/1號移除offline_access的權限，也就是說之後將不再支援offline_access，小弟我英文不是很好，官方文件沒辦法翻譯完全，但我會將我的解法跟大家分享
 <!--more-->

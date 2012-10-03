@@ -3,7 +3,7 @@ layout: post
 title: "[jQuery] 做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll"
 date: 2012-06-19 00:27
 comments: true
-categories: 
+categories: jQuery
 ---
 
 相信已經有很多人已經看過<a href="http://pinterest.com/" target="_blank">pinterest</a>這個網站的介面效果，是利用一個稱為<a href="http://www.21andy.com/blog/20120527/2041.html" target="_blank">Waterfall</a>，中文叫做瀑布流布局的效果，原理是算出周圍元素的寬和高，去排列畫面的布局，利用絕對定位的方式來達到隨著螢幕大小來變動整個版面

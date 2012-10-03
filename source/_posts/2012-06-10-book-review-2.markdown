@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[讀後心得] 疼痛,才叫青春"
+title: "[好書分享] 疼痛,才叫青春"
 date: 2012-06-10 03:06
 comments: true
-categories: 
+categories: 好書分享
 ---
 作者:金蘭都
 

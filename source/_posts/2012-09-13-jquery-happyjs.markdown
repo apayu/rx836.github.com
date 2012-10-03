@@ -3,7 +3,7 @@ layout: post
 title: "[jQuery] 快樂的Happy.js"
 date: 2012-09-13 15:45
 comments: true
-categories: 
+categories: jQuery
 ---
 
 今天看到有人分享<a href="http://happyjs.com/" target="_blank">Happy.js</a>，因為名字的關係引起了我的興趣，好奇的想說用這個plugin是不是寫起來很快樂，所以決定來玩一下

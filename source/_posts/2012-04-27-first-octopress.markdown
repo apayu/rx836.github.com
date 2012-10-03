@@ -3,7 +3,7 @@ layout: post
 title: "[Octopress]出生以來第一次使用Octopress for windows"
 date: 2012-04-27 01:55
 comments: true
-categories: 
+categories: Octopress
 ---
 終於...
 

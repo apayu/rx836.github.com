@@ -3,7 +3,7 @@ layout: post
 title: "[jQuery] $.data原理"
 date: 2012-08-30 14:10
 comments: true
-categories: 
+categories: jQuery
 ---
 
 今天在看別人寫的jQuery Plugin，發現 **this[expando]** 這個寫法，好奇心驅使下，決定一探究竟

@@ -3,7 +3,7 @@ layout: post
 title: "[Facebook] 如何建立facebook App 且取得FB ID"
 date: 2012-06-16 00:36
 comments: true
-categories: 
+categories: Facebook
 ---
 
 這裡將會紀錄如何建立一個Facebook App，並且讓User授權應用程式，最後取得FB ID來當會員資料或是參加活動的ID識別

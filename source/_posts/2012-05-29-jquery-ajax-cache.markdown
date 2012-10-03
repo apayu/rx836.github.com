@@ -3,7 +3,7 @@ layout: post
 title: "[jQuery] AJAX cache讓IE一直抓到舊資料"
 date: 2012-05-29 01:24
 comments: true
-categories: 
+categories: jQuery
 ---
 說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了
 <!--more-->

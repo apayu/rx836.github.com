@@ -3,7 +3,7 @@ layout: post
 title: "[CSS] 做網站非學不可的Twitter Bootstrap"
 date: 2012-10-01 18:41
 comments: true
-categories: 
+categories: CSS jQuery
 ---
 
 <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>越來越多人在用了，當然最主要的原因就是他可以幫助網頁開發者快速的開發出，有不錯外觀的web或是mobile apps，這對於許多不擅長外觀設計的網頁工程師們(包括我)，可以說是省下不少煩惱Layout的麻煩，不僅如此，針對按鈕、表格、或是排版，Bootstrap都幫你處理的好好，只要簡單幾個步驟引入即可

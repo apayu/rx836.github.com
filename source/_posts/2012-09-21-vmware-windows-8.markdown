@@ -3,7 +3,7 @@ layout: post
 title: "[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]"
 date: 2012-09-21 17:37
 comments: true
-categories: 
+categories: 學習筆記
 ---
 
 因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM

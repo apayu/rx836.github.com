@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[jQuery] Facebook xxx hours ago的時間生成"
+title: "[jQuery] Facebook XXX hours ago的時間生成"
 date: 2012-10-03 01:36
 comments: true
-categories: 
+categories: jQuery
 ---
 
 <a href="http://timeago.yarp.com/" target="_blank">timeago</a>是一套可以快速生成過去發生時間的jQuery plugin，大家應該對於Facebook文字框下方的『xxx hours ago』不會陌生，留言訊息不再只是單純的『x年x月x日 x時x分x秒』，而是可以很貼心的將時間換算給使用者知道，『喔~ 原來這則留言在幾分鐘之前』，這種對User experience來說其實是相當的加分，要實作其實也不難，網路上也有plugin可以方便使用，就趕快來看看如何做出這種效果吧！

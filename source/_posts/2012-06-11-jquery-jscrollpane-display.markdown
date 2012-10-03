@@ -3,7 +3,7 @@ layout: post
 title: "[jQuery] jScrollPane的使用與注意"
 date: 2012-06-11 18:26
 comments: true
-categories: 
+categories: jQuery
 ---
 有些時候客戶會不想要HTML內建的Scrollbar，所以特地去找了一個Jquery Plugin來使用，但注意，如果有使用到display:none，或是類似lightbox視窗效果，要注意一下先後執行的問題
 

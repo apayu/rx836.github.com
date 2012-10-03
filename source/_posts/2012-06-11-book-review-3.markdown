@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[讀後心得] 預見未來"
+title: "[好書分享] 預見未來"
 date: 2012-06-11 01:23
 comments: true
-categories: 
+categories: 好書分享
 ---
 作者:王伯達
 

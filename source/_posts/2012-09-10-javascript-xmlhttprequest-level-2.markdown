@@ -3,7 +3,7 @@ layout: post
 title: "[HTML5] 淺談XMLHttpRequest Level 2"
 date: 2012-09-10 15:24
 comments: true
-categories: 
+categories: HTML5
 ---
 
 HTML5近來可說是越來越火紅，在諸多優點裡面，最讓開發者期待的就是他的標準化，讓各家瀏覽器不再是各自為王，各自為政，這對於網頁開發者來說，可以說是一大利多(前提是微軟真正的統一?不過看IE10頗有那個味道)，今天要來看的是新的標準化-**XMLHttpReuest Level 2**

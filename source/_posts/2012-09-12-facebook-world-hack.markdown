@@ -3,7 +3,7 @@ layout: post
 title: "[Facebook] Facebook Developer World HACK 2012"
 date: 2012-09-12 23:42
 comments: true
-categories: 
+categories: Facebook
 ---
 
 因為本身的工作是開發Facebook相關社群APP，所以長期下來有在follow<a href="https://developers.facebook.com/blog/" target="_blank">Facebook Developer Blog</a>，看到<a href="https://developers.facebook.com/blog/post/2012/08/08/facebook-developer-world-hack-2012/" target="_blank">Facebook Developer World HACK 2012</a>原本以為應該跟以前一樣，只有幾個大城市才有舉辦，沒想到仔細一看，竟然有Taipei Taiwan！著實嚇了我一大跳，想當然爾是趕緊報名參加

@@ -3,7 +3,7 @@ layout: post
 title: "[Octopress]如何設定自己的Domain與異地編輯設定"
 date: 2012-05-20 01:35
 comments: true
-categories: 
+categories: Octopress
 ---
 
 用了將近一個月的Octopress，才慢慢覺得開始步上軌道，好笑的是我竟然誤以為因為Domain沒有設定，才會導致Google搜尋不到我的文章...，更慘的是，匆忙的利用網銀買了一組自己的Domain回來後，才發現原來我淺到連DNS都不會設定...

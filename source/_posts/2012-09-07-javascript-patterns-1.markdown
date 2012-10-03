@@ -3,7 +3,7 @@ layout: post
 title: "[JavaScript] 談物件, 實字與建構式"
 date: 2012-09-07 23:57
 comments: true
-categories: 
+categories: JavaScript
 ---
 
 最近在看一本書叫做**JavaScript 設計模式**，英文名稱是JavaScript Patterns，裡面很完整的告訴你如何寫好JavaScript，他不適合初學者看，因為他並不會從很基礎的觀念開始談起，但他卻非常適合像我這種已經知道基礎，並且正要開始往上爬的人閱讀

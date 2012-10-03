@@ -3,7 +3,7 @@ layout: post
 title: "[jQuery]jquery使用筆記(一)-開始*出發*起航"
 date: 2012-05-18 12:17
 comments: true
-categories: 
+categories: jQuery
 ---
 從08年那時候剛接觸到jquery，到現在每天都在使用他，總覺得好像不為自己寫一下筆記，也有點不踏實，而且重點是，我好像沒什麼"材料"，可以貢獻在廣大的技術社群裡面，只能從我會一點皮毛的地方(Jquery)，開始寫起真正的程式筆記心得，希望我的Blog就從這開始發芽....，最後長成大樹(疑?)
 <!--more-->

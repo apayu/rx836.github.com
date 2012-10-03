@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[讀後心得] 只剩下一個角落的繁華"
+title: "[好書分享] 只剩下一個角落的繁華"
 date: 2012-05-01 21:38
 comments: true
-categories: 
+categories: 好書分享
 ---
 
 作者:陳文茜

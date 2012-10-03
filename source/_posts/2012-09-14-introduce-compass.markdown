@@ -3,7 +3,7 @@ layout: post
 title: "[CSS] 用了就無法回頭的Compass"
 date: 2012-09-14 15:24
 comments: true
-categories: 
+categories: CSS
 ---
 
 <a href="http://compass-style.org/" target="_blank">Compass</a>這個CSS的framework已經有一陣子了，但我始終沒有去好好了解他，印象中只知道他可以很快的寫出CSS，但可以多快其實我一直無法感受，再加上還要用Ruby的環境，感覺學習曲線就很高，也覺得現在CSS寫的也好好的，就沒多加注意，直到...

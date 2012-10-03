@@ -3,7 +3,7 @@ layout: post
 title: "[jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin"
 date: 2012-09-06 12:04
 comments: true
-categories: 
+categories: CSS jQuery
 ---
 
 在網路上看到<a href="http://tympanus.net/Development/BookBlock/" target="_blank">翻書效果</a>感覺蠻有趣的，是利用<a href="http://www.w3schools.com/css3/css3_transitions.asp" target="_blank">CSS3 Transitions</a>和<a href="http://www.w3schools.com/css3/css3_3dtransforms.asp" target="_blank">CSS3 3D Transforms</a>的效果實現，這裡我是用<a href="http://tympanus.net/codrops/2012/09/03/bookblock-a-content-flip-plugin/" target="_blank">Flip Plugin</a>

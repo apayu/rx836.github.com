@@ -3,7 +3,7 @@ layout: post
 title: "[學習筆記] 全世界最會說故事的平台-TED"
 date: 2012-09-15 16:00
 comments: true
-categories: 
+categories: 學習筆記
 ---
 
 如果這是人生最後的十八分鐘，我想講什麼？這是去年受邀擔任TEDxTaipei講者-倒立先生黃明正，為了克服緊張，問自己的問題，同時也是為了講一個清楚重大的人生經驗，所需要準備的心境
