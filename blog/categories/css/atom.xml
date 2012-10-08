@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CSS | Rx836]]></title>
+  <link href="http://rx836.github.com/blog/categories/css/atom.xml" rel="self"/>
+  <link href="http://rx836.github.com/"/>
+  <updated>2012-10-08T18:46:03+08:00</updated>
+  <id>http://rx836.github.com/</id>
+  <author>
+    <name><![CDATA[阿帕]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 做網站非學不可的Twitter Bootstrap]]></title>
+    <link href="http://rx836.github.com/blog/twitter-bootstrap/"/>
+    <updated>2012-10-01T18:41:00+08:00</updated>
+    <id>http://rx836.github.com/blog/twitter-bootstrap</id>
+    <content type="html"><![CDATA[<p><a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>越來越多人在用了，當然最主要的原因就是他可以幫助網頁開發者快速的開發出，有不錯外觀的web或是mobile apps，這對於許多不擅長外觀設計的網頁工程師們(包括我)，可以說是省下不少煩惱Layout的麻煩，不僅如此，針對按鈕、表格、或是排版，Bootstrap都幫你處理的好好，只要簡單幾個步驟引入即可</p>
+
+<!--more-->
+
+
+<p>首先要先下載<a href="http://twitter.github.com/bootstrap/getting-started.html" target="_blank">Bootstrap</a>，你可以選擇compil過後的，或是選擇source版本，Bootstrap的css是用Less寫的，所以如果你想修改細節部分，可以下載source版本，一般來說直接用compiled版本即可</p>
+
+<p>接著就會看到有三個資料夾(css &amp; js &amp; img)</p>
+
+<p><img src="https://lh3.googleusercontent.com/-RHqEXjgftnI/UGl5vs7qyaI/AAAAAAAABoU/tKc440KDt5Y/s872/a.jpg" /></p>
+
+<p>可以把他們全部放入你的專案裡面，但引入到html時，css和js就只要選擇有沒有壓縮過的版本就好</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;  
+        &lt;meta charset="UTF-8" /&gt;
+        &lt;title&gt;example&lt;/title&gt;
+        &lt;link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;        
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+        &lt;script src="js/bootstrap.min.js"&gt;&lt;/script&gt;     
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>然後接下來就可以開始使用了！但請注意還是要引入jQuery喔，接下來就是介紹一些使用範例</p>
+
+<h2>Base CSS examples</h2>
+
+<h3>Buttons</h3>
+
+<p>加上相對應的class以後，就可以秀出相對應的外觀，例如紅色的按鈕class預設為<strong>btn-danger</strong>，Bootstrap很貼心的讓我們不再只有單調的按鈕顏色</p>
+
+<pre><code>&lt;button class="btn dropdown-toggle" data-toggle="dropdown"&gt;Action &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"&gt;Action &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"&gt;Danger &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"&gt;Warning &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-success dropdown-toggle" data-toggle="dropdown"&gt;Success &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-info dropdown-toggle" data-toggle="dropdown"&gt;Info &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"&gt;Inverse &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
+</code></pre>
+
+<p><img src="https://lh4.googleusercontent.com/-phDQRFC7UXQ/UGnPIeFHgVI/AAAAAAAABoo/VL2VekJjEVA/s617/123.jpg" /></p>
+
+<p>特別注意的是，按鈕旁邊有個倒三角形是用css做出來的，也同樣只要在span加一個class為caret即可</p>
+
+<h3>Progress bars</h3>
+
+<p>進度條只要外面包一層div給予相對的class，裡面再加一個div並且命名class為<strong>bar</strong>，<strong>width</strong>就是進度條的長度，這樣就可以用js來修改width顯示目前的進度狀況</p>
+
+<pre><code>&lt;div class="progress progress-info" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 10%"&gt;&lt;/div&gt; &lt;/div&gt; 
+&lt;div class="progress progress-success" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 20%"&gt;&lt;/div&gt; &lt;/div&gt; 
+&lt;div class="progress progress-warning" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 30%"&gt;&lt;/div&gt; &lt;/div&gt; 
+&lt;div class="progress progress-danger" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 40%"&gt;&lt;/div&gt; &lt;/div&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-CWMKYBHmiBk/UGpPoPagCQI/AAAAAAAABo8/o7uycvmJotE/s926/123.jpg" /></p>
+
+<p>更酷的是，bar的樣式也可以更改，而不是只有醜醜的實心bar</p>
+
+<pre><code>&lt;div class="progress progress-striped active"&gt; 
+&lt;div class="bar" style="width: 40%;"&gt;&lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
+
+<p>只要修改class為<strong>progress progress-striped active</strong>，就會有條紋的進度條，而且還加上css3的animation動畫</p>
+
+<h3>Button groups</h3>
+
+<p>也可以將button設為一組群組，就會有群組的樣式</p>
+
+<pre><code>&lt;div class="btn-group" style="margin: 9px 0;"&gt; 
+&lt;button class="btn"&gt;Left&lt;/button&gt; 
+&lt;button class="btn"&gt;Middle&lt;/button&gt; 
+&lt;button class="btn"&gt;Right&lt;/button&gt; 
+&lt;/div&gt;
+</code></pre>
+
+<p><img src="https://lh4.googleusercontent.com/-iCtFSRwd7UU/UGpYAp2xh6I/AAAAAAAABpQ/BVql_Jk9oto/s187/4.jpg" /></p>
+
+<p>用一個class名為<strong>btn-group</strong>的div包住button就可以</p>
+
+<h3>Horizontal and vertical tabs (with dropdown menus)</h3>
+
+<p>還在煩惱下拉選單嗎?</p>
+
+<pre><code>&lt;ul class="nav nav-tabs"&gt; 
+&lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt; 
+&lt;li&gt;&lt;a href="#"&gt;Portfolio&lt;/a&gt;&lt;/li&gt; 
+&lt;li class="dropdown"&gt; &lt;a class="dropdown-toggle" data-toggle="dropdown" href="#"&gt;Services &lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt; 
+&lt;ul class="dropdown-menu"&gt; &lt;li&gt;&lt;a href="#"&gt;Link 1&lt;/a&gt;&lt;/li&gt; 
+&lt;li&gt;&lt;a href="#"&gt;Link 2&lt;/a&gt;&lt;/li&gt; 
+&lt;/ul&gt; &lt;/li&gt; 
+&lt;/ul&gt;
+</code></pre>
+
+<p>只要用ul li包好，並且加上相對應的class，就可以輕鬆做tab+下拉選單</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ix3_DDLLdWg/UGpZ2cBhygI/AAAAAAAABpY/wzbaSwCDMb8/s303/5.jpg" /></p>
+
+<h3>Navigation bar component</h3>
+
+<p>看到這邊就覺得實在太強大了...</p>
+
+<pre><code>&lt;div class="navbar"&gt; 
+    &lt;div class="navbar-inner"&gt; 
+        &lt;div class="container"&gt; &lt;!-- brand class is from bootstrap.css --&gt; 
+            &lt;a class="brand" href="#"&gt;My Brand&lt;/a&gt; 
+            &lt;div class="nav-collapse"&gt; 
+                &lt;ul class="nav"&gt; 
+                    &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt; 
+                    &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;&lt;/li&gt; 
+                    &lt;li class="dropdown"&gt; &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Dropdown &lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt; 
+                        &lt;ul class="dropdown-menu"&gt; 
+                            &lt;li&gt;&lt;a href="#"&gt;Action 1&lt;/a&gt;&lt;/li&gt; 
+                            &lt;li&gt;&lt;a href="#"&gt;Action 2&lt;/a&gt;&lt;/li&gt; 
+                            &lt;li class="divider"&gt;&lt;/li&gt; 
+                            &lt;li class="nav-header"&gt;Header&lt;/li&gt; 
+                            &lt;li&gt;&lt;a href="#"&gt;Separated action&lt;/a&gt;&lt;/li&gt; 
+                        &lt;/ul&gt; 
+                    &lt;/li&gt; 
+                &lt;/ul&gt; 
+                &lt;form class="navbar-search pull-left"&gt; 
+                &lt;input type="text" class="search-query" placeholder="Search"&gt; 
+                &lt;/form&gt; 
+            &lt;/div&gt;&lt;!-- /.nav-collapse --&gt; 
+        &lt;/div&gt; 
+    &lt;/div&gt;&lt;!-- /navbar-inner --&gt; 
+&lt;/div&gt;&lt;!-- /navbar --&gt;
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-VBBWEKhYfzk/UGpba2H2VSI/AAAAAAAABpg/2KVa_kC0xX0/s647/6.jpg" /></p>
+
+<h3>Using the layout and built-in grid system</h3>
+
+<p>你也可以用他們的grid system</p>
+
+<pre><code>&lt;div class="container"&gt; 
+    &lt;div class="row"&gt; 
+        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
+        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
+        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
+    &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
+
+<p>預設是 12-column，940 pixel-centered layout</p>
+
+<h3>Responsive design</h3>
+
+<p>連最近很紅的responsive design也有，只要引入他們的<strong>bootstrap-responsive.css</strong>這個css檔案</p>
+
+<h3>Typeahead example</h3>
+
+<p>裡面也有plugin可以使用，例如下拉提示選單</p>
+
+<pre><code>&lt;input type="text" class="span3" style="margin: 0 auto;" 
+data-provide="typeahead" 
+data-items="4" 
+data-source='["Apples","Bananas","Cherries","Dates","Eggplants","Figs","Grapes", "Honeydew","Kiwi","Mango","Peaches","Plums","Raspberries","Strawberries","Watermelon","Zucchini"]'&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-y8ELDPfXQp4/UGpdfcl99uI/AAAAAAAABpo/A_l1HiZDL2I/s223/7.jpg" /></p>
+
+<p>還有很多使用範例，可以直接去<a href="http://twitter.github.com/bootstrap/index.html" target="_blank">官網看</a>，這樣大概看了一下教學範例，一個網站可能需要的元素，Bootstrap幾乎通通都有，網頁開發人員可以更專注在開發網頁這個事情上面</p>
+
+<p>只是不知道，會不會到後來，大家的網站都長得很像:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.adobe.com/devnet/html5/articles/twitter-bootstrap.html" target="_blank">Styling your apps with Twitter Bootstrap </a></p>
+
+<p><a href="http://www.w3resource.com/twitter-bootstrap/tutorial.php" target="_blank">Twitter Bootstrap tutorial</a></p>
+
+<p><a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Twitter Bootstrap</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 用了就無法回頭的Compass]]></title>
+    <link href="http://rx836.github.com/blog/introduce-compass/"/>
+    <updated>2012-09-14T15:24:00+08:00</updated>
+    <id>http://rx836.github.com/blog/introduce-compass</id>
+    <content type="html"><![CDATA[<p><a href="http://compass-style.org/" target="_blank">Compass</a>這個CSS的framework已經有一陣子了，但我始終沒有去好好了解他，印象中只知道他可以很快的寫出CSS，但可以多快其實我一直無法感受，再加上還要用Ruby的環境，感覺學習曲線就很高，也覺得現在CSS寫的也好好的，就沒多加注意，直到...</p>
+
+<!--more-->
+
+
+<p>我在看<a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/css-sprite-sheets-best-practices-tools-and-helpful-applications/">CSS Sprite Sheets: Best Practices, Tools and Helpful Applications</a>這篇文章時，文章尾巴的Tools to Help又提到了Compass，說可以自動生成Sprite，讓我好奇心作祟的打算真正看一下什麼是Compass</p>
+
+<p>沒想到，一用之下，驚為天人！我想這是很多數剛開始接觸Compass的人共同心聲吧，直接來看看怎麼使用吧！</p>
+
+<p>首先要先把Ruby的環境安裝起來，不過因為我是用windows，所以要特別下載<a href="http://www.ruby-lang.org/zh_TW/downloads/" target="_blank">for windows</a>用的，安裝好了以後你可以到Ruby的資料夾底下有個Start Command Prompt with Ruby，開啟命令列，接著安裝Compass</p>
+
+<pre><code>gem update --system #先更新gem
+gem install compass #安裝Compass
+</code></pre>
+
+<p>安裝完Compass以後，Sass也會自動安裝起來，這邊要稍微提一下甚麼是<a href="http://sass-lang.com/" target="_blank">Sass</a></p>
+
+<p><strong>Sass(Syntactically Awesome Stylesheets)</strong>其實就是一個拿來寫CSS樣式表的程式語言，然而還有一個因為CSS3而延伸的語法叫做Scss，兩個寫法有些微的差異，同樣的效果，寫法如下</p>
+
+<p>Scss:</p>
+
+<pre><code>table.hl {
+  margin: 2em 0;
+  td.ln {
+    text-align: right;
+  }
+}
+</code></pre>
+
+<p>Sass:</p>
+
+<pre><code>table.hl
+  margin: 2em 0
+  td.ln
+    text-align: right
+</code></pre>
+
+<p>可以看到Scss的寫法比較像我們一般看到的CSS，而Sass強調的是更精簡、快速的寫法，所以是利用縮排來呈現</p>
+
+<p>Sass/Scss的特點有可以利用變數，巢狀或是函式和繼承等，至於用法可以參考<a href="http://sass-lang.com/" target="_blank">官網</a>的首頁有簡單的範例，這邊就不提太多</p>
+
+<p>回到Compass，其實Compass也就是一個Sass的Framework，已經把原本要寫很多次的樣式都打包好，剛剛講到安裝完Compass以後現在就來開始使用他</p>
+
+<p>首先建立一個Compass專案</p>
+
+<pre><code>compass creat mycompass
+</code></pre>
+
+<p>執行成功以後，會看到底下有三個資料夾，一個檔案</p>
+
+<pre><code>.sass-cache //快取檔案
+sass // sass檔/scss檔
+stylesheets //css檔
+config.rb //設定檔
+</code></pre>
+
+<p>接著你就可以開始編寫Sass檔，除了剛剛說的Sass/Scss的寫法以外，還可以利用Compass強大的功能，例如要做一個reset檔案首先新建一個reset.scss，然後在裡面直接加上以下這段</p>
+
+<pre><code>@import "compass/reset";
+</code></pre>
+
+<p>接著可以用compile的方式</p>
+
+<pre><code>compass compile [資料夾名稱或路徑]
+</code></pre>
+
+<p>或是用監控的方式</p>
+
+<pre><code>compass watch [資料夾名稱或路徑]
+</code></pre>
+
+<p>我比較喜歡用watch方式，因為這樣改完直接存檔就會自動compile，reset.scss compile以後，就會看到stylesheets資料夾底下就出現reset.css的檔案了！</p>
+
+<p>其他還有像文章開頭提到的自動生成Sprite，到底有多神奇，來看看怎麼做</p>
+
+<p>首先準備兩張圖，一張是facebook的icon，另一張是plurk的icon，如下圖</p>
+
+<p><img src="https://lh6.googleusercontent.com/-fwPpZzFYl9I/UFL6CnNIZ1I/AAAAAAAABgE/t7FFyDSX-UU/s243/1.jpg" /></p>
+
+<p>接著這邊就是要注意的地方了，一開始我將圖放到icons的資料夾裡面，並且跟sass和stylesheets資料夾都擺在同一層</p>
+
+<p><img src="https://lh5.googleusercontent.com/-0AQioXIX4X8/UFL6qh2A2SI/AAAAAAAABgM/cuUTLF7UcOs/s660/2.jpg" /></p>
+
+<p>接著我就建一個sprite.scss的檔案並且在裡面加上</p>
+
+<pre><code>@import "icons/*.png";
+@include all-icons-sprites;  
+</code></pre>
+
+<p>可是後來發現怎麼compile都沒有用，一直出現以下錯誤訊息</p>
+
+<pre><code>No files were found in the load path matching "icons/*.png". Your current load
+paths
+</code></pre>
+
+<p>後來我才發現原來在設定檔config.rb裡面有指定圖檔的擺放位置</p>
+
+<pre><code>http_path = "/"
+css_dir = "stylesheets"
+sass_dir = "sass"
+images_dir = "images" //&lt;--指定圖檔位置
+javascripts_dir = "javascripts"
+</code></pre>
+
+<p>原來是要把icons的資料夾擺在images底下才行，重新指定好位置以後，再一次的compile，就會發現，Compass已經合好圖了！而且連CSS都寫好了！</p>
+
+<pre><code>.icons-sprite, .icons-facebook, .icons-plurk {
+  background: url('/images/icons-s78250ef0c5.png') no-repeat;
+}
+
+.icons-facebook {
+  background-position: 0 0;
+}
+
+.icons-plurk {
+  background-position: 0 -48px;
+}
+</code></pre>
+
+<p>太強大了！難怪很多人用了都回不去了，因為小弟我也是剛學沒多久，所以還有很多更強大的功能就要請各位自己去發掘了</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.visioncan.com/2011/compass-sass-your-css/" target="_blank">用強大的compass+sass寫css</a></p>
+
+<p><a href="http://kw0006667.wordpress.com/compass-%E2%80%93-%E4%BD%BF%E7%94%A8-ruby-compass-on-windows/" target="_blank">Compass – 使用 Ruby + compass on Windows</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin]]></title>
+    <link href="http://rx836.github.com/blog/jquery-css3-flip-plugin/"/>
+    <updated>2012-09-06T12:04:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-css3-flip-plugin</id>
+    <content type="html"><![CDATA[<p>在網路上看到<a href="http://tympanus.net/Development/BookBlock/" target="_blank">翻書效果</a>感覺蠻有趣的，是利用<a href="http://www.w3schools.com/css3/css3_transitions.asp" target="_blank">CSS3 Transitions</a>和<a href="http://www.w3schools.com/css3/css3_3dtransforms.asp" target="_blank">CSS3 3D Transforms</a>的效果實現，這裡我是用<a href="http://tympanus.net/codrops/2012/09/03/bookblock-a-content-flip-plugin/" target="_blank">Flip Plugin</a></p>
+
+<!--more-->
+
+
+<p>因為已經有<a href="http://tympanus.net/Development/BookBlock/BookBlock.zip" target="_blank">範例檔</a>可以用，所以就不詳細講太多程式碼細節，首先先載入CSS和Modernizr，這兩隻檔案在範例檔裡面都有，分別在css和ja的資料夾裡面</p>
+
+<pre><code>&lt;link rel="stylesheet" type="text/css" href="style.css" /&gt;
+&lt;link rel="stylesheet" type="text/css" href="custom.css" /&gt;
+&lt;script type="text/javascript" src="modernizr.custom.79639.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>可以看到CSS其實就是一開始先將第一張照片秀出，其他都先<strong>display : none</strong>，至於modernizr是因為為了要支援IE9以下所用的，因為IE9以下不支援CSS3 Transitions和CSS3 3D Transforms，所以要利用modernizr來偵測User所用瀏覽器的支援程度來決定實現的效果</p>
+
+<p>接下來要引用其他三支js進來</p>
+
+<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquerypp.custom.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.bookblock.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>其中jquerypp.custom.js是<a href="http://jquerypp.com/" target="_blank">jQuery++</a>，擴充了<strong>swipe even</strong>這個功能，讓行動裝置用手指滑動也能觸發翻頁的效果</p>
+
+<p>而jquery.bookblock.js就是Flip Plugin，我們可以看到裡面其中一行是</p>
+
+<pre><code>this.support = Modernizr.csstransitions &amp;&amp; Modernizr.csstransforms3d;
+</code></pre>
+
+<p>這行就是利用Modernizr在檢查User現在的瀏覽器支援程度，所以下面就會有if判斷</p>
+
+<pre><code>if( !this.support ) {
+
+    this._layoutNoSupport( dir );
+
+}
+else {
+
+    this._layout( dir );
+
+}
+</code></pre>
+
+<p>假如不支援的話，就會用.hide() or .show()來實現換頁效果，如果有支援就會使用CSS3 3D Transforms</p>
+
+<p>接著是基本HTML架構</p>
+
+<pre><code>&lt;div id="bb-bookblock" class="bb-bookblock"&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- custom content --&gt;
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- ... --&gt;
+    &lt;/div&gt;
+    &lt;div class="bb-item"&gt;
+        &lt;!-- ... --&gt;
+    &lt;/div&gt;
+    &lt;!-- ... --&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><strong>bb-item</strong>就是裡面每一頁要放的內容，可以是圖片或文字</p>
+
+<p>而js部分可以這樣寫</p>
+
+<pre><code>$(function() {
+
+    $( '#bb-bookblock' ).bookblock();
+
+});
+</code></pre>
+
+<p>裡面的options設定如下</p>
+
+<pre><code>// speed for the flip transition in ms.
+speed       : 1000,
+
+// easing for the flip transition.
+easing      : 'ease-in-out',
+
+// if set to true, both the flipping page and the sides will have an overlay to simulate shadows
+shadows     : true,
+
+// opacity value for the "shadow" on both sides (when the flipping page is over it).
+// value : 0.1 - 1
+shadowSides : 0.2,
+
+// opacity value for the "shadow" on the flipping page (while it is flipping).
+// value : 0.1 - 1
+shadowFlip  : 0.1,
+
+// perspective value
+perspective : 1300,
+
+// if we should show the first item after reaching the end.
+circular    : false,
+
+// if we want to specify a selector that triggers the next() function. example: '#bb-nav-next'.
+nextEl      : '',
+
+// if we want to specify a selector that triggers the prev() function.
+prevEl      : '',
+
+// callback after the flip transition.
+// page is the current item's index.
+// isLimit is true if the current page is the last one (or the first one).
+onEndFlip   : function( page, isLimit ) { return false; },
+
+// callback before the flip transition.
+// page is the current item's index.
+onBeforeFlip: function( page ) { return false; }
+</code></pre>
+
+<p>在綁定下一頁和上一頁的事件裡面，除了可以直接在<strong>bookblock()</strong>添加以外</p>
+
+<pre><code>$( '#bb-bookblock' ).bookblock( {
+    speed               : 800,
+    shadowSides : 0.8,
+    shadowFlip  : 0.7,
+    nextEl      : '#bb-nav-next', //綁定下一頁事件
+    prevEl      : '#bb-nav-prev'  //綁定上一頁事件
+} )
+</code></pre>
+
+<p>也可以按照範例裡面的寫法</p>
+
+<pre><code>var config = {
+    $bookBlock: $( '#bb-bookblock' ),
+    $navNext    : $( '#bb-nav-next' ),
+    $navPrev    : $( '#bb-nav-prev' ),
+    $navJump    : $( '#bb-nav-jump' ),
+    bb              : $( '#bb-bookblock' ).bookblock( {
+        speed               : 800,
+        shadowSides : 0.8,
+        shadowFlip  : 0.7
+    } )
+}
+
+config.$navNext.on( 'click', function() {
+
+    config.bb.next();
+    return false;
+
+} );
+
+config.$navPrev.on( 'click', function() {
+
+    config.bb.prev();
+    return false;
+
+} );
+</code></pre>
+
+<p>另外自己綁定click在上一頁和下一頁的DOM元素裡面</p>
+
+<p>範例完成以後我特地拿iPone來測試swipe even的效果，還蠻頓的，而且不是很靈敏，可能有細節要再調整，也有可能是手機本身的問題，這方面就要請各位要應用在行動裝置的朋友們再多多測試了</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://modernizr.com/docs/#features-css" target="_blank">Modernizr Documentation</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+</feed>

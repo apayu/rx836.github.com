@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[Win8] 入門要學說Hello world - Rx836</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="最近正在練習開發Win8 App，雖然微軟提供的開發途徑很多，例如C#、C++等，但因為自己對JavaScript比較有興趣，而且微軟也提供利用HTML+JavaScript+CSS就可以開發出Win8 APP，所以就決定朝這個方向前進，因為是第一次開發Win8 APP， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/first-win8-app">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Rx836" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Rx836</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[Win8] 入門要學說Hello World</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-08T17:06:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>最近正在練習開發Win8 App，雖然微軟提供的開發途徑很多，例如C#、C++等，但因為自己對JavaScript比較有興趣，而且微軟也提供利用HTML+JavaScript+CSS就可以開發出Win8 APP，所以就決定朝這個方向前進，因為是第一次開發Win8 APP，想當然要先做出一個Hello world來試試看</p>
+
+<!--more-->
+
+
+<p>要開發Win8 APP，必須先下載工具，直接到微軟官網下載<a href="http://www.microsoft.com/visualstudio/cht/downloads" target="_blank">Visual Studio Express 2012 for Windows 8</a>，接著安裝完以後，打開就會問你是否需要開發人員授權？輸入帳號密碼，就可以擁有開發人員的帳號</p>
+
+<p>打開Visual Studio Express 2012(以下簡稱VS 2012)，就會看到以下畫面</p>
+
+<p><img src="https://lh4.googleusercontent.com/-iLMiTXNLEaM/UHKuEKHOTHI/AAAAAAAABsY/DLqeu2umA-M/s786/p1.png" /></p>
+
+<p>接著選【檔案】-> 【新增專案】，就會出現以下的畫面</p>
+
+<p><img src="https://lh4.googleusercontent.com/-SeFZ08v5dSo/UHKuEndFXlI/AAAAAAAABsc/OKsOpJp0zic/s787/p2.png" /></p>
+
+<p>然後選擇【已安裝的】->【範本】->【JavaScript】->【Windows市集】->【空白應用程式】，接著再專案名稱裡面取名為MyHelloWorld，按下確定</p>
+
+<p><img src="https://lh5.googleusercontent.com/-EdDsceusOP8/UHKuEz1w-iI/AAAAAAAABsg/49aDvnhF7Ug/s786/p3.png" /></p>
+
+<p>建立好專案以後，會看到VS 2012已經預設建立好一些檔案，例如像package.appxmanifest資訊清單檔案，主要描述應用程式名稱、介紹、啟動顯示畫面，還有logo.png 和 smalllogo.png分別為大的和小的標誌影像，還有代表市集中的影像storelogo.png，和應用程式啟動時顯示的畫面splashscreen.png</p>
+
+<p>其他就是預設的css和js和應用程式啟動時執行的起始頁default.html</p>
+
+<p>按下ctrl+F5啟動應用程式</p>
+
+<p><img src="https://lh3.googleusercontent.com/-T-_lt_kQehI/UHKuFtbyMpI/AAAAAAAABso/zTQWUiOUyWg/s745/p4.png" /></p>
+
+<p>上面那張圖就是剛剛所提到的啟動顯示畫面圖splashscreen.png</p>
+
+<p>顯示畫面完以後就是主要的APP內容</p>
+
+<p><img src="https://lh3.googleusercontent.com/-7d-UacNm56o/UHKuF2WBmYI/AAAAAAAABss/xQwqzgpJwVI/s745/p5.png" /></p>
+
+<p>default.html長這樣</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre>
+
+<p><html>
+<head></p>
+
+<pre><code>&lt;meta charset="utf-8" /&gt;
+&lt;title&gt;HelloWorld&lt;/title&gt;
+
+&lt;!-- WinJS 參考 --&gt;
+&lt;link href="//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
+&lt;script src="//Microsoft.WinJS.1.0.RC/js/base.js"&gt;&lt;/script&gt;
+&lt;script src="//Microsoft.WinJS.1.0.RC/js/ui.js"&gt;&lt;/script&gt;
+
+&lt;!-- HelloWorld 參考 --&gt;
+&lt;link href="/css/default.css" rel="stylesheet" /&gt;
+&lt;script src="/js/default.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;內容在此處出現&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>對於網頁開發者來說一點都不陌生，這也是Win8 APP主打的賣點，接著我們開始來修改一下內容</p>
+
+<pre><code>&lt;body&gt;
+&lt;h1&gt;Hello, world!&lt;/h1&gt;
+&lt;p&gt;What's your name?&lt;/p&gt;
+&lt;input id="nameInput" type="text" /&gt;
+&lt;button id="helloButton"&gt;Say "Hello"&lt;/button&gt;
+&lt;div id="greetingOutput"&gt;&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p>在body裡面加上這些html，按下ctrl+f5執行，會發現有文字有按鈕，但還沒有反應，所以接下來就是重頭戲部分，建立事件處理常式，不過建立之前先來看看default.js裡面有些甚麼</p>
+
+<pre><code>(function () {
+    "use strict";
+
+     // Omitted code 
+
+ })(); 
+</code></pre>
+
+<p>預設是將js程式碼包裝在自我執行的匿名函式，有用jQuery的人應該不陌生，主要避免命名衝突或避免意外修改到不想修改的值，use strict代表開啟<a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/br230269.aspx" target="_blank">strict 模式</a></p>
+
+<p>其餘的程式碼就是APP的事件監控，但目前還用不到，現在我們會看到default.js裡面有個<em>app.start</em>，首先在他前面先建立一個click事件</p>
+
+<pre><code>function buttonClickHandler(eventInfo) {
+    var userName = document.getElementById("nameInput").value;
+    var greetingString = "Hello, " + userName + "!";
+    document.getElementById("greetingOutput").innerText = greetingString; 
+}
+</code></pre>
+
+<p>看起來都跟平常寫網頁的方式都一樣，但建立好事件以後要在哪個時間點註冊這個事件呢？答案就是應用程式啟動時</p>
+
+<pre><code>var app = WinJS.Application;
+var activation = Windows.ApplicationModel.Activation;
+WinJS.strictProcessing();
+
+app.onactivated = function (args) {
+    if (args.detail.kind === activation.ActivationKind.launch) {
+        if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
+            // TODO: This application has been newly launched. Initialize
+            // your application here.
+        } else {
+            // TODO: This application has been reactivated from suspension.
+            // Restore application state here.
+        }
+        args.setPromise(WinJS.UI.processAll());           
+    }
+};
+</code></pre>
+
+<p>微軟都已經把Win8 APP許多的事件都已經處理好，我們只要用他的事件處理常式即可，像<strong>app.onactivated </strong>就是應用程式啟動時會觸發的事件，不過裡面其實還有分<strong>第一次啟用</strong>還是<strong>已經啟動但因為擱置而重新啟用</strong>，不過在這裡我們也先暫時不用管是甚麼時候啟用，因為不管如何我們都要註冊點擊這個事件</p>
+
+<pre><code>    app.onactivated = function (args) {
+    if (args.detail.kind === activation.ActivationKind.launch) {
+        if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
+            // TODO: This application has been newly launched. Initialize
+            // your application here.
+        } else {
+            // TODO: This application has been reactivated from suspension.
+            // Restore application state here.
+        }
+        args.setPromise(WinJS.UI.processAll());
+
+        // Retrieve the button and register our event handler. 
+        var helloButton = document.getElementById("helloButton");
+        helloButton.addEventListener("click", buttonClickHandler, false);
+
+    }
+};
+</code></pre>
+
+<p>所以會看到我將點擊事件寫在<strong>args.setPromise(WinJS.UI.processAll())</strong>後面，接著一樣按下ctrl+f5，在對話框中輸入名字，就會出現問候語了</p>
+
+<p><img src="https://lh4.googleusercontent.com/-_NE7vhIsN-w/UHKuGaUHX-I/AAAAAAAABs8/K9SVwBzKgFo/s744/p6.png" /></p>
+
+<p>完成囉！等等，為什麼你的畫面看起來是白色的？大家回去看看default.html有先引用一個CSS檔案進來</p>
+
+<pre><code>&lt;link href="//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
+</code></pre>
+
+<p>只要將它改成</p>
+
+<pre><code>&lt;link href="//Microsoft.WinJS.1.0.RC/css/ui-light.css" rel="stylesheet" /&gt;
+</code></pre>
+
+<p>背景就會變成白色的囉！當然這個是官方提供的預設樣式表，文件上是建議用預設的樣式表為基礎去做客製化修改，至於怎麼修改就看大家的APP風格了</p>
+
+<p>官方建議如果是大量的影像或圖片，建議用深色系的css，如果是文字居多，建議用淺色系的css</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh986964.aspx" target="_blank">建立 &#8220;Hello, world&#8221; 應用程式</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-08T17:06:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/win8/'>Win8</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/note-marketing/" title="Previous Post: [學習筆記] 創意與提案">&laquo; [學習筆記] 創意與提案</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://rx836.github.com/blog/first-win8-app/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (3)</a></li><li><a href='/blog/categories/facebook'>Facebook (4)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/javascript'>JavaScript (3)</a></li><li><a href='/blog/categories/jquery'>jQuery (12)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/win8'>Win8 (3)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (4)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (6)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/first-win8-app/">[Win8] 入門要學說Hello world</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/note-marketing/">[學習筆記] 創意與提案</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-plugin-timeago/">[jQuery] Facebook XXX hours ago的時間生成</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/twitter-bootstrap/">[CSS] 做網站非學不可的Twitter Bootstrap</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/design-thinking/">[學習筆記] 透過實體活動來學習《設計與思考》</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/first-win8-app/';
+        var disqus_url = 'http://rx836.github.com/blog/first-win8-app/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=416172151763823&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

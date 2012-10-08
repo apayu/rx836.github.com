@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Win8 | Rx836]]></title>
+  <link href="http://rx836.github.com/blog/categories/win8/atom.xml" rel="self"/>
+  <link href="http://rx836.github.com/"/>
+  <updated>2012-10-08T18:46:03+08:00</updated>
+  <id>http://rx836.github.com/</id>
+  <author>
+    <name><![CDATA[阿帕]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[Win8] 入門要學說Hello world]]></title>
+    <link href="http://rx836.github.com/blog/first-win8-app/"/>
+    <updated>2012-10-08T17:06:00+08:00</updated>
+    <id>http://rx836.github.com/blog/first-win8-app</id>
+    <content type="html"><![CDATA[<p>最近正在練習開發Win8 App，雖然微軟提供的開發途徑很多，例如C#、C++等，但因為自己對JavaScript比較有興趣，而且微軟也提供利用HTML+JavaScript+CSS就可以開發出Win8 APP，所以就決定朝這個方向前進，因為是第一次開發Win8 APP，想當然要先做出一個Hello world來試試看</p>
+
+<!--more-->
+
+
+<p>要開發Win8 APP，必須先下載工具，直接到微軟官網下載<a href="http://www.microsoft.com/visualstudio/cht/downloads" target="_blank">Visual Studio Express 2012 for Windows 8</a>，接著安裝完以後，打開就會問你是否需要開發人員授權？輸入帳號密碼，就可以擁有開發人員的帳號</p>
+
+<p>打開Visual Studio Express 2012(以下簡稱VS 2012)，就會看到以下畫面</p>
+
+<p><img src="https://lh4.googleusercontent.com/-iLMiTXNLEaM/UHKuEKHOTHI/AAAAAAAABsY/DLqeu2umA-M/s786/p1.png" /></p>
+
+<p>接著選【檔案】-> 【新增專案】，就會出現以下的畫面</p>
+
+<p><img src="https://lh4.googleusercontent.com/-SeFZ08v5dSo/UHKuEndFXlI/AAAAAAAABsc/OKsOpJp0zic/s787/p2.png" /></p>
+
+<p>然後選擇【已安裝的】->【範本】->【JavaScript】->【Windows市集】->【空白應用程式】，接著再專案名稱裡面取名為MyHelloWorld，按下確定</p>
+
+<p><img src="https://lh5.googleusercontent.com/-EdDsceusOP8/UHKuEz1w-iI/AAAAAAAABsg/49aDvnhF7Ug/s786/p3.png" /></p>
+
+<p>建立好專案以後，會看到VS 2012已經預設建立好一些檔案，例如像package.appxmanifest資訊清單檔案，主要描述應用程式名稱、介紹、啟動顯示畫面，還有logo.png 和 smalllogo.png分別為大的和小的標誌影像，還有代表市集中的影像storelogo.png，和應用程式啟動時顯示的畫面splashscreen.png</p>
+
+<p>其他就是預設的css和js和應用程式啟動時執行的起始頁default.html</p>
+
+<p>按下ctrl+F5啟動應用程式</p>
+
+<p><img src="https://lh3.googleusercontent.com/-T-_lt_kQehI/UHKuFtbyMpI/AAAAAAAABso/zTQWUiOUyWg/s745/p4.png" /></p>
+
+<p>上面那張圖就是剛剛所提到的啟動顯示畫面圖splashscreen.png</p>
+
+<p>顯示畫面完以後就是主要的APP內容</p>
+
+<p><img src="https://lh3.googleusercontent.com/-7d-UacNm56o/UHKuF2WBmYI/AAAAAAAABss/xQwqzgpJwVI/s745/p5.png" /></p>
+
+<p>default.html長這樣</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre>
+
+<p><html>
+<head></p>
+
+<pre><code>&lt;meta charset="utf-8" /&gt;
+&lt;title&gt;HelloWorld&lt;/title&gt;
+
+&lt;!-- WinJS 參考 --&gt;
+&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
+&lt;script src="http://rx836.github.com//Microsoft.WinJS.1.0.RC/js/base.js"&gt;&lt;/script&gt;
+&lt;script src="http://rx836.github.com//Microsoft.WinJS.1.0.RC/js/ui.js"&gt;&lt;/script&gt;
+
+&lt;!-- HelloWorld 參考 --&gt;
+&lt;link href="http://rx836.github.com/css/default.css" rel="stylesheet" /&gt;
+&lt;script src="http://rx836.github.com/js/default.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;內容在此處出現&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>對於網頁開發者來說一點都不陌生，這也是Win8 APP主打的賣點，接著我們開始來修改一下內容</p>
+
+<pre><code>&lt;body&gt;
+&lt;h1&gt;Hello, world!&lt;/h1&gt;
+&lt;p&gt;What's your name?&lt;/p&gt;
+&lt;input id="nameInput" type="text" /&gt;
+&lt;button id="helloButton"&gt;Say "Hello"&lt;/button&gt;
+&lt;div id="greetingOutput"&gt;&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p>在body裡面加上這些html，按下ctrl+f5執行，會發現有文字有按鈕，但還沒有反應，所以接下來就是重頭戲部分，建立事件處理常式，不過建立之前先來看看default.js裡面有些甚麼</p>
+
+<pre><code>(function () {
+    "use strict";
+
+     // Omitted code 
+
+ })(); 
+</code></pre>
+
+<p>預設是將js程式碼包裝在自我執行的匿名函式，有用jQuery的人應該不陌生，主要避免命名衝突或避免意外修改到不想修改的值，use strict代表開啟<a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/br230269.aspx" target="_blank">strict 模式</a></p>
+
+<p>其餘的程式碼就是APP的事件監控，但目前還用不到，現在我們會看到default.js裡面有個<em>app.start</em>，首先在他前面先建立一個click事件</p>
+
+<pre><code>function buttonClickHandler(eventInfo) {
+    var userName = document.getElementById("nameInput").value;
+    var greetingString = "Hello, " + userName + "!";
+    document.getElementById("greetingOutput").innerText = greetingString; 
+}
+</code></pre>
+
+<p>看起來都跟平常寫網頁的方式都一樣，但建立好事件以後要在哪個時間點註冊這個事件呢？答案就是應用程式啟動時</p>
+
+<pre><code>var app = WinJS.Application;
+var activation = Windows.ApplicationModel.Activation;
+WinJS.strictProcessing();
+
+app.onactivated = function (args) {
+    if (args.detail.kind === activation.ActivationKind.launch) {
+        if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
+            // TODO: This application has been newly launched. Initialize
+            // your application here.
+        } else {
+            // TODO: This application has been reactivated from suspension.
+            // Restore application state here.
+        }
+        args.setPromise(WinJS.UI.processAll());           
+    }
+};
+</code></pre>
+
+<p>微軟都已經把Win8 APP許多的事件都已經處理好，我們只要用他的事件處理常式即可，像<strong>app.onactivated </strong>就是應用程式啟動時會觸發的事件，不過裡面其實還有分<strong>第一次啟用</strong>還是<strong>已經啟動但因為擱置而重新啟用</strong>，不過在這裡我們也先暫時不用管是甚麼時候啟用，因為不管如何我們都要註冊點擊這個事件</p>
+
+<pre><code>    app.onactivated = function (args) {
+    if (args.detail.kind === activation.ActivationKind.launch) {
+        if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
+            // TODO: This application has been newly launched. Initialize
+            // your application here.
+        } else {
+            // TODO: This application has been reactivated from suspension.
+            // Restore application state here.
+        }
+        args.setPromise(WinJS.UI.processAll());
+
+        // Retrieve the button and register our event handler. 
+        var helloButton = document.getElementById("helloButton");
+        helloButton.addEventListener("click", buttonClickHandler, false);
+
+    }
+};
+</code></pre>
+
+<p>所以會看到我將點擊事件寫在<strong>args.setPromise(WinJS.UI.processAll())</strong>後面，接著一樣按下ctrl+f5，在對話框中輸入名字，就會出現問候語了</p>
+
+<p><img src="https://lh4.googleusercontent.com/-_NE7vhIsN-w/UHKuGaUHX-I/AAAAAAAABs8/K9SVwBzKgFo/s744/p6.png" /></p>
+
+<p>完成囉！等等，為什麼你的畫面看起來是白色的？大家回去看看default.html有先引用一個CSS檔案進來</p>
+
+<pre><code>&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
+</code></pre>
+
+<p>只要將它改成</p>
+
+<pre><code>&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-light.css" rel="stylesheet" /&gt;
+</code></pre>
+
+<p>背景就會變成白色的囉！當然這個是官方提供的預設樣式表，文件上是建議用預設的樣式表為基礎去做客製化修改，至於怎麼修改就看大家的APP風格了</p>
+
+<p>官方建議如果是大量的影像或圖片，建議用深色系的css，如果是文字居多，建議用淺色系的css</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh986964.aspx" target="_blank">建立 "Hello, world" 應用程式</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]]]></title>
+    <link href="http://rx836.github.com/blog/2-vmware-windows-8/"/>
+    <updated>2012-09-22T14:33:00+08:00</updated>
+    <id>http://rx836.github.com/blog/2-vmware-windows-8</id>
+    <content type="html"><![CDATA[<p>延續上一篇<a href="http://blog.rx836.tw/blog/vmware-windows-8/" target="_blank">簡單容易，如何在VM裝Windows 8來玩玩[二]</a>，已經在VM裡面建立一個Windows 8的虛擬機器，現在就來開始安裝系統部分</p>
+
+<!--more-->
+
+
+<h3>2012/09/25 補充</h3>
+
+<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具...，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
+
+<p>按下『Play virtual machine』以後，就會出現啟動畫面</p>
+
+<p><img src="https://lh5.googleusercontent.com/-81H0bQbP8eA/UFyf5ev3TRI/AAAAAAAABko/QD4Y-GM2JIk/s903/12.jpg"  /></p>
+
+<p>接著選擇時區『Chinese(Traditional, Taiwan)』，語言只有英文可以選擇</p>
+
+<p><img src="https://lh5.googleusercontent.com/-fBKS1fGZlDk/UFyf5xfRyCI/AAAAAAAABk0/G6XGhTOasN0/s903/13.jpg"  /></p>
+
+<p>按下『Install now』</p>
+
+<p><img src="https://lh6.googleusercontent.com/-Ax-DPQyxZbc/UFyf57uCRkI/AAAAAAAABk4/rU9T-QxMrro/s903/14.jpg"  /></p>
+
+<p>接著會要你輸入產品序號，這時候去之前的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>下載頁，裡面有產品序號(Product key)</p>
+
+<p><img src="https://lh3.googleusercontent.com/-_d98Gtqnc3c/UFyf6UuvMiI/AAAAAAAABlA/p7N_61eQRGI/s860/15.jpg"  /></p>
+
+<p>貼到序號框裡面</p>
+
+<p><img src="https://lh4.googleusercontent.com/-oAOyYz0Eokg/UFyf7GrLx5I/AAAAAAAABlU/y3q_YM9AnO8/s903/16.jpg"  /></p>
+
+<p>勾選『I accept the license terms』，再點『Next』</p>
+
+<p><img src="https://lh6.googleusercontent.com/-NfbwsgksSwI/UFyf7X8MNPI/AAAAAAAABlQ/6-uWUpfp9xc/s903/17.jpg"  /></p>
+
+<p>點選『Custom: Install Windows only』</p>
+
+<p><img src="https://lh6.googleusercontent.com/-Qkt-zeuyf_8/UFyf7r9zNMI/AAAAAAAABlY/bY8Szlo-ibA/s903/18.jpg"  /></p>
+
+<p>直接點『Next』</p>
+
+<p><img src="https://lh3.googleusercontent.com/-kCW-XYnx_SI/UFyf8Qalj0I/AAAAAAAABl0/9LZ4DNqWYeQ/s903/19.jpg"  /></p>
+
+<p>開始安裝囉！</p>
+
+<p><img src="https://lh6.googleusercontent.com/-JFPiO0_vHPo/UFyf8jljh2I/AAAAAAAABlo/X-ZpEfFo5_0/s903/20.jpg"  /></p>
+
+<p>安裝好後進入設定畫面，這裡可以選擇電腦名稱和背景顏色，設定好後一樣按『Next』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-J08q-P3IoD0/UFyf9qrlE9I/AAAAAAAABl8/ZslAPvFNBmg/s903/21.jpg"  /></p>
+
+<p>直接選預設值吧！</p>
+
+<p><img src="https://lh4.googleusercontent.com/-bZOZ2SRntoc/UFyf-HMrfOI/AAAAAAAABmE/a0fcU4Ir3WY/s903/22.jpg"  /></p>
+
+<p>Windows 8可以整合Windows Live Messenger或MSN帳號</p>
+
+<p><img src="https://lh5.googleusercontent.com/-YjC4_qJCucU/UFyf_MjclJI/AAAAAAAABmc/B7zdknpEmD8/s903/23.jpg"  /></p>
+
+<p>輸入密碼</p>
+
+<p><img src="https://lh5.googleusercontent.com/-e7oYsxfVAaM/UFyf_E60dPI/AAAAAAAABmU/pa5aoZVvM_4/s903/24.jpg"  /></p>
+
+<p>確認一些基本資訊，直接點選『Next』</p>
+
+<p><img src="https://lh5.googleusercontent.com/-pZErLzdxSCY/UFyf_4S1FmI/AAAAAAAABmk/cYWchJUWOaU/s903/25.jpg"  /></p>
+
+<p>大功告成！趕快玩玩看吧！</p>
+
+<p><img src="https://lh3.googleusercontent.com/-62nz20DXDUM/UFygAq0QQ6I/AAAAAAAABmw/wkowZ3oShG8/s903/26.jpg"  /></p>
+
+<p>試玩了一下發現真的蠻多東西要重新適應的，包括操作介面和使用習慣，至於好不好用就是見仁見智了:)</p>
+
+<h2>後記</h2>
+
+<p>一定會有人疑惑要怎麼關機，請將滑鼠移到右下角會出現『Settings』，裡面有個『Power』再點『Shut down』即可</p>
+
+<p>其他還有IE10大家也可以玩玩看</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.xuite.net/yh96301/blog/58184430" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(二)</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]]]></title>
+    <link href="http://rx836.github.com/blog/vmware-windows-8/"/>
+    <updated>2012-09-21T17:37:00+08:00</updated>
+    <id>http://rx836.github.com/blog/vmware-windows-8</id>
+    <content type="html"><![CDATA[<p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
+
+<!--more-->
+
+
+<p>當然前提你必須先把VM給裝起來，網路上<a href="http://blog.xuite.net/yh96301/blog/53120472" target="_blank">教學還蠻多的</a>，這篇就不多加闡述</p>
+
+<p>一開始首先要去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM</p>
+
+<h3>2012/09/25 補充</h3>
+
+<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具...，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
+
+<p>點選『Create a New Virtual Machine』</p>
+
+<p><img src="https://lh5.googleusercontent.com/-otZSLwijQ0U/UFyf4XwFSyI/AAAAAAAABkc/FNIph_J7JHs/s657/1.jpg"  /></p>
+
+<p>接著點選『I will Install the operating system later』</p>
+
+<p><img src="https://lh5.googleusercontent.com/-xeiYkr8fudM/UFyf8en7F3I/AAAAAAAABls/swewFIyCkmE/s659/2.jpg"  /></p>
+
+<p>作業系統選擇『Microsoft Windows』，接著再選擇『Windows 7』，因為VM沒有Windows 8可以選</p>
+
+<p><img src="https://lh3.googleusercontent.com/-_Co3ZTLZ3bA/UFygAqiA5CI/AAAAAAAABm0/UixQmOxkxiU/s657/3.jpg"  /></p>
+
+<p>輸入虛擬機器的名稱，這邊取名『Windows 8』，再選擇要存放的路徑，然後點選『Next』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-KRAurNJRvLk/UFygBDKQoII/AAAAAAAABm8/YwQLP43AyUQ/s658/4.jpg"  /></p>
+
+<p>接著設定虛擬硬碟的大小，並且設定『Store virtual disk as a single files』，將虛擬硬碟存成一個資料夾，按下『Next』</p>
+
+<p><img src="https://lh3.googleusercontent.com/-EO-2MBYjcEc/UFygBr6bmvI/AAAAAAAABnI/5JjNmotkvEw/s656/5.jpg"  /></p>
+
+<p>再來準備要來設定記憶體和掛載Windows 8映像檔，選擇『Customize Hardware…』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-nbky8ASN0ck/UFygBw-01wI/AAAAAAAABnE/dxdanwgZcjg/s660/6.jpg"  /></p>
+
+<p>調整記憶體，一般來說建議為實體記憶體的3分之1至2分之1之間，官方網站是說至少要1G</p>
+
+<p><img src="https://lh5.googleusercontent.com/-btOEe35_ToI/UFygCdtCjwI/AAAAAAAABnY/P6JM4vBI9Nc/s656/7.jpg"  /></p>
+
+<p>接著選擇『New CD/DVD』的選項，再點『Use ISO image file:』，再按「Browse…」來選擇映像檔</p>
+
+<p><img src="https://lh6.googleusercontent.com/-WxOQRqu4nF8/UFygCyaFR9I/AAAAAAAABng/uQc30JVd0Oo/s658/8.jpg"  /></p>
+
+<p>選擇好映像檔以後就按下『Close』</p>
+
+<p><img src="https://lh4.googleusercontent.com/-v5ICos8qLUQ/UFygC-8bVNI/AAAAAAAABnc/9rp1LeXOO8I/s661/9.jpg"  /></p>
+
+<p>最後按下『Finish』就新增了一個虛擬機器</p>
+
+<p><img src="https://lh6.googleusercontent.com/-5QYBPsTQNwA/UFyf4pX33AI/AAAAAAAABkg/5rhtXII6H1s/s657/10.jpg"  /></p>
+
+<p>按下『Play virtual machine』，開始來進行安裝囉！</p>
+
+<p><img src="https://lh5.googleusercontent.com/-G0VcZ28gqbA/UFyf4laUtKI/AAAAAAAABkk/jvgPOqPFaOE/s659/11.jpg"  /></p>
+
+<p>因為篇幅有點過長，為了方便閱讀，所以分成兩篇來記錄</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.xuite.net/yh96301/blog/58183942" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(一)</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: JavaScript | Rx836]]></title>
+  <link href="http://rx836.github.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://rx836.github.com/"/>
+  <updated>2012-10-08T18:46:03+08:00</updated>
+  <id>http://rx836.github.com/</id>
+  <author>
+    <name><![CDATA[阿帕]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] 當函式需要傳遞很多參數時]]></title>
+    <link href="http://rx836.github.com/blog/javascript-simple-object/"/>
+    <updated>2012-09-25T00:06:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-simple-object</id>
+    <content type="html"><![CDATA[<p>有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花...</p>
+
+<!--more-->
+
+
+<p>不過，有個方法可以解決這個困擾，就是<strong>設定值物件</strong>，平常我們使用函式可能會這樣寫</p>
+
+<pre><code>function add(parameter1, parameter2, parameter3, parameter4, parameter5) {...}
+</code></pre>
+
+<p>可是參數一堆真的會又臭又長，還要注意先後順序，但如果改成這樣寫</p>
+
+<pre><code>var conf = {
+    parameter1: "a",
+    parameter2: "b",
+    parameter3: "c"
+}
+
+add(conf)
+</code></pre>
+
+<p>將參數全部包成一個物件，再傳給函式，不僅可以不用記住先後順序，還可以安全的略過選用參數，也更容易閱讀和維護，當然新增和移除也比較方便</p>
+
+<p>不過缺點就是要特別去知道參數的名稱，而且物件的屬性名稱並無法做最小化處理</p>
+
+<p>不過當你要設定一堆CSS樣式的時候，或是個人資料很多很繁雜的時候，這個方法倒是很好用的:)</p>
+
+<p>參考資料:</p>
+
+<p>JavaScript 設計模式</p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] 建立物件的第三招-自訂建構式函式]]></title>
+    <link href="http://rx836.github.com/blog/javascript-custom-function/"/>
+    <updated>2012-09-11T00:43:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-custom-function</id>
+    <content type="html"><![CDATA[<p>在前面一篇文章<a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a>，裡面有講到關於物件的建立，不過礙於篇幅，只談到<strong>實字模式(literal patterns)</strong>和<strong>建構式函式(constructor functions)</strong>，但其實還有一個建立物件的方法，那就是<strong>自訂建構式函式</strong></p>
+
+<!--more-->
+
+
+<p>用自定義的建構式函式來建立物件，直接用範例來說明</p>
+
+<pre><code>var kitty = new Cat('Kitty');
+var kitty.say(); // "kitty:喵~"
+</code></pre>
+
+<p>跟之前的建構式不同的地方在於，之前是用內建的new Object()，這裡我們是用new Cat()，這種模式很像Java使用一個class Cat來建立物件，語法非常的相似，但其實JavaScript並沒有class，Cat只是一個函式</p>
+
+<p>Cat的建構式定義如下</p>
+
+<pre><code>var Cat = function (name){
+    this.name = name;
+    this.say = function(){
+        return name+":喵~";
+    }
+};
+</code></pre>
+
+<p>但其實真正背後運作的方式是這樣，註解為JavaScript實際上還有做一些我們看不到的事情</p>
+
+<pre><code>var Cat = function (name){
+
+    //建立物件實字, 一個空物件
+    //var this = {};
+
+    //接著替this加入屬性和方法
+    this.name = name;
+    this.say = function(){
+        return name+":喵~";
+    }
+
+    //最後return this
+};
+</code></pre>
+
+<p>整個的流程首先會建立一個空物件，參考至this變數，藉由this的參考，將屬性和方法加入到此物件(this)，最後再將物件隱含的回傳出去(這邊要注意的是，回傳的情況是假設<strong>沒有其他物件被明確的指定回傳</strong>，後面則會提到)</p>
+
+<p>範例中say()是直接加入至this，不過真正實務中，當你每次new Cat()的時候，就會建立一個新函式到記憶體裡面，很明顯的會浪費記憶體效能，所以最好的方式是加入到原型(prototype)中</p>
+
+<pre><code>//只可以重複利用，都應該放進原型裡面
+Cat.prototype.say = function(){
+    return this.name+":喵~";
+};
+</code></pre>
+
+<p>不過這裡有個問題，假如忘記加上new會發生甚麼事情？其實是不會有語法或執行上的錯誤，但卻會導致非預期的錯誤發生，因為沒有加new以後，所有的this都指向全域物件去了！(例如window)</p>
+
+<pre><code>function cat(){
+    this.name = "kitty";
+}
+
+var kitty = new Cat();
+console.log(typeof kitty); // "object" 為物件
+console.log(kitty.name);
+
+var kitty2 = Cat();
+console.log(typeof kitty2); // undefined 忘了new, 不會有物件this回傳, 變成全域
+console.log(window.name); //全域變數
+</code></pre>
+
+<p>不過為了預防這種情況發生，可以利用以下寫法</p>
+
+<pre><code>function cat(){
+
+    //還是一樣會建立一個this
+    //var this = {};
+
+    var _self = {};     
+    _self.name = "kitty";
+
+    //不過return被_self取代了
+    return _self;
+}
+</code></pre>
+
+<p>所以不管User怎麼呼叫，都一定會回傳一個物件，也就是強制new的做法</p>
+
+<pre><code>var kitty = new Cat();  
+console.log(kitty.name); // "kitty"
+
+var kitty2 = Cat(); 
+console.log(kitty2.name); // "kitty"
+</code></pre>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] 談物件, 實字與建構式]]></title>
+    <link href="http://rx836.github.com/blog/javascript-patterns-1/"/>
+    <updated>2012-09-07T23:57:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-patterns-1</id>
+    <content type="html"><![CDATA[<p>最近在看一本書叫做<strong>JavaScript 設計模式</strong>，英文名稱是JavaScript Patterns，裡面很完整的告訴你如何寫好JavaScript，他不適合初學者看，因為他並不會從很基礎的觀念開始談起，但他卻非常適合像我這種已經知道基礎，並且正要開始往上爬的人閱讀</p>
+
+<!--more-->
+
+
+<p>所以如果有了基礎後再來看這本書，會發現收穫非常的多，就因為太多了，所以開始紀錄一些學習這本書的心得，讓我可以持續成長，而這篇要講的就是關於JavaScript『物件』這個東西</p>
+
+<p>JavaScript是一個物件導向的語言，在程式碼裡面大部份你所看到的都可以說是物件，除了五種原始型別不是以外，分別如下</p>
+
+<p>1.數值</p>
+
+<p>2.字串</p>
+
+<p>3.布林</p>
+
+<p>4.null</p>
+
+<p>5.undefined</p>
+
+<p>雖然數值、字串和布林不是物件，但如果需要的話，還是可以很容易的轉換成物件來使用</p>
+
+<p>其實當我們在做定義變數這個動作的時候，就已經接觸到物件，因為當定義變數的時候自然會成為『Activation Object』的一個屬性，另外，如果是定義全域變數，也就變成『全域物件』的屬性，更重要的是，其實變數本身也是個物件，因為他自己也擁有屬性</p>
+
+<p>那麼講了那麼多，『物件』到底是甚麼?</p>
+
+<p>其實物件非常的簡單，他只是一堆具名屬性的集合，或是名值對的清單，而且屬性可以是函式，這種時候我們就會叫這個函式為方法</p>
+
+<p><img src="https://lh5.googleusercontent.com/-s9ewb766mCo/UEoidMi9O3I/AAAAAAAABa4/YsFTCbWwRpo/s416/1.jpg" width="416px" /></p>
+
+<p>而物件建立了以後，並不是就說完全不能動他，你還是可以修改他，看是新增或移除裡面的屬性和方法都可以，再來要特別提到的是，有兩種主要的物件要認識一下</p>
+
+<p>第一種叫做原生物件(Native)，也可以叫做內建物件，例如Array、Date或是使用者自行定義(後面會提到)</p>
+
+<p>第二種叫做宿主物件(Host)，例如window物件和所有DOM物件</p>
+
+<p>怎麼去分辨這兩種物件，只要看看物件能不能在瀏覽器底下執行就可以，如果只能在瀏覽器底下執行，就是Host物件，如果在非瀏覽器的地方也可以執行，那就是Native</p>
+
+<p>什麼？你是不是覺得一直講物件物件的，是不是好像少一個東西？沒錯，JavaScript沒有Class，這對於熟悉其他語言來說是個新觀念，要試著去忘掉Class這個東西，當然，沒有了Class，也就沒有繼承，不過卻可以用其他方式來實現，最常見的就是使用原型(Prototype)，不過在往後的文章才會提到原型這個概念</p>
+
+<h2>實字與建構式</h2>
+
+<p>接下來我們就要開始講到如何建立物件，我們都知道物件簡單的來思考就是名值對(key-value pairs)的雜湊表，有點像是關聯式陣列(associative arrays)，而物件就包含了屬性和方法(函式)，建立物件有三種方式，不過本篇文章只會提到兩種，『自訂建構式函式』我們留到以後再說，我們先來談第一種物件實字(literal notation)</p>
+
+<pre><code>//首先建立一個空物件
+var cat = {};
+
+//增加一個屬性
+cat.name = "kitty";
+
+//增加一個方法
+cat.getName = function() {
+    return cat.name;
+}
+</code></pre>
+
+<p>以上就是一個物件實字模式的建立方式，除了以上的寫法，你還可以這樣寫</p>
+
+<pre><code>var cat = {
+    name : "kitty",
+    getName : function() {
+        return this.name;
+    }
+};
+</code></pre>
+
+<p>可能一開始會不太習慣這種寫法，但用久了，你會慢慢喜歡這種寫法，而外面大部份的寫法也都是用實字模式，也是比較推薦的寫法，後面也會提到為什麼推薦，而以下是物件實字的特點</p>
+
+<p>1.將物件用大括號包起來{ }</p>
+
+<p>2.逗號分隔每個屬性和物件，而最後可以不用逗號</p>
+
+<p>3.用分號分隔屬性名稱和屬性值</p>
+
+<p>4.最後別忘了要在最後面的}加上分號</p>
+
+<p>第二個要來談的是用<strong>建構式</strong>來建立物件</p>
+
+<p>雖然JavaScript沒有class，但他卻有一個很相似class的語法，叫做建構式函式(constructor functions)，你可以用建構式函式來建立物件，或著，使用內建的建構式(例如:Object()、Date()、String())，用法如下</p>
+
+<pre><code>var cat = new Object();
+cat.name = "kitty";
+</code></pre>
+
+<p>從以上程式碼你就可以看到，很明顯的實字程式碼比較短，建構式會比較長，而且實字比較像單純的雜湊表，不用像建構式一樣還要new一個東西出來，感覺上就來的複雜，除了這些以外，建構式其實背後還隱藏了陷阱存在，例如建立物件時有傳遞參數是動態，會導致以下情況發生</p>
+
+<pre><code>//記住, 以下寫法都不好
+//這是一個空物件
+var o = new Object();
+console.log(o.constructor === Object); // true
+
+//突然變成Number
+var o = new Object(1);
+console.log(o.constructor === Number); // true  
+
+//又變成字串
+var o = new Object("I am a string");
+console.log(o.constructor === String); // true      
+</code></pre>
+
+<p>從以上可以看出，依照參數的不同，會得到來自不同的建構式物件，造成非預期的結果產生，所以再次強調強烈建議使用<strong>實字模式</strong></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+</feed>

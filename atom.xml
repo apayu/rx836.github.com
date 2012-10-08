@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-09-25T15:13:32+08:00</updated>
+  <updated>2012-10-08T18:46:03+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,683 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[Win8] 入門要學說Hello world]]></title>
+    <link href="http://rx836.github.com/blog/first-win8-app/"/>
+    <updated>2012-10-08T17:06:00+08:00</updated>
+    <id>http://rx836.github.com/blog/first-win8-app</id>
+    <content type="html"><![CDATA[<p>最近正在練習開發Win8 App，雖然微軟提供的開發途徑很多，例如C#、C++等，但因為自己對JavaScript比較有興趣，而且微軟也提供利用HTML+JavaScript+CSS就可以開發出Win8 APP，所以就決定朝這個方向前進，因為是第一次開發Win8 APP，想當然要先做出一個Hello world來試試看</p>
+
+<!--more-->
+
+
+<p>要開發Win8 APP，必須先下載工具，直接到微軟官網下載<a href="http://www.microsoft.com/visualstudio/cht/downloads" target="_blank">Visual Studio Express 2012 for Windows 8</a>，接著安裝完以後，打開就會問你是否需要開發人員授權？輸入帳號密碼，就可以擁有開發人員的帳號</p>
+
+<p>打開Visual Studio Express 2012(以下簡稱VS 2012)，就會看到以下畫面</p>
+
+<p><img src="https://lh4.googleusercontent.com/-iLMiTXNLEaM/UHKuEKHOTHI/AAAAAAAABsY/DLqeu2umA-M/s786/p1.png" /></p>
+
+<p>接著選【檔案】-> 【新增專案】，就會出現以下的畫面</p>
+
+<p><img src="https://lh4.googleusercontent.com/-SeFZ08v5dSo/UHKuEndFXlI/AAAAAAAABsc/OKsOpJp0zic/s787/p2.png" /></p>
+
+<p>然後選擇【已安裝的】->【範本】->【JavaScript】->【Windows市集】->【空白應用程式】，接著再專案名稱裡面取名為MyHelloWorld，按下確定</p>
+
+<p><img src="https://lh5.googleusercontent.com/-EdDsceusOP8/UHKuEz1w-iI/AAAAAAAABsg/49aDvnhF7Ug/s786/p3.png" /></p>
+
+<p>建立好專案以後，會看到VS 2012已經預設建立好一些檔案，例如像package.appxmanifest資訊清單檔案，主要描述應用程式名稱、介紹、啟動顯示畫面，還有logo.png 和 smalllogo.png分別為大的和小的標誌影像，還有代表市集中的影像storelogo.png，和應用程式啟動時顯示的畫面splashscreen.png</p>
+
+<p>其他就是預設的css和js和應用程式啟動時執行的起始頁default.html</p>
+
+<p>按下ctrl+F5啟動應用程式</p>
+
+<p><img src="https://lh3.googleusercontent.com/-T-_lt_kQehI/UHKuFtbyMpI/AAAAAAAABso/zTQWUiOUyWg/s745/p4.png" /></p>
+
+<p>上面那張圖就是剛剛所提到的啟動顯示畫面圖splashscreen.png</p>
+
+<p>顯示畫面完以後就是主要的APP內容</p>
+
+<p><img src="https://lh3.googleusercontent.com/-7d-UacNm56o/UHKuF2WBmYI/AAAAAAAABss/xQwqzgpJwVI/s745/p5.png" /></p>
+
+<p>default.html長這樣</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre>
+
+<p><html>
+<head></p>
+
+<pre><code>&lt;meta charset="utf-8" /&gt;
+&lt;title&gt;HelloWorld&lt;/title&gt;
+
+&lt;!-- WinJS 參考 --&gt;
+&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
+&lt;script src="http://rx836.github.com//Microsoft.WinJS.1.0.RC/js/base.js"&gt;&lt;/script&gt;
+&lt;script src="http://rx836.github.com//Microsoft.WinJS.1.0.RC/js/ui.js"&gt;&lt;/script&gt;
+
+&lt;!-- HelloWorld 參考 --&gt;
+&lt;link href="http://rx836.github.com/css/default.css" rel="stylesheet" /&gt;
+&lt;script src="http://rx836.github.com/js/default.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;內容在此處出現&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>對於網頁開發者來說一點都不陌生，這也是Win8 APP主打的賣點，接著我們開始來修改一下內容</p>
+
+<pre><code>&lt;body&gt;
+&lt;h1&gt;Hello, world!&lt;/h1&gt;
+&lt;p&gt;What's your name?&lt;/p&gt;
+&lt;input id="nameInput" type="text" /&gt;
+&lt;button id="helloButton"&gt;Say "Hello"&lt;/button&gt;
+&lt;div id="greetingOutput"&gt;&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p>在body裡面加上這些html，按下ctrl+f5執行，會發現有文字有按鈕，但還沒有反應，所以接下來就是重頭戲部分，建立事件處理常式，不過建立之前先來看看default.js裡面有些甚麼</p>
+
+<pre><code>(function () {
+    "use strict";
+
+     // Omitted code 
+
+ })(); 
+</code></pre>
+
+<p>預設是將js程式碼包裝在自我執行的匿名函式，有用jQuery的人應該不陌生，主要避免命名衝突或避免意外修改到不想修改的值，use strict代表開啟<a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/br230269.aspx" target="_blank">strict 模式</a></p>
+
+<p>其餘的程式碼就是APP的事件監控，但目前還用不到，現在我們會看到default.js裡面有個<em>app.start</em>，首先在他前面先建立一個click事件</p>
+
+<pre><code>function buttonClickHandler(eventInfo) {
+    var userName = document.getElementById("nameInput").value;
+    var greetingString = "Hello, " + userName + "!";
+    document.getElementById("greetingOutput").innerText = greetingString; 
+}
+</code></pre>
+
+<p>看起來都跟平常寫網頁的方式都一樣，但建立好事件以後要在哪個時間點註冊這個事件呢？答案就是應用程式啟動時</p>
+
+<pre><code>var app = WinJS.Application;
+var activation = Windows.ApplicationModel.Activation;
+WinJS.strictProcessing();
+
+app.onactivated = function (args) {
+    if (args.detail.kind === activation.ActivationKind.launch) {
+        if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
+            // TODO: This application has been newly launched. Initialize
+            // your application here.
+        } else {
+            // TODO: This application has been reactivated from suspension.
+            // Restore application state here.
+        }
+        args.setPromise(WinJS.UI.processAll());           
+    }
+};
+</code></pre>
+
+<p>微軟都已經把Win8 APP許多的事件都已經處理好，我們只要用他的事件處理常式即可，像<strong>app.onactivated </strong>就是應用程式啟動時會觸發的事件，不過裡面其實還有分<strong>第一次啟用</strong>還是<strong>已經啟動但因為擱置而重新啟用</strong>，不過在這裡我們也先暫時不用管是甚麼時候啟用，因為不管如何我們都要註冊點擊這個事件</p>
+
+<pre><code>    app.onactivated = function (args) {
+    if (args.detail.kind === activation.ActivationKind.launch) {
+        if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
+            // TODO: This application has been newly launched. Initialize
+            // your application here.
+        } else {
+            // TODO: This application has been reactivated from suspension.
+            // Restore application state here.
+        }
+        args.setPromise(WinJS.UI.processAll());
+
+        // Retrieve the button and register our event handler. 
+        var helloButton = document.getElementById("helloButton");
+        helloButton.addEventListener("click", buttonClickHandler, false);
+
+    }
+};
+</code></pre>
+
+<p>所以會看到我將點擊事件寫在<strong>args.setPromise(WinJS.UI.processAll())</strong>後面，接著一樣按下ctrl+f5，在對話框中輸入名字，就會出現問候語了</p>
+
+<p><img src="https://lh4.googleusercontent.com/-_NE7vhIsN-w/UHKuGaUHX-I/AAAAAAAABs8/K9SVwBzKgFo/s744/p6.png" /></p>
+
+<p>完成囉！等等，為什麼你的畫面看起來是白色的？大家回去看看default.html有先引用一個CSS檔案進來</p>
+
+<pre><code>&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
+</code></pre>
+
+<p>只要將它改成</p>
+
+<pre><code>&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-light.css" rel="stylesheet" /&gt;
+</code></pre>
+
+<p>背景就會變成白色的囉！當然這個是官方提供的預設樣式表，文件上是建議用預設的樣式表為基礎去做客製化修改，至於怎麼修改就看大家的APP風格了</p>
+
+<p>官方建議如果是大量的影像或圖片，建議用深色系的css，如果是文字居多，建議用淺色系的css</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh986964.aspx" target="_blank">建立 &#8220;Hello, world&#8221; 應用程式</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[學習筆記] 創意與提案]]></title>
+    <link href="http://rx836.github.com/blog/note-marketing/"/>
+    <updated>2012-10-04T18:47:00+08:00</updated>
+    <id>http://rx836.github.com/blog/note-marketing</id>
+    <content type="html"><![CDATA[<p>前天公司內部教育訓練，請來Migo的行銷總監<a href="http://rexismtw.blogspot.tw/" target="_blank">Rex Pai</a>講師為我們上課，談從創意、到提案還有談行銷習慣，希望能整理自己的思緒，讓自己吸收更多</p>
+
+<!--more-->
+
+
+<p>再開始之前，先問自己兩個問題</p>
+
+<h3>你現在提案的架構是甚麼？</h3>
+
+<h3>你覺得甚麼地方最難？</h3>
+
+<p>Rex提到，一個頂尖的行銷人永遠都不會忘記<strong>問自己的問題</strong>，然而一份好的提案，該從甚麼地方開始？</p>
+
+<h2>客戶需求</h2>
+
+<p>什麼樣的標準叫做了解客戶需求？ Rex覺得，真正的了解客戶需求就是</p>
+
+<h3>你是不是能看到客戶沒想到的但又該做的事情？</h3>
+
+<p>或是</p>
+
+<h3>你是不是能用提案帶著客戶了解市場趨勢？</h3>
+
+<p>已故蘋果電腦創辦人-Steve Jobs 曾經說過</p>
+
+<h3>「站起來，站在客戶的頭上，看看他還需要什麼？看到了，你就不必卑躬屈膝，你就能好好把事情做好。」</h3>
+
+<p>現今大部分的行銷人員，多半站在客戶的同一條水平上看事情，甚至有時候比客戶還低一些，但如果能站在客戶的頭上看事情，看的更多更遠，展現出專業的能力讓客戶信服，我想提案一定可以更順利</p>
+
+<h2>提案架構</h2>
+
+<p>早期的提案架構為AIDMA</p>
+
+<p><img src="https://lh5.googleusercontent.com/-9nljFVfaAH8/UG6Ex6Hnk3I/AAAAAAAABqw/FOqIxscE4AU/s420/%E5%9C%96%E7%89%871.png" /></p>
+
+<p>分別是引起興趣(Attention)、產生興趣(Interest)、激發慾望(Desire)、強化記憶(Memory)、促使行動(Action)</p>
+
+<p>到了中期，因為網路的快速成長，包括Web site、SEOLPO、SEM、EC、Blog 、Forum、WOM大量的興起，所以提案架構紛紛朝向AISAS</p>
+
+<p><img src="https://lh4.googleusercontent.com/-UmJNJlEC4Q0/UG6F1U2oxWI/AAAAAAAABq4/oZgt0ZBPaJM/s404/%E5%9C%96%E7%89%872.png" /></p>
+
+<p>可以看到網路興起以後，利用廣告吸引消費者注意，消費者都會先去網路上google商品，來決定要不要購買此商品，買了以後有些消費者會更進一步做分享(例如開箱文)，這些分享的資訊又回到網路上供大眾搜尋，達到循環的效果</p>
+
+<p>但到了現在，新的行銷架構則稍微複雜了些</p>
+
+<p><img src="https://lh6.googleusercontent.com/-GlyIWk9SsB4/UG6G-PyXnhI/AAAAAAAABrA/3RIiuJbF0VE/s480/%E5%9C%96%E7%89%873.png" /></p>
+
+<p>最主要多了<strong>體驗</strong>和<strong>熱情</strong>，Rex就舉了海尼根的測字活動，讓網友體驗並且激發熱情，而不是只單單強調海尼根有多好喝，有了熱情，就會激發消費者與身邊的人分享，就如下圖所示</p>
+
+<p><img src="https://lh3.googleusercontent.com/--wJ4Piz76FI/UG6H02CTjII/AAAAAAAABrI/926sAJJIBQk/s648/%E5%9C%96%E7%89%874.png" /></p>
+
+<h2>產業現況</h2>
+
+<p>當然，身為一個行銷人員，一定要很清楚的了解自身的產業狀況，才能給客戶最好的策略和建議，以下是一些數據圖表分析</p>
+
+<p><img src="https://lh4.googleusercontent.com/-BVEbyfs4NT4/UG6IoS9X5eI/AAAAAAAABrQ/Hv4Cl3zORQg/s885/%E5%9C%96%E7%89%875.png" /></p>
+
+<p>從圖表中可知Internet的崛起，影響最深的是紙本媒體，例如雜誌或報紙，有趣的是TV和Radio反而不受什麼影響，從這裡可以知道現代人的生活習慣，還是脫離不了電視和收音機</p>
+
+<p><img src="https://lh6.googleusercontent.com/-rkQZb0Y0su8/UG6IpiylywI/AAAAAAAABrc/d0MYEKGOezs/s1021/%E5%9C%96%E7%89%876.jpg" /></p>
+
+<p>這張圖表對廣告媒體來說，可說是個好消息，一般認為台灣的經濟一年比一年惡劣，但企業對於廣告的預算卻不減反增，這裡值得注意的是，<strong>口碑行銷</strong>正逐年成長當中</p>
+
+<p><img src="https://lh4.googleusercontent.com/-1FCtMXkR_Ig/UG6IqLz1huI/AAAAAAAABrs/-JTRuY4tdX8/s1021/%E5%9C%96%E7%89%877.jpg" /></p>
+
+<p>上圖看到，口碑行銷的興起，壓縮到的是關鍵字廣告，至於網站廣告反而沒甚麼影響</p>
+
+<p><img src="https://lh5.googleusercontent.com/-QNHFlVdPtjc/UG6IqaiEvvI/AAAAAAAABro/Ns-bX9Jp-Sk/s1020/%E5%9C%96%E7%89%879.jpg" /></p>
+
+<p>最有趣的大概就是這張圖了，粉紅色的圓柱代表是2010企業預估要花費的廣告預算金額，黃色是2010真正花的金額，有發現為什麼關鍵字廣告反而比預估的少嗎？Rex說多數企業面臨到的問題是，台灣目前的關鍵字廣告成效都不怎麼好，目前能提出好的關鍵字策略公司並不多，但這也代表著進步空間更大</p>
+
+<h2>案例分享</h2>
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/WMWu1h_6OfE" frameborder="0" allowfullscreen></iframe>
+
+
+<p>上面那段影片是BMW的廣告，活動一開始在城市的中間會擺一台虛擬的Mini，參賽者必須先下載專屬的APP，然後持著手機去接近那台Mini，靠近50公尺以內就會收到你的手機裡面，這時候你就必須不停的跑不停的移動，持續一個禮拜，一個禮拜過後，誰能掌握這台Mini，就可以贏得一台車，但如果有人靠近你在50公尺內，很抱歉，車子就被人家收走啦，而重點是，要是網路斷電或手機沒電，車子就會留在原地等著別人拿走，具優勝者表示，他為了這台車過了一個禮拜無法想像的生活，他再也不參加了XD</p>
+
+<p>而這個活動也吸引了將近兩萬多人參與，並且為BMW帶來了高達25%的銷售成長！</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://rexismtw.blogspot.tw/" target="_blank">Rex Pai</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] Facebook XXX hours ago的時間生成]]></title>
+    <link href="http://rx836.github.com/blog/jquery-plugin-timeago/"/>
+    <updated>2012-10-03T01:36:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-plugin-timeago</id>
+    <content type="html"><![CDATA[<p><a href="http://timeago.yarp.com/" target="_blank">timeago</a>是一套可以快速生成過去發生時間的jQuery plugin，大家應該對於Facebook文字框下方的『xxx hours ago』不會陌生，留言訊息不再只是單純的『x年x月x日 x時x分x秒』，而是可以很貼心的將時間換算給使用者知道，『喔~ 原來這則留言在幾分鐘之前』，這種對User experience來說其實是相當的加分，要實作其實也不難，網路上也有plugin可以方便使用，就趕快來看看如何做出這種效果吧！</p>
+
+<p><img src="https://lh6.googleusercontent.com/-8eJHMArd3w0/UGxqjpAcHYI/AAAAAAAABqY/Z8lDGoeU_58/s409/1.jpg" /></p>
+
+<!--more-->
+
+
+<p>首先<a href="http://timeago.yarp.com/jquery.timeago.js" target="_blank">下載</a>timeago，和jQuery一起引用到html裡面</p>
+
+<pre><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>接著是html部分</p>
+
+<pre><code>&lt;abbr class="loaded timeago" title="when you opened the page"&gt;&lt;/abbr&gt;
+</code></pre>
+
+<p>這個plugin預設是用abbr這個元素，要搭配裡面的title，title屬性待會會存放時間資訊在裡面，接著是js部分</p>
+
+<pre><code>$(function(){
+    prepareDynamicDates();      
+    $("abbr.timeago").timeago();        
+
+    function prepareDynamicDates() {
+        $('abbr.loaded').attr("title", ISODateString(new Date()));                      
+    }
+
+    function ISODateString(d){
+        function pad(n){return n&lt;10 ? '0'+n : n}
+         return d.getUTCFullYear()+'-'
+              + pad(d.getUTCMonth()+1)+'-'
+              + pad(d.getUTCDate())+'T'
+              + pad(d.getUTCHours())+':'
+              + pad(d.getUTCMinutes())+':'
+              + pad(d.getUTCSeconds())+'Z'
+    }       
+
+});
+</code></pre>
+
+<p>要注意的一點是，要先將時間轉換成<a href="http://zh.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a>，ISO 8601是一種國際標準化組織所訂的日期時間表示法，至於要怎麼轉換，網路上已經都有人寫好了，或是直接看上面範例的函式<strong>ISODateString()</strong></p>
+
+<p>接著將轉換後的時間放到abbr這個元素的title屬性，然後使用.timeago()這個方法即可，這樣一打開網頁，就會顯示</p>
+
+<pre><code>less than a minute ago
+</code></pre>
+
+<p>過幾分鐘後 就會顯示，</p>
+
+<pre><code>2 minutes ago
+</code></pre>
+
+<p>代表已經過了兩分鐘，因為timeago不用重整會自動刷新時間</p>
+
+<p>或是你可以直接看我網頁上的DEMO結果如下</p>
+
+<p>『你開始看這篇文章在<abbr class="loaded timeago" title="when you opened the page"></abbr>』</p>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+
+
+<script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"></script>
+
+
+<script>
+    $(function(){
+        prepareDynamicDates();      
+        $("abbr.timeago").timeago();        
+
+        function prepareDynamicDates() {
+            $('abbr.loaded').attr("title", ISODateString(new Date()));                      
+        }
+
+        function ISODateString(d){
+            function pad(n){return n<10 ? '0'+n : n}
+             return d.getUTCFullYear()+'-'
+                  + pad(d.getUTCMonth()+1)+'-'
+                  + pad(d.getUTCDate())+'T'
+                  + pad(d.getUTCHours())+':'
+                  + pad(d.getUTCMinutes())+':'
+                  + pad(d.getUTCSeconds())+'Z'
+        }       
+        
+    });
+</script>
+
+
+<p>假如你按F5重整就會發現又回到less than a minute ago (除非js的檔案掛掉，才不會顯示)</p>
+
+<p>但如果是不想用現在時間開始計算，而是希望每則發文的時間開始計算呢？一樣html的部分如下</p>
+
+<pre><code>&lt;abbr class="modified timeago" title="xxx"&gt;&lt;/abbr&gt;
+</code></pre>
+
+<p>接著是js部分</p>
+
+<pre><code>$(function(){
+
+    $('abbr.modified').attr("title", "2012-10-02T17:30:33Z");
+    $("abbr.timeago").timeago();            
+
+});
+</code></pre>
+
+<p>一樣就直接把當初那則發文的ISO 8601的時間丟到title，然後使用.timeago()就可以了</p>
+
+<p>如果你想用更靈活或擴充性更大的plugin，也可以選擇另一款<a href="http://pragmaticly.github.com/smart-time-ago/" target="_blank">Smart Time Ago</a>，靈感就來自於timeago，只是功能更強大</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://pragmaticly.github.com/smart-time-ago/" target="_blank">Smart Time Ago</a></p>
+
+<p><a href="http://timeago.yarp.com/" target="_blank">timeago</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 做網站非學不可的Twitter Bootstrap]]></title>
+    <link href="http://rx836.github.com/blog/twitter-bootstrap/"/>
+    <updated>2012-10-01T18:41:00+08:00</updated>
+    <id>http://rx836.github.com/blog/twitter-bootstrap</id>
+    <content type="html"><![CDATA[<p><a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>越來越多人在用了，當然最主要的原因就是他可以幫助網頁開發者快速的開發出，有不錯外觀的web或是mobile apps，這對於許多不擅長外觀設計的網頁工程師們(包括我)，可以說是省下不少煩惱Layout的麻煩，不僅如此，針對按鈕、表格、或是排版，Bootstrap都幫你處理的好好，只要簡單幾個步驟引入即可</p>
+
+<!--more-->
+
+
+<p>首先要先下載<a href="http://twitter.github.com/bootstrap/getting-started.html" target="_blank">Bootstrap</a>，你可以選擇compil過後的，或是選擇source版本，Bootstrap的css是用Less寫的，所以如果你想修改細節部分，可以下載source版本，一般來說直接用compiled版本即可</p>
+
+<p>接著就會看到有三個資料夾(css &amp; js &amp; img)</p>
+
+<p><img src="https://lh3.googleusercontent.com/-RHqEXjgftnI/UGl5vs7qyaI/AAAAAAAABoU/tKc440KDt5Y/s872/a.jpg" /></p>
+
+<p>可以把他們全部放入你的專案裡面，但引入到html時，css和js就只要選擇有沒有壓縮過的版本就好</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;  
+        &lt;meta charset="UTF-8" /&gt;
+        &lt;title&gt;example&lt;/title&gt;
+        &lt;link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;        
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+        &lt;script src="js/bootstrap.min.js"&gt;&lt;/script&gt;     
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>然後接下來就可以開始使用了！但請注意還是要引入jQuery喔，接下來就是介紹一些使用範例</p>
+
+<h2>Base CSS examples</h2>
+
+<h3>Buttons</h3>
+
+<p>加上相對應的class以後，就可以秀出相對應的外觀，例如紅色的按鈕class預設為<strong>btn-danger</strong>，Bootstrap很貼心的讓我們不再只有單調的按鈕顏色</p>
+
+<pre><code>&lt;button class="btn dropdown-toggle" data-toggle="dropdown"&gt;Action &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"&gt;Action &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"&gt;Danger &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"&gt;Warning &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-success dropdown-toggle" data-toggle="dropdown"&gt;Success &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-info dropdown-toggle" data-toggle="dropdown"&gt;Info &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
+&lt;button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"&gt;Inverse &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
+</code></pre>
+
+<p><img src="https://lh4.googleusercontent.com/-phDQRFC7UXQ/UGnPIeFHgVI/AAAAAAAABoo/VL2VekJjEVA/s617/123.jpg" /></p>
+
+<p>特別注意的是，按鈕旁邊有個倒三角形是用css做出來的，也同樣只要在span加一個class為caret即可</p>
+
+<h3>Progress bars</h3>
+
+<p>進度條只要外面包一層div給予相對的class，裡面再加一個div並且命名class為<strong>bar</strong>，<strong>width</strong>就是進度條的長度，這樣就可以用js來修改width顯示目前的進度狀況</p>
+
+<pre><code>&lt;div class="progress progress-info" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 10%"&gt;&lt;/div&gt; &lt;/div&gt; 
+&lt;div class="progress progress-success" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 20%"&gt;&lt;/div&gt; &lt;/div&gt; 
+&lt;div class="progress progress-warning" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 30%"&gt;&lt;/div&gt; &lt;/div&gt; 
+&lt;div class="progress progress-danger" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 40%"&gt;&lt;/div&gt; &lt;/div&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-CWMKYBHmiBk/UGpPoPagCQI/AAAAAAAABo8/o7uycvmJotE/s926/123.jpg" /></p>
+
+<p>更酷的是，bar的樣式也可以更改，而不是只有醜醜的實心bar</p>
+
+<pre><code>&lt;div class="progress progress-striped active"&gt; 
+&lt;div class="bar" style="width: 40%;"&gt;&lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
+
+<p>只要修改class為<strong>progress progress-striped active</strong>，就會有條紋的進度條，而且還加上css3的animation動畫</p>
+
+<h3>Button groups</h3>
+
+<p>也可以將button設為一組群組，就會有群組的樣式</p>
+
+<pre><code>&lt;div class="btn-group" style="margin: 9px 0;"&gt; 
+&lt;button class="btn"&gt;Left&lt;/button&gt; 
+&lt;button class="btn"&gt;Middle&lt;/button&gt; 
+&lt;button class="btn"&gt;Right&lt;/button&gt; 
+&lt;/div&gt;
+</code></pre>
+
+<p><img src="https://lh4.googleusercontent.com/-iCtFSRwd7UU/UGpYAp2xh6I/AAAAAAAABpQ/BVql_Jk9oto/s187/4.jpg" /></p>
+
+<p>用一個class名為<strong>btn-group</strong>的div包住button就可以</p>
+
+<h3>Horizontal and vertical tabs (with dropdown menus)</h3>
+
+<p>還在煩惱下拉選單嗎?</p>
+
+<pre><code>&lt;ul class="nav nav-tabs"&gt; 
+&lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt; 
+&lt;li&gt;&lt;a href="#"&gt;Portfolio&lt;/a&gt;&lt;/li&gt; 
+&lt;li class="dropdown"&gt; &lt;a class="dropdown-toggle" data-toggle="dropdown" href="#"&gt;Services &lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt; 
+&lt;ul class="dropdown-menu"&gt; &lt;li&gt;&lt;a href="#"&gt;Link 1&lt;/a&gt;&lt;/li&gt; 
+&lt;li&gt;&lt;a href="#"&gt;Link 2&lt;/a&gt;&lt;/li&gt; 
+&lt;/ul&gt; &lt;/li&gt; 
+&lt;/ul&gt;
+</code></pre>
+
+<p>只要用ul li包好，並且加上相對應的class，就可以輕鬆做tab+下拉選單</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ix3_DDLLdWg/UGpZ2cBhygI/AAAAAAAABpY/wzbaSwCDMb8/s303/5.jpg" /></p>
+
+<h3>Navigation bar component</h3>
+
+<p>看到這邊就覺得實在太強大了&#8230;</p>
+
+<pre><code>&lt;div class="navbar"&gt; 
+    &lt;div class="navbar-inner"&gt; 
+        &lt;div class="container"&gt; &lt;!-- brand class is from bootstrap.css --&gt; 
+            &lt;a class="brand" href="#"&gt;My Brand&lt;/a&gt; 
+            &lt;div class="nav-collapse"&gt; 
+                &lt;ul class="nav"&gt; 
+                    &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt; 
+                    &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;&lt;/li&gt; 
+                    &lt;li class="dropdown"&gt; &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Dropdown &lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt; 
+                        &lt;ul class="dropdown-menu"&gt; 
+                            &lt;li&gt;&lt;a href="#"&gt;Action 1&lt;/a&gt;&lt;/li&gt; 
+                            &lt;li&gt;&lt;a href="#"&gt;Action 2&lt;/a&gt;&lt;/li&gt; 
+                            &lt;li class="divider"&gt;&lt;/li&gt; 
+                            &lt;li class="nav-header"&gt;Header&lt;/li&gt; 
+                            &lt;li&gt;&lt;a href="#"&gt;Separated action&lt;/a&gt;&lt;/li&gt; 
+                        &lt;/ul&gt; 
+                    &lt;/li&gt; 
+                &lt;/ul&gt; 
+                &lt;form class="navbar-search pull-left"&gt; 
+                &lt;input type="text" class="search-query" placeholder="Search"&gt; 
+                &lt;/form&gt; 
+            &lt;/div&gt;&lt;!-- /.nav-collapse --&gt; 
+        &lt;/div&gt; 
+    &lt;/div&gt;&lt;!-- /navbar-inner --&gt; 
+&lt;/div&gt;&lt;!-- /navbar --&gt;
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-VBBWEKhYfzk/UGpba2H2VSI/AAAAAAAABpg/2KVa_kC0xX0/s647/6.jpg" /></p>
+
+<h3>Using the layout and built-in grid system</h3>
+
+<p>你也可以用他們的grid system</p>
+
+<pre><code>&lt;div class="container"&gt; 
+    &lt;div class="row"&gt; 
+        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
+        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
+        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
+    &lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
+
+<p>預設是 12-column，940 pixel-centered layout</p>
+
+<h3>Responsive design</h3>
+
+<p>連最近很紅的responsive design也有，只要引入他們的<strong>bootstrap-responsive.css</strong>這個css檔案</p>
+
+<h3>Typeahead example</h3>
+
+<p>裡面也有plugin可以使用，例如下拉提示選單</p>
+
+<pre><code>&lt;input type="text" class="span3" style="margin: 0 auto;" 
+data-provide="typeahead" 
+data-items="4" 
+data-source='["Apples","Bananas","Cherries","Dates","Eggplants","Figs","Grapes", "Honeydew","Kiwi","Mango","Peaches","Plums","Raspberries","Strawberries","Watermelon","Zucchini"]'&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-y8ELDPfXQp4/UGpdfcl99uI/AAAAAAAABpo/A_l1HiZDL2I/s223/7.jpg" /></p>
+
+<p>還有很多使用範例，可以直接去<a href="http://twitter.github.com/bootstrap/index.html" target="_blank">官網看</a>，這樣大概看了一下教學範例，一個網站可能需要的元素，Bootstrap幾乎通通都有，網頁開發人員可以更專注在開發網頁這個事情上面</p>
+
+<p>只是不知道，會不會到後來，大家的網站都長得很像:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.adobe.com/devnet/html5/articles/twitter-bootstrap.html" target="_blank">Styling your apps with Twitter Bootstrap </a></p>
+
+<p><a href="http://www.w3resource.com/twitter-bootstrap/tutorial.php" target="_blank">Twitter Bootstrap tutorial</a></p>
+
+<p><a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Twitter Bootstrap</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[學習筆記] 透過實體活動來學習《設計與思考》]]></title>
+    <link href="http://rx836.github.com/blog/design-thinking/"/>
+    <updated>2012-09-26T00:50:00+08:00</updated>
+    <id>http://rx836.github.com/blog/design-thinking</id>
+    <content type="html"><![CDATA[<p><strong>Design Thinking</strong>算是我今年才接觸到的新觀念，起初我認為這是一個在探討如何讓外觀看起來更棒，讓使用者的體驗更佳的做法，但直到看過影片之後，我才知道原來並不是這麼一回事，整個想傳達的理念也不如我想的那樣</p>
+
+<!--more-->
+
+
+<p>下面的影片是《設計與思考》的前導預告片</p>
+
+<iframe width="853" height="480" src="http://www.youtube.com/embed/fR9wMJXFIE8?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+<p>看完影片可以知道，強調《設計與思考》的設計並不是一個外觀，他是一種工具，要讓我們先思考問題，去探索問題，並且利用設計去解決問題</p>
+
+<p>他是一種循環，必須不斷的重複尋找問題，了解需求，並且重複的修正，這讓不管是從行銷，設計，甚至是創業也好，都可以運用這個精神來面對</p>
+
+<p>今天剛好也很幸運的，有這個機會參加《精實創業》讀書會，讓Leo老師帶來的Workshop，使我體驗了所謂的設計與思考，讓我收穫非常的多，以下記錄整個過程</p>
+
+<h3>1.訪談</h3>
+
+<p>首先必須透過訪談，先挖掘對方的需求，要多問<strong>為什麼</strong>，嘗試挖掘出自己不曾想過的問題</p>
+
+<h3>2.再更深入訪談</h3>
+
+<p>透過剛剛的訪談，再針對雙方有興趣的主題，繼續深入問下去，試圖找出心裡最深處的聲音</p>
+
+<h3>3.整理筆記</h3>
+
+<p>先整理需求，並且將需求重新解讀為洞見，這個洞見就是一個很深層的需求，或是以前從沒想過的</p>
+
+<h3>4.界定題目</h3>
+
+<p>利用剛剛整理出來的洞見，再去除掉其他雜音(想法)，將它化做一句完整的句子</p>
+
+<p>例如xxx需要一個方法來XXXX(需求)，因為在他的世界裡，XXXXXXX(洞見)</p>
+
+<p>所以舉例來說，老人需要一個方法來<strong>解決孤單</strong>((需求)，因為在他的世界裡，<strong>是沒有人可以一直陪伴著他講話</strong>(洞見)</p>
+
+<h3>5.提出不一樣的點子</h3>
+
+<p>提出不一樣的點子，來解決這個問題，提越多越好，越瘋狂越好，並且必須要用繪畫的方式呈現</p>
+
+<h3>6.分享你的點子&amp;收集回饋</h3>
+
+<p>找個人分享你的點子，但千萬別銷售點子，只做分享，但要記錄對方給你的回饋意見</p>
+
+<h3>7.你的新點子</h3>
+
+<p>根據剛剛回饋的意見，修正自己的點子，讓它更好！</p>
+
+<h3>8.估價點子建置預算</h3>
+
+<p>用認知估算，粗估這個點子大概要花多少錢，不用算很精準</p>
+
+<p>大概的流程圖如下:
+<img src="https://lh4.googleusercontent.com/-ZQqVXZv7LAQ/UGMwK7zdK_I/AAAAAAAABoA/0mbOMtNzTo8/s505/a.jpg"  /></p>
+
+<p>整個流程做下來，其實我們就是在做<strong>設計與思考</strong>這件事情，透過訪談去了解需求，並且針對需求去整理出真正的問題，再依據這個問題去想解決的<strong>點子</strong>，然後分享得到<strong>回饋</strong>，再進一步的<strong>修正</strong>，而最後估價的部分，是為了要可以對照第二個階段，也就是<strong>實驗設計假設</strong>而先做的部分，以下是第二階段</p>
+
+<h2>實驗設計假設</h2>
+
+<h3>1.重新定義實驗設計假設</h3>
+
+<p>請將剛剛的點子，重新寫下來，並且用一句話來表達，句子的內容必須是:</p>
+
+<p>『點子xxxx可以解決xxxxx(使用者)的問題是xxxxxx』</p>
+
+<p>所以例如說:</p>
+
+<p>點子【竹蜻蜓】可以解決【上班族】的問題是【塞車通勤】</p>
+
+<h3>2.使用者是誰</h3>
+
+<p>將使用者畫出來，越具體越好</p>
+
+<h3>3.甚麼時候會發生這個問題</h3>
+
+<p>一樣畫出剛剛那個問題發生時使用者會遇到的問題，例如剛剛是【塞車通勤】</p>
+
+<h3>4.發生問題時使用者可能會做些甚麼</h3>
+
+<p>畫出假如發生剛剛描述的問題時，使用者可能會做出什麼，畫越多越好，可以畫成一個連續故事，例如【塞車通勤】發生時，使用者可能改搭【捷運】，就畫一個捷運</p>
+
+<h3>5.規劃一個簡單的活動與故事中的使用者互動</h3>
+
+<p>先規劃一個活動，讓使用者怎麼去體驗剛剛所想的點子，怎麼引起使用者的注意？並且要規畫如何收及使用者的反應？</p>
+
+<h3>6.評估你的實驗</h3>
+
+<p>最後，假設如果這個活動要十個人來實驗，要花多少錢？粗估就好</p>
+
+<p>算算看，透過<strong>實驗設計假設</strong>以後，你所花的實驗費是多少？有發現跟剛剛在第一階段發想點子時，所預估花的錢差很多嗎？</p>
+
+<p>透過這樣的第一階段的思考發想，然後設計點子，一直到第二階段的實驗假設，來了解其實可以不用很快的投入過多的成本，因為我們所想的不一定是對的，也可以避免浪費的狀況發生，造成不必要的失敗和損失，這跟《精實創業》想表達的精神其實是一樣的，透過這次學習，我了解了更多</p>
+
+<p>參考資料:</p>
+
+<p>Leo的Workshop</p>
+
+<p><a href="http://www.designthinkingmovie.com/index_ch.html" target="_blank">《設計與思考》</a></p>
+
+<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010547374" target="_blank">《精實創業》</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] 當函式需要傳遞很多參數時]]></title>
@@ -1659,401 +2336,6 @@ config.$navPrev.on( 'click', function() {
 <p><a href="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
 
 <p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[學習筆記] 亞馬遜帝國成功學]]></title>
-    <link href="http://rx836.github.com/blog/work-1/"/>
-    <updated>2012-06-24T02:27:00+08:00</updated>
-    <id>http://rx836.github.com/blog/work-1</id>
-    <content type="html"><![CDATA[<p>今天看到商業周刊1283期，裡面提到Amazon的成功學，讓我著實上了一課，其實應該是說六課，每一課都充滿了智慧在裡面，不僅可以套用在工作，事業，甚至是人生的規劃，都是非常好的借鏡</p>
-
-<!--more-->
-
-
-<h2>第一課:做對的事，比做有效率的事重要</h2>
-
-<p>亞馬遜在擴建倉庫的時候，其實一般人都很不看好，大家都認為，你做網路的，為什麼要跑去建倉庫？一堆人覺得很笨，可是Amazon就堅持做對的事情，他不在乎被人長期誤解，認為只有建倉庫，才能免去消費者的等待，幾年後，事實也證明，Amazon是對的，不為了效率搶快，而是做對的事情，就算需要的時間較長，也十分值得</p>
-
-<p>同樣用在自己的身上，你想做對的事情(長遠)，還是一昧追求效率(短期)？</p>
-
-<h2>第二課:想未來如何改變，根本白費力氣</h2>
-
-<p>很多人只會問，未來會怎麼變，但卻很少人問，未來5~10年，什麼是不變的基礎？掌握這些基礎，長期的投入，將會帶來可觀的收穫，這句話並不是要你不看未來，不去掌握趨勢，而是要你換另外一個角度，去想想，未來什麼是長期不變的，而不是針對那些每天都在變動的東西去思考，因為根本來不及追求</p>
-
-<p>何不想想，甚麼東西是未來20年都不會變的需求？</p>
-
-<h2>第三課:要創新，先懂兩個披薩原則</h2>
-
-<p>這意思是說，要求團隊只要10人左右即可(差不多兩份披薩的人數)，不管是開會還是如何，都希望每個人都能提出意見，共同參與，而不是有些人盯著台上的人不講話，才不會浪費人力資源，要讓大家人無不言，言無不盡，會議才會有深度</p>
-
-<h2>第四課:把Way Not？當口頭禪</h2>
-
-<p>許多人分配到任務，最常講的是，為什麼要做？而不是為何不做？Amazon認為他們最常犯的錯，就是<strong>沒去做的錯</strong>，因為沒去做，錯失很多機會，反覆的問自己，為什麼不做？而且要想辦法去做，才能提升自己的競爭能力</p>
-
-<h2>第五課:不必管對手，掏錢的不是他</h2>
-
-<p>常常人們犯最多的錯誤，就是迷失焦點，因為別人的一舉一動，就當成影響自己的原因，但當你跟別人或是別家公司比較的時候，有沒有想過，你自己的人生，為何要跟別人比較？別人過的如何？會實質影響到你的人生嗎？</p>
-
-<p>就如同公司，一直注意對手再幹什麼，卻忘記了，最後掏錢的是客戶，而不是對手，不要把焦點放在對手，而是要將專注力放在顧客身上，做專注的事情</p>
-
-<h2>第六課:獲利不重要，現金才是王道</h2>
-
-<p>保留給自己彈性，能應付各種突發狀況，我想這是每個人都應該做的風險管理，就跟企業一樣，留有保命的銀彈，不只可以不用擔心突然的景氣衰退，也可以不用一直看銀行臉色，不管做什麼都可以立即馬上實行，增加了企業改變很大的彈性，這點從Apple(蘋果)身上，也可以印證</p>
-
-<p>對於我們自己來說，更不應該把所有的錢投入在股匯市上面，因為你永遠不知道明天會發生什麼事情，要給自己容錯的機會</p>
-
-<p>Amazon的六堂課，每堂課都值得細細品嘗</p>
-
-<p>如有疑問，歡迎一起討論</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[讀後心得] 社群效應:小圈圈如何改變世界]]></title>
-    <link href="http://rx836.github.com/blog/book-review-4/"/>
-    <updated>2012-06-20T23:13:00+08:00</updated>
-    <id>http://rx836.github.com/blog/book-review-4</id>
-    <content type="html"><![CDATA[<p>作者:Paul Adams</p>
-
-<p>出版者:基峯資訊股份有限公司</p>
-
-<!--more-->
-
-
-<p>我一直對於社群這個詞感到興趣 ，也覺得這個世界會因為社群的關係 ，而有非常劇烈的改變 ，這程度甚至不亞於網路的興起 ，這本書其實一開始我並沒有關注到 ，是因為Facebook社團裡面的前輩所推薦(沒錯 ，Facebook幾乎可以說是改變我一生) ，才引起我的興趣</p>
-
-<h2>我們分享的是感受 ，而非事實</h2>
-
-<p>書裡面提到的很多觀念 ，是我以前不知道的 ，還有一些是 ，平常我就有感覺到的  ，像Facebook最常看到的是 ，大家分享某項資訊 ，會帶入個人自己的感受 ，或是照片 ，也會加上自己的評論進去 ，因為往往我們會被這種有包含朋友的觀點在裡面的事物所吸引</p>
-
-<h2>你是唯一的途徑</h2>
-
-<p>另一個讓我所沒想過的是 ，原來我的朋友群之間 ，真的是只有我做為唯一的連結點 ，如果沒有我 ，我的朋友群跟群之間 ，根本不可能會交會到 ，這在裡面提到的另一個重點 ，不要迷信尋找『有影響力』的人 ，而應該針對那些有連結『創意樞紐』的人 ，下足經營的工夫</p>
-
-<h2>偏頗如何影響我們</h2>
-
-<p>以前我就聽過人們是非理性，我一直認為怎麼會？但看完這章節後，裡面所舉的例子，讓我不得不說，人類真的是如此，我們的腦分為三個部分，意識腦是我們唯一能操控的部分，無意識腦是由兩個部分所組成，處理情緒和主導我們大部分行為的中腦，以及維持我們生命系統的原腦，在這個充斥資訊的世界裡，我們大腦會將意識資訊轉換成無意識的資訊，這就像是學習開車一樣，一開始你會使用意識腦來想每個動作，但久而久之，你可以邊想事情邊開車，就是因為你將開車這個動作轉換成無意識腦的一部份</p>
-
-<p>可是也因為這樣的特性，導致人們常被自己給欺騙，我們很多行為都是出自無意識腦，可是我們不可能記得每一件事情，當記憶是片段的時候，我們的大腦會嘗試補足那些缺口，但那卻都不是真的，這也是為什麼我們大腦都會記得有關連性的原因，同時，外面教人如何快速記憶，大都也是利用關聯性或故事性這種方法來增強記憶，</p>
-
-<p>書中告訴我們一些我們過去的誤解，只有你能掌握這些人與人之間的關係，對於社群的行銷才會事倍功半</p>
-
-<p>還有，不要再期望過去那種干擾式行銷可以為你帶來甚麼效益，消費者也是會進步的，他們已經不信這一套了，在這個以人為本的社群社會裡面，要學習如何抓住這個趨勢</p>
-
-<p>最後我想筆記的四個重點:社交行為、網絡、人們的想法、聚焦獨立的小型朋友群體</p>
-
-<p>如有想法，歡迎一起提出討論</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Jquery] 做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll]]></title>
-    <link href="http://rx836.github.com/blog/jquery-waterfall-infinitescroll/"/>
-    <updated>2012-06-19T00:27:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-waterfall-infinitescroll</id>
-    <content type="html"><![CDATA[<p>相信已經有很多人已經看過<a href="http://pinterest.com/" target="_blank">pinterest</a>這個網站的介面效果，是利用一個稱為<a href="http://www.21andy.com/blog/20120527/2041.html" target="_blank">Waterfall</a>，中文叫做瀑布流布局的效果，原理是算出周圍元素的寬和高，去排列畫面的布局，利用絕對定位的方式來達到隨著螢幕大小來變動整個版面</p>
-
-<!--more-->
-
-
-<p>再加上無限滾輪( Infinite Scroll)的搭配，就可以做出類似Pinterest效果，所以上網去搜尋了一下，找到了<a href="http://masonry.desandro.com/index.html" target="_blank">jQuery Masonry</a>這個Waterfall的Plugin，在jQuery Masonry的官方文件裡面寫可以跟<a href="http://www.infinite-scroll.com/" target="_blank">Infinite scroll</a>這個Plugin一起搭配無限滾輪這個效果，但我找不到Infinite scroll使用向Server端取得元素的方法，例如.NET常用的泛型處理常式，所以我另外找了其他的Infinite Scroll來使用</p>
-
-<p>但其實可以按照個人所需來選擇，這裡有介紹<a href="http://designbeep.com/2011/08/12/12-jquery-infinite-scrollingscroll-read-plugins-for-content-navigation/" target="_blank">12種jQuery Infinite Scrolling</a>，而我這邊是選擇<a href="http://andersonferminiano.com/jqueryscrollpagination/" target="_blank">jQuery ScrollPagination</a>，因為對我來說使用起來很簡單，但缺點就是要稍微修改一下Plugin，對於IE8來說</p>
-
-<p>首先就是先隨意建立一個HTML，但有個比較要注意的地方就是所有的div或是其他元素包含在_container裡面的，都要盡量去宣告width，不然有時候會有不正常的情況發生</p>
-
-<pre><code>&lt;div id="_container" style="height:800px;"&gt;         
-        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic1.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話我要講的話我&lt;/div&gt; &lt;/div&gt;
-        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic2.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話我要講的話我要講的話我要講&lt;/div&gt; &lt;/div&gt;
-        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic4.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話我要講的話我&lt;/div&gt; &lt;/div&gt;
-        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic5.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話我要講的話我要講的話我要講的話我要&lt;/div&gt; &lt;/div&gt;
-        &lt;div class="item"&gt;&lt;div&gt;&lt;img src="images/pic6.jpg" /&gt;&lt;/div&gt;&lt;div&gt;我要講的話&lt;/div&gt; &lt;/div&gt;         
-&lt;/div&gt;   
-</code></pre>
-
-<p>再來是js的部分，引用Jquery+jQuery Masonry+jQuery ScrollPagination</p>
-
-<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="scripts/jquery.masonry.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="scripts/scrollpagination.js"&gt;&lt;/script&gt;   
-</code></pre>
-
-<p>接著是要撰寫的部分，首先是Jquery Masonry部分，也就是Waterfall</p>
-
-<pre><code>$('#_container').imagesLoaded(function () {
-        $('#_container').masonry({
-            // options
-            itemSelector: '.item',
-            columnWidth: 240,
-            singleMode: true,
-            animate:true
-        });
-});
-</code></pre>
-
-<p><strong>imagesLoaded()</strong>:這個方法主要是因為一般來說我們用jquery用$(function(){ .. });這個方法來實做，image並不會載完，而是在DOM載完以後就會立刻執行，可是這樣並沒有辦法得知圖片大小，所以必須用imagesLoaded()來防止計算寬度和高度錯誤</p>
-
-<p><strong>itemSelector</strong>:要套用效果的元素</p>
-
-<p><strong>columnWidth</strong>:欄位寬度</p>
-
-<p><strong>singleMode</strong>:因為等會在jQuery ScrollPagination裡面也會再用一次Jquery Masonry(讀取新的元素進來要套用效果)，所以這邊設定true，後面的Jquery Masonry就可以直接使用前面的設定</p>
-
-<p><strong>animate</strong>:打開效果</p>
-
-<p>接著是jQuery ScrollPagination的撰寫部分</p>
-
-<pre><code>$('#_container').scrollPagination({
-        'contentPage': 'GetDynamicGrid.ashx', // the page where you are searching for results
-        'contentData': {  }, // you can pass the children().size() to know where is the pagination
-        'scrollTarget': $(window), // who gonna scroll? in this example, the full window
-        'heightOffset': 10, // how many pixels before reaching end of the page would loading start? positives numbers only please
-        'beforeLoad': function () { // before load, some function, maybe display a preloader div
-
-        },
-        'afterLoad': function (elementsLoaded) { // after loading, some function to animate results and hide a preloader div
-
-            var $newElems = $(elementsLoaded).css({ opacity: 0 });
-            $newElems.imagesLoaded(function () {
-                // show elems now they're ready
-                $newElems.animate({ opacity: 1 });
-                $('#_container').masonry('appended', $newElems, true);
-            });
-        }
-    });
-</code></pre>
-
-<p>這裡就不細翻每個option的解釋，大概的原理就是當算出scroll到底部以後，就會觸發ajax，接著afterLoad()會callback一個參數，裡面就是server端回傳的新元素，再用Jquery Masonry將Waterfall效果套用在新元素上面</p>
-
-<h2>IE8的空白間格問題&#8230;</h2>
-
-<p>但我在實做過程中，就如同之前所講的，IE8會有些許的問題，會發現每當只要滾輪到底部以後，觸發後收到新的元素加到畫面上，都會發現區塊與區塊之間有白色的間隔，問題找了好久，用firebug發現到，IE8每當我滾輪移到底部時，一般都會觸發一次ajax跟server端要資料，可是IE8卻會一次觸發兩次以上，導致Jquery Masonry計算元素的高度和寬度出現誤差，才會出現空白的間隔</p>
-
-<p>為了改善這個原因，我用比較笨的方式來解決，因為我的功力還沒辦法深入了解瀏覽器間的差異，我發現jQuery ScrollPagination它的範例裡面有用過<strong>stopScrollPagination()</strong>這個方法，看了一下Plugin的原始法，發現它是包覆在外層id名為_container的div，加上一個屬性</p>
-
-<pre><code>$(obj).attr('scrollPagination', 'disabled');
-</code></pre>
-
-<p>可以用搜尋在jQuery ScrollPagination的原始碼裡面來尋找，所以它利用判別屬性scrollPagination是disabled還是enabled，就可以知道是不是要繼續觸發滾輪事件</p>
-
-<p>我利用了它寫的這段程式碼，來修改一下，在原始碼這段</p>
-
-<pre><code>$.fn.scrollPagination.loadContent = function (obj, opts) { ... }
-</code></pre>
-
-<p> 我在ajax()前面先將scrollPagination屬性先設為disabled，接著在執行完ajax以後，再將屬性設回enabled，讓滾輪事件重新觸發，以下為修改程式碼片段</p>
-
-<pre><code> $(obj).attr('scrollPagination', 'disabled');
-            $.ajax({
-                type: 'POST',
-                url: opts.contentPage,
-                data: opts.contentData,
-                success: function (data) {
-                    $(obj).append(data);
-                    var objectsRendered = $(obj).children('[rel!=loaded]');
-
-                    if (opts.afterLoad != null) {
-                        opts.afterLoad(objectsRendered);
-                    }
-                    $(obj).attr('scrollPagination', 'enabled');
-                },
-                dataType: 'html'
-            });
-</code></pre>
-
-<p>其實這有點偷吃步，並不是真正解決核心的問題所在，但無奈底子差，只能先讓程式可以跑(這是重點呀&#8230;.!)，日後有時間再來好好探討這個問題(其實是希望等著IE8被淘汰的那天&#8230;)</p>
-
-<p>以上如有問題或是錯誤的地方，歡迎大家一起討論</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Facebook] 如何建立facebook App 且取得FB ID]]></title>
-    <link href="http://rx836.github.com/blog/facebook-app-create-getfbid/"/>
-    <updated>2012-06-16T00:36:00+08:00</updated>
-    <id>http://rx836.github.com/blog/facebook-app-create-getfbid</id>
-    <content type="html"><![CDATA[<p>這裡將會紀錄如何建立一個Facebook App，並且讓User授權應用程式，最後取得FB ID來當會員資料或是參加活動的ID識別</p>
-
-<!--more-->
-
-
-<p>首先，你必須是個Facebook App Developers，你可以去<a href="https://developers.facebook.com/" target="_blank">facebook DEVELOPER</a>申請你的身份，我記得以前不用手機驗證，但現在則需要</p>
-
-<p>接著你會看到以下畫面</p>
-
-<p><img src="https://lh3.googleusercontent.com/-qsrR5jf8ieQ/T9tcfJx0g0I/AAAAAAAAAQo/ijDj_DOzoFY/s902/2012-06-15_170640.jpg" width="700px" /></p>
-
-<p>點選右上角的Create New App</p>
-
-<p>會跳出一個POP視窗</p>
-
-<p><img src="https://lh4.googleusercontent.com/-b1KPFkV9kak/T9tdnIs-8LI/AAAAAAAAAQ4/Qa62h_PbpYw/s660/2012-06-15_171009.jpg" width="700px" /></p>
-
-<p><strong>App Name</strong>:指的是你的應用程式名稱</p>
-
-<p><strong>App Namespace</strong>:是你的網址命名</p>
-
-<p><strong>Web Hosting</strong>:如果你有自己的Web Hosting就不用勾選</p>
-
-<p>按下Continue以後會出現填寫驗證碼，填寫完後按下Submit</p>
-
-<p><img src="https://lh6.googleusercontent.com/--MZXrFzYUmo/T9tdnPmoYLI/AAAAAAAAAQw/tjvCiZFjhaU/s664/2012-06-15_171639.jpg" width="700px" /></p>
-
-<p>然後就會看到建立好的App一些資訊和設定</p>
-
-<p><img src="https://lh3.googleusercontent.com/-HmL8gmkIbMo/T9tdnPYDjgI/AAAAAAAAAQ0/aoxRueaQ4uQ/s882/2012-06-15_171904.jpg" width="700px" /></p>
-
-<p>因為雖然是寫Facebook App，但其實Facebook只是提供你API和外框包住你的網頁，所以你還要提供你的網頁所在位置給Facebook</p>
-
-<p><img src="https://lh6.googleusercontent.com/-WAH8_0uqxXY/T9tdnoOUwDI/AAAAAAAAAQ8/Ol4WZwkLFI8/s729/2012-06-15_172431.jpg" width="700px" /></p>
-
-<p>要注意的是Facebook要求<a href="https://developers.facebook.com/blog/post/497/" target="_blank">使用加密的https</a>，所以如果你如果沒有的話，可能要花錢購買這方面的憑證</p>
-
-<p>到這邊為止，已經建立好初步的Facebook App了</p>
-
-<h2>使用JavaScript API做授權</h2>
-
-<p>有了App以後，我們要跟網頁串起來，因為我是.NET開發者，所以我會先建立一個index.aspx，接著一般我都會在&lt;form id=&#8221;form1&#8221; runat=&#8221;server&#8221;&gt;&lt;/form&gt;的後面加上</p>
-
-<pre><code>&lt;div id="fb-root"&gt;&lt;/div&gt;
-&lt;script type="text/javascript" src="https://connect.facebook.net/zh_TW/all.js"&gt;&lt;/script&gt;  
-&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"&gt;&lt;/script&gt;
-</code></pre>
-
-<p> 注意，如果沒有fb-root的div會導致不能使用Facebook API，另外我還多用了Jquery來方便等一下寫js程式碼</p>
-
-<p>接下來新增一個div做為點選授權</p>
-
-<pre><code>&lt;div id="btn"&gt;點我授權&lt;/div&gt;
-</code></pre>
-
-<p>接著是js初始化部分</p>
-
-<pre><code>$(function () {
-
-        var _app_id = 'Your App ID';
-        var _api_key = '';
-        //驗證            
-        FB.init({
-            appId: _app_id,
-            status: true, // check login status
-            cookie: true, // enable cookies to allow the server to access the session
-            xfbml: true, // parse XFBML                
-            oauth: true // enable OAuth 2.0
-        });
-        FB.Canvas.setAutoGrow(); //autoResize  → no scrollbar
-
-   });
-</code></pre>
-
-<p><strong>Your App ID</strong>必須填入你建立好的Facebook App裡面的App ID ，接著加上點擊觸發授權的js部分</p>
-
-<pre><code>    $('#btn').click(function () {
-            getLoaginState();
-        });
-
-        //驗證
-        function getLoaginState() {
-            FB.getLoginStatus(function (response) {
-                if (response.authResponse) {
-                    var u_fb_id = response.authResponse.userID;
-                    console.log(u_fb_id);
-                } else {
-                    login();                        
-                }
-            });
-        }
-
-        //跳出登入視窗
-        function login() {
-            FB.login(function (response) {
-                if (response.authResponse) {
-                     var u_fb_id = response.authResponse.userID;
-                     console.log(u_fb_id);
-                } else {
-                    alert('須同意應用程式');
-                }
-            });
-        }
-</code></pre>
-
-<p>這段js是綁定一個click事件，在id為btn的div上，然後去執行getLoaginState()，<strong>FB.getLoginStatus</strong>是看登入狀態，沒有登入則會跳到login()，console是等下能看到我們所取得的FB ID</p>
-
-<p>接著在剛剛App設定網址那邊有個<strong>Canvas Page</strong>，那就是你掛在Facebook底下的網址，後面的網址名稱就是你剛剛設定的App Namespace，進入以後會看到以下畫面</p>
-
-<p><img src="https://lh3.googleusercontent.com/-j1YbMlBI6oU/T9tgEdDILSI/AAAAAAAAARY/noBT1wLBEEs/s1223/2012-06-16_001702.jpg" width="700px" /></p>
-
-<p>按下<strong>點我授權</strong>，就會跳出授權是否同意應用程式視窗</p>
-
-<p><img src="https://lh5.googleusercontent.com/-ul15BASQCTk/T9th2pskfsI/AAAAAAAAARg/E9_uWLPQVFI/s1046/2012-06-16_002409.jpg" width="700px" /></p>
-
-<p>同意以後，就可以在firebug裡面看到我們剛剛所加的console，秀出你的FB ID</p>
-
-<p><img src="https://lh5.googleusercontent.com/-ITJVUoACd3s/T9tirDBGMOI/AAAAAAAAARo/Oy8ICJf03bw/s1008/2012-06-16_002811.jpg" width="700px" /></p>
-
-<p>得到FB ID可以利用<a href="https://developers.facebook.com/docs/reference/api/" target="_blank">Graph API</a>再更進一步取得許多資料，當然也要先授權相關權限才行</p>
-
-<p>以上如有問題，歡迎一起討論</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Jquery] jScrollPane的使用與注意]]></title>
-    <link href="http://rx836.github.com/blog/jquery-jscrollpane-display/"/>
-    <updated>2012-06-11T18:26:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-jscrollpane-display</id>
-    <content type="html"><![CDATA[<p>有些時候客戶會不想要HTML內建的Scrollbar，所以特地去找了一個Jquery Plugin來使用，但注意，如果有使用到display:none，或是類似lightbox視窗效果，要注意一下先後執行的問題</p>
-
-<!--more-->
-
-
-<p>當然，還有其他很多Plugin可以選擇<a href="http://www.net-kit.com/jquery-custom-scrollbar-plugins/" target="_blank">10 jQuery Custom Scrollbar Plugins</a>，這裡我是用jScrollPane，使用方法很簡單，先下載他的檔案回來，在載入到網頁</p>
-
-<p>使用方法</p>
-
-<pre><code>&lt;!-- CSS部分 --&gt;
-&lt;link type="text/css" href="style/jquery.jscrollpane.css" rel="stylesheet" media="all" /&gt;
-
-&lt;!-- 還要載入Jquery 這裡用CDN --&gt;
-&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;
-&lt;/script&gt;
-
-&lt;!-- 載入mousewheel plugin --&gt;
-&lt;script type="text/javascript" src="script/jquery.mousewheel.js"&gt;&lt;/script&gt;
-
-&lt;!-- 載入jScrollPane --&gt;
-&lt;script type="text/javascript" src="script/jquery.jscrollpane.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>接著只要對包覆內容的div加上Jquery語法</p>
-
-<pre><code>$(function()
-{
-    $('.your div').jScrollPane();
-});
-</code></pre>
-
-<p>這樣就可以自製Scrollbar了！很簡單吧</p>
-
-<p>這裡有<a href="http://jscrollpane.kelvinluck.com/#examples" target="_blank">更多範例</a></p>
-
-<p>不過有時候我們會遇到一個狀況，一開始會設div為display:none，然後點了某個元件以後，用lightbox或其他方式秀出div，如下圖</p>
-
-<p><img width="300px" src="https://lh4.googleusercontent.com/-NBEVwEqZHlY/T9XCoGfeq1I/AAAAAAAAAQc/sWHyCp2vi6M/w753-h585-k/a.jpg" /></p>
-
-<p>但會發現，依照正常流程來套用，點開呈現的效果不如預期，那是因為你在還沒套用jScrollPane之前，為了呈現lightbox的效果，就已經先將他display:none，為了避免發生這種情況，必須先不要display:none，然後在jscrollpane套用以後，再將div做隱藏，教學如下</p>
-
-<p>1.先找到function initialise()</p>
-
-<p>2.接著在這個function的最後面加上$(&#8216;#your div&#8217;).hide()</p>
-
-<p>意思就是，等所有初始化步驟結束以後，才把div的display設成none</p>
-
-<p>其實有很多Jquery Plugin的套用，如果有用到顯示/隱藏的切換，都要注意到先後順序的問題</p>
-
-<p>以上如有問題，歡迎一起討論</p>
 ]]></content>
   </entry>
   
