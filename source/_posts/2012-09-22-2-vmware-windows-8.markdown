@@ -3,7 +3,7 @@ layout: post
 title: "[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]"
 date: 2012-09-22 14:33
 comments: true
-categories: 學習筆記
+categories: 學習筆記 Win8
 ---
 
 延續上一篇<a href="http://blog.rx836.tw/blog/vmware-windows-8/" target="_blank">簡單容易，如何在VM裝Windows 8來玩玩[二]</a>，已經在VM裡面建立一個Windows 8的虛擬機器，現在就來開始安裝系統部分
