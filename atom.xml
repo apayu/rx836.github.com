@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-08T18:53:03+08:00</updated>
+  <updated>2012-10-10T23:40:55+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[PhoneGap] 第一次開發PhoneGap教學筆記]]></title>
+    <link href="http://rx836.github.com/blog/phonegap-first/"/>
+    <updated>2012-10-10T22:39:00+08:00</updated>
+    <id>http://rx836.github.com/blog/phonegap-first</id>
+    <content type="html"><![CDATA[<p>很早很早以前曾經摸過一下Android，還曾想過要走開發手機這條路，但最後還是繼續寫著網頁，不知道選擇對不對，不過至少現在可以用寫網頁的方式做出APP，那就是利用已經出很久的PhoneGap，但到今天才真正的開始學習他，在這邊也會開始慢慢記錄一些有關於PhoneGap的心得</p>
+
+<!--more-->
+
+
+<p>網路上已經有很多很多的觀念與介紹，所以這邊就不在多述，要開始之前請先安裝<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Java 開發工具包( Java Development Kit , JDK )</a>，建議大家下載JDK6</p>
+
+<p><img src="https://lh3.googleusercontent.com/-O98JK3DRzHM/UHWWC5uq4QI/AAAAAAAABtY/ABoTETFnIJo/s538/1.png" /></p>
+
+<p>安裝好以後接著就下載並安裝<a href="http://www.eclipse.org/downloads/" target="_blanl">Eclipse</a>，Eclipse是一個IDE，一個整合開發環境，類似Microsoft Visual Studio，因為Android官方並沒有推出專屬的手機應用程式開發軟體，但有支援 Eclipse 的官方外掛開發套件</p>
+
+<p><img src="https://lh6.googleusercontent.com/-vDbyAlgXX8M/UHWWDDRPM3I/AAAAAAAABtg/nsLxVsp43L0/s731/2.png" /></p>
+
+<p>以上的安裝和設定過程，都可以參考<a href="http://blog.chinatimes.com/tomsun/archive/2011/11/08/1029787.html" target="_blank">[Android 教學] Android 4.0 SDK 下載安裝中文教學課程講義</a></p>
+
+<p>接著就是下載本篇主角<a href="http://www.phonegap.com/download" target="_blank">PhoneGap</a>，下載以後進行解壓縮</p>
+
+<p>但其實PhoneGap官方網站有詳細的<a href="http://docs.phonegap.com/en/2.1.0/guide_getting-started_android_index.md.html#Getting%20Started%20with%20Android" target="_blank">入門教學</a>，這裏我就直接按照他的步驟敘述</p>
+
+<p>1.首先開啟Eclipse，選擇<strong>New Project</strong></p>
+
+<p>2.選擇new一個<strong>Android Application Project</strong></p>
+
+<p>3.輸入<strong>Application Name</strong>、<strong>Project Name</strong>和<strong>Package Name</strong></p>
+
+<p>4.設定應用程式icon</p>
+
+<p>5.建立一個<strong>Blank Activity</strong></p>
+
+<p>6.在你的Android專案裡面建立新的目錄，分別是</p>
+
+<pre><code>/libs
+assets/www
+</code></pre>
+
+<p>7.從剛剛下載的PhoneGap的資料夾裡面，找到<strong>lib/android/</strong>，並且複製<strong>cordova-2.0.0.js</strong>到<strong>assets/www</strong>資料夾底下</p>
+
+<p>8.複製<strong>cordova-2.0.0.jar</strong>到<strong>/libs</strong>底下</p>
+
+<p>9.複製整個<strong>xml</strong>這個資料夾到Android專案底下的<strong>/res</strong>資料夾</p>
+
+<p>10.針對剛剛的<strong>cordova-2.0.0.jar</strong>檔案按下右鍵，選擇<strong>Build Paths/ > Configure Build Path</strong>，切換到Libraries這個頁籤，將<strong>cordova-2.0.0.jar</strong>加入到裡面</p>
+
+<p>11.找到<strong>src</strong>資料夾底下，副檔名為java的檔案並且開啟編輯他</p>
+
+<pre><code>增加**import org.apache.cordova.*;**這行程式
+修改class's extend從Activity改成DroidGap
+將**setContentView()**這行取代成**super.loadUrl("file:///android_asset/www/index.html");**
+</code></pre>
+
+<p>12.接著點擊<strong>AndroidManifest.xml</strong>選擇<strong>Open With > Text Editor</strong></p>
+
+<p>13.將以下程式加到<strong>&lt;uses-sdk&#8230;/></strong>和<strong>&lt;application&#8230;/></strong>tags之間</p>
+
+<pre><code>&lt;supports-screens 
+android:largeScreens="true" 
+android:normalScreens="true" 
+android:smallScreens="true" 
+android:resizeable="true" 
+android:anyDensity="true" /&gt;
+&lt;uses-permission android:name="android.permission.VIBRATE" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt;
+&lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;uses-permission android:name="android.permission.RECEIVE_SMS" /&gt;
+&lt;uses-permission android:name="android.permission.RECORD_AUDIO" /&gt;
+&lt;uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /&gt;
+&lt;uses-permission android:name="android.permission.READ_CONTACTS" /&gt;
+&lt;uses-permission android:name="android.permission.WRITE_CONTACTS" /&gt;
+&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt; 
+&lt;uses-permission android:name="android.permission.GET_ACCOUNTS" /&gt;
+&lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;
+</code></pre>
+
+<p>14.將以下程式加到<strong><activity></strong>這個tag裡面</p>
+
+<pre><code>android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+</code></pre>
+
+<p>15.新增一個<strong>index.html</strong>到<strong>assets/www</strong>資料夾底下，裡面的html碼為</p>
+
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Cordova&lt;/title&gt;
+&lt;script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>接下來就可以點擊專案名稱右鍵，選擇<strong>Run As > Android Application</strong>，開始看結果囉！</p>
+
+<p>假如你沒有AVD可以看<a href="http://blog.chinatimes.com/tomsun/archive/2011/11/24/1054452.html" target="_blank">這篇</a>教學怎麼設定AVD</p>
+
+<p>這樣index.html裡面就是你的Android應用程式的內容了，可以用你熟悉的html+css+js來開發手機應用程式</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://cire.pixnet.net/blog/post/37927775-%5B%E7%AD%86%E8%A8%98%5D--%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%96%8B%E7%99%BC-android-%E7%89%88%E6%9C%AC-phonegap--%2B-jquery-" target="_blank">[筆記] 第一次開發 Android 版本 PhoneGap + JQuery Mobile 就上手</a></p>
+
+<p><a href="http://docs.phonegap.com/en/2.1.0/guide_getting-started_android_index.md.html#Getting%20Started%20with%20Android" target="_blank">Getting Started with Android</a></p>
+
+<p><a href="http://www.eclipse.org/" target="_blank">eclipse</a></p>
+
+<p><a href="http://blog.chinatimes.com/tomsun/archive/2011/11/08/1029787.html" target="_blank">[Android 教學] Android 4.0 SDK 下載安裝中文教學課程講義</a></p>
+
+<p><a href="http://blog.chinatimes.com/tomsun/archive/2011/11/24/1054452.html" target="_blank">[Android 教學] Android 4.0 模擬器安裝設定教學課程講義</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[Win8] 入門要學說Hello world]]></title>
@@ -2174,165 +2297,6 @@ config.$navPrev.on( 'click', function() {
 <p>參考資料:</p>
 
 <p><a href="http://www.davecranwell.com/content/jquery-scroll-parallax-plugin" target="_blank">JQUERY SCROLL PARALLAX PLUGIN</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] $.data原理]]></title>
-    <link href="http://rx836.github.com/blog/jquery-data-cache/"/>
-    <updated>2012-08-30T14:10:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-data-cache</id>
-    <content type="html"><![CDATA[<p>今天在看別人寫的jQuery Plugin，發現 <strong>this[expando]</strong> 這個寫法，好奇心驅使下，決定一探究竟</p>
-
-<!--more-->
-
-
-<p>因為不了解<strong>expando</strong>是甚麼，所以特地去找了一下Google，發現在jQuery裡面有這一段程式碼</p>
-
-<pre><code>expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" );
-</code></pre>
-
-<p>原來這是在使用$.data時可以做為匹配的id，產生的邏輯就是版本代號+一組亂數，並把非數字的字元用replace替代掉，expando會在每次載入jQuery時直接生成，所以用console.log()看如下面所示</p>
-
-<pre><code>console.log($.expando);
-//jQuery18004247503886623739
-</code></pre>
-
-<p>那$.data又是甚麼呢？在jQuery的文件裡面是這樣寫</p>
-
-<pre><code>Description: Store arbitrary data associated with the matched elements.
-</code></pre>
-
-<p>意思就是以前我們都喜歡將數據存在HTMLElement屬性上，例如下面所示</p>
-
-<pre><code>&lt;div data="some data"&gt;my div&lt;/div&gt;
-&lt;script&gt;
-    div.getAttribute('data'); //some data
-&lt;/script&gt;
-</code></pre>
-
-<p>但如果用這種方式添加數據，往往數據會直接曝露在原始碼當中，從安全性的角度來思考並不太好，另一方面，在DOM的元素中添加這麼多的屬性，其實對瀏覽器來說是沒有意義</p>
-
-<p>所以jQuery很棒的提供了這方面的解決方式給我們，利用$.cache來緩存我們想要保存的數據，在說明原理之前，我們先來看幾個參數的意義，在jQuery原始碼底下看到以下這些程式碼</p>
-
-<pre><code>jQuery.extend({
-
-    cache: {},
-
-    ...
-
-    // Please use with caution
-    uuid: 0,
-
-    // Unique for each copy of jQuery on the page
-    // Non-digits removed to match rinlinejQuery
-    expando: "jQuery" + ( jQuery.fn.jquery + Math.random() ).replace( /\D/g, "" ),
-
-    // The following elements throw uncatchable exceptions if you
-    // attempt to add expando properties to them.
-    noData: {
-        "embed": true,
-        // Ban all objects except for Flash (which handle expandos)
-        "object": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000",
-        "applet": true
-    },
-
-    hasData: function( elem ) {
-        elem = elem.nodeType ? jQuery.cache[ elem[jQuery.expando] ] : elem[ jQuery.expando ];
-        return !!elem &amp;&amp; !isEmptyDataObject( elem );
-    },
-
-    ...
-
-});
-</code></pre>
-
-<p><strong>jQuery.cache</strong>:空物件，用來做緩存</p>
-
-<p><strong>jQuery.uuid</strong>:一個seed，會遞增，用來標示每個cache</p>
-
-<p><strong>jQuery.expando</strong>:一組字串，如前面所說，由Math.random生成，同時也是DOM的屬性名稱，裡面會對映到jQuery.uuid</p>
-
-<p><strong>jQuery.noData</strong>:檢查元素是否能使用$.data，預設是embed、object、applet不能使用</p>
-
-<p><strong>jQuery.hasData</strong>:判斷元素是否已經擁有data</p>
-
-<p>接下來是範例講解</p>
-
-<pre><code>&lt;div&gt;test&lt;/div&gt;
-&lt;script&gt;
-    console.log($.expando);
-    //jQuery180010448733290775436 
-    //載入jQuery就會生成一組字串
-
-    var div = document.getElementsByTagName('div')[0];
-
-    console.log($.hasData(div));
-    //false
-    //因為div還沒使用$.data，所以為false
-
-    $.data(div,'divName','name1');
-
-    console.log($.hasData(div));        
-    //true
-    //div已經有包含data，所以為true
-
-    console.log($.uuid);
-    //1
-    //第一個cache，此時seed遞增為1
-
-    var div2 = document.getElementsByTagName('div')[1];     
-
-    $.data(div2,'divName','name2');
-
-    console.log($.uuid);
-    //2
-    //第二個chche，此時seed遞增為2
-
-    var myObj = {};
-
-    $.data(myObj, 'objName','name3');       
-
-    console.log($.data(myObj, 'objName'));
-    //name3
-    //不只是HTMLElement可以使用$.data，物件也可以使用$.data
-
-    console.log(myObj);     
-    //myObj ={
-    //  jQuery180010448733290775436:{
-    //      objName:name3
-    //  }
-    //}
-    //不過物件並沒有將data緩存到$.cache裡面，而是直接在物件裡面新增一個屬性
-    //屬性名稱為$.expando，值為剛剛設定的緩存值
-
-    console.log(div[$.expando]);
-    //1
-    //再回頭看看元素div會發現裡面已經添加屬性，屬性名稱就叫$.expando也就是最前面那串字串
-    //而屬性值就是1       
-
-    console.log($.cache);
-    //1:{divName:'name1'}
-    //2:{divName:'name2'}       
-    //只有HTMLElement元素才會將值緩存到$.cache裡面，而且會發現屬性值為1可以匹配到$.cache裡面的屬性
-&lt;/script&gt;
-</code></pre>
-
-<p>用圖表示關係如下</p>
-
-<p><img src="https://lh5.googleusercontent.com/-t5d07KuRuJk/UD8Yz5NlG6I/AAAAAAAABYg/cd1cmEgctH8/s748/1.jpg" width="700px" /></p>
-
-<p>巧妙的使用$.data，就可以不必替DOM元素新增一堆屬性了</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://api.jquery.com/data/" target="_blank">jQuery $.data</a></p>
-
-<p><a href="http://www.jb51.net/article/27433.htm" target="_blank">http://www.jb51.net/article/27433.htm</a></p>
-
-<p><a href="http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html" target="_blank">http://hpf1908.appspot.com/2010/10/7/cache-jquery-javascript.html</a></p>
-
-<p>如有錯誤，歡迎指正</p>
 ]]></content>
   </entry>
   
