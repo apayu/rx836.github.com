@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-10T23:40:55+08:00</updated>
+  <updated>2012-10-10T23:48:44+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -63,10 +63,11 @@ assets/www
 
 <p>11.找到<strong>src</strong>資料夾底下，副檔名為java的檔案並且開啟編輯他</p>
 
-<pre><code>增加**import org.apache.cordova.*;**這行程式
-修改class's extend從Activity改成DroidGap
-將**setContentView()**這行取代成**super.loadUrl("file:///android_asset/www/index.html");**
-</code></pre>
+<p>增加<strong>import org.apache.cordova.*;</strong>這行程式</p>
+
+<p>修改class&#8217;s extend從Activity改成DroidGap</p>
+
+<p>將<strong>setContentView()</strong>這行取代成<strong>super.loadUrl(&#8220;file:///android_asset/www/index.html&#8221;);</strong></p>
 
 <p>12.接著點擊<strong>AndroidManifest.xml</strong>選擇<strong>Open With > Text Editor</strong></p>
 
@@ -95,7 +96,7 @@ android:anyDensity="true" /&gt;
 &lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;
 </code></pre>
 
-<p>14.將以下程式加到<strong><activity></strong>這個tag裡面</p>
+<p>14.將以下程式加到<strong>&lt;activity../></strong>這個tag裡面</p>
 
 <pre><code>android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
 </code></pre>
