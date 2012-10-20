@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-21T01:33:33+08:00</updated>
+  <updated>2012-10-21T01:44:41+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -39,7 +39,7 @@
 
 <p><strong>transition-duration:</strong> 指定transition從開始到結束的變化時間，在數字後面加上s就是以秒計算，用ms就是微秒</p>
 
-<p><strong>transition-timing-function:</strong> 根據時間地進行去改變屬性值的變化數率，也就是貝茲曲線，詳細的介紹可以參考<a href="http://www.w3.org/TR/css3-transitions/#transition-timing-function-property" target="_blank">這篇</a>，基本的有linear, ease-in, ease-out和ease-in-out這些值可以使用</p>
+<p><strong>transition-timing-function:</strong> 根據時間的進行去改變屬性值的變化速率，也就是貝茲曲線，詳細的介紹可以參考<a href="http://www.w3.org/TR/css3-transitions/#transition-timing-function-property" target="_blank">這篇</a>，基本的有linear, ease-in, ease-out和ease-in-out這些值可以使用</p>
 
 <p><strong>transition-delay:</strong> 可以指定秒或微秒來延遲transition觸發的時間</p>
 
@@ -52,7 +52,7 @@
 } 
 </code></pre>
 
-<p>要特別注意的是，順序的重要性，另外第一個時間代表是<strong>transition-duration</strong>，第二個時間是<strong>transition-delay</strong>，如果你要定義<strong>transition-duration</strong>一定要先定義<strong>transition-duration</strong>才行</p>
+<p>要特別注意的是，順序的重要性，另外第一個時間代表是<strong>transition-duration</strong>，第二個時間是<strong>transition-delay</strong>，如果你要定義<strong>transition-delay</strong>一定要先定義<strong>transition-duration</strong>才行</p>
 
 <h3>Multiple transitions</h3>
 
@@ -84,7 +84,7 @@
 
 <p><a href="http://jsfiddle.net/Pa5Uk/1/" target="_blank">範例</a></p>
 
-<p>會看到將滑鼠移到div .example上面，會先等一秒以後，再花兩秒的時間從綠色轉換成藍色</p>
+<p>會看到如果將滑鼠移到div .example上面，會先等待一秒，接著再花兩秒的時間從綠色轉換成藍色</p>
 
 <h3>Transitions triggered by JavaScript</h3>
 
