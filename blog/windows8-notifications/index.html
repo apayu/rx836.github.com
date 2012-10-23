@@ -9,7 +9,7 @@
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="最近正參加dea × Quality × Speed – Apps 開發者聯盟，想爭取快手獎前100名名額，活動辦法中有提到需符合10項建議中的其中兩項(詳情看活動辦法)，我覺得動態磚是Win8 APP很有特色的一項功能，所以決定把他加入到我的APP，順便學習如何操作動態磚:) &hellip;">
+  <meta name="description" content="最近正參加Idea × Quality × Speed – Apps 開發者聯盟，想爭取快手獎前100名名額，活動辦法中有提到需符合10項建議中的其中兩項(詳情看活動辦法)，我覺得動態磚是Win8 APP很有特色的一項功能，所以決定把他加入到我的APP，順便學習如何操作動態磚:) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,7 +108,7 @@
   </header>
 
 
-<div class="entry-content"><p>最近正參加<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/detailedRule.htm" target="_blank">dea × Quality × Speed – Apps 開發者聯盟</a>，想爭取快手獎前100名名額，活動辦法中有提到需符合10項建議中的其中兩項(詳情看活動辦法)，我覺得動態磚是Win8 APP很有特色的一項功能，所以決定把他加入到我的APP，順便學習如何操作動態磚:)</p>
+<div class="entry-content"><p>最近正參加<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/detailedRule.htm" target="_blank">Idea × Quality × Speed – Apps 開發者聯盟</a>，想爭取快手獎前100名名額，活動辦法中有提到需符合10項建議中的其中兩項(詳情看活動辦法)，我覺得動態磚是Win8 APP很有特色的一項功能，所以決定把他加入到我的APP，順便學習如何操作動態磚:)</p>
 
 <!--more-->
 
@@ -127,17 +127,19 @@
 
 <p><strong>小標誌:</strong> 是提供搜尋結果的小圖</p>
 
-<p>1為方形磚，2為寬型磚</p>
-
 <p><img src="https://lh3.googleusercontent.com/-PxTwOp3yqSo/UIZeXz4taNI/AAAAAAAABuA/_61SB2q6UtI/s518/B.png" /></p>
 
-<p>這邊有一點要特別特別注意的是，對Win8 APP來說，假如沒有在資訊清單裡面設定<strong>寬標誌</strong>，應用程式將無法切換成寬型磚，所以寬型通知將也無法顯示，小弟我就式在這邊卡了很久，想說程式都沒有錯，為什麼一直無法顯示寬型通知&#8230;</p>
+<p>上面的顯示圖1為方形磚，2為寬型磚</p>
 
-<p>假設應用程式有提供寬標誌，對應用程式按下右鍵，會有選項可以選擇放大或縮小</p>
+<h3>注意事項</h3>
+
+<p>這邊有一點要<strong>特別特別注意</strong>的是，對Win8 APP來說，假如沒有在資訊清單裡面設定<strong>寬標誌</strong>，應用程式將無法切換成寬型磚，所以寬型通知將也無法顯示，小弟我就是在這邊卡了很久，想說程式都沒有錯，為什麼一直無法顯示寬型通知&#8230;</p>
+
+<p>假設你的應用程式有提供寬標誌，對應用程式按下右鍵，就會有選項可以選擇放大或縮小</p>
 
 <p><img src="https://lh3.googleusercontent.com/-1rzB4IyyrZI/UIZeYR6tFBI/AAAAAAAABuI/6aKtLu5S_pA/s570/C.png" /></p>
 
-<p>OK，對動態磚有基本的認識以後，接下來就是Javascript部份</p>
+<p>OK，對動態磚有基本的認識以後，接下來就是JavaScript部份</p>
 
 <p>先宣告一個notifications變數，這裡宣告的目的是取代完整的命名空間，省去每次都要打很長一串程式碼</p>
 
@@ -177,7 +179,7 @@ tileImageAttributes[0].setAttribute("src", "http://i.msdn.microsoft.com/dynimg/I
 tileImageAttributes[0].setAttribute("alt", "red graphic");  
 </code></pre>
 
-<p>剛剛設定完寬磚型通知以後，接下來是方形磚通知</p>
+<p>以上設定完寬磚型通知以後，接下來是方形磚通知</p>
 
 <pre><code>var squareTemplate = notifications.TileTemplateType.tileSquareText04;
 var squareTileXml = notifications.TileUpdateManager.getTemplateContent(squareTemplate);
