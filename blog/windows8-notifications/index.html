@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一] - Rx836</title>
+  <title>[Win8] 動態磚初體驗 - Rx836</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="因為想參加Microsoft的Apps開發者聯盟，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM 當然前提你必須先把VM給裝起來，網路上教學還蠻多的，這篇就不多加闡述 &hellip;">
+  <meta name="description" content="最近正參加dea × Quality × Speed – Apps 開發者聯盟，想爭取快手獎前100名名額，活動辦法中有提到需符合10項建議中的其中兩項(詳情看活動辦法)，我覺得動態磚是Win8 APP很有特色的一項功能，所以決定把他加入到我的APP，順便學習如何操作動態磚:) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/vmware-windows-8">
+  <link rel="canonical" href="http://rx836.github.com/blog/windows8-notifications">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]</h1>
+      <h1 class="entry-title">[Win8] 動態磚初體驗</h1>
     
     
       <p class="meta">
@@ -99,7 +99,7 @@
   
 
 
-<time datetime="2012-09-21T17:37:00+08:00" pubdate data-updated="true">Sep 21<span>st</span>, 2012</time>
+<time datetime="2012-10-23T15:27:00+08:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,70 +108,115 @@
   </header>
 
 
-<div class="entry-content"><p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
+<div class="entry-content"><p>最近正參加<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/detailedRule.htm" target="_blank">dea × Quality × Speed – Apps 開發者聯盟</a>，想爭取快手獎前100名名額，活動辦法中有提到需符合10項建議中的其中兩項(詳情看活動辦法)，我覺得動態磚是Win8 APP很有特色的一項功能，所以決定把他加入到我的APP，順便學習如何操作動態磚:)</p>
 
 <!--more-->
 
 
-<p>當然前提你必須先把VM給裝起來，網路上<a href="http://blog.xuite.net/yh96301/blog/53120472" target="_blank">教學還蠻多的</a>，這篇就不多加闡述</p>
+<p>如果還不太了解Win8 APP的朋友，可以參考之前的<a href="http://blog.rx836.tw/blog/first-win8-app/" target="_blank">[Win8] 入門要學說Hello World</a></p>
 
-<p>一開始首先要去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM</p>
+<p>在Win8 APP一開始可以從<strong>資訊清單</strong>裡面設定<strong>預設磚</strong>，預設磚會在應用程式第一次安裝時顯示</p>
 
-<h3>2012/09/25 補充</h3>
+<p>點擊package.appxmanifest兩下開啟資訊清單編輯器</p>
 
-<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具&#8230;，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
+<p><img src="https://lh5.googleusercontent.com/-op8a6QflCRY/UIZeWzVBBTI/AAAAAAAABt4/5HGif4Mh8hY/s813/A.png" /></p>
 
-<p>點選『Create a New Virtual Machine』</p>
+<p><strong>標誌:</strong> 是正方形磚的圖檔設定</p>
 
-<p><img src="https://lh5.googleusercontent.com/-otZSLwijQ0U/UFyf4XwFSyI/AAAAAAAABkc/FNIph_J7JHs/s657/1.jpg"  /></p>
+<p><strong>寬標誌:</strong> 是寬型磚的圖檔設定</p>
 
-<p>接著點選『I will Install the operating system later』</p>
+<p><strong>小標誌:</strong> 是提供搜尋結果的小圖</p>
 
-<p><img src="https://lh5.googleusercontent.com/-xeiYkr8fudM/UFyf8en7F3I/AAAAAAAABls/swewFIyCkmE/s659/2.jpg"  /></p>
+<p>1為方形磚，2為寬型磚</p>
 
-<p>作業系統選擇『Microsoft Windows』，接著再選擇『Windows 7』，因為VM沒有Windows 8可以選</p>
+<p><img src="https://lh3.googleusercontent.com/-PxTwOp3yqSo/UIZeXz4taNI/AAAAAAAABuA/_61SB2q6UtI/s518/B.png" /></p>
 
-<p><img src="https://lh3.googleusercontent.com/-_Co3ZTLZ3bA/UFygAqiA5CI/AAAAAAAABm0/UixQmOxkxiU/s657/3.jpg"  /></p>
+<p>這邊有一點要特別特別注意的是，對Win8 APP來說，假如沒有在資訊清單裡面設定<strong>寬標誌</strong>，應用程式將無法切換成寬型磚，所以寬型通知將也無法顯示，小弟我就式在這邊卡了很久，想說程式都沒有錯，為什麼一直無法顯示寬型通知&#8230;</p>
 
-<p>輸入虛擬機器的名稱，這邊取名『Windows 8』，再選擇要存放的路徑，然後點選『Next』</p>
+<p>假設應用程式有提供寬標誌，對應用程式按下右鍵，會有選項可以選擇放大或縮小</p>
 
-<p><img src="https://lh4.googleusercontent.com/-KRAurNJRvLk/UFygBDKQoII/AAAAAAAABm8/YwQLP43AyUQ/s658/4.jpg"  /></p>
+<p><img src="https://lh3.googleusercontent.com/-1rzB4IyyrZI/UIZeYR6tFBI/AAAAAAAABuI/6aKtLu5S_pA/s570/C.png" /></p>
 
-<p>接著設定虛擬硬碟的大小，並且設定『Store virtual disk as a single files』，將虛擬硬碟存成一個資料夾，按下『Next』</p>
+<p>OK，對動態磚有基本的認識以後，接下來就是Javascript部份</p>
 
-<p><img src="https://lh3.googleusercontent.com/-EO-2MBYjcEc/UFygBr6bmvI/AAAAAAAABnI/5JjNmotkvEw/s656/5.jpg"  /></p>
+<p>先宣告一個notifications變數，這裡宣告的目的是取代完整的命名空間，省去每次都要打很長一串程式碼</p>
 
-<p>再來準備要來設定記憶體和掛載Windows 8映像檔，選擇『Customize Hardware…』</p>
+<pre><code>var notifications = Windows.UI.Notifications;
+</code></pre>
 
-<p><img src="https://lh4.googleusercontent.com/-nbky8ASN0ck/UFygBw-01wI/AAAAAAAABnE/dxdanwgZcjg/s660/6.jpg"  /></p>
+<p>接下來就是為你的寬型磚挑選一個範本，並且抓取他的XML內容</p>
 
-<p>調整記憶體，一般來說建議為實體記憶體的3分之1至2分之1之間，官方網站是說至少要1G</p>
+<pre><code>var template = notifications.TileTemplateType.tileWideImageAndText01;                      
+var tileXml = notifications.TileUpdateManager.getTemplateContent(template);
+</code></pre>
 
-<p><img src="https://lh5.googleusercontent.com/-btOEe35_ToI/UFygCdtCjwI/AAAAAAAABnY/P6JM4vBI9Nc/s656/7.jpg"  /></p>
+<p>動態磚裡面的顯示內容其實就是一個XML的格式，所以我們利用<strong>GetTemplateContent</strong> 方法傳回 <strong>XmlDocument</strong>，也就是下列的XML基本架構</p>
 
-<p>接著選擇『New CD/DVD』的選項，再點『Use ISO image file:』，再按「Browse…」來選擇映像檔</p>
+<pre><code>&lt;tile&gt;
+    &lt;visual&gt;
+        &lt;binding template="TileWideImageAndText01"&gt;
+            &lt;image id="1" src=""/&gt;
+            &lt;text id="1"&gt;&lt;/text&gt;
+        &lt;/binding&gt;
+    &lt;/visual&gt;
+&lt;/tile&gt;
+</code></pre>
 
-<p><img src="https://lh6.googleusercontent.com/-WxOQRqu4nF8/UFygCyaFR9I/AAAAAAAABng/uQc30JVd0Oo/s658/8.jpg"  /></p>
+<p>後續我們就是透過標準DOM函式來修改這個XML的內容，例如新增文字和新增圖片</p>
 
-<p>選擇好映像檔以後就按下『Close』</p>
+<p>新增文字</p>
 
-<p><img src="https://lh4.googleusercontent.com/-v5ICos8qLUQ/UFygC-8bVNI/AAAAAAAABnc/9rp1LeXOO8I/s661/9.jpg"  /></p>
+<pre><code>var tileTextAttributes = tileXml.getElementsByTagName("text");   
+tileTextAttributes[0].appendChild(tileXml.createTextNode("我是寬型磚通知"));
+</code></pre>
 
-<p>最後按下『Finish』就新增了一個虛擬機器</p>
+<p>新增圖片</p>
 
-<p><img src="https://lh6.googleusercontent.com/-5QYBPsTQNwA/UFyf4pX33AI/AAAAAAAABkg/5rhtXII6H1s/s657/10.jpg"  /></p>
+<pre><code>var tileImageAttributes = tileXml.getElementsByTagName("image");
+tileImageAttributes[0].setAttribute("src", "http://i.msdn.microsoft.com/dynimg/IC612768.png");
+tileImageAttributes[0].setAttribute("alt", "red graphic");  
+</code></pre>
 
-<p>按下『Play virtual machine』，開始來進行安裝囉！</p>
+<p>剛剛設定完寬磚型通知以後，接下來是方形磚通知</p>
 
-<p><img src="https://lh5.googleusercontent.com/-G0VcZ28gqbA/UFyf4laUtKI/AAAAAAAABkk/jvgPOqPFaOE/s659/11.jpg"  /></p>
+<pre><code>var squareTemplate = notifications.TileTemplateType.tileSquareText04;
+var squareTileXml = notifications.TileUpdateManager.getTemplateContent(squareTemplate);
+var squareTileTextAttributes = squareTileXml.getElementsByTagName("text");   
+squareTileTextAttributes[0].appendChild(squareTileXml.createTextNode("我是方型磚通知"));
+</code></pre>
 
-<p>因為篇幅有點過長，為了方便閱讀，所以分成兩篇來記錄</p>
+<p>然後將方型磚通知加到XML節點裡面</p>
+
+<pre><code>var node = tileXml.importNode(squareTileXml.getElementsByTagName("binding").item(0), true);
+tileXml.getElementsByTagName("visual").item(0).appendChild(node);
+</code></pre>
+
+<p>最後就是利用XML來建立新的通知</p>
+
+<pre><code>var tileNotification = new notifications.TileNotification(tileXml);
+</code></pre>
+
+<p>按下Ctrl+F5來看看效果吧</p>
+
+<p><img src="https://lh6.googleusercontent.com/-qKWHXg0ND0Y/UIZeZSVxekI/AAAAAAAABuQ/xU26ZDJgRIA/s771/D.png" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/-1hIF3GPJNp4/UIZeZngTBII/AAAAAAAABuU/T3AO20DhkAI/s771/E.png" /></p>
+
+<p>另外微軟建議通知的內容需要有時效性，所以建議磚的內容不應該超過通知訊息的時效性，也就是說太老舊的訊息就不要再通知囉~，記得幫通知加個時效性，以下程式碼是指10分鐘後將會把通知從磚移除</p>
+
+<pre><code>var currentTime = new Date();
+tileNotification.expirationTime = new Date(currentTime.getTime() + 600 * 1000);
+
+notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNotification);
+</code></pre>
 
 <p>參考資料:</p>
 
-<p><a href="http://blog.xuite.net/yh96301/blog/58183942" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(一)</a></p>
+<p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh465439.aspx" target="_blank">傳送磚更新 (使用 JavaScript 和 HTML 的 Metro 樣式應用程式)</a></p>
 
-<p>如有錯誤，歡迎指正</p>
+<p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh779724.aspx" target="_blank">磚與磚通知概觀 (Metro 樣式應用程式)</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -205,23 +250,15 @@
   
 
 
-<time datetime="2012-09-21T17:37:00+08:00" pubdate data-updated="true">Sep 21<span>st</span>, 2012</time>
+<time datetime="2012-10-23T15:27:00+08:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/win8/'>Win8</a>, <a class='category' href='/blog/categories/學習筆記/'>學習筆記</a>
-  
-</span>
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-hoverpulse/" title="Previous Post: [jQuery] hoverpulse 滑鼠移入，圖片縮放">&laquo; [jQuery] hoverpulse 滑鼠移入，圖片縮放</a>
+        <a class="basic-alignment left" href="/blog/css3-transitions-guide/" title="Previous Post: [CSS3] 認識CSS3 transitions">&laquo; [CSS3] 認識CSS3 transitions</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2-vmware-windows-8/" title="Next Post: [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]">[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二] &raquo;</a>
       
     </p>
   </footer>
@@ -232,7 +269,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/vmware-windows-8/" 
+	data-href="http://rx836.github.com/blog/windows8-notifications/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -306,8 +343,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/vmware-windows-8/';
-        var disqus_url = 'http://rx836.github.com/blog/vmware-windows-8/';
+        var disqus_identifier = 'http://rx836.github.com/blog/windows8-notifications/';
+        var disqus_url = 'http://rx836.github.com/blog/windows8-notifications/';
         var disqus_script = 'embed.js';
       
     (function () {
