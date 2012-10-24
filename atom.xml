@@ -4,7 +4,7 @@
   <title><![CDATA[Rx836]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-23T17:32:04+08:00</updated>
+  <updated>2012-10-25T00:34:56+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,142 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] jQuery你一定要知道的八件事]]></title>
+    <link href="http://rx836.github.com/blog/jquery-8-skill/"/>
+    <updated>2012-10-24T23:18:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-8-skill</id>
+    <content type="html"><![CDATA[<p>jQuery這項技能在面試的時候，已經從&#8221;加分&#8221;變成&#8221;必備&#8221;，由此可知，如果想走web開發，jQuery已經是不可或缺的技術，但jQuery雖然好上手，網路上的教學資源也很多，但有幾件事情是在使用jQuery你一定要知道的</p>
+
+<!--more-->
+
+
+<h2>1.使用Google CDN-hosted並且保持最新版本</h2>
+
+<p>使用Google CDN的好處是，有許多網站都有使用CDN，所以訪客在拜訪你的網站之前，可能已經先下載過jQuery，之後拜訪你的網站就可以直接從快取中使用，而不用重新下載，增加網站讀取速度，至於保持jQuery最新的版本，除了可以修復一些bug，還可以增加performance</p>
+
+<pre><code>&lt;script type="text/javascript" src="http://rx836.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>有些人可能會發現，為什麼少了<strong>http:</strong>，原因是假如網站遊走在http和https之間，使用這種忽略 <strong>scheme</strong> 的部分，就可以避免因為開啟了https的網頁，但jQuery是http所產生的安全性問題</p>
+
+<h2>2.在開發時搭配Cheat Sheet</h2>
+
+<p>其實不只是初學者，對於資深的開發者也建議使用cheat sheets，方便直接查詢，省卻google的麻煩</p>
+
+<p><a href="http://oscarotero.com/jquery/" target="_blank">http://oscarotero.com/jquery/</a></p>
+
+<p><a href="http://www.javascripttoolbox.com/jquery/cheatsheet/" target="_blank">http://www.javascripttoolbox.com/jquery/cheatsheet/</a></p>
+
+<p><a href="http://devcheatsheet.com/tag/jquery/" target="_blank">http://devcheatsheet.com/tag/jquery/</a></p>
+
+<h2>3.不能單純只使用CDN</h2>
+
+<p>剛剛第一點講到建議使用Google CDN，但有一點必須要注意的是，CDN有時候會有失效的問題，像某些地區會連不到Google CDN，這時候就要有locally的jQuery可以備用，判別的JavaScript語法可以這樣寫</p>
+
+<pre><code>&lt;script src="http://rx836.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;window.jQuery || document.write('&lt;script src="js/jquery-1.8.1.min.js"&gt;&lt;\/script&gt;')&lt;/script&gt;
+</code></pre>
+
+<p>這段程式碼會在抓不到Google CDN時，去抓取自家主機上的jQuery，讓網站不至於因為這樣而掛掉</p>
+
+<h2>4.重複使用jQuery selector</h2>
+
+<p>為了優化jQuery，千萬不要這樣寫</p>
+
+<pre><code>$("#mySmashingID").css("color", "pink");
+$("#mySmashingID").css("font", "Verdana");
+$("#mySmashingID").text("Some error message goes here!");
+</code></pre>
+
+<p>假如要針對同個selectors做操作，不應該重複呼叫自己，而是要利用jQuery鏈結的特性串起來</p>
+
+<pre><code>$("#mySmashingID").css({ "color": "pink", "font": "Verdana"}).text("Some error message goes here!!");
+</code></pre>
+
+<h2>5.將重複使用的selector宣告一個變數存起來</h2>
+
+<p>假如你會針對一個selector在很多地方使用到</p>
+
+<pre><code>$(‘#mySmashingGag’).appendTo(‘#mysidebar’);
+$(‘#mySmashingGag’).addClass(‘widget’);
+$(‘#mySmashingGag’).hide();
+$(‘#mySmashingGag’).fadeIn(‘fast’);
+</code></pre>
+
+<p>你應該將他存入一個變數，並且使用變數來操作，這樣也可以增加效能，而不會一直去做selector</p>
+
+<pre><code>var mySmashingGag = $(‘#mySmashingGag’);
+mySmashingGag.appendTo(‘#mysidebar’);
+mySmashingGag.addClass(‘widget’);
+mySmashingGag.hide();
+mySmashingGag.fadeIn(‘fast’);
+</code></pre>
+
+<h2>6.使用ID而不要使用classes</h2>
+
+<p>jQuery骨子裡其實還是JavaScript，所以不管如何速度再快也比不上原生的JavaScript快，所以如果使用ID來選取元素的話，就會使用JavaScript的原生方法 <strong>getElementByID</strong>，效能就會比較快，相反的不是使用原生方法的classes效能就會比較慢</p>
+
+<p>不要使用classes</p>
+
+<pre><code>// Selecting each item at once
+for (i = 0; i &lt; 900; i++) {
+    var selectedItem = $('.mySmashingItem' + i);
+}
+</code></pre>
+
+<p>使用ID</p>
+
+<pre><code>// Selecting each item at once
+for (i = 0; i &lt; 900; i++) {
+    var selectedItem = $('#mySmashingItem' + i);
+}
+</code></pre>
+
+<h2>7.使用縮寫</h2>
+
+<p>正常來說會這樣寫</p>
+
+<pre><code>$(document).ready(function (){
+    // your awesome code here
+});
+</code></pre>
+
+<p>但其實可以這樣寫</p>
+
+<pre><code>$(function (){
+    // your awesome code here
+});
+</code></pre>
+
+<h2>8.使用context</h2>
+
+<p>當你再使用選取器的時候(selectors)，jQuery會針對整個頁面去做搜索直到找到為止，可是其實我們可以縮小範圍</p>
+
+<p>例如原本的寫法</p>
+
+<pre><code>$(‘.mySmashingGag’).on(‘click’, showMenu);
+</code></pre>
+
+<p>但我們可以這樣寫</p>
+
+<pre><code>$(‘.mySmashingGag’, ‘#mySidebar’).on(‘click’, showMenu);
+</code></pre>
+
+<p>這樣他就會在ID為mySidebar去搜尋class為mySmashingGag的元素</p>
+
+<p>這些其實不難，但都是養成正確寫jQuery的好習慣:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://smashinghub.com/8-jquery-crimes-you-really-shouldnt-commit.htm" target="_blank">8 jQuery Crimes You Really Shouldn’t Commit</a></p>
+
+<p><a href="http://blog.miniasp.com/post/2008/10/19/URL-URI-Description-and-usage-tips.aspx" target="_blank">講解 URL 結構與分享幾個相對路徑與絕對路徑的開發技巧 </a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[Win8] 動態磚初體驗]]></title>
@@ -2174,185 +2310,6 @@ console.log(kitty2.name); // "kitty"
 <p>參考資料:</p>
 
 <p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[HTML5] 淺談XMLHttpRequest Level 2]]></title>
-    <link href="http://rx836.github.com/blog/javascript-xmlhttprequest-level-2/"/>
-    <updated>2012-09-10T15:24:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-xmlhttprequest-level-2</id>
-    <content type="html"><![CDATA[<p>HTML5近來可說是越來越火紅，在諸多優點裡面，最讓開發者期待的就是他的標準化，讓各家瀏覽器不再是各自為王，各自為政，這對於網頁開發者來說，可以說是一大利多(前提是微軟真正的統一?不過看IE10頗有那個味道)，今天要來看的是新的標準化-<strong>XMLHttpReuest Level 2</strong></p>
-
-<!--more-->
-
-
-<p>XMLHttpRequest其實是一個物件，也是AJAX的核心，微軟的IE5是最早支援這個物件，後來在Google大量應用之下，讓AJAX這項技術開始爆紅，也讓各家瀏覽器開始相繼支援，不過因為XMLHttpRequest(底下簡稱XHR)並不是標準，所以導致實做上必須小心各家瀏覽器的差異</p>
-
-<p>早些時候我們要寫AJAX我們可能會這樣寫</p>
-
-<pre><code>var xhr;
-
-// 依照不同的瀏覽器，取得XMLHttpRequest物件
-function CreateAJAX() {
-　if (window.ActiveXObject) {
-　　try {
-　　　return new ActiveXObject("Msxml2.XMLHTTP");
-　　} catch (e) {
-　　　try {
-　　　　return new ActiveXObject("Microsoft.XMLHTTP");
-　　　} catch (e2) {
-　　　　return null;
-　　　}
-　　}
-　} else if (window.XMLHttpRequest) {
-　　return new XMLHttpRequest();
-　} else {
-　　return null;
-　}
-}
-
-//回傳資料
-function onReponseData () {
-　if (xhr.readyState == 4) {
-　　if (xhr.status == 200) {
-
-      //do something
-      //console.log(xhr.responseText);
-
-　　} else {
-　　　alert ("伺服器處理錯誤");
-　　}
-　} 
-}
-
-//送出資料
-function ajaxSendRequest(uri) {
-  xhr = CreateAJAX() ;
-　if (!xhr) {
-　　alert ('瀏覽器不支援！');
-　　return 0;
-　}
-
-  xhr.onreadystatechange = onReponseData;
-  xhr.open ("GET", uri, true);
-  xhr.send ("");
-}
-</code></pre>
-
-<p>HTML部分</p>
-
-<pre><code>&lt;input type="button" value="執行" onclick="ajaxSendRequest('index.php')" &gt;
-</code></pre>
-
-<p>大概提一下幾個重要屬性</p>
-
-<p>1.xhr.readyState:XMLHttpRequest狀態，等於4表示數據已經接收完畢</p>
-
-<p>2.xhr.status:狀態碼，200表示正常</p>
-
-<p>3.xhr.responseText:server回應的文字數據</p>
-
-<p>不過假如有時候要取得跨網域的API資料，受限於安全問題，會因為<a href="http://en.wikipedia.org/wiki/Same_origin_policy" target="_blank">同源限制(Same Origin Policy)</a>的關係而受阻，因此有些人可能會使用<a href="http://zh.wikipedia.org/wiki/JSONP" target="_blank">JSONP</a>來解決此類問題，不過未來在新的標準XMLHttpRequest Level 2會有解決方法</p>
-
-<p>新的XHR的特點如下</p>
-
-<p>1.可以設置HTTP請求時限</p>
-
-<p>2.可以使用FormData管理表單數據</p>
-
-<p>3.可以上傳檔案</p>
-
-<p>4.可以跨網域請求</p>
-
-<p>5.可以獲得server端二進制數據</p>
-
-<p>6.可以獲得數據傳輸的進度訊息</p>
-
-<p>這裡礙於篇幅只介紹請求時限和跨網域請求部分</p>
-
-<h2>Setting and handling timeouts</h2>
-
-<p>有時候我們在做AJAX時，常會無法預知會花多少時間，如果網路速度一慢，User可能會等上好一段時間，甚至會認為網站當掉而離去，這其實不是個好的User Experience</p>
-
-<p>所以在新的標準裡面我們可以這樣做</p>
-
-<pre><code>xhr.timeout = 3000;
-</code></pre>
-
-<p>整個範例程式大概如下</p>
-
-<pre><code>function makeRequest() {
-  var url = 'index.php';
-  var onLoadHandler = function(event){
-     // Parse the JSON and build a list.
-  }
-  var onTimeOutHandler = function(event){
-    var content = document.getElementById('content'),
-      p = document.createElement('p'),
-      msg = document.createTextNode('Just a little bit longer!');
-      p.appendChild(msg);
-      content.appendChild(p);
-
-      // Restarts the request.
-      event.target.open('GET',url);
-
-      // Optionally, set a longer timeout to override the original.
-      event.target.timeout = 6000;
-      event.target.send();
-  }
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET',url);
-  xhr.timeout = 3000;
-  xhr.onload = onLoadHandler;
-  xhr.ontimeout = onTimeOutHandler;
-  xhr.send();
-}
-
-makeRequest();
-</code></pre>
-
-<p>可以在index.php裡面寫延遲4秒，會發現第一次請求時，會出現<strong>Just a little bit longer!</strong>的提示文字，第二次才順利取得資料，這是因為一開始的等待時間是設定三秒，第二次是六秒</p>
-
-<p><em>備註:Chrome和Safari尚未支援XHR timeouts，只有Oprea和Firefox還有IE10有，IE8和IE9有支援不過用的是XDomainRequest物件</em></p>
-
-<h2>Requesting data from another domain</h2>
-
-<p>跨網域的請求問題(Cross-origin resource sharing，簡稱CORS)，在新的XMLHttpRequest Level 2得到解答，可以針對不同的網域發出請求，但使用時除了要注意瀏覽器是否支援以外，同時Server端也要允許存取才行，而程式寫法其實跟以前一樣</p>
-
-<p>這裡有個<a href="http://devfiles.myopera.com/articles/9482/xhr-credentials.html" target="_blank">範例</a>可以看看</p>
-
-<p>進去範例打開開發者工具，點下Make request的按鈕，查看回應標頭</p>
-
-<p><img src="https://lh3.googleusercontent.com/-gcWY8Edjbn8/UE2qKLxkU1I/AAAAAAAABdk/67b8otL39m8/s492/1.jpg" width="492px" /></p>
-
-<p>會發現<strong>Access-Control-Allow-Origin</strong>的值是<strong>http://devfiles.myopera.com</strong>，也就是此範例的網域，代表只允許此網域的請求，另外<strong>access-control-allow-credentials</strong>的值為ture，表示允許跨網域請求</p>
-
-<p>為了驗證限制某個網域的請求(Access-Control-Allow-Origin)，我自己寫了一個js去對範例中請求的server做Request</p>
-
-<p><img src="https://lh3.googleusercontent.com/-SpkH2Sjk8Bo/UE2tLkTlrWI/AAAAAAAABd0/9sB5KOXXVE0/s707/2.jpg" width="600px" /></p>
-
-<p>會發現雖然狀態碼為200，但實際上根本就沒有東西回應</p>
-
-<p><em>備註:除了IE8與IE9，其他主流瀏覽器都支援此項功能</em></p>
-
-<p>HTML5裡面實在太多可以玩了，也難怪會被譽為殺手級的技術，大家記得在使用這些功能前先查查瀏覽器支援的程度，畢竟HTML5的標準都還在制定中</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://dev.opera.com/articles/view/xhr2/" target="_blank">Introduction to XMLHttpRequest Level 2</a></p>
-
-<p><a href="http://dev.opera.com/articles/view/dom-access-control-using-cross-origin-resource-sharing/" target="_blank">DOM access control using cross-origin resource sharing</a></p>
-
-<p><a href="http://www.ruanyifeng.com/blog/2012/09/xmlhttprequest_level_2.html" target="_blank">XMLHttpRequest Level 2 使用指南</a></p>
-
-<p><a href="http://jck11.pixnet.net/blog/post/11624882-ajax%E6%A0%B8%E5%BF%83-xmlhttprequest%5B%E7%AD%86%E8%A8%98%5D" target="_blank">AJAX核心-XMLHttpRequest[筆記]</a></p>
-
-<p><a href="http://caterpillar.onlyfun.net/Gossip/JavaScript/SecurityConstraint.html" target="_blank">JavaScript Essence: 安全限制</a></p>
-
-<p><a href="http://design2u.me/blog/936/cross-domain-ajax-cross-domain-data-has-been-retrieved-jsonp" target="_blank">Cross Domain Ajax 跨網域抓取資料(JSONP)</a></p>
 
 <p>如有錯誤，歡迎指正</p>
 ]]></content>

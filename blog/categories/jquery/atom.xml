@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | Rx836]]></title>
   <link href="http://rx836.github.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-23T17:32:04+08:00</updated>
+  <updated>2012-10-25T00:34:56+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,142 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] jQuery你一定要知道的八件事]]></title>
+    <link href="http://rx836.github.com/blog/jquery-8-skill/"/>
+    <updated>2012-10-24T23:18:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-8-skill</id>
+    <content type="html"><![CDATA[<p>jQuery這項技能在面試的時候，已經從"加分"變成"必備"，由此可知，如果想走web開發，jQuery已經是不可或缺的技術，但jQuery雖然好上手，網路上的教學資源也很多，但有幾件事情是在使用jQuery你一定要知道的</p>
+
+<!--more-->
+
+
+<h2>1.使用Google CDN-hosted並且保持最新版本</h2>
+
+<p>使用Google CDN的好處是，有許多網站都有使用CDN，所以訪客在拜訪你的網站之前，可能已經先下載過jQuery，之後拜訪你的網站就可以直接從快取中使用，而不用重新下載，增加網站讀取速度，至於保持jQuery最新的版本，除了可以修復一些bug，還可以增加performance</p>
+
+<pre><code>&lt;script type="text/javascript" src="http://rx836.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>有些人可能會發現，為什麼少了<strong>http:</strong>，原因是假如網站遊走在http和https之間，使用這種忽略 <strong>scheme</strong> 的部分，就可以避免因為開啟了https的網頁，但jQuery是http所產生的安全性問題</p>
+
+<h2>2.在開發時搭配Cheat Sheet</h2>
+
+<p>其實不只是初學者，對於資深的開發者也建議使用cheat sheets，方便直接查詢，省卻google的麻煩</p>
+
+<p><a href="http://oscarotero.com/jquery/" target="_blank">http://oscarotero.com/jquery/</a></p>
+
+<p><a href="http://www.javascripttoolbox.com/jquery/cheatsheet/" target="_blank">http://www.javascripttoolbox.com/jquery/cheatsheet/</a></p>
+
+<p><a href="http://devcheatsheet.com/tag/jquery/" target="_blank">http://devcheatsheet.com/tag/jquery/</a></p>
+
+<h2>3.不能單純只使用CDN</h2>
+
+<p>剛剛第一點講到建議使用Google CDN，但有一點必須要注意的是，CDN有時候會有失效的問題，像某些地區會連不到Google CDN，這時候就要有locally的jQuery可以備用，判別的JavaScript語法可以這樣寫</p>
+
+<pre><code>&lt;script src="http://rx836.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;window.jQuery || document.write('&lt;script src="js/jquery-1.8.1.min.js"&gt;&lt;\/script&gt;')&lt;/script&gt;
+</code></pre>
+
+<p>這段程式碼會在抓不到Google CDN時，去抓取自家主機上的jQuery，讓網站不至於因為這樣而掛掉</p>
+
+<h2>4.重複使用jQuery selector</h2>
+
+<p>為了優化jQuery，千萬不要這樣寫</p>
+
+<pre><code>$("#mySmashingID").css("color", "pink");
+$("#mySmashingID").css("font", "Verdana");
+$("#mySmashingID").text("Some error message goes here!");
+</code></pre>
+
+<p>假如要針對同個selectors做操作，不應該重複呼叫自己，而是要利用jQuery鏈結的特性串起來</p>
+
+<pre><code>$("#mySmashingID").css({ "color": "pink", "font": "Verdana"}).text("Some error message goes here!!");
+</code></pre>
+
+<h2>5.將重複使用的selector宣告一個變數存起來</h2>
+
+<p>假如你會針對一個selector在很多地方使用到</p>
+
+<pre><code>$(‘#mySmashingGag’).appendTo(‘#mysidebar’);
+$(‘#mySmashingGag’).addClass(‘widget’);
+$(‘#mySmashingGag’).hide();
+$(‘#mySmashingGag’).fadeIn(‘fast’);
+</code></pre>
+
+<p>你應該將他存入一個變數，並且使用變數來操作，這樣也可以增加效能，而不會一直去做selector</p>
+
+<pre><code>var mySmashingGag = $(‘#mySmashingGag’);
+mySmashingGag.appendTo(‘#mysidebar’);
+mySmashingGag.addClass(‘widget’);
+mySmashingGag.hide();
+mySmashingGag.fadeIn(‘fast’);
+</code></pre>
+
+<h2>6.使用ID而不要使用classes</h2>
+
+<p>jQuery骨子裡其實還是JavaScript，所以不管如何速度再快也比不上原生的JavaScript快，所以如果使用ID來選取元素的話，就會使用JavaScript的原生方法 <strong>getElementByID</strong>，效能就會比較快，相反的不是使用原生方法的classes效能就會比較慢</p>
+
+<p>不要使用classes</p>
+
+<pre><code>// Selecting each item at once
+for (i = 0; i &lt; 900; i++) {
+    var selectedItem = $('.mySmashingItem' + i);
+}
+</code></pre>
+
+<p>使用ID</p>
+
+<pre><code>// Selecting each item at once
+for (i = 0; i &lt; 900; i++) {
+    var selectedItem = $('#mySmashingItem' + i);
+}
+</code></pre>
+
+<h2>7.使用縮寫</h2>
+
+<p>正常來說會這樣寫</p>
+
+<pre><code>$(document).ready(function (){
+    // your awesome code here
+});
+</code></pre>
+
+<p>但其實可以這樣寫</p>
+
+<pre><code>$(function (){
+    // your awesome code here
+});
+</code></pre>
+
+<h2>8.使用context</h2>
+
+<p>當你再使用選取器的時候(selectors)，jQuery會針對整個頁面去做搜索直到找到為止，可是其實我們可以縮小範圍</p>
+
+<p>例如原本的寫法</p>
+
+<pre><code>$(‘.mySmashingGag’).on(‘click’, showMenu);
+</code></pre>
+
+<p>但我們可以這樣寫</p>
+
+<pre><code>$(‘.mySmashingGag’, ‘#mySidebar’).on(‘click’, showMenu);
+</code></pre>
+
+<p>這樣他就會在ID為mySidebar去搜尋class為mySmashingGag的元素</p>
+
+<p>這些其實不難，但都是養成正確寫jQuery的好習慣:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://smashinghub.com/8-jquery-crimes-you-really-shouldnt-commit.htm" target="_blank">8 jQuery Crimes You Really Shouldn’t Commit</a></p>
+
+<p><a href="http://blog.miniasp.com/post/2008/10/19/URL-URI-Description-and-usage-tips.aspx" target="_blank">講解 URL 結構與分享幾個相對路徑與絕對路徑的開發技巧 </a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQuery] Facebook XXX hours ago的時間生成]]></title>
@@ -611,178 +747,6 @@ $('.resize').hover(
 </code></pre>
 
 <p>當然也可以把這個修改寫得更好看一些，但我用最快的方式來補充這個AJAX的需求</p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] 利用CSS3 3D Transforms做翻書效果 Flip Plugin]]></title>
-    <link href="http://rx836.github.com/blog/jquery-css3-flip-plugin/"/>
-    <updated>2012-09-06T12:04:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-css3-flip-plugin</id>
-    <content type="html"><![CDATA[<p>在網路上看到<a href="http://tympanus.net/Development/BookBlock/" target="_blank">翻書效果</a>感覺蠻有趣的，是利用<a href="http://www.w3schools.com/css3/css3_transitions.asp" target="_blank">CSS3 Transitions</a>和<a href="http://www.w3schools.com/css3/css3_3dtransforms.asp" target="_blank">CSS3 3D Transforms</a>的效果實現，這裡我是用<a href="http://tympanus.net/codrops/2012/09/03/bookblock-a-content-flip-plugin/" target="_blank">Flip Plugin</a></p>
-
-<!--more-->
-
-
-<p>因為已經有<a href="http://tympanus.net/Development/BookBlock/BookBlock.zip" target="_blank">範例檔</a>可以用，所以就不詳細講太多程式碼細節，首先先載入CSS和Modernizr，這兩隻檔案在範例檔裡面都有，分別在css和ja的資料夾裡面</p>
-
-<pre><code>&lt;link rel="stylesheet" type="text/css" href="style.css" /&gt;
-&lt;link rel="stylesheet" type="text/css" href="custom.css" /&gt;
-&lt;script type="text/javascript" src="modernizr.custom.79639.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>可以看到CSS其實就是一開始先將第一張照片秀出，其他都先<strong>display : none</strong>，至於modernizr是因為為了要支援IE9以下所用的，因為IE9以下不支援CSS3 Transitions和CSS3 3D Transforms，所以要利用modernizr來偵測User所用瀏覽器的支援程度來決定實現的效果</p>
-
-<p>接下來要引用其他三支js進來</p>
-
-<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="jquerypp.custom.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="jquery.bookblock.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>其中jquerypp.custom.js是<a href="http://jquerypp.com/" target="_blank">jQuery++</a>，擴充了<strong>swipe even</strong>這個功能，讓行動裝置用手指滑動也能觸發翻頁的效果</p>
-
-<p>而jquery.bookblock.js就是Flip Plugin，我們可以看到裡面其中一行是</p>
-
-<pre><code>this.support = Modernizr.csstransitions &amp;&amp; Modernizr.csstransforms3d;
-</code></pre>
-
-<p>這行就是利用Modernizr在檢查User現在的瀏覽器支援程度，所以下面就會有if判斷</p>
-
-<pre><code>if( !this.support ) {
-
-    this._layoutNoSupport( dir );
-
-}
-else {
-
-    this._layout( dir );
-
-}
-</code></pre>
-
-<p>假如不支援的話，就會用.hide() or .show()來實現換頁效果，如果有支援就會使用CSS3 3D Transforms</p>
-
-<p>接著是基本HTML架構</p>
-
-<pre><code>&lt;div id="bb-bookblock" class="bb-bookblock"&gt;
-    &lt;div class="bb-item"&gt;
-        &lt;!-- custom content --&gt;
-    &lt;/div&gt;
-    &lt;div class="bb-item"&gt;
-
-    &lt;/div&gt;
-    &lt;div class="bb-item"&gt;
-        &lt;!-- ... --&gt;
-    &lt;/div&gt;
-    &lt;div class="bb-item"&gt;
-        &lt;!-- ... --&gt;
-    &lt;/div&gt;
-    &lt;!-- ... --&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p><strong>bb-item</strong>就是裡面每一頁要放的內容，可以是圖片或文字</p>
-
-<p>而js部分可以這樣寫</p>
-
-<pre><code>$(function() {
-
-    $( '#bb-bookblock' ).bookblock();
-
-});
-</code></pre>
-
-<p>裡面的options設定如下</p>
-
-<pre><code>// speed for the flip transition in ms.
-speed       : 1000,
-
-// easing for the flip transition.
-easing      : 'ease-in-out',
-
-// if set to true, both the flipping page and the sides will have an overlay to simulate shadows
-shadows     : true,
-
-// opacity value for the "shadow" on both sides (when the flipping page is over it).
-// value : 0.1 - 1
-shadowSides : 0.2,
-
-// opacity value for the "shadow" on the flipping page (while it is flipping).
-// value : 0.1 - 1
-shadowFlip  : 0.1,
-
-// perspective value
-perspective : 1300,
-
-// if we should show the first item after reaching the end.
-circular    : false,
-
-// if we want to specify a selector that triggers the next() function. example: '#bb-nav-next'.
-nextEl      : '',
-
-// if we want to specify a selector that triggers the prev() function.
-prevEl      : '',
-
-// callback after the flip transition.
-// page is the current item's index.
-// isLimit is true if the current page is the last one (or the first one).
-onEndFlip   : function( page, isLimit ) { return false; },
-
-// callback before the flip transition.
-// page is the current item's index.
-onBeforeFlip: function( page ) { return false; }
-</code></pre>
-
-<p>在綁定下一頁和上一頁的事件裡面，除了可以直接在<strong>bookblock()</strong>添加以外</p>
-
-<pre><code>$( '#bb-bookblock' ).bookblock( {
-    speed               : 800,
-    shadowSides : 0.8,
-    shadowFlip  : 0.7,
-    nextEl      : '#bb-nav-next', //綁定下一頁事件
-    prevEl      : '#bb-nav-prev'  //綁定上一頁事件
-} )
-</code></pre>
-
-<p>也可以按照範例裡面的寫法</p>
-
-<pre><code>var config = {
-    $bookBlock: $( '#bb-bookblock' ),
-    $navNext    : $( '#bb-nav-next' ),
-    $navPrev    : $( '#bb-nav-prev' ),
-    $navJump    : $( '#bb-nav-jump' ),
-    bb              : $( '#bb-bookblock' ).bookblock( {
-        speed               : 800,
-        shadowSides : 0.8,
-        shadowFlip  : 0.7
-    } )
-}
-
-config.$navNext.on( 'click', function() {
-
-    config.bb.next();
-    return false;
-
-} );
-
-config.$navPrev.on( 'click', function() {
-
-    config.bb.prev();
-    return false;
-
-} );
-</code></pre>
-
-<p>另外自己綁定click在上一頁和下一頁的DOM元素裡面</p>
-
-<p>範例完成以後我特地拿iPone來測試swipe even的效果，還蠻頓的，而且不是很靈敏，可能有細節要再調整，也有可能是手機本身的問題，這方面就要請各位要應用在行動裝置的朋友們再多多測試了</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://modernizr.com/docs/#features-css" target="_blank">Modernizr Documentation</a></p>
 
 <p>如有錯誤，歡迎指正</p>
 ]]></content>
