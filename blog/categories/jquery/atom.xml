@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | Rx836]]></title>
   <link href="http://rx836.github.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-25T00:34:56+08:00</updated>
+  <updated>2012-10-25T00:43:20+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -34,7 +34,7 @@
 
 <h2>2.在開發時搭配Cheat Sheet</h2>
 
-<p>其實不只是初學者，對於資深的開發者也建議使用cheat sheets，方便直接查詢，省卻google的麻煩</p>
+<p>其實不只是初學者，對於資深的開發者也建議使用cheat sheets，可以方便直接查詢，也省去google的麻煩</p>
 
 <p><a href="http://oscarotero.com/jquery/" target="_blank">http://oscarotero.com/jquery/</a></p>
 
@@ -85,11 +85,11 @@ mySmashingGag.hide();
 mySmashingGag.fadeIn(‘fast’);
 </code></pre>
 
-<h2>6.使用ID而不要使用classes</h2>
+<h2>6.使用ID而不要使用class</h2>
 
-<p>jQuery骨子裡其實還是JavaScript，所以不管如何速度再快也比不上原生的JavaScript快，所以如果使用ID來選取元素的話，就會使用JavaScript的原生方法 <strong>getElementByID</strong>，效能就會比較快，相反的不是使用原生方法的classes效能就會比較慢</p>
+<p>jQuery骨子裡其實還是JavaScript，所以不管如何速度再快也比不上原生的JavaScript快，所以如果使用ID來選取元素的話，就會使用JavaScript的原生方法 <strong>getElementByID</strong>，效能就會比較快，相反的不是使用原生方法的class效能就會比較慢</p>
 
-<p>不要使用classes</p>
+<p>不要使用class</p>
 
 <pre><code>// Selecting each item at once
 for (i = 0; i &lt; 900; i++) {
@@ -123,7 +123,7 @@ for (i = 0; i &lt; 900; i++) {
 
 <h2>8.使用context</h2>
 
-<p>當你再使用選取器的時候(selectors)，jQuery會針對整個頁面去做搜索直到找到為止，可是其實我們可以縮小範圍</p>
+<p>當你再使用選取器(selectors)的時候，jQuery會針對整個頁面去做搜索直到找到為止，可是其實我們可以縮小範圍</p>
 
 <p>例如原本的寫法</p>
 
