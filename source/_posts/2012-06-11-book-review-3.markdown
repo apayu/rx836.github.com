@@ -5,6 +5,9 @@ date: 2012-06-11 01:23
 comments: true
 categories: 好書分享
 ---
+
+<img src="https://lh6.googleusercontent.com/-NA5GuwsRhXM/UIo1zI_i73I/AAAAAAAABwA/2gMWMuj3_UM/s277/2012517165549%E9%A0%90%E8%A6%8B%E6%9C%AA%E4%BE%86_%E6%AD%A3%E5%B0%81%E9%9D%A233.jpg" />
+
 作者:王伯達
 
 出版者:天下遠見出版股份有限公司

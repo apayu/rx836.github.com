@@ -6,6 +6,8 @@ comments: true
 categories: 好書分享
 ---
 
+<img src="https://lh4.googleusercontent.com/-qBVvJlLs8E8/UIo1zG5KrcI/AAAAAAAABv4/ZZI8suC49do/s270/M10152672_big.jpg" />
+
 作者:陳文茜
 
 出版者:時報文化出版

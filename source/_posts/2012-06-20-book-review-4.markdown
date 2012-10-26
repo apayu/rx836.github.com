@@ -5,6 +5,9 @@ date: 2012-06-20 23:13
 comments: true
 categories: 好書分享
 ---
+
+<img src="https://lh3.googleusercontent.com/-wMV4FXvk4qM/UIo10CPMeiI/AAAAAAAABwM/F2okrzWGWk8/s600/kk0320558.jpg" />
+
 作者:Paul Adams
 
 出版者:基峯資訊股份有限公司

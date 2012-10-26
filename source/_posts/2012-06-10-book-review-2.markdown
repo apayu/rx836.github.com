@@ -5,6 +5,9 @@ date: 2012-06-10 03:06
 comments: true
 categories: 好書分享
 ---
+
+<img src="https://lh3.googleusercontent.com/-wMTQWX9wU4I/UIo1zLeJljI/AAAAAAAABv8/BEBJHR0RgiM/s300/20120514190058837_300.jpg" />
+
 作者:金蘭都
 
 出版者:圓神出版社有限公司
