@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[好書分享] 疼痛,才叫青春 - apa</title>
+  <title>[學習筆記] 如何停止浪費時間在舊版IE的相容性 - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="作者:金蘭都 出版者:圓神出版社有限公司 這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的 人生時鐘:你現在的人生是幾點? 雖然他是寫給剛畢業的新鮮人或是大學生為主， &hellip;">
+  <meta name="description" content="IE的痛&#8230;，只有遇過才可以體會到，我相信絕大多數的開發者都曾經有過這個痛，在許多開發者聚會的場合裡面，IE也是最常被拿出來開玩笑，但如何停止浪費你的時間去為了IE做開發上的調整？Mandy Barrington所寫的How to Stop Wasting Time Developing &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/book-review-2">
+  <link rel="canonical" href="http://rx836.github.com/blog/stop-wasting-time-for-ie">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">[好書分享] 疼痛,才叫青春</h1>
+      <h1 class="entry-title">[學習筆記] 如何停止浪費時間在舊版IE的相容性</h1>
     
     
       <p class="meta">
@@ -99,7 +99,7 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-10-26T12:25:00+08:00" pubdate data-updated="true">Oct 26<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,30 +108,54 @@
   </header>
 
 
-<div class="entry-content"><p><img src="https://lh3.googleusercontent.com/-wMTQWX9wU4I/UIo1zLeJljI/AAAAAAAABv8/BEBJHR0RgiM/s300/20120514190058837_300.jpg" /></p>
-
-<p>作者:金蘭都</p>
-
-<p>出版者:圓神出版社有限公司</p>
+<div class="entry-content"><p>IE的痛&#8230;，只有遇過才可以體會到，我相信絕大多數的開發者都曾經有過這個痛，在許多開發者聚會的場合裡面，IE也是最常被拿出來開玩笑，但如何停止浪費你的時間去為了IE做開發上的調整？Mandy Barrington所寫的<a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a>或許可以供大家參考</p>
 
 <!--more-->
 
 
-<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
+<h3>1.使用分析工具</h3>
 
-<h2>人生時鐘:你現在的人生是幾點?</h2>
+<p>使用分析工具來分析網站的訪客都用哪一個瀏覽器，如果發現只有很少數的人使用舊版IE，就別花費時間去為了那些訪客做修改，在這裡推薦很多網站都使用的<a href="http://www.google.com/analytics/" target="_blank">Google Analytics</a>，最重要的是它還是免費</p>
 
-<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所提的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
+<h3>2.提醒用戶升級</h3>
 
-<h2>你想要新人獎還是主角獎?</h2>
+<p>假設有些時候某些功能沒辦法在舊版的IE上執行，那善意的提醒也是不錯的效果，可以在這邊下載<a href="http://code.google.com/p/ie6-upgrade-warning/" target="_blank">IE6 Upgrade Warning</a>，這個由Google寫的Project可以幫助你在訪客是使用IE6時，跳出提醒升級的視窗，使用方式就是先下載整包Project，放進你的網站裡面，並且加入以下程式碼</p>
 
-<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
+<pre><code>&lt;!--[if lte IE 6]&gt;&lt;script src="js/ie6/warning.js"&gt;&lt;/script&gt;&lt;script&gt;window.onload=function(){e("js/ie6/")}&lt;/script&gt;&lt;![endif]--&gt;
+</code></pre>
 
-<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
+<p><strong>warning.js</strong>這支檔案可以隨著擺放路徑而調整，假如偵測到訪客是使用IE6就會跳出以下畫面</p>
 
-<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
+<p><img src="https://lh5.googleusercontent.com/-rsWJFxHcHAs/UIoszY9MeOI/AAAAAAAABvg/KV_7bbdkMEg/s700/upgrade.jpg" /></p>
 
-<p>如果有不一樣的想法，歡迎一起討論</p>
+<p>當然你也可以換成繁體中文版，只要打開warning.js這支檔案，將前三行的code換成以下的程式碼即可</p>
+
+<pre><code>var msg1 = "你知道你的 Internet Explorer 瀏覽器已經過時了嗎？";
+var msg2 = "建議你升級到較新的版本，或是改用其他的瀏覽器，以獲得更好的使用體驗。下面是一份目前廣受歡迎的瀏覽器列表。";
+var msg3 = "只要點選圖示，就可以連到各自的下載頁面。";
+</code></pre>
+
+<p>記得注意UTF-8的編碼問題</p>
+
+<h3>3.整理問題</h3>
+
+<p>有時候好不容易處理過的BUG，記得要記錄起來，不僅造福將來也有可能碰到問題的自己，也可以幫助團隊的其他人，甚至是社群上同樣遇到相同問題的開發者</p>
+
+<h3>4.提高預算</h3>
+
+<p>假如真的遇到客戶要求一定要支援所有瀏覽器&#8230;.，那就大膽的開口要求提高預算吧！</p>
+
+<p>以上就是作者建議大家的解決方式</p>
+
+<p>IE的相容性問題我想也不是一時可以解決，但至少幾個大型的入口網站(例如Google)已經開始不再支援老舊的IE，而IE6老實說也慢慢的逐漸消失中，微軟似乎也聽見的大家的心聲，至少IE10目前看起來是中規中矩，讓我們還是用樂觀的心情來迎接未來:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a></p>
+
+<p><a href="http://code.google.com/p/ie6-upgrade-warning/" target="_blank">ie6-upgrade-warning</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -165,12 +189,12 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-10-26T12:25:00+08:00" pubdate data-updated="true">Oct 26<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/好書分享/'>好書分享</a>
+    <a class='category' href='/blog/categories/學習筆記/'>學習筆記</a>
   
 </span>
 
@@ -178,10 +202,8 @@
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-ajax-cache/" title="Previous Post: [jQuery] AJAX cache讓IE一直抓到舊資料">&laquo; [jQuery] AJAX cache讓IE一直抓到舊資料</a>
+        <a class="basic-alignment left" href="/blog/book-review-5/" title="Previous Post: [好書分享] 為什麼搜尋將被淘汰">&laquo; [好書分享] 為什麼搜尋將被淘汰</a>
       
-      
-        <a class="basic-alignment right" href="/blog/book-review-3/" title="Next Post: [好書分享] 預見未來">[好書分享] 預見未來 &raquo;</a>
       
     </p>
   </footer>
@@ -192,7 +214,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/book-review-2/" 
+	data-href="http://rx836.github.com/blog/stop-wasting-time-for-ie/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -266,8 +288,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/book-review-2/';
-        var disqus_url = 'http://rx836.github.com/blog/book-review-2/';
+        var disqus_identifier = 'http://rx836.github.com/blog/stop-wasting-time-for-ie/';
+        var disqus_url = 'http://rx836.github.com/blog/stop-wasting-time-for-ie/';
         var disqus_script = 'embed.js';
       
     (function () {

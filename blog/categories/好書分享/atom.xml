@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 好書分享 | Rx836]]></title>
+  <title><![CDATA[Category: 好書分享 | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/好書分享/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-25T23:45:07+08:00</updated>
+  <updated>2012-10-27T13:28:49+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -43,6 +43,10 @@
 
 <p>最後我想筆記的重點是:資訊越多，策展者越重要，電腦還尚未可以取代人類</p>
 
+<p>參考資料:</p>
+
+<p>為什麼搜尋將被淘汰</p>
+
 <p>如有想法，歡迎一起提出討論</p>
 ]]></content>
   </entry>
@@ -52,7 +56,9 @@
     <link href="http://rx836.github.com/blog/book-review-4/"/>
     <updated>2012-06-20T23:13:00+08:00</updated>
     <id>http://rx836.github.com/blog/book-review-4</id>
-    <content type="html"><![CDATA[<p>作者:Paul Adams</p>
+    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-wMV4FXvk4qM/UIo10CPMeiI/AAAAAAAABwM/F2okrzWGWk8/s600/kk0320558.jpg" /></p>
+
+<p>作者:Paul Adams</p>
 
 <p>出版者:基峯資訊股份有限公司</p>
 
@@ -90,7 +96,9 @@
     <link href="http://rx836.github.com/blog/book-review-3/"/>
     <updated>2012-06-11T01:23:00+08:00</updated>
     <id>http://rx836.github.com/blog/book-review-3</id>
-    <content type="html"><![CDATA[<p>作者:王伯達</p>
+    <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-NA5GuwsRhXM/UIo1zI_i73I/AAAAAAAABwA/2gMWMuj3_UM/s277/2012517165549%E9%A0%90%E8%A6%8B%E6%9C%AA%E4%BE%86_%E6%AD%A3%E5%B0%81%E9%9D%A233.jpg" /></p>
+
+<p>作者:王伯達</p>
 
 <p>出版者:天下遠見出版股份有限公司</p>
 
@@ -118,7 +126,9 @@
     <link href="http://rx836.github.com/blog/book-review-2/"/>
     <updated>2012-06-10T03:06:00+08:00</updated>
     <id>http://rx836.github.com/blog/book-review-2</id>
-    <content type="html"><![CDATA[<p>作者:金蘭都</p>
+    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-wMTQWX9wU4I/UIo1zLeJljI/AAAAAAAABv8/BEBJHR0RgiM/s300/20120514190058837_300.jpg" /></p>
+
+<p>作者:金蘭都</p>
 
 <p>出版者:圓神出版社有限公司</p>
 
@@ -148,7 +158,9 @@
     <link href="http://rx836.github.com/blog/book-review-1/"/>
     <updated>2012-05-01T21:38:00+08:00</updated>
     <id>http://rx836.github.com/blog/book-review-1</id>
-    <content type="html"><![CDATA[<p>作者:陳文茜</p>
+    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-qBVvJlLs8E8/UIo1zG5KrcI/AAAAAAAABv4/ZZI8suC49do/s270/M10152672_big.jpg" /></p>
+
+<p>作者:陳文茜</p>
 
 <p>出版者:時報文化出版</p>
 

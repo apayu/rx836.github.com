@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Rx836]]></title>
+  <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-25T23:45:07+08:00</updated>
+  <updated>2012-10-27T13:28:49+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[學習筆記] 如何停止浪費時間在舊版IE的相容性]]></title>
+    <link href="http://rx836.github.com/blog/stop-wasting-time-for-ie/"/>
+    <updated>2012-10-26T12:25:00+08:00</updated>
+    <id>http://rx836.github.com/blog/stop-wasting-time-for-ie</id>
+    <content type="html"><![CDATA[<p>IE的痛&#8230;，只有遇過才可以體會到，我相信絕大多數的開發者都曾經有過這個痛，在許多開發者聚會的場合裡面，IE也是最常被拿出來開玩笑，但如何停止浪費你的時間去為了IE做開發上的調整？Mandy Barrington所寫的<a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a>或許可以供大家參考</p>
+
+<!--more-->
+
+
+<h3>1.使用分析工具</h3>
+
+<p>使用分析工具來分析網站的訪客都用哪一個瀏覽器，如果發現只有很少數的人使用舊版IE，就別花費時間去為了那些訪客做修改，在這裡推薦很多網站都使用的<a href="http://www.google.com/analytics/" target="_blank">Google Analytics</a>，最重要的是它還是免費</p>
+
+<h3>2.提醒用戶升級</h3>
+
+<p>假設有些時候某些功能沒辦法在舊版的IE上執行，那善意的提醒也是不錯的效果，可以在這邊下載<a href="http://code.google.com/p/ie6-upgrade-warning/" target="_blank">IE6 Upgrade Warning</a>，這個由Google寫的Project可以幫助你在訪客是使用IE6時，跳出提醒升級的視窗，使用方式就是先下載整包Project，放進你的網站裡面，並且加入以下程式碼</p>
+
+<pre><code>&lt;!--[if lte IE 6]&gt;&lt;script src="js/ie6/warning.js"&gt;&lt;/script&gt;&lt;script&gt;window.onload=function(){e("js/ie6/")}&lt;/script&gt;&lt;![endif]--&gt;
+</code></pre>
+
+<p><strong>warning.js</strong>這支檔案可以隨著擺放路徑而調整，假如偵測到訪客是使用IE6就會跳出以下畫面</p>
+
+<p><img src="https://lh5.googleusercontent.com/-rsWJFxHcHAs/UIoszY9MeOI/AAAAAAAABvg/KV_7bbdkMEg/s700/upgrade.jpg" /></p>
+
+<p>當然你也可以換成繁體中文版，只要打開warning.js這支檔案，將前三行的code換成以下的程式碼即可</p>
+
+<pre><code>var msg1 = "你知道你的 Internet Explorer 瀏覽器已經過時了嗎？";
+var msg2 = "建議你升級到較新的版本，或是改用其他的瀏覽器，以獲得更好的使用體驗。下面是一份目前廣受歡迎的瀏覽器列表。";
+var msg3 = "只要點選圖示，就可以連到各自的下載頁面。";
+</code></pre>
+
+<p>記得注意UTF-8的編碼問題</p>
+
+<h3>3.整理問題</h3>
+
+<p>有時候好不容易處理過的BUG，記得要記錄起來，不僅造福將來也有可能碰到問題的自己，也可以幫助團隊的其他人，甚至是社群上同樣遇到相同問題的開發者</p>
+
+<h3>4.提高預算</h3>
+
+<p>假如真的遇到客戶要求一定要支援所有瀏覽器&#8230;.，那就大膽的開口要求提高預算吧！</p>
+
+<p>以上就是作者建議大家的解決方式</p>
+
+<p>IE的相容性問題我想也不是一時可以解決，但至少幾個大型的入口網站(例如Google)已經開始不再支援老舊的IE，而IE6老實說也慢慢的逐漸消失中，微軟似乎也聽見的大家的心聲，至少IE10目前看起來是中規中矩，讓我們還是用樂觀的心情來迎接未來:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a></p>
+
+<p><a href="http://code.google.com/p/ie6-upgrade-warning/" target="_blank">ie6-upgrade-warning</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[好書分享] 為什麼搜尋將被淘汰]]></title>
@@ -42,6 +98,10 @@
 <p>流行銷的作者Jamie，也有針對Curator寫了一篇文章，叫做<a href="http://mrjamie.cc/2012/03/09/curator/" target="_blank">為你的消費者，當一個盡責的「Curator」</a>，有興趣的人也可以去看看</p>
 
 <p>最後我想筆記的重點是:資訊越多，策展者越重要，電腦還尚未可以取代人類</p>
+
+<p>參考資料:</p>
+
+<p>為什麼搜尋將被淘汰</p>
 
 <p>如有想法，歡迎一起提出討論</p>
 ]]></content>
@@ -2174,76 +2234,6 @@ javascripts_dir = "javascripts"
 <p>當然也可以把這個修改寫得更好看一些，但我用最快的方式來補充這個AJAX的需求</p>
 
 <p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Facebook] Facebook Developer World HACK 2012]]></title>
-    <link href="http://rx836.github.com/blog/facebook-world-hack/"/>
-    <updated>2012-09-12T23:42:00+08:00</updated>
-    <id>http://rx836.github.com/blog/facebook-world-hack</id>
-    <content type="html"><![CDATA[<p>因為本身的工作是開發Facebook相關社群APP，所以長期下來有在follow<a href="https://developers.facebook.com/blog/" target="_blank">Facebook Developer Blog</a>，看到<a href="https://developers.facebook.com/blog/post/2012/08/08/facebook-developer-world-hack-2012/" target="_blank">Facebook Developer World HACK 2012</a>原本以為應該跟以前一樣，只有幾個大城市才有舉辦，沒想到仔細一看，竟然有Taipei Taiwan！著實嚇了我一大跳，想當然爾是趕緊報名參加</p>
-
-<!--more-->
-
-
-<p>入場費蠻便宜的大概七百多塊，以下是我記錄的一些相片，因為是用手機拍的畫質不是很好多見諒</p>
-
-<p>會場是位於信義區裡的克緹國際總部大樓，因為我是第一次參加這種HACK活動，所以我是事後才知道這大概是目前所有HACK活動場地最高級的一次，光看這個view就知道多棒</p>
-
-<p><img src="https://lh6.googleusercontent.com/-v_dRNzia9Lk/UFC9Tzbpx-I/AAAAAAAABe0/V-eKCYRGiNY/s788/IMG_2992.JPG" width="800px" /></p>
-
-<p>整個會場都是落地窗玻璃，所以一整天參加活動甚至寫code都感到非常的舒服，尤其是下午的時候夕陽真的非常非常的漂亮</p>
-
-<p><img src="https://lh3.googleusercontent.com/-SchSdUumDww/UFDCG6u60OI/AAAAAAAABfc/oHuqMauFcQU/s788/IMG_2985.JPG" width="800px" /></p>
-
-<p>這是在進去會場之前的報到，其實這是個類似天橋的地方，天橋旁有個空地可以看到整個信義區的view，我想跨年煙火在這看應該超HIGH的</p>
-
-<p><img src="https://lh5.googleusercontent.com/-PkjKD0yXXbw/UFC7Oui1G4I/AAAAAAAABeE/8cGsvgtZSP4/s788/IMG_2989.JPG" width="800px" /></p>
-
-<p>進去後可以看到活動的大LOGO，是用中華民國的國旗所拼成的，可見Facebook多麼用心</p>
-
-<p><img src="https://lh6.googleusercontent.com/-nX29nNMaBBA/UFC7Qiw-HVI/AAAAAAAABeM/XDv-YGQnG1k/s788/IMG_2991.JPG" width="800px" /></p>
-
-<p>當然還有領到一些東西，例如專屬徽章、T桖、還有貼紙，左邊那台是口譯機，Facebook相當貼心的請了同步翻譯人員，讓英文較不佳的人也可以知道講者在講什麼，而且是同步翻譯喔！</p>
-
-<p><img src="https://lh6.googleusercontent.com/-Xk3LqAjFKGg/UFC7iRksdEI/AAAAAAAABec/tX_5-Qu3fm8/s903/IMG_2994.JPG" width="800px" /></p>
-
-<p>實體版的憤怒鳥XD，code寫累了可以來憤怒一下</p>
-
-<p><img src="https://lh6.googleusercontent.com/-Zb7ubBYygng/UFC7ZbaPDdI/AAAAAAAABeU/VdE3fIhCaTg/s788/IMG_2993.JPG" width="800px" /></p>
-
-<p>吃不完的零食和喝不完的飲料是必備的，啤酒當然也是少不了</p>
-
-<p><img src="https://lh4.googleusercontent.com/-KdhIaeQwmZE/UFC9Prk4u8I/AAAAAAAABek/l-ZN1zb3XHc/s788/IMG_2998.JPG" width="800px" /></p>
-
-<p>上午主要focus在Graph API部分，告訴大家怎麼利用Facebook做一些第三方的APP，也分享一些範例，但其實我蠻失望的，因為我原本會以為可以知道一些我從官方文件或Blog學不到的東西，不過後來想想也是，這本來就不是技術發表會，這是來推廣Facebook的Open Graph</p>
-
-<p><img src="https://lh3.googleusercontent.com/-u-licm0d5hg/UFC9XRWECvI/AAAAAAAABe8/Z7XsaVUYquE/s788/IMG_3003.JPG" /></p>
-
-<p>然後Berlin也是跟我們台灣一樣11號舉行，但因為時差的關係我們進行到下午他們才正要開始，所以還有視訊同步Say Hello，還聽到有人開玩笑的大喊Hello World！ XDD</p>
-
-<p><img src="https://lh4.googleusercontent.com/-uz0E3PyUkgQ/UFC9R3twXkI/AAAAAAAABes/mWRevtEOLC4/s903/IMG_3001.JPG" /></p>
-
-<p>因為下午時間就是開始寫code，但我大概接近中午的時候就開始寫了，因為我覺得我時間一定不夠，所以我一有想法就趕快開始動手了，順便簡單的分享一下我的心路歷程</p>
-
-<p>第一次參加這種HACK活動，其實本來沒有什麼頭緒，甚至早上還都只是認為來這邊拜大神，吃喝一下就滿足了，可是後來在認識的前輩鼓勵之下，我也想來挑戰一下自己的極限，看看在這種氛圍底下我可以發揮到什麼程度，所以心一橫，我就決定來真的，好好拼一下</p>
-
-<p>因為工作關係平常本來就是FB重度使用者，所以在發想要做啥這個階段，對我來說不是很困難，不過以後參加別的HACK就可能要先想好做什麼了，因為發想其實應該是最困難的，我想做的是因為我平常出去玩很喜歡用手機拍照上傳到FB，可是如果回家要寫BLOG的話，整理照片那些又很麻煩，所以我決定做一個簡單的工具，可以抓取妳出去玩的時候拍照上傳的照片，加上說明文字，並且幫你拼湊成HTML碼然後丟到HTML編輯器裡面，讓你按幾下就可以有一個BLOG的基本範本存在，而就不用煩惱BLOG要怎麼開頭</p>
-
-<p>定好方向以後，就開始查官方文件，並且邊做邊調整細微的功能，因為是一人團隊的關係，所以我在ICON方面就用了bootstrap，省去了很多美工，Server端的code我也都沒寫，純粹都是用js來完成這個網站，結果一進入狀態以後，時間就過超快的，一下就天黑了</p>
-
-<p><img src="https://lh3.googleusercontent.com/-858tykFHwq0/UFC9XtZTnOI/AAAAAAAABfA/j-URBx8q624/s788/IMG_3005.JPG" width="800px" /></p>
-
-<p>到了吃晚飯時間，我起來走了一下，發現還是很多人在拼呀</p>
-
-<p>後來因為我沒注意到要上去DEMO的人要去網站註冊，所以我錯失了上台分享的機會，這讓我覺得蠻可惜的，雖然做的不是很好，但有一個展現自己的機會應該要好好把握</p>
-
-<p><img src="https://lh6.googleusercontent.com/-cJGtuvW_5ss/UFC9YhdCjcI/AAAAAAAABfE/dNz5OY_6rKo/s788/IMG_3007.JPG" width="800px" /></p>
-
-<p>最後總共有30幾隊報名，大家真的都很厲害，而且評分有分好幾種得獎名額，例如最佳mobile或是最佳game，而且只要得獎都有IPAD可以拿，超大手筆的！不過只有第一名有機會去矽谷再跟全世界的人比一次</p>
-
-<p>這是我人生的第一個HACK，真的收穫很多，也大開眼界，期許自己有一天能在上舞台分享我的東西，但在那之前可能要好好的加強自己的能力才行:)</p>
 ]]></content>
   </entry>
   
