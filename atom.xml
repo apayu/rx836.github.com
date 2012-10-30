@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-27T13:28:49+08:00</updated>
+  <updated>2012-10-30T16:24:53+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,162 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[first-amazon-web-services]]></title>
+    <link href="http://rx836.github.com/blog/first-amazon-web-services/"/>
+    <updated>2012-10-30T11:25:00+08:00</updated>
+    <id>http://rx836.github.com/blog/first-amazon-web-services</id>
+    <content type="html"><![CDATA[<p>Amazon Web Service(AWS)從2006就開始提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節設定還要再多摸索學習，這次就先筆記怎麼開始使用AWS的EC2服務</p>
+
+<!--more-->
+
+
+<p>首先到<a href="http://aws.amazon.com/" target="_blank">AWS</a>首頁，選擇Sign up now</p>
+
+<p><img src="https://lh4.googleusercontent.com/-xqNCJQspknM/UI-FGSVVMGI/AAAAAAAABxo/HnD7qU0Zmvc/s1038/2012-10-30_114058.jpg" /></p>
+
+<p>假如沒有Amazon的帳號，必須選擇 <strong> I am a new user</strong> ，然後進行申請的步驟，如果已經擁有帳號，就直接選擇 <strong>I am a returning userand my password is</strong> ，並且輸入密碼，注意要使用AWS的服務必須要有信用卡，因為當你超過免費的使用上限才能直接收錢(無誤)</p>
+
+<p><img src="https://lh5.googleusercontent.com/-HyaQ3OppxQQ/UI-FGY4NJXI/AAAAAAAABxs/RWZ0aOeO_AQ/s915/2012-10-30_113758.jpg" /></p>
+
+<p>申請帳號的過程都是填一些基本資料，和進行一些驗證，過程中就不多加說明了</p>
+
+<p>OK，進來以後你就會看到這個畫面</p>
+
+<p><img src="https://lh3.googleusercontent.com/-HewOX42mZ4k/UI-FHoeHdXI/AAAAAAAABx4/3jnReVoz0ZM/s916/2012-10-30_115202.jpg" /></p>
+
+<p>恩&#8230;琳瑯滿目的英文選項，但沒關係，我們只要挑選我們要的去了解，選擇左邊的 <strong>AWS Management Console</strong></p>
+
+<p><img src="https://lh6.googleusercontent.com/-xDKUaMI1kp0/UI-FLs8jlSI/AAAAAAAAByE/hONoGXerkO0/s885/2012-10-30_115611.jpg" /></p>
+
+<p>接著按下 <strong>Sign in to the AWS Console</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/-ePuWgaQtyIs/UI-FL3IykXI/AAAAAAAAByM/Unm4rUDg308/s938/2012-10-30_115843.jpg" /></p>
+
+<p>挑選 <strong>EC2</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-VlYPIrLzYgk/UI-FLlQrk7I/AAAAAAAAByA/Dhh-5voV3d0/s1137/2012-10-30_120015.jpg" /></p>
+
+<p>這裡要注意的一點是，右上角在名稱的右邊，可以選擇主機的所在位置，鄉民是推薦日本，但如果你想架在別的地方也可以</p>
+
+<p><img src="https://lh3.googleusercontent.com/-L4HVl_bkCg0/UI-F7rDExDI/AAAAAAAAB0g/0Wi1AEjKEas/s344/2012-10-30_154605.jpg" /></p>
+
+<p>接著點選 <strong>Launch Instance</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-F0dPwprEHwk/UI-FP_x-OvI/AAAAAAAAByY/9kTJDlGQ_jk/s1223/2012-10-30_144418.jpg" /></p>
+
+<p>選擇 <strong>Classic Wizard</strong>，接著按下 <strong>Continue</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-k0dIMHJwYMc/UI-FQ320qmI/AAAAAAAAByg/sLJFd9FLEl0/s1223/2012-10-30_144558.jpg" /></p>
+
+<p>如果要用free的話，記得要挑選 <strong>Root Device Size</strong> 在10G以內的服務，這裡我們選擇的是 <strong>Ubuntu Server 11.10</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-wmx8zWDjMBU/UI-FQzGdbkI/AAAAAAAAByk/903ECWkyYVc/s1082/2012-10-30_144823.jpg" /></p>
+
+<p>這頁裡的 <strong>Number of Instances</strong> 則是你要建立的主機數量，因為免費的計畫每個月只有提供750小時，所以如果是開兩台的話，則是兩台的時數相加計算，這裡我們建立一台即可</p>
+
+<p>另外因為是免付費，所以能選擇的 <strong>Instance Type</strong> 只有 <strong>Micro(t1.micro, 613Mib)</strong>，其他都要花錢</p>
+
+<p><img src="https://lh5.googleusercontent.com/-8EtQOn5sYIU/UI-FUrXpQZI/AAAAAAAAByw/JU14oyBEQTg/s923/2012-10-30_145517.jpg" /></p>
+
+<p>再來 <strong>INSTANCE DETAILS</strong> 都用預設</p>
+
+<p><img src="https://lh5.googleusercontent.com/-wdMLzfYkYYs/UI-FUntOkpI/AAAAAAAABy0/0i_6vntxIXQ/s928/2012-10-30_145536.jpg" /></p>
+
+<p>設定主機的標籤，在 <strong>Value</strong> 打上你取的名字即可</p>
+
+<p><img src="https://lh4.googleusercontent.com/-MbOIYyJvqEc/UI-FU4x1toI/AAAAAAAABy4/0J1YjC84FAE/s925/2012-10-30_145722.jpg" /></p>
+
+<p>接下來這個步驟相當相當的重要，因為要建立等下登入的金鑰，自訂一個名稱一個，按下 <strong>Create &amp; Download you key Pair</strong> ，就會下載一個金鑰檔(*.pem)，請妥善保管這個檔案，有這個檔案等下你才能透過SSH登入EC2主機</p>
+
+<p><img src="https://lh6.googleusercontent.com/-1cB05WAXDTc/UI-FWrGmNII/AAAAAAAABzI/3SldjtxLwH8/s925/2012-10-30_145856.jpg" /></p>
+
+<p>防火牆群組沒有特別需求就選擇預設 <strong>quick-start-1</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-m-sDdpaLk88/UI-HR5UGR7I/AAAAAAAAB0o/HmQm9N64pqU/s873/2012-10-30_155203.jpg" /></p>
+
+<p>列出一個結果清單，沒問題就按下Launch</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ERYFFX--ARs/UI-FXp1zUYI/AAAAAAAABzY/9tcXui8NhvY/s914/2012-10-30_150423.jpg" /></p>
+
+<p>回到AWS後台，點選左邊的Instance，你會看到主機的狀態</p>
+
+<p><img src="https://lh4.googleusercontent.com/-4tlmBtCA4XQ/UI-FYCQUe0I/AAAAAAAABzg/BzOz1XOpx8Y/s873/2012-10-30_150714.jpg" /></p>
+
+<p>底下有個Public DNS，稍後建立連線時會用到Public DNS</p>
+
+<p><img src="https://lh5.googleusercontent.com/-Q7z3TcmKTvw/UI-FZXjHSTI/AAAAAAAABzo/WC8BPmzR13A/s1222/2012-10-30_151020.jpg" /></p>
+
+<p>接下來就要開始連到我們的EC2虛擬機器，必須透過SSH軟體來遠端登入，Windows大部分都是使用 <strong>Putty</strong> ， 不過因為因為EC2的金鑰是以.pem檔來儲存，Putty無法直接使用，所以要用一個叫做 <strong>Puttygen</strong> 來做金鑰的轉檔</p>
+
+<p><a href="http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe" target="_blank">Putty 下載點</a></p>
+
+<p><a href="http://the.earth.li/~sgtatham/putty/latest/x86/puttygen.exe" target="_blank">Puttygen 下載點</a></p>
+
+<p>執行 <strong>puttygen.exe</strong> 且無需安裝，打開後按下 <strong>Load</strong>，選擇剛才下載的.pem檔</p>
+
+<p><img src="https://lh3.googleusercontent.com/-pdtYelILnZo/UI-FbRF5hQI/AAAAAAAABzw/BAS6tI_xdEk/s496/2012-10-30_152801.jpg" /></p>
+
+<p>選擇 <strong>Sace private key</strong>，存成一個 .ppk檔</p>
+
+<p><img src="https://lh6.googleusercontent.com/-1UG_P7Wqw-g/UI-FdpNAfRI/AAAAAAAABz8/T0TRFtxMVVY/s495/2012-10-30_152856.jpg" /></p>
+
+<p>接著執行剛剛下載的 <strong>Putty.exe</strong> ， 左方選擇 <strong>Connection</strong> → <strong>SSH</strong> → <strong>Auth</strong> ，然後按下 <strong>Browse</strong> 選擇剛剛儲存的.ppk檔</p>
+
+<p><img src="https://lh4.googleusercontent.com/-sQRc74011W4/UI-FdcvHmrI/AAAAAAAABz4/f8ySGHCBkWY/s466/2012-10-30_153144.jpg" /></p>
+
+<p>按下左方的 <strong>Session</strong> ，在Host Name欄位輸入你剛才的 <strong>Public DNS</strong> ，連線類型(Connection type)選擇 <strong>SSH</strong>，按下 <strong>Open</strong> 就可以開始連線囉~</p>
+
+<p><img src="https://lh5.googleusercontent.com/-_Pi8UR1wsNQ/UI-FeJmaw0I/AAAAAAAAB0I/zLQMYgYx1ng/s467/2012-10-30_153603.jpg" /></p>
+
+<p>在 <strong>login as</strong> 後面輸入 <strong>ubuntu</strong> 按下Enter</p>
+
+<p><img src="https://lh6.googleusercontent.com/-hLdma4Q0mBQ/UI-FefgvVOI/AAAAAAAAB0M/J11ZpqvsRjs/s675/2012-10-30_153633.jpg" /></p>
+
+<p>過一會，出現輸入指令的畫面，代表成功連線到EC2主機啦~</p>
+
+<p><img src="https://lh4.googleusercontent.com/-F1v2Uh5v0CI/UI-FfPGHXQI/AAAAAAAAB0Y/sYuU9veEA-o/s676/2012-10-30_153720.jpg" /></p>
+
+<p>那要怎麼把主機關掉不用呢?</p>
+
+<p>回到剛剛的EC2後台，在主機的那一欄的狀態列按下右鍵，會看到四個狀態</p>
+
+<p><img src="https://lh5.googleusercontent.com/-qyQ7NRYxMjg/UI-MfJ_bKoI/AAAAAAAAB1M/xHplgqf1hhQ/s538/2012-10-30_161427.jpg" /></p>
+
+<p><strong>Terminate:</strong> 代表終止，會將主機刪除</p>
+
+<p><strong>Reboot:</strong> 重新開機</p>
+
+<p><strong>Stop:</strong> 代表關機</p>
+
+<p><strong>Start:</strong> 代表開機</p>
+
+<p>記住，只要一開機就會開始用一小時來計算，免費的只有一個月750小時，超過要收錢喔！</p>
+
+<p>那如果想看目前總共花了多少錢，該去哪看呢?</p>
+
+<p>在右上角點擊名稱，點選 <strong>Account Activity</strong></p>
+
+<p><img src="https://lh4.googleusercontent.com/-4ZmMEDZjsE4/UI-Nm_7PFfI/AAAAAAAAB1U/RZEJGKYuGoU/s363/2012-10-30_161809.jpg" /></p>
+
+<p>拉到最下面就可以看到囉~</p>
+
+<p><img src="https://lh3.googleusercontent.com/-zwSmA7ZkDew/UI-NnYpkmpI/AAAAAAAAB1c/_Bnh80-i0Ds/s778/2012-10-30_161909.jpg" /></p>
+
+<p>接下來如果還有玩出甚麼心得，再跟大家分享~</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.soft.idv.tw/?p=823" target="_blank">什麼是雲端服務？阿正老師教你免費玩Amazon EC2雲端主機！(上篇)</a></p>
+
+<p><a href="http://blog.soft.idv.tw/?p=824" target="_blank">阿正老師教你免費玩Amazon EC2雲端主機(下篇)：主機實戰篇</a></p>
+
+<p>很多大大的指導</p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 如何停止浪費時間在舊版IE的相容性]]></title>
@@ -2129,109 +2285,6 @@ javascripts_dir = "javascripts"
 <p><a href="http://blog.visioncan.com/2011/compass-sass-your-css/" target="_blank">用強大的compass+sass寫css</a></p>
 
 <p><a href="http://kw0006667.wordpress.com/compass-%E2%80%93-%E4%BD%BF%E7%94%A8-ruby-compass-on-windows/" target="_blank">Compass – 使用 Ruby + compass on Windows</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] 快樂的Happy.js]]></title>
-    <link href="http://rx836.github.com/blog/jquery-happyjs/"/>
-    <updated>2012-09-13T15:45:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-happyjs</id>
-    <content type="html"><![CDATA[<p>今天看到有人分享<a href="http://happyjs.com/" target="_blank">Happy.js</a>，因為名字的關係引起了我的興趣，好奇的想說用這個plugin是不是寫起來很快樂，所以決定來玩一下</p>
-
-<!--more-->
-
-
-<p>事實證明&#8230;，其實並沒有特別Happy，當然這只是取名字而已XD，Happy.js其實是一套驗證表單的plugin，官方網站強調的是它相當的輕量且容易擴充，而實際檔案大概也只有3kb左右，用法也相當的簡單</p>
-
-<p>首先一樣是引入js部分，分別是jQuery和happy.js還有happy.methods.js，可以直接下載<a href="http://github.com/andyet/Happy.js/zipball/master" target="_blank">範例檔</a></p>
-
-<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script src="happy.js"&gt;&lt;/script&gt;
-&lt;script src="happy.methods.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>happy.js是主程式，happy.methods.js是一些擴充的驗證方法</p>
-
-<p>接著是HTML部分</p>
-
-<pre><code>&lt;form id="awesomeForm" action="/lights/camera" method="post"&gt;
-  &lt;input id="yourName" type="text" name="name" /&gt;
-  &lt;input id="email" type="text" name="email" class="" /&gt;
-  &lt;input type="submit" value="go" /&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>再來就是js部分</p>
-
-<pre><code>$('#awesomeForm').isHappy({
-    fields: {
-      '#yourName': {
-        required: true,
-        message: '忘記填姓名囉！'
-      },
-      '#email': {
-        required: true,
-        message: '忘記填Email囉！',
-        test: happy.email 
-      }
-    }
-  });
-</code></pre>
-
-<p>其實蠻好理解的，主要就是fields裡面要設置需要驗證的欄位，例如像#yourName和#email的input，然後message就是看要出現甚麼錯誤訊息，test這個屬性就是指擴充的驗證方法部分，就是寫在剛剛引用的happy.methods.js裡面，所以你可以除了要求不能空白以外，還可以進一步要求Email的格式</p>
-
-<p>而出現的錯誤訊息就如同下面所示</p>
-
-<pre><code>&lt;span id=​"textInput1_unhappy" class=​"unhappyMessage"&gt;​忘記填Email囉！​&lt;/span&gt;
-</code></pre>
-
-<p>這個span會在發生錯誤時添加，而你會看到類別就叫<strong>unhappyMessage</strong>，作者就說他是認真的，不是開玩笑的，因為這真的不是個很開心的訊息 XD</p>
-
-<p>所以你可以添加一些unhappyMessage的CSS樣式讓錯誤訊息更顯著</p>
-
-<p>當然這不一定只能用在表單部分，如果有時候不是一個FORM而是用div所拼湊的表單，要做AJAX的效果，就可以把預設的submitButton改掉，如下所示</p>
-
-<pre><code>$('#awesomeForm').isHappy({
-    fields: {
-      '#yourName': {
-        required: true,
-        message: '忘記填姓名囉！'
-      },
-      '#email': {
-        required: true,
-        message: '忘記填Email囉！',
-        test: happy.email 
-      }
-    },
-    submitButton:'#subBtn' //自己制定的submitButton
-});
-</code></pre>
-
-<p>不過我後來發現一個小問題，如果是制定的話，再驗證完後要觸發AJAX卻不知道要寫哪裡，所以我後來自己稍微修改了一下原始碼，把要加到AJAX的部分寫在happy.js裡面</p>
-
-<pre><code>function handleSubmit() {
-  var errors = false, i, l;
-  for (i = 0, l = fields.length; i &lt; l; i += 1) {
-    if (!fields[i].testValid(true)) {
-      errors = true;
-    }
-  }
-  if (errors) {
-    if (isFunction(config.unHappy)) config.unHappy();
-    return false;
-  } else if (config.testMode) {
-    if (window.console) console.warn('would have submitted');
-    return false;
-  } else {          //這個else是後來自己加上去的
-                    //代表通過驗證以後要做的事情，把AJAX的code寫在這裡
-  }                 //
-}
-</code></pre>
-
-<p>當然也可以把這個修改寫得更好看一些，但我用最快的方式來補充這個AJAX的需求</p>
 
 <p>如有錯誤，歡迎指正</p>
 ]]></content>

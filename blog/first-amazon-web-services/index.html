@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>first-amazon-web-services - apa</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="Amazon Web Service(AWS)從2006就開始提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節設定還要再多摸索學習，這次就先筆記怎麼開始使用AWS的EC2服務 首先到AWS首頁，選擇Sign up now &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/first-amazon-web-services">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="apa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">apa</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">First-amazon-web-services</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-30T11:25:00+08:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Amazon Web Service(AWS)從2006就開始提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節設定還要再多摸索學習，這次就先筆記怎麼開始使用AWS的EC2服務</p>
+
+<!--more-->
+
+
+<p>首先到<a href="http://aws.amazon.com/" target="_blank">AWS</a>首頁，選擇Sign up now</p>
+
+<p><img src="https://lh4.googleusercontent.com/-xqNCJQspknM/UI-FGSVVMGI/AAAAAAAABxo/HnD7qU0Zmvc/s1038/2012-10-30_114058.jpg" /></p>
+
+<p>假如沒有Amazon的帳號，必須選擇 <strong> I am a new user</strong> ，然後進行申請的步驟，如果已經擁有帳號，就直接選擇 <strong>I am a returning userand my password is</strong> ，並且輸入密碼，注意要使用AWS的服務必須要有信用卡，因為當你超過免費的使用上限才能直接收錢(無誤)</p>
+
+<p><img src="https://lh5.googleusercontent.com/-HyaQ3OppxQQ/UI-FGY4NJXI/AAAAAAAABxs/RWZ0aOeO_AQ/s915/2012-10-30_113758.jpg" /></p>
+
+<p>申請帳號的過程都是填一些基本資料，和進行一些驗證，過程中就不多加說明了</p>
+
+<p>OK，進來以後你就會看到這個畫面</p>
+
+<p><img src="https://lh3.googleusercontent.com/-HewOX42mZ4k/UI-FHoeHdXI/AAAAAAAABx4/3jnReVoz0ZM/s916/2012-10-30_115202.jpg" /></p>
+
+<p>恩&#8230;琳瑯滿目的英文選項，但沒關係，我們只要挑選我們要的去了解，選擇左邊的 <strong>AWS Management Console</strong></p>
+
+<p><img src="https://lh6.googleusercontent.com/-xDKUaMI1kp0/UI-FLs8jlSI/AAAAAAAAByE/hONoGXerkO0/s885/2012-10-30_115611.jpg" /></p>
+
+<p>接著按下 <strong>Sign in to the AWS Console</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/-ePuWgaQtyIs/UI-FL3IykXI/AAAAAAAAByM/Unm4rUDg308/s938/2012-10-30_115843.jpg" /></p>
+
+<p>挑選 <strong>EC2</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-VlYPIrLzYgk/UI-FLlQrk7I/AAAAAAAAByA/Dhh-5voV3d0/s1137/2012-10-30_120015.jpg" /></p>
+
+<p>這裡要注意的一點是，右上角在名稱的右邊，可以選擇主機的所在位置，鄉民是推薦日本，但如果你想架在別的地方也可以</p>
+
+<p><img src="https://lh3.googleusercontent.com/-L4HVl_bkCg0/UI-F7rDExDI/AAAAAAAAB0g/0Wi1AEjKEas/s344/2012-10-30_154605.jpg" /></p>
+
+<p>接著點選 <strong>Launch Instance</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-F0dPwprEHwk/UI-FP_x-OvI/AAAAAAAAByY/9kTJDlGQ_jk/s1223/2012-10-30_144418.jpg" /></p>
+
+<p>選擇 <strong>Classic Wizard</strong>，接著按下 <strong>Continue</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-k0dIMHJwYMc/UI-FQ320qmI/AAAAAAAAByg/sLJFd9FLEl0/s1223/2012-10-30_144558.jpg" /></p>
+
+<p>如果要用free的話，記得要挑選 <strong>Root Device Size</strong> 在10G以內的服務，這裡我們選擇的是 <strong>Ubuntu Server 11.10</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-wmx8zWDjMBU/UI-FQzGdbkI/AAAAAAAAByk/903ECWkyYVc/s1082/2012-10-30_144823.jpg" /></p>
+
+<p>這頁裡的 <strong>Number of Instances</strong> 則是你要建立的主機數量，因為免費的計畫每個月只有提供750小時，所以如果是開兩台的話，則是兩台的時數相加計算，這裡我們建立一台即可</p>
+
+<p>另外因為是免付費，所以能選擇的 <strong>Instance Type</strong> 只有 <strong>Micro(t1.micro, 613Mib)</strong>，其他都要花錢</p>
+
+<p><img src="https://lh5.googleusercontent.com/-8EtQOn5sYIU/UI-FUrXpQZI/AAAAAAAAByw/JU14oyBEQTg/s923/2012-10-30_145517.jpg" /></p>
+
+<p>再來 <strong>INSTANCE DETAILS</strong> 都用預設</p>
+
+<p><img src="https://lh5.googleusercontent.com/-wdMLzfYkYYs/UI-FUntOkpI/AAAAAAAABy0/0i_6vntxIXQ/s928/2012-10-30_145536.jpg" /></p>
+
+<p>設定主機的標籤，在 <strong>Value</strong> 打上你取的名字即可</p>
+
+<p><img src="https://lh4.googleusercontent.com/-MbOIYyJvqEc/UI-FU4x1toI/AAAAAAAABy4/0J1YjC84FAE/s925/2012-10-30_145722.jpg" /></p>
+
+<p>接下來這個步驟相當相當的重要，因為要建立等下登入的金鑰，自訂一個名稱一個，按下 <strong>Create &amp; Download you key Pair</strong> ，就會下載一個金鑰檔(*.pem)，請妥善保管這個檔案，有這個檔案等下你才能透過SSH登入EC2主機</p>
+
+<p><img src="https://lh6.googleusercontent.com/-1cB05WAXDTc/UI-FWrGmNII/AAAAAAAABzI/3SldjtxLwH8/s925/2012-10-30_145856.jpg" /></p>
+
+<p>防火牆群組沒有特別需求就選擇預設 <strong>quick-start-1</strong></p>
+
+<p><img src="https://lh5.googleusercontent.com/-m-sDdpaLk88/UI-HR5UGR7I/AAAAAAAAB0o/HmQm9N64pqU/s873/2012-10-30_155203.jpg" /></p>
+
+<p>列出一個結果清單，沒問題就按下Launch</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ERYFFX--ARs/UI-FXp1zUYI/AAAAAAAABzY/9tcXui8NhvY/s914/2012-10-30_150423.jpg" /></p>
+
+<p>回到AWS後台，點選左邊的Instance，你會看到主機的狀態</p>
+
+<p><img src="https://lh4.googleusercontent.com/-4tlmBtCA4XQ/UI-FYCQUe0I/AAAAAAAABzg/BzOz1XOpx8Y/s873/2012-10-30_150714.jpg" /></p>
+
+<p>底下有個Public DNS，稍後建立連線時會用到Public DNS</p>
+
+<p><img src="https://lh5.googleusercontent.com/-Q7z3TcmKTvw/UI-FZXjHSTI/AAAAAAAABzo/WC8BPmzR13A/s1222/2012-10-30_151020.jpg" /></p>
+
+<p>接下來就要開始連到我們的EC2虛擬機器，必須透過SSH軟體來遠端登入，Windows大部分都是使用 <strong>Putty</strong> ， 不過因為因為EC2的金鑰是以.pem檔來儲存，Putty無法直接使用，所以要用一個叫做 <strong>Puttygen</strong> 來做金鑰的轉檔</p>
+
+<p><a href="http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe" target="_blank">Putty 下載點</a></p>
+
+<p><a href="http://the.earth.li/~sgtatham/putty/latest/x86/puttygen.exe" target="_blank">Puttygen 下載點</a></p>
+
+<p>執行 <strong>puttygen.exe</strong> 且無需安裝，打開後按下 <strong>Load</strong>，選擇剛才下載的.pem檔</p>
+
+<p><img src="https://lh3.googleusercontent.com/-pdtYelILnZo/UI-FbRF5hQI/AAAAAAAABzw/BAS6tI_xdEk/s496/2012-10-30_152801.jpg" /></p>
+
+<p>選擇 <strong>Sace private key</strong>，存成一個 .ppk檔</p>
+
+<p><img src="https://lh6.googleusercontent.com/-1UG_P7Wqw-g/UI-FdpNAfRI/AAAAAAAABz8/T0TRFtxMVVY/s495/2012-10-30_152856.jpg" /></p>
+
+<p>接著執行剛剛下載的 <strong>Putty.exe</strong> ， 左方選擇 <strong>Connection</strong> → <strong>SSH</strong> → <strong>Auth</strong> ，然後按下 <strong>Browse</strong> 選擇剛剛儲存的.ppk檔</p>
+
+<p><img src="https://lh4.googleusercontent.com/-sQRc74011W4/UI-FdcvHmrI/AAAAAAAABz4/f8ySGHCBkWY/s466/2012-10-30_153144.jpg" /></p>
+
+<p>按下左方的 <strong>Session</strong> ，在Host Name欄位輸入你剛才的 <strong>Public DNS</strong> ，連線類型(Connection type)選擇 <strong>SSH</strong>，按下 <strong>Open</strong> 就可以開始連線囉~</p>
+
+<p><img src="https://lh5.googleusercontent.com/-_Pi8UR1wsNQ/UI-FeJmaw0I/AAAAAAAAB0I/zLQMYgYx1ng/s467/2012-10-30_153603.jpg" /></p>
+
+<p>在 <strong>login as</strong> 後面輸入 <strong>ubuntu</strong> 按下Enter</p>
+
+<p><img src="https://lh6.googleusercontent.com/-hLdma4Q0mBQ/UI-FefgvVOI/AAAAAAAAB0M/J11ZpqvsRjs/s675/2012-10-30_153633.jpg" /></p>
+
+<p>過一會，出現輸入指令的畫面，代表成功連線到EC2主機啦~</p>
+
+<p><img src="https://lh4.googleusercontent.com/-F1v2Uh5v0CI/UI-FfPGHXQI/AAAAAAAAB0Y/sYuU9veEA-o/s676/2012-10-30_153720.jpg" /></p>
+
+<p>那要怎麼把主機關掉不用呢?</p>
+
+<p>回到剛剛的EC2後台，在主機的那一欄的狀態列按下右鍵，會看到四個狀態</p>
+
+<p><img src="https://lh5.googleusercontent.com/-qyQ7NRYxMjg/UI-MfJ_bKoI/AAAAAAAAB1M/xHplgqf1hhQ/s538/2012-10-30_161427.jpg" /></p>
+
+<p><strong>Terminate:</strong> 代表終止，會將主機刪除</p>
+
+<p><strong>Reboot:</strong> 重新開機</p>
+
+<p><strong>Stop:</strong> 代表關機</p>
+
+<p><strong>Start:</strong> 代表開機</p>
+
+<p>記住，只要一開機就會開始用一小時來計算，免費的只有一個月750小時，超過要收錢喔！</p>
+
+<p>那如果想看目前總共花了多少錢，該去哪看呢?</p>
+
+<p>在右上角點擊名稱，點選 <strong>Account Activity</strong></p>
+
+<p><img src="https://lh4.googleusercontent.com/-4ZmMEDZjsE4/UI-Nm_7PFfI/AAAAAAAAB1U/RZEJGKYuGoU/s363/2012-10-30_161809.jpg" /></p>
+
+<p>拉到最下面就可以看到囉~</p>
+
+<p><img src="https://lh3.googleusercontent.com/-zwSmA7ZkDew/UI-NnYpkmpI/AAAAAAAAB1c/_Bnh80-i0Ds/s778/2012-10-30_161909.jpg" /></p>
+
+<p>接下來如果還有玩出甚麼心得，再跟大家分享~</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.soft.idv.tw/?p=823" target="_blank">什麼是雲端服務？阿正老師教你免費玩Amazon EC2雲端主機！(上篇)</a></p>
+
+<p><a href="http://blog.soft.idv.tw/?p=824" target="_blank">阿正老師教你免費玩Amazon EC2雲端主機(下篇)：主機實戰篇</a></p>
+
+<p>很多大大的指導</p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-30T11:25:00+08:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/stop-wasting-time-for-ie/" title="Previous Post: [學習筆記] 如何停止浪費時間在舊版IE的相容性">&laquo; [學習筆記] 如何停止浪費時間在舊版IE的相容性</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://rx836.github.com/blog/first-amazon-web-services/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (4)</a></li><li><a href='/blog/categories/facebook'>Facebook (4)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/javascript'>JavaScript (4)</a></li><li><a href='/blog/categories/jquery'>jQuery (13)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (1)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (5)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (7)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/first-amazon-web-services/">first-amazon-web-services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/stop-wasting-time-for-ie/">[學習筆記] 如何停止浪費時間在舊版IE的相容性</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/book-review-5/">[好書分享] 為什麼搜尋將被淘汰</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-8-skill/">[jQuery] jQuery你一定要知道的八件事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/windows8-notifications/">[Win8] 動態磚初體驗</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/first-amazon-web-services/';
+        var disqus_url = 'http://rx836.github.com/blog/first-amazon-web-services/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=416172151763823&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
