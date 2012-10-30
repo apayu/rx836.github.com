@@ -9,7 +9,7 @@
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="Amazon Web Service(AWS)從2006年開始就提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節設定還要再多摸索學習，這次就先筆記怎麼開始使用AWS的EC2服務 先來簡單介紹一下什麼是EC2(Elastic &hellip;">
+  <meta name="description" content="Amazon Web Service(AWS)從2006年開始就提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節與設定還要再多摸索，這次就先筆記怎麼開始使用AWS的EC2服務 先來簡單介紹一下什麼是EC2(Elastic &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,7 +108,7 @@
   </header>
 
 
-<div class="entry-content"><p>Amazon Web Service(AWS)從2006年開始就提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節設定還要再多摸索學習，這次就先筆記怎麼開始使用AWS的EC2服務</p>
+<div class="entry-content"><p>Amazon Web Service(AWS)從2006年開始就提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節與設定還要再多摸索，這次就先筆記怎麼開始使用AWS的EC2服務</p>
 
 <!--more-->
 
@@ -153,11 +153,11 @@
 
 <p><img src="https://lh5.googleusercontent.com/-k0dIMHJwYMc/UI-FQ320qmI/AAAAAAAAByg/sLJFd9FLEl0/s1223/2012-10-30_144558.jpg" /></p>
 
-<p>如果要用free的話，記得要挑選 <strong>Root Device Size</strong> 在10G以內的服務，這裡我們選擇的是 <strong>Ubuntu Server 11.10</strong></p>
+<p>如果要用free的話，記得要挑選 <strong>Root Device Size</strong> 在10G以內的服務，這裡我們選擇的是 <strong>Ubuntu Server 11.10</strong>，之後按下Select</p>
 
 <p><img src="https://lh5.googleusercontent.com/-wmx8zWDjMBU/UI-FQzGdbkI/AAAAAAAAByk/903ECWkyYVc/s1082/2012-10-30_144823.jpg" /></p>
 
-<p>選完要的系統以後，接著會看到下頁裡有個選項是 <strong>Number of Instances</strong> 代表的是你要建立的主機數量，因為免費的計畫每個月只有提供750小時，所以如果是開兩台的話，則是兩台的時數相加計算，這裡我們建立一台即可</p>
+<p>選完要的系統以後，這邊會看到有個選項 <strong>Number of Instances</strong> 代表的是你要建立的主機數量，因為免費的計畫每個月只有提供750小時，所以如果是開兩台的話，則是兩台的時數相加計算，這裡我們建立一台即可</p>
 
 <p>另外因為是免付費，所以能選擇的 <strong>Instance Type</strong> 只有 <strong>Micro(t1.micro, 613Mib)</strong>，其他都要花錢</p>
 
@@ -229,13 +229,13 @@
 
 <p><strong>Terminate:</strong> 代表終止，會將主機刪除</p>
 
-<p><strong>Reboot:</strong> 重新開機</p>
+<p><strong>Reboot:</strong> 代表重新開機</p>
 
 <p><strong>Stop:</strong> 代表關機</p>
 
 <p><strong>Start:</strong> 代表開機</p>
 
-<p>記住，只要一開機就會開始用一小時來計算，免費的只有一個月750小時，超過要收錢喔！</p>
+<p>記住，只要一開機就會開始用一小時來計算，免費的一個月只有750小時，超過要收錢喔！</p>
 
 <p>那如果想看目前總共花了多少錢，該去哪看呢?</p>
 
@@ -248,6 +248,18 @@
 <p><img src="https://lh3.googleusercontent.com/-zwSmA7ZkDew/UI-NnYpkmpI/AAAAAAAAB1c/_Bnh80-i0Ds/s778/2012-10-30_161909.jpg" /></p>
 
 <p>接下來如果還有玩出甚麼心得，再跟大家分享~</p>
+
+<p>備註</p>
+
+<h3>免費使用上限</h3>
+
+<p>750小時的EC2 Linux Micro Instance使用(613MB RAM, 32/64位元平台)</p>
+
+<p>5GB的S3儲存空間(兩萬次下載/兩千次上傳)，30GB的網路總流量(上傳/下載各15GB)</p>
+
+<p>25小時的Amazon SimpleDB使用及1GB的儲存空間 ※如果你的使用超過以上用量，則超出部份必須收費</p>
+
+<h1>以官方公告為主</h1>
 
 <p>參考資料:</p>
 
