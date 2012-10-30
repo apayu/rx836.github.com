@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 學習筆記 | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/學習筆記/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-30T16:28:32+08:00</updated>
+  <updated>2012-10-30T16:39:49+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,10 +18,12 @@
     <link href="http://rx836.github.com/blog/first-amazon-web-services/"/>
     <updated>2012-10-30T11:25:00+08:00</updated>
     <id>http://rx836.github.com/blog/first-amazon-web-services</id>
-    <content type="html"><![CDATA[<p>Amazon Web Service(AWS)從2006就開始提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節設定還要再多摸索學習，這次就先筆記怎麼開始使用AWS的EC2服務</p>
+    <content type="html"><![CDATA[<p>Amazon Web Service(AWS)從2006年開始就提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節設定還要再多摸索學習，這次就先筆記怎麼開始使用AWS的EC2服務</p>
 
 <!--more-->
 
+
+<p>先來簡單介紹一下什麼是EC2(Elastic ComputeCloud，彈性雲端運算)，其實他就是一台虛擬主機，只要你會架站技術，就可以用遠端連線的方式，選擇安裝Linux或Windows Server 2008，不想使用的話也可以在後台直接關機或刪除虛擬主機，而且AWS最讓人著迷的就是使用多少才算多少錢，如果這個月服務想停止，那這個月就不會跟你算錢！這麼好的服務要怎麼申請呢？直接來看下面步驟</p>
 
 <p>首先到<a href="http://aws.amazon.com/" target="_blank">AWS</a>首頁，選擇Sign up now</p>
 
@@ -65,7 +67,7 @@
 
 <p><img src="https://lh5.googleusercontent.com/-wmx8zWDjMBU/UI-FQzGdbkI/AAAAAAAAByk/903ECWkyYVc/s1082/2012-10-30_144823.jpg" /></p>
 
-<p>這頁裡的 <strong>Number of Instances</strong> 則是你要建立的主機數量，因為免費的計畫每個月只有提供750小時，所以如果是開兩台的話，則是兩台的時數相加計算，這裡我們建立一台即可</p>
+<p>選完要的系統以後，接著會看到下頁裡有個選項是 <strong>Number of Instances</strong> 代表的是你要建立的主機數量，因為免費的計畫每個月只有提供750小時，所以如果是開兩台的話，則是兩台的時數相加計算，這裡我們建立一台即可</p>
 
 <p>另外因為是免付費，所以能選擇的 <strong>Instance Type</strong> 只有 <strong>Micro(t1.micro, 613Mib)</strong>，其他都要花錢</p>
 
@@ -79,7 +81,7 @@
 
 <p><img src="https://lh4.googleusercontent.com/-MbOIYyJvqEc/UI-FU4x1toI/AAAAAAAABy4/0J1YjC84FAE/s925/2012-10-30_145722.jpg" /></p>
 
-<p>接下來這個步驟相當相當的重要，因為要建立等下登入的金鑰，自訂一個名稱一個，按下 <strong>Create &amp; Download you key Pair</strong> ，就會下載一個金鑰檔(*.pem)，請妥善保管這個檔案，有這個檔案等下你才能透過SSH登入EC2主機</p>
+<p>接下來這個步驟相當相當的重要，因為要建立等下登入的金鑰，自訂一個名稱，按下 <strong>Create &amp; Download you key Pair</strong> ，就會下載一個金鑰檔(*.pem)，請妥善保管這個檔案，有這個檔案等下你才能透過SSH登入EC2主機</p>
 
 <p><img src="https://lh6.googleusercontent.com/-1cB05WAXDTc/UI-FWrGmNII/AAAAAAAABzI/3SldjtxLwH8/s925/2012-10-30_145856.jpg" /></p>
 
