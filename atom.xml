@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-10-30T16:49:16+08:00</updated>
+  <updated>2012-10-30T16:52:17+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -159,9 +159,9 @@
 
 <p>接下來如果還有玩出甚麼心得，再跟大家分享~</p>
 
-<p>備註</p>
+<p>備註:</p>
 
-<h3>免費使用上限</h3>
+<p>免費使用上限</p>
 
 <p>750小時的EC2 Linux Micro Instance使用(613MB RAM, 32/64位元平台)</p>
 
@@ -169,7 +169,7 @@
 
 <p>25小時的Amazon SimpleDB使用及1GB的儲存空間 ※如果你的使用超過以上用量，則超出部份必須收費</p>
 
-<h1>以官方公告為主</h1>
+<p>以上內容以官方公告為主</p>
 
 <p>參考資料:</p>
 
