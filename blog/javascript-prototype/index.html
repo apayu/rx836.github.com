@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[CSS3] 認識CSS3 transitions - apa</title>
+  <title>javascript-prototype - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="一直沒有找個時間好好的了解一下CSS3 transitions，趁著看到這篇文章，就來筆記一下用法，扎實一下基本功 CSS3 transitions可以改變css屬性的值，在某個期間內做出變化，類似jQuery.animate()，語法結構如下 .example { transition- &hellip;">
+  <meta name="description" content="今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件部分，趁這個機會再把JavaScript的觀念整理清楚，尤其是「prototype」 在講prototype之前，要先複習一下之前所寫的 [JavaScript &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/css3-transitions-guide">
+  <link rel="canonical" href="http://rx836.github.com/blog/javascript-prototype">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">[CSS3] 認識CSS3 Transitions</h1>
+      <h1 class="entry-title">Javascript-prototype</h1>
     
     
       <p class="meta">
@@ -99,7 +99,7 @@
   
 
 
-<time datetime="2012-10-20T23:24:00+08:00" pubdate data-updated="true">Oct 20<span>th</span>, 2012</time>
+<time datetime="2012-11-02T15:11:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,149 +108,112 @@
   </header>
 
 
-<div class="entry-content"><p>一直沒有找個時間好好的了解一下CSS3 transitions，趁著看到<a href="http://www.adobe.com/devnet/html5/articles/using-css3-transitions-a-comprehensive-guide.html" target="_blank">這篇</a>文章，就來筆記一下用法，扎實一下基本功</p>
+<div class="entry-content"><p>今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件部分，趁這個機會再把JavaScript的觀念整理清楚，尤其是「prototype」</p>
 
 <!--more-->
 
 
-<p>CSS3 transitions可以改變css屬性的值，在某個期間內做出變化，類似<a href="http://api.jquery.com/animate/" target="_blank">jQuery.animate()</a>，語法結構如下</p>
+<p>在講prototype之前，要先複習一下之前所寫的 <a href="http://blog.rx836.tw/blog/javascript-patterns-1/">[JavaScript] 談物件, 實字與建構式</a> 和 <a href="http://blog.rx836.tw/blog/javascript-custom-function/">[JavaScript] 建立物件的第三招-自訂建構式函式</a>，這兩篇文章有提到物件和建構式函式(constructor functions)，但其實還有一個叫做prototype也跟他們兩個糾纏不清，形成特殊的三角關係(誤)</p>
 
-<pre><code>.example {     
-    transition-property: background-color;     
-    transition-duration: 2s;     
-    transition-timing-function: ease-in;            
-    transition-delay: 1s; 
+<p>首先我們先來看物件</p>
+
+<pre><code>var obj={
+    name : '阿帕',
+    run : function(){
+        //跑跑跑
+    }
 }
+
+console.log(obj.name);
+//阿帕
+obj.run();
+//執行裡面的跑跑跑
 </code></pre>
 
-<p>這裡沒有特別加上prefixes，在真正使用的時候要自行加上，接著是分別講解每個屬性的用途</p>
+<p>OK，相信大家對上面這個物件不陌生，但除了以上建立物件的方法，還可以用建構式函式</p>
 
-<p><strong>transition-property:</strong> 指定你要變化的CSS屬性，至於哪些屬性是擁有transition效果可以查看<a href="http://www.w3.org/TR/css3-transitions/#animatable-properties" target="_blank">這張表</a></p>
-
-<p><strong>transition-duration:</strong> 指定transition從開始到結束的變化時間，在數字後面加上s就是以秒計算，用ms就是微秒</p>
-
-<p><strong>transition-timing-function:</strong> 根據時間的進行去改變屬性值的變化速率，也就是貝茲曲線，詳細的介紹可以參考<a href="http://www.w3.org/TR/css3-transitions/#transition-timing-function-property" target="_blank">這篇</a>，基本的有linear, ease-in, ease-out和ease-in-out這些值可以使用</p>
-
-<p><strong>transition-delay:</strong> 可以指定秒或微秒來延遲transition觸發的時間</p>
-
-<h3>Transition shorthand</h3>
-
-<p>為了簡潔也可以這樣寫</p>
-
-<pre><code>.example {     
-    transition: background-color 2s ease-in 1s; 
-} 
-</code></pre>
-
-<p>要特別注意的是，順序的重要性，另外第一個時間代表是<strong>transition-duration</strong>，第二個時間是<strong>transition-delay</strong>，如果你要定義<strong>transition-delay</strong>一定要先定義<strong>transition-duration</strong>才行</p>
-
-<h3>Multiple transitions</h3>
-
-<p>如果想在同個元素上定義複數個transitions，可以用下面寫法</p>
-
-<pre><code>.example {     
-    transition:  background-color  2s ease-in 1s,      
-    width  2s ease-in-out,      
-    height 3s ease-out; 
+<pre><code>function Obj(){
+    this.name = '阿帕';
+    this.run = function(){
+        //跑跑跑
+    }
 }
+
+var _obj = new Obj();
+console.log(_obj.name);
+//阿帕
+_obj.run();
+//執行裡面的跑跑跑
 </code></pre>
 
-<p>記得要用<strong>逗號</strong>隔開</p>
+<p>所以我們可以說，JavaScript利用<strong>建構式實例出一個物件</strong>，那跟prtotype有甚麼關係呢？</p>
 
-<h3>Triggering a transition</h3>
+<p>其實在建構式函式裡面有個屬性叫做prototype，他就是建構式函式的「原型物件」</p>
 
-<p>但其實光寫上面那些語法並不能實現transitions，原因在於沒有<strong>觸發</strong>這個動作，所以我們可能要加些&#8221;動作&#8221;，例如比較常見的是<strong>:hover</strong></p>
-
-<pre><code>.example {     
-    background-color: green;     
-    transition: background-color  2s ease-in 1s; 
-    width:100px;
-    height:100px;  
-} 
-.example:hover {     
-    background-color: blue 
+<pre><code>function Obj(){
+    this.name = '阿帕';
+    this.run = function(){
+        //跑跑跑
+    }
 }
+
+console.log(Obj.prototype);
+//Obj {} 這也是一個物件，叫原型物件
 </code></pre>
 
-<p><a href="http://jsfiddle.net/Pa5Uk/1/" target="_blank">範例</a></p>
+<p>這個原型物件可以做什麼呢？假如我今天用Obj()這個建構式函式建立了a、b、c三個物件，完成以後我還要每個都再加一個屬性height怎麼辦？你可能會這樣寫</p>
 
-<p>會看到如果將滑鼠移到div .example上面，會先等待一秒，接著再花兩秒的時間從綠色轉換成藍色</p>
-
-<h3>Transitions triggered by JavaScript</h3>
-
-<p>假如要搭配JavaScript呢？我們可以使用jQuery來示範一下</p>
-
-<p>css</p>
-
-<pre><code>.example {     
-    background-color: green;     
-    transition: background-color  2s ease-in 1s;
-    width:100px;
-    height:100px;  
+<pre><code>function Obj(){
+    this.name = '阿帕';
+    this.run = function(){
+        //跑跑跑
+    }
 }
-.style-change {     
-    background-color: blue
+
+var a = new Obj();
+var b = new Obj();
+var c = new Obj();
+
+//為每個物件增加屬性
+a.height= 15;
+b.height= 15;
+c.height= 15;
+</code></pre>
+
+<p>但其實你可以這樣寫</p>
+
+<pre><code>function Obj(){
+    this.name = '阿帕';
+    this.run = function(){
+        //跑跑跑
+    }
 }
+
+var a = new Obj();    
+Obj.prototype.height = 15;
+var b = new Obj();    
+var c = new Obj();    
+
+
+console.log(a.height);
+console.log(b.height);
+console.log(c.height);
 </code></pre>
 
-<p>html</p>
+<p>有發現我只要給建構函式Obj的prototype屬性，從Obj實例出來的物件都有相同的屬性，而且不管是先實例出來的a還是後面實例出來的b、c都一樣擁有</p>
 
-<pre><code>&lt;div id="a" class="example"&gt;&lt;/div&gt;
+<p>為什麼在原型物件Obj.prototype裡面增加屬性，會影響到從Obj建構式裡面實例出來的物件呢？</p>
+
+<p>原來是因為Obj()的屬性prototype是原型物件Obj.prototype，但Obj.prototype裡面也有一個屬性叫做constructor又指回Obj()，所以當Obj.prototype增加屬性的時候，就會連帶增加從建構式函式Obj實例出來的物件</p>
+
+<pre><code>Obj === Obj.prototype.constructor
 </code></pre>
 
-<p>js</p>
-
-<pre><code>$("#a").click(function() {         
-    $(".example").toggleClass("style-change");    
-}); 
-</code></pre>
-
-<p><a href="http://jsfiddle.net/Rnebd/" target="_blank">範例</a></p>
-
-<p>這樣就可以搭配著js來使用transition的效果</p>
-
-<h3>Transition tricks and techniques</h3>
-
-<p>有了前面的一些基本用法以外，接下來介紹的是一些小技巧，前面的<strong>:hover</strong>例子不管是從綠色切換成藍色，還是藍色切換回綠色，都是同樣的效果和速度，但其實可以針對這兩者去做變化，例如</p>
-
-<pre><code>.example {     
-    background-color: green;     
-    transition: background-color  1s ease-out;
-    width:100px;
-    height:100px;    
-}
-.example:hover {     
-    background-color: blue;
-    transition: background-color  5s linear;
-}
-</code></pre>
-
-<p>這段意思是從綠色到藍色要花一秒的時間，但從藍色變回綠色要花五秒，就可以做出比較不一樣的效果</p>
-
-<pre><code>.example {     
-    width: 100px;     
-    height: 100px;     
-    background-color: blue;     
-    transition: width 0s ease-out 999999s,                 
-    height 0s ease-out 999999s; } 
-
-.example:active {     
-    width: 200px;     
-    height: 200px;     
-    transition: width 2s,                 
-    height 2s; 
-}
-</code></pre>
-
-<p>當然也可以把transition-delay設為999999s，這樣就可以將效果一直保存</p>
-
-<p>只是我目前還不知道這樣的保存可以用來做啥就是了&#8230;</p>
+<p>不知道這樣說明，大家清楚嗎:)</p>
 
 <p>參考資料:</p>
 
-<p><a href="http://www.adobe.com/devnet/html5/articles/using-css3-transitions-a-comprehensive-guide.html" target="_blank">Using CSS3 transitions: A comprehensive guide</a></p>
-
-<p><a href="http://www.w3cplus.com/content/css3-transition" target="_blank">CSS3 Transition</a></p>
+<p>自已</p>
 
 <p>內容如有錯誤，歡迎指正</p>
 </div>
@@ -286,23 +249,15 @@
   
 
 
-<time datetime="2012-10-20T23:24:00+08:00" pubdate data-updated="true">Oct 20<span>th</span>, 2012</time>
+<time datetime="2012-11-02T15:11:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/css/'>CSS</a>
-  
-</span>
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/javascript-currying/" title="Previous Post: [JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying">&laquo; [JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying</a>
+        <a class="basic-alignment left" href="/blog/first-amazon-web-services/" title="Previous Post: [學習筆記] 免費玩Amazon Web Service(AWS) EC2">&laquo; [學習筆記] 免費玩Amazon Web Service(AWS) EC2</a>
       
-      
-        <a class="basic-alignment right" href="/blog/windows8-notifications/" title="Next Post: [Win8] 動態磚初體驗">[Win8] 動態磚初體驗 &raquo;</a>
       
     </p>
   </footer>
@@ -313,7 +268,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/css3-transitions-guide/" 
+	data-href="http://rx836.github.com/blog/javascript-prototype/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -387,8 +342,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/css3-transitions-guide/';
-        var disqus_url = 'http://rx836.github.com/blog/css3-transitions-guide/';
+        var disqus_identifier = 'http://rx836.github.com/blog/javascript-prototype/';
+        var disqus_url = 'http://rx836.github.com/blog/javascript-prototype/';
         var disqus_script = 'embed.js';
       
     (function () {
