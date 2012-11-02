@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-02T16:46:31+08:00</updated>
+  <updated>2012-11-02T16:52:21+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,12 +18,12 @@
     <link href="http://rx836.github.com/blog/javascript-prototype/"/>
     <updated>2012-11-02T15:11:00+08:00</updated>
     <id>http://rx836.github.com/blog/javascript-prototype</id>
-    <content type="html"><![CDATA[<p>今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件部分，趁這個機會再把JavaScript的觀念整理清楚，尤其是「prototype」</p>
+    <content type="html"><![CDATA[<p>今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件方面，那就趁著這個機會再把JavaScript的觀念整理清楚，增強自己的功力，尤其是一直很模糊的「prototype」</p>
 
 <!--more-->
 
 
-<p>在講prototype之前，要先複習一下之前所寫的 <a href="http://blog.rx836.tw/blog/javascript-patterns-1/">[JavaScript] 談物件, 實字與建構式</a> 和 <a href="http://blog.rx836.tw/blog/javascript-custom-function/">[JavaScript] 建立物件的第三招-自訂建構式函式</a>，這兩篇文章有提到物件和建構式函式(constructor functions)，但其實還有一個叫做prototype也跟他們兩個糾纏不清，形成特殊的三角關係(誤)</p>
+<p>在講prototype之前，要先複習一下之前所寫的 <a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a> 和 <a href="http://blog.rx836.tw/blog/javascript-custom-function/" target="_blank">[JavaScript] 建立物件的第三招-自訂建構式函式</a>，這兩篇文章有提到物件和建構式函式(constructor functions)，但其實還有一個叫做prototype也跟他們兩個糾纏不清，形成特殊的三角關係(誤)</p>
 
 <p>首先我們先來看物件</p>
 
@@ -71,7 +71,7 @@ console.log(Obj.prototype);
 //Obj {} 這也是一個物件，叫原型物件
 </code></pre>
 
-<p>這個原型物件可以做什麼呢？假如我今天用Obj()這個建構式函式建立了a、b、c三個物件，完成以後我還要每個都再加一個屬性height怎麼辦？你可能會這樣寫</p>
+<p>這個原型物件可以做什麼呢？假如我今天用Obj()這個建構式函式實例了a、b、c三個物件，完成以後我還要每個都再加一個屬性height怎麼辦？你可能會這樣寫</p>
 
 <pre><code>function Obj(){
     this.name = '阿帕';
@@ -114,7 +114,7 @@ console.log(c.height);
 
 <p>為什麼在原型物件Obj.prototype裡面增加屬性，會影響到從Obj建構式裡面實例出來的物件呢？</p>
 
-<p>原來是因為Obj()的屬性prototype是原型物件Obj.prototype，但Obj.prototype裡面也有一個屬性叫做constructor又指回Obj()，所以當Obj.prototype增加屬性的時候，就會連帶增加從建構式函式Obj實例出來的物件</p>
+<p>原來是因為建構函式Obj的屬性prototype是原型物件Obj.prototype，但Obj.prototype裡面也有一個屬性叫做constructor又指回建構函式Obj，所以當Obj.prototype增加屬性的時候，就會連帶增加從建構式函式Obj實例出來的物件</p>
 
 <pre><code>Obj === Obj.prototype.constructor
 </code></pre>
