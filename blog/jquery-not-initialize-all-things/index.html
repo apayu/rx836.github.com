@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying - apa</title>
+  <title>[jQuery] 不要將任何事情都在jQuery.ready()初始化 - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化) Curry這個命名是一個來自Haskell Curry的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹， &hellip;">
+  <meta name="description" content="Don&#8217;t Initialize All the Thing in jQuery.ready()&#8230;，這是由Elijah Manor所寫的一篇文章，裡面提到不要把所有事情都放在jQuery.ready()做初始化(我就是這樣&#8230;)，現在就來筆記一下他怎麼說 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/javascript-currying">
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-not-initialize-all-things">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying</h1>
+      <h1 class="entry-title">[jQuery] 不要將任何事情都在jQuery.ready()初始化</h1>
     
     
       <p class="meta">
@@ -99,7 +99,7 @@
   
 
 
-<time datetime="2012-10-18T00:01:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+<time datetime="2012-11-06T15:06:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,139 +108,87 @@
   </header>
 
 
-<div class="entry-content"><p>有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化)</p>
+<div class="entry-content"><p>Don&#8217;t Initialize All the Thing in jQuery.ready()&#8230;，這是由<a href="https://twitter.com/elijahmanor" target="_blank">Elijah Manor</a>所寫的一篇文章，裡面提到不要把所有事情都放在jQuery.ready()做初始化(我就是這樣&#8230;)，現在就來筆記一下他怎麼說</p>
 
 <!--more-->
 
 
-<p>Curry這個命名是一個來自<a href="http://en.wikipedia.org/wiki/Haskell_Curry" target="_blank">Haskell Curry</a>的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹，我們先來看看以下這段程式碼</p>
+<p>寫過jQuery的開發者都知道，在撰寫jQuery都會用jQuery.ready()包起來，在載入網頁時都會先等DOM載入完畢，才會執行裡面的程式碼部分，不過這有時候會讓User在進入網頁時等待過久，失去耐心，如何讓網頁在最短的時間先有畫面出來，也會影響到User使用上的經驗</p>
 
-<pre><code>function m(x, y){
-    return x * y;
-}
+<p>先看HTML的部分</p>
+
+<pre><code>&lt;form class="form-horizontal well"&gt;
+    &lt;fieldset&gt;
+        &lt;div class="control-group"&gt;
+            &lt;label class="control-label" for="firstName"&gt;First Name&lt;/label&gt;
+            &lt;div class="controls"&gt;
+                &lt;input id="firstName" type="text" class="input-xlarge"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- More HTML... --&gt;
+        &lt;div class="control-group"&gt;
+            &lt;label class="control-label" for="birthday"&gt;Birthday&lt;/label&gt;
+            &lt;div class="controls"&gt;
+                &lt;input id="birthday" type="text" class="date input-xlarge"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="form-actions"&gt;
+            &lt;button type="submit" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+            &lt;button class="btn"&gt;Cancel&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
 </code></pre>
 
-<p>這是一段很普通的函式，傳入參數x和y以後做相乘，並且將結果回傳，可是假如有一個情況是，x參數是固定的，y值是動態的，那我們每次呼叫會怎麼做呢？</p>
+<p>這是一個很常見的表格，會填寫一些基本資料，不過為了讓User在填寫日期方便，會用「datapicker」這個jQuery UI widget來選擇日期</p>
 
-<pre><code>m(2,1);
-m(2,2);
-m(2,3);
-m(2,4);
-...
+<p><img src="https://lh5.googleusercontent.com/-mb7pEbTw_FI/UJjDYpdh3oI/AAAAAAAAB28/ZQDyzYWd5K0/s296/123.jpg" /></p>
+
+<p>jQuery程式碼部分</p>
+
+<pre><code>$( document ).ready( function() {
+
+    $( "input.date" ).datepicker({
+        minDate: moment().subtract( "months", 1 ).toDate(),
+        maxDate: moment().add( "months", 1 ).toDate(),
+        dateFormat: "d M, y",
+        constrainInput: true,
+        beforeShowDay: $.datepicker.noWeekends
+    });
+
+});
 </code></pre>
 
-<p>這樣看起來雖然不太好，但尚且還可以接受，但如果函式的參數不止兩個呢？</p>
+<p>用這樣方式的優點是，當用戶選擇日期的時候，jQuery已經準備好並且很快的產生互動，但缺點是:</p>
 
-<pre><code>function m(x, y, z, p, k, l){
-    return x * y * z * p * k * l;
-}
+<p>1.程式碼必須等到DOM載完才能執行</p>
+
+<p>2.沒有使用context，選取器會在整個網頁進行搜尋，降低效能</p>
+
+<p>3.雖然程式碼在初始化的時候就都載入完畢，但不確定是不是真的會用到</p>
+
+<p>所以，為了改善這個情況，我們可以在需要的時候，在執行datapicker</p>
+
+<pre><code>$( document ).on( "focus", "input.date:not(.hasDatepicker)", function() {
+    toastr.info( "Initializing " + this.id );
+
+    $( this ).datepicker({
+        minDate: moment().subtract( "months", 1 ).toDate(),
+        maxDate: moment().add( "months", 1 ).toDate(),
+        dateFormat: "d M, y",
+        constrainInput: true,
+        beforeShowDay: $.datepicker.noWeekends
+    });
+});
 </code></pre>
 
-<p>然後呼叫的時候，只有l參數變動，其他參數每次都固定&#8230;</p>
+<p>可以看到在「input.date」上我們監聽了一個事件「focus」，當這個元素並選取時，就會執行裡面的datapicker的UI程式，也就是說，當User要輸入日期時，才會執行這段程式碼，而不用再一開始就將程式碼執行起來</p>
 
-<pre><code>m(2,3,4,5,6,1);
-m(2,3,4,5,6,2);
-m(2,3,4,5,6,3);
-m(2,3,4,5,6,4);
-...
-</code></pre>
-
-<p>這時候就會覺得，一定有什麼方法可以更簡化，少打更多的code，這時候就要將函式進行Currying，首先我們要先寫一個泛用的Currying函式</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-</code></pre>
-
-<p>然後接著寫</p>
-
-<pre><code>function m(x, y){
-    return x * y;
-}
-
-var new_m = currying(m, 5)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
-
-<p>這樣y值不管傳什麼，x值一樣都保持固定的5，程式有點複雜，現在我們就來看看吧，首先來看看變數slice和stored_args分別是什麼</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    console.log(slice); //function slice() { [native code] }        
-    console.log(stored_args); // [5]        
-}
-
-function m(x, y){
-    return x * y;
-}
-
-currying(m, 5);​
-</code></pre>
-
-<p>我們可以看到，變數slice存放<a href="http://www.w3school.com.cn/js/jsref_slice_string.asp" target="_blank">slice()</a>方法，因為我們想要將傳進來的參數轉換成陣列，並且將第一個參數去掉(這裡指的第一個參數就是m())，所以最後只剩下一個5的陣列</p>
-
-<pre><code>console.log(stored_args); // [5]
-</code></pre>
-
-<p>接著後面會return一個函式，函式將會重複的參數存在裡面，等於回傳一個新的函式讓User使用，從console.log可以看到變數new_args和args</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        console.log(new_args);//[4] 
-        console.log(args);//[5, 4] 
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y){
-    return x * y;
-}
-
-var new_m = currying(m, 5);
-new_m(4)
-</code></pre>
-
-<p>​
-回傳的函式會放在變數new_m，而這個函式到底在做些甚麼呢？其實就是將新得到的參數(也就是從new_m(4)傳進來的那個4)取出，接著利用concat將新參數和舊參數合在一起，再將合在一起後的參數([5, 4])丟進當初m()這個函式裡面，達成原本要相乘的任務，這樣當函式的參數一多，重複性高時，就可以做優化，例如就如同類似之前提到的y、z、k皆為重覆值，x值為動態</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y, z, k){
-    return x * y * z * k;
-}
-
-var new_m = currying(m, 5, 6, 7)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
-
-<p>重複的事情被取代了，這樣程式碼是不是看起來優化了呢？</p>
+<p>這將會讓我們的網頁不會在這麼的笨重，顯得緩慢，讓我又多學習了一招:)</p>
 
 <p>參考資料:</p>
 
-<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
+<p><a href="http://www.elijahmanor.com/2012/10/dont-initialize-all-things-in.html" target="_blank">Don&#8217;t Initialize All the Things in jQuery.ready() </a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 </div>
@@ -276,12 +224,12 @@ new_m(6);
   
 
 
-<time datetime="2012-10-18T00:01:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+<time datetime="2012-11-06T15:06:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/jquery/'>jQuery</a>
   
 </span>
 
@@ -289,10 +237,10 @@ new_m(6);
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/phonegap-first/" title="Previous Post: [PhoneGap] 第一次開發PhoneGap教學筆記">&laquo; [PhoneGap] 第一次開發PhoneGap教學筆記</a>
+        <a class="basic-alignment left" href="/blog/jquery-countdown-plugins/" title="Previous Post: [jQuery] 倒數計時的plugin介紹">&laquo; [jQuery] 倒數計時的plugin介紹</a>
       
       
-        <a class="basic-alignment right" href="/blog/css3-transitions-guide/" title="Next Post: [CSS3] 認識CSS3 transitions">[CSS3] 認識CSS3 transitions &raquo;</a>
+        <a class="basic-alignment right" href="/blog/data-uri-web-desing/" title="Next Post: [CSS] Data URI使用心得筆記">[CSS] Data URI使用心得筆記 &raquo;</a>
       
     </p>
   </footer>
@@ -303,7 +251,7 @@ new_m(6);
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/javascript-currying/" 
+	data-href="http://rx836.github.com/blog/jquery-not-initialize-all-things/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -377,8 +325,8 @@ new_m(6);
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/javascript-currying/';
-        var disqus_url = 'http://rx836.github.com/blog/javascript-currying/';
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-not-initialize-all-things/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-not-initialize-all-things/';
         var disqus_script = 'embed.js';
       
     (function () {

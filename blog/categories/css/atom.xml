@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-02T16:52:21+08:00</updated>
+  <updated>2012-11-09T16:27:53+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] Data URI使用心得筆記]]></title>
+    <link href="http://rx836.github.com/blog/data-uri-web-desing/"/>
+    <updated>2012-11-07T16:02:00+08:00</updated>
+    <id>http://rx836.github.com/blog/data-uri-web-desing</id>
+    <content type="html"><![CDATA[<p>Data URI不算新的技術，但他卻是一個可以節省頻寬，增進網頁載入效率的技巧，今天就來實際記錄一下使用的方式，順便比較一下用src指向URL的差別</p>
+
+<!--more-->
+
+
+<p>Data URI是直接在網頁崁入一段Base64編碼，目前IE8+,Firefox, Safari, Opera, Chrome都能正確顯示圖檔和css設定，以下是Base64編碼崁入在網頁的樣子</p>
+
+<pre><code>&lt;img src="data:image/png;base64,&lt;base64 data goes here&gt;" /&gt;
+</code></pre>
+
+<p>HTML碼中＜base64 data goes here＞就是擺放那一長串的文字編碼，現在就來實際操作一下如何使用</p>
+
+<p>首先你必須要準備一張圖檔，如果不想找可以直接到<a href="http://subtlepatterns.com/" target="_blank">Subtle Patterns</a>下載</p>
+
+<p>接著到<a href="http://www.websemantics.co.uk/online_tools/image_to_data_uri_convertor/" target="_blank">websemantics</a>，點選BROWSE選取要轉換成Base64編碼的圖片，按下CONVERT IMAGE</p>
+
+<p><img src="https://lh4.googleusercontent.com/-PmeBE4o7p7s/UJooOcgjcaI/AAAAAAAAB3o/qgNMNlvaSPA/s476/a.jpg" /></p>
+
+<p>之後將網頁拉到最下方，會看到轉換出來的Base64編碼和CSS</p>
+
+<p><img src="https://lh6.googleusercontent.com/-UTJUZpoyHE4/UJooOR2uuQI/AAAAAAAAB3Y/jqioWsQHsw0/s651/b.jpg" /></p>
+
+<p>接著直接將css複製到網頁上，並且增加另外一段css用src做比較</p>
+
+<pre><code>    div.logo-data  {
+        width: 198px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-image: url(data:image/png;base64,&lt;base64 data goes here&gt;);
+    }   
+    div.logo-img{
+        width: 198px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-image: url(nasty_fabric.png);            
+    }
+</code></pre>
+
+<p>注意，＜base64 data goes here＞是要放Base64編碼，但因為實在太長了(這也是等下會提到的缺點之一)，所以我這邊用＜base64 data goes here＞代替</p>
+
+<p>再來是HTML部分，我們先看用src直接指向URL的結果</p>
+
+<pre><code>&lt;div class="logo-img"&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>打開Firebug，看看讀取這個網頁會載入些什麼</p>
+
+<p><img src="https://lh4.googleusercontent.com/-0vnZZFDEAb4/UJooOTvo1eI/AAAAAAAAB3c/k8REjQueAvI/s891/c.jpg" /></p>
+
+<p>會看到載入了一個網頁和一個png圖檔，共70kB</p>
+
+<p>接著用Data URI來看看</p>
+
+<pre><code>&lt;div class="logo-data"&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-4uQB0YLPq7U/UJooPPLWN0I/AAAAAAAAB3k/74hpcikj_O0/s894/d.jpg" /></p>
+
+<p>一樣的圖片呈現效果，這裡只載入一個網頁，圖片呢？圖片就如剛剛所說的，用base64編碼方式崁入在網頁裡面，所以網頁稍微大了一點點(因為那一長串的字串關係)，但卻可以減少一個HTTP Request</p>
+
+<p>所以使用Data URI的好處就是不用下載圖檔，也不用占用到HTTP Request</p>
+
+<p>但缺點就是除了一開始提到的IE8以上才支援以外，還有因為是崁入到網頁當中，所以如果是動態網頁內容會變化的話，就無法享受到快取的好處，而且整個HTML和css會看起來比較凌亂(一堆編碼)，再加上工作流程上也必須先將圖片處理過後，才能使用，會增加製作的時間</p>
+
+<h3>總結:</h3>
+
+<p>假如你放棄了IE8以下的瀏覽器，或許可以在一些背景圖和一些小icon做一些Data URI的處理，畢竟減少一些頻寬和HTTP Request也對$$也是不無小補:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/the-what-why-and-how-of-data-uris-in-web-design/" target="_blank">The What, Why and How of Data URIs in Web Design</a></p>
+
+<p><a href="http://blog.darkthread.net/post-2010-11-05-data-uri.aspx" target="_blank">淺嚐Data URI</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CSS3] 認識CSS3 transitions]]></title>

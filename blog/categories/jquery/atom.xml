@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-02T16:52:21+08:00</updated>
+  <updated>2012-11-09T16:27:53+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,165 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] 不要將任何事情都在jQuery.ready()初始化]]></title>
+    <link href="http://rx836.github.com/blog/jquery-not-initialize-all-things/"/>
+    <updated>2012-11-06T15:06:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-not-initialize-all-things</id>
+    <content type="html"><![CDATA[<p>Don't Initialize All the Thing in jQuery.ready()...，這是由<a href="https://twitter.com/elijahmanor" target="_blank">Elijah Manor</a>所寫的一篇文章，裡面提到不要把所有事情都放在jQuery.ready()做初始化(我就是這樣...)，現在就來筆記一下他怎麼說</p>
+
+<!--more-->
+
+
+<p>寫過jQuery的開發者都知道，在撰寫jQuery都會用jQuery.ready()包起來，在載入網頁時都會先等DOM載入完畢，才會執行裡面的程式碼部分，不過這有時候會讓User在進入網頁時等待過久，失去耐心，如何讓網頁在最短的時間先有畫面出來，也會影響到User使用上的經驗</p>
+
+<p>先看HTML的部分</p>
+
+<pre><code>&lt;form class="form-horizontal well"&gt;
+    &lt;fieldset&gt;
+        &lt;div class="control-group"&gt;
+            &lt;label class="control-label" for="firstName"&gt;First Name&lt;/label&gt;
+            &lt;div class="controls"&gt;
+                &lt;input id="firstName" type="text" class="input-xlarge"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- More HTML... --&gt;
+        &lt;div class="control-group"&gt;
+            &lt;label class="control-label" for="birthday"&gt;Birthday&lt;/label&gt;
+            &lt;div class="controls"&gt;
+                &lt;input id="birthday" type="text" class="date input-xlarge"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="form-actions"&gt;
+            &lt;button type="submit" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+            &lt;button class="btn"&gt;Cancel&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>這是一個很常見的表格，會填寫一些基本資料，不過為了讓User在填寫日期方便，會用「datapicker」這個jQuery UI widget來選擇日期</p>
+
+<p><img src="https://lh5.googleusercontent.com/-mb7pEbTw_FI/UJjDYpdh3oI/AAAAAAAAB28/ZQDyzYWd5K0/s296/123.jpg" /></p>
+
+<p>jQuery程式碼部分</p>
+
+<pre><code>$( document ).ready( function() {
+
+    $( "input.date" ).datepicker({
+        minDate: moment().subtract( "months", 1 ).toDate(),
+        maxDate: moment().add( "months", 1 ).toDate(),
+        dateFormat: "d M, y",
+        constrainInput: true,
+        beforeShowDay: $.datepicker.noWeekends
+    });
+
+});
+</code></pre>
+
+<p>用這樣方式的優點是，當用戶選擇日期的時候，jQuery已經準備好並且很快的產生互動，但缺點是:</p>
+
+<p>1.程式碼必須等到DOM載完才能執行</p>
+
+<p>2.沒有使用context，選取器會在整個網頁進行搜尋，降低效能</p>
+
+<p>3.雖然程式碼在初始化的時候就都載入完畢，但不確定是不是真的會用到</p>
+
+<p>所以，為了改善這個情況，我們可以在需要的時候，在執行datapicker</p>
+
+<pre><code>$( document ).on( "focus", "input.date:not(.hasDatepicker)", function() {
+    toastr.info( "Initializing " + this.id );
+
+    $( this ).datepicker({
+        minDate: moment().subtract( "months", 1 ).toDate(),
+        maxDate: moment().add( "months", 1 ).toDate(),
+        dateFormat: "d M, y",
+        constrainInput: true,
+        beforeShowDay: $.datepicker.noWeekends
+    });
+});
+</code></pre>
+
+<p>可以看到在「input.date」上我們監聽了一個事件「focus」，當這個元素並選取時，就會執行裡面的datapicker的UI程式，也就是說，當User要輸入日期時，才會執行這段程式碼，而不用再一開始就將程式碼執行起來</p>
+
+<p>這將會讓我們的網頁不會在這麼的笨重，顯得緩慢，讓我又多學習了一招:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.elijahmanor.com/2012/10/dont-initialize-all-things-in.html" target="_blank">Don't Initialize All the Things in jQuery.ready() </a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] 倒數計時的plugin介紹]]></title>
+    <link href="http://rx836.github.com/blog/jquery-countdown-plugins/"/>
+    <updated>2012-11-05T11:45:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-countdown-plugins</id>
+    <content type="html"><![CDATA[<p>之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考</p>
+
+<!--more-->
+
+
+<h3>jQuery Countdown Script</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-q5CkXGDfwAo/UJc_Gp1lgEI/AAAAAAAAB2E/gjITVcyHIes/s480/lwt_post1.jpg" /></p>
+
+<p>plugin簡單好設定，還可以在同一個頁面設定好幾個不同的倒數計時，甚至是啟動和暫停</p>
+
+<p><a href="http://www.littlewebthings.com/2010/02/jquery-countdown-script/" target="_blank">範例Demo</a></p>
+
+<h3>Countdown</h3>
+
+<p><img src="https://lh6.googleusercontent.com/-pmIMh95RX54/UJc_Ga3R2dI/AAAAAAAAB2I/TR6Dtq4DHYw/s480/jquery-countdown.gif" /></p>
+
+<p>擁有許多進階的設定，支援時區，多種語言等</p>
+
+<p><a href="http://keith-wood.name/countdown.html" target="_blank">範例Demo</a></p>
+
+<h3>The Final Countdown</h3>
+
+<p><img src="https://lh4.googleusercontent.com/-q5WsQiLTJv4/UJc_FlYN8YI/AAAAAAAAB14/eR6HQ1RxIMo/s403/a1.jpg" /></p>
+
+<p>多種呈現方式，可以隨自己喜歡去做調整，倒數計時的部分甚至連毫秒都可以呈現</p>
+
+<p><a href="https://github.com/hilios/jquery.countdown" target="_blank">範例Demo</a></p>
+
+<h3>KK Countdown</h3>
+
+<p><img src="https://lh6.googleusercontent.com/-MKQU1yoPcpA/UJc_Fn8CqaI/AAAAAAAAB2A/AZs0VgXkuco/s600/2.jpg" /></p>
+
+<p>一樣有多種呈現方式，用時間戳記來給予時間</p>
+
+<p><a href="http://krzysztof-furtak.pl/2010/05/kk-countdown-jquery-plugin/" target="_blank">範例Demo</a></p>
+
+<h3>jQuery Countdown</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-uIiwnxje1y0/UJdAu1w52KI/AAAAAAAAB2g/-ZVyh0o40DA/s520/3.jpg" /></p>
+
+<p>利用圖片來呈現，沒有太多功能可以設定，比較簡單的plugin</p>
+
+<p><a href="http://code.google.com/p/jquery-countdown/" target="_blank">範例Demo</a></p>
+
+<h3>jQuery Countdown Timer</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-fmAgRmTcc40/UJc_FilzH0I/AAAAAAAAB18/qyyvqbxCZfU/s620/jquery-countdown-timer.jpg" /></p>
+
+<p>裡面有相當詳細的教學文，教你怎麼使用他們的plugin</p>
+
+<p><a href="http://tutorialzine.com/2011/12/countdown-jquery/" target="_blank">範例Demo</a></p>
+
+<p>倒數計時自己寫並不難，不過有些很特別的功能或是效果用plugin，倒也可以省下不少時間，所以要用plugin或是自己手刻就看各位開發者自己當下的狀況做選擇:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.webresourcesdepot.com/jquery-countdown-plugins-for-coming-soon-pages/" target="_blank"></a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQuery] jQuery你一定要知道的八件事]]></title>
@@ -455,298 +614,6 @@ data-source='["Apples","Bananas","Cherries","Dates","Eggplants","Figs","Grapes",
 <p><a href="http://www.w3resource.com/twitter-bootstrap/tutorial.php" target="_blank">Twitter Bootstrap tutorial</a></p>
 
 <p><a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Twitter Bootstrap</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] hoverpulse 滑鼠移入，圖片縮放]]></title>
-    <link href="http://rx836.github.com/blog/jquery-hoverpulse/"/>
-    <updated>2012-09-20T23:42:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-hoverpulse</id>
-    <content type="html"><![CDATA[<p>jQuery寫了一陣子，直到最近有個需求，想要做到滑鼠移到圖片上，會微微的放大，才發現這個很常看到的效果，我到今天都還沒實做過</p>
-
-<!--more-->
-
-
-<p>幸運的是...，就因為這麼晚才實做，所以早就有人把plugin寫好了，我所用的是<a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a>，用法相當相當的簡單</p>
-
-<p>首先是HTML部份</p>
-
-<pre><code>&lt;div&gt;&lt;img src="a.jpg" /&gt;&lt;/div&gt;
-&lt;div&gt;&lt;img src="b.jpg" /&gt;&lt;/div&gt;
-&lt;div&gt;&lt;img src="c.jpg" /&gt;&lt;/div&gt;
-</code></pre>
-
-<p>再來是jQuery部份</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse();
-});
-</code></pre>
-
-<p>這樣就完成了！當然什麼值都沒有給的情況下是用default，但如果想要設定放大的幅度和變化的速度，可以這樣寫</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse({
-        size: 40,  // number of pixels to pulse element (in each direction)
-        speed: 400 // speed of the animation 
-    });
-});
-</code></pre>
-
-<p>真的簡單又明瞭...</p>
-
-<p>那如果你想加入點擊的事件，你可以這樣寫</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse().each(function() {
-        var $img = $(this);                 
-        $img.click(function() {
-
-            //點每張圖的事件
-
-            return false;
-        });
-    });
-});
-</code></pre>
-
-<p>接下來是我個人好奇去看他的source code，可以看到他先將每個圖片的width和height存到$.data裡面</p>
-
-<pre><code>this.each(function() {
-    var $this = $(this);
-    var w = $this.width(), h = $this.height();
-    $this.data('hoverpulse.size', { w: parseInt(w), h: parseInt(h) });
-});
-</code></pre>
-
-<p>接著利用到<strong>.hover()</strong>的方法去做出滑鼠移到圖片和移出圖片的效果</p>
-
-<pre><code>// bind hover event for behavior
-return this.hover(
-    // hover over
-    function() {
-        var $this = $(this);
-        $this.parent().css('z-index', opts.zIndexActive);
-
-        var size = $this.data('hoverpulse.size');
-        var w = size.w, h = size.h;
-        $this.stop().animate({ 
-            top:  ('-'+opts.size+'px'), 
-            left: ('-'+opts.size+'px'), 
-            height: (h+2*opts.size)+'px', 
-            width:  (w+2*opts.size)+'px' 
-        }, opts.speed);
-    },
-    // hover out
-    function() {
-        var $this = $(this);
-        var size = $this.data('hoverpulse.size');
-        var w = size.w, h = size.h;
-
-        $this.stop().animate({ 
-            top:  0, 
-            left: 0, 
-            height: (h+'px'), 
-            width:  (w+'px') 
-        }, opts.speed, function() {
-            $this.parent().css('z-index', opts.zIndexNormal);
-        });
-    }
-);
-</code></pre>
-
-<p>在移入部份會先將包覆img的div z-index值設到100</p>
-
-<pre><code>$this.parent().css('z-index', opts.zIndexActive);
-</code></pre>
-
-<p>然後從data取出之前放入的圖片width和height，接著用<strong>.animate()</strong>來執行放大效果</p>
-
-<pre><code>$this.stop().animate({ 
-            top:  ('-'+opts.size+'px'), 
-            left: ('-'+opts.size+'px'), 
-            height: (h+2*opts.size)+'px', 
-            width:  (w+2*opts.size)+'px' 
-        }, opts.speed);
-</code></pre>
-
-<p>這段code其實就是把你設定的size放大兩倍，並且為了有感覺從圖片中間點開始放大的效果，所以把位置top和left給予負值，等於整張圖片往左上角移動，速度是<strong>opts.speed</strong>，而圖片的position:absolute在整個plugin一開始就已經設定了</p>
-
-<pre><code>// parent must be relatively positioned
-this.parent().css({ position: 'relative' });
-// pulsing element must be absolutely positioned
-this.css({ position: 'absolute', top: 0, left: 0 });
-</code></pre>
-
-<p>可以看到包覆img的div是relatively，img是absolute</p>
-
-<p>而滑鼠移開之後只是把值恢復成原來的設定</p>
-
-<pre><code>var $this = $(this);
-var size = $this.data('hoverpulse.size');
-var w = size.w, h = size.h;
-
-$this.stop().animate({ 
-    top:  0, 
-    left: 0, 
-    height: (h+'px'), 
-    width:  (w+'px') 
-}, opts.speed, function() {
-    $this.parent().css('z-index', opts.zIndexNormal);
-});
-</code></pre>
-
-<p>將top和left歸為0，height和width恢復成原來的大小，z-index也設回預設值1</p>
-
-<p>當然預設值在plugin的最下面可以自己修改</p>
-
-<pre><code>$.fn.hoverpulse.defaults = {
-    size:  20,
-    speed: 200,
-    zIndexActive: 100,
-    zIndexNormal: 1
-};
-</code></pre>
-
-<p>這樣plugin整個看起來就很清楚明瞭，也可以自己嘗試動手寫寫看喔！</p>
-
-<h2>後記</h2>
-
-<p>Aaron大大說plugin寫法有點舊，而且有點囉嗦XD，他建議我新的寫法，在此特別筆記下來</p>
-
-<p>HTML</p>
-
-<pre><code>&lt;img src="a.jpg" class="resize" width="250"/&gt;
-</code></pre>
-
-<p>jQuery</p>
-
-<pre><code>var current_h = null;
-var current_w = null;
-
-$('.resize').hover(
-    function(){
-        current_h = $(this, 'img').height;
-        current_w = $(this, 'img').width;
-        $(this).stop(true, false).animate({width: (current_w * 1.3), height: (current_h * 1.3)}, 300);
-    },
-    function(){
-        $(this).stop(true, false).animate({width: current_w + 'px', height: current_h + 'px'}, 300);
-    }
-);
-</code></pre>
-
-<p>不要用plugin，直接寫，至於top和left在自己加上就好，跟前面的plugin道理一樣</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] 快樂的Happy.js]]></title>
-    <link href="http://rx836.github.com/blog/jquery-happyjs/"/>
-    <updated>2012-09-13T15:45:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-happyjs</id>
-    <content type="html"><![CDATA[<p>今天看到有人分享<a href="http://happyjs.com/" target="_blank">Happy.js</a>，因為名字的關係引起了我的興趣，好奇的想說用這個plugin是不是寫起來很快樂，所以決定來玩一下</p>
-
-<!--more-->
-
-
-<p>事實證明...，其實並沒有特別Happy，當然這只是取名字而已XD，Happy.js其實是一套驗證表單的plugin，官方網站強調的是它相當的輕量且容易擴充，而實際檔案大概也只有3kb左右，用法也相當的簡單</p>
-
-<p>首先一樣是引入js部分，分別是jQuery和happy.js還有happy.methods.js，可以直接下載<a href="http://github.com/andyet/Happy.js/zipball/master" target="_blank">範例檔</a></p>
-
-<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script src="happy.js"&gt;&lt;/script&gt;
-&lt;script src="happy.methods.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>happy.js是主程式，happy.methods.js是一些擴充的驗證方法</p>
-
-<p>接著是HTML部分</p>
-
-<pre><code>&lt;form id="awesomeForm" action="/lights/camera" method="post"&gt;
-  &lt;input id="yourName" type="text" name="name" /&gt;
-  &lt;input id="email" type="text" name="email" class="" /&gt;
-  &lt;input type="submit" value="go" /&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>再來就是js部分</p>
-
-<pre><code>$('#awesomeForm').isHappy({
-    fields: {
-      '#yourName': {
-        required: true,
-        message: '忘記填姓名囉！'
-      },
-      '#email': {
-        required: true,
-        message: '忘記填Email囉！',
-        test: happy.email 
-      }
-    }
-  });
-</code></pre>
-
-<p>其實蠻好理解的，主要就是fields裡面要設置需要驗證的欄位，例如像#yourName和#email的input，然後message就是看要出現甚麼錯誤訊息，test這個屬性就是指擴充的驗證方法部分，就是寫在剛剛引用的happy.methods.js裡面，所以你可以除了要求不能空白以外，還可以進一步要求Email的格式</p>
-
-<p>而出現的錯誤訊息就如同下面所示</p>
-
-<pre><code>&lt;span id=​"textInput1_unhappy" class=​"unhappyMessage"&gt;​忘記填Email囉！​&lt;/span&gt;
-</code></pre>
-
-<p>這個span會在發生錯誤時添加，而你會看到類別就叫<strong>unhappyMessage</strong>，作者就說他是認真的，不是開玩笑的，因為這真的不是個很開心的訊息 XD</p>
-
-<p>所以你可以添加一些unhappyMessage的CSS樣式讓錯誤訊息更顯著</p>
-
-<p>當然這不一定只能用在表單部分，如果有時候不是一個FORM而是用div所拼湊的表單，要做AJAX的效果，就可以把預設的submitButton改掉，如下所示</p>
-
-<pre><code>$('#awesomeForm').isHappy({
-    fields: {
-      '#yourName': {
-        required: true,
-        message: '忘記填姓名囉！'
-      },
-      '#email': {
-        required: true,
-        message: '忘記填Email囉！',
-        test: happy.email 
-      }
-    },
-    submitButton:'#subBtn' //自己制定的submitButton
-});
-</code></pre>
-
-<p>不過我後來發現一個小問題，如果是制定的話，再驗證完後要觸發AJAX卻不知道要寫哪裡，所以我後來自己稍微修改了一下原始碼，把要加到AJAX的部分寫在happy.js裡面</p>
-
-<pre><code>function handleSubmit() {
-  var errors = false, i, l;
-  for (i = 0, l = fields.length; i &lt; l; i += 1) {
-    if (!fields[i].testValid(true)) {
-      errors = true;
-    }
-  }
-  if (errors) {
-    if (isFunction(config.unHappy)) config.unHappy();
-    return false;
-  } else if (config.testMode) {
-    if (window.console) console.warn('would have submitted');
-    return false;
-  } else {          //這個else是後來自己加上去的
-                    //代表通過驗證以後要做的事情，把AJAX的code寫在這裡
-  }                 //
-}
-</code></pre>
-
-<p>當然也可以把這個修改寫得更好看一些，但我用最快的方式來補充這個AJAX的需求</p>
 
 <p>如有錯誤，歡迎指正</p>
 ]]></content>

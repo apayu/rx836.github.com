@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-02T16:52:21+08:00</updated>
+  <updated>2012-11-09T16:27:53+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,327 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[PhoneGap] 如何搭配平板或手機開發Android]]></title>
+    <link href="http://rx836.github.com/blog/android-phonegap-usb-develop/"/>
+    <updated>2012-11-09T14:32:00+08:00</updated>
+    <id>http://rx836.github.com/blog/android-phonegap-usb-develop</id>
+    <content type="html"><![CDATA[<p>繼好幾天前開始了<a href="http://blog.rx836.tw/blog/phonegap-first/" target="_blank">第一次的PhoneGap之旅</a>，漸漸的開始慢慢熟悉運作模式，有一直下去寫果然還是有差，當然一路上也一直碰到牆壁和踩到地雷(渾身傷..)，這篇就來記錄怎麼用實機做開發測試，往後也會多發幾篇關於PhoneGap開發心得文章出來奉獻</p>
+
+<!--more-->
+
+
+<p>雖然之前的文章有提到模擬器，但其實每次把Android啟動起來還是很不方便，因為總是要等一段時間</p>
+
+<p><img src="https://lh6.googleusercontent.com/-mBxqTZDV0AI/UJy7d2-dqXI/AAAAAAAAB4Y/hRTlohLYjm4/s630/a1.jpg" /></p>
+
+<p>但如果手邊有Android實機的話(不管是平板還是手機)，都可以用下面的方法來做開發測試(可能會因為改版關係略有不同)</p>
+
+<h3>找找之前下載的Android SDK</h3>
+
+<p>相信在開發Android的時候會先下載Android SDK，先去找找那個SDK，裡面的資料長的像這樣</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ny6p8foNJJQ/UJy7dTQ4C5I/AAAAAAAAB4Q/1rL70M7D2-Y/s232/a2.jpg" /></p>
+
+<h3>開啟Eclipse</h3>
+
+<p>找到Android SDK以後，打開Eclipse，選擇「Window」->「Android SDK Manager」</p>
+
+<p><img src="https://lh3.googleusercontent.com/-F24YqktQKuE/UJy7d6jaMCI/AAAAAAAAB4c/5UL63BEf9Zs/s601/a3.jpg" /></p>
+
+<h3>安裝「Google USB Driver」</h3>
+
+<p>拉到下面的「Extras」底下有個「Google USB Driver」，勾選並且點選右下角的「install packages&#8230;」，注意，因為我是已經安裝過所以才會變淺色，還沒安裝可以進行點選</p>
+
+<p><img src="https://lh4.googleusercontent.com/-7zkUd652OBw/UJy7eZ6Q1cI/AAAAAAAAB4g/WcSKd8rR0sc/s703/a4.jpg" /></p>
+
+<h3>開啟設備上的USB測試功能</h3>
+
+<p>安裝好後接著關閉Eclipse，在來這個步驟，會因為每個人設備不同而稍微有異，舉Nexus 7為例，在「設定」->「開發人員選項」，進去後點右上角的開啟，還有把「USB偵錯模式」勾選起來，其他設備大同小異，接著用USB跟電腦接上，這時電腦會出現安裝驅動程式，先不用管他</p>
+
+<h3>安裝你的硬體驅動程式</h3>
+
+<p>接上USB後打開「控制台」->「系統及安全性」->「系統」->「裝置管理員」，會看到可攜式裝置那邊，會有你的設備名稱，並且顯示驚嘆號，在設備上點選右鍵，選擇「更新驅動程式軟體」，接著選擇「瀏覽電腦上的驅動程式軟體」，還記得剛剛安裝的Google USB Driver嗎？位置沒變動會在「Android SDK」->「extras」->「google」->「usb_driver」，接著電腦就會自動安裝設備囉~</p>
+
+<h3>令人期待的一刻！</h3>
+
+<p>來到最後一個步驟囉，打開Eclipse，編輯AndroidManifest.xml，將以下程式加入到 <application>這個Tag裡面</p>
+
+<pre><code>android:debuggable="true"
+</code></pre>
+
+<p>接著在上面的選單列選擇「Run」->「Run Configurations」，做一些簡單的設定，選擇頁籤「Target」並且點選「Always prompt to pick device」，最主要是因為這樣每次在Run的時候都可以先選擇設備</p>
+
+<p><img src="https://lh5.googleusercontent.com/-I0yrNYdm1RY/UJy7e8giz5I/AAAAAAAAB40/Hdkv8Ncs-2s/s702/a5.jpg" /></p>
+
+<p>設定好後，點選「Run As」->「Android Application」，如果點選Run As沒有出現Android Application代表你沒有選到專案(看左邊那個紅圖)，這也是我一直撞牆的地方&#8230;</p>
+
+<p><img src="https://lh3.googleusercontent.com/-nG-rVob0H0k/UJy7fECMaCI/AAAAAAAAB4w/q1Yp2Is_jQg/s1027/a6.jpg" /></p>
+
+<p>看到你的設備了嗎？別懷疑！直接點選OK開啟吧！</p>
+
+<p><img src="https://lh5.googleusercontent.com/-gHQrLAMHp_0/UJy7ff6GWmI/AAAAAAAAB4s/ZKxtK4zOfLI/s708/a7.jpg" /></p>
+
+<p>有看到你的手機上顯示畫面出來了嗎？！</p>
+
+<p>有的話就恭喜你！成功囉~，一起加入開發Android吧！</p>
+
+<p>假如不幸失敗的話&#8230;，請歡迎留言給我，一起討論(因為你的問題也可能是我的問題..)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://developer.android.com/sdk/win-usb.html#WinUsbDriver" target="_blank">Google USB Driver</a></p>
+
+<p><a href="http://www.ibm.com/developerworks/cn/web/wa-mobappdev1/index.html" target="_blank">第 1 部分: Android 上的 PhoneGap 和 Dojo Mobile</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] Data URI使用心得筆記]]></title>
+    <link href="http://rx836.github.com/blog/data-uri-web-desing/"/>
+    <updated>2012-11-07T16:02:00+08:00</updated>
+    <id>http://rx836.github.com/blog/data-uri-web-desing</id>
+    <content type="html"><![CDATA[<p>Data URI不算新的技術，但他卻是一個可以節省頻寬，增進網頁載入效率的技巧，今天就來實際記錄一下使用的方式，順便比較一下用src指向URL的差別</p>
+
+<!--more-->
+
+
+<p>Data URI是直接在網頁崁入一段Base64編碼，目前IE8+,Firefox, Safari, Opera, Chrome都能正確顯示圖檔和css設定，以下是Base64編碼崁入在網頁的樣子</p>
+
+<pre><code>&lt;img src="data:image/png;base64,&lt;base64 data goes here&gt;" /&gt;
+</code></pre>
+
+<p>HTML碼中＜base64 data goes here＞就是擺放那一長串的文字編碼，現在就來實際操作一下如何使用</p>
+
+<p>首先你必須要準備一張圖檔，如果不想找可以直接到<a href="http://subtlepatterns.com/" target="_blank">Subtle Patterns</a>下載</p>
+
+<p>接著到<a href="http://www.websemantics.co.uk/online_tools/image_to_data_uri_convertor/" target="_blank">websemantics</a>，點選BROWSE選取要轉換成Base64編碼的圖片，按下CONVERT IMAGE</p>
+
+<p><img src="https://lh4.googleusercontent.com/-PmeBE4o7p7s/UJooOcgjcaI/AAAAAAAAB3o/qgNMNlvaSPA/s476/a.jpg" /></p>
+
+<p>之後將網頁拉到最下方，會看到轉換出來的Base64編碼和CSS</p>
+
+<p><img src="https://lh6.googleusercontent.com/-UTJUZpoyHE4/UJooOR2uuQI/AAAAAAAAB3Y/jqioWsQHsw0/s651/b.jpg" /></p>
+
+<p>接著直接將css複製到網頁上，並且增加另外一段css用src做比較</p>
+
+<pre><code>    div.logo-data  {
+        width: 198px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-image: url(data:image/png;base64,&lt;base64 data goes here&gt;);
+    }   
+    div.logo-img{
+        width: 198px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-image: url(nasty_fabric.png);            
+    }
+</code></pre>
+
+<p>注意，＜base64 data goes here＞是要放Base64編碼，但因為實在太長了(這也是等下會提到的缺點之一)，所以我這邊用＜base64 data goes here＞代替</p>
+
+<p>再來是HTML部分，我們先看用src直接指向URL的結果</p>
+
+<pre><code>&lt;div class="logo-img"&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>打開Firebug，看看讀取這個網頁會載入些什麼</p>
+
+<p><img src="https://lh4.googleusercontent.com/-0vnZZFDEAb4/UJooOTvo1eI/AAAAAAAAB3c/k8REjQueAvI/s891/c.jpg" /></p>
+
+<p>會看到載入了一個網頁和一個png圖檔，共70kB</p>
+
+<p>接著用Data URI來看看</p>
+
+<pre><code>&lt;div class="logo-data"&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-4uQB0YLPq7U/UJooPPLWN0I/AAAAAAAAB3k/74hpcikj_O0/s894/d.jpg" /></p>
+
+<p>一樣的圖片呈現效果，這裡只載入一個網頁，圖片呢？圖片就如剛剛所說的，用base64編碼方式崁入在網頁裡面，所以網頁稍微大了一點點(因為那一長串的字串關係)，但卻可以減少一個HTTP Request</p>
+
+<p>所以使用Data URI的好處就是不用下載圖檔，也不用占用到HTTP Request</p>
+
+<p>但缺點就是除了一開始提到的IE8以上才支援以外，還有因為是崁入到網頁當中，所以如果是動態網頁內容會變化的話，就無法享受到快取的好處，而且整個HTML和css會看起來比較凌亂(一堆編碼)，再加上工作流程上也必須先將圖片處理過後，才能使用，會增加製作的時間</p>
+
+<h3>總結:</h3>
+
+<p>假如你放棄了IE8以下的瀏覽器，或許可以在一些背景圖和一些小icon做一些Data URI的處理，畢竟減少一些頻寬和HTTP Request也對$$也是不無小補:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/the-what-why-and-how-of-data-uris-in-web-design/" target="_blank">The What, Why and How of Data URIs in Web Design</a></p>
+
+<p><a href="http://blog.darkthread.net/post-2010-11-05-data-uri.aspx" target="_blank">淺嚐Data URI</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] 不要將任何事情都在jQuery.ready()初始化]]></title>
+    <link href="http://rx836.github.com/blog/jquery-not-initialize-all-things/"/>
+    <updated>2012-11-06T15:06:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-not-initialize-all-things</id>
+    <content type="html"><![CDATA[<p>Don&#8217;t Initialize All the Thing in jQuery.ready()&#8230;，這是由<a href="https://twitter.com/elijahmanor" target="_blank">Elijah Manor</a>所寫的一篇文章，裡面提到不要把所有事情都放在jQuery.ready()做初始化(我就是這樣&#8230;)，現在就來筆記一下他怎麼說</p>
+
+<!--more-->
+
+
+<p>寫過jQuery的開發者都知道，在撰寫jQuery都會用jQuery.ready()包起來，在載入網頁時都會先等DOM載入完畢，才會執行裡面的程式碼部分，不過這有時候會讓User在進入網頁時等待過久，失去耐心，如何讓網頁在最短的時間先有畫面出來，也會影響到User使用上的經驗</p>
+
+<p>先看HTML的部分</p>
+
+<pre><code>&lt;form class="form-horizontal well"&gt;
+    &lt;fieldset&gt;
+        &lt;div class="control-group"&gt;
+            &lt;label class="control-label" for="firstName"&gt;First Name&lt;/label&gt;
+            &lt;div class="controls"&gt;
+                &lt;input id="firstName" type="text" class="input-xlarge"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- More HTML... --&gt;
+        &lt;div class="control-group"&gt;
+            &lt;label class="control-label" for="birthday"&gt;Birthday&lt;/label&gt;
+            &lt;div class="controls"&gt;
+                &lt;input id="birthday" type="text" class="date input-xlarge"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="form-actions"&gt;
+            &lt;button type="submit" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+            &lt;button class="btn"&gt;Cancel&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>這是一個很常見的表格，會填寫一些基本資料，不過為了讓User在填寫日期方便，會用「datapicker」這個jQuery UI widget來選擇日期</p>
+
+<p><img src="https://lh5.googleusercontent.com/-mb7pEbTw_FI/UJjDYpdh3oI/AAAAAAAAB28/ZQDyzYWd5K0/s296/123.jpg" /></p>
+
+<p>jQuery程式碼部分</p>
+
+<pre><code>$( document ).ready( function() {
+
+    $( "input.date" ).datepicker({
+        minDate: moment().subtract( "months", 1 ).toDate(),
+        maxDate: moment().add( "months", 1 ).toDate(),
+        dateFormat: "d M, y",
+        constrainInput: true,
+        beforeShowDay: $.datepicker.noWeekends
+    });
+
+});
+</code></pre>
+
+<p>用這樣方式的優點是，當用戶選擇日期的時候，jQuery已經準備好並且很快的產生互動，但缺點是:</p>
+
+<p>1.程式碼必須等到DOM載完才能執行</p>
+
+<p>2.沒有使用context，選取器會在整個網頁進行搜尋，降低效能</p>
+
+<p>3.雖然程式碼在初始化的時候就都載入完畢，但不確定是不是真的會用到</p>
+
+<p>所以，為了改善這個情況，我們可以在需要的時候，在執行datapicker</p>
+
+<pre><code>$( document ).on( "focus", "input.date:not(.hasDatepicker)", function() {
+    toastr.info( "Initializing " + this.id );
+
+    $( this ).datepicker({
+        minDate: moment().subtract( "months", 1 ).toDate(),
+        maxDate: moment().add( "months", 1 ).toDate(),
+        dateFormat: "d M, y",
+        constrainInput: true,
+        beforeShowDay: $.datepicker.noWeekends
+    });
+});
+</code></pre>
+
+<p>可以看到在「input.date」上我們監聽了一個事件「focus」，當這個元素並選取時，就會執行裡面的datapicker的UI程式，也就是說，當User要輸入日期時，才會執行這段程式碼，而不用再一開始就將程式碼執行起來</p>
+
+<p>這將會讓我們的網頁不會在這麼的笨重，顯得緩慢，讓我又多學習了一招:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.elijahmanor.com/2012/10/dont-initialize-all-things-in.html" target="_blank">Don&#8217;t Initialize All the Things in jQuery.ready() </a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] 倒數計時的plugin介紹]]></title>
+    <link href="http://rx836.github.com/blog/jquery-countdown-plugins/"/>
+    <updated>2012-11-05T11:45:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-countdown-plugins</id>
+    <content type="html"><![CDATA[<p>之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考</p>
+
+<!--more-->
+
+
+<h3>jQuery Countdown Script</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-q5CkXGDfwAo/UJc_Gp1lgEI/AAAAAAAAB2E/gjITVcyHIes/s480/lwt_post1.jpg" /></p>
+
+<p>plugin簡單好設定，還可以在同一個頁面設定好幾個不同的倒數計時，甚至是啟動和暫停</p>
+
+<p><a href="http://www.littlewebthings.com/2010/02/jquery-countdown-script/" target="_blank">範例Demo</a></p>
+
+<h3>Countdown</h3>
+
+<p><img src="https://lh6.googleusercontent.com/-pmIMh95RX54/UJc_Ga3R2dI/AAAAAAAAB2I/TR6Dtq4DHYw/s480/jquery-countdown.gif" /></p>
+
+<p>擁有許多進階的設定，支援時區，多種語言等</p>
+
+<p><a href="http://keith-wood.name/countdown.html" target="_blank">範例Demo</a></p>
+
+<h3>The Final Countdown</h3>
+
+<p><img src="https://lh4.googleusercontent.com/-q5WsQiLTJv4/UJc_FlYN8YI/AAAAAAAAB14/eR6HQ1RxIMo/s403/a1.jpg" /></p>
+
+<p>多種呈現方式，可以隨自己喜歡去做調整，倒數計時的部分甚至連毫秒都可以呈現</p>
+
+<p><a href="https://github.com/hilios/jquery.countdown" target="_blank">範例Demo</a></p>
+
+<h3>KK Countdown</h3>
+
+<p><img src="https://lh6.googleusercontent.com/-MKQU1yoPcpA/UJc_Fn8CqaI/AAAAAAAAB2A/AZs0VgXkuco/s600/2.jpg" /></p>
+
+<p>一樣有多種呈現方式，用時間戳記來給予時間</p>
+
+<p><a href="http://krzysztof-furtak.pl/2010/05/kk-countdown-jquery-plugin/" target="_blank">範例Demo</a></p>
+
+<h3>jQuery Countdown</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-uIiwnxje1y0/UJdAu1w52KI/AAAAAAAAB2g/-ZVyh0o40DA/s520/3.jpg" /></p>
+
+<p>利用圖片來呈現，沒有太多功能可以設定，比較簡單的plugin</p>
+
+<p><a href="http://code.google.com/p/jquery-countdown/" target="_blank">範例Demo</a></p>
+
+<h3>jQuery Countdown Timer</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-fmAgRmTcc40/UJc_FilzH0I/AAAAAAAAB18/qyyvqbxCZfU/s620/jquery-countdown-timer.jpg" /></p>
+
+<p>裡面有相當詳細的教學文，教你怎麼使用他們的plugin</p>
+
+<p><a href="http://tutorialzine.com/2011/12/countdown-jquery/" target="_blank">範例Demo</a></p>
+
+<p>倒數計時自己寫並不難，不過有些很特別的功能或是效果用plugin，倒也可以省下不少時間，所以要用plugin或是自己手刻就看各位開發者自己當下的狀況做選擇:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.webresourcesdepot.com/jquery-countdown-plugins-for-coming-soon-pages/" target="_blank"></a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] prototype與建構函式和物件]]></title>
@@ -1867,418 +2188,6 @@ add(conf)
 <p>參考資料:</p>
 
 <p><a href="http://blog.xuite.net/yh96301/blog/58184430" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(二)</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]]]></title>
-    <link href="http://rx836.github.com/blog/vmware-windows-8/"/>
-    <updated>2012-09-21T17:37:00+08:00</updated>
-    <id>http://rx836.github.com/blog/vmware-windows-8</id>
-    <content type="html"><![CDATA[<p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
-
-<!--more-->
-
-
-<p>當然前提你必須先把VM給裝起來，網路上<a href="http://blog.xuite.net/yh96301/blog/53120472" target="_blank">教學還蠻多的</a>，這篇就不多加闡述</p>
-
-<p>一開始首先要去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM</p>
-
-<h3>2012/09/25 補充</h3>
-
-<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具&#8230;，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
-
-<p>點選『Create a New Virtual Machine』</p>
-
-<p><img src="https://lh5.googleusercontent.com/-otZSLwijQ0U/UFyf4XwFSyI/AAAAAAAABkc/FNIph_J7JHs/s657/1.jpg"  /></p>
-
-<p>接著點選『I will Install the operating system later』</p>
-
-<p><img src="https://lh5.googleusercontent.com/-xeiYkr8fudM/UFyf8en7F3I/AAAAAAAABls/swewFIyCkmE/s659/2.jpg"  /></p>
-
-<p>作業系統選擇『Microsoft Windows』，接著再選擇『Windows 7』，因為VM沒有Windows 8可以選</p>
-
-<p><img src="https://lh3.googleusercontent.com/-_Co3ZTLZ3bA/UFygAqiA5CI/AAAAAAAABm0/UixQmOxkxiU/s657/3.jpg"  /></p>
-
-<p>輸入虛擬機器的名稱，這邊取名『Windows 8』，再選擇要存放的路徑，然後點選『Next』</p>
-
-<p><img src="https://lh4.googleusercontent.com/-KRAurNJRvLk/UFygBDKQoII/AAAAAAAABm8/YwQLP43AyUQ/s658/4.jpg"  /></p>
-
-<p>接著設定虛擬硬碟的大小，並且設定『Store virtual disk as a single files』，將虛擬硬碟存成一個資料夾，按下『Next』</p>
-
-<p><img src="https://lh3.googleusercontent.com/-EO-2MBYjcEc/UFygBr6bmvI/AAAAAAAABnI/5JjNmotkvEw/s656/5.jpg"  /></p>
-
-<p>再來準備要來設定記憶體和掛載Windows 8映像檔，選擇『Customize Hardware…』</p>
-
-<p><img src="https://lh4.googleusercontent.com/-nbky8ASN0ck/UFygBw-01wI/AAAAAAAABnE/dxdanwgZcjg/s660/6.jpg"  /></p>
-
-<p>調整記憶體，一般來說建議為實體記憶體的3分之1至2分之1之間，官方網站是說至少要1G</p>
-
-<p><img src="https://lh5.googleusercontent.com/-btOEe35_ToI/UFygCdtCjwI/AAAAAAAABnY/P6JM4vBI9Nc/s656/7.jpg"  /></p>
-
-<p>接著選擇『New CD/DVD』的選項，再點『Use ISO image file:』，再按「Browse…」來選擇映像檔</p>
-
-<p><img src="https://lh6.googleusercontent.com/-WxOQRqu4nF8/UFygCyaFR9I/AAAAAAAABng/uQc30JVd0Oo/s658/8.jpg"  /></p>
-
-<p>選擇好映像檔以後就按下『Close』</p>
-
-<p><img src="https://lh4.googleusercontent.com/-v5ICos8qLUQ/UFygC-8bVNI/AAAAAAAABnc/9rp1LeXOO8I/s661/9.jpg"  /></p>
-
-<p>最後按下『Finish』就新增了一個虛擬機器</p>
-
-<p><img src="https://lh6.googleusercontent.com/-5QYBPsTQNwA/UFyf4pX33AI/AAAAAAAABkg/5rhtXII6H1s/s657/10.jpg"  /></p>
-
-<p>按下『Play virtual machine』，開始來進行安裝囉！</p>
-
-<p><img src="https://lh5.googleusercontent.com/-G0VcZ28gqbA/UFyf4laUtKI/AAAAAAAABkk/jvgPOqPFaOE/s659/11.jpg"  /></p>
-
-<p>因為篇幅有點過長，為了方便閱讀，所以分成兩篇來記錄</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://blog.xuite.net/yh96301/blog/58183942" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(一)</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] hoverpulse 滑鼠移入，圖片縮放]]></title>
-    <link href="http://rx836.github.com/blog/jquery-hoverpulse/"/>
-    <updated>2012-09-20T23:42:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-hoverpulse</id>
-    <content type="html"><![CDATA[<p>jQuery寫了一陣子，直到最近有個需求，想要做到滑鼠移到圖片上，會微微的放大，才發現這個很常看到的效果，我到今天都還沒實做過</p>
-
-<!--more-->
-
-
-<p>幸運的是&#8230;，就因為這麼晚才實做，所以早就有人把plugin寫好了，我所用的是<a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a>，用法相當相當的簡單</p>
-
-<p>首先是HTML部份</p>
-
-<pre><code>&lt;div&gt;&lt;img src="a.jpg" /&gt;&lt;/div&gt;
-&lt;div&gt;&lt;img src="b.jpg" /&gt;&lt;/div&gt;
-&lt;div&gt;&lt;img src="c.jpg" /&gt;&lt;/div&gt;
-</code></pre>
-
-<p>再來是jQuery部份</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse();
-});
-</code></pre>
-
-<p>這樣就完成了！當然什麼值都沒有給的情況下是用default，但如果想要設定放大的幅度和變化的速度，可以這樣寫</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse({
-        size: 40,  // number of pixels to pulse element (in each direction)
-        speed: 400 // speed of the animation 
-    });
-});
-</code></pre>
-
-<p>真的簡單又明瞭&#8230;</p>
-
-<p>那如果你想加入點擊的事件，你可以這樣寫</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse().each(function() {
-        var $img = $(this);                 
-        $img.click(function() {
-
-            //點每張圖的事件
-
-            return false;
-        });
-    });
-});
-</code></pre>
-
-<p>接下來是我個人好奇去看他的source code，可以看到他先將每個圖片的width和height存到$.data裡面</p>
-
-<pre><code>this.each(function() {
-    var $this = $(this);
-    var w = $this.width(), h = $this.height();
-    $this.data('hoverpulse.size', { w: parseInt(w), h: parseInt(h) });
-});
-</code></pre>
-
-<p>接著利用到<strong>.hover()</strong>的方法去做出滑鼠移到圖片和移出圖片的效果</p>
-
-<pre><code>// bind hover event for behavior
-return this.hover(
-    // hover over
-    function() {
-        var $this = $(this);
-        $this.parent().css('z-index', opts.zIndexActive);
-
-        var size = $this.data('hoverpulse.size');
-        var w = size.w, h = size.h;
-        $this.stop().animate({ 
-            top:  ('-'+opts.size+'px'), 
-            left: ('-'+opts.size+'px'), 
-            height: (h+2*opts.size)+'px', 
-            width:  (w+2*opts.size)+'px' 
-        }, opts.speed);
-    },
-    // hover out
-    function() {
-        var $this = $(this);
-        var size = $this.data('hoverpulse.size');
-        var w = size.w, h = size.h;
-
-        $this.stop().animate({ 
-            top:  0, 
-            left: 0, 
-            height: (h+'px'), 
-            width:  (w+'px') 
-        }, opts.speed, function() {
-            $this.parent().css('z-index', opts.zIndexNormal);
-        });
-    }
-);
-</code></pre>
-
-<p>在移入部份會先將包覆img的div z-index值設到100</p>
-
-<pre><code>$this.parent().css('z-index', opts.zIndexActive);
-</code></pre>
-
-<p>然後從data取出之前放入的圖片width和height，接著用<strong>.animate()</strong>來執行放大效果</p>
-
-<pre><code>$this.stop().animate({ 
-            top:  ('-'+opts.size+'px'), 
-            left: ('-'+opts.size+'px'), 
-            height: (h+2*opts.size)+'px', 
-            width:  (w+2*opts.size)+'px' 
-        }, opts.speed);
-</code></pre>
-
-<p>這段code其實就是把你設定的size放大兩倍，並且為了有感覺從圖片中間點開始放大的效果，所以把位置top和left給予負值，等於整張圖片往左上角移動，速度是<strong>opts.speed</strong>，而圖片的position:absolute在整個plugin一開始就已經設定了</p>
-
-<pre><code>// parent must be relatively positioned
-this.parent().css({ position: 'relative' });
-// pulsing element must be absolutely positioned
-this.css({ position: 'absolute', top: 0, left: 0 });
-</code></pre>
-
-<p>可以看到包覆img的div是relatively，img是absolute</p>
-
-<p>而滑鼠移開之後只是把值恢復成原來的設定</p>
-
-<pre><code>var $this = $(this);
-var size = $this.data('hoverpulse.size');
-var w = size.w, h = size.h;
-
-$this.stop().animate({ 
-    top:  0, 
-    left: 0, 
-    height: (h+'px'), 
-    width:  (w+'px') 
-}, opts.speed, function() {
-    $this.parent().css('z-index', opts.zIndexNormal);
-});
-</code></pre>
-
-<p>將top和left歸為0，height和width恢復成原來的大小，z-index也設回預設值1</p>
-
-<p>當然預設值在plugin的最下面可以自己修改</p>
-
-<pre><code>$.fn.hoverpulse.defaults = {
-    size:  20,
-    speed: 200,
-    zIndexActive: 100,
-    zIndexNormal: 1
-};
-</code></pre>
-
-<p>這樣plugin整個看起來就很清楚明瞭，也可以自己嘗試動手寫寫看喔！</p>
-
-<h2>後記</h2>
-
-<p>Aaron大大說plugin寫法有點舊，而且有點囉嗦XD，他建議我新的寫法，在此特別筆記下來</p>
-
-<p>HTML</p>
-
-<pre><code>&lt;img src="a.jpg" class="resize" width="250"/&gt;
-</code></pre>
-
-<p>jQuery</p>
-
-<pre><code>var current_h = null;
-var current_w = null;
-
-$('.resize').hover(
-    function(){
-        current_h = $(this, 'img').height;
-        current_w = $(this, 'img').width;
-        $(this).stop(true, false).animate({width: (current_w * 1.3), height: (current_h * 1.3)}, 300);
-    },
-    function(){
-        $(this).stop(true, false).animate({width: current_w + 'px', height: current_h + 'px'}, 300);
-    }
-);
-</code></pre>
-
-<p>不要用plugin，直接寫，至於top和left在自己加上就好，跟前面的plugin道理一樣</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Facebook] 如何讓Page Tab的Scroll bar消失以及使用錨點?]]></title>
-    <link href="http://rx836.github.com/blog/facebook-page-tab-scroll/"/>
-    <updated>2012-09-19T23:53:00+08:00</updated>
-    <id>http://rx836.github.com/blog/facebook-page-tab-scroll</id>
-    <content type="html"><![CDATA[<p>常常會看到粉絲團裡面的頁籤活動(Page Tab)，都會出現scroll bar，老實說其實有點醜，所以這邊記錄一下怎樣讓Page Tab消失，讓你的頁籤內容有多長，整個Page Tab就有多長，另外順便記錄一下Facebook錨點的問題</p>
-
-<!--more-->
-
-
-<p>要如何讓Facebook不再出現scroll bar</p>
-
-<p><img src="https://lh5.googleusercontent.com/-UTpcRBt6434/UFntIvLIR-I/AAAAAAAABhU/QxBuOx2nspc/s803/1.jpg" width="800px"  /></p>
-
-<p>這是某個粉絲團裡面的頁籤活動，可以看到有一個scroll bar在右側，消失的方法就是在body裡面加上overflow</p>
-
-<pre><code>&lt;body style="overflow:hidden"&gt;
-</code></pre>
-
-<p>但這樣其實有個問題，就是scroll bar雖然消失了，但Page Tab被切到了，也就是說下半部的內容會顯示不出來，所以要在加上JavaScript的code上去</p>
-
-<pre><code>var _app_id = 'xxxx';
-var _api_key = '';
-//初始化
-FB.init({
-    appId: _app_id,
-    status: true, // check login status
-    cookie: true, // enable cookies to allow the server to access the session
-    xfbml: true, // parse XFBML        
-    oauth: true // enable OAuth 2.0
-});
-</code></pre>
-
-<p>一般來說這是初始化Facebook的JavaScript SDK，緊接著在後面加上</p>
-
-<pre><code>    FB.Canvas.setAutoGrow();
-</code></pre>
-
-<p>這樣就可以讓你Page Tab可以整個顯示出來，而且也不會再出現scroll bar，要注意的是，以前會用<strong>FB.Canvas.setAutoResize</strong>，不過現在不要再用這個語法囉，因為Facebook已經要刪除，不再支援這種寫法</p>
-
-<h2>Facebook 錨點無效</h2>
-
-<p>我們平常寫網頁，我們會這樣設錨點</p>
-
-<pre><code>&lt;a name="h"&gt;我是錨點&lt;/a&gt;
-</code></pre>
-
-<p>接著會下這樣的超連結</p>
-
-<pre><code>&lt;a href="#h"&gt;點我跳到我是錨點&lt;/a&gt;
-</code></pre>
-
-<p>這樣就可以到達網頁設定好的錨點，但是這樣在Facebook是無效的！因為Facebook Page Tab其實是一個iframe，所以Facebook自己有出SDK可以控制scroll的移動，寫法如下</p>
-
-<pre><code>FB.Canvas.scrollTo(0, 0);
-</code></pre>
-
-<p>等於說你可以寫click某個HTML讓他移動到你設定好的座標位置，例如</p>
-
-<pre><code>$('a').click(function(){
-    FB.Canvas.scrollTo(0, 300);
-});
-</code></pre>
-
-<p>這樣意思代表點擊a移動到Page Tab坐標(0, 300)的地方，這樣就可以取代錨點失效的問題了</p>
-
-<p>參考資料:</p>
-
-<p><a href="https://developers.facebook.com/docs/reference/javascript/FB.Canvas.scrollTo/" target="_blank">FB.Canvas.scrollTo</a></p>
-
-<p><a href="https://developers.facebook.com/docs/reference/javascript/FB.Canvas.setAutoGrow/" target="_blank">FB.Canvas.setAutoGrow</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[學習筆記] 全世界最會說故事的平台-TED]]></title>
-    <link href="http://rx836.github.com/blog/introduce-ted/"/>
-    <updated>2012-09-15T16:00:00+08:00</updated>
-    <id>http://rx836.github.com/blog/introduce-ted</id>
-    <content type="html"><![CDATA[<p>如果這是人生最後的十八分鐘，我想講什麼？這是去年受邀擔任TEDxTaipei講者-倒立先生黃明正，為了克服緊張，問自己的問題，同時也是為了講一個清楚重大的人生經驗，所需要準備的心境</p>
-
-<!--more-->
-
-
-<p><a href="http://www.ted.com/" target="_blank">TED</a>是在1984年於美國矽谷成立，是科技(technology)、娛樂(entertainment)、設計(design)的簡稱，也是一個非營利組織，每年會舉辦一次會議，一開始原本是一個私人聚會，由『資訊建築』的先驅沃曼(Richard Wurman)發想邀請最頂尖的人物來說他們的創意故事，後來TED的影響力持續發酵到今日，已經成為每年一場四天三夜的論壇</p>
-
-<p>因為在商週上看到關於TED的敘述，裡面有提到說故事的方式，因為最近剛好準備一些快講資料，所以這邊做一些心得記錄</p>
-
-<h2>在舞台上做好自己</h2>
-
-<p>要用自己的風格表達，並且熱情的和大家分享自己的故事、工作和心得，要盡量用自己的角度去分享故事，例如『我經歷過最酷的事情』，而不是『我所知道最酷的事情』，像其中一名講者泰勒(Jill Bolte Taylor)所分享的『我腦內的兩個世界』，就是非常好的例子，講者用本身所經歷的中風經驗，來分享對於這個世界的感受，甚至為了讓觀眾更了解腦的構造，還當場秀出真的人腦！</p>
-
-<object width="526" height="374">
-<param name="movie" value="http://video.ted.com/assets/player/swf/EmbedPlayer.swf"></param>
-<param name="allowFullScreen" value="true" />
-<param name="allowScriptAccess" value="always"/>
-<param name="wmode" value="transparent"></param>
-<param name="bgColor" value="#ffffff"></param>
-<param name="flashvars" value="vu=http://video.ted.com/talk/stream/2008/Blank/JillBolteTaylor_2008-320k.mp4&su=http://images.ted.com/images/ted/tedindex/embed-posters/JillBolteTaylor-2008.embed_thumbnail.jpg&vw=512&vh=288&ap=0&ti=229&lang=en&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jill_bolte_taylor_s_powerful_stroke_of_insight;year=2008;theme=how_the_mind_works;theme=medicine_without_borders;theme=master_storytellers;event=TED2008;tag=biology;tag=brain;tag=consciousness;tag=global+issues;tag=illness;tag=science;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;" />
-<embed src="http://video.ted.com/assets/player/swf/EmbedPlayer.swf" pluginspace="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent" bgColor="#ffffff" width="526" height="374" allowFullScreen="true" allowScriptAccess="always" flashvars="vu=http://video.ted.com/talk/stream/2008/Blank/JillBolteTaylor_2008-320k.mp4&su=http://images.ted.com/images/ted/tedindex/embed-posters/JillBolteTaylor-2008.embed_thumbnail.jpg&vw=512&vh=288&ap=0&ti=229&lang=en&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jill_bolte_taylor_s_powerful_stroke_of_insight;year=2008;theme=how_the_mind_works;theme=medicine_without_borders;theme=master_storytellers;event=TED2008;tag=biology;tag=brain;tag=consciousness;tag=global+issues;tag=illness;tag=science;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;"></embed>
-</object>
-
-
-<p>(可以選擇中文字幕)</p>
-
-<p>如此的震撼讓人印象不深刻都很難</p>
-
-<h2>當作人生最後十八分鐘</h2>
-
-<p>將演講想成你的人生剩下十八分鐘，你會怎麼去表達一個人生經驗？重點不是表達從小到大的精華故事，而是怎麼去分享具有意義的人生體驗</p>
-
-<h2>用上台動機取代緊張</h2>
-
-<p>我相信每個人對於上台分享，不管是第一次還是經驗豐富者，都還是會有緊張時刻，把注意力集中在演講動機，或是釐清演講目的，比將注意力其中在令人恐懼的緊張來的好</p>
-
-<h2>畫面比口說更夠力</h2>
-
-<p>讓大家親身感受吧！例如比爾‧蓋茲為了讓大家重視瘧疾，當場秀出了瘧蚊的罐子擺在大家面前，英國名廚奧利佛(Jamie Oliver)為了讓聽眾注意兒童的糖分攝取，將一車的糖推倒在大家面前</p>
-
-<object width="526" height="374"><param name="movie" value="http://video.ted.com/assets/player/swf/EmbedPlayer.swf"></param><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always"/><param name="wmode" value="transparent"></param><param name="bgColor" value="#ffffff"></param><param name="flashvars" value="vu=http://video.ted.com/talk/stream/2010/Blank/JamieOliver_2010-320k.mp4&su=http://images.ted.com/images/ted/tedindex/embed-posters/JamieOliver-2010.embed_thumbnail.jpg&vw=512&vh=288&ap=0&ti=765&lang=en&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jamie_oliver;year=2010;theme=food_matters;theme=ted_prize_winners;theme=listening_to_teachers;event=TED2010;tag=business;tag=education;tag=food;tag=global+issues;tag=health;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;" /><embed src="http://video.ted.com/assets/player/swf/EmbedPlayer.swf" pluginspace="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent" bgColor="#ffffff" width="526" height="374" allowFullScreen="true" allowScriptAccess="always" flashvars="vu=http://video.ted.com/talk/stream/2010/Blank/JamieOliver_2010-320k.mp4&su=http://images.ted.com/images/ted/tedindex/embed-posters/JamieOliver-2010.embed_thumbnail.jpg&vw=512&vh=288&ap=0&ti=765&lang=en&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jamie_oliver;year=2010;theme=food_matters;theme=ted_prize_winners;theme=listening_to_teachers;event=TED2010;tag=business;tag=education;tag=food;tag=global+issues;tag=health;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;"></embed></object>
-
-
-<p>影片13:20秒開始，可以選擇中文字幕</p>
-
-<h2>說理占10%就好</h2>
-
-<p>說故事都有目的，有些是拿來激勵人，有些是警告某些事物，但不管如何，90%的時間都是拿來說故事，最後10%才是來說道理，做結論</p>
-
-<p>我個人認為TED是個很棒的組織，因為他是個跨領域的論壇，集合來自不同背景的人意見，來激發每個人的想法，和衝擊你的思維，很慶幸的是，在2009年TED開放品牌授權，讓全世界有心有能力的人用TED的模式去經營TED大會，而這種TED授權的就叫做TEDx。以城市為名，用在地的故事，而台灣也有一個TED就叫做<a href="http://tedxtaipei.com/" target="_blank">TEDx Taipei</a></p>
-
-<p>文章最後，我放上我個人最喜歡的TED演講片段『定時攝影下冰河急遽流失的證據』(Time-lapse proof of extreme ice loss)，是一個叫做James Balog的攝影家，用定時攝影的方式來呈現地球暖化的證據，影片內容讓我相當的震撼，因為那些場景是我一輩子沒看過也無法想像的畫面</p>
-
-<object width="526" height="374"><param name="movie" value="http://video.ted.com/assets/player/swf/EmbedPlayer.swf"></param><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always"/><param name="wmode" value="transparent"></param><param name="bgColor" value="#ffffff"></param><param name="flashvars" value="vu=http://video.ted.com/talk/stream/2009G/Blank/JamesBalog_2009G-320k.mp4&su=http://images.ted.com/images/ted/tedindex/embed-posters/JamesBalog-2009G.embed_thumbnail.jpg&vw=512&vh=288&ap=0&ti=628&lang=en&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=james_balog_time_lapse_proof_of_extreme_ice_loss;year=2009;theme=a_greener_future;theme=media_that_matters;theme=to_boldly_go;event=TEDGlobal+2009;tag=climate+change;tag=global+issues;tag=photography;tag=science;tag=technology;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;" /><embed src="http://video.ted.com/assets/player/swf/EmbedPlayer.swf" pluginspace="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent" bgColor="#ffffff" width="526" height="374" allowFullScreen="true" allowScriptAccess="always" flashvars="vu=http://video.ted.com/talk/stream/2009G/Blank/JamesBalog_2009G-320k.mp4&su=http://images.ted.com/images/ted/tedindex/embed-posters/JamesBalog-2009G.embed_thumbnail.jpg&vw=512&vh=288&ap=0&ti=628&lang=en&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=james_balog_time_lapse_proof_of_extreme_ice_loss;year=2009;theme=a_greener_future;theme=media_that_matters;theme=to_boldly_go;event=TEDGlobal+2009;tag=climate+change;tag=global+issues;tag=photography;tag=science;tag=technology;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;"></embed></object>
-
-
-<p>參考資料:</p>
-
-<p>1295期商業周刊</p>
-
-<p><a href="http://www.ted.com/" target="_blank">TED</a></p>
-
-<p><a href="http://tedxtaipei.com/" target="_blank">TEDxTaipei</a></p>
-
-<p><a href="https://www.facebook.com/TEDxTaipei" target="_blank">TEDxTaipei Facebook粉絲團</a></p>
 
 <p>如有錯誤，歡迎指正</p>
 ]]></content>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying - apa</title>
+  <title>[PhoneGap] 如何搭配平板或手機開發Android - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化) Curry這個命名是一個來自Haskell Curry的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹， &hellip;">
+  <meta name="description" content="繼好幾天前開始了第一次的PhoneGap之旅，漸漸的開始慢慢熟悉運作模式，有一直下去寫果然還是有差，當然一路上也一直碰到牆壁和踩到地雷(渾身傷..)，這篇就來記錄怎麼用實機做開發測試，往後也會多發幾篇關於PhoneGap開發心得文章出來奉獻 雖然之前的文章有提到模擬器， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/javascript-currying">
+  <link rel="canonical" href="http://rx836.github.com/blog/android-phonegap-usb-develop">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying</h1>
+      <h1 class="entry-title">[PhoneGap] 如何搭配平板或手機開發Android</h1>
     
     
       <p class="meta">
@@ -99,7 +99,7 @@
   
 
 
-<time datetime="2012-10-18T00:01:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+<time datetime="2012-11-09T14:32:00+08:00" pubdate data-updated="true">Nov 9<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,139 +108,73 @@
   </header>
 
 
-<div class="entry-content"><p>有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化)</p>
+<div class="entry-content"><p>繼好幾天前開始了<a href="http://blog.rx836.tw/blog/phonegap-first/" target="_blank">第一次的PhoneGap之旅</a>，漸漸的開始慢慢熟悉運作模式，有一直下去寫果然還是有差，當然一路上也一直碰到牆壁和踩到地雷(渾身傷..)，這篇就來記錄怎麼用實機做開發測試，往後也會多發幾篇關於PhoneGap開發心得文章出來奉獻</p>
 
 <!--more-->
 
 
-<p>Curry這個命名是一個來自<a href="http://en.wikipedia.org/wiki/Haskell_Curry" target="_blank">Haskell Curry</a>的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹，我們先來看看以下這段程式碼</p>
+<p>雖然之前的文章有提到模擬器，但其實每次把Android啟動起來還是很不方便，因為總是要等一段時間</p>
 
-<pre><code>function m(x, y){
-    return x * y;
-}
+<p><img src="https://lh6.googleusercontent.com/-mBxqTZDV0AI/UJy7d2-dqXI/AAAAAAAAB4Y/hRTlohLYjm4/s630/a1.jpg" /></p>
+
+<p>但如果手邊有Android實機的話(不管是平板還是手機)，都可以用下面的方法來做開發測試(可能會因為改版關係略有不同)</p>
+
+<h3>找找之前下載的Android SDK</h3>
+
+<p>相信在開發Android的時候會先下載Android SDK，先去找找那個SDK，裡面的資料長的像這樣</p>
+
+<p><img src="https://lh5.googleusercontent.com/-ny6p8foNJJQ/UJy7dTQ4C5I/AAAAAAAAB4Q/1rL70M7D2-Y/s232/a2.jpg" /></p>
+
+<h3>開啟Eclipse</h3>
+
+<p>找到Android SDK以後，打開Eclipse，選擇「Window」->「Android SDK Manager」</p>
+
+<p><img src="https://lh3.googleusercontent.com/-F24YqktQKuE/UJy7d6jaMCI/AAAAAAAAB4c/5UL63BEf9Zs/s601/a3.jpg" /></p>
+
+<h3>安裝「Google USB Driver」</h3>
+
+<p>拉到下面的「Extras」底下有個「Google USB Driver」，勾選並且點選右下角的「install packages&#8230;」，注意，因為我是已經安裝過所以才會變淺色，還沒安裝可以進行點選</p>
+
+<p><img src="https://lh4.googleusercontent.com/-7zkUd652OBw/UJy7eZ6Q1cI/AAAAAAAAB4g/WcSKd8rR0sc/s703/a4.jpg" /></p>
+
+<h3>開啟設備上的USB測試功能</h3>
+
+<p>安裝好後接著關閉Eclipse，在來這個步驟，會因為每個人設備不同而稍微有異，舉Nexus 7為例，在「設定」->「開發人員選項」，進去後點右上角的開啟，還有把「USB偵錯模式」勾選起來，其他設備大同小異，接著用USB跟電腦接上，這時電腦會出現安裝驅動程式，先不用管他</p>
+
+<h3>安裝你的硬體驅動程式</h3>
+
+<p>接上USB後打開「控制台」->「系統及安全性」->「系統」->「裝置管理員」，會看到可攜式裝置那邊，會有你的設備名稱，並且顯示驚嘆號，在設備上點選右鍵，選擇「更新驅動程式軟體」，接著選擇「瀏覽電腦上的驅動程式軟體」，還記得剛剛安裝的Google USB Driver嗎？位置沒變動會在「Android SDK」->「extras」->「google」->「usb_driver」，接著電腦就會自動安裝設備囉~</p>
+
+<h3>令人期待的一刻！</h3>
+
+<p>來到最後一個步驟囉，打開Eclipse，編輯AndroidManifest.xml，將以下程式加入到 <application>這個Tag裡面</p>
+
+<pre><code>android:debuggable="true"
 </code></pre>
 
-<p>這是一段很普通的函式，傳入參數x和y以後做相乘，並且將結果回傳，可是假如有一個情況是，x參數是固定的，y值是動態的，那我們每次呼叫會怎麼做呢？</p>
+<p>接著在上面的選單列選擇「Run」->「Run Configurations」，做一些簡單的設定，選擇頁籤「Target」並且點選「Always prompt to pick device」，最主要是因為這樣每次在Run的時候都可以先選擇設備</p>
 
-<pre><code>m(2,1);
-m(2,2);
-m(2,3);
-m(2,4);
-...
-</code></pre>
+<p><img src="https://lh5.googleusercontent.com/-I0yrNYdm1RY/UJy7e8giz5I/AAAAAAAAB40/Hdkv8Ncs-2s/s702/a5.jpg" /></p>
 
-<p>這樣看起來雖然不太好，但尚且還可以接受，但如果函式的參數不止兩個呢？</p>
+<p>設定好後，點選「Run As」->「Android Application」，如果點選Run As沒有出現Android Application代表你沒有選到專案(看左邊那個紅圖)，這也是我一直撞牆的地方&#8230;</p>
 
-<pre><code>function m(x, y, z, p, k, l){
-    return x * y * z * p * k * l;
-}
-</code></pre>
+<p><img src="https://lh3.googleusercontent.com/-nG-rVob0H0k/UJy7fECMaCI/AAAAAAAAB4w/q1Yp2Is_jQg/s1027/a6.jpg" /></p>
 
-<p>然後呼叫的時候，只有l參數變動，其他參數每次都固定&#8230;</p>
+<p>看到你的設備了嗎？別懷疑！直接點選OK開啟吧！</p>
 
-<pre><code>m(2,3,4,5,6,1);
-m(2,3,4,5,6,2);
-m(2,3,4,5,6,3);
-m(2,3,4,5,6,4);
-...
-</code></pre>
+<p><img src="https://lh5.googleusercontent.com/-gHQrLAMHp_0/UJy7ff6GWmI/AAAAAAAAB4s/ZKxtK4zOfLI/s708/a7.jpg" /></p>
 
-<p>這時候就會覺得，一定有什麼方法可以更簡化，少打更多的code，這時候就要將函式進行Currying，首先我們要先寫一個泛用的Currying函式</p>
+<p>有看到你的手機上顯示畫面出來了嗎？！</p>
 
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-</code></pre>
+<p>有的話就恭喜你！成功囉~，一起加入開發Android吧！</p>
 
-<p>然後接著寫</p>
-
-<pre><code>function m(x, y){
-    return x * y;
-}
-
-var new_m = currying(m, 5)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
-
-<p>這樣y值不管傳什麼，x值一樣都保持固定的5，程式有點複雜，現在我們就來看看吧，首先來看看變數slice和stored_args分別是什麼</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    console.log(slice); //function slice() { [native code] }        
-    console.log(stored_args); // [5]        
-}
-
-function m(x, y){
-    return x * y;
-}
-
-currying(m, 5);​
-</code></pre>
-
-<p>我們可以看到，變數slice存放<a href="http://www.w3school.com.cn/js/jsref_slice_string.asp" target="_blank">slice()</a>方法，因為我們想要將傳進來的參數轉換成陣列，並且將第一個參數去掉(這裡指的第一個參數就是m())，所以最後只剩下一個5的陣列</p>
-
-<pre><code>console.log(stored_args); // [5]
-</code></pre>
-
-<p>接著後面會return一個函式，函式將會重複的參數存在裡面，等於回傳一個新的函式讓User使用，從console.log可以看到變數new_args和args</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        console.log(new_args);//[4] 
-        console.log(args);//[5, 4] 
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y){
-    return x * y;
-}
-
-var new_m = currying(m, 5);
-new_m(4)
-</code></pre>
-
-<p>​
-回傳的函式會放在變數new_m，而這個函式到底在做些甚麼呢？其實就是將新得到的參數(也就是從new_m(4)傳進來的那個4)取出，接著利用concat將新參數和舊參數合在一起，再將合在一起後的參數([5, 4])丟進當初m()這個函式裡面，達成原本要相乘的任務，這樣當函式的參數一多，重複性高時，就可以做優化，例如就如同類似之前提到的y、z、k皆為重覆值，x值為動態</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y, z, k){
-    return x * y * z * k;
-}
-
-var new_m = currying(m, 5, 6, 7)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
-
-<p>重複的事情被取代了，這樣程式碼是不是看起來優化了呢？</p>
+<p>假如不幸失敗的話&#8230;，請歡迎留言給我，一起討論(因為你的問題也可能是我的問題..)</p>
 
 <p>參考資料:</p>
 
-<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
+<p><a href="http://developer.android.com/sdk/win-usb.html#WinUsbDriver" target="_blank">Google USB Driver</a></p>
+
+<p><a href="http://www.ibm.com/developerworks/cn/web/wa-mobappdev1/index.html" target="_blank">第 1 部分: Android 上的 PhoneGap 和 Dojo Mobile</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 </div>
@@ -276,12 +210,12 @@ new_m(6);
   
 
 
-<time datetime="2012-10-18T00:01:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+<time datetime="2012-11-09T14:32:00+08:00" pubdate data-updated="true">Nov 9<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/phonegap/'>PhoneGap</a>
   
 </span>
 
@@ -289,10 +223,8 @@ new_m(6);
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/phonegap-first/" title="Previous Post: [PhoneGap] 第一次開發PhoneGap教學筆記">&laquo; [PhoneGap] 第一次開發PhoneGap教學筆記</a>
+        <a class="basic-alignment left" href="/blog/data-uri-web-desing/" title="Previous Post: [CSS] Data URI使用心得筆記">&laquo; [CSS] Data URI使用心得筆記</a>
       
-      
-        <a class="basic-alignment right" href="/blog/css3-transitions-guide/" title="Next Post: [CSS3] 認識CSS3 transitions">[CSS3] 認識CSS3 transitions &raquo;</a>
       
     </p>
   </footer>
@@ -303,7 +235,7 @@ new_m(6);
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/javascript-currying/" 
+	data-href="http://rx836.github.com/blog/android-phonegap-usb-develop/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -377,8 +309,8 @@ new_m(6);
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/javascript-currying/';
-        var disqus_url = 'http://rx836.github.com/blog/javascript-currying/';
+        var disqus_identifier = 'http://rx836.github.com/blog/android-phonegap-usb-develop/';
+        var disqus_url = 'http://rx836.github.com/blog/android-phonegap-usb-develop/';
         var disqus_script = 'embed.js';
       
     (function () {

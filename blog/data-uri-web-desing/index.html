@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying - apa</title>
+  <title>[CSS] Data URI使用心得筆記 - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化) Curry這個命名是一個來自Haskell Curry的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹， &hellip;">
+  <meta name="description" content="Data URI不算新的技術，但他卻是一個可以節省頻寬，增進網頁載入效率的技巧，今天就來實際記錄一下使用的方式，順便比較一下用src指向URL的差別 Data URI是直接在網頁崁入一段Base64編碼，目前IE8+,Firefox, Safari, Opera, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://rx836.github.com/blog/javascript-currying">
+  <link rel="canonical" href="http://rx836.github.com/blog/data-uri-web-desing">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying</h1>
+      <h1 class="entry-title">[CSS] Data URI使用心得筆記</h1>
     
     
       <p class="meta">
@@ -99,7 +99,7 @@
   
 
 
-<time datetime="2012-10-18T00:01:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+<time datetime="2012-11-07T16:02:00+08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,139 +108,81 @@
   </header>
 
 
-<div class="entry-content"><p>有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化)</p>
+<div class="entry-content"><p>Data URI不算新的技術，但他卻是一個可以節省頻寬，增進網頁載入效率的技巧，今天就來實際記錄一下使用的方式，順便比較一下用src指向URL的差別</p>
 
 <!--more-->
 
 
-<p>Curry這個命名是一個來自<a href="http://en.wikipedia.org/wiki/Haskell_Curry" target="_blank">Haskell Curry</a>的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹，我們先來看看以下這段程式碼</p>
+<p>Data URI是直接在網頁崁入一段Base64編碼，目前IE8+,Firefox, Safari, Opera, Chrome都能正確顯示圖檔和css設定，以下是Base64編碼崁入在網頁的樣子</p>
 
-<pre><code>function m(x, y){
-    return x * y;
-}
+<pre><code>&lt;img src="data:image/png;base64,&lt;base64 data goes here&gt;" /&gt;
 </code></pre>
 
-<p>這是一段很普通的函式，傳入參數x和y以後做相乘，並且將結果回傳，可是假如有一個情況是，x參數是固定的，y值是動態的，那我們每次呼叫會怎麼做呢？</p>
+<p>HTML碼中＜base64 data goes here＞就是擺放那一長串的文字編碼，現在就來實際操作一下如何使用</p>
 
-<pre><code>m(2,1);
-m(2,2);
-m(2,3);
-m(2,4);
-...
+<p>首先你必須要準備一張圖檔，如果不想找可以直接到<a href="http://subtlepatterns.com/" target="_blank">Subtle Patterns</a>下載</p>
+
+<p>接著到<a href="http://www.websemantics.co.uk/online_tools/image_to_data_uri_convertor/" target="_blank">websemantics</a>，點選BROWSE選取要轉換成Base64編碼的圖片，按下CONVERT IMAGE</p>
+
+<p><img src="https://lh4.googleusercontent.com/-PmeBE4o7p7s/UJooOcgjcaI/AAAAAAAAB3o/qgNMNlvaSPA/s476/a.jpg" /></p>
+
+<p>之後將網頁拉到最下方，會看到轉換出來的Base64編碼和CSS</p>
+
+<p><img src="https://lh6.googleusercontent.com/-UTJUZpoyHE4/UJooOR2uuQI/AAAAAAAAB3Y/jqioWsQHsw0/s651/b.jpg" /></p>
+
+<p>接著直接將css複製到網頁上，並且增加另外一段css用src做比較</p>
+
+<pre><code>    div.logo-data  {
+        width: 198px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-image: url(data:image/png;base64,&lt;base64 data goes here&gt;);
+    }   
+    div.logo-img{
+        width: 198px;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-image: url(nasty_fabric.png);            
+    }
 </code></pre>
 
-<p>這樣看起來雖然不太好，但尚且還可以接受，但如果函式的參數不止兩個呢？</p>
+<p>注意，＜base64 data goes here＞是要放Base64編碼，但因為實在太長了(這也是等下會提到的缺點之一)，所以我這邊用＜base64 data goes here＞代替</p>
 
-<pre><code>function m(x, y, z, p, k, l){
-    return x * y * z * p * k * l;
-}
+<p>再來是HTML部分，我們先看用src直接指向URL的結果</p>
+
+<pre><code>&lt;div class="logo-img"&gt;
+&lt;/div&gt;
 </code></pre>
 
-<p>然後呼叫的時候，只有l參數變動，其他參數每次都固定&#8230;</p>
+<p>打開Firebug，看看讀取這個網頁會載入些什麼</p>
 
-<pre><code>m(2,3,4,5,6,1);
-m(2,3,4,5,6,2);
-m(2,3,4,5,6,3);
-m(2,3,4,5,6,4);
-...
+<p><img src="https://lh4.googleusercontent.com/-0vnZZFDEAb4/UJooOTvo1eI/AAAAAAAAB3c/k8REjQueAvI/s891/c.jpg" /></p>
+
+<p>會看到載入了一個網頁和一個png圖檔，共70kB</p>
+
+<p>接著用Data URI來看看</p>
+
+<pre><code>&lt;div class="logo-data"&gt;
+&lt;/div&gt;
 </code></pre>
 
-<p>這時候就會覺得，一定有什麼方法可以更簡化，少打更多的code，這時候就要將函式進行Currying，首先我們要先寫一個泛用的Currying函式</p>
+<p><img src="https://lh6.googleusercontent.com/-4uQB0YLPq7U/UJooPPLWN0I/AAAAAAAAB3k/74hpcikj_O0/s894/d.jpg" /></p>
 
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-</code></pre>
+<p>一樣的圖片呈現效果，這裡只載入一個網頁，圖片呢？圖片就如剛剛所說的，用base64編碼方式崁入在網頁裡面，所以網頁稍微大了一點點(因為那一長串的字串關係)，但卻可以減少一個HTTP Request</p>
 
-<p>然後接著寫</p>
+<p>所以使用Data URI的好處就是不用下載圖檔，也不用占用到HTTP Request</p>
 
-<pre><code>function m(x, y){
-    return x * y;
-}
+<p>但缺點就是除了一開始提到的IE8以上才支援以外，還有因為是崁入到網頁當中，所以如果是動態網頁內容會變化的話，就無法享受到快取的好處，而且整個HTML和css會看起來比較凌亂(一堆編碼)，再加上工作流程上也必須先將圖片處理過後，才能使用，會增加製作的時間</p>
 
-var new_m = currying(m, 5)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
+<h3>總結:</h3>
 
-<p>這樣y值不管傳什麼，x值一樣都保持固定的5，程式有點複雜，現在我們就來看看吧，首先來看看變數slice和stored_args分別是什麼</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    console.log(slice); //function slice() { [native code] }        
-    console.log(stored_args); // [5]        
-}
-
-function m(x, y){
-    return x * y;
-}
-
-currying(m, 5);​
-</code></pre>
-
-<p>我們可以看到，變數slice存放<a href="http://www.w3school.com.cn/js/jsref_slice_string.asp" target="_blank">slice()</a>方法，因為我們想要將傳進來的參數轉換成陣列，並且將第一個參數去掉(這裡指的第一個參數就是m())，所以最後只剩下一個5的陣列</p>
-
-<pre><code>console.log(stored_args); // [5]
-</code></pre>
-
-<p>接著後面會return一個函式，函式將會重複的參數存在裡面，等於回傳一個新的函式讓User使用，從console.log可以看到變數new_args和args</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        console.log(new_args);//[4] 
-        console.log(args);//[5, 4] 
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y){
-    return x * y;
-}
-
-var new_m = currying(m, 5);
-new_m(4)
-</code></pre>
-
-<p>​
-回傳的函式會放在變數new_m，而這個函式到底在做些甚麼呢？其實就是將新得到的參數(也就是從new_m(4)傳進來的那個4)取出，接著利用concat將新參數和舊參數合在一起，再將合在一起後的參數([5, 4])丟進當初m()這個函式裡面，達成原本要相乘的任務，這樣當函式的參數一多，重複性高時，就可以做優化，例如就如同類似之前提到的y、z、k皆為重覆值，x值為動態</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y, z, k){
-    return x * y * z * k;
-}
-
-var new_m = currying(m, 5, 6, 7)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
-
-<p>重複的事情被取代了，這樣程式碼是不是看起來優化了呢？</p>
+<p>假如你放棄了IE8以下的瀏覽器，或許可以在一些背景圖和一些小icon做一些Data URI的處理，畢竟減少一些頻寬和HTTP Request也對$$也是不無小補:)</p>
 
 <p>參考資料:</p>
 
-<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
+<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/the-what-why-and-how-of-data-uris-in-web-design/" target="_blank">The What, Why and How of Data URIs in Web Design</a></p>
+
+<p><a href="http://blog.darkthread.net/post-2010-11-05-data-uri.aspx" target="_blank">淺嚐Data URI</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 </div>
@@ -276,12 +218,12 @@ new_m(6);
   
 
 
-<time datetime="2012-10-18T00:01:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+<time datetime="2012-11-07T16:02:00+08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>
   
 </span>
 
@@ -289,10 +231,10 @@ new_m(6);
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/phonegap-first/" title="Previous Post: [PhoneGap] 第一次開發PhoneGap教學筆記">&laquo; [PhoneGap] 第一次開發PhoneGap教學筆記</a>
+        <a class="basic-alignment left" href="/blog/jquery-not-initialize-all-things/" title="Previous Post: [jQuery] 不要將任何事情都在jQuery.ready()初始化">&laquo; [jQuery] 不要將任何事情都在jQuery.ready()初始化</a>
       
       
-        <a class="basic-alignment right" href="/blog/css3-transitions-guide/" title="Next Post: [CSS3] 認識CSS3 transitions">[CSS3] 認識CSS3 transitions &raquo;</a>
+        <a class="basic-alignment right" href="/blog/android-phonegap-usb-develop/" title="Next Post: [PhoneGap] 如何搭配平板或手機開發Android">[PhoneGap] 如何搭配平板或手機開發Android &raquo;</a>
       
     </p>
   </footer>
@@ -303,7 +245,7 @@ new_m(6);
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://rx836.github.com/blog/javascript-currying/" 
+	data-href="http://rx836.github.com/blog/data-uri-web-desing/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -377,8 +319,8 @@ new_m(6);
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://rx836.github.com/blog/javascript-currying/';
-        var disqus_url = 'http://rx836.github.com/blog/javascript-currying/';
+        var disqus_identifier = 'http://rx836.github.com/blog/data-uri-web-desing/';
+        var disqus_url = 'http://rx836.github.com/blog/data-uri-web-desing/';
         var disqus_script = 'embed.js';
       
     (function () {
