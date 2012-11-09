@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PhoneGap | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/phonegap/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-09T16:27:53+08:00</updated>
+  <updated>2012-11-09T16:39:31+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,46 +18,46 @@
     <link href="http://rx836.github.com/blog/android-phonegap-usb-develop/"/>
     <updated>2012-11-09T14:32:00+08:00</updated>
     <id>http://rx836.github.com/blog/android-phonegap-usb-develop</id>
-    <content type="html"><![CDATA[<p>繼好幾天前開始了<a href="http://blog.rx836.tw/blog/phonegap-first/" target="_blank">第一次的PhoneGap之旅</a>，漸漸的開始慢慢熟悉運作模式，有一直下去寫果然還是有差，當然一路上也一直碰到牆壁和踩到地雷(渾身傷..)，這篇就來記錄怎麼用實機做開發測試，往後也會多發幾篇關於PhoneGap開發心得文章出來奉獻</p>
+    <content type="html"><![CDATA[<p>繼好幾天前開始了<a href="http://blog.rx836.tw/blog/phonegap-first/" target="_blank">第一次的PhoneGap之旅</a>，漸漸的開始慢慢熟悉運作模式，有一直寫下去果然還是有差，當然一路上也一直碰到牆壁和踩到地雷(渾身傷..)，這篇就來記錄怎麼用實機做開發測試，往後也會多寫幾篇關於PhoneGap開發心得文章出來奉獻</p>
 
 <!--more-->
 
 
-<p>雖然之前的文章有提到模擬器，但其實每次把Android啟動起來還是很不方便，因為總是要等一段時間</p>
+<p>雖然之前的文章有提到Android模擬器，但其實每次要把Android模擬器啟動起來還是很不方便，因為總是要等一段時間</p>
 
 <p><img src="https://lh6.googleusercontent.com/-mBxqTZDV0AI/UJy7d2-dqXI/AAAAAAAAB4Y/hRTlohLYjm4/s630/a1.jpg" /></p>
 
 <p>但如果手邊有Android實機的話(不管是平板還是手機)，都可以用下面的方法來做開發測試(可能會因為改版關係略有不同)</p>
 
-<h3>找找之前下載的Android SDK</h3>
+<h3>1.找找之前下載的Android SDK</h3>
 
-<p>相信在開發Android的時候會先下載Android SDK，先去找找那個SDK，裡面的資料長的像這樣</p>
+<p>相信之前在開發Android的時候，會先下載Android SDK，找找那個SDK，裡面的資料會長的像這樣</p>
 
 <p><img src="https://lh5.googleusercontent.com/-ny6p8foNJJQ/UJy7dTQ4C5I/AAAAAAAAB4Q/1rL70M7D2-Y/s232/a2.jpg" /></p>
 
-<h3>開啟Eclipse</h3>
+<h3>2.開啟Eclipse</h3>
 
 <p>找到Android SDK以後，打開Eclipse，選擇「Window」->「Android SDK Manager」</p>
 
 <p><img src="https://lh3.googleusercontent.com/-F24YqktQKuE/UJy7d6jaMCI/AAAAAAAAB4c/5UL63BEf9Zs/s601/a3.jpg" /></p>
 
-<h3>安裝「Google USB Driver」</h3>
+<h3>3.安裝「Google USB Driver」</h3>
 
-<p>拉到下面的「Extras」底下有個「Google USB Driver」，勾選並且點選右下角的「install packages...」，注意，因為我是已經安裝過所以才會變淺色，還沒安裝可以進行點選</p>
+<p>拉到下面的「Extras」底下有個「Google USB Driver」，勾選並且點選右下角的「install packages...」，注意，因為我是已經安裝過所以才會變淺色，還沒安裝可以進行點選安裝</p>
 
 <p><img src="https://lh4.googleusercontent.com/-7zkUd652OBw/UJy7eZ6Q1cI/AAAAAAAAB4g/WcSKd8rR0sc/s703/a4.jpg" /></p>
 
-<h3>開啟設備上的USB測試功能</h3>
+<h3>4.開啟設備上的USB測試功能</h3>
 
 <p>安裝好後接著關閉Eclipse，在來這個步驟，會因為每個人設備不同而稍微有異，舉Nexus 7為例，在「設定」->「開發人員選項」，進去後點右上角的開啟，還有把「USB偵錯模式」勾選起來，其他設備大同小異，接著用USB跟電腦接上，這時電腦會出現安裝驅動程式，先不用管他</p>
 
-<h3>安裝你的硬體驅動程式</h3>
+<h3>5.安裝你的硬體驅動程式</h3>
 
-<p>接上USB後打開「控制台」->「系統及安全性」->「系統」->「裝置管理員」，會看到可攜式裝置那邊，會有你的設備名稱，並且顯示驚嘆號，在設備上點選右鍵，選擇「更新驅動程式軟體」，接著選擇「瀏覽電腦上的驅動程式軟體」，還記得剛剛安裝的Google USB Driver嗎？位置沒變動會在「Android SDK」->「extras」->「google」->「usb_driver」，接著電腦就會自動安裝設備囉~</p>
+<p>接上USB後打開「控制台」->「系統及安全性」->「系統」->「裝置管理員」，會看到可攜式裝置那邊，會有你的設備名稱，並且顯示驚嘆號，在設備上點選右鍵，選擇「更新驅動程式軟體」，接著選擇「瀏覽電腦上的驅動程式軟體」，還記得剛剛安裝的Google USB Driver嗎？位置沒變動會在 Android SDK\extras\google\usb_driver，接著電腦就會自動安裝設備囉~</p>
 
-<h3>令人期待的一刻！</h3>
+<h3>6.令人期待的一刻！</h3>
 
-<p>來到最後一個步驟囉，打開Eclipse，編輯AndroidManifest.xml，將以下程式加入到 <application>這個Tag裡面</p>
+<p>來到最後一個步驟囉，打開Eclipse，編輯AndroidManifest.xml，將以下程式加入到＜application＞這個Tag裡面</p>
 
 <pre><code>android:debuggable="true"
 </code></pre>
@@ -66,7 +66,7 @@
 
 <p><img src="https://lh5.googleusercontent.com/-I0yrNYdm1RY/UJy7e8giz5I/AAAAAAAAB40/Hdkv8Ncs-2s/s702/a5.jpg" /></p>
 
-<p>設定好後，點選「Run As」->「Android Application」，如果點選Run As沒有出現Android Application代表你沒有選到專案(看左邊那個紅圖)，這也是我一直撞牆的地方...</p>
+<p>設定好後，點選「Run As」->「Android Application」，如果點選Run As沒有出現Android Application代表你沒有選到專案(看左邊那個紅框)，這也是我一直撞牆的地方...</p>
 
 <p><img src="https://lh3.googleusercontent.com/-nG-rVob0H0k/UJy7fECMaCI/AAAAAAAAB4w/q1Yp2Is_jQg/s1027/a6.jpg" /></p>
 
