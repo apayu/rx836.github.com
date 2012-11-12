@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Facebook | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/facebook/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-12T14:29:52+08:00</updated>
+  <updated>2012-11-12T14:36:21+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,7 +18,7 @@
     <link href="http://rx836.github.com/blog/android-facebook-key-hashes/"/>
     <updated>2012-11-12T11:38:00+08:00</updated>
     <id>http://rx836.github.com/blog/android-facebook-key-hashes</id>
-    <content type="html"><![CDATA[<p>用web方式開發Facebook App相信很多人都很有經驗，網路上也有很多教學文章，小弟我之前也有過一篇很簡單的<a href="http://blog.rx836.tw/blog/facebook-app-create-getfbid/" target="_blank">心得文章</a>，但如果是用PhoneGap來開發Facebook App呢？我想很多人第一個遇到的問題就是，我在Facebook開發者設定是註冊web還是Android呢？</p>
+    <content type="html"><![CDATA[<p>之前曾經有寫過一篇關於Facebook web App開發的<a href="http://blog.rx836.tw/blog/facebook-app-create-getfbid/" target="_blank">心得文章</a>，但如果是用PhoneGap來開發Facebook App呢？我想很多人第一個遇到的問題就是，我在Facebook開發者設定是註冊web還是Android？</p>
 
 <!--more-->
 
