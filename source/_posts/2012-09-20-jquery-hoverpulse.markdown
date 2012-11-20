@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[jQuery] hoverpulse 滑鼠移入，圖片縮放"
+title: "[jQ-Plugin] hoverpulse 滑鼠移入，圖片縮放"
 date: 2012-09-20 23:42
 comments: true
-categories: jQuery
+categories: jQuery jQ-Plugin
 ---
 
 jQuery寫了一陣子，直到最近有個需求，想要做到滑鼠移到圖片上，會微微的放大，才發現這個很常看到的效果，我到今天都還沒實做過

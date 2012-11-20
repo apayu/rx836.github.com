@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[jQuery] 倒數計時的plugin介紹"
+title: "[jQ-Plugin] 倒數計時的plugin介紹"
 date: 2012-11-05 11:45
 comments: true
-categories: jQuery
+categories: jQuery jQ-Plugin
 ---
 
 之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考

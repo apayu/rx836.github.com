@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[jQuery] jQuery scroll parallax plugin"
+title: "[jQ-Plugin] jQuery scroll parallax plugin"
 date: 2012-08-31 17:55
 comments: true
-categories: jQuery
+categories: jQuery jQ-Plugin
 ---
 
 在Facebook看到有人分享<a href="http://www.milwaukeepolicenews.com/#menu=home-page" target="_blank">這個網站</a>，有人提到是用parallax scroll來實做，因為對這個不熟悉，所以趕緊做了一些功課來看看怎麼做
