@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-28T14:57:20+08:00</updated>
+  <updated>2012-11-28T15:13:17+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -26,6 +26,8 @@
 
 
 <p>Kicksend發現有很多人被退信的原因都是在輸入電子郵件(E-mail)的時候打錯domain，例如“hotmail.con”、“gnail.com”、“yajoo.com”等，這種錯誤有時候用戶自己都不知道，就直接按送出，導致收不到註冊信，所以Kicksend就做了一個設計，在用戶輸入E-mail以後，會檢查E-mail的domain，如果發現疑似錯誤情形，就會跳出建議的選項問用戶要不要更改，做到良好的 <strong>user experience</strong>，用了這個方法以後也確實降低了50%的退信率，無形中也增加了不少用戶，而下面將介紹這套jQuery plugin - <strong>mailcheck</strong></p>
+
+<h2>start</h2>
 
 <p>首先，可以去github載回原始碼</p>
 
@@ -125,7 +127,7 @@ $('#email').on('blur', function() {
 </ul>
 
 
-<p>參考資料:</p>
+<h3>參考資料:</h3>
 
 <p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck Github</a></p>
 
