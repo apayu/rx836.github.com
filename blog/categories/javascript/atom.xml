@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-12T14:36:21+08:00</updated>
+  <updated>2012-11-28T14:45:29+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼]]></title>
+    <link href="http://rx836.github.com/blog/javascript-namespace/"/>
+    <updated>2012-11-21T12:09:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-namespace</id>
+    <content type="html"><![CDATA[<p>網路上JavaScript的library或plugin非常的多，我平常在寫網頁時，有用到別人的plugin都會稍微看一下source code，會發現「Namespace」在JavaScript的世界當中應用相當的廣泛，就連著名的 <strong>jQuery</strong> 也有用到，學習Namespace不僅可以更能看懂別人寫的code，對於增進自己JavaScript的底子也是非常有幫助，可以說不能輕忽他</p>
+
+<!--more-->
+
+
+<p>有一個情況是這樣子的，今天我寫了一個叫做CheckName()的函式在網頁裡面，而同事因為接手維護，也因為某次的需求也在網頁裡面自己寫了一個CheckName()，這會發生什麼事情呢？如果同事寫的CheckName()在我之後，他將會<strong>覆蓋</strong>我之前寫的CheckName()，反之亦然，這會造成某段使用這個函式的程式碼出錯，所以為了要避免這種情形發生，可以為他們<strong>再取一個名字</strong>，也就是所謂的<strong>命名空間</strong>，但JavaScript本身並沒有這個機制，但可以依靠<strong>物件</strong>來達到這樣的效果</p>
+
+<p>不好的js寫法</p>
+
+<pre><code>function CheckName() {
+    //我寫的
+}
+//很多程式碼
+//很多程式碼
+//很多程式碼
+//很多程式碼
+function CheckName() {
+    //.. 同事寫的
+}
+</code></pre>
+
+<p>可以這樣寫</p>
+
+<pre><code>//建立一個物件
+var apa = {};     
+function CheckName() {
+    //我寫的
+}
+//使物件新增一個方法   
+apa.CheckName = CheckName; 
+//要執行時
+apa.CheckName();
+</code></pre>
+
+<p>如果我同事要寫，他也可以這樣子寫</p>
+
+<pre><code>var gary = {};     
+function CheckName() {
+    //同事寫的
+}   
+gary.CheckName = CheckName;     
+gary.CheckName();   
+</code></pre>
+
+<p>這樣就不會有衝突的問題，另外你有看過這樣的寫法嗎？</p>
+
+<pre><code>var obj = obj || {};
+</code></pre>
+
+<p>這代表說如果在建立物件之前先檢查有沒有使用過，如果有的話就直接延用之前寫的物件，如果沒有就給空的物件，避免物件重複宣告</p>
+
+<p>在JavaScript強調盡量少用全域變數，多用區域變數，所以有時候我們可以這樣把程式碼包起來</p>
+
+<pre><code>(function() {
+    var a=1; //區域變數
+})();
+</code></pre>
+
+<p>這樣就可以減少全域變數的使用，jQuery的原始碼也是利用這樣的方式</p>
+
+<p><a href="http://code.jquery.com/jquery-1.8.3.js" target="_blank">jQuery原始碼</a></p>
+
+<pre><code>(function( window, undefined ) {
+    //...
+    //...
+    jQuery = function( selector, context ) {
+        // The jQuery object is actually just the init constructor 'enhanced'
+        return new jQuery.fn.init( selector, context, rootjQuery );
+    }
+    //...
+    //...
+    window.jQuery = window.$ = jQuery;
+    //...
+})( window );
+</code></pre>
+
+<p>可以看到中間那段jQuery=function( selector, context )就是我們用jQuery最常見的選擇器宣告，也因為這樣我們才能「jQuery(div)」這樣的方式寫jQuery，而「window.jQuery = window.$ = jQuery;」這段就是可以用「$」來代替「jQuery」，這樣對於jQuery有沒有比較了解呢</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://caterpillar.onlyfun.net/Gossip/JavaScript/Namespace.html" target="_blank">JavaScript Essence: 名稱管理</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] prototype與建構函式和物件]]></title>
@@ -409,116 +500,6 @@ console.log(kitty2.name); // "kitty"
 <p>參考資料:</p>
 
 <p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[JavaScript] 談物件, 實字與建構式]]></title>
-    <link href="http://rx836.github.com/blog/javascript-patterns-1/"/>
-    <updated>2012-09-07T23:57:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-patterns-1</id>
-    <content type="html"><![CDATA[<p>最近在看一本書叫做<strong>JavaScript 設計模式</strong>，英文名稱是JavaScript Patterns，裡面很完整的告訴你如何寫好JavaScript，他不適合初學者看，因為他並不會從很基礎的觀念開始談起，但他卻非常適合像我這種已經知道基礎，並且正要開始往上爬的人閱讀</p>
-
-<!--more-->
-
-
-<p>所以如果有了基礎後再來看這本書，會發現收穫非常的多，就因為太多了，所以開始紀錄一些學習這本書的心得，讓我可以持續成長，而這篇要講的就是關於JavaScript『物件』這個東西</p>
-
-<p>JavaScript是一個物件導向的語言，在程式碼裡面大部份你所看到的都可以說是物件，除了五種原始型別不是以外，分別如下</p>
-
-<p>1.數值</p>
-
-<p>2.字串</p>
-
-<p>3.布林</p>
-
-<p>4.null</p>
-
-<p>5.undefined</p>
-
-<p>雖然數值、字串和布林不是物件，但如果需要的話，還是可以很容易的轉換成物件來使用</p>
-
-<p>其實當我們在做定義變數這個動作的時候，就已經接觸到物件，因為當定義變數的時候自然會成為『Activation Object』的一個屬性，另外，如果是定義全域變數，也就變成『全域物件』的屬性，更重要的是，其實變數本身也是個物件，因為他自己也擁有屬性</p>
-
-<p>那麼講了那麼多，『物件』到底是甚麼?</p>
-
-<p>其實物件非常的簡單，他只是一堆具名屬性的集合，或是名值對的清單，而且屬性可以是函式，這種時候我們就會叫這個函式為方法</p>
-
-<p><img src="https://lh5.googleusercontent.com/-s9ewb766mCo/UEoidMi9O3I/AAAAAAAABa4/YsFTCbWwRpo/s416/1.jpg" width="416px" /></p>
-
-<p>而物件建立了以後，並不是就說完全不能動他，你還是可以修改他，看是新增或移除裡面的屬性和方法都可以，再來要特別提到的是，有兩種主要的物件要認識一下</p>
-
-<p>第一種叫做原生物件(Native)，也可以叫做內建物件，例如Array、Date或是使用者自行定義(後面會提到)</p>
-
-<p>第二種叫做宿主物件(Host)，例如window物件和所有DOM物件</p>
-
-<p>怎麼去分辨這兩種物件，只要看看物件能不能在瀏覽器底下執行就可以，如果只能在瀏覽器底下執行，就是Host物件，如果在非瀏覽器的地方也可以執行，那就是Native</p>
-
-<p>什麼？你是不是覺得一直講物件物件的，是不是好像少一個東西？沒錯，JavaScript沒有Class，這對於熟悉其他語言來說是個新觀念，要試著去忘掉Class這個東西，當然，沒有了Class，也就沒有繼承，不過卻可以用其他方式來實現，最常見的就是使用原型(Prototype)，不過在往後的文章才會提到原型這個概念</p>
-
-<h2>實字與建構式</h2>
-
-<p>接下來我們就要開始講到如何建立物件，我們都知道物件簡單的來思考就是名值對(key-value pairs)的雜湊表，有點像是關聯式陣列(associative arrays)，而物件就包含了屬性和方法(函式)，建立物件有三種方式，不過本篇文章只會提到兩種，『自訂建構式函式』我們留到以後再說，我們先來談第一種物件實字(literal notation)</p>
-
-<pre><code>//首先建立一個空物件
-var cat = {};
-
-//增加一個屬性
-cat.name = "kitty";
-
-//增加一個方法
-cat.getName = function() {
-    return cat.name;
-}
-</code></pre>
-
-<p>以上就是一個物件實字模式的建立方式，除了以上的寫法，你還可以這樣寫</p>
-
-<pre><code>var cat = {
-    name : "kitty",
-    getName : function() {
-        return this.name;
-    }
-};
-</code></pre>
-
-<p>可能一開始會不太習慣這種寫法，但用久了，你會慢慢喜歡這種寫法，而外面大部份的寫法也都是用實字模式，也是比較推薦的寫法，後面也會提到為什麼推薦，而以下是物件實字的特點</p>
-
-<p>1.將物件用大括號包起來{ }</p>
-
-<p>2.逗號分隔每個屬性和物件，而最後可以不用逗號</p>
-
-<p>3.用分號分隔屬性名稱和屬性值</p>
-
-<p>4.最後別忘了要在最後面的}加上分號</p>
-
-<p>第二個要來談的是用<strong>建構式</strong>來建立物件</p>
-
-<p>雖然JavaScript沒有class，但他卻有一個很相似class的語法，叫做建構式函式(constructor functions)，你可以用建構式函式來建立物件，或著，使用內建的建構式(例如:Object()、Date()、String())，用法如下</p>
-
-<pre><code>var cat = new Object();
-cat.name = "kitty";
-</code></pre>
-
-<p>從以上程式碼你就可以看到，很明顯的實字程式碼比較短，建構式會比較長，而且實字比較像單純的雜湊表，不用像建構式一樣還要new一個東西出來，感覺上就來的複雜，除了這些以外，建構式其實背後還隱藏了陷阱存在，例如建立物件時有傳遞參數是動態，會導致以下情況發生</p>
-
-<pre><code>//記住, 以下寫法都不好
-//這是一個空物件
-var o = new Object();
-console.log(o.constructor === Object); // true
-
-//突然變成Number
-var o = new Object(1);
-console.log(o.constructor === Number); // true  
-
-//又變成字串
-var o = new Object("I am a string");
-console.log(o.constructor === String); // true      
-</code></pre>
-
-<p>從以上可以看出，依照參數的不同，會得到來自不同的建構式物件，造成非預期的結果產生，所以再次強調強烈建議使用<strong>實字模式</strong></p>
 
 <p>如有錯誤，歡迎指正</p>
 ]]></content>

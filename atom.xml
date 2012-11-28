@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-12T14:36:21+08:00</updated>
+  <updated>2012-11-28T14:45:29+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,974 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 有效降低會員註冊退信率的mailcheck]]></title>
+    <link href="http://rx836.github.com/blog/mailcheck-jquery-plugin/"/>
+    <updated>2012-11-28T12:04:00+08:00</updated>
+    <id>http://rx836.github.com/blog/mailcheck-jquery-plugin</id>
+    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-dLci9WLFC-8/ULWyqQJ-OxI/AAAAAAAAB_U/odHWaG3jNfE/s482/w.jpg" /></p>
+
+<p>免費檔案分享<a href="http://kicksend.com/" target="_blank">Kicksend</a>有寫一篇文章是關於<a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target=_blank"">如何降低退信率</a>，內容大概是講會員註冊會員以後，會發送註冊的確認信，但常常會發生被退信的情況，導致會員收不到信可能必須重新申請一次帳號，不然就是請客服修改E-mail，所以Kicksend去做了分析並且解決這個問題</p>
+
+<!--more-->
+
+
+<p>Kicksend發現有很多人被退信的原因都是在輸入電子郵件(E-mail)的時候打錯domain，例如“hotmail.con”、“gnail.com”、“yajoo.com”等，這種錯誤用戶有時候自己不知道，就直接按送出，導致收不到註冊信，所以Kicksend就做了一個設計，在用戶輸入E-mail以後，會檢查E-mail的domain，如果發現疑似錯誤情形，就會跳出建議的選項問用戶要不要更改，做到良好的 <strong>user experience</strong>，用了這個方法以後也確實降低了50%的退信率，無形中也增加了不少用戶，而下面將介紹這套jQuery plugin - <strong>mailcheck</strong></p>
+
+<p>先去github抓他的原始碼</p>
+
+<p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck</a></p>
+
+<p>接著在網頁裡面載入jQuery和mailcheck.min</p>
+
+<pre><code>&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="mailcheck.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>html部分，一個text field</p>
+
+<pre><code>&lt;input id="email" name="email" type="text" /&gt;
+</code></pre>
+
+<p>接著是js部份</p>
+
+<pre><code>var domains = ['hotmail.com', 'gmail.com', 'aol.com'];
+var topLevelDomains = ["com", "net", "org"];
+
+var superStringDistance = function(string1, string2) {
+  // a string distance algorithm of your choosing
+}
+
+$('#email').on('blur', function() {
+  $(this).mailcheck({
+    domains: domains,                       // optional
+    topLevelDomains: topLevelDomains,       // optional
+    distanceFunction: superStringDistance,  // optional
+    suggested: function(element, suggestion) {
+      // callback code
+    },
+    empty: function(element) {
+      // callback code
+    }
+  });
+});
+</code></pre>
+
+<p>「domains」、「topLevelDomains」、「distanceFunction」這三個參數都是選填，分別為</p>
+
+<p><strong>domains</strong>: 要比對的domain，例如:yahoo.com、google.com</p>
+
+<p><strong>topLevelDomains</strong>: 允許的topLevelDomain，例如:com、net</p>
+
+<p><strong>distanceFunction</strong>: 自訂用來計算最接近topLevelDomain內容的函式</p>
+
+<p>假設在沒有填寫 <strong>domains</strong> 和 <strong>topLevelDomains</strong> 情況下，會採用預設值，根據source code裡面所寫的預設值為</p>
+
+<p>預設domains</p>
+
+<pre><code>defaultDomains: ["yahoo.com", "google.com", "hotmail.com", "gmail.com", "me.com", "aol.com", "mac.com",
+  "live.com", "comcast.net", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk",
+  "facebook.com", "verizon.net", "sbcglobal.net", "att.net", "gmx.com", "mail.com"]
+</code></pre>
+
+<p>預設topLevelDomains</p>
+
+<pre><code>defaultTopLevelDomains: ["co.uk", "com", "net", "org", "info", "edu", "gov", "mil"]
+</code></pre>
+
+<p>而「suggested」和「empty」則分別是 <strong>輸入錯誤時的callback</strong> 和 <strong>沒填寫E-mail的callback</strong>，所以你可以自行在這裡加上程式碼提醒User輸入錯誤或忘記輸入</p>
+
+<h3>沒有jQuery的情況下</h3>
+
+<p>假如你的專案裡面沒有用到jQuery，也可以單純使用js版本</p>
+
+<pre><code>Kicksend.mailcheck.run({
+  email: yourTextInput.value,
+  domains: domains,                       // optional
+  topLevelDomains: topLevelDomains,       // optional
+  distanceFunction: superStringDistance,  // optional
+  suggested: function(suggestion) {
+    // callback code
+  },
+  empty: function() {
+    // callback code
+  }
+});
+</code></pre>
+
+<p>最後附上有用到mailcheck這項效果的網站</p>
+
+<ul>
+<li><a href="http://kicksend.com/" target="_blank">Kicksend</a></li>
+<li><a href="http://dropbox.com/" target="_blank">Dropbox</a></li>
+<li><a href="http://flotype.com/" target="_blank">Flotype</a></li>
+<li><a href="http://kickstarter.com/" target="_blank">Kickstarter</a></li>
+<li><a href="http://kippt.com/" target="_blank">Kippt</a></li>
+<li><a href="http://minecraft.net/" target="_blank">Minecraft</a></li>
+<li><a href="http://prispy.com/" target="_blank">Prispy</a></li>
+<li><a href="http://sbnation.com/" target="_blank">SB Nation</a></li>
+<li><a href="http://show-space.com/" target="_blank">Show Space</a></li>
+<li><a href="http://theverge.com/" target="_blank">The Verge</a></li>
+<li><a href="http://uber.com/" target="_blank">Uber</a></li>
+</ul>
+
+
+<p>參考資料:</p>
+
+<p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck Github</a></p>
+
+<p><a href="http://kicksend.com/join" target="_blank">Demo</a></p>
+
+<p><a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target="_blank">How we decreased sign up confirmation email bounces by 50%</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] 自製擁有Responsive的Tooltip]]></title>
+    <link href="http://rx836.github.com/blog/friendly-tooltip-responsive/"/>
+    <updated>2012-11-27T11:53:00+08:00</updated>
+    <id>http://rx836.github.com/blog/friendly-tooltip-responsive</id>
+    <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-KiD_TaOPzFA/ULRxljbyVVI/AAAAAAAAB-M/nHY1WuJDaGE/s373/q1.jpg" /></p>
+
+<p>之前做Tooltip，都是上網找plugin比較多，但這次看到一篇文章，是自己寫一個Tooltip，就來記錄一下，而且還有Responsive的效果，可以依照載具大小做縮放和位置的改變，code不多，也很簡單明瞭</p>
+
+<!--more-->
+
+
+<p>先稍微介紹一下什麼是Tooltip，就如上面的圖所示，他可以提供良好的 <strong>user experience</strong>，可以在某個功能或選單，又或是某段文字上，在滑鼠移過去時(有時候是在點擊情況下，但少數)，出現一個小框，裡面有少許的說明文字，讓用戶知道，這個功能或是按鈕是在幹嘛</p>
+
+<p>首先，是CSS的部分</p>
+
+<pre><code>#tooltip
+{
+    text-align: center;
+    color: #fff;
+    background: #111;
+    position: absolute;
+    z-index: 100;
+    padding: 15px;
+}
+
+    #tooltip:after /* triangle decoration */
+    {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #111;
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        margin-left: -10px;
+    }
+
+        #tooltip.top:after
+        {
+            border-top-color: transparent;
+            border-bottom: 10px solid #111;
+            top: -20px;
+            bottom: auto;
+        }
+
+        #tooltip.left:after
+        {
+            left: 10px;
+            margin: 0;
+        }
+
+        #tooltip.right:after
+        {
+            right: 10px;
+            left: auto;
+            margin: 0;
+        }
+</code></pre>
+
+<p>這段CSS是建立一個tooltip，包括在不同載具時，呈現tooltip在不同的適當位置(bottom、top、left、right)，不過這邊有個小技巧要特別拿出來說明一下</p>
+
+<p>就是Tooltip上面那個小箭頭其實是用CSS畫出來的</p>
+
+<p><img src="https://lh4.googleusercontent.com/-jhfjv_hv-hY/ULRzfM9ycJI/AAAAAAAAB-w/oOohCQO9N6w/s373/q6.jpg" /></p>
+
+<p>不同的CSS畫法，可以參考下面範例，HTML部分就只要一個div</p>
+
+<h3>用CSS畫出三角型</h3>
+
+<p><img src="https://lh3.googleusercontent.com/-kNDtVnCgUzE/ULRxloJG7qI/AAAAAAAAB-U/Jkfm3E0DC6k/s112/q2.jpg" /></p>
+
+<pre><code>div {
+    width: 0;
+    height: 0;
+    border-left: 50px solid #fff;
+    border-right: 50px solid #fff;
+    border-bottom: 100px solid black;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-siEgv7d8AJM/ULRxmDlFMeI/AAAAAAAAB-Q/BFmufqFJ3VU/s115/q4.jpg" /></p>
+
+<pre><code>div {
+    width: 0;
+    height: 0;
+    border-top: 50px solid #fff;
+    border-right: 100px solid black;
+    border-bottom: 50px solid #fff;
+}
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-VWF99ZiXIo8/ULRxlgGjbuI/AAAAAAAAB-I/ASZmQTUURI4/s110/q3.jpg" /></p>
+
+<pre><code>div {
+    width: 0;
+    height: 0;
+    border-left: 50px solid #fff;
+    border-right: 50px solid #fff;
+    border-top: 100px solid black;
+}
+</code></pre>
+
+<p><img src="https://lh4.googleusercontent.com/-bjaIIy9c9Ow/ULRxmXa20iI/AAAAAAAAB-Y/ZvF6cRBvc1I/s107/q5.jpg" /></p>
+
+<pre><code>div {
+    width: 0;
+    height: 0;
+    border-top: 50px solid #fff;
+    border-right: 100px solid black;
+    border-bottom: 50px solid #fff;
+}
+</code></pre>
+
+<p>當然如果希望是別的底色可以自己再做修改，接下來是JS部分</p>
+
+<pre><code>$( document ).ready( function()
+{
+    var targets = $( '[rel~=tooltip]' ),
+        target  = false,
+        tooltip = false,
+        title   = false;
+
+    targets.bind( 'mouseenter', function()
+    {
+        target  = $( this );
+        tip     = target.attr( 'title' );
+        tooltip = $( '&lt;div id="tooltip"&gt;&lt;/div&gt;' );
+
+        if( !tip || tip == '' )
+            return false;
+
+        target.removeAttr( 'title' );
+        tooltip.css( 'opacity', 0 )
+               .html( tip )
+               .appendTo( 'body' );
+
+        var init_tooltip = function()
+        {
+            if( $( window ).width() &lt; tooltip.outerWidth() * 1.5 )
+                tooltip.css( 'max-width', $( window ).width() / 2 );
+            else
+                tooltip.css( 'max-width', 340 );
+
+            var pos_left = target.offset().left + ( target.outerWidth() / 2 ) - ( tooltip.outerWidth() / 2 ),
+                pos_top  = target.offset().top - tooltip.outerHeight() - 20;
+
+            if( pos_left &lt; 0 )
+            {
+                pos_left = target.offset().left + target.outerWidth() / 2 - 20;
+                tooltip.addClass( 'left' );
+            }
+            else
+                tooltip.removeClass( 'left' );
+
+            if( pos_left + tooltip.outerWidth() &gt; $( window ).width() )
+            {
+                pos_left = target.offset().left - tooltip.outerWidth() + target.outerWidth() / 2 + 20;
+                tooltip.addClass( 'right' );
+            }
+            else
+                tooltip.removeClass( 'right' );
+
+            if( pos_top &lt; 0 )
+            {
+                var pos_top  = target.offset().top + target.outerHeight();
+                tooltip.addClass( 'top' );
+            }
+            else
+                tooltip.removeClass( 'top' );
+
+            tooltip.css( { left: pos_left, top: pos_top } )
+                   .animate( { top: '+=10', opacity: 1 }, 50 );
+        };
+
+        init_tooltip();
+        $( window ).resize( init_tooltip );
+
+        var remove_tooltip = function()
+        {
+            tooltip.animate( { top: '-=10', opacity: 0 }, 50, function()
+            {
+                $( this ).remove();
+            });
+
+            target.attr( 'title', tip );
+        };
+
+        target.bind( 'mouseleave', remove_tooltip );
+        tooltip.bind( 'click', remove_tooltip );
+    });
+});
+</code></pre>
+
+<p>JS部分，就是當「mouseenter」的事件發生時，加上id為tooltip的div，「mouseleave」時就把div也就是tooltip移除</p>
+
+<p>「init_tooltip」主要是計算載具視窗的大小，來給予tooltip相對的位置和添加類別，其中說明一下 <strong>.outerWidth()</strong> 這個方法</p>
+
+<br/>
+
+
+<br/>
+
+
+<h3>width()、innerWidth()、outerWidth()的三者差別</h3>
+
+<p><strong>width()</strong>: 一般我們取得一個元素的寬都會用，取出來的值只有<span style="color:red">宽度</span></p>
+
+<p><strong>innerWidth()</strong>: <span style="color:red">宽度</span>+<span style="color:red">內距(padding)</span></p>
+
+<p><strong>outerWidth()</strong>: <span style="color:red">宽度</span>+<span style="color:red">內距(padding)</span>+<span style="color:red">邊框(boder)</span></p>
+
+<p><strong>outerWidth(true)</strong>: 如果給true的話(預設是false)，<span style="color:red">宽度</span>+<span style="color:red">內距(padding)</span>+<span style="color:red">邊框(boder)</span>+<span style="color:red">邊界(margin)</span></p>
+
+<br/>
+
+
+<br/>
+
+
+<p>這樣，搭配幾個小技巧，一個簡單又好用的Tooltip就可以自己製作，而不用再去找相關的plugin</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://osvaldas.info/elegant-css-and-jquery-tooltip-responsive-mobile-friendly" target="_blank">Responsive and Mobile-Friendly Tooltip</a></p>
+
+<p><a href="http://osvaldas.info/examples/elegant-css-and-jquery-tooltip-responsive-mobile-friendly/" target="_blank">Demo</a></p>
+
+<p><a href="http://wyz.67ge.com/css-triangle/" target="_blank">使用纯CSS实现的各种三角，全浏览器兼容</a></p>
+
+<p><a href="http://www.dearoom.com/blog/jquery%E4%B8%AD-heightwidth-innerheightinnerwidth-outerheightouterwidth%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank">jQuery中 height(width) innerHeight(innerWidth) outerHeight(outerWidth)的区别</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4]]></title>
+    <link href="http://rx836.github.com/blog/css3-real-beauty-box-shadows/"/>
+    <updated>2012-11-26T10:21:00+08:00</updated>
+    <id>http://rx836.github.com/blog/css3-real-beauty-box-shadows</id>
+    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-gnXY1RrRaSU/ULLgp4EX-6I/AAAAAAAAB84/m3JLnkc5h_E/s125/a.jpg" /></p>
+
+<p>CSS3有許多讓人驚艷的地方，其中之一就是「box-shadow」，在這之前為了做出陰影效果，可能需要一些Photoshop的幫助，但在CSS3卻可以用純CSS來達到這樣的結果，但如果你認為「box-shadow」只能拿來做陰影效果的話，那可就誤會大了，看完這篇文章，你或許會有不同的想法</p>
+
+<!--more-->
+
+
+<p>在此之前，我們先來介紹 <strong>box-shadow</strong> 一些基本的屬性和用法</p>
+
+<p><strong>x-offset</strong>: 水平位移植，必須要指定</p>
+
+<p><strong>y-offset</strong>: 垂直位移植，必須要指定</p>
+
+<p><strong>blur</strong>: 模糊效果，不能為負值，預設為0</p>
+
+<p><strong>spread</strong>: 擴散強度，可以為負值(縮小)，預設為0</p>
+
+<p><strong>color</strong>: 顏色，有些網站可能會寫預設值為黑色，<strong>但一般建議還是要給予顏色，因為有些瀏覽器預設值並不一定為黑色(例如手機)</strong></p>
+
+<p><strong>inset</strong>: 這個值有些人是放在<strong>最前面</strong>，有些是放在<strong>最後面</strong>，兩者皆可，如果有給予這個值box就會在陰影裡面，反之則在外面</p>
+
+<p>以下為box-shadow語法</p>
+
+<pre><code>box-shadow: inset x-offset y-offset blur spread color
+</code></pre>
+
+<p>記得x-offset和y-offset為必要值，其它依照排列，如果只有blur可不填spread，但有spread一定要給blur值(可以為0px)</p>
+
+<p>特別注意的是，<strong>spread</strong>這個屬性值，等等會來好好說明，先來看幾個簡單的範例</p>
+
+<p>以下的範例HTML部分都只有這一行</p>
+
+<pre><code>&lt;div class="shadow"&gt;&lt;/div&gt;
+</code></pre>
+
+<h3>X and Y Offsets</h3>
+
+<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="mo08pkqb" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>這邊建立了一個width和height都為100px的box，然後陰影依照這個box往右位移10px，往下位移10px，且顏色為黑色</p>
+
+<h3>Inset</h3>
+
+<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="eesxhanx" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>如果有給予 <strong>inset</strong>，box就會在陰影裡面</p>
+
+<h3>Blur</h3>
+
+<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="vic8fc7f" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>添加 <strong>Blur</strong> 值，會讓陰影有模糊效果</p>
+
+<h3>Colors</h3>
+
+<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="zcpl4thp" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>也可以加些不一樣的顏色，這裡是給予rgba值</p>
+
+<h3>spread</h3>
+
+<p>剛剛有特別要注意到 <strong>spread</strong> 這個值，原因就是他可以擴展陰影的範圍，可以放大可以縮小，但不能改變形狀，因為陰影的形狀是來自box(就跟人的影子一樣)，也就是box是圓形，陰影就是圓形，是方形就是方形</p>
+
+<pre class="_cssdeck_embed" data-pane="output,css,html" data-user="rx836" data-href="qnznlsof" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>如果spread為5px，那陰影就會擴展5px，如果為-5px，那陰影就會縮減5px，也就是說可以依照需求改變陰影的大小，這樣可以幹嘛呢？可以看看下面這個範例</p>
+
+<pre class="_cssdeck_embed" data-pane="output,css,html" data-user="rx836" data-href="qmbxujts" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>看到了嗎？我可以用<strong>一個div就創造出這麼多個box</strong>，也就是說我可以用一個元素來做出很多意想不到的效果，例如</p>
+
+<p>我可以用一個div畫出一支IPHONE 4</p>
+
+<p><a href="http://cssdeck.com/labs/creating-single-element-iphone-using-css3" target="_blank"><img src="https://lh3.googleusercontent.com/-L9BuoRAjjfE/ULLjV_tNNGI/AAAAAAAAB9Y/SSAO9DOdBMU/s558/rr.jpg" /></a></p>
+
+<p>或用一個div畫出蒙娜麗莎的微笑</p>
+
+<p><a href="http://cssdeck.com/labs/mona-lisa-with-pure-css" target="_blank"><img src="https://lh5.googleusercontent.com/-gzi2x2_clBk/ULLjV4zuCnI/AAAAAAAAB9g/Oo9VmXXkF_E/s535/rr1.jpg" /></a></p>
+
+<p>甚至是利用這個原理，來當作畫Pixel圖案來使用</p>
+
+<p><a href="http://cssdeck.com/labs/create-a-pixel-character-using-css3-box-shadows" target="_blank"><img src="https://lh6.googleusercontent.com/-lnfW4QAeeao/ULLjV84Z0oI/AAAAAAAAB9c/1J0e5V0VjS0/s300/rr2.jpg" /></a></p>
+
+<p>所以好好運用box-shadow，他可以發揮許多意想不到的創意喔</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://codetheory.in/the-real-beauty-of-css3-box-shadows/" target="_blank">The Real Beauty of CSS3 Box Shadows</a></p>
+
+<p><a href="http://www.w3schools.com/cssref/css3_pr_box-shadow.asp" target="_blank">CSS3 的box-shadow屬性</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼]]></title>
+    <link href="http://rx836.github.com/blog/javascript-namespace/"/>
+    <updated>2012-11-21T12:09:00+08:00</updated>
+    <id>http://rx836.github.com/blog/javascript-namespace</id>
+    <content type="html"><![CDATA[<p>網路上JavaScript的library或plugin非常的多，我平常在寫網頁時，有用到別人的plugin都會稍微看一下source code，會發現「Namespace」在JavaScript的世界當中應用相當的廣泛，就連著名的 <strong>jQuery</strong> 也有用到，學習Namespace不僅可以更能看懂別人寫的code，對於增進自己JavaScript的底子也是非常有幫助，可以說不能輕忽他</p>
+
+<!--more-->
+
+
+<p>有一個情況是這樣子的，今天我寫了一個叫做CheckName()的函式在網頁裡面，而同事因為接手維護，也因為某次的需求也在網頁裡面自己寫了一個CheckName()，這會發生什麼事情呢？如果同事寫的CheckName()在我之後，他將會<strong>覆蓋</strong>我之前寫的CheckName()，反之亦然，這會造成某段使用這個函式的程式碼出錯，所以為了要避免這種情形發生，可以為他們<strong>再取一個名字</strong>，也就是所謂的<strong>命名空間</strong>，但JavaScript本身並沒有這個機制，但可以依靠<strong>物件</strong>來達到這樣的效果</p>
+
+<p>不好的js寫法</p>
+
+<pre><code>function CheckName() {
+    //我寫的
+}
+//很多程式碼
+//很多程式碼
+//很多程式碼
+//很多程式碼
+function CheckName() {
+    //.. 同事寫的
+}
+</code></pre>
+
+<p>可以這樣寫</p>
+
+<pre><code>//建立一個物件
+var apa = {};     
+function CheckName() {
+    //我寫的
+}
+//使物件新增一個方法   
+apa.CheckName = CheckName; 
+//要執行時
+apa.CheckName();
+</code></pre>
+
+<p>如果我同事要寫，他也可以這樣子寫</p>
+
+<pre><code>var gary = {};     
+function CheckName() {
+    //同事寫的
+}   
+gary.CheckName = CheckName;     
+gary.CheckName();   
+</code></pre>
+
+<p>這樣就不會有衝突的問題，另外你有看過這樣的寫法嗎？</p>
+
+<pre><code>var obj = obj || {};
+</code></pre>
+
+<p>這代表說如果在建立物件之前先檢查有沒有使用過，如果有的話就直接延用之前寫的物件，如果沒有就給空的物件，避免物件重複宣告</p>
+
+<p>在JavaScript強調盡量少用全域變數，多用區域變數，所以有時候我們可以這樣把程式碼包起來</p>
+
+<pre><code>(function() {
+    var a=1; //區域變數
+})();
+</code></pre>
+
+<p>這樣就可以減少全域變數的使用，jQuery的原始碼也是利用這樣的方式</p>
+
+<p><a href="http://code.jquery.com/jquery-1.8.3.js" target="_blank">jQuery原始碼</a></p>
+
+<pre><code>(function( window, undefined ) {
+    //...
+    //...
+    jQuery = function( selector, context ) {
+        // The jQuery object is actually just the init constructor 'enhanced'
+        return new jQuery.fn.init( selector, context, rootjQuery );
+    }
+    //...
+    //...
+    window.jQuery = window.$ = jQuery;
+    //...
+})( window );
+</code></pre>
+
+<p>可以看到中間那段jQuery=function( selector, context )就是我們用jQuery最常見的選擇器宣告，也因為這樣我們才能「jQuery(div)」這樣的方式寫jQuery，而「window.jQuery = window.$ = jQuery;」這段就是可以用「$」來代替「jQuery」，這樣對於jQuery有沒有比較了解呢</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://caterpillar.onlyfun.net/Gossip/JavaScript/Namespace.html" target="_blank">JavaScript Essence: 名稱管理</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] Accordion Menu(手風琴)-Kwicks]]></title>
+    <link href="http://rx836.github.com/blog/jquery-accordion-plugin-kwicks/"/>
+    <updated>2012-11-20T11:52:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-accordion-plugin-kwicks</id>
+    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-_J-W2xu9kk0/UKssWB_LsAI/AAAAAAAAB8I/l5FDpuCO27c/s415/t1.jpg" /></p>
+
+<p><img src="https://lh5.googleusercontent.com/-jKM2KBpI5eM/UKssWHgRekI/AAAAAAAAB8E/hG205WtoTDU/s415/t2.jpg" /></p>
+
+<p>「jQuery accordion menu」，也有人稱呼為手風琴，從上面兩張圖可以看到原本是一個水平的menu，滑鼠移過去指定某個項目，週遭的menu會縮起來，指定的那個項目會展開，因為一開一合的效果很像手風琴，所以才稱呼為「accordion menu」</p>
+
+<!--more-->
+
+
+<p>但這篇不教怎麼自己打造accordion menu，因為自認為功力不夠不敢亂現，網路上也很多那種例如「30種精選jQuery accordion menu」主題的文章，資源非常豐富，但因為實在太多款了，每次要做都還要花時間一個一個去看，所以今天就特別介紹一款叫做 <a href="http://devsmash.com/projects/kwicks" target="_blank">「Kwicks」</a> 的jQuery plugin，也可以簡單達到前面所說的accordion menu效果，這邊就記錄在我的Blog裡面，方便我或網路上的朋友可以參考</p>
+
+<p>最好的介紹就是直接看Demo最快，Kwicks可以做到 <a href="http://devsmash.com/projects/kwicks/examples/horizontal" target="_blank">Horizontal</a>、<a href="http://devsmash.com/projects/kwicks/examples/vertical" target="_blank">vertical</a>、<a href="http://devsmash.com/projects/kwicks/examples/easing" target="_blank">Custom Easing</a> 等效果</p>
+
+<p>要用Kwicks需下載他的plugin還有jQuery</p>
+
+<p><a href="http://jquery.com/" target="_blank" />jQuery >= 1.7</a></p>
+
+<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.js" target="_blank" />jquery.kwicks.js</a></p>
+
+<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.css" target="_blank" />jquery.kwicks.css</a></p>
+
+<p>要注意的是，這版Kwicks是v2.0.0，需用到jQuery 1.7以上，另外如果要用到Custom Easing，還要另外下載jQuery Easing Plugin</p>
+
+<p><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" />jQuery Easing Plugin</a></p>
+
+<p>接著就是HTML部分，很簡潔不複雜</p>
+
+<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>就是用一個&lt;ul&gt;元素包裹著&lt;li&gt;，&lt;li&gt;裡面放著就是項目裡面要擺的東西(例如圖片、文字)，&lt;ul&gt;部分必須要添加「kwicks」和「kwicks-horizontal」兩個class，「kwicks」是固定要添加的class，「kwicks-horizontal」是指水平的呈現方式，如果要垂直就用「kwicks-vertical」</p>
+
+<p>jQuery的寫法部分，有分三種</p>
+
+<pre><code>// instantiate kwicks
+$(element).kwicks(opts);
+
+// invoke a method
+$(element).kwicks('method-name' [, param]);
+
+// handle events
+$(element).on('event-name.kwicks', handler);
+</code></pre>
+
+<p>以下是參數設定</p>
+
+<h3>size:(必填)</h3>
+
+<p>設定項目的長或寬，如果isVertical是true的話，這個設定就是高度，其它情況預設就是寬度，特別注意的是這個值會影響到整個accordion menu多高(或多寬)</p>
+
+<h3>maxSize|minSize:(必填)</h3>
+
+<p>展開的最大寬度(或高度)，或是最小寬度(或高度)，你只能選擇填最大或最小，不能兩個都填</p>
+
+<h3>spacing:(Default: 5)</h3>
+
+<p>每個項目之間的距離，預設是5px</p>
+
+<h3>duration:(Default: 500)</h3>
+
+<pre><code>觸發後動畫執行的時間(毫秒)，預設是500毫秒
+</code></pre>
+
+<h3>isVertical:(Default: false)</h3>
+
+<pre><code>是否為垂直menu，預設是false
+</code></pre>
+
+<p>easing:(Default: none)</p>
+
+<pre><code>如果有載入jQuery Easing Plugin，可以設定效果
+</code></pre>
+
+<p>behavior:(Default: none)</p>
+
+<pre><code>初始化的動作
+</code></pre>
+
+<h3>Examples</h3>
+
+<p>HTML</p>
+
+<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
+    &lt;li id='panel-1'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-2'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-3'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-4'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>用&lt;ul&gt;、&lt;li&gt;做一個menu，&lt;ul&gt;加上對應的class，&lt;li&gt;裡面放置圖片或文字</p>
+
+<p>CSS</p>
+
+<pre><code>.kwicks {
+    width: 515px;
+    height: 100px;
+}
+.kwicks &gt; li {
+    width: 100px;
+    height: 100px;
+    /* overridden by kwicks but good for when JavaScript is disabled */
+    margin-left: 5px;
+    float: left;
+}
+
+#panel-1 { background-color: #53b388; }
+#panel-2 { background-color: #5a69a9; }
+#panel-3 { background-color: #c26468; }
+#panel-4 { background-color: #bf7cc7; }
+</code></pre>
+
+<p>注意width和height會影響到顯示的結果</p>
+
+<p>JS</p>
+
+<pre><code>$(function() {
+    $('.kwicks').kwicks({
+        size: 100,
+        maxSize : 250,
+        spacing : 5,
+        behavior: 'menu'
+    });
+});
+</code></pre>
+
+<p>size要特別注意的是，越高(or寬)展開的空間就越大，看到的東西就會越多，如何拿捏可以實際在瀏覽器上跑跑看效果</p>
+
+<p>Kwicks還有支援<strong>Methods</strong>和<strong>events</strong>，有興趣的可以直接參考文件(附參考資料)</p>
+
+<p>當然，網路世界的選擇太多了，不一定非要用這個plugin，如果有更好的推薦也歡迎跟我說:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://devsmash.com/projects/kwicks" target="_blank">Kwicks for jQuery</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 拋棄原生checkbox用CSS3自己簡單動手做]]></title>
+    <link href="http://rx836.github.com/blog/css3-checkboxes-radiobuttons/"/>
+    <updated>2012-11-16T15:27:00+08:00</updated>
+    <id>http://rx836.github.com/blog/css3-checkboxes-radiobuttons</id>
+    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-AstthsAdcVk/UKX5J1b1PpI/AAAAAAAAB7U/UxqFI-iYi0g/s166/a.jpg" /></p>
+
+<p>已經用膩原生的checkbox和radiobutton嗎？今天就試著用CSS3來做出不一樣的checkbox和radiobutton吧，而且是不用任何一行JavaScript，重點是，就算IE9以下不支援CSS3也沒關係喔！</p>
+
+<!--more-->
+
+
+<p>在開始之前，先認識一下什麼是 <a href="http://meyerweb.com/eric/articles/webrev/200007a.html" target="_blank">Adjacent-Sibling Selector</a>，這等下會用到，簡單的範例如下</p>
+
+<p>HTML</p>
+
+<pre><code>&lt;div&gt;
+    &lt;span&gt;&lt;/span&gt;
+    &lt;p&gt;apa&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>CSS</p>
+
+<pre><code>span + p{
+    color:red;
+}
+</code></pre>
+
+<p>可以看到這樣寫「apa」就會顯示紅色，「+」的用法就是等於選擇兄弟元素的意思</p>
+
+<p>OK，那我們要怎麼做出不一樣的checkbox和radiobutton呢？先建立HTML部分吧</p>
+
+<pre><code>&lt;input type="checkbox" /&gt;
+&lt;label&gt;Check Box 1&lt;/label&gt;
+</code></pre>
+
+<p>會用label的原因是希望可以在點擊「Check Box 1」也可以選擇checkbox，讓<strong>可點擊的範圍</strong>更大，所以為了有這個效果，我們就需要用到label的屬性「for」</p>
+
+<pre><code>&lt;input type="checkbox" id="c1" name="cc" /&gt;
+&lt;label for="c1"&gt;Check Box 1&lt;/label&gt;
+</code></pre>
+
+<p>會看到for指定的id為input #c1</p>
+
+<p>再來我們可以在label裡面放一個span，為的就是等下可以直接在span加上背景圖，當然你也可以不用span而直接在label放背景圖，不過這樣當調整位置的時候會比較不方便，所以跟放文字的label分開會比較好</p>
+
+<pre><code>&lt;input type="checkbox" id="c1" name="cc" /&gt;
+&lt;label for="c1"&gt;&lt;span&gt;&lt;/span&gt;Check Box 1&lt;/label&gt;
+</code></pre>
+
+<p>接著是CSS部分，首先為了替換掉原生的HTML樣式，我們先將原生的checkbox隱藏起來</p>
+
+<pre><code>input[type="checkbox"] {
+    display:none;
+}
+</code></pre>
+
+<p>這邊要特別注意的是，雖然看不到checkbox，實際上他還是存在喔！一樣還是會有勾選效果，只是看不到而已，隱藏完以後，我們就要將背景圖設置到span裡面</p>
+
+<pre><code>input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    background:url(check_radio_sheet.png) left top no-repeat;
+}
+</code></pre>
+
+<p>有看到選擇器「input[type=&#8221;checkbox&#8221;] + label span」這樣的寫法嗎？這就是之前講的選擇兄弟元素</p>
+
+<p>那圖的部分就可以用CSS Sprite的方式來呈現，把需要的小icon放在同一張圖，利用位移來顯示出想要的部分，將其它不要的部分隱藏0</p>
+
+<p><img src="https://lh5.googleusercontent.com/-VSnKVuXA5k4/UKX5J-71RvI/AAAAAAAAB7Q/hDmvr5xxMjg/s76/check_radio_sheet.png" /></p>
+
+<p>最後，剛剛那個是「尚未選取」的CSS狀態，這邊就把「選取後」的CSS狀態也一併加上吧，也就是CSS3的「:checked」</p>
+
+<pre><code>input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+input[type="checkbox"]:checked + label span {
+    background:url(check_radio_sheet.png) -19px top no-repeat;
+}
+</code></pre>
+
+<p>大功告成！很簡單吧？而且不用任何一行JavaScript</p>
+
+<p>原理其實就是將原生的checkbox隱藏起來，再利用CSS的選擇器「:checked」來分辨checkbox目前的狀態(是否選取)，然後換掉相對應的span背景圖，如果不太懂的話，可以先暫時把「display:none」就會比較明瞭囉</p>
+
+<h3>IE9以下不支援CSS3怎麼辦呢？</h3>
+
+<p>不用擔心，這種做法有個好處就是向下兼容，就算沒有支援CSS3，頂多就是恢復到以前原生的樣式，並不會影響使用者喔！</p>
+
+<p><img src="https://lh4.googleusercontent.com/-Uyji0CjOhRU/UKX61r2rp9I/AAAAAAAAB7g/2rQS4EpXUBI/s171/VASV.jpg" /></p>
+
+<p>參考資料:</p>
+
+<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-easy-css3-checkboxes-and-radio-buttons/" target="_blank">Quick Tip: Easy CSS3 Checkboxes and Radio Buttons</a></p>
+
+<p><a href="http://www.w3.org/TR/CSS2/selector.html#adjacent-selectors" target="_blank">Selectors</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 用inline-block做產品展示頁並且擁有RWD效果]]></title>
+    <link href="http://rx836.github.com/blog/inline-block-display-product-grid-view/"/>
+    <updated>2012-11-14T14:09:00+08:00</updated>
+    <id>http://rx836.github.com/blog/inline-block-display-product-grid-view</id>
+    <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-CMJtAWKTc9c/UKNLl-e4eMI/AAAAAAAAB6c/lFZ01h2vX2k/s975/inline-block-screenshot-1.png" /></p>
+
+<p>相信大家對於這樣的排版並不陌生，這是一個產品的展示頁，文章參考<a href="https://twitter.com/randyhoyt" target="_blank">Randy Hoyt</a>教你如何用inline-block來做設計排版，內容簡單易懂</p>
+
+<!--more-->
+
+
+<p>首先先來認識一下「inline」、「block」、「inline-block」</p>
+
+<h3>display : inline</h3>
+
+<p>像&lt;img&gt;、&lt;span&gt;、&lt;a&gt;預設的display屬性是inline，在網頁上呈現時並不會換行，且不能設定「width」、 「height」 、 「background-image」</p>
+
+<h3>display : block</h3>
+
+<p>像&lt;div&gt;、&lt;p&gt;、&lt;h1&gt;預設的display屬性是block，只要碰到這類元素不管前後都會換行，且預設寬度為最大，但可以設定「width」、 「height」 、 「background-image」等值</p>
+
+<h3>display : inline-block</h3>
+
+<p>從字面上可以很清楚的知道，可以同時擁有inline不會換行的特性，還可以像block一樣設定「width」、 「height」 、 「background-image」等值</p>
+
+<p>OK，接下來在寫HTML之前先用小畫家做一張尺寸為200*300的圖當作產品圖</p>
+
+<p><img src="https://lh4.googleusercontent.com/-_1vY5kEq_nY/UKNMlBPDb4I/AAAAAAAAB6w/0KCoHR7sGUU/s300/a.jpg" /></p>
+
+<p>接著是HTML部分</p>
+
+<pre><code>&lt;ul class="products"&gt;
+    &lt;li&gt;
+        &lt;a href="#"&gt;
+            &lt;img src="a.jpg"&gt;
+            &lt;h4&gt;內衣&lt;/h4&gt;
+            &lt;p&gt;$200.00&lt;/p&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="#"&gt;
+            &lt;img src="a.jpg"&gt;
+            &lt;h4&gt;冬天超級無敵霹靂保暖的阿爾卑斯山羊毛羽絨超薄大衣&lt;/h4&gt;
+            &lt;p&gt;$2.00&lt;/p&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;&lt;!-- more list items --&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>CSS部分</p>
+
+<pre><code>ul.products li {
+    width: 200px;
+    display: inline-block;
+}
+</code></pre>
+
+<p>呈現如下</p>
+
+<p><img src="https://lh3.googleusercontent.com/-9nRQw7JS9cU/UKNLk9c2M2I/AAAAAAAAB6I/duH5hR67EQI/s530/c1.jpg" /></p>
+
+<p>會發現好像有點不太對齊，可以使用「vertical-align」CSS屬性</p>
+
+<pre><code>ul.products li {
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-ak-BlgPF5_o/UKNLk16TvvI/AAAAAAAAB6M/LvJzebhF70o/s533/c2.jpg" /></p>
+
+<p>這樣就可以垂直靠上，不過這裡有個問題，會發現明明我沒設定margin或是padding的屬性，為啥中間會有留白，難道有預設值？其實不是，是因為剛剛在HTML的部分中間留白的關係，也就是說如果在HTML碼部分，在兩個inline-block元素之間有空白的話，會被<strong>顯示出來</strong>，所以為了避免這樣的情形發生，可以改成這樣</p>
+
+<pre><code>&lt;ul class="products"&gt;
+    &lt;li&gt;
+        &lt;a href="#"&gt;
+            &lt;img src="a.jpg"&gt;
+            &lt;h4&gt;內衣&lt;/h4&gt;
+            &lt;p&gt;$200.00&lt;/p&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;&lt;li&gt;
+        &lt;a href="#"&gt;
+            &lt;img src="a.jpg"&gt;
+            &lt;h4&gt;冬天超級無敵霹靂保暖的阿爾卑斯山羊毛羽絨超薄大衣&lt;/h4&gt;
+            &lt;p&gt;$2.00&lt;/p&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;&lt;!-- more list items --&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>呈現如下</p>
+
+<p><img src="https://lh3.googleusercontent.com/-A1Un01aXcu4/UKNLlJcCU-I/AAAAAAAAB6Q/hwInTSC84nw/s535/c3.jpg" /></p>
+
+<h2>Responsive</h2>
+
+<p>這樣的寫法還有個好處，就是他擁有最近很火紅的RWD(Responsive Web Design)效果，會依照畫面尺寸大小進行換行</p>
+
+<p><img src="https://lh5.googleusercontent.com/-sUEPvofcsWQ/UKNLl8K_OSI/AAAAAAAAB6g/82TRXLL6RyA/s845/c4.jpg" /></p>
+
+<p>但世界並不會這麼完美&#8230;，每件事情總是會有缺點，這種寫法在大部分的瀏覽器上都可以執行，但IE6和IE7上面會有一些問題，所以如果想要支援較舊的瀏覽器，可以用Hack來解決</p>
+
+<pre><code>ul.products li {
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+    *display: inline;
+    *zoom: 1;
+}
+</code></pre>
+
+<p>文章裡面還有提到為什麼不用Float來排版，作者說當高度一致的時候用Float是沒有問題，可是當每個項目高度不一樣的時候，就會出現<strong>重疊</strong>的狀況發生</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://blog.teamtreehouse.com/using-inline-block-to-display-a-product-grid-view" target="_blank">Using inline-block to Display a Product Grid View</a></p>
+
+<p><a href="http://blog.xuite.net/vexed/tech/29221717-CSS+%E5%B1%AC%E6%80%A7+display+%E7%9A%84%E5%80%BC+inline+block+inline-block+none" target="_blank">CSS 屬性 display 的值 inline block inline-block none</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[PhoneGap] Android開發Facebook取得Key Hashes]]></title>
@@ -336,7 +1304,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[[jQuery] 倒數計時的plugin介紹]]></title>
+    <title type="html"><![CDATA[[jQ-Plugin] 倒數計時的plugin介紹]]></title>
     <link href="http://rx836.github.com/blog/jquery-countdown-plugins/"/>
     <updated>2012-11-05T11:45:00+08:00</updated>
     <id>http://rx836.github.com/blog/jquery-countdown-plugins</id>
@@ -1331,844 +2299,6 @@ new_m(6);
 <p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[PhoneGap] 第一次開發PhoneGap教學筆記]]></title>
-    <link href="http://rx836.github.com/blog/phonegap-first/"/>
-    <updated>2012-10-10T22:39:00+08:00</updated>
-    <id>http://rx836.github.com/blog/phonegap-first</id>
-    <content type="html"><![CDATA[<p>很早很早以前曾經摸過一下Android，還曾想過要走開發手機這條路，但最後還是繼續寫著網頁，不知道選擇對不對，不過至少現在可以用寫網頁的方式做出APP，那就是利用已經出很久的PhoneGap，但到今天才真正的開始學習他，在這邊也會開始慢慢記錄一些有關於PhoneGap的心得</p>
-
-<!--more-->
-
-
-<p>網路上已經有很多很多的觀念與介紹，所以這邊就不在多述，要開始之前請先安裝<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Java 開發工具包( Java Development Kit , JDK )</a>，建議大家下載JDK6</p>
-
-<p><img src="https://lh3.googleusercontent.com/-O98JK3DRzHM/UHWWC5uq4QI/AAAAAAAABtY/ABoTETFnIJo/s538/1.png" /></p>
-
-<p>安裝好以後接著就下載並安裝<a href="http://www.eclipse.org/downloads/" target="_blanl">Eclipse</a>，Eclipse是一個IDE，一個整合開發環境，類似Microsoft Visual Studio，因為Android官方並沒有推出專屬的手機應用程式開發軟體，但有支援 Eclipse 的官方外掛開發套件</p>
-
-<p><img src="https://lh6.googleusercontent.com/-vDbyAlgXX8M/UHWWDDRPM3I/AAAAAAAABtg/nsLxVsp43L0/s731/2.png" /></p>
-
-<p>以上的安裝和設定過程，都可以參考<a href="http://blog.chinatimes.com/tomsun/archive/2011/11/08/1029787.html" target="_blank">[Android 教學] Android 4.0 SDK 下載安裝中文教學課程講義</a></p>
-
-<p>接著就是下載本篇主角<a href="http://www.phonegap.com/download" target="_blank">PhoneGap</a>，下載以後進行解壓縮</p>
-
-<p>但其實PhoneGap官方網站有詳細的<a href="http://docs.phonegap.com/en/2.1.0/guide_getting-started_android_index.md.html#Getting%20Started%20with%20Android" target="_blank">入門教學</a>，這裏我就直接按照他的步驟敘述</p>
-
-<p>1.首先開啟Eclipse，選擇<strong>New Project</strong></p>
-
-<p>2.選擇new一個<strong>Android Application Project</strong></p>
-
-<p>3.輸入<strong>Application Name</strong>、<strong>Project Name</strong>和<strong>Package Name</strong></p>
-
-<p>4.設定應用程式icon</p>
-
-<p>5.建立一個<strong>Blank Activity</strong></p>
-
-<p>6.在你的Android專案裡面建立新的目錄，分別是</p>
-
-<pre><code>/libs
-assets/www
-</code></pre>
-
-<p>7.從剛剛下載的PhoneGap的資料夾裡面，找到<strong>lib/android/</strong>，並且複製<strong>cordova-2.0.0.js</strong>到<strong>assets/www</strong>資料夾底下</p>
-
-<p>8.複製<strong>cordova-2.0.0.jar</strong>到<strong>/libs</strong>底下</p>
-
-<p>9.複製整個<strong>xml</strong>這個資料夾到Android專案底下的<strong>/res</strong>資料夾</p>
-
-<p>10.針對剛剛的<strong>cordova-2.0.0.jar</strong>檔案按下右鍵，選擇<strong>Build Paths/ > Configure Build Path</strong>，切換到Libraries這個頁籤，將<strong>cordova-2.0.0.jar</strong>加入到裡面</p>
-
-<p>11.找到<strong>src</strong>資料夾底下，副檔名為java的檔案並且開啟編輯他</p>
-
-<p>增加<strong>import org.apache.cordova.*;</strong>這行程式</p>
-
-<p>修改class&#8217;s extend從Activity改成DroidGap</p>
-
-<p>將<strong>setContentView()</strong>這行取代成<strong>super.loadUrl(&#8220;file:///android_asset/www/index.html&#8221;);</strong></p>
-
-<p>12.接著點擊<strong>AndroidManifest.xml</strong>選擇<strong>Open With > Text Editor</strong></p>
-
-<p>13.將以下程式加到<strong>&lt;uses-sdk&#8230;/></strong>和<strong>&lt;application&#8230;/></strong>tags之間</p>
-
-<pre><code>&lt;supports-screens 
-android:largeScreens="true" 
-android:normalScreens="true" 
-android:smallScreens="true" 
-android:resizeable="true" 
-android:anyDensity="true" /&gt;
-&lt;uses-permission android:name="android.permission.VIBRATE" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt;
-&lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
-&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
-&lt;uses-permission android:name="android.permission.RECEIVE_SMS" /&gt;
-&lt;uses-permission android:name="android.permission.RECORD_AUDIO" /&gt;
-&lt;uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /&gt;
-&lt;uses-permission android:name="android.permission.READ_CONTACTS" /&gt;
-&lt;uses-permission android:name="android.permission.WRITE_CONTACTS" /&gt;
-&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt; 
-&lt;uses-permission android:name="android.permission.GET_ACCOUNTS" /&gt;
-&lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;
-</code></pre>
-
-<p>14.將以下程式加到<strong>&lt;activity../></strong>這個tag裡面</p>
-
-<pre><code>android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
-</code></pre>
-
-<p>15.新增一個<strong>index.html</strong>到<strong>assets/www</strong>資料夾底下，裡面的html碼為</p>
-
-<pre><code>&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Cordova&lt;/title&gt;
-&lt;script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Hello World&lt;/h1&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>接下來就可以點擊專案名稱右鍵，選擇<strong>Run As > Android Application</strong>，開始看結果囉！</p>
-
-<p>假如你沒有AVD可以看<a href="http://blog.chinatimes.com/tomsun/archive/2011/11/24/1054452.html" target="_blank">這篇</a>教學怎麼設定AVD</p>
-
-<p>這樣index.html裡面就是你的Android應用程式的內容了，可以用你熟悉的html+css+js來開發手機應用程式</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://cire.pixnet.net/blog/post/37927775-%5B%E7%AD%86%E8%A8%98%5D--%E7%AC%AC%E4%B8%80%E6%AC%A1%E9%96%8B%E7%99%BC-android-%E7%89%88%E6%9C%AC-phonegap--%2B-jquery-" target="_blank">[筆記] 第一次開發 Android 版本 PhoneGap + JQuery Mobile 就上手</a></p>
-
-<p><a href="http://docs.phonegap.com/en/2.1.0/guide_getting-started_android_index.md.html#Getting%20Started%20with%20Android" target="_blank">Getting Started with Android</a></p>
-
-<p><a href="http://www.eclipse.org/" target="_blank">eclipse</a></p>
-
-<p><a href="http://blog.chinatimes.com/tomsun/archive/2011/11/08/1029787.html" target="_blank">[Android 教學] Android 4.0 SDK 下載安裝中文教學課程講義</a></p>
-
-<p><a href="http://blog.chinatimes.com/tomsun/archive/2011/11/24/1054452.html" target="_blank">[Android 教學] Android 4.0 模擬器安裝設定教學課程講義</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Win8] 入門要學說Hello world]]></title>
-    <link href="http://rx836.github.com/blog/first-win8-app/"/>
-    <updated>2012-10-08T17:06:00+08:00</updated>
-    <id>http://rx836.github.com/blog/first-win8-app</id>
-    <content type="html"><![CDATA[<p>最近正在練習開發Win8 App，雖然微軟提供的開發途徑很多，例如C#、C++等，但因為自己對JavaScript比較有興趣，而且微軟也提供利用HTML+JavaScript+CSS就可以開發出Win8 APP，所以就決定朝這個方向前進，因為是第一次開發Win8 APP，想當然要先做出一個Hello world來試試看</p>
-
-<!--more-->
-
-
-<p>要開發Win8 APP，必須先下載工具，直接到微軟官網下載<a href="http://www.microsoft.com/visualstudio/cht/downloads" target="_blank">Visual Studio Express 2012 for Windows 8</a>，安裝完以後，打開就會問你是否需要開發人員授權，輸入帳號密碼，就可以擁有開發人員的帳號</p>
-
-<p>打開Visual Studio Express 2012(以下簡稱VS 2012)，就會看到以下畫面</p>
-
-<p><img src="https://lh4.googleusercontent.com/-iLMiTXNLEaM/UHKuEKHOTHI/AAAAAAAABsY/DLqeu2umA-M/s786/p1.png" /></p>
-
-<p>接著選【檔案】-> 【新增專案】，就會出現以下的畫面</p>
-
-<p><img src="https://lh4.googleusercontent.com/-SeFZ08v5dSo/UHKuEndFXlI/AAAAAAAABsc/OKsOpJp0zic/s787/p2.png" /></p>
-
-<p>然後選擇【已安裝的】->【範本】->【JavaScript】->【Windows市集】->【空白應用程式】，接著在專案名稱裡面取名為MyHelloWorld，按下確定</p>
-
-<p><img src="https://lh5.googleusercontent.com/-EdDsceusOP8/UHKuEz1w-iI/AAAAAAAABsg/49aDvnhF7Ug/s786/p3.png" /></p>
-
-<p>建立好專案以後，會看到VS 2012已經預設建立好一些檔案，例如像package.appxmanifest資訊清單檔案，主要描述應用程式名稱、介紹、啟動顯示畫面，還有logo.png 和 smalllogo.png分別為大的和小的標誌影像，還有代表市集中的影像storelogo.png，和應用程式啟動時顯示的畫面splashscreen.png</p>
-
-<p>其他就是預設的css和js和應用程式啟動時執行的起始頁default.html</p>
-
-<p>按下ctrl+F5啟動應用程式</p>
-
-<p><img src="https://lh3.googleusercontent.com/-T-_lt_kQehI/UHKuFtbyMpI/AAAAAAAABso/zTQWUiOUyWg/s745/p4.png" /></p>
-
-<p>上面那張圖就是剛剛所提到的啟動顯示畫面圖splashscreen.png</p>
-
-<p>顯示畫面完以後就是主要的APP內容</p>
-
-<p><img src="https://lh3.googleusercontent.com/-7d-UacNm56o/UHKuF2WBmYI/AAAAAAAABss/xQwqzgpJwVI/s745/p5.png" /></p>
-
-<p>default.html長這樣</p>
-
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;HelloWorld&lt;/title&gt;
-
-&lt;!-- WinJS 參考 --&gt;
-&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
-&lt;script src="http://rx836.github.com//Microsoft.WinJS.1.0.RC/js/base.js"&gt;&lt;/script&gt;
-&lt;script src="http://rx836.github.com//Microsoft.WinJS.1.0.RC/js/ui.js"&gt;&lt;/script&gt;
-
-&lt;!-- HelloWorld 參考 --&gt;
-&lt;link href="http://rx836.github.com/css/default.css" rel="stylesheet" /&gt;
-&lt;script src="http://rx836.github.com/js/default.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;p&gt;內容在此處出現&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>對於網頁開發者來說一點都不陌生，這也是Win8 APP主打的賣點，接著我們開始來修改一下內容</p>
-
-<pre><code>&lt;body&gt;
-&lt;h1&gt;Hello, world!&lt;/h1&gt;
-&lt;p&gt;What's your name?&lt;/p&gt;
-&lt;input id="nameInput" type="text" /&gt;
-&lt;button id="helloButton"&gt;Say "Hello"&lt;/button&gt;
-&lt;div id="greetingOutput"&gt;&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p>在body裡面加上這些html，按下ctrl+f5執行，會發現有文字有按鈕，但還沒有反應，所以接下來就是重頭戲部分，建立事件處理常式，不過建立之前先來看看default.js裡面有些甚麼</p>
-
-<pre><code>(function () {
-    "use strict";
-
-     // Omitted code 
-
- })(); 
-</code></pre>
-
-<p>預設是將js程式碼包裝在自我執行的匿名函式，有用jQuery的人應該不陌生，主要避免命名衝突或避免意外修改到不想修改的值，use strict代表開啟<a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/br230269.aspx" target="_blank">strict 模式</a></p>
-
-<p>其餘的程式碼就是APP的事件監控，但目前還用不到，現在我們會看到default.js裡面有個<em>app.start</em>，首先在他前面先建立一個click事件</p>
-
-<pre><code>function buttonClickHandler(eventInfo) {
-    var userName = document.getElementById("nameInput").value;
-    var greetingString = "Hello, " + userName + "!";
-    document.getElementById("greetingOutput").innerText = greetingString; 
-}
-</code></pre>
-
-<p>看起來都跟平常寫網頁的方式都一樣，但建立好事件以後要在哪個時間點註冊這個事件呢？答案就是應用程式啟動時</p>
-
-<pre><code>var app = WinJS.Application;
-var activation = Windows.ApplicationModel.Activation;
-WinJS.strictProcessing();
-
-app.onactivated = function (args) {
-    if (args.detail.kind === activation.ActivationKind.launch) {
-        if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
-            // TODO: This application has been newly launched. Initialize
-            // your application here.
-        } else {
-            // TODO: This application has been reactivated from suspension.
-            // Restore application state here.
-        }
-        args.setPromise(WinJS.UI.processAll());           
-    }
-};
-</code></pre>
-
-<p>微軟都已經把Win8 APP許多的事件都已經處理好，我們只要用他的事件處理常式即可，像<strong>app.onactivated </strong>就是應用程式啟動時會觸發的事件，不過裡面其實還有分<strong>第一次啟用</strong>還是<strong>已經啟動但因為擱置而重新啟用</strong>，不過在這裡我們也先暫時不用管是甚麼時候啟用，因為不管如何我們都要註冊點擊這個事件</p>
-
-<pre><code>    app.onactivated = function (args) {
-    if (args.detail.kind === activation.ActivationKind.launch) {
-        if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
-            // TODO: This application has been newly launched. Initialize
-            // your application here.
-        } else {
-            // TODO: This application has been reactivated from suspension.
-            // Restore application state here.
-        }
-        args.setPromise(WinJS.UI.processAll());
-
-        // Retrieve the button and register our event handler. 
-        var helloButton = document.getElementById("helloButton");
-        helloButton.addEventListener("click", buttonClickHandler, false);
-
-    }
-};
-</code></pre>
-
-<p>所以會看到我將點擊事件寫在<strong>args.setPromise(WinJS.UI.processAll())</strong>後面，接著一樣按下ctrl+f5，在對話框中輸入名字，就會出現問候語了</p>
-
-<p><img src="https://lh4.googleusercontent.com/-_NE7vhIsN-w/UHKuGaUHX-I/AAAAAAAABs8/K9SVwBzKgFo/s744/p6.png" /></p>
-
-<p>完成囉！等等，為什麼你的畫面看起來是白色的？大家回去看看default.html有先引用一個CSS檔案進來</p>
-
-<pre><code>&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
-</code></pre>
-
-<p>只要將它改成</p>
-
-<pre><code>&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-light.css" rel="stylesheet" /&gt;
-</code></pre>
-
-<p>背景就會變成白色的囉！當然這個是官方提供的預設樣式表，文件上是建議用預設的樣式表為基礎去做客製化修改，至於怎麼修改就看大家的APP風格了</p>
-
-<p>官方建議如果是大量的影像或圖片，建議用深色系的css，如果是文字居多，建議用淺色系的css</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh986964.aspx" target="_blank">建立 &#8220;Hello, world&#8221; 應用程式</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[學習筆記] 創意與提案]]></title>
-    <link href="http://rx836.github.com/blog/note-marketing/"/>
-    <updated>2012-10-04T18:47:00+08:00</updated>
-    <id>http://rx836.github.com/blog/note-marketing</id>
-    <content type="html"><![CDATA[<p>前天公司內部教育訓練，請來Migo的行銷總監<a href="http://rexismtw.blogspot.tw/" target="_blank">Rex Pai</a>講師為我們上課，談從創意、到提案還有談行銷習慣，希望能整理自己的思緒，讓自己吸收更多</p>
-
-<!--more-->
-
-
-<p>再開始之前，先問自己兩個問題</p>
-
-<h3>你現在提案的架構是甚麼？</h3>
-
-<h3>你覺得甚麼地方最難？</h3>
-
-<p>Rex提到，一個頂尖的行銷人永遠都不會忘記<strong>問自己的問題</strong>，然而一份好的提案，該從甚麼地方開始？</p>
-
-<h2>客戶需求</h2>
-
-<p>什麼樣的標準叫做了解客戶需求？ Rex覺得，真正的了解客戶需求就是</p>
-
-<h3>你是不是能看到客戶沒想到的但又該做的事情？</h3>
-
-<p>或是</p>
-
-<h3>你是不是能用提案帶著客戶了解市場趨勢？</h3>
-
-<p>已故蘋果電腦創辦人-Steve Jobs 曾經說過</p>
-
-<h3>「站起來，站在客戶的頭上，看看他還需要什麼？看到了，你就不必卑躬屈膝，你就能好好把事情做好。」</h3>
-
-<p>現今大部分的行銷人員，多半站在客戶的同一條水平上看事情，甚至有時候比客戶還低一些，但如果能站在客戶的頭上看事情，看的更多更遠，展現出專業的能力讓客戶信服，我想提案一定可以更順利</p>
-
-<h2>提案架構</h2>
-
-<p>早期的提案架構為AIDMA</p>
-
-<p><img src="https://lh5.googleusercontent.com/-9nljFVfaAH8/UG6Ex6Hnk3I/AAAAAAAABqw/FOqIxscE4AU/s420/%E5%9C%96%E7%89%871.png" /></p>
-
-<p>分別是引起興趣(Attention)、產生興趣(Interest)、激發慾望(Desire)、強化記憶(Memory)、促使行動(Action)</p>
-
-<p>到了中期，因為網路的快速成長，包括Web site、SEOLPO、SEM、EC、Blog 、Forum、WOM大量的興起，所以提案架構紛紛朝向AISAS</p>
-
-<p><img src="https://lh4.googleusercontent.com/-UmJNJlEC4Q0/UG6F1U2oxWI/AAAAAAAABq4/oZgt0ZBPaJM/s404/%E5%9C%96%E7%89%872.png" /></p>
-
-<p>可以看到網路興起以後，利用廣告吸引消費者注意，消費者都會先去網路上google商品，來決定要不要購買此商品，買了以後有些消費者會更進一步做分享(例如開箱文)，這些分享的資訊又回到網路上供大眾搜尋，達到循環的效果</p>
-
-<p>但到了現在，新的行銷架構則稍微複雜了些</p>
-
-<p><img src="https://lh6.googleusercontent.com/-GlyIWk9SsB4/UG6G-PyXnhI/AAAAAAAABrA/3RIiuJbF0VE/s480/%E5%9C%96%E7%89%873.png" /></p>
-
-<p>最主要多了<strong>體驗</strong>和<strong>熱情</strong>，Rex就舉了海尼根的測字活動，讓網友體驗並且激發熱情，而不是只單單強調海尼根有多好喝，有了熱情，就會激發消費者與身邊的人分享，就如下圖所示</p>
-
-<p><img src="https://lh3.googleusercontent.com/--wJ4Piz76FI/UG6H02CTjII/AAAAAAAABrI/926sAJJIBQk/s648/%E5%9C%96%E7%89%874.png" /></p>
-
-<h2>產業現況</h2>
-
-<p>當然，身為一個行銷人員，一定要很清楚的了解自身的產業狀況，才能給客戶最好的策略和建議，以下是一些數據圖表分析</p>
-
-<p><img src="https://lh4.googleusercontent.com/-BVEbyfs4NT4/UG6IoS9X5eI/AAAAAAAABrQ/Hv4Cl3zORQg/s885/%E5%9C%96%E7%89%875.png" /></p>
-
-<p>從圖表中可知Internet的崛起，影響最深的是紙本媒體，例如雜誌或報紙，有趣的是TV和Radio反而不受什麼影響，從這裡可以知道現代人的生活習慣，還是脫離不了電視和收音機</p>
-
-<p><img src="https://lh6.googleusercontent.com/-rkQZb0Y0su8/UG6IpiylywI/AAAAAAAABrc/d0MYEKGOezs/s1021/%E5%9C%96%E7%89%876.jpg" /></p>
-
-<p>這張圖表對廣告媒體來說，可說是個好消息，一般認為台灣的經濟一年比一年惡劣，但企業對於廣告的預算卻不減反增，這裡值得注意的是，<strong>口碑行銷</strong>正逐年成長當中</p>
-
-<p><img src="https://lh4.googleusercontent.com/-1FCtMXkR_Ig/UG6IqLz1huI/AAAAAAAABrs/-JTRuY4tdX8/s1021/%E5%9C%96%E7%89%877.jpg" /></p>
-
-<p>上圖看到，口碑行銷的興起，壓縮到的是關鍵字廣告，至於網站廣告反而沒甚麼影響</p>
-
-<p><img src="https://lh5.googleusercontent.com/-QNHFlVdPtjc/UG6IqaiEvvI/AAAAAAAABro/Ns-bX9Jp-Sk/s1020/%E5%9C%96%E7%89%879.jpg" /></p>
-
-<p>最有趣的大概就是這張圖了，粉紅色的圓柱代表是2010企業預估要花費的廣告預算金額，黃色是2010真正花的金額，有發現為什麼關鍵字廣告反而比預估的少嗎？Rex說多數企業面臨到的問題是，台灣目前的關鍵字廣告成效都不怎麼好，目前能提出好的關鍵字策略公司並不多，但這也代表著進步空間更大</p>
-
-<h2>案例分享</h2>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/WMWu1h_6OfE" frameborder="0" allowfullscreen></iframe>
-
-
-<p>上面那段影片是BMW的廣告，活動一開始在城市的中間會擺一台虛擬的Mini，參賽者必須先下載專屬的APP，然後持著手機去接近那台Mini，靠近50公尺以內就會收到你的手機裡面，這時候你就必須不停的跑不停的移動，持續一個禮拜，一個禮拜過後，誰能掌握這台Mini，就可以贏得一台車，但如果有人靠近你在50公尺內，很抱歉，車子就被人家收走啦，而重點是，要是網路斷電或手機沒電，車子就會留在原地等著別人拿走，具優勝者表示，他為了這台車過了一個禮拜無法想像的生活，他再也不參加了XD</p>
-
-<p>而這個活動也吸引了將近兩萬多人參與，並且為BMW帶來了高達25%的銷售成長！</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://rexismtw.blogspot.tw/" target="_blank">Rex Pai</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] Facebook XXX hours ago的時間生成]]></title>
-    <link href="http://rx836.github.com/blog/jquery-plugin-timeago/"/>
-    <updated>2012-10-03T01:36:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-plugin-timeago</id>
-    <content type="html"><![CDATA[<p><a href="http://timeago.yarp.com/" target="_blank">timeago</a>是一套可以快速生成過去發生時間的jQuery plugin，大家應該對於Facebook文字框下方的『xxx hours ago』不會陌生，留言訊息不再只是單純的『x年x月x日 x時x分x秒』，而是可以很貼心的將時間換算給使用者知道，『喔~ 原來這則留言在幾分鐘之前』，這種對User experience來說其實是相當的加分，要實作其實也不難，網路上也有plugin可以方便使用，就趕快來看看如何做出這種效果吧！</p>
-
-<p><img src="https://lh6.googleusercontent.com/-8eJHMArd3w0/UGxqjpAcHYI/AAAAAAAABqY/Z8lDGoeU_58/s409/1.jpg" /></p>
-
-<!--more-->
-
-
-<p>首先<a href="http://timeago.yarp.com/jquery.timeago.js" target="_blank">下載</a>timeago，和jQuery一起引用到html裡面</p>
-
-<pre><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>接著是html部分</p>
-
-<pre><code>&lt;abbr class="loaded timeago" title="when you opened the page"&gt;&lt;/abbr&gt;
-</code></pre>
-
-<p>這個plugin預設是用abbr這個元素，要搭配裡面的title，title屬性待會會存放時間資訊在裡面，接著是js部分</p>
-
-<pre><code>$(function(){
-    prepareDynamicDates();      
-    $("abbr.timeago").timeago();        
-
-    function prepareDynamicDates() {
-        $('abbr.loaded').attr("title", ISODateString(new Date()));                      
-    }
-
-    function ISODateString(d){
-        function pad(n){return n&lt;10 ? '0'+n : n}
-         return d.getUTCFullYear()+'-'
-              + pad(d.getUTCMonth()+1)+'-'
-              + pad(d.getUTCDate())+'T'
-              + pad(d.getUTCHours())+':'
-              + pad(d.getUTCMinutes())+':'
-              + pad(d.getUTCSeconds())+'Z'
-    }       
-
-});
-</code></pre>
-
-<p>要注意的一點是，要先將時間轉換成<a href="http://zh.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a>，ISO 8601是一種國際標準化組織所訂的日期時間表示法，至於要怎麼轉換，網路上已經都有人寫好了，或是直接看上面範例的函式<strong>ISODateString()</strong></p>
-
-<p>接著將轉換後的時間放到abbr這個元素的title屬性，然後使用.timeago()這個方法即可，這樣一打開網頁，就會顯示</p>
-
-<pre><code>less than a minute ago
-</code></pre>
-
-<p>過幾分鐘後 就會顯示，</p>
-
-<pre><code>2 minutes ago
-</code></pre>
-
-<p>代表已經過了兩分鐘，因為timeago不用重整會自動刷新時間</p>
-
-<p>或是你可以直接看我網頁上的DEMO結果如下</p>
-
-<p>『你開始看這篇文章在<abbr class="loaded timeago" title="when you opened the page"></abbr>』</p>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
-
-
-<script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"></script>
-
-
-<script>
-    $(function(){
-        prepareDynamicDates();      
-        $("abbr.timeago").timeago();        
-
-        function prepareDynamicDates() {
-            $('abbr.loaded').attr("title", ISODateString(new Date()));                      
-        }
-
-        function ISODateString(d){
-            function pad(n){return n<10 ? '0'+n : n}
-             return d.getUTCFullYear()+'-'
-                  + pad(d.getUTCMonth()+1)+'-'
-                  + pad(d.getUTCDate())+'T'
-                  + pad(d.getUTCHours())+':'
-                  + pad(d.getUTCMinutes())+':'
-                  + pad(d.getUTCSeconds())+'Z'
-        }       
-        
-    });
-</script>
-
-
-<p>假如你按F5重整就會發現又回到less than a minute ago (除非js的檔案掛掉，才不會顯示)</p>
-
-<p>但如果是不想用現在時間開始計算，而是希望每則發文的時間開始計算呢？一樣html的部分如下</p>
-
-<pre><code>&lt;abbr class="modified timeago" title="xxx"&gt;&lt;/abbr&gt;
-</code></pre>
-
-<p>接著是js部分</p>
-
-<pre><code>$(function(){
-
-    $('abbr.modified').attr("title", "2012-10-02T17:30:33Z");
-    $("abbr.timeago").timeago();            
-
-});
-</code></pre>
-
-<p>一樣就直接把當初那則發文的ISO 8601的時間丟到title，然後使用.timeago()就可以了</p>
-
-<p>如果你想用更靈活或擴充性更大的plugin，也可以選擇另一款<a href="http://pragmaticly.github.com/smart-time-ago/" target="_blank">Smart Time Ago</a>，靈感就來自於timeago，只是功能更強大</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://pragmaticly.github.com/smart-time-ago/" target="_blank">Smart Time Ago</a></p>
-
-<p><a href="http://timeago.yarp.com/" target="_blank">timeago</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS] 做網站非學不可的Twitter Bootstrap]]></title>
-    <link href="http://rx836.github.com/blog/twitter-bootstrap/"/>
-    <updated>2012-10-01T18:41:00+08:00</updated>
-    <id>http://rx836.github.com/blog/twitter-bootstrap</id>
-    <content type="html"><![CDATA[<p><a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>越來越多人在用了，當然最主要的原因就是他可以幫助網頁開發者快速的開發出，有不錯外觀的web或是mobile apps，這對於許多不擅長外觀設計的網頁工程師們(包括我)，可以說是省下不少煩惱Layout的麻煩，不僅如此，針對按鈕、表格、或是排版，Bootstrap都幫你處理的好好，只要簡單幾個步驟引入即可</p>
-
-<!--more-->
-
-
-<p>首先要先下載<a href="http://twitter.github.com/bootstrap/getting-started.html" target="_blank">Bootstrap</a>，你可以選擇compil過後的，或是選擇source版本，Bootstrap的css是用Less寫的，所以如果你想修改細節部分，可以下載source版本，一般來說直接用compiled版本即可</p>
-
-<p>接著就會看到有三個資料夾(css &amp; js &amp; img)</p>
-
-<p><img src="https://lh3.googleusercontent.com/-RHqEXjgftnI/UGl5vs7qyaI/AAAAAAAABoU/tKc440KDt5Y/s872/a.jpg" /></p>
-
-<p>可以把他們全部放入你的專案裡面，但引入到html時，css和js就只要選擇有沒有壓縮過的版本就好</p>
-
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;  
-        &lt;meta charset="UTF-8" /&gt;
-        &lt;title&gt;example&lt;/title&gt;
-        &lt;link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;        
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
-        &lt;script src="js/bootstrap.min.js"&gt;&lt;/script&gt;     
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>然後接下來就可以開始使用了！但請注意還是要引入jQuery喔，接下來就是介紹一些使用範例</p>
-
-<h2>Base CSS examples</h2>
-
-<h3>Buttons</h3>
-
-<p>加上相對應的class以後，就可以秀出相對應的外觀，例如紅色的按鈕class預設為<strong>btn-danger</strong>，Bootstrap很貼心的讓我們不再只有單調的按鈕顏色</p>
-
-<pre><code>&lt;button class="btn dropdown-toggle" data-toggle="dropdown"&gt;Action &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
-&lt;button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"&gt;Action &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
-&lt;button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"&gt;Danger &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
-&lt;button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"&gt;Warning &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
-&lt;button class="btn btn-success dropdown-toggle" data-toggle="dropdown"&gt;Success &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
-&lt;button class="btn btn-info dropdown-toggle" data-toggle="dropdown"&gt;Info &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt; 
-&lt;button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"&gt;Inverse &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
-</code></pre>
-
-<p><img src="https://lh4.googleusercontent.com/-phDQRFC7UXQ/UGnPIeFHgVI/AAAAAAAABoo/VL2VekJjEVA/s617/123.jpg" /></p>
-
-<p>特別注意的是，按鈕旁邊有個倒三角形是用css做出來的，也同樣只要在span加一個class為caret即可</p>
-
-<h3>Progress bars</h3>
-
-<p>進度條只要外面包一層div給予相對的class，裡面再加一個div並且命名class為<strong>bar</strong>，<strong>width</strong>就是進度條的長度，這樣就可以用js來修改width顯示目前的進度狀況</p>
-
-<pre><code>&lt;div class="progress progress-info" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 10%"&gt;&lt;/div&gt; &lt;/div&gt; 
-&lt;div class="progress progress-success" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 20%"&gt;&lt;/div&gt; &lt;/div&gt; 
-&lt;div class="progress progress-warning" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 30%"&gt;&lt;/div&gt; &lt;/div&gt; 
-&lt;div class="progress progress-danger" style="margin-bottom: 9px;"&gt; &lt;div class="bar" style="width: 40%"&gt;&lt;/div&gt; &lt;/div&gt;
-</code></pre>
-
-<p><img src="https://lh6.googleusercontent.com/-CWMKYBHmiBk/UGpPoPagCQI/AAAAAAAABo8/o7uycvmJotE/s926/123.jpg" /></p>
-
-<p>更酷的是，bar的樣式也可以更改，而不是只有醜醜的實心bar</p>
-
-<pre><code>&lt;div class="progress progress-striped active"&gt; 
-&lt;div class="bar" style="width: 40%;"&gt;&lt;/div&gt; 
-&lt;/div&gt;
-</code></pre>
-
-<p>只要修改class為<strong>progress progress-striped active</strong>，就會有條紋的進度條，而且還加上css3的animation動畫</p>
-
-<h3>Button groups</h3>
-
-<p>也可以將button設為一組群組，就會有群組的樣式</p>
-
-<pre><code>&lt;div class="btn-group" style="margin: 9px 0;"&gt; 
-&lt;button class="btn"&gt;Left&lt;/button&gt; 
-&lt;button class="btn"&gt;Middle&lt;/button&gt; 
-&lt;button class="btn"&gt;Right&lt;/button&gt; 
-&lt;/div&gt;
-</code></pre>
-
-<p><img src="https://lh4.googleusercontent.com/-iCtFSRwd7UU/UGpYAp2xh6I/AAAAAAAABpQ/BVql_Jk9oto/s187/4.jpg" /></p>
-
-<p>用一個class名為<strong>btn-group</strong>的div包住button就可以</p>
-
-<h3>Horizontal and vertical tabs (with dropdown menus)</h3>
-
-<p>還在煩惱下拉選單嗎?</p>
-
-<pre><code>&lt;ul class="nav nav-tabs"&gt; 
-&lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt; 
-&lt;li&gt;&lt;a href="#"&gt;Portfolio&lt;/a&gt;&lt;/li&gt; 
-&lt;li class="dropdown"&gt; &lt;a class="dropdown-toggle" data-toggle="dropdown" href="#"&gt;Services &lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt; 
-&lt;ul class="dropdown-menu"&gt; &lt;li&gt;&lt;a href="#"&gt;Link 1&lt;/a&gt;&lt;/li&gt; 
-&lt;li&gt;&lt;a href="#"&gt;Link 2&lt;/a&gt;&lt;/li&gt; 
-&lt;/ul&gt; &lt;/li&gt; 
-&lt;/ul&gt;
-</code></pre>
-
-<p>只要用ul li包好，並且加上相對應的class，就可以輕鬆做tab+下拉選單</p>
-
-<p><img src="https://lh5.googleusercontent.com/-ix3_DDLLdWg/UGpZ2cBhygI/AAAAAAAABpY/wzbaSwCDMb8/s303/5.jpg" /></p>
-
-<h3>Navigation bar component</h3>
-
-<p>看到這邊就覺得實在太強大了&#8230;</p>
-
-<pre><code>&lt;div class="navbar"&gt; 
-    &lt;div class="navbar-inner"&gt; 
-        &lt;div class="container"&gt; &lt;!-- brand class is from bootstrap.css --&gt; 
-            &lt;a class="brand" href="#"&gt;My Brand&lt;/a&gt; 
-            &lt;div class="nav-collapse"&gt; 
-                &lt;ul class="nav"&gt; 
-                    &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt; 
-                    &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;&lt;/li&gt; 
-                    &lt;li class="dropdown"&gt; &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Dropdown &lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt; 
-                        &lt;ul class="dropdown-menu"&gt; 
-                            &lt;li&gt;&lt;a href="#"&gt;Action 1&lt;/a&gt;&lt;/li&gt; 
-                            &lt;li&gt;&lt;a href="#"&gt;Action 2&lt;/a&gt;&lt;/li&gt; 
-                            &lt;li class="divider"&gt;&lt;/li&gt; 
-                            &lt;li class="nav-header"&gt;Header&lt;/li&gt; 
-                            &lt;li&gt;&lt;a href="#"&gt;Separated action&lt;/a&gt;&lt;/li&gt; 
-                        &lt;/ul&gt; 
-                    &lt;/li&gt; 
-                &lt;/ul&gt; 
-                &lt;form class="navbar-search pull-left"&gt; 
-                &lt;input type="text" class="search-query" placeholder="Search"&gt; 
-                &lt;/form&gt; 
-            &lt;/div&gt;&lt;!-- /.nav-collapse --&gt; 
-        &lt;/div&gt; 
-    &lt;/div&gt;&lt;!-- /navbar-inner --&gt; 
-&lt;/div&gt;&lt;!-- /navbar --&gt;
-</code></pre>
-
-<p><img src="https://lh5.googleusercontent.com/-VBBWEKhYfzk/UGpba2H2VSI/AAAAAAAABpg/2KVa_kC0xX0/s647/6.jpg" /></p>
-
-<h3>Using the layout and built-in grid system</h3>
-
-<p>你也可以用他們的grid system</p>
-
-<pre><code>&lt;div class="container"&gt; 
-    &lt;div class="row"&gt; 
-        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
-        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
-        &lt;div class="span4"&gt; &lt;!--content--&gt; &lt;/div&gt; 
-    &lt;/div&gt; 
-&lt;/div&gt;
-</code></pre>
-
-<p>預設是 12-column，940 pixel-centered layout</p>
-
-<h3>Responsive design</h3>
-
-<p>連最近很紅的responsive design也有，只要引入他們的<strong>bootstrap-responsive.css</strong>這個css檔案</p>
-
-<h3>Typeahead example</h3>
-
-<p>裡面也有plugin可以使用，例如下拉提示選單</p>
-
-<pre><code>&lt;input type="text" class="span3" style="margin: 0 auto;" 
-data-provide="typeahead" 
-data-items="4" 
-data-source='["Apples","Bananas","Cherries","Dates","Eggplants","Figs","Grapes", "Honeydew","Kiwi","Mango","Peaches","Plums","Raspberries","Strawberries","Watermelon","Zucchini"]'&gt;
-</code></pre>
-
-<p><img src="https://lh6.googleusercontent.com/-y8ELDPfXQp4/UGpdfcl99uI/AAAAAAAABpo/A_l1HiZDL2I/s223/7.jpg" /></p>
-
-<p>還有很多使用範例，可以直接去<a href="http://twitter.github.com/bootstrap/index.html" target="_blank">官網看</a>，這樣大概看了一下教學範例，一個網站可能需要的元素，Bootstrap幾乎通通都有，網頁開發人員可以更專注在開發網頁這個事情上面</p>
-
-<p>只是不知道，會不會到後來，大家的網站都長得很像:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.adobe.com/devnet/html5/articles/twitter-bootstrap.html" target="_blank">Styling your apps with Twitter Bootstrap </a></p>
-
-<p><a href="http://www.w3resource.com/twitter-bootstrap/tutorial.php" target="_blank">Twitter Bootstrap tutorial</a></p>
-
-<p><a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Twitter Bootstrap</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[學習筆記] 透過實體活動來學習《設計與思考》]]></title>
-    <link href="http://rx836.github.com/blog/design-thinking/"/>
-    <updated>2012-09-26T00:50:00+08:00</updated>
-    <id>http://rx836.github.com/blog/design-thinking</id>
-    <content type="html"><![CDATA[<p><strong>Design Thinking</strong>算是我今年才接觸到的新觀念，起初我認為這是一個在探討如何讓外觀看起來更棒，讓使用者的體驗更佳的做法，但直到看過影片之後，我才知道原來並不是這麼一回事，整個想傳達的理念也不如我想的那樣</p>
-
-<!--more-->
-
-
-<p>下面的影片是《設計與思考》的前導預告片</p>
-
-<iframe width="853" height="480" src="http://www.youtube.com/embed/fR9wMJXFIE8?rel=0" frameborder="0" allowfullscreen></iframe>
-
-
-<p>看完影片可以知道，強調《設計與思考》的設計並不是一個外觀，他是一種工具，要讓我們先思考問題，去探索問題，並且利用設計去解決問題</p>
-
-<p>他是一種循環，必須不斷的重複尋找問題，了解需求，並且重複的修正，這讓不管是從行銷，設計，甚至是創業也好，都可以運用這個精神來面對</p>
-
-<p>今天剛好也很幸運的，有這個機會參加《精實創業》讀書會，讓Leo老師帶來的Workshop，使我體驗了所謂的設計與思考，讓我收穫非常的多，以下記錄整個過程</p>
-
-<h3>1.訪談</h3>
-
-<p>首先必須透過訪談，先挖掘對方的需求，要多問<strong>為什麼</strong>，嘗試挖掘出自己不曾想過的問題</p>
-
-<h3>2.再更深入訪談</h3>
-
-<p>透過剛剛的訪談，再針對雙方有興趣的主題，繼續深入問下去，試圖找出心裡最深處的聲音</p>
-
-<h3>3.整理筆記</h3>
-
-<p>先整理需求，並且將需求重新解讀為洞見，這個洞見就是一個很深層的需求，或是以前從沒想過的</p>
-
-<h3>4.界定題目</h3>
-
-<p>利用剛剛整理出來的洞見，再去除掉其他雜音(想法)，將它化做一句完整的句子</p>
-
-<p>例如xxx需要一個方法來XXXX(需求)，因為在他的世界裡，XXXXXXX(洞見)</p>
-
-<p>所以舉例來說，老人需要一個方法來<strong>解決孤單</strong>((需求)，因為在他的世界裡，<strong>是沒有人可以一直陪伴著他講話</strong>(洞見)</p>
-
-<h3>5.提出不一樣的點子</h3>
-
-<p>提出不一樣的點子，來解決這個問題，提越多越好，越瘋狂越好，並且必須要用繪畫的方式呈現</p>
-
-<h3>6.分享你的點子&amp;收集回饋</h3>
-
-<p>找個人分享你的點子，但千萬別銷售點子，只做分享，但要記錄對方給你的回饋意見</p>
-
-<h3>7.你的新點子</h3>
-
-<p>根據剛剛回饋的意見，修正自己的點子，讓它更好！</p>
-
-<h3>8.估價點子建置預算</h3>
-
-<p>用認知估算，粗估這個點子大概要花多少錢，不用算很精準</p>
-
-<p>大概的流程圖如下:
-<img src="https://lh4.googleusercontent.com/-ZQqVXZv7LAQ/UGMwK7zdK_I/AAAAAAAABoA/0mbOMtNzTo8/s505/a.jpg"  /></p>
-
-<p>整個流程做下來，其實我們就是在做<strong>設計與思考</strong>這件事情，透過訪談去了解需求，並且針對需求去整理出真正的問題，再依據這個問題去想解決的<strong>點子</strong>，然後分享得到<strong>回饋</strong>，再進一步的<strong>修正</strong>，而最後估價的部分，是為了要可以對照第二個階段，也就是<strong>實驗設計假設</strong>而先做的部分，以下是第二階段</p>
-
-<h2>實驗設計假設</h2>
-
-<h3>1.重新定義實驗設計假設</h3>
-
-<p>請將剛剛的點子，重新寫下來，並且用一句話來表達，句子的內容必須是:</p>
-
-<p>『點子xxxx可以解決xxxxx(使用者)的問題是xxxxxx』</p>
-
-<p>所以例如說:</p>
-
-<p>點子【竹蜻蜓】可以解決【上班族】的問題是【塞車通勤】</p>
-
-<h3>2.使用者是誰</h3>
-
-<p>將使用者畫出來，越具體越好</p>
-
-<h3>3.甚麼時候會發生這個問題</h3>
-
-<p>一樣畫出剛剛那個問題發生時使用者會遇到的問題，例如剛剛是【塞車通勤】</p>
-
-<h3>4.發生問題時使用者可能會做些甚麼</h3>
-
-<p>畫出假如發生剛剛描述的問題時，使用者可能會做出什麼，畫越多越好，可以畫成一個連續故事，例如【塞車通勤】發生時，使用者可能改搭【捷運】，就畫一個捷運</p>
-
-<h3>5.規劃一個簡單的活動與故事中的使用者互動</h3>
-
-<p>先規劃一個活動，讓使用者怎麼去體驗剛剛所想的點子，怎麼引起使用者的注意？並且要規畫如何收及使用者的反應？</p>
-
-<h3>6.評估你的實驗</h3>
-
-<p>最後，假設如果這個活動要十個人來實驗，要花多少錢？粗估就好</p>
-
-<p>算算看，透過<strong>實驗設計假設</strong>以後，你所花的實驗費是多少？有發現跟剛剛在第一階段發想點子時，所預估花的錢差很多嗎？</p>
-
-<p>透過這樣的第一階段的思考發想，然後設計點子，一直到第二階段的實驗假設，來了解其實可以不用很快的投入過多的成本，因為我們所想的不一定是對的，也可以避免浪費的狀況發生，造成不必要的失敗和損失，這跟《精實創業》想表達的精神其實是一樣的，透過這次學習，我了解了更多</p>
-
-<p>參考資料:</p>
-
-<p>Leo的Workshop</p>
-
-<p><a href="http://www.designthinkingmovie.com/index_ch.html" target="_blank">《設計與思考》</a></p>
-
-<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010547374" target="_blank">《精實創業》</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[JavaScript] 當函式需要傳遞很多參數時]]></title>
-    <link href="http://rx836.github.com/blog/javascript-simple-object/"/>
-    <updated>2012-09-25T00:06:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-simple-object</id>
-    <content type="html"><![CDATA[<p>有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230;</p>
-
-<!--more-->
-
-
-<p>不過，有個方法可以解決這個困擾，就是<strong>設定值物件</strong>，平常我們使用函式可能會這樣寫</p>
-
-<pre><code>function add(parameter1, parameter2, parameter3, parameter4, parameter5) {...}
-</code></pre>
-
-<p>可是參數一堆真的會又臭又長，還要注意先後順序，但如果改成這樣寫</p>
-
-<pre><code>var conf = {
-    parameter1: "a",
-    parameter2: "b",
-    parameter3: "c"
-}
-
-add(conf)
-</code></pre>
-
-<p>將參數全部包成一個物件，再傳給函式，不僅可以不用記住先後順序，還可以安全的略過選用參數，也更容易閱讀和維護，當然新增和移除也比較方便</p>
-
-<p>不過缺點就是要特別去知道參數的名稱，而且物件的屬性名稱並無法做最小化處理</p>
-
-<p>不過當你要設定一堆CSS樣式的時候，或是個人資料很多很繁雜的時候，這個方法倒是很好用的:)</p>
-
-<p>參考資料:</p>
-
-<p>JavaScript 設計模式</p>
-
-<p>如有錯誤，歡迎指正</p>
 ]]></content>
   </entry>
   

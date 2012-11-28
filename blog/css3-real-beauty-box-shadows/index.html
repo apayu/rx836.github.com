@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4 - apa</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="CSS3有許多讓人驚艷的地方，其中之一就是「box-shadow」，在這之前為了做出陰影效果，可能需要一些Photoshop的幫助，但在CSS3卻可以用純CSS來達到這樣的結果，但如果你認為「box-shadow」只能拿來做陰影效果的話，那可就誤會大了，看完這篇文章，你或許會有不同的想法 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/css3-real-beauty-box-shadows">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="apa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">apa</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-26T10:21:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="https://lh3.googleusercontent.com/-gnXY1RrRaSU/ULLgp4EX-6I/AAAAAAAAB84/m3JLnkc5h_E/s125/a.jpg" /></p>
+
+<p>CSS3有許多讓人驚艷的地方，其中之一就是「box-shadow」，在這之前為了做出陰影效果，可能需要一些Photoshop的幫助，但在CSS3卻可以用純CSS來達到這樣的結果，但如果你認為「box-shadow」只能拿來做陰影效果的話，那可就誤會大了，看完這篇文章，你或許會有不同的想法</p>
+
+<!--more-->
+
+
+<p>在此之前，我們先來介紹 <strong>box-shadow</strong> 一些基本的屬性和用法</p>
+
+<p><strong>x-offset</strong>: 水平位移植，必須要指定</p>
+
+<p><strong>y-offset</strong>: 垂直位移植，必須要指定</p>
+
+<p><strong>blur</strong>: 模糊效果，不能為負值，預設為0</p>
+
+<p><strong>spread</strong>: 擴散強度，可以為負值(縮小)，預設為0</p>
+
+<p><strong>color</strong>: 顏色，有些網站可能會寫預設值為黑色，<strong>但一般建議還是要給予顏色，因為有些瀏覽器預設值並不一定為黑色(例如手機)</strong></p>
+
+<p><strong>inset</strong>: 這個值有些人是放在<strong>最前面</strong>，有些是放在<strong>最後面</strong>，兩者皆可，如果有給予這個值box就會在陰影裡面，反之則在外面</p>
+
+<p>以下為box-shadow語法</p>
+
+<pre><code>box-shadow: inset x-offset y-offset blur spread color
+</code></pre>
+
+<p>記得x-offset和y-offset為必要值，其它依照排列，如果只有blur可不填spread，但有spread一定要給blur值(可以為0px)</p>
+
+<p>特別注意的是，<strong>spread</strong>這個屬性值，等等會來好好說明，先來看幾個簡單的範例</p>
+
+<p>以下的範例HTML部分都只有這一行</p>
+
+<pre><code>&lt;div class="shadow"&gt;&lt;/div&gt;
+</code></pre>
+
+<h3>X and Y Offsets</h3>
+
+<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="mo08pkqb" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>這邊建立了一個width和height都為100px的box，然後陰影依照這個box往右位移10px，往下位移10px，且顏色為黑色</p>
+
+<h3>Inset</h3>
+
+<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="eesxhanx" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>如果有給予 <strong>inset</strong>，box就會在陰影裡面</p>
+
+<h3>Blur</h3>
+
+<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="vic8fc7f" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>添加 <strong>Blur</strong> 值，會讓陰影有模糊效果</p>
+
+<h3>Colors</h3>
+
+<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="zcpl4thp" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>也可以加些不一樣的顏色，這裡是給予rgba值</p>
+
+<h3>spread</h3>
+
+<p>剛剛有特別要注意到 <strong>spread</strong> 這個值，原因就是他可以擴展陰影的範圍，可以放大可以縮小，但不能改變形狀，因為陰影的形狀是來自box(就跟人的影子一樣)，也就是box是圓形，陰影就是圓形，是方形就是方形</p>
+
+<pre class="_cssdeck_embed" data-pane="output,css,html" data-user="rx836" data-href="qnznlsof" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>如果spread為5px，那陰影就會擴展5px，如果為-5px，那陰影就會縮減5px，也就是說可以依照需求改變陰影的大小，這樣可以幹嘛呢？可以看看下面這個範例</p>
+
+<pre class="_cssdeck_embed" data-pane="output,css,html" data-user="rx836" data-href="qmbxujts" data-version="0"></pre>
+
+
+<script async src="http://cssdeck.com/assets/js/embed.js"></script>
+
+
+<p>看到了嗎？我可以用<strong>一個div就創造出這麼多個box</strong>，也就是說我可以用一個元素來做出很多意想不到的效果，例如</p>
+
+<p>我可以用一個div畫出一支IPHONE 4</p>
+
+<p><a href="http://cssdeck.com/labs/creating-single-element-iphone-using-css3" target="_blank"><img src="https://lh3.googleusercontent.com/-L9BuoRAjjfE/ULLjV_tNNGI/AAAAAAAAB9Y/SSAO9DOdBMU/s558/rr.jpg" /></a></p>
+
+<p>或用一個div畫出蒙娜麗莎的微笑</p>
+
+<p><a href="http://cssdeck.com/labs/mona-lisa-with-pure-css" target="_blank"><img src="https://lh5.googleusercontent.com/-gzi2x2_clBk/ULLjV4zuCnI/AAAAAAAAB9g/Oo9VmXXkF_E/s535/rr1.jpg" /></a></p>
+
+<p>甚至是利用這個原理，來當作畫Pixel圖案來使用</p>
+
+<p><a href="http://cssdeck.com/labs/create-a-pixel-character-using-css3-box-shadows" target="_blank"><img src="https://lh6.googleusercontent.com/-lnfW4QAeeao/ULLjV84Z0oI/AAAAAAAAB9c/1J0e5V0VjS0/s300/rr2.jpg" /></a></p>
+
+<p>所以好好運用box-shadow，他可以發揮許多意想不到的創意喔</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://codetheory.in/the-real-beauty-of-css3-box-shadows/" target="_blank">The Real Beauty of CSS3 Box Shadows</a></p>
+
+<p><a href="http://www.w3schools.com/cssref/css3_pr_box-shadow.asp" target="_blank">CSS3 的box-shadow屬性</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-26T10:21:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/css/'>CSS</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/javascript-namespace/" title="Previous Post: [JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼">&laquo; [JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/friendly-tooltip-responsive/" title="Next Post: [jQuery] 自製擁有Responsive的Tooltip">[jQuery] 自製擁有Responsive的Tooltip &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://rx836.github.com/blog/css3-real-beauty-box-shadows/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (9)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/javascript'>JavaScript (6)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (8)</a></li><li><a href='/blog/categories/jquery'>jQuery (17)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (5)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (8)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/mailcheck-jquery-plugin/">[jQ-Plugin] 有效降低會員註冊退信率的mailcheck</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/friendly-tooltip-responsive/">[jQuery] 自製擁有Responsive的Tooltip</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/css3-real-beauty-box-shadows/">[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/javascript-namespace/">[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-accordion-plugin-kwicks/">[jQ-Plugin] Accordion Menu(手風琴)-Kwicks</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/css3-real-beauty-box-shadows/';
+        var disqus_url = 'http://rx836.github.com/blog/css3-real-beauty-box-shadows/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=416172151763823&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

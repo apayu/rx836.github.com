@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[jQ-Plugin] Accordion Menu(手風琴)-Kwicks - apa</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="「jQuery accordion menu」，也有人稱呼為手風琴，從上面兩張圖可以看到原本是一個水平的menu，滑鼠移過去指定某個項目，週遭的menu會縮起來，指定的那個項目會展開，因為一開一合的效果很像手風琴，所以才稱呼為「accordion menu」 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-accordion-plugin-kwicks">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="apa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">apa</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[jQ-Plugin] Accordion Menu(手風琴)-Kwicks</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-20T11:52:00+08:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="https://lh3.googleusercontent.com/-_J-W2xu9kk0/UKssWB_LsAI/AAAAAAAAB8I/l5FDpuCO27c/s415/t1.jpg" /></p>
+
+<p><img src="https://lh5.googleusercontent.com/-jKM2KBpI5eM/UKssWHgRekI/AAAAAAAAB8E/hG205WtoTDU/s415/t2.jpg" /></p>
+
+<p>「jQuery accordion menu」，也有人稱呼為手風琴，從上面兩張圖可以看到原本是一個水平的menu，滑鼠移過去指定某個項目，週遭的menu會縮起來，指定的那個項目會展開，因為一開一合的效果很像手風琴，所以才稱呼為「accordion menu」</p>
+
+<!--more-->
+
+
+<p>但這篇不教怎麼自己打造accordion menu，因為自認為功力不夠不敢亂現，網路上也很多那種例如「30種精選jQuery accordion menu」主題的文章，資源非常豐富，但因為實在太多款了，每次要做都還要花時間一個一個去看，所以今天就特別介紹一款叫做 <a href="http://devsmash.com/projects/kwicks" target="_blank">「Kwicks」</a> 的jQuery plugin，也可以簡單達到前面所說的accordion menu效果，這邊就記錄在我的Blog裡面，方便我或網路上的朋友可以參考</p>
+
+<p>最好的介紹就是直接看Demo最快，Kwicks可以做到 <a href="http://devsmash.com/projects/kwicks/examples/horizontal" target="_blank">Horizontal</a>、<a href="http://devsmash.com/projects/kwicks/examples/vertical" target="_blank">vertical</a>、<a href="http://devsmash.com/projects/kwicks/examples/easing" target="_blank">Custom Easing</a> 等效果</p>
+
+<p>要用Kwicks需下載他的plugin還有jQuery</p>
+
+<p><a href="http://jquery.com/" target="_blank" />jQuery >= 1.7</a></p>
+
+<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.js" target="_blank" />jquery.kwicks.js</a></p>
+
+<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.css" target="_blank" />jquery.kwicks.css</a></p>
+
+<p>要注意的是，這版Kwicks是v2.0.0，需用到jQuery 1.7以上，另外如果要用到Custom Easing，還要另外下載jQuery Easing Plugin</p>
+
+<p><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" />jQuery Easing Plugin</a></p>
+
+<p>接著就是HTML部分，很簡潔不複雜</p>
+
+<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>就是用一個&lt;ul&gt;元素包裹著&lt;li&gt;，&lt;li&gt;裡面放著就是項目裡面要擺的東西(例如圖片、文字)，&lt;ul&gt;部分必須要添加「kwicks」和「kwicks-horizontal」兩個class，「kwicks」是固定要添加的class，「kwicks-horizontal」是指水平的呈現方式，如果要垂直就用「kwicks-vertical」</p>
+
+<p>jQuery的寫法部分，有分三種</p>
+
+<pre><code>// instantiate kwicks
+$(element).kwicks(opts);
+
+// invoke a method
+$(element).kwicks('method-name' [, param]);
+
+// handle events
+$(element).on('event-name.kwicks', handler);
+</code></pre>
+
+<p>以下是參數設定</p>
+
+<h3>size:(必填)</h3>
+
+<p>設定項目的長或寬，如果isVertical是true的話，這個設定就是高度，其它情況預設就是寬度，特別注意的是這個值會影響到整個accordion menu多高(或多寬)</p>
+
+<h3>maxSize|minSize:(必填)</h3>
+
+<p>展開的最大寬度(或高度)，或是最小寬度(或高度)，你只能選擇填最大或最小，不能兩個都填</p>
+
+<h3>spacing:(Default: 5)</h3>
+
+<p>每個項目之間的距離，預設是5px</p>
+
+<h3>duration:(Default: 500)</h3>
+
+<pre><code>觸發後動畫執行的時間(毫秒)，預設是500毫秒
+</code></pre>
+
+<h3>isVertical:(Default: false)</h3>
+
+<pre><code>是否為垂直menu，預設是false
+</code></pre>
+
+<p>easing:(Default: none)</p>
+
+<pre><code>如果有載入jQuery Easing Plugin，可以設定效果
+</code></pre>
+
+<p>behavior:(Default: none)</p>
+
+<pre><code>初始化的動作
+</code></pre>
+
+<h3>Examples</h3>
+
+<p>HTML</p>
+
+<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
+    &lt;li id='panel-1'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-2'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-3'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-4'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>用&lt;ul&gt;、&lt;li&gt;做一個menu，&lt;ul&gt;加上對應的class，&lt;li&gt;裡面放置圖片或文字</p>
+
+<p>CSS</p>
+
+<pre><code>.kwicks {
+    width: 515px;
+    height: 100px;
+}
+.kwicks &gt; li {
+    width: 100px;
+    height: 100px;
+    /* overridden by kwicks but good for when JavaScript is disabled */
+    margin-left: 5px;
+    float: left;
+}
+
+#panel-1 { background-color: #53b388; }
+#panel-2 { background-color: #5a69a9; }
+#panel-3 { background-color: #c26468; }
+#panel-4 { background-color: #bf7cc7; }
+</code></pre>
+
+<p>注意width和height會影響到顯示的結果</p>
+
+<p>JS</p>
+
+<pre><code>$(function() {
+    $('.kwicks').kwicks({
+        size: 100,
+        maxSize : 250,
+        spacing : 5,
+        behavior: 'menu'
+    });
+});
+</code></pre>
+
+<p>size要特別注意的是，越高(or寬)展開的空間就越大，看到的東西就會越多，如何拿捏可以實際在瀏覽器上跑跑看效果</p>
+
+<p>Kwicks還有支援<strong>Methods</strong>和<strong>events</strong>，有興趣的可以直接參考文件(附參考資料)</p>
+
+<p>當然，網路世界的選擇太多了，不一定非要用這個plugin，如果有更好的推薦也歡迎跟我說:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://devsmash.com/projects/kwicks" target="_blank">Kwicks for jQuery</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-20T11:52:00+08:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/css3-checkboxes-radiobuttons/" title="Previous Post: [CSS] 拋棄原生checkbox用CSS3自己簡單動手做">&laquo; [CSS] 拋棄原生checkbox用CSS3自己簡單動手做</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/javascript-namespace/" title="Next Post: [JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼">[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://rx836.github.com/blog/jquery-accordion-plugin-kwicks/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (9)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/javascript'>JavaScript (6)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (8)</a></li><li><a href='/blog/categories/jquery'>jQuery (17)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (5)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (8)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/mailcheck-jquery-plugin/">[jQ-Plugin] 有效降低會員註冊退信率的mailcheck</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/friendly-tooltip-responsive/">[jQuery] 自製擁有Responsive的Tooltip</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/css3-real-beauty-box-shadows/">[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/javascript-namespace/">[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-accordion-plugin-kwicks/">[jQ-Plugin] Accordion Menu(手風琴)-Kwicks</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-accordion-plugin-kwicks/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-accordion-plugin-kwicks/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=416172151763823&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

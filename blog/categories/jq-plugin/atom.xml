@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jQ-Plugin | apa]]></title>
+  <link href="http://rx836.github.com/blog/categories/jq-plugin/atom.xml" rel="self"/>
+  <link href="http://rx836.github.com/"/>
+  <updated>2012-11-28T14:45:29+08:00</updated>
+  <id>http://rx836.github.com/</id>
+  <author>
+    <name><![CDATA[阿帕]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 有效降低會員註冊退信率的mailcheck]]></title>
+    <link href="http://rx836.github.com/blog/mailcheck-jquery-plugin/"/>
+    <updated>2012-11-28T12:04:00+08:00</updated>
+    <id>http://rx836.github.com/blog/mailcheck-jquery-plugin</id>
+    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-dLci9WLFC-8/ULWyqQJ-OxI/AAAAAAAAB_U/odHWaG3jNfE/s482/w.jpg" /></p>
+
+<p>免費檔案分享<a href="http://kicksend.com/" target="_blank">Kicksend</a>有寫一篇文章是關於<a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target=_blank"">如何降低退信率</a>，內容大概是講會員註冊會員以後，會發送註冊的確認信，但常常會發生被退信的情況，導致會員收不到信可能必須重新申請一次帳號，不然就是請客服修改E-mail，所以Kicksend去做了分析並且解決這個問題</p>
+
+<!--more-->
+
+
+<p>Kicksend發現有很多人被退信的原因都是在輸入電子郵件(E-mail)的時候打錯domain，例如“hotmail.con”、“gnail.com”、“yajoo.com”等，這種錯誤用戶有時候自己不知道，就直接按送出，導致收不到註冊信，所以Kicksend就做了一個設計，在用戶輸入E-mail以後，會檢查E-mail的domain，如果發現疑似錯誤情形，就會跳出建議的選項問用戶要不要更改，做到良好的 <strong>user experience</strong>，用了這個方法以後也確實降低了50%的退信率，無形中也增加了不少用戶，而下面將介紹這套jQuery plugin - <strong>mailcheck</strong></p>
+
+<p>先去github抓他的原始碼</p>
+
+<p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck</a></p>
+
+<p>接著在網頁裡面載入jQuery和mailcheck.min</p>
+
+<pre><code>&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="mailcheck.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>html部分，一個text field</p>
+
+<pre><code>&lt;input id="email" name="email" type="text" /&gt;
+</code></pre>
+
+<p>接著是js部份</p>
+
+<pre><code>var domains = ['hotmail.com', 'gmail.com', 'aol.com'];
+var topLevelDomains = ["com", "net", "org"];
+
+var superStringDistance = function(string1, string2) {
+  // a string distance algorithm of your choosing
+}
+
+$('#email').on('blur', function() {
+  $(this).mailcheck({
+    domains: domains,                       // optional
+    topLevelDomains: topLevelDomains,       // optional
+    distanceFunction: superStringDistance,  // optional
+    suggested: function(element, suggestion) {
+      // callback code
+    },
+    empty: function(element) {
+      // callback code
+    }
+  });
+});
+</code></pre>
+
+<p>「domains」、「topLevelDomains」、「distanceFunction」這三個參數都是選填，分別為</p>
+
+<p><strong>domains</strong>: 要比對的domain，例如:yahoo.com、google.com</p>
+
+<p><strong>topLevelDomains</strong>: 允許的topLevelDomain，例如:com、net</p>
+
+<p><strong>distanceFunction</strong>: 自訂用來計算最接近topLevelDomain內容的函式</p>
+
+<p>假設在沒有填寫 <strong>domains</strong> 和 <strong>topLevelDomains</strong> 情況下，會採用預設值，根據source code裡面所寫的預設值為</p>
+
+<p>預設domains</p>
+
+<pre><code>defaultDomains: ["yahoo.com", "google.com", "hotmail.com", "gmail.com", "me.com", "aol.com", "mac.com",
+  "live.com", "comcast.net", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk",
+  "facebook.com", "verizon.net", "sbcglobal.net", "att.net", "gmx.com", "mail.com"]
+</code></pre>
+
+<p>預設topLevelDomains</p>
+
+<pre><code>defaultTopLevelDomains: ["co.uk", "com", "net", "org", "info", "edu", "gov", "mil"]
+</code></pre>
+
+<p>而「suggested」和「empty」則分別是 <strong>輸入錯誤時的callback</strong> 和 <strong>沒填寫E-mail的callback</strong>，所以你可以自行在這裡加上程式碼提醒User輸入錯誤或忘記輸入</p>
+
+<h3>沒有jQuery的情況下</h3>
+
+<p>假如你的專案裡面沒有用到jQuery，也可以單純使用js版本</p>
+
+<pre><code>Kicksend.mailcheck.run({
+  email: yourTextInput.value,
+  domains: domains,                       // optional
+  topLevelDomains: topLevelDomains,       // optional
+  distanceFunction: superStringDistance,  // optional
+  suggested: function(suggestion) {
+    // callback code
+  },
+  empty: function() {
+    // callback code
+  }
+});
+</code></pre>
+
+<p>最後附上有用到mailcheck這項效果的網站</p>
+
+<ul>
+<li><a href="http://kicksend.com/" target="_blank">Kicksend</a></li>
+<li><a href="http://dropbox.com/" target="_blank">Dropbox</a></li>
+<li><a href="http://flotype.com/" target="_blank">Flotype</a></li>
+<li><a href="http://kickstarter.com/" target="_blank">Kickstarter</a></li>
+<li><a href="http://kippt.com/" target="_blank">Kippt</a></li>
+<li><a href="http://minecraft.net/" target="_blank">Minecraft</a></li>
+<li><a href="http://prispy.com/" target="_blank">Prispy</a></li>
+<li><a href="http://sbnation.com/" target="_blank">SB Nation</a></li>
+<li><a href="http://show-space.com/" target="_blank">Show Space</a></li>
+<li><a href="http://theverge.com/" target="_blank">The Verge</a></li>
+<li><a href="http://uber.com/" target="_blank">Uber</a></li>
+</ul>
+
+
+<p>參考資料:</p>
+
+<p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck Github</a></p>
+
+<p><a href="http://kicksend.com/join" target="_blank">Demo</a></p>
+
+<p><a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target="_blank">How we decreased sign up confirmation email bounces by 50%</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] Accordion Menu(手風琴)-Kwicks]]></title>
+    <link href="http://rx836.github.com/blog/jquery-accordion-plugin-kwicks/"/>
+    <updated>2012-11-20T11:52:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-accordion-plugin-kwicks</id>
+    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-_J-W2xu9kk0/UKssWB_LsAI/AAAAAAAAB8I/l5FDpuCO27c/s415/t1.jpg" /></p>
+
+<p><img src="https://lh5.googleusercontent.com/-jKM2KBpI5eM/UKssWHgRekI/AAAAAAAAB8E/hG205WtoTDU/s415/t2.jpg" /></p>
+
+<p>「jQuery accordion menu」，也有人稱呼為手風琴，從上面兩張圖可以看到原本是一個水平的menu，滑鼠移過去指定某個項目，週遭的menu會縮起來，指定的那個項目會展開，因為一開一合的效果很像手風琴，所以才稱呼為「accordion menu」</p>
+
+<!--more-->
+
+
+<p>但這篇不教怎麼自己打造accordion menu，因為自認為功力不夠不敢亂現，網路上也很多那種例如「30種精選jQuery accordion menu」主題的文章，資源非常豐富，但因為實在太多款了，每次要做都還要花時間一個一個去看，所以今天就特別介紹一款叫做 <a href="http://devsmash.com/projects/kwicks" target="_blank">「Kwicks」</a> 的jQuery plugin，也可以簡單達到前面所說的accordion menu效果，這邊就記錄在我的Blog裡面，方便我或網路上的朋友可以參考</p>
+
+<p>最好的介紹就是直接看Demo最快，Kwicks可以做到 <a href="http://devsmash.com/projects/kwicks/examples/horizontal" target="_blank">Horizontal</a>、<a href="http://devsmash.com/projects/kwicks/examples/vertical" target="_blank">vertical</a>、<a href="http://devsmash.com/projects/kwicks/examples/easing" target="_blank">Custom Easing</a> 等效果</p>
+
+<p>要用Kwicks需下載他的plugin還有jQuery</p>
+
+<p><a href="http://jquery.com/" target="_blank" />jQuery >= 1.7</a></p>
+
+<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.js" target="_blank" />jquery.kwicks.js</a></p>
+
+<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.css" target="_blank" />jquery.kwicks.css</a></p>
+
+<p>要注意的是，這版Kwicks是v2.0.0，需用到jQuery 1.7以上，另外如果要用到Custom Easing，還要另外下載jQuery Easing Plugin</p>
+
+<p><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" />jQuery Easing Plugin</a></p>
+
+<p>接著就是HTML部分，很簡潔不複雜</p>
+
+<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>就是用一個&lt;ul&gt;元素包裹著&lt;li&gt;，&lt;li&gt;裡面放著就是項目裡面要擺的東西(例如圖片、文字)，&lt;ul&gt;部分必須要添加「kwicks」和「kwicks-horizontal」兩個class，「kwicks」是固定要添加的class，「kwicks-horizontal」是指水平的呈現方式，如果要垂直就用「kwicks-vertical」</p>
+
+<p>jQuery的寫法部分，有分三種</p>
+
+<pre><code>// instantiate kwicks
+$(element).kwicks(opts);
+
+// invoke a method
+$(element).kwicks('method-name' [, param]);
+
+// handle events
+$(element).on('event-name.kwicks', handler);
+</code></pre>
+
+<p>以下是參數設定</p>
+
+<h3>size:(必填)</h3>
+
+<p>設定項目的長或寬，如果isVertical是true的話，這個設定就是高度，其它情況預設就是寬度，特別注意的是這個值會影響到整個accordion menu多高(或多寬)</p>
+
+<h3>maxSize|minSize:(必填)</h3>
+
+<p>展開的最大寬度(或高度)，或是最小寬度(或高度)，你只能選擇填最大或最小，不能兩個都填</p>
+
+<h3>spacing:(Default: 5)</h3>
+
+<p>每個項目之間的距離，預設是5px</p>
+
+<h3>duration:(Default: 500)</h3>
+
+<pre><code>觸發後動畫執行的時間(毫秒)，預設是500毫秒
+</code></pre>
+
+<h3>isVertical:(Default: false)</h3>
+
+<pre><code>是否為垂直menu，預設是false
+</code></pre>
+
+<p>easing:(Default: none)</p>
+
+<pre><code>如果有載入jQuery Easing Plugin，可以設定效果
+</code></pre>
+
+<p>behavior:(Default: none)</p>
+
+<pre><code>初始化的動作
+</code></pre>
+
+<h3>Examples</h3>
+
+<p>HTML</p>
+
+<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
+    &lt;li id='panel-1'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-2'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-3'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+    &lt;li id='panel-4'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>用&lt;ul&gt;、&lt;li&gt;做一個menu，&lt;ul&gt;加上對應的class，&lt;li&gt;裡面放置圖片或文字</p>
+
+<p>CSS</p>
+
+<pre><code>.kwicks {
+    width: 515px;
+    height: 100px;
+}
+.kwicks &gt; li {
+    width: 100px;
+    height: 100px;
+    /* overridden by kwicks but good for when JavaScript is disabled */
+    margin-left: 5px;
+    float: left;
+}
+
+#panel-1 { background-color: #53b388; }
+#panel-2 { background-color: #5a69a9; }
+#panel-3 { background-color: #c26468; }
+#panel-4 { background-color: #bf7cc7; }
+</code></pre>
+
+<p>注意width和height會影響到顯示的結果</p>
+
+<p>JS</p>
+
+<pre><code>$(function() {
+    $('.kwicks').kwicks({
+        size: 100,
+        maxSize : 250,
+        spacing : 5,
+        behavior: 'menu'
+    });
+});
+</code></pre>
+
+<p>size要特別注意的是，越高(or寬)展開的空間就越大，看到的東西就會越多，如何拿捏可以實際在瀏覽器上跑跑看效果</p>
+
+<p>Kwicks還有支援<strong>Methods</strong>和<strong>events</strong>，有興趣的可以直接參考文件(附參考資料)</p>
+
+<p>當然，網路世界的選擇太多了，不一定非要用這個plugin，如果有更好的推薦也歡迎跟我說:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://devsmash.com/projects/kwicks" target="_blank">Kwicks for jQuery</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 倒數計時的plugin介紹]]></title>
+    <link href="http://rx836.github.com/blog/jquery-countdown-plugins/"/>
+    <updated>2012-11-05T11:45:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-countdown-plugins</id>
+    <content type="html"><![CDATA[<p>之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考</p>
+
+<!--more-->
+
+
+<h3>jQuery Countdown Script</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-q5CkXGDfwAo/UJc_Gp1lgEI/AAAAAAAAB2E/gjITVcyHIes/s480/lwt_post1.jpg" /></p>
+
+<p>plugin簡單好設定，還可以在同一個頁面設定好幾個不同的倒數計時，甚至是啟動和暫停</p>
+
+<p><a href="http://www.littlewebthings.com/2010/02/jquery-countdown-script/" target="_blank">範例Demo</a></p>
+
+<h3>Countdown</h3>
+
+<p><img src="https://lh6.googleusercontent.com/-pmIMh95RX54/UJc_Ga3R2dI/AAAAAAAAB2I/TR6Dtq4DHYw/s480/jquery-countdown.gif" /></p>
+
+<p>擁有許多進階的設定，支援時區，多種語言等</p>
+
+<p><a href="http://keith-wood.name/countdown.html" target="_blank">範例Demo</a></p>
+
+<h3>The Final Countdown</h3>
+
+<p><img src="https://lh4.googleusercontent.com/-q5WsQiLTJv4/UJc_FlYN8YI/AAAAAAAAB14/eR6HQ1RxIMo/s403/a1.jpg" /></p>
+
+<p>多種呈現方式，可以隨自己喜歡去做調整，倒數計時的部分甚至連毫秒都可以呈現</p>
+
+<p><a href="https://github.com/hilios/jquery.countdown" target="_blank">範例Demo</a></p>
+
+<h3>KK Countdown</h3>
+
+<p><img src="https://lh6.googleusercontent.com/-MKQU1yoPcpA/UJc_Fn8CqaI/AAAAAAAAB2A/AZs0VgXkuco/s600/2.jpg" /></p>
+
+<p>一樣有多種呈現方式，用時間戳記來給予時間</p>
+
+<p><a href="http://krzysztof-furtak.pl/2010/05/kk-countdown-jquery-plugin/" target="_blank">範例Demo</a></p>
+
+<h3>jQuery Countdown</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-uIiwnxje1y0/UJdAu1w52KI/AAAAAAAAB2g/-ZVyh0o40DA/s520/3.jpg" /></p>
+
+<p>利用圖片來呈現，沒有太多功能可以設定，比較簡單的plugin</p>
+
+<p><a href="http://code.google.com/p/jquery-countdown/" target="_blank">範例Demo</a></p>
+
+<h3>jQuery Countdown Timer</h3>
+
+<p><img src="https://lh5.googleusercontent.com/-fmAgRmTcc40/UJc_FilzH0I/AAAAAAAAB18/qyyvqbxCZfU/s620/jquery-countdown-timer.jpg" /></p>
+
+<p>裡面有相當詳細的教學文，教你怎麼使用他們的plugin</p>
+
+<p><a href="http://tutorialzine.com/2011/12/countdown-jquery/" target="_blank">範例Demo</a></p>
+
+<p>倒數計時自己寫並不難，不過有些很特別的功能或是效果用plugin，倒也可以省下不少時間，所以要用plugin或是自己手刻就看各位開發者自己當下的狀況做選擇:)</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.webresourcesdepot.com/jquery-countdown-plugins-for-coming-soon-pages/" target="_blank"></a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] Facebook XXX hours ago的時間生成]]></title>
+    <link href="http://rx836.github.com/blog/jquery-plugin-timeago/"/>
+    <updated>2012-10-03T01:36:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-plugin-timeago</id>
+    <content type="html"><![CDATA[<p><a href="http://timeago.yarp.com/" target="_blank">timeago</a>是一套可以快速生成過去發生時間的jQuery plugin，大家應該對於Facebook文字框下方的『xxx hours ago』不會陌生，留言訊息不再只是單純的『x年x月x日 x時x分x秒』，而是可以很貼心的將時間換算給使用者知道，『喔~ 原來這則留言在幾分鐘之前』，這種對User experience來說其實是相當的加分，要實作其實也不難，網路上也有plugin可以方便使用，就趕快來看看如何做出這種效果吧！</p>
+
+<p><img src="https://lh6.googleusercontent.com/-8eJHMArd3w0/UGxqjpAcHYI/AAAAAAAABqY/Z8lDGoeU_58/s409/1.jpg" /></p>
+
+<!--more-->
+
+
+<p>首先<a href="http://timeago.yarp.com/jquery.timeago.js" target="_blank">下載</a>timeago，和jQuery一起引用到html裡面</p>
+
+<pre><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>接著是html部分</p>
+
+<pre><code>&lt;abbr class="loaded timeago" title="when you opened the page"&gt;&lt;/abbr&gt;
+</code></pre>
+
+<p>這個plugin預設是用abbr這個元素，要搭配裡面的title，title屬性待會會存放時間資訊在裡面，接著是js部分</p>
+
+<pre><code>$(function(){
+    prepareDynamicDates();      
+    $("abbr.timeago").timeago();        
+
+    function prepareDynamicDates() {
+        $('abbr.loaded').attr("title", ISODateString(new Date()));                      
+    }
+
+    function ISODateString(d){
+        function pad(n){return n&lt;10 ? '0'+n : n}
+         return d.getUTCFullYear()+'-'
+              + pad(d.getUTCMonth()+1)+'-'
+              + pad(d.getUTCDate())+'T'
+              + pad(d.getUTCHours())+':'
+              + pad(d.getUTCMinutes())+':'
+              + pad(d.getUTCSeconds())+'Z'
+    }       
+
+});
+</code></pre>
+
+<p>要注意的一點是，要先將時間轉換成<a href="http://zh.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a>，ISO 8601是一種國際標準化組織所訂的日期時間表示法，至於要怎麼轉換，網路上已經都有人寫好了，或是直接看上面範例的函式<strong>ISODateString()</strong></p>
+
+<p>接著將轉換後的時間放到abbr這個元素的title屬性，然後使用.timeago()這個方法即可，這樣一打開網頁，就會顯示</p>
+
+<pre><code>less than a minute ago
+</code></pre>
+
+<p>過幾分鐘後 就會顯示，</p>
+
+<pre><code>2 minutes ago
+</code></pre>
+
+<p>代表已經過了兩分鐘，因為timeago不用重整會自動刷新時間</p>
+
+<p>或是你可以直接看我網頁上的DEMO結果如下</p>
+
+<p>『你開始看這篇文章在<abbr class="loaded timeago" title="when you opened the page"></abbr>』</p>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+
+
+<script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"></script>
+
+
+<script>
+    $(function(){
+        prepareDynamicDates();      
+        $("abbr.timeago").timeago();        
+
+        function prepareDynamicDates() {
+            $('abbr.loaded').attr("title", ISODateString(new Date()));                      
+        }
+
+        function ISODateString(d){
+            function pad(n){return n<10 ? '0'+n : n}
+             return d.getUTCFullYear()+'-'
+                  + pad(d.getUTCMonth()+1)+'-'
+                  + pad(d.getUTCDate())+'T'
+                  + pad(d.getUTCHours())+':'
+                  + pad(d.getUTCMinutes())+':'
+                  + pad(d.getUTCSeconds())+'Z'
+        }       
+        
+    });
+</script>
+
+
+<p>假如你按F5重整就會發現又回到less than a minute ago (除非js的檔案掛掉，才不會顯示)</p>
+
+<p>但如果是不想用現在時間開始計算，而是希望每則發文的時間開始計算呢？一樣html的部分如下</p>
+
+<pre><code>&lt;abbr class="modified timeago" title="xxx"&gt;&lt;/abbr&gt;
+</code></pre>
+
+<p>接著是js部分</p>
+
+<pre><code>$(function(){
+
+    $('abbr.modified').attr("title", "2012-10-02T17:30:33Z");
+    $("abbr.timeago").timeago();            
+
+});
+</code></pre>
+
+<p>一樣就直接把當初那則發文的ISO 8601的時間丟到title，然後使用.timeago()就可以了</p>
+
+<p>如果你想用更靈活或擴充性更大的plugin，也可以選擇另一款<a href="http://pragmaticly.github.com/smart-time-ago/" target="_blank">Smart Time Ago</a>，靈感就來自於timeago，只是功能更強大</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://pragmaticly.github.com/smart-time-ago/" target="_blank">Smart Time Ago</a></p>
+
+<p><a href="http://timeago.yarp.com/" target="_blank">timeago</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] hoverpulse 滑鼠移入，圖片縮放]]></title>
+    <link href="http://rx836.github.com/blog/jquery-hoverpulse/"/>
+    <updated>2012-09-20T23:42:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-hoverpulse</id>
+    <content type="html"><![CDATA[<p>jQuery寫了一陣子，直到最近有個需求，想要做到滑鼠移到圖片上，會微微的放大，才發現這個很常看到的效果，我到今天都還沒實做過</p>
+
+<!--more-->
+
+
+<p>幸運的是...，就因為這麼晚才實做，所以早就有人把plugin寫好了，我所用的是<a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a>，用法相當相當的簡單</p>
+
+<p>首先是HTML部份</p>
+
+<pre><code>&lt;div&gt;&lt;img src="a.jpg" /&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src="b.jpg" /&gt;&lt;/div&gt;
+&lt;div&gt;&lt;img src="c.jpg" /&gt;&lt;/div&gt;
+</code></pre>
+
+<p>再來是jQuery部份</p>
+
+<pre><code>$(document).ready(function() {
+    $('div img').hoverpulse();
+});
+</code></pre>
+
+<p>這樣就完成了！當然什麼值都沒有給的情況下是用default，但如果想要設定放大的幅度和變化的速度，可以這樣寫</p>
+
+<pre><code>$(document).ready(function() {
+    $('div img').hoverpulse({
+        size: 40,  // number of pixels to pulse element (in each direction)
+        speed: 400 // speed of the animation 
+    });
+});
+</code></pre>
+
+<p>真的簡單又明瞭...</p>
+
+<p>那如果你想加入點擊的事件，你可以這樣寫</p>
+
+<pre><code>$(document).ready(function() {
+    $('div img').hoverpulse().each(function() {
+        var $img = $(this);                 
+        $img.click(function() {
+
+            //點每張圖的事件
+
+            return false;
+        });
+    });
+});
+</code></pre>
+
+<p>接下來是我個人好奇去看他的source code，可以看到他先將每個圖片的width和height存到$.data裡面</p>
+
+<pre><code>this.each(function() {
+    var $this = $(this);
+    var w = $this.width(), h = $this.height();
+    $this.data('hoverpulse.size', { w: parseInt(w), h: parseInt(h) });
+});
+</code></pre>
+
+<p>接著利用到<strong>.hover()</strong>的方法去做出滑鼠移到圖片和移出圖片的效果</p>
+
+<pre><code>// bind hover event for behavior
+return this.hover(
+    // hover over
+    function() {
+        var $this = $(this);
+        $this.parent().css('z-index', opts.zIndexActive);
+
+        var size = $this.data('hoverpulse.size');
+        var w = size.w, h = size.h;
+        $this.stop().animate({ 
+            top:  ('-'+opts.size+'px'), 
+            left: ('-'+opts.size+'px'), 
+            height: (h+2*opts.size)+'px', 
+            width:  (w+2*opts.size)+'px' 
+        }, opts.speed);
+    },
+    // hover out
+    function() {
+        var $this = $(this);
+        var size = $this.data('hoverpulse.size');
+        var w = size.w, h = size.h;
+
+        $this.stop().animate({ 
+            top:  0, 
+            left: 0, 
+            height: (h+'px'), 
+            width:  (w+'px') 
+        }, opts.speed, function() {
+            $this.parent().css('z-index', opts.zIndexNormal);
+        });
+    }
+);
+</code></pre>
+
+<p>在移入部份會先將包覆img的div z-index值設到100</p>
+
+<pre><code>$this.parent().css('z-index', opts.zIndexActive);
+</code></pre>
+
+<p>然後從data取出之前放入的圖片width和height，接著用<strong>.animate()</strong>來執行放大效果</p>
+
+<pre><code>$this.stop().animate({ 
+            top:  ('-'+opts.size+'px'), 
+            left: ('-'+opts.size+'px'), 
+            height: (h+2*opts.size)+'px', 
+            width:  (w+2*opts.size)+'px' 
+        }, opts.speed);
+</code></pre>
+
+<p>這段code其實就是把你設定的size放大兩倍，並且為了有感覺從圖片中間點開始放大的效果，所以把位置top和left給予負值，等於整張圖片往左上角移動，速度是<strong>opts.speed</strong>，而圖片的position:absolute在整個plugin一開始就已經設定了</p>
+
+<pre><code>// parent must be relatively positioned
+this.parent().css({ position: 'relative' });
+// pulsing element must be absolutely positioned
+this.css({ position: 'absolute', top: 0, left: 0 });
+</code></pre>
+
+<p>可以看到包覆img的div是relatively，img是absolute</p>
+
+<p>而滑鼠移開之後只是把值恢復成原來的設定</p>
+
+<pre><code>var $this = $(this);
+var size = $this.data('hoverpulse.size');
+var w = size.w, h = size.h;
+
+$this.stop().animate({ 
+    top:  0, 
+    left: 0, 
+    height: (h+'px'), 
+    width:  (w+'px') 
+}, opts.speed, function() {
+    $this.parent().css('z-index', opts.zIndexNormal);
+});
+</code></pre>
+
+<p>將top和left歸為0，height和width恢復成原來的大小，z-index也設回預設值1</p>
+
+<p>當然預設值在plugin的最下面可以自己修改</p>
+
+<pre><code>$.fn.hoverpulse.defaults = {
+    size:  20,
+    speed: 200,
+    zIndexActive: 100,
+    zIndexNormal: 1
+};
+</code></pre>
+
+<p>這樣plugin整個看起來就很清楚明瞭，也可以自己嘗試動手寫寫看喔！</p>
+
+<h2>後記</h2>
+
+<p>Aaron大大說plugin寫法有點舊，而且有點囉嗦XD，他建議我新的寫法，在此特別筆記下來</p>
+
+<p>HTML</p>
+
+<pre><code>&lt;img src="a.jpg" class="resize" width="250"/&gt;
+</code></pre>
+
+<p>jQuery</p>
+
+<pre><code>var current_h = null;
+var current_w = null;
+
+$('.resize').hover(
+    function(){
+        current_h = $(this, 'img').height;
+        current_w = $(this, 'img').width;
+        $(this).stop(true, false).animate({width: (current_w * 1.3), height: (current_h * 1.3)}, 300);
+    },
+    function(){
+        $(this).stop(true, false).animate({width: current_w + 'px', height: current_h + 'px'}, 300);
+    }
+);
+</code></pre>
+
+<p>不要用plugin，直接寫，至於top和left在自己加上就好，跟前面的plugin道理一樣</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a></p>
+
+<p>如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+</feed>
