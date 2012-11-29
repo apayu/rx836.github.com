@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-29T16:57:43+08:00</updated>
+  <updated>2012-11-29T17:05:31+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -103,7 +103,7 @@ $("input#myInput").on("focus", function() { /* Do something... */ });
 
 <h2>.select()</h2>
 
-<p>select算是很容易讓人混淆的事件，在text input元素裡面(或textarea)，當你在裡面將文字反白以後，就會觸發此事件，範例如下</p>
+<p>select算是很容易讓人混淆的事件，在text input元素裡面(或textarea)，當你將文字反白以後，就會觸發此事件，範例如下</p>
 
 <pre><code>&lt;input type="text" value="Some text" /&gt;
 
@@ -120,7 +120,9 @@ $("input#myInput").on("focus", function() { /* Do something... */ });
 $("input[type=radio]").select();  
 </code></pre>
 
-<p><strong>這個方法並不能將checkbox或是radio執行勾選</strong>，正確的做法應該是這樣</p>
+<p><strong>這個方法並不能將checkbox或是radio執行勾選</strong></p>
+
+<p>正確的做法應該是這樣</p>
 
 <pre><code>$("input[type=checkbox]").prop("checked", true); // Check checkbox
 $("input[type=radio]").prop("checked", true); // Check radio button
@@ -128,7 +130,7 @@ $("input[type=radio]").prop("checked", true); // Check radio button
 
 <h2>.val()</h2>
 
-<p>這大概是jQuery最長用到的方法之一， <strong>.val()</strong> 可以取得值</p>
+<p>這大概是jQuery最常用到的方法之一， <strong>.val()</strong> 可以取得值</p>
 
 <pre><code>var Email = $("input#Email").val();
 </code></pre>
@@ -187,7 +189,7 @@ $("input[type=radio]").prop("checked", true); // Check radio button
 
 <p>當按下submit以後，就會進行驗證，假如回傳值是false，表單就不會送出</p>
 
-<p>以上是常用的表單驗證方法，當然網路上也有很多寫好的plugin可以用，因為處理這個老實說蠻麻煩的，善用plugin也是個不錯的選擇</p>
+<p>以上是常用的表單驗證方法，當然網路上也有很多寫好的plugin可以用，因為處理一大堆資料的驗證老實說蠻麻煩的，善用plugin也是個不錯的選擇，但基礎觀念還是要懂才行</p>
 
 <h3>參考資料:</h3>
 
