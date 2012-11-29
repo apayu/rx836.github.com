@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[jQuery] jQuery常用的表單驗證事件 - apa</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="在動態網頁的世界裡面，最常使用到的大概就非Forms莫屬，填寫完表格以後都會將資料傳送到bcak-end(後端)，而在傳送之前，有一些資料的驗證都會交由front-end(前端)來處理，這篇就來紀錄一下對於HTML Forms來說，常用的一些jQuery方法 .blur() Blur &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rx836.github.com/blog/jquery-html-forms">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="apa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">apa</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rx836.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[jQuery] jQuery常用的表單驗證事件</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-29T15:40:00+08:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>在動態網頁的世界裡面，最常使用到的大概就非Forms莫屬，填寫完表格以後都會將資料傳送到bcak-end(後端)，而在傳送之前，有一些資料的驗證都會交由front-end(前端)來處理，這篇就來紀錄一下對於HTML Forms來說，常用的一些jQuery方法</p>
+
+<!--more-->
+
+
+<h2>.blur()</h2>
+
+<p><strong>Blur</strong> 發生在當一個元素失去焦點時，所觸發的一個事件，在原生的HTML裡面提供了 <strong>onblur</strong> 這個屬性，可以將這個事件附加到HTML元素上，範例如下</p>
+
+<pre><code>&lt;input type = "text" onblur = "doSomething();" /&gt;
+</code></pre>
+
+<p>當光標的焦點在input裡面以後，在點擊input以外的元素就會觸發，不過這是老舊的寫法，因為我們希望能盡量在HTML上保持乾淨，與程式邏輯做分離，所以就會使用jQuery的blur()來達到此任務</p>
+
+<pre><code>$("input").blur(function() { /* Do something... */ } );
+</code></pre>
+
+<p>要特別注意的是 <strong>onblur </strong> 這個事件適用於所有的input元素，也就是說就算是button也適用，因為在鍵盤上有個「Tab鍵」可以在網頁上做焦點的切換，就會觸發 <strong>onblur</strong> 這個事件</p>
+
+<p>不過在1.7以後的jQuery版本裡面建議開始使用 <strong>.on()</strong> 來達到此任務，效能會比較好</p>
+
+<pre><code>$('input').on('blur', function() { /* Do something.... */ });
+$('input').off('blur', function() { /* Do something... */ });
+</code></pre>
+
+<p>相較於 <strong>.on()</strong> ， <strong>.off()</strong> 就是停止監聽這個事件，善用 <strong>.off()</strong> 也可以讓效能增加(參考<a href="http://blog.darkthread.net/post-2011-11-07-jquery-1-7-release.aspx" target="_blank">黑暗執行緒 jQuery 1.7筆記</a>)，避免過多不必要的事件監聽</p>
+
+<p>如果你只希望監聽「某個類型元素」的事件，可以這樣寫</p>
+
+<pre><code>$("input[type=radio]").on('blur', function() { /* Do something... */ } );
+$("input[type=checkbox]").on('blur', function() { /* Do something... */ } );    
+$("input[type=text]").on('blur', function() { /* Do something... */ } );
+</code></pre>
+
+<p>當然，只想要針對單一指定的元素，可以用id值來選取</p>
+
+<pre><code>$("input#Email").on('blur', function() { /* Do something... */ } );
+</code></pre>
+
+<h2>.change()</h2>
+
+<p><strong>change</strong> 事件相當於HTML裡面的 <strong>onchange </strong> 屬性，跟上一個討論 <strong>blur</strong> 事件很像，但不同的地方在於，當焦點離開元素之前，如果元素有改變的話，就會觸發這個事件，寫法如下</p>
+
+<pre><code>$("input#target").change(function() { /* Do something... */ } );
+$("input#target").bind("change", function() { /* Do something... */ } );
+$("input#target").on("change", function() { /* Do something... */ } );
+</code></pre>
+
+<p>一樣建議使用 <strong>on()</strong> 來監聽change這個事件</p>
+
+<p>同時利用 <strong>onChange</strong> 和 <strong>onBlur</strong> 來驗證表單也是很常見的做法</p>
+
+<pre><code>$("input#target").on("change", EmailChecked );
+$("input#target").on("blur", EmailChecked );
+
+function EmailChecked( value )
+{
+    //在這邊做驗證...
+
+     if (valid)
+     {
+         // 驗證通過...
+     }
+     else
+     {
+         // 驗證不通過...
+     }
+}
+</code></pre>
+
+<p>可以讓驗證做的更完善，兩個事件的觸發先後順序為 onChange>onBlur</p>
+
+<h2>.focus()</h2>
+
+<p>相等同於 <strong>onFocus</strong> ，如果 <strong>.blur()</strong> 是失去焦點，那 <strong>.focus()</strong>就是得到焦點，也就是在某個元素被點擊以後所觸發的事件，語法如下</p>
+
+<pre><code>$("input#myInput").focus(function() { /* Do something... */ });
+$("input#myInput").bind("focus", function() { /* Do something... */ });
+$("input#myInput").on("focus", function() { /* Do something... */ });
+</code></pre>
+
+<p>這邊還是建議使用 <strong>.on()</strong></p>
+
+<h2>.select()</h2>
+
+<p>select算是很容易讓人混淆的事件，在text input元素裡面(或textarea)，當你在裡面將文字反白以後，就會觸發此事件，範例如下</p>
+
+<pre><code>&lt;input type="text" value="Some text" /&gt;
+
+&lt;script&gt;
+    $(":input").select( function () { 
+        alert('文字被反白');
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>但有些人可能會誤用成這樣</p>
+
+<pre><code>$("input[type=checkbox]").select();
+$("input[type=radio]").select();  
+</code></pre>
+
+<p><strong>這個方法並不能將checkbox或是radio執行勾選</strong>，正確的做法應該是這樣</p>
+
+<pre><code>$("input[type=checkbox]").prop("checked", true); // Check checkbox
+$("input[type=radio]").prop("checked", true); // Check radio button
+</code></pre>
+
+<h2>.val()</h2>
+
+<p>這大概是jQuery最長用到的方法之一， <strong>.val()</strong> 可以取得值</p>
+
+<pre><code>var Email = $("input#Email").val();
+</code></pre>
+
+<p>當是用在&lt;select&gt;元素時，<strong>.val()</strong> 可以將現在選取的項目值取出來</p>
+
+<pre><code>&lt;select id="test1" name="test1" /&gt;
+  &lt;option value="1"&gt;select1&lt;/option&gt;
+  &lt;option value="2"&gt;select2&lt;/option&gt;
+  &lt;option value="3"&gt;select3&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $("select").val(); 
+&lt;/script&gt;
+</code></pre>
+
+<p>不過 <strong>.val()</strong> 只適用在input元素裡面，就算在div裡面自己加上value屬性也取不到值</p>
+
+<pre><code>&lt;div value = "apa"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("div").val(); //錯誤的...
+&lt;/script&gt;
+</code></pre>
+
+<p>div應該要用 <strong>.text()</strong> 或是 <strong>.html()</strong> 來修改裡面的內容</p>
+
+<h2>.submit()</h2>
+
+<p>在表單傳送裡面，HTML必須長成這樣</p>
+
+<pre><code>&lt;form id = "myForm"&gt;
+    &lt;input type = "submit" value = "Submit"/&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>submit的button必須一定要包裹在&lt;form&gt;，如果想要藉由&lt;form&gt;以外的元素來觸發呢？可以這樣寫</p>
+
+<pre><code>$("input#myButton").click(function() {
+    $("#myForm").submit();
+});
+</code></pre>
+
+<p>這樣就可以不需要透過submit來將資料送出，另外想在送出前做表單驗證的話，也可以用 <strong>.submit()</strong></p>
+
+<pre><code>$("form").submit(function() {
+  if ($("input:first").val() == "correct") {
+    $("span").text("Validated...").show();
+    return true;
+  }
+  $("span").text("Not valid!").show().fadeOut(1000);
+  return false;
+});
+</code></pre>
+
+<p>當按下submit以後，就會進行驗證，假如回傳值是false，表單就不會送出</p>
+
+<p>以上是常用的表單驗證方法，當然網路上也有很多寫好的plugin可以用，因為處理這個老實說蠻麻煩的，善用plugin也是個不錯的選擇</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://blog.darkthread.net/post-2011-11-07-jquery-1-7-release.aspx" target="_blank">黑暗執行緒 jQuery 1.7筆記</a></p>
+
+<p><a href="http://api.jquery.com/blur/" target="_blank">jQuery API .blur()</a></p>
+
+<p><a href="http://api.jquery.com/change/" target="_blank">jQuery API .change()</a></p>
+
+<p><a href="http://api.jquery.com/on/" target="_blank">jQuery API .on()</a></p>
+
+<p><a href="http://api.jquery.com/focus/" target="_blank">jQuery API .focus()</a></p>
+
+<p><a href="http://api.jquery.com/select/" target="_blank">jQuery API .select()</a></p>
+
+<p><a href="http://api.jquery.com/val/" target="_blank">jQuery API .val()</a></p>
+
+<p><a href="http://api.jquery.com/submit/" target="_blank">jQuery API .submit()</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-29T15:40:00+08:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jquery/'>jQuery</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/mailcheck-jquery-plugin/" title="Previous Post: [jQ-Plugin] 有效降低會員註冊退信率的mailcheck">&laquo; [jQ-Plugin] 有效降低會員註冊退信率的mailcheck</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://rx836.github.com/blog/jquery-html-forms/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (9)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/javascript'>JavaScript (6)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (8)</a></li><li><a href='/blog/categories/jquery'>jQuery (18)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (5)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (8)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/jquery-html-forms/">[jQuery] jQuery常用的表單驗證事件</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/mailcheck-jquery-plugin/">[jQ-Plugin] 有效降低會員註冊退信率的mailcheck</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/friendly-tooltip-responsive/">[jQuery] 自製擁有Responsive的Tooltip</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/css3-real-beauty-box-shadows/">[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/javascript-namespace/">[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://rx836.github.com/blog/jquery-html-forms/';
+        var disqus_url = 'http://rx836.github.com/blog/jquery-html-forms/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=416172151763823&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

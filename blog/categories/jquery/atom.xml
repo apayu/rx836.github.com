@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | apa]]></title>
   <link href="http://rx836.github.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-28T15:13:17+08:00</updated>
+  <updated>2012-11-29T16:57:43+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,204 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] jQuery常用的表單驗證事件]]></title>
+    <link href="http://rx836.github.com/blog/jquery-html-forms/"/>
+    <updated>2012-11-29T15:40:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-html-forms</id>
+    <content type="html"><![CDATA[<p>在動態網頁的世界裡面，最常使用到的大概就非Forms莫屬，填寫完表格以後都會將資料傳送到bcak-end(後端)，而在傳送之前，有一些資料的驗證都會交由front-end(前端)來處理，這篇就來紀錄一下對於HTML Forms來說，常用的一些jQuery方法</p>
+
+<!--more-->
+
+
+<h2>.blur()</h2>
+
+<p><strong>Blur</strong> 發生在當一個元素失去焦點時，所觸發的一個事件，在原生的HTML裡面提供了 <strong>onblur</strong> 這個屬性，可以將這個事件附加到HTML元素上，範例如下</p>
+
+<pre><code>&lt;input type = "text" onblur = "doSomething();" /&gt;
+</code></pre>
+
+<p>當光標的焦點在input裡面以後，在點擊input以外的元素就會觸發，不過這是老舊的寫法，因為我們希望能盡量在HTML上保持乾淨，與程式邏輯做分離，所以就會使用jQuery的blur()來達到此任務</p>
+
+<pre><code>$("input").blur(function() { /* Do something... */ } );
+</code></pre>
+
+<p>要特別注意的是 <strong>onblur </strong> 這個事件適用於所有的input元素，也就是說就算是button也適用，因為在鍵盤上有個「Tab鍵」可以在網頁上做焦點的切換，就會觸發 <strong>onblur</strong> 這個事件</p>
+
+<p>不過在1.7以後的jQuery版本裡面建議開始使用 <strong>.on()</strong> 來達到此任務，效能會比較好</p>
+
+<pre><code>$('input').on('blur', function() { /* Do something.... */ });
+$('input').off('blur', function() { /* Do something... */ });
+</code></pre>
+
+<p>相較於 <strong>.on()</strong> ， <strong>.off()</strong> 就是停止監聽這個事件，善用 <strong>.off()</strong> 也可以讓效能增加(參考<a href="http://blog.darkthread.net/post-2011-11-07-jquery-1-7-release.aspx" target="_blank">黑暗執行緒 jQuery 1.7筆記</a>)，避免過多不必要的事件監聽</p>
+
+<p>如果你只希望監聽「某個類型元素」的事件，可以這樣寫</p>
+
+<pre><code>$("input[type=radio]").on('blur', function() { /* Do something... */ } );
+$("input[type=checkbox]").on('blur', function() { /* Do something... */ } );    
+$("input[type=text]").on('blur', function() { /* Do something... */ } );
+</code></pre>
+
+<p>當然，只想要針對單一指定的元素，可以用id值來選取</p>
+
+<pre><code>$("input#Email").on('blur', function() { /* Do something... */ } );
+</code></pre>
+
+<h2>.change()</h2>
+
+<p><strong>change</strong> 事件相當於HTML裡面的 <strong>onchange </strong> 屬性，跟上一個討論 <strong>blur</strong> 事件很像，但不同的地方在於，當焦點離開元素之前，如果元素有改變的話，就會觸發這個事件，寫法如下</p>
+
+<pre><code>$("input#target").change(function() { /* Do something... */ } );
+$("input#target").bind("change", function() { /* Do something... */ } );
+$("input#target").on("change", function() { /* Do something... */ } );
+</code></pre>
+
+<p>一樣建議使用 <strong>on()</strong> 來監聽change這個事件</p>
+
+<p>同時利用 <strong>onChange</strong> 和 <strong>onBlur</strong> 來驗證表單也是很常見的做法</p>
+
+<pre><code>$("input#target").on("change", EmailChecked );
+$("input#target").on("blur", EmailChecked );
+
+function EmailChecked( value )
+{
+    //在這邊做驗證...
+
+     if (valid)
+     {
+         // 驗證通過...
+     }
+     else
+     {
+         // 驗證不通過...
+     }
+}
+</code></pre>
+
+<p>可以讓驗證做的更完善，兩個事件的觸發先後順序為 onChange>onBlur</p>
+
+<h2>.focus()</h2>
+
+<p>相等同於 <strong>onFocus</strong> ，如果 <strong>.blur()</strong> 是失去焦點，那 <strong>.focus()</strong>就是得到焦點，也就是在某個元素被點擊以後所觸發的事件，語法如下</p>
+
+<pre><code>$("input#myInput").focus(function() { /* Do something... */ });
+$("input#myInput").bind("focus", function() { /* Do something... */ });
+$("input#myInput").on("focus", function() { /* Do something... */ });
+</code></pre>
+
+<p>這邊還是建議使用 <strong>.on()</strong></p>
+
+<h2>.select()</h2>
+
+<p>select算是很容易讓人混淆的事件，在text input元素裡面(或textarea)，當你在裡面將文字反白以後，就會觸發此事件，範例如下</p>
+
+<pre><code>&lt;input type="text" value="Some text" /&gt;
+
+&lt;script&gt;
+    $(":input").select( function () { 
+        alert('文字被反白');
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>但有些人可能會誤用成這樣</p>
+
+<pre><code>$("input[type=checkbox]").select();
+$("input[type=radio]").select();  
+</code></pre>
+
+<p><strong>這個方法並不能將checkbox或是radio執行勾選</strong>，正確的做法應該是這樣</p>
+
+<pre><code>$("input[type=checkbox]").prop("checked", true); // Check checkbox
+$("input[type=radio]").prop("checked", true); // Check radio button
+</code></pre>
+
+<h2>.val()</h2>
+
+<p>這大概是jQuery最長用到的方法之一， <strong>.val()</strong> 可以取得值</p>
+
+<pre><code>var Email = $("input#Email").val();
+</code></pre>
+
+<p>當是用在&lt;select&gt;元素時，<strong>.val()</strong> 可以將現在選取的項目值取出來</p>
+
+<pre><code>&lt;select id="test1" name="test1" /&gt;
+  &lt;option value="1"&gt;select1&lt;/option&gt;
+  &lt;option value="2"&gt;select2&lt;/option&gt;
+  &lt;option value="3"&gt;select3&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $("select").val(); 
+&lt;/script&gt;
+</code></pre>
+
+<p>不過 <strong>.val()</strong> 只適用在input元素裡面，就算在div裡面自己加上value屬性也取不到值</p>
+
+<pre><code>&lt;div value = "apa"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("div").val(); //錯誤的...
+&lt;/script&gt;
+</code></pre>
+
+<p>div應該要用 <strong>.text()</strong> 或是 <strong>.html()</strong> 來修改裡面的內容</p>
+
+<h2>.submit()</h2>
+
+<p>在表單傳送裡面，HTML必須長成這樣</p>
+
+<pre><code>&lt;form id = "myForm"&gt;
+    &lt;input type = "submit" value = "Submit"/&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>submit的button必須一定要包裹在&lt;form&gt;，如果想要藉由&lt;form&gt;以外的元素來觸發呢？可以這樣寫</p>
+
+<pre><code>$("input#myButton").click(function() {
+    $("#myForm").submit();
+});
+</code></pre>
+
+<p>這樣就可以不需要透過submit來將資料送出，另外想在送出前做表單驗證的話，也可以用 <strong>.submit()</strong></p>
+
+<pre><code>$("form").submit(function() {
+  if ($("input:first").val() == "correct") {
+    $("span").text("Validated...").show();
+    return true;
+  }
+  $("span").text("Not valid!").show().fadeOut(1000);
+  return false;
+});
+</code></pre>
+
+<p>當按下submit以後，就會進行驗證，假如回傳值是false，表單就不會送出</p>
+
+<p>以上是常用的表單驗證方法，當然網路上也有很多寫好的plugin可以用，因為處理這個老實說蠻麻煩的，善用plugin也是個不錯的選擇</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://blog.darkthread.net/post-2011-11-07-jquery-1-7-release.aspx" target="_blank">黑暗執行緒 jQuery 1.7筆記</a></p>
+
+<p><a href="http://api.jquery.com/blur/" target="_blank">jQuery API .blur()</a></p>
+
+<p><a href="http://api.jquery.com/change/" target="_blank">jQuery API .change()</a></p>
+
+<p><a href="http://api.jquery.com/on/" target="_blank">jQuery API .on()</a></p>
+
+<p><a href="http://api.jquery.com/focus/" target="_blank">jQuery API .focus()</a></p>
+
+<p><a href="http://api.jquery.com/select/" target="_blank">jQuery API .select()</a></p>
+
+<p><a href="http://api.jquery.com/val/" target="_blank">jQuery API .val()</a></p>
+
+<p><a href="http://api.jquery.com/submit/" target="_blank">jQuery API .submit()</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQuery] 自製擁有Responsive的Tooltip]]></title>
@@ -555,142 +753,6 @@ $(element).on('event-name.kwicks', handler);
 <p>參考資料:</p>
 
 <p><a href="http://www.webresourcesdepot.com/jquery-countdown-plugins-for-coming-soon-pages/" target="_blank"></a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] jQuery你一定要知道的八件事]]></title>
-    <link href="http://rx836.github.com/blog/jquery-8-skill/"/>
-    <updated>2012-10-24T23:18:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-8-skill</id>
-    <content type="html"><![CDATA[<p>jQuery這項技能在面試的時候，已經從"加分"變成"必備"，由此可知，如果想走web開發，jQuery已經是不可或缺的技術，但jQuery雖然好上手，網路上的教學資源也很多，但有幾件事情是在使用jQuery你一定要知道的</p>
-
-<!--more-->
-
-
-<h2>1.使用Google CDN-hosted並且保持最新版本</h2>
-
-<p>使用Google CDN的好處是，有許多網站都有使用CDN，所以訪客在拜訪你的網站之前，可能已經先下載過jQuery，之後拜訪你的網站就可以直接從快取中使用，而不用重新下載，增加網站讀取速度，至於保持jQuery最新的版本，除了可以修復一些bug，還可以增加performance</p>
-
-<pre><code>&lt;script type="text/javascript" src="http://rx836.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>有些人可能會發現，為什麼少了<strong>http:</strong>，原因是假如網站遊走在http和https之間，使用這種忽略 <strong>scheme</strong> 的部分，就可以避免因為開啟了https的網頁，但jQuery是http所產生的安全性問題</p>
-
-<h2>2.在開發時搭配Cheat Sheet</h2>
-
-<p>其實不只是初學者，對於資深的開發者也建議使用cheat sheets，可以方便直接查詢，也省去google的麻煩</p>
-
-<p><a href="http://oscarotero.com/jquery/" target="_blank">http://oscarotero.com/jquery/</a></p>
-
-<p><a href="http://www.javascripttoolbox.com/jquery/cheatsheet/" target="_blank">http://www.javascripttoolbox.com/jquery/cheatsheet/</a></p>
-
-<p><a href="http://devcheatsheet.com/tag/jquery/" target="_blank">http://devcheatsheet.com/tag/jquery/</a></p>
-
-<h2>3.不能單純只使用CDN</h2>
-
-<p>剛剛第一點講到建議使用Google CDN，但有一點必須要注意的是，CDN有時候會有失效的問題，像某些地區會連不到Google CDN，這時候就要有locally的jQuery可以備用，判別的JavaScript語法可以這樣寫</p>
-
-<pre><code>&lt;script src="http://rx836.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;window.jQuery || document.write('&lt;script src="js/jquery-1.8.1.min.js"&gt;&lt;\/script&gt;')&lt;/script&gt;
-</code></pre>
-
-<p>這段程式碼會在抓不到Google CDN時，去抓取自家主機上的jQuery，讓網站不至於因為這樣而掛掉</p>
-
-<h2>4.重複使用jQuery selector</h2>
-
-<p>為了優化jQuery，千萬不要這樣寫</p>
-
-<pre><code>$("#mySmashingID").css("color", "pink");
-$("#mySmashingID").css("font", "Verdana");
-$("#mySmashingID").text("Some error message goes here!");
-</code></pre>
-
-<p>假如要針對同個selectors做操作，不應該重複呼叫自己，而是要利用jQuery鏈結的特性串起來</p>
-
-<pre><code>$("#mySmashingID").css({ "color": "pink", "font": "Verdana"}).text("Some error message goes here!!");
-</code></pre>
-
-<h2>5.將重複使用的selector宣告一個變數存起來</h2>
-
-<p>假如你會針對一個selector在很多地方使用到</p>
-
-<pre><code>$(‘#mySmashingGag’).appendTo(‘#mysidebar’);
-$(‘#mySmashingGag’).addClass(‘widget’);
-$(‘#mySmashingGag’).hide();
-$(‘#mySmashingGag’).fadeIn(‘fast’);
-</code></pre>
-
-<p>你應該將他存入一個變數，並且使用變數來操作，這樣也可以增加效能，而不會一直去做selector</p>
-
-<pre><code>var mySmashingGag = $(‘#mySmashingGag’);
-mySmashingGag.appendTo(‘#mysidebar’);
-mySmashingGag.addClass(‘widget’);
-mySmashingGag.hide();
-mySmashingGag.fadeIn(‘fast’);
-</code></pre>
-
-<h2>6.使用ID而不要使用class</h2>
-
-<p>jQuery骨子裡其實還是JavaScript，所以不管如何速度再快也比不上原生的JavaScript快，所以如果使用ID來選取元素的話，就會使用JavaScript的原生方法 <strong>getElementByID</strong>，效能就會比較快，相反的不是使用原生方法的class效能就會比較慢</p>
-
-<p>不要使用class</p>
-
-<pre><code>// Selecting each item at once
-for (i = 0; i &lt; 900; i++) {
-    var selectedItem = $('.mySmashingItem' + i);
-}
-</code></pre>
-
-<p>使用ID</p>
-
-<pre><code>// Selecting each item at once
-for (i = 0; i &lt; 900; i++) {
-    var selectedItem = $('#mySmashingItem' + i);
-}
-</code></pre>
-
-<h2>7.使用縮寫</h2>
-
-<p>正常來說會這樣寫</p>
-
-<pre><code>$(document).ready(function (){
-    // your awesome code here
-});
-</code></pre>
-
-<p>但其實可以這樣寫</p>
-
-<pre><code>$(function (){
-    // your awesome code here
-});
-</code></pre>
-
-<h2>8.使用context</h2>
-
-<p>當你再使用選取器(selectors)的時候，jQuery會針對整個頁面去做搜索直到找到為止，可是其實我們可以縮小範圍</p>
-
-<p>例如原本的寫法</p>
-
-<pre><code>$(‘.mySmashingGag’).on(‘click’, showMenu);
-</code></pre>
-
-<p>但我們可以這樣寫</p>
-
-<pre><code>$(‘.mySmashingGag’, ‘#mySidebar’).on(‘click’, showMenu);
-</code></pre>
-
-<p>這樣他就會在ID為mySidebar去搜尋class為mySmashingGag的元素</p>
-
-<p>這些其實不難，但都是養成正確寫jQuery的好習慣:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://smashinghub.com/8-jquery-crimes-you-really-shouldnt-commit.htm" target="_blank">8 jQuery Crimes You Really Shouldn’t Commit</a></p>
-
-<p><a href="http://blog.miniasp.com/post/2008/10/19/URL-URI-Description-and-usage-tips.aspx" target="_blank">講解 URL 結構與分享幾個相對路徑與絕對路徑的開發技巧 </a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

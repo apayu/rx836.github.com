@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-28T15:13:17+08:00</updated>
+  <updated>2012-11-29T16:57:43+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,204 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] jQuery常用的表單驗證事件]]></title>
+    <link href="http://rx836.github.com/blog/jquery-html-forms/"/>
+    <updated>2012-11-29T15:40:00+08:00</updated>
+    <id>http://rx836.github.com/blog/jquery-html-forms</id>
+    <content type="html"><![CDATA[<p>在動態網頁的世界裡面，最常使用到的大概就非Forms莫屬，填寫完表格以後都會將資料傳送到bcak-end(後端)，而在傳送之前，有一些資料的驗證都會交由front-end(前端)來處理，這篇就來紀錄一下對於HTML Forms來說，常用的一些jQuery方法</p>
+
+<!--more-->
+
+
+<h2>.blur()</h2>
+
+<p><strong>Blur</strong> 發生在當一個元素失去焦點時，所觸發的一個事件，在原生的HTML裡面提供了 <strong>onblur</strong> 這個屬性，可以將這個事件附加到HTML元素上，範例如下</p>
+
+<pre><code>&lt;input type = "text" onblur = "doSomething();" /&gt;
+</code></pre>
+
+<p>當光標的焦點在input裡面以後，在點擊input以外的元素就會觸發，不過這是老舊的寫法，因為我們希望能盡量在HTML上保持乾淨，與程式邏輯做分離，所以就會使用jQuery的blur()來達到此任務</p>
+
+<pre><code>$("input").blur(function() { /* Do something... */ } );
+</code></pre>
+
+<p>要特別注意的是 <strong>onblur </strong> 這個事件適用於所有的input元素，也就是說就算是button也適用，因為在鍵盤上有個「Tab鍵」可以在網頁上做焦點的切換，就會觸發 <strong>onblur</strong> 這個事件</p>
+
+<p>不過在1.7以後的jQuery版本裡面建議開始使用 <strong>.on()</strong> 來達到此任務，效能會比較好</p>
+
+<pre><code>$('input').on('blur', function() { /* Do something.... */ });
+$('input').off('blur', function() { /* Do something... */ });
+</code></pre>
+
+<p>相較於 <strong>.on()</strong> ， <strong>.off()</strong> 就是停止監聽這個事件，善用 <strong>.off()</strong> 也可以讓效能增加(參考<a href="http://blog.darkthread.net/post-2011-11-07-jquery-1-7-release.aspx" target="_blank">黑暗執行緒 jQuery 1.7筆記</a>)，避免過多不必要的事件監聽</p>
+
+<p>如果你只希望監聽「某個類型元素」的事件，可以這樣寫</p>
+
+<pre><code>$("input[type=radio]").on('blur', function() { /* Do something... */ } );
+$("input[type=checkbox]").on('blur', function() { /* Do something... */ } );    
+$("input[type=text]").on('blur', function() { /* Do something... */ } );
+</code></pre>
+
+<p>當然，只想要針對單一指定的元素，可以用id值來選取</p>
+
+<pre><code>$("input#Email").on('blur', function() { /* Do something... */ } );
+</code></pre>
+
+<h2>.change()</h2>
+
+<p><strong>change</strong> 事件相當於HTML裡面的 <strong>onchange </strong> 屬性，跟上一個討論 <strong>blur</strong> 事件很像，但不同的地方在於，當焦點離開元素之前，如果元素有改變的話，就會觸發這個事件，寫法如下</p>
+
+<pre><code>$("input#target").change(function() { /* Do something... */ } );
+$("input#target").bind("change", function() { /* Do something... */ } );
+$("input#target").on("change", function() { /* Do something... */ } );
+</code></pre>
+
+<p>一樣建議使用 <strong>on()</strong> 來監聽change這個事件</p>
+
+<p>同時利用 <strong>onChange</strong> 和 <strong>onBlur</strong> 來驗證表單也是很常見的做法</p>
+
+<pre><code>$("input#target").on("change", EmailChecked );
+$("input#target").on("blur", EmailChecked );
+
+function EmailChecked( value )
+{
+    //在這邊做驗證...
+
+     if (valid)
+     {
+         // 驗證通過...
+     }
+     else
+     {
+         // 驗證不通過...
+     }
+}
+</code></pre>
+
+<p>可以讓驗證做的更完善，兩個事件的觸發先後順序為 onChange>onBlur</p>
+
+<h2>.focus()</h2>
+
+<p>相等同於 <strong>onFocus</strong> ，如果 <strong>.blur()</strong> 是失去焦點，那 <strong>.focus()</strong>就是得到焦點，也就是在某個元素被點擊以後所觸發的事件，語法如下</p>
+
+<pre><code>$("input#myInput").focus(function() { /* Do something... */ });
+$("input#myInput").bind("focus", function() { /* Do something... */ });
+$("input#myInput").on("focus", function() { /* Do something... */ });
+</code></pre>
+
+<p>這邊還是建議使用 <strong>.on()</strong></p>
+
+<h2>.select()</h2>
+
+<p>select算是很容易讓人混淆的事件，在text input元素裡面(或textarea)，當你在裡面將文字反白以後，就會觸發此事件，範例如下</p>
+
+<pre><code>&lt;input type="text" value="Some text" /&gt;
+
+&lt;script&gt;
+    $(":input").select( function () { 
+        alert('文字被反白');
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>但有些人可能會誤用成這樣</p>
+
+<pre><code>$("input[type=checkbox]").select();
+$("input[type=radio]").select();  
+</code></pre>
+
+<p><strong>這個方法並不能將checkbox或是radio執行勾選</strong>，正確的做法應該是這樣</p>
+
+<pre><code>$("input[type=checkbox]").prop("checked", true); // Check checkbox
+$("input[type=radio]").prop("checked", true); // Check radio button
+</code></pre>
+
+<h2>.val()</h2>
+
+<p>這大概是jQuery最長用到的方法之一， <strong>.val()</strong> 可以取得值</p>
+
+<pre><code>var Email = $("input#Email").val();
+</code></pre>
+
+<p>當是用在&lt;select&gt;元素時，<strong>.val()</strong> 可以將現在選取的項目值取出來</p>
+
+<pre><code>&lt;select id="test1" name="test1" /&gt;
+  &lt;option value="1"&gt;select1&lt;/option&gt;
+  &lt;option value="2"&gt;select2&lt;/option&gt;
+  &lt;option value="3"&gt;select3&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $("select").val(); 
+&lt;/script&gt;
+</code></pre>
+
+<p>不過 <strong>.val()</strong> 只適用在input元素裡面，就算在div裡面自己加上value屬性也取不到值</p>
+
+<pre><code>&lt;div value = "apa"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("div").val(); //錯誤的...
+&lt;/script&gt;
+</code></pre>
+
+<p>div應該要用 <strong>.text()</strong> 或是 <strong>.html()</strong> 來修改裡面的內容</p>
+
+<h2>.submit()</h2>
+
+<p>在表單傳送裡面，HTML必須長成這樣</p>
+
+<pre><code>&lt;form id = "myForm"&gt;
+    &lt;input type = "submit" value = "Submit"/&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>submit的button必須一定要包裹在&lt;form&gt;，如果想要藉由&lt;form&gt;以外的元素來觸發呢？可以這樣寫</p>
+
+<pre><code>$("input#myButton").click(function() {
+    $("#myForm").submit();
+});
+</code></pre>
+
+<p>這樣就可以不需要透過submit來將資料送出，另外想在送出前做表單驗證的話，也可以用 <strong>.submit()</strong></p>
+
+<pre><code>$("form").submit(function() {
+  if ($("input:first").val() == "correct") {
+    $("span").text("Validated...").show();
+    return true;
+  }
+  $("span").text("Not valid!").show().fadeOut(1000);
+  return false;
+});
+</code></pre>
+
+<p>當按下submit以後，就會進行驗證，假如回傳值是false，表單就不會送出</p>
+
+<p>以上是常用的表單驗證方法，當然網路上也有很多寫好的plugin可以用，因為處理這個老實說蠻麻煩的，善用plugin也是個不錯的選擇</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://blog.darkthread.net/post-2011-11-07-jquery-1-7-release.aspx" target="_blank">黑暗執行緒 jQuery 1.7筆記</a></p>
+
+<p><a href="http://api.jquery.com/blur/" target="_blank">jQuery API .blur()</a></p>
+
+<p><a href="http://api.jquery.com/change/" target="_blank">jQuery API .change()</a></p>
+
+<p><a href="http://api.jquery.com/on/" target="_blank">jQuery API .on()</a></p>
+
+<p><a href="http://api.jquery.com/focus/" target="_blank">jQuery API .focus()</a></p>
+
+<p><a href="http://api.jquery.com/select/" target="_blank">jQuery API .select()</a></p>
+
+<p><a href="http://api.jquery.com/val/" target="_blank">jQuery API .val()</a></p>
+
+<p><a href="http://api.jquery.com/submit/" target="_blank">jQuery API .submit()</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 有效降低會員註冊退信率的mailcheck]]></title>
@@ -2156,149 +2354,6 @@ notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNot
 <p><a href="http://www.adobe.com/devnet/html5/articles/using-css3-transitions-a-comprehensive-guide.html" target="_blank">Using CSS3 transitions: A comprehensive guide</a></p>
 
 <p><a href="http://www.w3cplus.com/content/css3-transition" target="_blank">CSS3 Transition</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying]]></title>
-    <link href="http://rx836.github.com/blog/javascript-currying/"/>
-    <updated>2012-10-18T00:01:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-currying</id>
-    <content type="html"><![CDATA[<p>有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化)</p>
-
-<!--more-->
-
-
-<p>Curry這個命名是一個來自<a href="http://en.wikipedia.org/wiki/Haskell_Curry" target="_blank">Haskell Curry</a>的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹，我們先來看看以下這段程式碼</p>
-
-<pre><code>function m(x, y){
-    return x * y;
-}
-</code></pre>
-
-<p>這是一段很普通的函式，傳入參數x和y以後做相乘，並且將結果回傳，可是假如有一個情況是，x參數是固定的，y值是動態的，那我們每次呼叫會怎麼做呢？</p>
-
-<pre><code>m(2,1);
-m(2,2);
-m(2,3);
-m(2,4);
-...
-</code></pre>
-
-<p>這樣看起來雖然不太好，但尚且還可以接受，但如果函式的參數不止兩個呢？</p>
-
-<pre><code>function m(x, y, z, p, k, l){
-    return x * y * z * p * k * l;
-}
-</code></pre>
-
-<p>然後呼叫的時候，只有l參數變動，其他參數每次都固定&#8230;</p>
-
-<pre><code>m(2,3,4,5,6,1);
-m(2,3,4,5,6,2);
-m(2,3,4,5,6,3);
-m(2,3,4,5,6,4);
-...
-</code></pre>
-
-<p>這時候就會覺得，一定有什麼方法可以更簡化，少打更多的code，這時候就要將函式進行Currying，首先我們要先寫一個泛用的Currying函式</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-</code></pre>
-
-<p>然後接著寫</p>
-
-<pre><code>function m(x, y){
-    return x * y;
-}
-
-var new_m = currying(m, 5)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
-
-<p>這樣y值不管傳什麼，x值一樣都保持固定的5，程式有點複雜，現在我們就來看看吧，首先來看看變數slice和stored_args分別是什麼</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    console.log(slice); //function slice() { [native code] }        
-    console.log(stored_args); // [5]        
-}
-
-function m(x, y){
-    return x * y;
-}
-
-currying(m, 5);​
-</code></pre>
-
-<p>我們可以看到，變數slice存放<a href="http://www.w3school.com.cn/js/jsref_slice_string.asp" target="_blank">slice()</a>方法，因為我們想要將傳進來的參數轉換成陣列，並且將第一個參數去掉(這裡指的第一個參數就是m())，所以最後只剩下一個5的陣列</p>
-
-<pre><code>console.log(stored_args); // [5]
-</code></pre>
-
-<p>接著後面會return一個函式，函式將會重複的參數存在裡面，等於回傳一個新的函式讓User使用，從console.log可以看到變數new_args和args</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        console.log(new_args);//[4] 
-        console.log(args);//[5, 4] 
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y){
-    return x * y;
-}
-
-var new_m = currying(m, 5);
-new_m(4)
-</code></pre>
-
-<p>​
-回傳的函式會放在變數new_m，而這個函式到底在做些甚麼呢？其實就是將新得到的參數(也就是從new_m(4)傳進來的那個4)取出，接著利用concat將新參數和舊參數合在一起，再將合在一起後的參數([5, 4])丟進當初m()這個函式裡面，達成原本要相乘的任務，這樣當函式的參數一多，重複性高時，就可以做優化，例如就如同類似之前提到的y、z、k皆為重覆值，x值為動態</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y, z, k){
-    return x * y * z * k;
-}
-
-var new_m = currying(m, 5, 6, 7)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
-
-<p>重複的事情被取代了，這樣程式碼是不是看起來優化了呢？</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
