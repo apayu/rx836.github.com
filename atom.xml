@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://rx836.github.com/atom.xml" rel="self"/>
   <link href="http://rx836.github.com/"/>
-  <updated>2012-11-29T17:05:31+08:00</updated>
+  <updated>2012-12-02T01:08:48+08:00</updated>
   <id>http://rx836.github.com/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[好書分享] 開放式領導]]></title>
+    <link href="http://rx836.github.com/blog/book-review-6/"/>
+    <updated>2012-12-01T23:59:00+08:00</updated>
+    <id>http://rx836.github.com/blog/book-review-6</id>
+    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-HyLDQMw16fo/ULo4id1YO-I/AAAAAAAAB_8/z9LHSm1m9EY/s348/%25E9%2596%258B%25E6%2594%25BE%25E5%25BC%258F%25E9%25A0%2598%25E5%25B0%258E%25E5%25B0%2581%25E9%259D%25A2.jpg" /></p>
+
+<p>這本書其實是從Facebook別人分享得知的，「開放式領導」這個詞，老實說也是我看到書名後，才第一次認識到，很幸運的除了自己看書以外，還很有幸的參加了HPX，其中有一群人組了這本書的讀書會，在最後一次聚會時所分享的結論，讓我更加了解這本書的內容</p>
+
+<!--more-->
+
+
+<p>首先在這本書的封面，其實已經說明了開放式領導的重點，就是</p>
+
+<p><strong>分享</strong></p>
+
+<p><strong>參與</strong></p>
+
+<p><strong>互動</strong></p>
+
+<p>要想朝「開放式領導」方向前進，首先必須要讓整個組織有共同的願景，我個人覺得這非常的重要，如果一家公司沒有共同的方向，會讓底下的員工覺得，今天我為何而做？為何而戰？為何而犧牲假日加班？當心中有很多為什麼的時候，員工會因為猶豫而無法做更多，書中有一段是這麼說的</p>
+
+<p>「當你們分享願景和策略的時候，這些人會主動來找你，問說：『我可以幫你什麼忙？』他們對於這個理念的掌握是出於個人的層次，而且願意傾注全部的心力來支持這項策略」</p>
+
+<h3>分享，是首當要務</h3>
+
+<p>共同的願景之後，就是讓大家一起參與，但「開放式領導」雖然講求開放，但某些情況下還是會有所規範和限制，書中有提到可以運用沙坑公約，也就是建立沙坑範圍，讓大家知道規則是什麼，就跟桌遊一樣，是規則建立起遊戲，因為有了規則，才能讓遊戲進行下去，同時也能避免許多糾紛</p>
+
+<h3>溝通、溝通、再溝通</h3>
+
+<p>建立起彼此的信任，多與每個人互動，聽聽每個人的想法，建立共同的願景、目標，最終一起朝同個方向努力，這是我讀開放式領導這本書的心得感想</p>
+
+<p>另外有興趣的人可以延伸閱讀這本書</p>
+
+<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010494708" target="_blank">想好了就豁出去：人生不能只做有把握的事，鞋王謝家華這樣找出勝算</a></p>
+
+<p>因為 開放x創新，而造就了這家公司的成功，可說是開放式領導之典範</p>
+
+<p>如有想法，歡迎一起提出討論</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQuery] jQuery常用的表單驗證事件]]></title>
@@ -2203,159 +2245,6 @@ notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNot
 <p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh465439.aspx" target="_blank">傳送磚更新 (使用 JavaScript 和 HTML 的 Metro 樣式應用程式)</a></p>
 
 <p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh779724.aspx" target="_blank">磚與磚通知概觀 (Metro 樣式應用程式)</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS3] 認識CSS3 transitions]]></title>
-    <link href="http://rx836.github.com/blog/css3-transitions-guide/"/>
-    <updated>2012-10-20T23:24:00+08:00</updated>
-    <id>http://rx836.github.com/blog/css3-transitions-guide</id>
-    <content type="html"><![CDATA[<p>一直沒有找個時間好好的了解一下CSS3 transitions，趁著看到<a href="http://www.adobe.com/devnet/html5/articles/using-css3-transitions-a-comprehensive-guide.html" target="_blank">這篇</a>文章，就來筆記一下用法，扎實一下基本功</p>
-
-<!--more-->
-
-
-<p>CSS3 transitions可以改變css屬性的值，在某個期間內做出變化，類似<a href="http://api.jquery.com/animate/" target="_blank">jQuery.animate()</a>，語法結構如下</p>
-
-<pre><code>.example {     
-    transition-property: background-color;     
-    transition-duration: 2s;     
-    transition-timing-function: ease-in;            
-    transition-delay: 1s; 
-}
-</code></pre>
-
-<p>這裡沒有特別加上prefixes，在真正使用的時候要自行加上，接著是分別講解每個屬性的用途</p>
-
-<p><strong>transition-property:</strong> 指定你要變化的CSS屬性，至於哪些屬性是擁有transition效果可以查看<a href="http://www.w3.org/TR/css3-transitions/#animatable-properties" target="_blank">這張表</a></p>
-
-<p><strong>transition-duration:</strong> 指定transition從開始到結束的變化時間，在數字後面加上s就是以秒計算，用ms就是微秒</p>
-
-<p><strong>transition-timing-function:</strong> 根據時間的進行去改變屬性值的變化速率，也就是貝茲曲線，詳細的介紹可以參考<a href="http://www.w3.org/TR/css3-transitions/#transition-timing-function-property" target="_blank">這篇</a>，基本的有linear, ease-in, ease-out和ease-in-out這些值可以使用</p>
-
-<p><strong>transition-delay:</strong> 可以指定秒或微秒來延遲transition觸發的時間</p>
-
-<h3>Transition shorthand</h3>
-
-<p>為了簡潔也可以這樣寫</p>
-
-<pre><code>.example {     
-    transition: background-color 2s ease-in 1s; 
-} 
-</code></pre>
-
-<p>要特別注意的是，順序的重要性，另外第一個時間代表是<strong>transition-duration</strong>，第二個時間是<strong>transition-delay</strong>，如果你要定義<strong>transition-delay</strong>一定要先定義<strong>transition-duration</strong>才行</p>
-
-<h3>Multiple transitions</h3>
-
-<p>如果想在同個元素上定義複數個transitions，可以用下面寫法</p>
-
-<pre><code>.example {     
-    transition:  background-color  2s ease-in 1s,      
-    width  2s ease-in-out,      
-    height 3s ease-out; 
-}
-</code></pre>
-
-<p>記得要用<strong>逗號</strong>隔開</p>
-
-<h3>Triggering a transition</h3>
-
-<p>但其實光寫上面那些語法並不能實現transitions，原因在於沒有<strong>觸發</strong>這個動作，所以我們可能要加些&#8221;動作&#8221;，例如比較常見的是<strong>:hover</strong></p>
-
-<pre><code>.example {     
-    background-color: green;     
-    transition: background-color  2s ease-in 1s; 
-    width:100px;
-    height:100px;  
-} 
-.example:hover {     
-    background-color: blue 
-}
-</code></pre>
-
-<p><a href="http://jsfiddle.net/Pa5Uk/1/" target="_blank">範例</a></p>
-
-<p>會看到如果將滑鼠移到div .example上面，會先等待一秒，接著再花兩秒的時間從綠色轉換成藍色</p>
-
-<h3>Transitions triggered by JavaScript</h3>
-
-<p>假如要搭配JavaScript呢？我們可以使用jQuery來示範一下</p>
-
-<p>css</p>
-
-<pre><code>.example {     
-    background-color: green;     
-    transition: background-color  2s ease-in 1s;
-    width:100px;
-    height:100px;  
-}
-.style-change {     
-    background-color: blue
-}
-</code></pre>
-
-<p>html</p>
-
-<pre><code>&lt;div id="a" class="example"&gt;&lt;/div&gt;
-</code></pre>
-
-<p>js</p>
-
-<pre><code>$("#a").click(function() {         
-    $(".example").toggleClass("style-change");    
-}); 
-</code></pre>
-
-<p><a href="http://jsfiddle.net/Rnebd/" target="_blank">範例</a></p>
-
-<p>這樣就可以搭配著js來使用transition的效果</p>
-
-<h3>Transition tricks and techniques</h3>
-
-<p>有了前面的一些基本用法以外，接下來介紹的是一些小技巧，前面的<strong>:hover</strong>例子不管是從綠色切換成藍色，還是藍色切換回綠色，都是同樣的效果和速度，但其實可以針對這兩者去做變化，例如</p>
-
-<pre><code>.example {     
-    background-color: green;     
-    transition: background-color  1s ease-out;
-    width:100px;
-    height:100px;    
-}
-.example:hover {     
-    background-color: blue;
-    transition: background-color  5s linear;
-}
-</code></pre>
-
-<p>這段意思是從綠色到藍色要花一秒的時間，但從藍色變回綠色要花五秒，就可以做出比較不一樣的效果</p>
-
-<pre><code>.example {     
-    width: 100px;     
-    height: 100px;     
-    background-color: blue;     
-    transition: width 0s ease-out 999999s,                 
-    height 0s ease-out 999999s; } 
-
-.example:active {     
-    width: 200px;     
-    height: 200px;     
-    transition: width 2s,                 
-    height 2s; 
-}
-</code></pre>
-
-<p>當然也可以把transition-delay設為999999s，這樣就可以將效果一直保存</p>
-
-<p>只是我目前還不知道這樣的保存可以用來做啥就是了&#8230;</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.adobe.com/devnet/html5/articles/using-css3-transitions-a-comprehensive-guide.html" target="_blank">Using CSS3 transitions: A comprehensive guide</a></p>
-
-<p><a href="http://www.w3cplus.com/content/css3-transition" target="_blank">CSS3 Transition</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
