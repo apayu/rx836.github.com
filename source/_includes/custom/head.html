@@ -4,4 +4,9 @@
 {% if site.facebook_appid %}
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="{{ site.facebook_appid }}" />
+<meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}" />
+{% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ content | raw_content }}{% endif %}{% endcapture %}
+<meta property="og:description" content="{{ description | strip_html | condense_spaces | truncate:150 }}" />
+{% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' }}{% endif %}{% endcapture %}
+<meta property="og:url" content="{{ canonical }}" />  
 {% endif %}
