@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: PhoneGap | apa]]></title>
-  <link href="http://rx836.github.com/blog/categories/phonegap/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/blog/categories/phonegap/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[PhoneGap] Android開發Facebook取得Key Hashes]]></title>
-    <link href="http://rx836.github.com/blog/android-facebook-key-hashes/"/>
+    <link href="http://blog.rx836.tw/blog/android-facebook-key-hashes/"/>
     <updated>2012-11-12T11:38:00+08:00</updated>
-    <id>http://rx836.github.com/blog/android-facebook-key-hashes</id>
+    <id>http://blog.rx836.tw/blog/android-facebook-key-hashes</id>
     <content type="html"><![CDATA[<p>之前曾經有寫過一篇關於Facebook web App開發的<a href="http://blog.rx836.tw/blog/facebook-app-create-getfbid/" target="_blank">心得文章</a>，但如果是用PhoneGap來開發Facebook App呢？我想很多人第一個遇到的問題就是，我在Facebook開發者設定是註冊web還是Android？</p>
 
 <!--more-->
@@ -84,9 +84,9 @@
   
   <entry>
     <title type="html"><![CDATA[[PhoneGap] 如何搭配平板或手機開發Android]]></title>
-    <link href="http://rx836.github.com/blog/android-phonegap-usb-develop/"/>
+    <link href="http://blog.rx836.tw/blog/android-phonegap-usb-develop/"/>
     <updated>2012-11-09T14:32:00+08:00</updated>
-    <id>http://rx836.github.com/blog/android-phonegap-usb-develop</id>
+    <id>http://blog.rx836.tw/blog/android-phonegap-usb-develop</id>
     <content type="html"><![CDATA[<p>繼好幾天前開始了<a href="http://blog.rx836.tw/blog/phonegap-first/" target="_blank">第一次的PhoneGap之旅</a>，漸漸的開始慢慢熟悉運作模式，有一直寫下去果然還是有差，當然一路上也一直碰到牆壁和踩到地雷(渾身傷..)，這篇就來記錄怎麼用實機做開發測試，往後也會多寫幾篇關於PhoneGap開發心得文章出來奉獻</p>
 
 <!--more-->
@@ -161,9 +161,9 @@
   
   <entry>
     <title type="html"><![CDATA[[PhoneGap] 第一次開發PhoneGap教學筆記]]></title>
-    <link href="http://rx836.github.com/blog/phonegap-first/"/>
+    <link href="http://blog.rx836.tw/blog/phonegap-first/"/>
     <updated>2012-10-10T22:39:00+08:00</updated>
-    <id>http://rx836.github.com/blog/phonegap-first</id>
+    <id>http://blog.rx836.tw/blog/phonegap-first</id>
     <content type="html"><![CDATA[<p>很早很早以前曾經摸過一下Android，還曾想過要走開發手機這條路，但最後還是繼續寫著網頁，不知道選擇對不對，不過至少現在可以用寫網頁的方式做出APP，那就是利用已經出很久的PhoneGap，但到今天才真正的開始學習他，在這邊也會開始慢慢記錄一些有關於PhoneGap的心得</p>
 
 <!--more-->

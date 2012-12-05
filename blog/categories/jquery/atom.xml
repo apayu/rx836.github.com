@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: jQuery | apa]]></title>
-  <link href="http://rx836.github.com/blog/categories/jquery/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/blog/categories/jquery/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[jQuery] jQuery常用的表單驗證事件]]></title>
-    <link href="http://rx836.github.com/blog/jquery-html-forms/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-html-forms/"/>
     <updated>2012-11-29T15:40:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-html-forms</id>
+    <id>http://blog.rx836.tw/blog/jquery-html-forms</id>
     <content type="html"><![CDATA[<p>在動態網頁的世界裡面，最常使用到的大概就非Forms莫屬，填寫完表格以後都會將資料傳送到bcak-end(後端)，而在傳送之前，有一些資料的驗證都會交由front-end(前端)來處理，這篇就來紀錄一下對於HTML Forms來說，常用的一些jQuery方法</p>
 
 <!--more-->
@@ -215,9 +215,9 @@ $("input[type=radio]").prop("checked", true); // Check radio button
   
   <entry>
     <title type="html"><![CDATA[[jQuery] 自製擁有Responsive的Tooltip]]></title>
-    <link href="http://rx836.github.com/blog/friendly-tooltip-responsive/"/>
+    <link href="http://blog.rx836.tw/blog/friendly-tooltip-responsive/"/>
     <updated>2012-11-27T11:53:00+08:00</updated>
-    <id>http://rx836.github.com/blog/friendly-tooltip-responsive</id>
+    <id>http://blog.rx836.tw/blog/friendly-tooltip-responsive</id>
     <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-KiD_TaOPzFA/ULRxljbyVVI/AAAAAAAAB-M/nHY1WuJDaGE/s373/q1.jpg" /></p>
 
 <p>之前做Tooltip，都是上網找plugin比較多，但這次看到一篇文章，是自己寫一個Tooltip，就來記錄一下，而且還有Responsive的效果，可以依照載具大小做縮放和位置的改變，code不多，也很簡單明瞭</p>
@@ -453,9 +453,9 @@ $("input[type=radio]").prop("checked", true); // Check radio button
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] Accordion Menu(手風琴)-Kwicks]]></title>
-    <link href="http://rx836.github.com/blog/jquery-accordion-plugin-kwicks/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks/"/>
     <updated>2012-11-20T11:52:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-accordion-plugin-kwicks</id>
+    <id>http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks</id>
     <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-_J-W2xu9kk0/UKssWB_LsAI/AAAAAAAAB8I/l5FDpuCO27c/s415/t1.jpg" /></p>
 
 <p><img src="https://lh5.googleusercontent.com/-jKM2KBpI5eM/UKssWHgRekI/AAAAAAAAB8E/hG205WtoTDU/s415/t2.jpg" /></p>
@@ -603,9 +603,9 @@ $(element).on('event-name.kwicks', handler);
   
   <entry>
     <title type="html"><![CDATA[[jQuery] 不要將任何事情都在jQuery.ready()初始化]]></title>
-    <link href="http://rx836.github.com/blog/jquery-not-initialize-all-things/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-not-initialize-all-things/"/>
     <updated>2012-11-06T15:06:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-not-initialize-all-things</id>
+    <id>http://blog.rx836.tw/blog/jquery-not-initialize-all-things</id>
     <content type="html"><![CDATA[<p>Don't Initialize All the Thing in jQuery.ready()...，這是由<a href="https://twitter.com/elijahmanor" target="_blank">Elijah Manor</a>所寫的一篇文章，裡面提到不要把所有事情都放在jQuery.ready()做初始化(我就是這樣...)，現在就來筆記一下他怎麼說</p>
 
 <!--more-->
@@ -694,9 +694,9 @@ $(element).on('event-name.kwicks', handler);
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 倒數計時的plugin介紹]]></title>
-    <link href="http://rx836.github.com/blog/jquery-countdown-plugins/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-countdown-plugins/"/>
     <updated>2012-11-05T11:45:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-countdown-plugins</id>
+    <id>http://blog.rx836.tw/blog/jquery-countdown-plugins</id>
     <content type="html"><![CDATA[<p>之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考</p>
 
 <!--more-->

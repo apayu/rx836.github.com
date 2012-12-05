@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Win8 | apa]]></title>
-  <link href="http://rx836.github.com/blog/categories/win8/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/blog/categories/win8/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[Win8] 動態磚初體驗]]></title>
-    <link href="http://rx836.github.com/blog/windows8-notifications/"/>
+    <link href="http://blog.rx836.tw/blog/windows8-notifications/"/>
     <updated>2012-10-23T15:27:00+08:00</updated>
-    <id>http://rx836.github.com/blog/windows8-notifications</id>
+    <id>http://blog.rx836.tw/blog/windows8-notifications</id>
     <content type="html"><![CDATA[<p>最近正參加<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/detailedRule.htm" target="_blank">Idea × Quality × Speed – Apps 開發者聯盟</a>，想爭取快手獎前100名名額，活動辦法中有提到需符合10項建議中的其中兩項(詳情看活動辦法)，我覺得動態磚是Win8 APP很有特色的一項功能，所以決定把他加入到我的APP，順便學習如何操作動態磚:)</p>
 
 <!--more-->
@@ -134,9 +134,9 @@ notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNot
   
   <entry>
     <title type="html"><![CDATA[[Win8] 入門要學說Hello world]]></title>
-    <link href="http://rx836.github.com/blog/first-win8-app/"/>
+    <link href="http://blog.rx836.tw/blog/first-win8-app/"/>
     <updated>2012-10-08T17:06:00+08:00</updated>
-    <id>http://rx836.github.com/blog/first-win8-app</id>
+    <id>http://blog.rx836.tw/blog/first-win8-app</id>
     <content type="html"><![CDATA[<p>最近正在練習開發Win8 App，雖然微軟提供的開發途徑很多，例如C#、C++等，但因為自己對JavaScript比較有興趣，而且微軟也提供利用HTML+JavaScript+CSS就可以開發出Win8 APP，所以就決定朝這個方向前進，因為是第一次開發Win8 APP，想當然要先做出一個Hello world來試試看</p>
 
 <!--more-->
@@ -179,13 +179,13 @@ notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNot
 &lt;title&gt;HelloWorld&lt;/title&gt;
 
 &lt;!-- WinJS 參考 --&gt;
-&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
-&lt;script src="http://rx836.github.com//Microsoft.WinJS.1.0.RC/js/base.js"&gt;&lt;/script&gt;
-&lt;script src="http://rx836.github.com//Microsoft.WinJS.1.0.RC/js/ui.js"&gt;&lt;/script&gt;
+&lt;link href="http://blog.rx836.tw//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
+&lt;script src="http://blog.rx836.tw//Microsoft.WinJS.1.0.RC/js/base.js"&gt;&lt;/script&gt;
+&lt;script src="http://blog.rx836.tw//Microsoft.WinJS.1.0.RC/js/ui.js"&gt;&lt;/script&gt;
 
 &lt;!-- HelloWorld 參考 --&gt;
-&lt;link href="http://rx836.github.com/css/default.css" rel="stylesheet" /&gt;
-&lt;script src="http://rx836.github.com/js/default.js"&gt;&lt;/script&gt;
+&lt;link href="http://blog.rx836.tw/css/default.css" rel="stylesheet" /&gt;
+&lt;script src="http://blog.rx836.tw/js/default.js"&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;p&gt;內容在此處出現&lt;/p&gt;
@@ -272,12 +272,12 @@ app.onactivated = function (args) {
 
 <p>完成囉！等等，為什麼你的畫面看起來是白色的？大家回去看看default.html有先引用一個CSS檔案進來</p>
 
-<pre><code>&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
+<pre><code>&lt;link href="http://blog.rx836.tw//Microsoft.WinJS.1.0.RC/css/ui-dark.css" rel="stylesheet" /&gt;
 </code></pre>
 
 <p>只要將它改成</p>
 
-<pre><code>&lt;link href="http://rx836.github.com//Microsoft.WinJS.1.0.RC/css/ui-light.css" rel="stylesheet" /&gt;
+<pre><code>&lt;link href="http://blog.rx836.tw//Microsoft.WinJS.1.0.RC/css/ui-light.css" rel="stylesheet" /&gt;
 </code></pre>
 
 <p>背景就會變成白色的囉！當然這個是官方提供的預設樣式表，文件上是建議用預設的樣式表為基礎去做客製化修改，至於怎麼修改就看大家的APP風格了</p>
@@ -294,9 +294,9 @@ app.onactivated = function (args) {
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]]]></title>
-    <link href="http://rx836.github.com/blog/2-vmware-windows-8/"/>
+    <link href="http://blog.rx836.tw/blog/2-vmware-windows-8/"/>
     <updated>2012-09-22T14:33:00+08:00</updated>
-    <id>http://rx836.github.com/blog/2-vmware-windows-8</id>
+    <id>http://blog.rx836.tw/blog/2-vmware-windows-8</id>
     <content type="html"><![CDATA[<p>延續上一篇<a href="http://blog.rx836.tw/blog/vmware-windows-8/" target="_blank">簡單容易，如何在VM裝Windows 8來玩玩[二]</a>，已經在VM裡面建立一個Windows 8的虛擬機器，現在就來開始安裝系統部分</p>
 
 <!--more-->
@@ -384,9 +384,9 @@ app.onactivated = function (args) {
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]]]></title>
-    <link href="http://rx836.github.com/blog/vmware-windows-8/"/>
+    <link href="http://blog.rx836.tw/blog/vmware-windows-8/"/>
     <updated>2012-09-21T17:37:00+08:00</updated>
-    <id>http://rx836.github.com/blog/vmware-windows-8</id>
+    <id>http://blog.rx836.tw/blog/vmware-windows-8</id>
     <content type="html"><![CDATA[<p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
 
 <!--more-->

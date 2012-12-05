@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: JavaScript | apa]]></title>
-  <link href="http://rx836.github.com/blog/categories/javascript/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼]]></title>
-    <link href="http://rx836.github.com/blog/javascript-namespace/"/>
+    <link href="http://blog.rx836.tw/blog/javascript-namespace/"/>
     <updated>2012-11-21T12:09:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-namespace</id>
+    <id>http://blog.rx836.tw/blog/javascript-namespace</id>
     <content type="html"><![CDATA[<p>網路上JavaScript的library或plugin非常的多，我平常在寫網頁時，有用到別人的plugin都會稍微看一下source code，會發現「Namespace」在JavaScript的世界當中應用相當的廣泛，就連著名的 <strong>jQuery</strong> 也有用到，學習Namespace不僅可以更能看懂別人寫的code，對於增進自己JavaScript的底子也是非常有幫助，可以說不能輕忽他</p>
 
 <!--more-->
@@ -106,9 +106,9 @@ gary.CheckName();
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] prototype與建構函式和物件]]></title>
-    <link href="http://rx836.github.com/blog/javascript-prototype/"/>
+    <link href="http://blog.rx836.tw/blog/javascript-prototype/"/>
     <updated>2012-11-02T15:11:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-prototype</id>
+    <id>http://blog.rx836.tw/blog/javascript-prototype</id>
     <content type="html"><![CDATA[<p>今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件方面，那就趁著這個機會再把JavaScript的觀念整理清楚，增強自己的功力，尤其是一直很模糊的「prototype」</p>
 
 <!--more-->
@@ -222,9 +222,9 @@ console.log(c.height);
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying]]></title>
-    <link href="http://rx836.github.com/blog/javascript-currying/"/>
+    <link href="http://blog.rx836.tw/blog/javascript-currying/"/>
     <updated>2012-10-18T00:01:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-currying</id>
+    <id>http://blog.rx836.tw/blog/javascript-currying</id>
     <content type="html"><![CDATA[<p>有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化)</p>
 
 <!--more-->
@@ -365,9 +365,9 @@ new_m(6);
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] 當函式需要傳遞很多參數時]]></title>
-    <link href="http://rx836.github.com/blog/javascript-simple-object/"/>
+    <link href="http://blog.rx836.tw/blog/javascript-simple-object/"/>
     <updated>2012-09-25T00:06:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-simple-object</id>
+    <id>http://blog.rx836.tw/blog/javascript-simple-object</id>
     <content type="html"><![CDATA[<p>有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花...</p>
 
 <!--more-->
@@ -405,9 +405,9 @@ add(conf)
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] 建立物件的第三招-自訂建構式函式]]></title>
-    <link href="http://rx836.github.com/blog/javascript-custom-function/"/>
+    <link href="http://blog.rx836.tw/blog/javascript-custom-function/"/>
     <updated>2012-09-11T00:43:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-custom-function</id>
+    <id>http://blog.rx836.tw/blog/javascript-custom-function</id>
     <content type="html"><![CDATA[<p>在前面一篇文章<a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a>，裡面有講到關於物件的建立，不過礙於篇幅，只談到<strong>實字模式(literal patterns)</strong>和<strong>建構式函式(constructor functions)</strong>，但其實還有一個建立物件的方法，那就是<strong>自訂建構式函式</strong></p>
 
 <!--more-->

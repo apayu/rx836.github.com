@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[好書分享] 疼痛,才叫青春 - apa</title>
+  <title>[jQ-Plugin] 圖片延遲加載-Lazy-Loading - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="作者:金蘭都 出版者:圓神出版社有限公司 這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的 人生時鐘:你現在的人生是幾點? 雖然他是寫給剛畢業的新鮮人或是大學生為主， &hellip;">
+  <meta name="description" content="延遲加載圖片常用在有大量圖片的網站，在訪客還沒看到的區域先暫停讀取圖片，等到看到特定區域時才將需要的圖片載入，好處是可以減少一開始等待所有圖片載入的時間，避免訪客感到不耐煩而流失，要做到此效果只需要搭配簡單的jQuery plugin，並且在HTML上加點技巧即可，重點是， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/book-review-2/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/create-lazy-loading/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[好書分享] 疼痛,才叫青春 - apa" />
+<meta property="og:title" content="[jQ-Plugin] 圖片延遲加載-Lazy-Loading - apa" />
 
-<meta property="og:description" content="作者:金蘭都 出版者:圓神出版社有限公司 這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的 人生時鐘:你現在的人生是幾點? 雖然他是寫給剛畢業的新鮮人或是大學生為主， &hellip;" />
+<meta property="og:description" content="延遲加載圖片常用在有大量圖片的網站，在訪客還沒看到的區域先暫停讀取圖片，等到看到特定區域時才將需要的圖片載入，好處是可以減少一開始等待所有圖片載入的時間，避免訪客感到不耐煩而流失，要做到此效果只需要搭配簡單的jQuery plugin，並且在HTML上加點技巧即可，重點是， &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/book-review-2/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/create-lazy-loading/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[好書分享] 疼痛,才叫青春</h1>
+      <h1 class="entry-title">[jQ-Plugin] 圖片延遲加載-Lazy-Loading</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-12-03T15:01:00+08:00" pubdate data-updated="true">Dec 3<span>rd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,30 +113,61 @@
   </header>
 
 
-<div class="entry-content"><p><img src="https://lh3.googleusercontent.com/-wMTQWX9wU4I/UIo1zLeJljI/AAAAAAAABv8/BEBJHR0RgiM/s300/20120514190058837_300.jpg" /></p>
+<div class="entry-content"><p><img src="https://lh4.googleusercontent.com/-9VL-bSTiio8/ULxO_q7aPbI/AAAAAAAACAQ/R6Nns5e2_T0/s551/qwer.jpg" /></p>
 
-<p>作者:金蘭都</p>
-
-<p>出版者:圓神出版社有限公司</p>
+<p>延遲加載圖片常用在有大量圖片的網站，在訪客還沒看到的區域先暫停讀取圖片，等到看到特定區域時才將需要的圖片載入，好處是可以減少一開始等待所有圖片載入的時間，避免訪客感到不耐煩而流失，要做到此效果只需要搭配簡單的jQuery plugin，並且在HTML上加點技巧即可，重點是，要加上這個效果對設計師來說並不困難，因為裡面並沒有涉及到太多JavaScript知識</p>
 
 <!--more-->
 
 
-<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
+<h2>Start</h2>
 
-<h2>人生時鐘:你現在的人生是幾點?</h2>
+<p>首先必須下載jQuery和<a href="https://raw.github.com/tuupola/jquery_lazyload/master/jquery.lazyload.min.js" target="_blank">minified lazyload script</a>，並且加掛在網頁裡面</p>
 
-<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所提的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
+<pre><code>&lt;script src="jquery.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="jquery.lazyload.js" type="text/javascript"&gt;&lt;/script&gt;
+</code></pre>
 
-<h2>你想要新人獎還是主角獎?</h2>
+<p>接著我們需要建立一個 1x1 px的灰色小圖，這將會取代尚未讀取到的圖片，來做為延遲加載的效果</p>
 
-<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
+<p><img src="https://lh4.googleusercontent.com/-GynYPKkHJnU/ULxbNG8liyI/AAAAAAAACA0/QMBzvG46740/s530/rtyu.jpg" /></p>
 
-<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
+<p>接著是HTML部分</p>
 
-<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
+<pre><code>&lt;div class="frame"&gt;&lt;img class="lazy" src="img/g.gif" data-original="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/div&gt;
+</code></pre>
 
-<p>如果有不一樣的想法，歡迎一起討論</p>
+<p>這邊特別的是&lt;img&gt;的屬性 <strong>src</strong> 並不是指向原始圖檔，而是 1x1 px的小圖，而原始圖檔擺放的位置在屬性 <strong>data-original</strong> 裡面，另外要給予原始圖檔的 <strong>width</strong> 和 <strong>height</strong>，避免不必要的錯誤發生</p>
+
+<h3>noscript</h3>
+
+<p>在瀏覽器沒有開啟JavaScript的情況下，我們可能也要做一些預防措施，直接將圖片載入，不然使用者看到的圖片都是一片灰</p>
+
+<pre><code>&lt;div class="frame"&gt;&lt;img class="lazy" src="img/g.gif" data-original="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/div&gt;
+&lt;noscript&gt;&lt;img src="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/noscript&gt;
+</code></pre>
+
+<p>接著是JS部分</p>
+
+<pre><code>$("img.lazy").lazyload();
+</code></pre>
+
+<p>大功告成！很容易吧，假如你不太喜歡這麼呆滯的載入圖片，可以加入一些效果，例如 <strong>fadeIn</strong></p>
+
+<pre><code>$("img.lazy").lazyload({
+    effect: "fadeIn"
+});
+</code></pre>
+
+<p>想要看更多運用，可以連到參考資料</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://speckyboy.com/2012/10/18/how-to-create-lazy-loading-images-for-your-website/" target="_blank">How to Create Lazy-Loading Images for your Website</a></p>
+
+<p><a href="http://www.appelsiini.net/projects/lazyload" target="_blank">Lazy Load Plugin for jQuery</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -170,12 +201,12 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2012-12-03T15:01:00+08:00" pubdate data-updated="true">Dec 3<span>rd</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/好書分享/'>好書分享</a>
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>
   
 </span>
 
@@ -183,10 +214,10 @@
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-ajax-cache/" title="Previous Post: [jQuery] AJAX cache讓IE一直抓到舊資料">&laquo; [jQuery] AJAX cache讓IE一直抓到舊資料</a>
+        <a class="basic-alignment left" href="/blog/book-review-6/" title="Previous Post: [好書分享] 開放式領導">&laquo; [好書分享] 開放式領導</a>
       
       
-        <a class="basic-alignment right" href="/blog/book-review-3/" title="Next Post: [好書分享] 預見未來">[好書分享] 預見未來 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/jquery-plugin-format-number/" title="Next Post: [jQ-Plugin] 簡易的數值格式化-Numeral.js">[jQ-Plugin] 簡易的數值格式化-Numeral.js &raquo;</a>
       
     </p>
   </footer>
@@ -204,7 +235,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/book-review-2/" 
+	data-href="http://blog.rx836.tw/blog/create-lazy-loading/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -271,9 +302,9 @@
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/book-review-2/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/book-review-2/';
-        var disqus_url = 'http://blog.rx836.tw/blog/book-review-2/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/create-lazy-loading/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/create-lazy-loading/';
+        var disqus_url = 'http://blog.rx836.tw/blog/create-lazy-loading/';
         var disqus_script = 'embed.js';
       
     (function () {

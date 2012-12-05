@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[apa]]></title>
-  <link href="http://rx836.github.com/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -14,10 +14,561 @@
 
   
   <entry>
+    <title type="html"><![CDATA[[CSS] 5個對設計師有幫助的CSS屬性]]></title>
+    <link href="http://blog.rx836.tw/blog/5-css-properties/"/>
+    <updated>2012-12-05T14:50:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/5-css-properties</id>
+    <content type="html"><![CDATA[<p>如果要寫一個網頁，基本上就是利用HTML+CSS互相搭配(廢話)，網路上的教學也非常的多，除非是剛踏入這一行的新手，不然大部分的人對這都不陌生，不過雖然CSS整體來說並不難，但有幾個特別的屬性他並不是這麼直覺好懂，但卻很適合設計師來學習，所以這篇就來筆記幾個CSS，來幫助釐清觀念</p>
+
+<!--more-->
+
+
+<h2>Clear</h2>
+
+<p>首先先看一個基本的網站架構</p>
+
+<p>HTML</p>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;h1&gt;網站標題&lt;/h1&gt;
+    &lt;div id="content"&gt;
+        &lt;h2&gt;文章標題&lt;/h2&gt;
+        &lt;p&gt;文章內容文章內容文章內容文章內容文章內容文章內容文章內容文章內容文章內容文章內容&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div id="sidebar"&gt;
+        &lt;h2&gt;側邊欄位1&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div id="sidebar2"&gt;
+        &lt;h2&gt;側邊欄位2&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div id="footer"&gt;我是footer&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>CSS</p>
+
+<pre><code>#container{
+    background:#0CF;
+    width:450px;
+}
+#content{
+    background:#FC3;
+    width:250px;
+    float:left;
+}
+#sidebar{
+    float:left;
+    background:#360;
+    width:100px;
+}
+#sidebar2{
+    float:left;
+    background:#F0F;
+    width:100px;
+}
+#footer{
+
+}
+</code></pre>
+
+<p>看起來就長的像這樣</p>
+
+<p><img src="https://lh6.googleusercontent.com/-hrlyAdCFVM4/UL9zdLc_WSI/AAAAAAAACBY/obrq-cebCvY/s470/2012-12-05_225116.jpg" /></p>
+
+<p>HTML部份就是利用一個div做為最外層的container，裡面包有content、sidebar和footer，利用CSS的屬性 <strong>float</strong>，將content和sidebar排成水平一直線，這是排版常使用的技巧，可是會發現，footer卻不是心中所想的那樣在最底層，反而受到float影響而圍繞在其他的div周圍</p>
+
+<h3>如何讓單一的div消除float的影響</h3>
+
+<p>就是 <strong>Clear</strong> 的功效，所以為了讓footer排在應該有的位置，我們可以這樣添加CSS屬性</p>
+
+<pre><code>#footer{
+    clear:both;
+}
+</code></pre>
+
+<p>結果</p>
+
+<p><img src="https://lh6.googleusercontent.com/-j2gYazTo_HE/UL9zdAr8LVI/AAAAAAAACBg/EN-h4zoISdQ/s466/2012-12-05_230147.jpg" /></p>
+
+<p>有發現了嗎？只要簡單的加上clear這個屬性，div就會乖乖地恢復他本來的特性，讓你水平或垂直排列可以隨心所欲</p>
+
+<h2>Box Shadows</h2>
+
+<p>box-shadow這個新的CSS3屬性之前有在<a href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/" target="_blank">文章</a>介紹過，其實他就是很方便的利用CSS做出陰影效果，例如像這樣加上CSS</p>
+
+<pre><code>#content{
+    background:#ccc;
+    width:250px;
+    float:left;
+    padding:5px;
+    -webkit-box-shadow: inset 0px 0px 2px 2px #f00;
+    box-shadow: inset 0px 0px 2px 2px #f00;
+}
+</code></pre>
+
+<p>我們這邊利用box-shadow做出有內嵌效果的div，並且加上5px的內距，會發現整個網站會長成這樣</p>
+
+<p><img src="https://lh5.googleusercontent.com/-dxl0B5r8Ksk/UL9zdMMiRLI/AAAAAAAACBc/lGKF0VdvFo8/s469/2012-12-05_231526.jpg" /></p>
+
+<p>這也是寫CSS常會發生的事情，一個沒注意就破版了，原因是之前設container寬度為450px，content為250px，兩個sidebar分別為100px，這樣加起來是剛好的，但加上了padding的5px以後(有左右兩邊，所以實際是10px)，兩個sidebar必須調整為95，這樣才不會擠壓到</p>
+
+<pre><code>#sidebar{
+    float:left;
+    background:#360;
+    width:95px;
+}
+#sidebar2{
+    float:left;
+    background:#F0F;
+    width:95px;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-S0FvavMd3Lo/UL9zdySksMI/AAAAAAAACBk/DnzWTwuLljo/s468/2012-12-05_232026.jpg" /></p>
+
+<p>這樣就正常了，回到剛剛的box-shadow，可以看到為了跨瀏覽器的關係，我們在使用box-shadow會搭配每個瀏覽器的前綴</p>
+
+<pre><code>-webkit-box-shadow: inset 0px 0px 2px 2px #f00;
+</code></pre>
+
+<p>另外box-shadow屬性寫法如下</p>
+
+<pre><code>box-shadow: inset x-offset y-offset blur spread color
+</code></pre>
+
+<p>每個值所代表的意義為</p>
+
+<p><strong>x-offset</strong>: 水平位移植，必須要指定</p>
+
+<p><strong>y-offset</strong>: 垂直位移植，必須要指定</p>
+
+<p><strong>blur</strong>: 模糊效果，不能為負值，預設為0</p>
+
+<p><strong>spread</strong>: 擴散強度，可以為負值(縮小)，預設為0</p>
+
+<p><strong>color</strong>: 顏色，有些網站可能會寫預設值為黑色，<strong>但一般建議還是要給予顏色，因為有些瀏覽器預設值並不一定為黑色(例如手機)</strong></p>
+
+<p><strong>inset</strong>: 這個值有些人是放在<strong>最前面</strong>，有些是放在<strong>最後面</strong>，兩者皆可，如果有給予這個值box就會在陰影裡面，反之則在外面</p>
+
+<p>而除了box-shadow以外，CSS3其實還有針對文字的text-shadow，範例如下</p>
+
+<pre><code>h2{
+    Font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color:#fff;
+    text-shadow: -2px 0px 3px #003366;
+}
+</code></pre>
+
+<p>差別在於text-shadow沒有spread，而效果看起來就像這樣</p>
+
+<p><img src="https://lh5.googleusercontent.com/-2vCt4XwlUoY/UL9zeNS-J5I/AAAAAAAACBo/TMv2Oo5TPAg/s469/2012-12-05_233015.jpg" /></p>
+
+<p>明顯可以看出文字擁有立體的感覺</p>
+
+<h2>CSS Gradients</h2>
+
+<p>用CSS3來表達漸層，用法其實不難，難的是要做到跨瀏覽器不是一件很容易的事情，以下是漸層的語法</p>
+
+<pre><code>#container{
+    background: #a8e7ff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #a8e7ff 0%, #4096ee 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a8e7ff), color-stop(100%,#4096ee)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #a8e7ff 0%,#4096ee 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #a8e7ff 0%,#4096ee 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #a8e7ff 0%,#4096ee 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #a8e7ff 0%,#4096ee 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a8e7ff', endColorstr='#4096ee',GradientType=0 ); /* IE6-9 */
+}
+</code></pre>
+
+<p><img src="https://lh4.googleusercontent.com/-HaSJlf5Trxc/UL9zec5QzcI/AAAAAAAACBs/ewEGX4ImfBc/s605/2012-12-05_233546.jpg" /></p>
+
+<p>可以看到頁面從淡藍變成深藍，而且是用CSS而不是圖片來達成，但為了配合到每個瀏覽器這裡使用了8行的CSS，每一行的CSS都長的不太一樣，這也是比較令人煩惱的地方，基本的語法如下</p>
+
+<pre><code>(top,  #a8e7ff 0%,#4096ee 100%)
+</code></pre>
+
+<p>這意思就是指漸層的效果是從最上方開始變化到最下方，如果是50%，就是指從中間開始</p>
+
+<h2>Dropdown Menus</h2>
+
+<p>下拉選單是網站常見的元素，可以利用HTML加上CSS來呈現這樣的效果，關鍵點在於 <strong>hover</strong> 和 <strong>display:none</strong>，範例如下</p>
+
+<p>HTML</p>
+
+<pre><code>&lt;div class="menubar"&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;a href="#" &gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" id="current"&gt;Products&lt;/a&gt;
+        &lt;ul&gt; &lt;li&gt;&lt;a href="#"&gt;Sliders&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Galleries&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Apps&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Extensions&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://blog.rx836.tw/about.html"&gt;About&lt;/a&gt; &lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Company History&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Address&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Customer Service&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>CSS</p>
+
+<pre><code>.menubar{
+    border:none;
+    border:0px;
+    margin:0px;
+    padding:0px;
+    font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+    font-size:14px;
+    font-weight:bold;
+}
+.menubar ul{
+    background: rgb(109,109,109);
+    height:50px;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.menubar li{
+    float:left;
+    padding:0px;
+}
+.menubar li a{
+    background: rgb(109,109,109);
+    color:#cccccc;
+    display:block;
+    font-weight:normal;
+    line-height:50px;
+    margin:0px;
+    padding:0px 25px;
+    text-align:center;
+    text-decoration:none;
+}
+.menubar li a:hover, .menubar ul li:hover a{
+    background: rgb(71,71,71);
+    color:#FFFFFF;
+    text-decoration:none;
+}
+.menubar li ul{
+    background: rgb(109,109,109);
+    display:none;
+    height:auto;
+    padding:0px;
+    margin:0px;
+    border:0px;
+    position:absolute;
+    width:200px;
+    z-index:200;
+    /*top:1em;
+    /*left:0;*/
+}
+.menubar li:hover ul{
+    display:block;
+}
+.menubar li li {
+    background: rgb(109,109,109);
+    display:block;
+    float:none;
+    margin:0px;
+    padding:0px;
+    width:200px;
+}
+.menubar li:hover li a{
+    background:none;
+}
+.menubar li ul a{
+    display:block;
+    height:50px;
+    font-size:12px;
+    font-style:normal;
+    margin:0px;
+    padding:0px 10px 0px 15px;
+    text-align:left;
+}
+.menubar li ul a:hover, .menubar li ul li:hover a{
+    background: rgb(71,71,71);
+    border:0px;
+    color:#ffffff;
+    text-decoration:none;
+}
+.menubar p{
+    clear:left;
+}
+</code></pre>
+
+<p>看起來的效果就像這樣</p>
+
+<p><img src="https://lh4.googleusercontent.com/-bnIvT8x3nww/UL9ze-1MTWI/AAAAAAAACB8/c4k6lL2dy_k/s896/2012-12-05_235741.jpg" /></p>
+
+<p>不用任何一行js就可以做出下拉的選單，而剛剛提到的關鍵點屬性display</p>
+
+<pre><code>.menubar li:hover ul{
+    display:block;
+}
+</code></pre>
+
+<p>利用這個屬性就可以做到將滑鼠移過去的時候，子選單就會呈現出來</p>
+
+<h2>Border Radius</h2>
+
+<p><strong>圓角</strong>也是做網站設計很常用到的元素，利用CSS3的屬性border-radius也可以輕鬆做到，但有些人或許不知道圓角還可以針對四個角做不同的設置，範例如下</p>
+
+<p>CSS</p>
+
+<pre><code>#container{
+    background: #a8e7ff; /* Old browsers */
+    width:600px;
+    -webkit-border-radius: 20px 5px 115px 35px;
+    border-radius: 20px 5px 115px 35px;
+}
+</code></pre>
+
+<p>我們一樣拿剛剛最前面那個範例來說明，效果如下</p>
+
+<p><img src="https://lh3.googleusercontent.com/-xzuDA1ptHRo/UL9zfIUb32I/AAAAAAAACB4/cKv2qf7ahQM/s619/2012-12-06_001054.jpg" /></p>
+
+<p>可以看到四個角給的值不同，圓角的效果也都不同，但特別注意的是，在使用圓角效果時，要注意會不會有破版的情形發生，就如同圖的左下角圓角，跟剛剛提到的padding意思一樣</p>
+
+<p>以上是幾個對設計師來說好用的CSS屬性，希望對大家有幫助</p>
+
+<p>參考資料:</p>
+
+<p><a href="http://designfestival.com/5-css-properties-that-give-designers-fits/" target="_blank">5 CSS Properties That Give Designers Fits</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 簡易的數值格式化-Numeral.js]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-plugin-format-number/"/>
+    <updated>2012-12-04T12:34:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-plugin-format-number</id>
+    <content type="html"><![CDATA[<p>對於將數字或是文字做格式化一直都覺得很阿雜，例如將算出來的數字加個千分位的逗點，或是加個貨幣符號，雖然自己做並不難，但還是希望可以有個plugin能做到這些事情，所以今天就來筆記 Numeral.js  這款plugin</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>用法很簡單容易，先下載 <a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
+
+<p>接著載入到網頁裡面後，js的寫法如下</p>
+
+<pre><code>var string = numeral(1000).format('0,0');
+// 1,000
+</code></pre>
+
+<p>這樣子把數字丟進去以後，在 <strong>format()</strong> 傳入相對應的格式，就可以擁有千分位的逗點，其它還有</p>
+
+<h3>名次</h3>
+
+<pre><code>var string = numeral(12).format('0o');
+//12th
+</code></pre>
+
+<h3>貨幣符號</h3>
+
+<pre><code>var string = numeral(1001).format('$ 0,0[.]00');
+//$ 1,001
+</code></pre>
+
+<h3>Bytes</h3>
+
+<pre><code>var string = numeral(7884486213).format('0.0b');
+//7.3GB
+</code></pre>
+
+<h3>百分率</h3>
+
+<pre><code>var string = numeral(0.974878234).format('0.000%');
+//97.488%
+</code></pre>
+
+<h3>時間</h3>
+
+<pre><code>var string = numeral(238).format('00:00:00');
+//0:03:58
+</code></pre>
+
+<h3>Unformat</h3>
+
+<p>能轉換過去，當然也可以轉換回來</p>
+
+<pre><code>var string = numeral().unformat('12th');
+//12
+</code></pre>
+
+<h3>加減乘除</h3>
+
+<pre><code>var number = numeral(1000);
+
+var added = number.add(10);
+// 1010
+</code></pre>
+
+<p>這功能我是覺得有點多餘XD，去看source也只是做加減乘除，不太需要再多此一舉</p>
+
+<h2>source code</h2>
+
+<p>因為最近想自己嘗試練習多寫一些plugin，所以會去觀摩別人的寫法，numeral.js是一個蠻簡單明瞭的範例，所以大概抓幾個重點出來筆記心得，有興趣的人可以一起看看XD</p>
+
+<p>1.建立一個名為Numeral的函式</p>
+
+<p>數值就是從這邊傳入</p>
+
+<pre><code>// Numeral prototype object
+function Numeral (number) {
+    this._n = number;
+}
+</code></pre>
+
+<p>2.加入一些prototype</p>
+
+<pre><code>numeral.fn = Numeral.prototype = {
+
+    clone : function () {
+        // ...
+    },
+
+    format : function (inputString) {           
+        // ...
+    },
+
+    // ...
+    // ...
+
+    multiply : function (value) {
+        // ...
+    },
+
+    divide : function (value) {
+        // ...
+    },
+
+    difference : function (value) {
+        // ...
+    }
+
+};
+</code></pre>
+
+<p>以上兩個為程式的主體，所以有了這個架構我們就可以這樣寫</p>
+
+<pre><code>numeral(1000).format('0,0');
+</code></pre>
+
+<p>3.其它大部分就是函式的處理</p>
+
+<pre><code>function formatNumeral (n, format) {
+    var output;
+
+    // figure out what kind of format we are dealing with
+    if (format.indexOf('$') &gt; -1) { // currency!!!!!
+        output = formatCurrency(n, format);
+    } else if (format.indexOf('%') &gt; -1) { // percentage
+        output = formatPercentage(n, format);
+    } else if (format.indexOf(':') &gt; -1) { // time
+        output = formatTime(n, format);
+    } else { // plain ol' numbers or bytes
+        output = formatNumber(n, format);
+    }
+
+    // return string
+    return output;
+}
+</code></pre>
+
+<p>會發現傳入的參數為 <strong>n</strong> 和 <strong>format</strong></p>
+
+<p>n就是 <strong>Numeral函式</strong> 本身，裡面帶有傳入的數值和prototype這些東西</p>
+
+<p>format就是要進行什麼樣的格式化</p>
+
+<p>如果format裡面含有$就是要進行貨幣的格式化，有%就是要進行百分比的格式化，其它以此類推</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="https://github.com/adamwdraper/Numeral-js" target="_blank">Github Numeral-js</a></p>
+
+<p><a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 圖片延遲加載-Lazy-Loading]]></title>
+    <link href="http://blog.rx836.tw/blog/create-lazy-loading/"/>
+    <updated>2012-12-03T15:01:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/create-lazy-loading</id>
+    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-9VL-bSTiio8/ULxO_q7aPbI/AAAAAAAACAQ/R6Nns5e2_T0/s551/qwer.jpg" /></p>
+
+<p>延遲加載圖片常用在有大量圖片的網站，在訪客還沒看到的區域先暫停讀取圖片，等到看到特定區域時才將需要的圖片載入，好處是可以減少一開始等待所有圖片載入的時間，避免訪客感到不耐煩而流失，要做到此效果只需要搭配簡單的jQuery plugin，並且在HTML上加點技巧即可，重點是，要加上這個效果對設計師來說並不困難，因為裡面並沒有涉及到太多JavaScript知識</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>首先必須下載jQuery和<a href="https://raw.github.com/tuupola/jquery_lazyload/master/jquery.lazyload.min.js" target="_blank">minified lazyload script</a>，並且加掛在網頁裡面</p>
+
+<pre><code>&lt;script src="jquery.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="jquery.lazyload.js" type="text/javascript"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>接著我們需要建立一個 1x1 px的灰色小圖，這將會取代尚未讀取到的圖片，來做為延遲加載的效果</p>
+
+<p><img src="https://lh4.googleusercontent.com/-GynYPKkHJnU/ULxbNG8liyI/AAAAAAAACA0/QMBzvG46740/s530/rtyu.jpg" /></p>
+
+<p>接著是HTML部分</p>
+
+<pre><code>&lt;div class="frame"&gt;&lt;img class="lazy" src="img/g.gif" data-original="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/div&gt;
+</code></pre>
+
+<p>這邊特別的是&lt;img&gt;的屬性 <strong>src</strong> 並不是指向原始圖檔，而是 1x1 px的小圖，而原始圖檔擺放的位置在屬性 <strong>data-original</strong> 裡面，另外要給予原始圖檔的 <strong>width</strong> 和 <strong>height</strong>，避免不必要的錯誤發生</p>
+
+<h3>noscript</h3>
+
+<p>在瀏覽器沒有開啟JavaScript的情況下，我們可能也要做一些預防措施，直接將圖片載入，不然使用者看到的圖片都是一片灰</p>
+
+<pre><code>&lt;div class="frame"&gt;&lt;img class="lazy" src="img/g.gif" data-original="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/div&gt;
+&lt;noscript&gt;&lt;img src="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/noscript&gt;
+</code></pre>
+
+<p>接著是JS部分</p>
+
+<pre><code>$("img.lazy").lazyload();
+</code></pre>
+
+<p>大功告成！很容易吧，假如你不太喜歡這麼呆滯的載入圖片，可以加入一些效果，例如 <strong>fadeIn</strong></p>
+
+<pre><code>$("img.lazy").lazyload({
+    effect: "fadeIn"
+});
+</code></pre>
+
+<p>想要看更多運用，可以連到參考資料</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://speckyboy.com/2012/10/18/how-to-create-lazy-loading-images-for-your-website/" target="_blank">How to Create Lazy-Loading Images for your Website</a></p>
+
+<p><a href="http://www.appelsiini.net/projects/lazyload" target="_blank">Lazy Load Plugin for jQuery</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[[好書分享] 開放式領導]]></title>
-    <link href="http://rx836.github.com/blog/book-review-6/"/>
+    <link href="http://blog.rx836.tw/blog/book-review-6/"/>
     <updated>2012-12-01T23:59:00+08:00</updated>
-    <id>http://rx836.github.com/blog/book-review-6</id>
+    <id>http://blog.rx836.tw/blog/book-review-6</id>
     <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-HyLDQMw16fo/ULo4id1YO-I/AAAAAAAAB_8/z9LHSm1m9EY/s348/%25E9%2596%258B%25E6%2594%25BE%25E5%25BC%258F%25E9%25A0%2598%25E5%25B0%258E%25E5%25B0%2581%25E9%259D%25A2.jpg" /></p>
 
 <p>這本書其實是從Facebook別人分享得知的，「開放式領導」這個詞，老實說也是我看到書名後，才第一次認識到，很幸運的除了自己看書以外，還很有幸的參加了HPX，其中有一群人組了這本書的讀書會，在最後一次聚會時所分享的結論，讓我更加了解這本書的內容</p>
@@ -57,9 +608,9 @@
   
   <entry>
     <title type="html"><![CDATA[[jQuery] jQuery常用的表單驗證事件]]></title>
-    <link href="http://rx836.github.com/blog/jquery-html-forms/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-html-forms/"/>
     <updated>2012-11-29T15:40:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-html-forms</id>
+    <id>http://blog.rx836.tw/blog/jquery-html-forms</id>
     <content type="html"><![CDATA[<p>在動態網頁的世界裡面，最常使用到的大概就非Forms莫屬，填寫完表格以後都會將資料傳送到bcak-end(後端)，而在傳送之前，有一些資料的驗證都會交由front-end(前端)來處理，這篇就來紀錄一下對於HTML Forms來說，常用的一些jQuery方法</p>
 
 <!--more-->
@@ -257,9 +808,9 @@ $("input[type=radio]").prop("checked", true); // Check radio button
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 有效降低會員註冊退信率的mailcheck]]></title>
-    <link href="http://rx836.github.com/blog/mailcheck-jquery-plugin/"/>
+    <link href="http://blog.rx836.tw/blog/mailcheck-jquery-plugin/"/>
     <updated>2012-11-28T12:04:00+08:00</updated>
-    <id>http://rx836.github.com/blog/mailcheck-jquery-plugin</id>
+    <id>http://blog.rx836.tw/blog/mailcheck-jquery-plugin</id>
     <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-dLci9WLFC-8/ULWyqQJ-OxI/AAAAAAAAB_U/odHWaG3jNfE/s482/w.jpg" /></p>
 
 <p>免費檔案分享<a href="http://kicksend.com/" target="_blank">Kicksend</a>有寫一篇文章是關於<a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target=_blank"">如何降低退信率</a>，內容大概是講User註冊會員以後，會發送註冊的確認信，但常常會發生被退信的情況，導致會員收不到信可能必須重新申請一次帳號，不然就是請客服修改E-mail，所以Kicksend為了減少這個困擾就做了分析並且解決問題</p>
@@ -383,9 +934,9 @@ $('#email').on('blur', function() {
   
   <entry>
     <title type="html"><![CDATA[[jQuery] 自製擁有Responsive的Tooltip]]></title>
-    <link href="http://rx836.github.com/blog/friendly-tooltip-responsive/"/>
+    <link href="http://blog.rx836.tw/blog/friendly-tooltip-responsive/"/>
     <updated>2012-11-27T11:53:00+08:00</updated>
-    <id>http://rx836.github.com/blog/friendly-tooltip-responsive</id>
+    <id>http://blog.rx836.tw/blog/friendly-tooltip-responsive</id>
     <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-KiD_TaOPzFA/ULRxljbyVVI/AAAAAAAAB-M/nHY1WuJDaGE/s373/q1.jpg" /></p>
 
 <p>之前做Tooltip，都是上網找plugin比較多，但這次看到一篇文章，是自己寫一個Tooltip，就來記錄一下，而且還有Responsive的效果，可以依照載具大小做縮放和位置的改變，code不多，也很簡單明瞭</p>
@@ -621,9 +1172,9 @@ $('#email').on('blur', function() {
   
   <entry>
     <title type="html"><![CDATA[[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4]]></title>
-    <link href="http://rx836.github.com/blog/css3-real-beauty-box-shadows/"/>
+    <link href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/"/>
     <updated>2012-11-26T10:21:00+08:00</updated>
-    <id>http://rx836.github.com/blog/css3-real-beauty-box-shadows</id>
+    <id>http://blog.rx836.tw/blog/css3-real-beauty-box-shadows</id>
     <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-gnXY1RrRaSU/ULLgp4EX-6I/AAAAAAAAB84/m3JLnkc5h_E/s125/a.jpg" /></p>
 
 <p>CSS3有許多讓人驚艷的地方，其中之一就是「box-shadow」，在這之前為了做出陰影效果，可能需要一些Photoshop的幫助，但在CSS3卻可以用純CSS來達到這樣的結果，但如果你認為「box-shadow」只能拿來做陰影效果的話，那可就誤會大了，看完這篇文章，你或許會有不同的想法</p>
@@ -745,9 +1296,9 @@ $('#email').on('blur', function() {
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼]]></title>
-    <link href="http://rx836.github.com/blog/javascript-namespace/"/>
+    <link href="http://blog.rx836.tw/blog/javascript-namespace/"/>
     <updated>2012-11-21T12:09:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-namespace</id>
+    <id>http://blog.rx836.tw/blog/javascript-namespace</id>
     <content type="html"><![CDATA[<p>網路上JavaScript的library或plugin非常的多，我平常在寫網頁時，有用到別人的plugin都會稍微看一下source code，會發現「Namespace」在JavaScript的世界當中應用相當的廣泛，就連著名的 <strong>jQuery</strong> 也有用到，學習Namespace不僅可以更能看懂別人寫的code，對於增進自己JavaScript的底子也是非常有幫助，可以說不能輕忽他</p>
 
 <!--more-->
@@ -836,9 +1387,9 @@ gary.CheckName();
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] Accordion Menu(手風琴)-Kwicks]]></title>
-    <link href="http://rx836.github.com/blog/jquery-accordion-plugin-kwicks/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks/"/>
     <updated>2012-11-20T11:52:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-accordion-plugin-kwicks</id>
+    <id>http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks</id>
     <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-_J-W2xu9kk0/UKssWB_LsAI/AAAAAAAAB8I/l5FDpuCO27c/s415/t1.jpg" /></p>
 
 <p><img src="https://lh5.googleusercontent.com/-jKM2KBpI5eM/UKssWHgRekI/AAAAAAAAB8E/hG205WtoTDU/s415/t2.jpg" /></p>
@@ -986,9 +1537,9 @@ $(element).on('event-name.kwicks', handler);
   
   <entry>
     <title type="html"><![CDATA[[CSS] 拋棄原生checkbox用CSS3自己簡單動手做]]></title>
-    <link href="http://rx836.github.com/blog/css3-checkboxes-radiobuttons/"/>
+    <link href="http://blog.rx836.tw/blog/css3-checkboxes-radiobuttons/"/>
     <updated>2012-11-16T15:27:00+08:00</updated>
-    <id>http://rx836.github.com/blog/css3-checkboxes-radiobuttons</id>
+    <id>http://blog.rx836.tw/blog/css3-checkboxes-radiobuttons</id>
     <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-AstthsAdcVk/UKX5J1b1PpI/AAAAAAAAB7U/UxqFI-iYi0g/s166/a.jpg" /></p>
 
 <p>已經用膩原生的checkbox和radiobutton嗎？今天就試著用CSS3來做出不一樣的checkbox和radiobutton吧，而且是不用任何一行JavaScript，重點是，就算IE9以下不支援CSS3也沒關係喔！</p>
@@ -1102,9 +1653,9 @@ input[type="checkbox"]:checked + label span {
   
   <entry>
     <title type="html"><![CDATA[[CSS] 用inline-block做產品展示頁並且擁有RWD效果]]></title>
-    <link href="http://rx836.github.com/blog/inline-block-display-product-grid-view/"/>
+    <link href="http://blog.rx836.tw/blog/inline-block-display-product-grid-view/"/>
     <updated>2012-11-14T14:09:00+08:00</updated>
-    <id>http://rx836.github.com/blog/inline-block-display-product-grid-view</id>
+    <id>http://blog.rx836.tw/blog/inline-block-display-product-grid-view</id>
     <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-CMJtAWKTc9c/UKNLl-e4eMI/AAAAAAAAB6c/lFZ01h2vX2k/s975/inline-block-screenshot-1.png" /></p>
 
 <p>相信大家對於這樣的排版並不陌生，這是一個產品的展示頁，文章參考<a href="https://twitter.com/randyhoyt" target="_blank">Randy Hoyt</a>教你如何用inline-block來做設計排版，內容簡單易懂</p>
@@ -1227,9 +1778,9 @@ input[type="checkbox"]:checked + label span {
   
   <entry>
     <title type="html"><![CDATA[[PhoneGap] Android開發Facebook取得Key Hashes]]></title>
-    <link href="http://rx836.github.com/blog/android-facebook-key-hashes/"/>
+    <link href="http://blog.rx836.tw/blog/android-facebook-key-hashes/"/>
     <updated>2012-11-12T11:38:00+08:00</updated>
-    <id>http://rx836.github.com/blog/android-facebook-key-hashes</id>
+    <id>http://blog.rx836.tw/blog/android-facebook-key-hashes</id>
     <content type="html"><![CDATA[<p>之前曾經有寫過一篇關於Facebook web App開發的<a href="http://blog.rx836.tw/blog/facebook-app-create-getfbid/" target="_blank">心得文章</a>，但如果是用PhoneGap來開發Facebook App呢？我想很多人第一個遇到的問題就是，我在Facebook開發者設定是註冊web還是Android？</p>
 
 <!--more-->
@@ -1296,9 +1847,9 @@ input[type="checkbox"]:checked + label span {
   
   <entry>
     <title type="html"><![CDATA[[PhoneGap] 如何搭配平板或手機開發Android]]></title>
-    <link href="http://rx836.github.com/blog/android-phonegap-usb-develop/"/>
+    <link href="http://blog.rx836.tw/blog/android-phonegap-usb-develop/"/>
     <updated>2012-11-09T14:32:00+08:00</updated>
-    <id>http://rx836.github.com/blog/android-phonegap-usb-develop</id>
+    <id>http://blog.rx836.tw/blog/android-phonegap-usb-develop</id>
     <content type="html"><![CDATA[<p>繼好幾天前開始了<a href="http://blog.rx836.tw/blog/phonegap-first/" target="_blank">第一次的PhoneGap之旅</a>，漸漸的開始慢慢熟悉運作模式，有一直寫下去果然還是有差，當然一路上也一直碰到牆壁和踩到地雷(渾身傷..)，這篇就來記錄怎麼用實機做開發測試，往後也會多寫幾篇關於PhoneGap開發心得文章出來奉獻</p>
 
 <!--more-->
@@ -1373,9 +1924,9 @@ input[type="checkbox"]:checked + label span {
   
   <entry>
     <title type="html"><![CDATA[[CSS] Data URI使用心得筆記]]></title>
-    <link href="http://rx836.github.com/blog/data-uri-web-desing/"/>
+    <link href="http://blog.rx836.tw/blog/data-uri-web-desing/"/>
     <updated>2012-11-07T16:02:00+08:00</updated>
-    <id>http://rx836.github.com/blog/data-uri-web-desing</id>
+    <id>http://blog.rx836.tw/blog/data-uri-web-desing</id>
     <content type="html"><![CDATA[<p>Data URI不算新的技術，但他卻是一個可以節省頻寬，增進網頁載入效率的技巧，今天就來實際記錄一下使用的方式，順便比較一下用src指向URL的差別</p>
 
 <!--more-->
@@ -1458,9 +2009,9 @@ input[type="checkbox"]:checked + label span {
   
   <entry>
     <title type="html"><![CDATA[[jQuery] 不要將任何事情都在jQuery.ready()初始化]]></title>
-    <link href="http://rx836.github.com/blog/jquery-not-initialize-all-things/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-not-initialize-all-things/"/>
     <updated>2012-11-06T15:06:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-not-initialize-all-things</id>
+    <id>http://blog.rx836.tw/blog/jquery-not-initialize-all-things</id>
     <content type="html"><![CDATA[<p>Don&#8217;t Initialize All the Thing in jQuery.ready()&#8230;，這是由<a href="https://twitter.com/elijahmanor" target="_blank">Elijah Manor</a>所寫的一篇文章，裡面提到不要把所有事情都放在jQuery.ready()做初始化(我就是這樣&#8230;)，現在就來筆記一下他怎麼說</p>
 
 <!--more-->
@@ -1549,9 +2100,9 @@ input[type="checkbox"]:checked + label span {
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 倒數計時的plugin介紹]]></title>
-    <link href="http://rx836.github.com/blog/jquery-countdown-plugins/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-countdown-plugins/"/>
     <updated>2012-11-05T11:45:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-countdown-plugins</id>
+    <id>http://blog.rx836.tw/blog/jquery-countdown-plugins</id>
     <content type="html"><![CDATA[<p>之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考</p>
 
 <!--more-->
@@ -1617,9 +2168,9 @@ input[type="checkbox"]:checked + label span {
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] prototype與建構函式和物件]]></title>
-    <link href="http://rx836.github.com/blog/javascript-prototype/"/>
+    <link href="http://blog.rx836.tw/blog/javascript-prototype/"/>
     <updated>2012-11-02T15:11:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-prototype</id>
+    <id>http://blog.rx836.tw/blog/javascript-prototype</id>
     <content type="html"><![CDATA[<p>今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件方面，那就趁著這個機會再把JavaScript的觀念整理清楚，增強自己的功力，尤其是一直很模糊的「prototype」</p>
 
 <!--more-->
@@ -1733,9 +2284,9 @@ console.log(c.height);
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 免費玩Amazon Web Service(AWS) EC2]]></title>
-    <link href="http://rx836.github.com/blog/first-amazon-web-services/"/>
+    <link href="http://blog.rx836.tw/blog/first-amazon-web-services/"/>
     <updated>2012-10-30T11:25:00+08:00</updated>
-    <id>http://rx836.github.com/blog/first-amazon-web-services</id>
+    <id>http://blog.rx836.tw/blog/first-amazon-web-services</id>
     <content type="html"><![CDATA[<p>Amazon Web Service(AWS)從2006年開始就提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節與設定還要再多摸索，這次就先筆記怎麼開始使用AWS的EC2服務</p>
 
 <!--more-->
@@ -1903,9 +2454,9 @@ console.log(c.height);
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 如何停止浪費時間在舊版IE的相容性]]></title>
-    <link href="http://rx836.github.com/blog/stop-wasting-time-for-ie/"/>
+    <link href="http://blog.rx836.tw/blog/stop-wasting-time-for-ie/"/>
     <updated>2012-10-26T12:25:00+08:00</updated>
-    <id>http://rx836.github.com/blog/stop-wasting-time-for-ie</id>
+    <id>http://blog.rx836.tw/blog/stop-wasting-time-for-ie</id>
     <content type="html"><![CDATA[<p>IE的痛&#8230;，只有遇過才可以體會到，我相信絕大多數的開發者都曾經有過這個痛，在許多開發者聚會的場合裡面，IE也是最常被拿出來開玩笑，但如何停止浪費你的時間去為了IE做開發上的調整？Mandy Barrington所寫的<a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a>或許可以供大家參考</p>
 
 <!--more-->
@@ -1952,299 +2503,6 @@ var msg3 = "只要點選圖示，就可以連到各自的下載頁面。";
 <p><a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a></p>
 
 <p><a href="http://code.google.com/p/ie6-upgrade-warning/" target="_blank">ie6-upgrade-warning</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[好書分享] 為什麼搜尋將被淘汰]]></title>
-    <link href="http://rx836.github.com/blog/book-review-5/"/>
-    <updated>2012-10-25T22:33:00+08:00</updated>
-    <id>http://rx836.github.com/blog/book-review-5</id>
-    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-_xeoCp7o0h4/UIlc6lVxgCI/AAAAAAAABvI/aIdvp8E_NHU/s360/DJAP00-A60993607000_4f18e070e0a07.jpeg" /></p>
-
-<p>作者:史蒂芬．羅森鮑姆（Steven Rosenbaum）</p>
-
-<p>出版者:美商麥格羅希爾國際股</p>
-
-<!--more-->
-
-
-<p>身處於資訊爆炸的時代，尤其是近幾年的Facebook崛起，每天早上我打開臉書，塗鴉牆上來自各式各樣的訊息，扣除掉一些個人的心情感想，大部分都是新聞轉貼，科技新知，或是國際大事，也因為這樣，幾乎每一則相關訊息文章，我都會看過一遍，等於是餵我多少訊息，我就會吃下多少訊息，近似強迫症的症狀&#8230;</p>
-
-<p>但這幾個月來，我喜歡針對某些主題去訂閱文章，例如JavaScript或是HTML5，甚至是創業、行銷、科技，而不再是漫無目的的去接受大量的資訊，原因在於其實大部分的資訊對我來說都是雜訊，但因為個性關係不想漏掉任何訊息(就跟常常會盯著通訊軟體看有沒有miss訊息一樣)，不過人的一天時間其實有限，在這資訊大海中不可能每一篇都看過，所以訂閱特定主題的BLOG或文章對我來說特別有幫助</p>
-
-<h3>關於策展(curation)</h3>
-
-<p>這本『為什麼搜尋將被淘汰』內容其實主要講的就是關於<strong>策展(curation)</strong>這件事情，策展就是蒐集某個主題的事情，並將它整理給有需求的人接收，在之前我可能為了想知道關於<strong>社群行銷</strong>這件事，我必須去Google相關的關鍵字，而跳出來的往往都是好幾萬筆的資料文章，在一個一個的點開消化、過濾，得出我想要的東西，但這不會是很好的方式，相反的，如果這時候有個專門在講關於社群行銷的Blog，是不是就省卻了很多時間尋找這方面的資訊?</p>
-
-<p>本書也提到每個人都可以成為一個策展人，還有描述許多正反兩面的意見，例如有些人覺得策展是一件盜取別人的創作內容，應該給予譴責，但另外一派人卻覺得，如果沒有策展人，一篇文章只會在茫茫的資訊大海中被雜訊給淹沒</p>
-
-<p>我個人是覺得，電腦可以利用優秀的演算法去找出『可能』適合我們的資訊，但很多關於『人』的事情電腦反而沒辦法做到像策展者如此出色，書本也提到，假如今天你去吃一家餐廳，發現主廚的手藝不是很好，回到家以後立刻寫了一篇文章告訴大家，但有可能那天主廚因為身體不適或是幾個月後主廚換人了，但這篇文章會從網路消失嗎？並不會，而且會在大家搜尋的時候一次又一次的跑出來</p>
-
-<p>流行銷的作者Jamie，也有針對Curator寫了一篇文章，叫做<a href="http://mrjamie.cc/2012/03/09/curator/" target="_blank">為你的消費者，當一個盡責的「Curator」</a>，有興趣的人也可以去看看</p>
-
-<p>最後我想筆記的重點是:資訊越多，策展者越重要，電腦還尚未可以取代人類</p>
-
-<p>參考資料:</p>
-
-<p>為什麼搜尋將被淘汰</p>
-
-<p>如有想法，歡迎一起提出討論</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQuery] jQuery你一定要知道的八件事]]></title>
-    <link href="http://rx836.github.com/blog/jquery-8-skill/"/>
-    <updated>2012-10-24T23:18:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-8-skill</id>
-    <content type="html"><![CDATA[<p>jQuery這項技能在面試的時候，已經從&#8221;加分&#8221;變成&#8221;必備&#8221;，由此可知，如果想走web開發，jQuery已經是不可或缺的技術，但jQuery雖然好上手，網路上的教學資源也很多，但有幾件事情是在使用jQuery你一定要知道的</p>
-
-<!--more-->
-
-
-<h2>1.使用Google CDN-hosted並且保持最新版本</h2>
-
-<p>使用Google CDN的好處是，有許多網站都有使用CDN，所以訪客在拜訪你的網站之前，可能已經先下載過jQuery，之後拜訪你的網站就可以直接從快取中使用，而不用重新下載，增加網站讀取速度，至於保持jQuery最新的版本，除了可以修復一些bug，還可以增加performance</p>
-
-<pre><code>&lt;script type="text/javascript" src="http://rx836.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>有些人可能會發現，為什麼少了<strong>http:</strong>，原因是假如網站遊走在http和https之間，使用這種忽略 <strong>scheme</strong> 的部分，就可以避免因為開啟了https的網頁，但jQuery是http所產生的安全性問題</p>
-
-<h2>2.在開發時搭配Cheat Sheet</h2>
-
-<p>其實不只是初學者，對於資深的開發者也建議使用cheat sheets，可以方便直接查詢，也省去google的麻煩</p>
-
-<p><a href="http://oscarotero.com/jquery/" target="_blank">http://oscarotero.com/jquery/</a></p>
-
-<p><a href="http://www.javascripttoolbox.com/jquery/cheatsheet/" target="_blank">http://www.javascripttoolbox.com/jquery/cheatsheet/</a></p>
-
-<p><a href="http://devcheatsheet.com/tag/jquery/" target="_blank">http://devcheatsheet.com/tag/jquery/</a></p>
-
-<h2>3.不能單純只使用CDN</h2>
-
-<p>剛剛第一點講到建議使用Google CDN，但有一點必須要注意的是，CDN有時候會有失效的問題，像某些地區會連不到Google CDN，這時候就要有locally的jQuery可以備用，判別的JavaScript語法可以這樣寫</p>
-
-<pre><code>&lt;script src="http://rx836.github.com//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;window.jQuery || document.write('&lt;script src="js/jquery-1.8.1.min.js"&gt;&lt;\/script&gt;')&lt;/script&gt;
-</code></pre>
-
-<p>這段程式碼會在抓不到Google CDN時，去抓取自家主機上的jQuery，讓網站不至於因為這樣而掛掉</p>
-
-<h2>4.重複使用jQuery selector</h2>
-
-<p>為了優化jQuery，千萬不要這樣寫</p>
-
-<pre><code>$("#mySmashingID").css("color", "pink");
-$("#mySmashingID").css("font", "Verdana");
-$("#mySmashingID").text("Some error message goes here!");
-</code></pre>
-
-<p>假如要針對同個selectors做操作，不應該重複呼叫自己，而是要利用jQuery鏈結的特性串起來</p>
-
-<pre><code>$("#mySmashingID").css({ "color": "pink", "font": "Verdana"}).text("Some error message goes here!!");
-</code></pre>
-
-<h2>5.將重複使用的selector宣告一個變數存起來</h2>
-
-<p>假如你會針對一個selector在很多地方使用到</p>
-
-<pre><code>$(‘#mySmashingGag’).appendTo(‘#mysidebar’);
-$(‘#mySmashingGag’).addClass(‘widget’);
-$(‘#mySmashingGag’).hide();
-$(‘#mySmashingGag’).fadeIn(‘fast’);
-</code></pre>
-
-<p>你應該將他存入一個變數，並且使用變數來操作，這樣也可以增加效能，而不會一直去做selector</p>
-
-<pre><code>var mySmashingGag = $(‘#mySmashingGag’);
-mySmashingGag.appendTo(‘#mysidebar’);
-mySmashingGag.addClass(‘widget’);
-mySmashingGag.hide();
-mySmashingGag.fadeIn(‘fast’);
-</code></pre>
-
-<h2>6.使用ID而不要使用class</h2>
-
-<p>jQuery骨子裡其實還是JavaScript，所以不管如何速度再快也比不上原生的JavaScript快，所以如果使用ID來選取元素的話，就會使用JavaScript的原生方法 <strong>getElementByID</strong>，效能就會比較快，相反的不是使用原生方法的class效能就會比較慢</p>
-
-<p>不要使用class</p>
-
-<pre><code>// Selecting each item at once
-for (i = 0; i &lt; 900; i++) {
-    var selectedItem = $('.mySmashingItem' + i);
-}
-</code></pre>
-
-<p>使用ID</p>
-
-<pre><code>// Selecting each item at once
-for (i = 0; i &lt; 900; i++) {
-    var selectedItem = $('#mySmashingItem' + i);
-}
-</code></pre>
-
-<h2>7.使用縮寫</h2>
-
-<p>正常來說會這樣寫</p>
-
-<pre><code>$(document).ready(function (){
-    // your awesome code here
-});
-</code></pre>
-
-<p>但其實可以這樣寫</p>
-
-<pre><code>$(function (){
-    // your awesome code here
-});
-</code></pre>
-
-<h2>8.使用context</h2>
-
-<p>當你再使用選取器(selectors)的時候，jQuery會針對整個頁面去做搜索直到找到為止，可是其實我們可以縮小範圍</p>
-
-<p>例如原本的寫法</p>
-
-<pre><code>$(‘.mySmashingGag’).on(‘click’, showMenu);
-</code></pre>
-
-<p>但我們可以這樣寫</p>
-
-<pre><code>$(‘.mySmashingGag’, ‘#mySidebar’).on(‘click’, showMenu);
-</code></pre>
-
-<p>這樣他就會在ID為mySidebar去搜尋class為mySmashingGag的元素</p>
-
-<p>這些其實不難，但都是養成正確寫jQuery的好習慣:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://smashinghub.com/8-jquery-crimes-you-really-shouldnt-commit.htm" target="_blank">8 jQuery Crimes You Really Shouldn’t Commit</a></p>
-
-<p><a href="http://blog.miniasp.com/post/2008/10/19/URL-URI-Description-and-usage-tips.aspx" target="_blank">講解 URL 結構與分享幾個相對路徑與絕對路徑的開發技巧 </a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Win8] 動態磚初體驗]]></title>
-    <link href="http://rx836.github.com/blog/windows8-notifications/"/>
-    <updated>2012-10-23T15:27:00+08:00</updated>
-    <id>http://rx836.github.com/blog/windows8-notifications</id>
-    <content type="html"><![CDATA[<p>最近正參加<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/detailedRule.htm" target="_blank">Idea × Quality × Speed – Apps 開發者聯盟</a>，想爭取快手獎前100名名額，活動辦法中有提到需符合10項建議中的其中兩項(詳情看活動辦法)，我覺得動態磚是Win8 APP很有特色的一項功能，所以決定把他加入到我的APP，順便學習如何操作動態磚:)</p>
-
-<!--more-->
-
-
-<p>如果還不太了解Win8 APP的朋友，可以參考之前的<a href="http://blog.rx836.tw/blog/first-win8-app/" target="_blank">[Win8] 入門要學說Hello World</a></p>
-
-<p>在Win8 APP一開始可以從<strong>資訊清單</strong>裡面設定<strong>預設磚</strong>，預設磚會在應用程式第一次安裝時顯示</p>
-
-<p>點擊package.appxmanifest兩下開啟資訊清單編輯器</p>
-
-<p><img src="https://lh5.googleusercontent.com/-op8a6QflCRY/UIZeWzVBBTI/AAAAAAAABt4/5HGif4Mh8hY/s813/A.png" /></p>
-
-<p><strong>標誌:</strong> 是正方形磚的圖檔設定</p>
-
-<p><strong>寬標誌:</strong> 是寬型磚的圖檔設定</p>
-
-<p><strong>小標誌:</strong> 是提供搜尋結果的小圖</p>
-
-<p><img src="https://lh3.googleusercontent.com/-PxTwOp3yqSo/UIZeXz4taNI/AAAAAAAABuA/_61SB2q6UtI/s518/B.png" /></p>
-
-<p>上面的顯示圖1為方形磚，2為寬型磚</p>
-
-<h3>注意事項</h3>
-
-<p>這邊有一點要<strong>特別特別注意</strong>的是，對Win8 APP來說，假如沒有在資訊清單裡面設定<strong>寬標誌</strong>，應用程式將無法切換成寬型磚，所以寬型通知將也無法顯示，小弟我就是在這邊卡了很久，想說程式都沒有錯，為什麼一直無法顯示寬型通知&#8230;</p>
-
-<p>假設你的應用程式有提供寬標誌，對應用程式按下右鍵，就會有選項可以選擇放大或縮小</p>
-
-<p><img src="https://lh3.googleusercontent.com/-1rzB4IyyrZI/UIZeYR6tFBI/AAAAAAAABuI/6aKtLu5S_pA/s570/C.png" /></p>
-
-<p>OK，對動態磚有基本的認識以後，接下來就是JavaScript部份</p>
-
-<p>先宣告一個notifications變數，這裡宣告的目的是取代完整的命名空間，省去每次都要打很長一串程式碼</p>
-
-<pre><code>var notifications = Windows.UI.Notifications;
-</code></pre>
-
-<p>接下來就是為你的寬型磚挑選一個範本，並且抓取他的XML內容</p>
-
-<pre><code>var template = notifications.TileTemplateType.tileWideImageAndText01;                      
-var tileXml = notifications.TileUpdateManager.getTemplateContent(template);
-</code></pre>
-
-<p>動態磚裡面的顯示內容其實就是一個XML的格式，所以我們利用<strong>GetTemplateContent</strong> 方法傳回 <strong>XmlDocument</strong>，也就是下列的XML基本架構</p>
-
-<pre><code>&lt;tile&gt;
-    &lt;visual&gt;
-        &lt;binding template="TileWideImageAndText01"&gt;
-            &lt;image id="1" src=""/&gt;
-            &lt;text id="1"&gt;&lt;/text&gt;
-        &lt;/binding&gt;
-    &lt;/visual&gt;
-&lt;/tile&gt;
-</code></pre>
-
-<p>後續我們就是透過標準DOM函式來修改這個XML的內容，例如新增文字和新增圖片</p>
-
-<p>新增文字</p>
-
-<pre><code>var tileTextAttributes = tileXml.getElementsByTagName("text");   
-tileTextAttributes[0].appendChild(tileXml.createTextNode("我是寬型磚通知"));
-</code></pre>
-
-<p>新增圖片</p>
-
-<pre><code>var tileImageAttributes = tileXml.getElementsByTagName("image");
-tileImageAttributes[0].setAttribute("src", "http://i.msdn.microsoft.com/dynimg/IC612768.png");
-tileImageAttributes[0].setAttribute("alt", "red graphic");  
-</code></pre>
-
-<p>以上設定完寬磚型通知以後，接下來是方形磚通知</p>
-
-<pre><code>var squareTemplate = notifications.TileTemplateType.tileSquareText04;
-var squareTileXml = notifications.TileUpdateManager.getTemplateContent(squareTemplate);
-var squareTileTextAttributes = squareTileXml.getElementsByTagName("text");   
-squareTileTextAttributes[0].appendChild(squareTileXml.createTextNode("我是方型磚通知"));
-</code></pre>
-
-<p>然後將方型磚通知加到XML節點裡面</p>
-
-<pre><code>var node = tileXml.importNode(squareTileXml.getElementsByTagName("binding").item(0), true);
-tileXml.getElementsByTagName("visual").item(0).appendChild(node);
-</code></pre>
-
-<p>最後就是利用XML來建立新的通知</p>
-
-<pre><code>var tileNotification = new notifications.TileNotification(tileXml);
-</code></pre>
-
-<p>按下Ctrl+F5來看看效果吧</p>
-
-<p><img src="https://lh6.googleusercontent.com/-qKWHXg0ND0Y/UIZeZSVxekI/AAAAAAAABuQ/xU26ZDJgRIA/s771/D.png" /></p>
-
-<p><img src="https://lh3.googleusercontent.com/-1hIF3GPJNp4/UIZeZngTBII/AAAAAAAABuU/T3AO20DhkAI/s771/E.png" /></p>
-
-<p>另外微軟建議通知的內容需要有時效性，所以建議磚的內容不應該超過通知訊息的時效性，也就是說太老舊的訊息就不要再通知囉~，記得幫通知加個時效性，以下程式碼是指10分鐘後將會把通知從磚移除</p>
-
-<pre><code>var currentTime = new Date();
-tileNotification.expirationTime = new Date(currentTime.getTime() + 600 * 1000);
-
-notifications.TileUpdateManager.createTileUpdaterForApplication().update(tileNotification);
-</code></pre>
-
-<p>參考資料:</p>
-
-<p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh465439.aspx" target="_blank">傳送磚更新 (使用 JavaScript 和 HTML 的 Metro 樣式應用程式)</a></p>
-
-<p><a href="http://msdn.microsoft.com/zh-tw/library/windows/apps/hh779724.aspx" target="_blank">磚與磚通知概觀 (Metro 樣式應用程式)</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

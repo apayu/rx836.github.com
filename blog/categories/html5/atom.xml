@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: HTML5 | apa]]></title>
-  <link href="http://rx836.github.com/blog/categories/html5/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/blog/categories/html5/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[HTML5] 淺談XMLHttpRequest Level 2]]></title>
-    <link href="http://rx836.github.com/blog/javascript-xmlhttprequest-level-2/"/>
+    <link href="http://blog.rx836.tw/blog/javascript-xmlhttprequest-level-2/"/>
     <updated>2012-09-10T15:24:00+08:00</updated>
-    <id>http://rx836.github.com/blog/javascript-xmlhttprequest-level-2</id>
+    <id>http://blog.rx836.tw/blog/javascript-xmlhttprequest-level-2</id>
     <content type="html"><![CDATA[<p>HTML5近來可說是越來越火紅，在諸多優點裡面，最讓開發者期待的就是他的標準化，讓各家瀏覽器不再是各自為王，各自為政，這對於網頁開發者來說，可以說是一大利多(前提是微軟真正的統一?不過看IE10頗有那個味道)，今天要來看的是新的標準化-<strong>XMLHttpReuest Level 2</strong></p>
 
 <!--more-->

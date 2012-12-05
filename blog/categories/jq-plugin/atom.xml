@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
-  <link href="http://rx836.github.com/blog/categories/jq-plugin/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -14,10 +14,231 @@
 
   
   <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 簡易的數值格式化-Numeral.js]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-plugin-format-number/"/>
+    <updated>2012-12-04T12:34:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-plugin-format-number</id>
+    <content type="html"><![CDATA[<p>對於將數字或是文字做格式化一直都覺得很阿雜，例如將算出來的數字加個千分位的逗點，或是加個貨幣符號，雖然自己做並不難，但還是希望可以有個plugin能做到這些事情，所以今天就來筆記 Numeral.js  這款plugin</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>用法很簡單容易，先下載 <a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
+
+<p>接著載入到網頁裡面後，js的寫法如下</p>
+
+<pre><code>var string = numeral(1000).format('0,0');
+// 1,000
+</code></pre>
+
+<p>這樣子把數字丟進去以後，在 <strong>format()</strong> 傳入相對應的格式，就可以擁有千分位的逗點，其它還有</p>
+
+<h3>名次</h3>
+
+<pre><code>var string = numeral(12).format('0o');
+//12th
+</code></pre>
+
+<h3>貨幣符號</h3>
+
+<pre><code>var string = numeral(1001).format('$ 0,0[.]00');
+//$ 1,001
+</code></pre>
+
+<h3>Bytes</h3>
+
+<pre><code>var string = numeral(7884486213).format('0.0b');
+//7.3GB
+</code></pre>
+
+<h3>百分率</h3>
+
+<pre><code>var string = numeral(0.974878234).format('0.000%');
+//97.488%
+</code></pre>
+
+<h3>時間</h3>
+
+<pre><code>var string = numeral(238).format('00:00:00');
+//0:03:58
+</code></pre>
+
+<h3>Unformat</h3>
+
+<p>能轉換過去，當然也可以轉換回來</p>
+
+<pre><code>var string = numeral().unformat('12th');
+//12
+</code></pre>
+
+<h3>加減乘除</h3>
+
+<pre><code>var number = numeral(1000);
+
+var added = number.add(10);
+// 1010
+</code></pre>
+
+<p>這功能我是覺得有點多餘XD，去看source也只是做加減乘除，不太需要再多此一舉</p>
+
+<h2>source code</h2>
+
+<p>因為最近想自己嘗試練習多寫一些plugin，所以會去觀摩別人的寫法，numeral.js是一個蠻簡單明瞭的範例，所以大概抓幾個重點出來筆記心得，有興趣的人可以一起看看XD</p>
+
+<p>1.建立一個名為Numeral的函式</p>
+
+<p>數值就是從這邊傳入</p>
+
+<pre><code>// Numeral prototype object
+function Numeral (number) {
+    this._n = number;
+}
+</code></pre>
+
+<p>2.加入一些prototype</p>
+
+<pre><code>numeral.fn = Numeral.prototype = {
+
+    clone : function () {
+        // ...
+    },
+
+    format : function (inputString) {           
+        // ...
+    },
+
+    // ...
+    // ...
+
+    multiply : function (value) {
+        // ...
+    },
+
+    divide : function (value) {
+        // ...
+    },
+
+    difference : function (value) {
+        // ...
+    }
+
+};
+</code></pre>
+
+<p>以上兩個為程式的主體，所以有了這個架構我們就可以這樣寫</p>
+
+<pre><code>numeral(1000).format('0,0');
+</code></pre>
+
+<p>3.其它大部分就是函式的處理</p>
+
+<pre><code>function formatNumeral (n, format) {
+    var output;
+
+    // figure out what kind of format we are dealing with
+    if (format.indexOf('$') &gt; -1) { // currency!!!!!
+        output = formatCurrency(n, format);
+    } else if (format.indexOf('%') &gt; -1) { // percentage
+        output = formatPercentage(n, format);
+    } else if (format.indexOf(':') &gt; -1) { // time
+        output = formatTime(n, format);
+    } else { // plain ol' numbers or bytes
+        output = formatNumber(n, format);
+    }
+
+    // return string
+    return output;
+}
+</code></pre>
+
+<p>會發現傳入的參數為 <strong>n</strong> 和 <strong>format</strong></p>
+
+<p>n就是 <strong>Numeral函式</strong> 本身，裡面帶有傳入的數值和prototype這些東西</p>
+
+<p>format就是要進行什麼樣的格式化</p>
+
+<p>如果format裡面含有$就是要進行貨幣的格式化，有%就是要進行百分比的格式化，其它以此類推</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="https://github.com/adamwdraper/Numeral-js" target="_blank">Github Numeral-js</a></p>
+
+<p><a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 圖片延遲加載-Lazy-Loading]]></title>
+    <link href="http://blog.rx836.tw/blog/create-lazy-loading/"/>
+    <updated>2012-12-03T15:01:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/create-lazy-loading</id>
+    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-9VL-bSTiio8/ULxO_q7aPbI/AAAAAAAACAQ/R6Nns5e2_T0/s551/qwer.jpg" /></p>
+
+<p>延遲加載圖片常用在有大量圖片的網站，在訪客還沒看到的區域先暫停讀取圖片，等到看到特定區域時才將需要的圖片載入，好處是可以減少一開始等待所有圖片載入的時間，避免訪客感到不耐煩而流失，要做到此效果只需要搭配簡單的jQuery plugin，並且在HTML上加點技巧即可，重點是，要加上這個效果對設計師來說並不困難，因為裡面並沒有涉及到太多JavaScript知識</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>首先必須下載jQuery和<a href="https://raw.github.com/tuupola/jquery_lazyload/master/jquery.lazyload.min.js" target="_blank">minified lazyload script</a>，並且加掛在網頁裡面</p>
+
+<pre><code>&lt;script src="jquery.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="jquery.lazyload.js" type="text/javascript"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>接著我們需要建立一個 1x1 px的灰色小圖，這將會取代尚未讀取到的圖片，來做為延遲加載的效果</p>
+
+<p><img src="https://lh4.googleusercontent.com/-GynYPKkHJnU/ULxbNG8liyI/AAAAAAAACA0/QMBzvG46740/s530/rtyu.jpg" /></p>
+
+<p>接著是HTML部分</p>
+
+<pre><code>&lt;div class="frame"&gt;&lt;img class="lazy" src="img/g.gif" data-original="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/div&gt;
+</code></pre>
+
+<p>這邊特別的是&lt;img&gt;的屬性 <strong>src</strong> 並不是指向原始圖檔，而是 1x1 px的小圖，而原始圖檔擺放的位置在屬性 <strong>data-original</strong> 裡面，另外要給予原始圖檔的 <strong>width</strong> 和 <strong>height</strong>，避免不必要的錯誤發生</p>
+
+<h3>noscript</h3>
+
+<p>在瀏覽器沒有開啟JavaScript的情況下，我們可能也要做一些預防措施，直接將圖片載入，不然使用者看到的圖片都是一片灰</p>
+
+<pre><code>&lt;div class="frame"&gt;&lt;img class="lazy" src="img/g.gif" data-original="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/div&gt;
+&lt;noscript&gt;&lt;img src="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/noscript&gt;
+</code></pre>
+
+<p>接著是JS部分</p>
+
+<pre><code>$("img.lazy").lazyload();
+</code></pre>
+
+<p>大功告成！很容易吧，假如你不太喜歡這麼呆滯的載入圖片，可以加入一些效果，例如 <strong>fadeIn</strong></p>
+
+<pre><code>$("img.lazy").lazyload({
+    effect: "fadeIn"
+});
+</code></pre>
+
+<p>想要看更多運用，可以連到參考資料</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://speckyboy.com/2012/10/18/how-to-create-lazy-loading-images-for-your-website/" target="_blank">How to Create Lazy-Loading Images for your Website</a></p>
+
+<p><a href="http://www.appelsiini.net/projects/lazyload" target="_blank">Lazy Load Plugin for jQuery</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 有效降低會員註冊退信率的mailcheck]]></title>
-    <link href="http://rx836.github.com/blog/mailcheck-jquery-plugin/"/>
+    <link href="http://blog.rx836.tw/blog/mailcheck-jquery-plugin/"/>
     <updated>2012-11-28T12:04:00+08:00</updated>
-    <id>http://rx836.github.com/blog/mailcheck-jquery-plugin</id>
+    <id>http://blog.rx836.tw/blog/mailcheck-jquery-plugin</id>
     <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-dLci9WLFC-8/ULWyqQJ-OxI/AAAAAAAAB_U/odHWaG3jNfE/s482/w.jpg" /></p>
 
 <p>免費檔案分享<a href="http://kicksend.com/" target="_blank">Kicksend</a>有寫一篇文章是關於<a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target=_blank"">如何降低退信率</a>，內容大概是講User註冊會員以後，會發送註冊的確認信，但常常會發生被退信的情況，導致會員收不到信可能必須重新申請一次帳號，不然就是請客服修改E-mail，所以Kicksend為了減少這個困擾就做了分析並且解決問題</p>
@@ -141,9 +362,9 @@ $('#email').on('blur', function() {
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] Accordion Menu(手風琴)-Kwicks]]></title>
-    <link href="http://rx836.github.com/blog/jquery-accordion-plugin-kwicks/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks/"/>
     <updated>2012-11-20T11:52:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-accordion-plugin-kwicks</id>
+    <id>http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks</id>
     <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-_J-W2xu9kk0/UKssWB_LsAI/AAAAAAAAB8I/l5FDpuCO27c/s415/t1.jpg" /></p>
 
 <p><img src="https://lh5.googleusercontent.com/-jKM2KBpI5eM/UKssWHgRekI/AAAAAAAAB8E/hG205WtoTDU/s415/t2.jpg" /></p>
@@ -291,9 +512,9 @@ $(element).on('event-name.kwicks', handler);
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 倒數計時的plugin介紹]]></title>
-    <link href="http://rx836.github.com/blog/jquery-countdown-plugins/"/>
+    <link href="http://blog.rx836.tw/blog/jquery-countdown-plugins/"/>
     <updated>2012-11-05T11:45:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-countdown-plugins</id>
+    <id>http://blog.rx836.tw/blog/jquery-countdown-plugins</id>
     <content type="html"><![CDATA[<p>之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考</p>
 
 <!--more-->
@@ -354,319 +575,6 @@ $(element).on('event-name.kwicks', handler);
 <p><a href="http://www.webresourcesdepot.com/jquery-countdown-plugins-for-coming-soon-pages/" target="_blank"></a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] Facebook XXX hours ago的時間生成]]></title>
-    <link href="http://rx836.github.com/blog/jquery-plugin-timeago/"/>
-    <updated>2012-10-03T01:36:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-plugin-timeago</id>
-    <content type="html"><![CDATA[<p><a href="http://timeago.yarp.com/" target="_blank">timeago</a>是一套可以快速生成過去發生時間的jQuery plugin，大家應該對於Facebook文字框下方的『xxx hours ago』不會陌生，留言訊息不再只是單純的『x年x月x日 x時x分x秒』，而是可以很貼心的將時間換算給使用者知道，『喔~ 原來這則留言在幾分鐘之前』，這種對User experience來說其實是相當的加分，要實作其實也不難，網路上也有plugin可以方便使用，就趕快來看看如何做出這種效果吧！</p>
-
-<p><img src="https://lh6.googleusercontent.com/-8eJHMArd3w0/UGxqjpAcHYI/AAAAAAAABqY/Z8lDGoeU_58/s409/1.jpg" /></p>
-
-<!--more-->
-
-
-<p>首先<a href="http://timeago.yarp.com/jquery.timeago.js" target="_blank">下載</a>timeago，和jQuery一起引用到html裡面</p>
-
-<pre><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>接著是html部分</p>
-
-<pre><code>&lt;abbr class="loaded timeago" title="when you opened the page"&gt;&lt;/abbr&gt;
-</code></pre>
-
-<p>這個plugin預設是用abbr這個元素，要搭配裡面的title，title屬性待會會存放時間資訊在裡面，接著是js部分</p>
-
-<pre><code>$(function(){
-    prepareDynamicDates();      
-    $("abbr.timeago").timeago();        
-
-    function prepareDynamicDates() {
-        $('abbr.loaded').attr("title", ISODateString(new Date()));                      
-    }
-
-    function ISODateString(d){
-        function pad(n){return n&lt;10 ? '0'+n : n}
-         return d.getUTCFullYear()+'-'
-              + pad(d.getUTCMonth()+1)+'-'
-              + pad(d.getUTCDate())+'T'
-              + pad(d.getUTCHours())+':'
-              + pad(d.getUTCMinutes())+':'
-              + pad(d.getUTCSeconds())+'Z'
-    }       
-
-});
-</code></pre>
-
-<p>要注意的一點是，要先將時間轉換成<a href="http://zh.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a>，ISO 8601是一種國際標準化組織所訂的日期時間表示法，至於要怎麼轉換，網路上已經都有人寫好了，或是直接看上面範例的函式<strong>ISODateString()</strong></p>
-
-<p>接著將轉換後的時間放到abbr這個元素的title屬性，然後使用.timeago()這個方法即可，這樣一打開網頁，就會顯示</p>
-
-<pre><code>less than a minute ago
-</code></pre>
-
-<p>過幾分鐘後 就會顯示，</p>
-
-<pre><code>2 minutes ago
-</code></pre>
-
-<p>代表已經過了兩分鐘，因為timeago不用重整會自動刷新時間</p>
-
-<p>或是你可以直接看我網頁上的DEMO結果如下</p>
-
-<p>『你開始看這篇文章在<abbr class="loaded timeago" title="when you opened the page"></abbr>』</p>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
-
-
-<script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"></script>
-
-
-<script>
-    $(function(){
-        prepareDynamicDates();      
-        $("abbr.timeago").timeago();        
-
-        function prepareDynamicDates() {
-            $('abbr.loaded').attr("title", ISODateString(new Date()));                      
-        }
-
-        function ISODateString(d){
-            function pad(n){return n<10 ? '0'+n : n}
-             return d.getUTCFullYear()+'-'
-                  + pad(d.getUTCMonth()+1)+'-'
-                  + pad(d.getUTCDate())+'T'
-                  + pad(d.getUTCHours())+':'
-                  + pad(d.getUTCMinutes())+':'
-                  + pad(d.getUTCSeconds())+'Z'
-        }       
-        
-    });
-</script>
-
-
-<p>假如你按F5重整就會發現又回到less than a minute ago (除非js的檔案掛掉，才不會顯示)</p>
-
-<p>但如果是不想用現在時間開始計算，而是希望每則發文的時間開始計算呢？一樣html的部分如下</p>
-
-<pre><code>&lt;abbr class="modified timeago" title="xxx"&gt;&lt;/abbr&gt;
-</code></pre>
-
-<p>接著是js部分</p>
-
-<pre><code>$(function(){
-
-    $('abbr.modified').attr("title", "2012-10-02T17:30:33Z");
-    $("abbr.timeago").timeago();            
-
-});
-</code></pre>
-
-<p>一樣就直接把當初那則發文的ISO 8601的時間丟到title，然後使用.timeago()就可以了</p>
-
-<p>如果你想用更靈活或擴充性更大的plugin，也可以選擇另一款<a href="http://pragmaticly.github.com/smart-time-ago/" target="_blank">Smart Time Ago</a>，靈感就來自於timeago，只是功能更強大</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://pragmaticly.github.com/smart-time-ago/" target="_blank">Smart Time Ago</a></p>
-
-<p><a href="http://timeago.yarp.com/" target="_blank">timeago</a></p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] hoverpulse 滑鼠移入，圖片縮放]]></title>
-    <link href="http://rx836.github.com/blog/jquery-hoverpulse/"/>
-    <updated>2012-09-20T23:42:00+08:00</updated>
-    <id>http://rx836.github.com/blog/jquery-hoverpulse</id>
-    <content type="html"><![CDATA[<p>jQuery寫了一陣子，直到最近有個需求，想要做到滑鼠移到圖片上，會微微的放大，才發現這個很常看到的效果，我到今天都還沒實做過</p>
-
-<!--more-->
-
-
-<p>幸運的是...，就因為這麼晚才實做，所以早就有人把plugin寫好了，我所用的是<a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a>，用法相當相當的簡單</p>
-
-<p>首先是HTML部份</p>
-
-<pre><code>&lt;div&gt;&lt;img src="a.jpg" /&gt;&lt;/div&gt;
-&lt;div&gt;&lt;img src="b.jpg" /&gt;&lt;/div&gt;
-&lt;div&gt;&lt;img src="c.jpg" /&gt;&lt;/div&gt;
-</code></pre>
-
-<p>再來是jQuery部份</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse();
-});
-</code></pre>
-
-<p>這樣就完成了！當然什麼值都沒有給的情況下是用default，但如果想要設定放大的幅度和變化的速度，可以這樣寫</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse({
-        size: 40,  // number of pixels to pulse element (in each direction)
-        speed: 400 // speed of the animation 
-    });
-});
-</code></pre>
-
-<p>真的簡單又明瞭...</p>
-
-<p>那如果你想加入點擊的事件，你可以這樣寫</p>
-
-<pre><code>$(document).ready(function() {
-    $('div img').hoverpulse().each(function() {
-        var $img = $(this);                 
-        $img.click(function() {
-
-            //點每張圖的事件
-
-            return false;
-        });
-    });
-});
-</code></pre>
-
-<p>接下來是我個人好奇去看他的source code，可以看到他先將每個圖片的width和height存到$.data裡面</p>
-
-<pre><code>this.each(function() {
-    var $this = $(this);
-    var w = $this.width(), h = $this.height();
-    $this.data('hoverpulse.size', { w: parseInt(w), h: parseInt(h) });
-});
-</code></pre>
-
-<p>接著利用到<strong>.hover()</strong>的方法去做出滑鼠移到圖片和移出圖片的效果</p>
-
-<pre><code>// bind hover event for behavior
-return this.hover(
-    // hover over
-    function() {
-        var $this = $(this);
-        $this.parent().css('z-index', opts.zIndexActive);
-
-        var size = $this.data('hoverpulse.size');
-        var w = size.w, h = size.h;
-        $this.stop().animate({ 
-            top:  ('-'+opts.size+'px'), 
-            left: ('-'+opts.size+'px'), 
-            height: (h+2*opts.size)+'px', 
-            width:  (w+2*opts.size)+'px' 
-        }, opts.speed);
-    },
-    // hover out
-    function() {
-        var $this = $(this);
-        var size = $this.data('hoverpulse.size');
-        var w = size.w, h = size.h;
-
-        $this.stop().animate({ 
-            top:  0, 
-            left: 0, 
-            height: (h+'px'), 
-            width:  (w+'px') 
-        }, opts.speed, function() {
-            $this.parent().css('z-index', opts.zIndexNormal);
-        });
-    }
-);
-</code></pre>
-
-<p>在移入部份會先將包覆img的div z-index值設到100</p>
-
-<pre><code>$this.parent().css('z-index', opts.zIndexActive);
-</code></pre>
-
-<p>然後從data取出之前放入的圖片width和height，接著用<strong>.animate()</strong>來執行放大效果</p>
-
-<pre><code>$this.stop().animate({ 
-            top:  ('-'+opts.size+'px'), 
-            left: ('-'+opts.size+'px'), 
-            height: (h+2*opts.size)+'px', 
-            width:  (w+2*opts.size)+'px' 
-        }, opts.speed);
-</code></pre>
-
-<p>這段code其實就是把你設定的size放大兩倍，並且為了有感覺從圖片中間點開始放大的效果，所以把位置top和left給予負值，等於整張圖片往左上角移動，速度是<strong>opts.speed</strong>，而圖片的position:absolute在整個plugin一開始就已經設定了</p>
-
-<pre><code>// parent must be relatively positioned
-this.parent().css({ position: 'relative' });
-// pulsing element must be absolutely positioned
-this.css({ position: 'absolute', top: 0, left: 0 });
-</code></pre>
-
-<p>可以看到包覆img的div是relatively，img是absolute</p>
-
-<p>而滑鼠移開之後只是把值恢復成原來的設定</p>
-
-<pre><code>var $this = $(this);
-var size = $this.data('hoverpulse.size');
-var w = size.w, h = size.h;
-
-$this.stop().animate({ 
-    top:  0, 
-    left: 0, 
-    height: (h+'px'), 
-    width:  (w+'px') 
-}, opts.speed, function() {
-    $this.parent().css('z-index', opts.zIndexNormal);
-});
-</code></pre>
-
-<p>將top和left歸為0，height和width恢復成原來的大小，z-index也設回預設值1</p>
-
-<p>當然預設值在plugin的最下面可以自己修改</p>
-
-<pre><code>$.fn.hoverpulse.defaults = {
-    size:  20,
-    speed: 200,
-    zIndexActive: 100,
-    zIndexNormal: 1
-};
-</code></pre>
-
-<p>這樣plugin整個看起來就很清楚明瞭，也可以自己嘗試動手寫寫看喔！</p>
-
-<h2>後記</h2>
-
-<p>Aaron大大說plugin寫法有點舊，而且有點囉嗦XD，他建議我新的寫法，在此特別筆記下來</p>
-
-<p>HTML</p>
-
-<pre><code>&lt;img src="a.jpg" class="resize" width="250"/&gt;
-</code></pre>
-
-<p>jQuery</p>
-
-<pre><code>var current_h = null;
-var current_w = null;
-
-$('.resize').hover(
-    function(){
-        current_h = $(this, 'img').height;
-        current_w = $(this, 'img').width;
-        $(this).stop(true, false).animate({width: (current_w * 1.3), height: (current_h * 1.3)}, 300);
-    },
-    function(){
-        $(this).stop(true, false).animate({width: current_w + 'px', height: current_h + 'px'}, 300);
-    }
-);
-</code></pre>
-
-<p>不要用plugin，直接寫，至於top和left在自己加上就好，跟前面的plugin道理一樣</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.malsup.com/jquery/hoverpulse/" target="_blank">hoverpulse</a></p>
-
-<p>如有錯誤，歡迎指正</p>
 ]]></content>
   </entry>
   

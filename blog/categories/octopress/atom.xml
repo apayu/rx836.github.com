@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Octopress | apa]]></title>
-  <link href="http://rx836.github.com/blog/categories/octopress/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[Octopress]如何設定自己的Domain與異地編輯設定]]></title>
-    <link href="http://rx836.github.com/blog/octopress-notes-2/"/>
+    <link href="http://blog.rx836.tw/blog/octopress-notes-2/"/>
     <updated>2012-05-20T01:35:00+08:00</updated>
-    <id>http://rx836.github.com/blog/octopress-notes-2</id>
+    <id>http://blog.rx836.tw/blog/octopress-notes-2</id>
     <content type="html"><![CDATA[<p>用了將近一個月的Octopress，才慢慢覺得開始步上軌道，好笑的是我竟然誤以為因為Domain沒有設定，才會導致Google搜尋不到我的文章...，更慘的是，匆忙的利用網銀買了一組自己的Domain回來後，才發現原來我淺到連DNS都不會設定...</p>
 
 <!--more-->
@@ -117,9 +117,9 @@ git push origin source
   
   <entry>
     <title type="html"><![CDATA[[Octopress]如何開啟 Disqus與和常見的指令]]></title>
-    <link href="http://rx836.github.com/blog/octopress-notes-1/"/>
+    <link href="http://blog.rx836.tw/blog/octopress-notes-1/"/>
     <updated>2012-04-27T02:12:00+08:00</updated>
-    <id>http://rx836.github.com/blog/octopress-notes-1</id>
+    <id>http://blog.rx836.tw/blog/octopress-notes-1</id>
     <content type="html"><![CDATA[<p>經營Blog不是一件簡單的事情，尤其是還是自己架Blog的情況下，更是挫折連連，真的是憑藉著一股不知哪來的傻勁，遇到問題就找找資料，土法煉鋼好像也能做出一把堪用的武器出來</p>
 
 <!-- more  -->
@@ -184,9 +184,9 @@ git push origin source
   
   <entry>
     <title type="html"><![CDATA[[Octopress]出生以來第一次使用Octopress for windows]]></title>
-    <link href="http://rx836.github.com/blog/first-octopress/"/>
+    <link href="http://blog.rx836.tw/blog/first-octopress/"/>
     <updated>2012-04-27T01:55:00+08:00</updated>
-    <id>http://rx836.github.com/blog/first-octopress</id>
+    <id>http://blog.rx836.tw/blog/first-octopress</id>
     <content type="html"><![CDATA[<p>終於...</p>
 
 <p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>

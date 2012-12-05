@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 學習筆記 | apa]]></title>
-  <link href="http://rx836.github.com/blog/categories/學習筆記/atom.xml" rel="self"/>
-  <link href="http://rx836.github.com/"/>
-  <updated>2012-12-02T01:08:48+08:00</updated>
-  <id>http://rx836.github.com/</id>
+  <link href="http://blog.rx836.tw/blog/categories/學習筆記/atom.xml" rel="self"/>
+  <link href="http://blog.rx836.tw/"/>
+  <updated>2012-12-06T00:20:37+08:00</updated>
+  <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 免費玩Amazon Web Service(AWS) EC2]]></title>
-    <link href="http://rx836.github.com/blog/first-amazon-web-services/"/>
+    <link href="http://blog.rx836.tw/blog/first-amazon-web-services/"/>
     <updated>2012-10-30T11:25:00+08:00</updated>
-    <id>http://rx836.github.com/blog/first-amazon-web-services</id>
+    <id>http://blog.rx836.tw/blog/first-amazon-web-services</id>
     <content type="html"><![CDATA[<p>Amazon Web Service(AWS)從2006年開始就提供一些雲端服務，但我也是直到近期才開始真正的使用雲端帶來的方便，使用方式說起來也蠻簡單的，不過其實有很多細節與設定還要再多摸索，這次就先筆記怎麼開始使用AWS的EC2服務</p>
 
 <!--more-->
@@ -185,9 +185,9 @@
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 如何停止浪費時間在舊版IE的相容性]]></title>
-    <link href="http://rx836.github.com/blog/stop-wasting-time-for-ie/"/>
+    <link href="http://blog.rx836.tw/blog/stop-wasting-time-for-ie/"/>
     <updated>2012-10-26T12:25:00+08:00</updated>
-    <id>http://rx836.github.com/blog/stop-wasting-time-for-ie</id>
+    <id>http://blog.rx836.tw/blog/stop-wasting-time-for-ie</id>
     <content type="html"><![CDATA[<p>IE的痛...，只有遇過才可以體會到，我相信絕大多數的開發者都曾經有過這個痛，在許多開發者聚會的場合裡面，IE也是最常被拿出來開玩笑，但如何停止浪費你的時間去為了IE做開發上的調整？Mandy Barrington所寫的<a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a>或許可以供大家參考</p>
 
 <!--more-->
@@ -241,9 +241,9 @@ var msg3 = "只要點選圖示，就可以連到各自的下載頁面。";
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 創意與提案]]></title>
-    <link href="http://rx836.github.com/blog/note-marketing/"/>
+    <link href="http://blog.rx836.tw/blog/note-marketing/"/>
     <updated>2012-10-04T18:47:00+08:00</updated>
-    <id>http://rx836.github.com/blog/note-marketing</id>
+    <id>http://blog.rx836.tw/blog/note-marketing</id>
     <content type="html"><![CDATA[<p>前天公司內部教育訓練，請來Migo的行銷總監<a href="http://rexismtw.blogspot.tw/" target="_blank">Rex Pai</a>講師為我們上課，談從創意、到提案還有談行銷習慣，希望能整理自己的思緒，讓自己吸收更多</p>
 
 <!--more-->
@@ -334,9 +334,9 @@ var msg3 = "只要點選圖示，就可以連到各自的下載頁面。";
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 透過實體活動來學習《設計與思考》]]></title>
-    <link href="http://rx836.github.com/blog/design-thinking/"/>
+    <link href="http://blog.rx836.tw/blog/design-thinking/"/>
     <updated>2012-09-26T00:50:00+08:00</updated>
-    <id>http://rx836.github.com/blog/design-thinking</id>
+    <id>http://blog.rx836.tw/blog/design-thinking</id>
     <content type="html"><![CDATA[<p><strong>Design Thinking</strong>算是我今年才接觸到的新觀念，起初我認為這是一個在探討如何讓外觀看起來更棒，讓使用者的體驗更佳的做法，但直到看過影片之後，我才知道原來並不是這麼一回事，整個想傳達的理念也不如我想的那樣</p>
 
 <!--more-->
@@ -444,9 +444,9 @@ var msg3 = "只要點選圖示，就可以連到各自的下載頁面。";
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]]]></title>
-    <link href="http://rx836.github.com/blog/2-vmware-windows-8/"/>
+    <link href="http://blog.rx836.tw/blog/2-vmware-windows-8/"/>
     <updated>2012-09-22T14:33:00+08:00</updated>
-    <id>http://rx836.github.com/blog/2-vmware-windows-8</id>
+    <id>http://blog.rx836.tw/blog/2-vmware-windows-8</id>
     <content type="html"><![CDATA[<p>延續上一篇<a href="http://blog.rx836.tw/blog/vmware-windows-8/" target="_blank">簡單容易，如何在VM裝Windows 8來玩玩[二]</a>，已經在VM裡面建立一個Windows 8的虛擬機器，現在就來開始安裝系統部分</p>
 
 <!--more-->
