@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一] - apa</title>
+  <title>[CSS] 利用CSS3做scrolling effect - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="因為想參加Microsoft的Apps開發者聯盟，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM 當然前提你必須先把VM給裝起來，網路上教學還蠻多的，這篇就不多加闡述 &hellip;">
+  <meta name="description" content="今天看到一篇文章介紹美國ebay網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可, 這邊就來筆記一下過程 Start 一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/vmware-windows-8/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/css3-scrolling-effect/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一] - apa" />
+<meta property="og:title" content="[CSS] 利用CSS3做scrolling effect - apa" />
 
-<meta property="og:description" content="因為想參加Microsoft的Apps開發者聯盟，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM 當然前提你必須先把VM給裝起來，網路上教學還蠻多的，這篇就不多加闡述 &hellip;" />
+<meta property="og:description" content="今天看到一篇文章介紹美國ebay網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可, 這邊就來筆記一下過程 Start 一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有， &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/vmware-windows-8/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/css3-scrolling-effect/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]</h1>
+      <h1 class="entry-title">[CSS] 利用CSS3做scrolling Effect</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-09-21T17:37:00+08:00" pubdate data-updated="true">Sep 21<span>st</span>, 2012</time>
+<time datetime="2012-12-11T07:05:00+08:00" pubdate data-updated="true">Dec 11<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,70 +113,102 @@
   </header>
 
 
-<div class="entry-content"><p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
+<div class="entry-content"><p><img src="https://lh6.googleusercontent.com/-URpPFCw8GZY/UMZ5NsXYJuI/AAAAAAAACC4/Bjab2PYz86w/s1077/2012-12-11_071208.jpg" /></p>
+
+<p>今天看到一篇文章介紹美國<a href="http://www.ebay.com/new" target="_blank">ebay</a>網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可, 這邊就來筆記一下過程</p>
 
 <!--more-->
 
 
-<p>當然前提你必須先把VM給裝起來，網路上<a href="http://blog.xuite.net/yh96301/blog/53120472" target="_blank">教學還蠻多的</a>，這篇就不多加闡述</p>
+<h2>Start</h2>
 
-<p>一開始首先要去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM</p>
+<p>一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有，可以直接使用文章裡面的<a href="pepsized.com/wp-content/uploads/2012/11/lavender.zip" target="_blank">Demo</a>，就有現成的圖片可以練習，另外下面都是用Demo裡面的檔案做講解</p>
 
-<h3>2012/09/25 補充</h3>
+<p>HTML部份</p>
 
-<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具&#8230;，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js" lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;From love for lavender&lt;/title&gt;
+&lt;!-- 略... --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header class=" content"&gt;
+        &lt;div class="wrapper"&gt;
+                &lt;h1&gt;From love for lavender&lt;/h1&gt;
+                &lt;p&gt;&lt;span&gt;Lavender&lt;/span&gt; (botanic name Lavandula) is a ....
+                &lt;/p&gt;
+        &lt;/div&gt;
+&lt;/header&gt;
 
-<p>點選『Create a New Virtual Machine』</p>
+&lt;section class="content" id="oil"&gt;
+        &lt;div class="wrapper"&gt;
+                &lt;p&gt;&lt;span&gt;Lavender oil&lt;/span&gt; is an ... &lt;/p&gt;
+        &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- 略... --&gt;
+&lt;footer&gt;
+        &lt;div class=wrapper&gt;
+                 "From love for lavender" has been built ...
+        &lt;/div&gt;
+&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
-<p><img src="https://lh5.googleusercontent.com/-otZSLwijQ0U/UFyf4XwFSyI/AAAAAAAABkc/FNIph_J7JHs/s657/1.jpg"  /></p>
+<p>HTML部份就是常見的HTML5的架構，有&lt;header&gt;、&lt;section&gt;和&lt;footer&gt;，每個裡面都包含有一個class為 &#8220;wrapper&#8221; 的&lt;div&gt;</p>
 
-<p>接著點選『I will Install the operating system later』</p>
+<p>再來是基本的CSS部份</p>
 
-<p><img src="https://lh5.googleusercontent.com/-xeiYkr8fudM/UFyf8en7F3I/AAAAAAAABls/swewFIyCkmE/s659/2.jpg"  /></p>
+<pre><code>.wrapper {
+    width: 100%;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+</code></pre>
 
-<p>作業系統選擇『Microsoft Windows』，接著再選擇『Windows 7』，因為VM沒有Windows 8可以選</p>
+<p>會看到有一個比較少見的屬性叫 <strong>box-sizing</strong> ，他是CSS3的屬性，如果我們設box-sizing為 <strong>border-box</strong> ，意思就是指width和height的部份都包含了padding和border，詳細的屬性說明可以參考<a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">這篇</a></p>
 
-<p><img src="https://lh3.googleusercontent.com/-_Co3ZTLZ3bA/UFygAqiA5CI/AAAAAAAABm0/UixQmOxkxiU/s657/3.jpg"  /></p>
+<p>接著是scrolling effect部份</p>
 
-<p>輸入虛擬機器的名稱，這邊取名『Windows 8』，再選擇要存放的路徑，然後點選『Next』</p>
+<pre><code>section:after, header:after {
+    content: "";
+    display: block;
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6); 
+}
 
-<p><img src="https://lh4.googleusercontent.com/-KRAurNJRvLk/UFygBDKQoII/AAAAAAAABm8/YwQLP43AyUQ/s658/4.jpg"  /></p>
+header:after {
+  background-image: url(../images/lavenderbg1.jpg); }
+#oil:after {
+  background-image: url(../images/lavenderbg2.jpg); }
+#culinary:after {
+  background-image: url(../images/lavenderbg3.jpg); }
+#dried:after {
+  background-image: url(../images/lavenderbg4.jpg); }
+</code></pre>
 
-<p>接著設定虛擬硬碟的大小，並且設定『Store virtual disk as a single files』，將虛擬硬碟存成一個資料夾，按下『Next』</p>
+<p>因為沒有用到js的關係，但我們又想在HTML上新增元素，所以我們可以利用CSS的pseudo-elements <strong>after</strong>，他會幫我們在元素後面加上新的元素上去，並且擁有 <strong>background</strong>，另外，我們將屬性 <strong>background-attachment</strong> 設定為fixed，這也是scrolling effect的重點所在，意思就是指<strong>當頁面滾動時，背景圖並不會跟著移動</strong></p>
 
-<p><img src="https://lh3.googleusercontent.com/-EO-2MBYjcEc/UFygBr6bmvI/AAAAAAAABnI/5JjNmotkvEw/s656/5.jpg"  /></p>
+<p>這樣就大功告成囉，有沒有覺得效果很不錯呢？</p>
 
-<p>再來準備要來設定記憶體和掛載Windows 8映像檔，選擇『Customize Hardware…』</p>
+<h3>參考資料:</h3>
 
-<p><img src="https://lh4.googleusercontent.com/-nbky8ASN0ck/UFygBw-01wI/AAAAAAAABnE/dxdanwgZcjg/s660/6.jpg"  /></p>
+<p><a href="http://pepsized.com/how-to-recreate-the-new-e-bay-site-scrolling-effect/?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_33&utm_medium=web" target="_blank">How to recreate the new e-bay site scrolling effect</a></p>
 
-<p>調整記憶體，一般來說建議為實體記憶體的3分之1至2分之1之間，官方網站是說至少要1G</p>
+<p><a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">CSS3 Box-sizing </a></p>
 
-<p><img src="https://lh5.googleusercontent.com/-btOEe35_ToI/UFygCdtCjwI/AAAAAAAABnY/P6JM4vBI9Nc/s656/7.jpg"  /></p>
+<p><a href="http://www.w3school.com.cn/css/pr_background-attachment.asp" target="_blank">CSS background-attachment 属性</a></p>
 
-<p>接著選擇『New CD/DVD』的選項，再點『Use ISO image file:』，再按「Browse…」來選擇映像檔</p>
-
-<p><img src="https://lh6.googleusercontent.com/-WxOQRqu4nF8/UFygCyaFR9I/AAAAAAAABng/uQc30JVd0Oo/s658/8.jpg"  /></p>
-
-<p>選擇好映像檔以後就按下『Close』</p>
-
-<p><img src="https://lh4.googleusercontent.com/-v5ICos8qLUQ/UFygC-8bVNI/AAAAAAAABnc/9rp1LeXOO8I/s661/9.jpg"  /></p>
-
-<p>最後按下『Finish』就新增了一個虛擬機器</p>
-
-<p><img src="https://lh6.googleusercontent.com/-5QYBPsTQNwA/UFyf4pX33AI/AAAAAAAABkg/5rhtXII6H1s/s657/10.jpg"  /></p>
-
-<p>按下『Play virtual machine』，開始來進行安裝囉！</p>
-
-<p><img src="https://lh5.googleusercontent.com/-G0VcZ28gqbA/UFyf4laUtKI/AAAAAAAABkk/jvgPOqPFaOE/s659/11.jpg"  /></p>
-
-<p>因為篇幅有點過長，為了方便閱讀，所以分成兩篇來記錄</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://blog.xuite.net/yh96301/blog/58183942" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(一)</a></p>
-
-<p>如有錯誤，歡迎指正</p>
+<p>內容如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -210,12 +242,12 @@
   
 
 
-<time datetime="2012-09-21T17:37:00+08:00" pubdate data-updated="true">Sep 21<span>st</span>, 2012</time>
+<time datetime="2012-12-11T07:05:00+08:00" pubdate data-updated="true">Dec 11<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/win8/'>Win8</a>, <a class='category' href='/blog/categories/學習筆記/'>學習筆記</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>
   
 </span>
 
@@ -223,10 +255,8 @@
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-hoverpulse/" title="Previous Post: [jQ-Plugin] hoverpulse 滑鼠移入，圖片縮放">&laquo; [jQ-Plugin] hoverpulse 滑鼠移入，圖片縮放</a>
+        <a class="basic-alignment left" href="/blog/5-css-properties/" title="Previous Post: [CSS] 5個對設計師有幫助的CSS屬性">&laquo; [CSS] 5個對設計師有幫助的CSS屬性</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2-vmware-windows-8/" title="Next Post: [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]">[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二] &raquo;</a>
       
     </p>
   </footer>
@@ -244,7 +274,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/vmware-windows-8/" 
+	data-href="http://blog.rx836.tw/blog/css3-scrolling-effect/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -311,9 +341,9 @@
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/vmware-windows-8/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/vmware-windows-8/';
-        var disqus_url = 'http://blog.rx836.tw/blog/vmware-windows-8/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/css3-scrolling-effect/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/css3-scrolling-effect/';
+        var disqus_url = 'http://blog.rx836.tw/blog/css3-scrolling-effect/';
         var disqus_script = 'embed.js';
       
     (function () {

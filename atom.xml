@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-06T00:20:37+08:00</updated>
+  <updated>2012-12-11T08:09:46+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,110 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 利用CSS3做scrolling effect]]></title>
+    <link href="http://blog.rx836.tw/blog/css3-scrolling-effect/"/>
+    <updated>2012-12-11T07:05:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css3-scrolling-effect</id>
+    <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-URpPFCw8GZY/UMZ5NsXYJuI/AAAAAAAACC4/Bjab2PYz86w/s1077/2012-12-11_071208.jpg" /></p>
+
+<p>今天看到一篇文章介紹美國<a href="http://www.ebay.com/new" target="_blank">ebay</a>網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可, 這邊就來筆記一下過程</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有，可以直接使用文章裡面的<a href="pepsized.com/wp-content/uploads/2012/11/lavender.zip" target="_blank">Demo</a>，就有現成的圖片可以練習，另外下面都是用Demo裡面的檔案做講解</p>
+
+<p>HTML部份</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js" lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;From love for lavender&lt;/title&gt;
+&lt;!-- 略... --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header class=" content"&gt;
+        &lt;div class="wrapper"&gt;
+                &lt;h1&gt;From love for lavender&lt;/h1&gt;
+                &lt;p&gt;&lt;span&gt;Lavender&lt;/span&gt; (botanic name Lavandula) is a ....
+                &lt;/p&gt;
+        &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;section class="content" id="oil"&gt;
+        &lt;div class="wrapper"&gt;
+                &lt;p&gt;&lt;span&gt;Lavender oil&lt;/span&gt; is an ... &lt;/p&gt;
+        &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- 略... --&gt;
+&lt;footer&gt;
+        &lt;div class=wrapper&gt;
+                 "From love for lavender" has been built ...
+        &lt;/div&gt;
+&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>HTML部份就是常見的HTML5的架構，有&lt;header&gt;、&lt;section&gt;和&lt;footer&gt;，每個裡面都包含有一個class為 &#8220;wrapper&#8221; 的&lt;div&gt;</p>
+
+<p>再來是基本的CSS部份</p>
+
+<pre><code>.wrapper {
+    width: 100%;
+    margin: 0 auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+</code></pre>
+
+<p>會看到有一個比較少見的屬性叫 <strong>box-sizing</strong> ，他是CSS3的屬性，如果我們設box-sizing為 <strong>border-box</strong> ，意思就是指width和height的部份都包含了padding和border，詳細的屬性說明可以參考<a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">這篇</a></p>
+
+<p>接著是scrolling effect部份</p>
+
+<pre><code>section:after, header:after {
+    content: "";
+    display: block;
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6); 
+}
+
+header:after {
+  background-image: url(../images/lavenderbg1.jpg); }
+#oil:after {
+  background-image: url(../images/lavenderbg2.jpg); }
+#culinary:after {
+  background-image: url(../images/lavenderbg3.jpg); }
+#dried:after {
+  background-image: url(../images/lavenderbg4.jpg); }
+</code></pre>
+
+<p>因為沒有用到js的關係，但我們又想在HTML上新增元素，所以我們可以利用CSS的pseudo-elements <strong>after</strong>，他會幫我們在元素後面加上新的元素上去，並且擁有 <strong>background</strong>，另外，我們將屬性 <strong>background-attachment</strong> 設定為fixed，這也是scrolling effect的重點所在，意思就是指<strong>當頁面滾動時，背景圖並不會跟著移動</strong></p>
+
+<p>這樣就大功告成囉，有沒有覺得效果很不錯呢？</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://pepsized.com/how-to-recreate-the-new-e-bay-site-scrolling-effect/?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_33&utm_medium=web" target="_blank">How to recreate the new e-bay site scrolling effect</a></p>
+
+<p><a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">CSS3 Box-sizing </a></p>
+
+<p><a href="http://www.w3school.com.cn/css/pr_background-attachment.asp" target="_blank">CSS background-attachment 属性</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CSS] 5個對設計師有幫助的CSS屬性]]></title>
@@ -25,7 +129,7 @@
 
 <h2>Clear</h2>
 
-<p>首先先看一個基本的網站架構</p>
+<p>首先來看一個基本的網站架構</p>
 
 <p>HTML</p>
 
@@ -75,7 +179,7 @@
 
 <p><img src="https://lh6.googleusercontent.com/-hrlyAdCFVM4/UL9zdLc_WSI/AAAAAAAACBY/obrq-cebCvY/s470/2012-12-05_225116.jpg" /></p>
 
-<p>HTML部份就是利用一個div做為最外層的container，裡面包有content、sidebar和footer，利用CSS的屬性 <strong>float</strong>，將content和sidebar排成水平一直線，這是排版常使用的技巧，可是會發現，footer卻不是心中所想的那樣在最底層，反而受到float影響而圍繞在其他的div周圍</p>
+<p>HTML部份就是利用一個div做為最外層的container，裡面包有content、sidebar和footer，利用CSS的屬性 <strong>float</strong>，將content和sidebar排成水平一直線，這是排版常使用的技巧，可是會發現，footer卻不是心中所想的那樣置底，反而受到float影響而圍繞在其他的div周圍</p>
 
 <h3>如何讓單一的div消除float的影響</h3>
 
@@ -94,7 +198,7 @@
 
 <h2>Box Shadows</h2>
 
-<p>box-shadow這個新的CSS3屬性之前有在<a href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/" target="_blank">文章</a>介紹過，其實他就是很方便的利用CSS做出陰影效果，例如像這樣加上CSS</p>
+<p>box-shadow這個新的CSS3屬性之前有在<a href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/" target="_blank">文章</a>介紹過，其實他就是利用CSS很方便的做出陰影效果，例如像這樣加上CSS</p>
 
 <pre><code>#content{
     background:#ccc;
@@ -167,7 +271,7 @@
 
 <h2>CSS Gradients</h2>
 
-<p>用CSS3來表達漸層，用法其實不難，難的是要做到跨瀏覽器不是一件很容易的事情，以下是漸層的語法</p>
+<p>用CSS3來表達漸層，用法其實不難，難的是要做到跨瀏覽器不是一件很容易的事情，以下是範例語法</p>
 
 <pre><code>#container{
     background: #a8e7ff; /* Old browsers */
@@ -335,7 +439,7 @@
 
 <p>以上是幾個對設計師來說好用的CSS屬性，希望對大家有幫助</p>
 
-<p>參考資料:</p>
+<h3>參考資料:</h3>
 
 <p><a href="http://designfestival.com/5-css-properties-that-give-designers-fits/" target="_blank">5 CSS Properties That Give Designers Fits</a></p>
 
@@ -2447,62 +2551,6 @@ console.log(c.height);
 <p><a href="http://blog.soft.idv.tw/?p=824" target="_blank">阿正老師教你免費玩Amazon EC2雲端主機(下篇)：主機實戰篇</a></p>
 
 <p>很多大大的指導</p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[學習筆記] 如何停止浪費時間在舊版IE的相容性]]></title>
-    <link href="http://blog.rx836.tw/blog/stop-wasting-time-for-ie/"/>
-    <updated>2012-10-26T12:25:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/stop-wasting-time-for-ie</id>
-    <content type="html"><![CDATA[<p>IE的痛&#8230;，只有遇過才可以體會到，我相信絕大多數的開發者都曾經有過這個痛，在許多開發者聚會的場合裡面，IE也是最常被拿出來開玩笑，但如何停止浪費你的時間去為了IE做開發上的調整？Mandy Barrington所寫的<a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a>或許可以供大家參考</p>
-
-<!--more-->
-
-
-<h3>1.使用分析工具</h3>
-
-<p>使用分析工具來分析網站的訪客都用哪一個瀏覽器，如果發現只有很少數的人使用舊版IE，就別花費時間去為了那些訪客做修改，在這裡推薦很多網站都使用的<a href="http://www.google.com/analytics/" target="_blank">Google Analytics</a>，最重要的是它還是免費</p>
-
-<h3>2.提醒用戶升級</h3>
-
-<p>假設有些時候某些功能沒辦法在舊版的IE上執行，那善意的提醒也是不錯的效果，可以在這邊下載<a href="http://code.google.com/p/ie6-upgrade-warning/" target="_blank">IE6 Upgrade Warning</a>，這個由Google寫的Project可以幫助你在訪客是使用IE6時，跳出提醒升級的視窗，使用方式就是先下載整包Project，放進你的網站裡面，並且加入以下程式碼</p>
-
-<pre><code>&lt;!--[if lte IE 6]&gt;&lt;script src="js/ie6/warning.js"&gt;&lt;/script&gt;&lt;script&gt;window.onload=function(){e("js/ie6/")}&lt;/script&gt;&lt;![endif]--&gt;
-</code></pre>
-
-<p><strong>warning.js</strong>這支檔案可以隨著擺放路徑而調整，假如偵測到訪客是使用IE6就會跳出以下畫面</p>
-
-<p><img src="https://lh5.googleusercontent.com/-rsWJFxHcHAs/UIoszY9MeOI/AAAAAAAABvg/KV_7bbdkMEg/s700/upgrade.jpg" /></p>
-
-<p>當然你也可以換成繁體中文版，只要打開warning.js這支檔案，將前三行的code換成以下的程式碼即可</p>
-
-<pre><code>var msg1 = "你知道你的 Internet Explorer 瀏覽器已經過時了嗎？";
-var msg2 = "建議你升級到較新的版本，或是改用其他的瀏覽器，以獲得更好的使用體驗。下面是一份目前廣受歡迎的瀏覽器列表。";
-var msg3 = "只要點選圖示，就可以連到各自的下載頁面。";
-</code></pre>
-
-<p>記得注意UTF-8的編碼問題</p>
-
-<h3>3.整理問題</h3>
-
-<p>有時候好不容易處理過的BUG，記得要記錄起來，不僅造福將來也有可能碰到問題的自己，也可以幫助團隊的其他人，甚至是社群上同樣遇到相同問題的開發者</p>
-
-<h3>4.提高預算</h3>
-
-<p>假如真的遇到客戶要求一定要支援所有瀏覽器&#8230;.，那就大膽的開口要求提高預算吧！</p>
-
-<p>以上就是作者建議大家的解決方式</p>
-
-<p>IE的相容性問題我想也不是一時可以解決，但至少幾個大型的入口網站(例如Google)已經開始不再支援老舊的IE，而IE6老實說也慢慢的逐漸消失中，微軟似乎也聽見的大家的心聲，至少IE10目前看起來是中規中矩，讓我們還是用樂觀的心情來迎接未來:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.sitepoint.com/how-to-stop-wasting-time-developing-for-internet-explorer/" target="_blank">How to Stop Wasting Time Developing for Internet Explorer</a></p>
-
-<p><a href="http://code.google.com/p/ie6-upgrade-warning/" target="_blank">ie6-upgrade-warning</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

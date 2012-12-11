@@ -120,7 +120,7 @@
 
 <h2>Clear</h2>
 
-<p>首先先看一個基本的網站架構</p>
+<p>首先來看一個基本的網站架構</p>
 
 <p>HTML</p>
 
@@ -170,7 +170,7 @@
 
 <p><img src="https://lh6.googleusercontent.com/-hrlyAdCFVM4/UL9zdLc_WSI/AAAAAAAACBY/obrq-cebCvY/s470/2012-12-05_225116.jpg" /></p>
 
-<p>HTML部份就是利用一個div做為最外層的container，裡面包有content、sidebar和footer，利用CSS的屬性 <strong>float</strong>，將content和sidebar排成水平一直線，這是排版常使用的技巧，可是會發現，footer卻不是心中所想的那樣在最底層，反而受到float影響而圍繞在其他的div周圍</p>
+<p>HTML部份就是利用一個div做為最外層的container，裡面包有content、sidebar和footer，利用CSS的屬性 <strong>float</strong>，將content和sidebar排成水平一直線，這是排版常使用的技巧，可是會發現，footer卻不是心中所想的那樣置底，反而受到float影響而圍繞在其他的div周圍</p>
 
 <h3>如何讓單一的div消除float的影響</h3>
 
@@ -189,7 +189,7 @@
 
 <h2>Box Shadows</h2>
 
-<p>box-shadow這個新的CSS3屬性之前有在<a href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/" target="_blank">文章</a>介紹過，其實他就是很方便的利用CSS做出陰影效果，例如像這樣加上CSS</p>
+<p>box-shadow這個新的CSS3屬性之前有在<a href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/" target="_blank">文章</a>介紹過，其實他就是利用CSS很方便的做出陰影效果，例如像這樣加上CSS</p>
 
 <pre><code>#content{
     background:#ccc;
@@ -262,7 +262,7 @@
 
 <h2>CSS Gradients</h2>
 
-<p>用CSS3來表達漸層，用法其實不難，難的是要做到跨瀏覽器不是一件很容易的事情，以下是漸層的語法</p>
+<p>用CSS3來表達漸層，用法其實不難，難的是要做到跨瀏覽器不是一件很容易的事情，以下是範例語法</p>
 
 <pre><code>#container{
     background: #a8e7ff; /* Old browsers */
@@ -430,7 +430,7 @@
 
 <p>以上是幾個對設計師來說好用的CSS屬性，希望對大家有幫助</p>
 
-<p>參考資料:</p>
+<h3>參考資料:</h3>
 
 <p><a href="http://designfestival.com/5-css-properties-that-give-designers-fits/" target="_blank">5 CSS Properties That Give Designers Fits</a></p>
 
@@ -484,6 +484,8 @@
         <a class="basic-alignment left" href="/blog/jquery-plugin-format-number/" title="Previous Post: [jQ-Plugin] 簡易的數值格式化-Numeral.js">&laquo; [jQ-Plugin] 簡易的數值格式化-Numeral.js</a>
       
       
+        <a class="basic-alignment right" href="/blog/css3-scrolling-effect/" title="Next Post: [CSS] 利用CSS3做scrolling effect">[CSS] 利用CSS3做scrolling effect &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -514,11 +516,15 @@
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (10)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/javascript'>JavaScript (6)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (10)</a></li><li><a href='/blog/categories/jquery'>jQuery (18)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (6)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (8)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (11)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (1)</a></li><li><a href='/blog/categories/javascript'>JavaScript (6)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (10)</a></li><li><a href='/blog/categories/jquery'>jQuery (18)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (6)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (8)</a></li></ul>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/css3-scrolling-effect/">[CSS] 利用CSS3做scrolling effect</a>
+      </li>
     
       <li class="post">
         <a href="/blog/5-css-properties/">[CSS] 5個對設計師有幫助的CSS屬性</a>
@@ -534,10 +540,6 @@
     
       <li class="post">
         <a href="/blog/book-review-6/">[好書分享] 開放式領導</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/jquery-html-forms/">[jQuery] jQuery常用的表單驗證事件</a>
       </li>
     
   </ul>
