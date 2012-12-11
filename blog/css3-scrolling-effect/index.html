@@ -9,7 +9,7 @@
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="今天看到一篇文章介紹美國ebay網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可, 這邊就來筆記一下過程 Start 一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有， &hellip;">
+  <meta name="description" content="今天看到一篇文章介紹美國 ebay 網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可，這邊就來筆記一下過程 Start 一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -33,7 +33,7 @@
 <meta property="fb:app_id" content="416172151763823" />
 <meta property="og:title" content="[CSS] 利用CSS3做scrolling effect - apa" />
 
-<meta property="og:description" content="今天看到一篇文章介紹美國ebay網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可, 這邊就來筆記一下過程 Start 一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有， &hellip;" />
+<meta property="og:description" content="今天看到一篇文章介紹美國 ebay 網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可，這邊就來筆記一下過程 Start 一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有， &hellip;" />
 
 <meta property="og:url" content="http://blog.rx836.tw/blog/css3-scrolling-effect/" />  
 
@@ -115,7 +115,7 @@
 
 <div class="entry-content"><p><img src="https://lh6.googleusercontent.com/-URpPFCw8GZY/UMZ5NsXYJuI/AAAAAAAACC4/Bjab2PYz86w/s1077/2012-12-11_071208.jpg" /></p>
 
-<p>今天看到一篇文章介紹美國<a href="http://www.ebay.com/new" target="_blank">ebay</a>網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可, 這邊就來筆記一下過程</p>
+<p>今天看到一篇文章介紹美國 <a href="http://www.ebay.com/new" target="_blank">ebay</a> 網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可，這邊就來筆記一下過程</p>
 
 <!--more-->
 
@@ -170,7 +170,7 @@
 }
 </code></pre>
 
-<p>會看到有一個比較少見的屬性叫 <strong>box-sizing</strong> ，他是CSS3的屬性，如果我們設box-sizing為 <strong>border-box</strong> ，意思就是指width和height的部份都包含了padding和border，詳細的屬性說明可以參考<a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">這篇</a></p>
+<p>會看到有一個比較少見的屬性叫 <strong>box-sizing</strong>，他是CSS3的屬性，如果我們設box-sizing為 <strong>border-box</strong>，意思就是指width和height的部份都包含了 <strong>padding</strong> 和 <strong>border</strong>，詳細的屬性說明可以參考 <a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">這篇</a></p>
 
 <p>接著是scrolling effect部份</p>
 
@@ -196,7 +196,7 @@ header:after {
   background-image: url(../images/lavenderbg4.jpg); }
 </code></pre>
 
-<p>因為沒有用到js的關係，但我們又想在HTML上新增元素，所以我們可以利用CSS的pseudo-elements <strong>after</strong>，他會幫我們在元素後面加上新的元素上去，並且擁有 <strong>background</strong>，另外，我們將屬性 <strong>background-attachment</strong> 設定為fixed，這也是scrolling effect的重點所在，意思就是指<strong>當頁面滾動時，背景圖並不會跟著移動</strong></p>
+<p>因為沒有用到js的關係，但我們又想在HTML上新增元素，所以我們可以利用CSS的pseudo-elements <strong>:after</strong>，他會幫我們在元素後面加上新的元素上去，並且擁有 <strong>background</strong>，另外，我們將屬性 <strong>background-attachment</strong> 設定為fixed，這也是scrolling effect的重點所在，意思就是指<strong>當頁面滾動時，背景圖並不會跟著移動</strong></p>
 
 <p>這樣就大功告成囉，有沒有覺得效果很不錯呢？</p>
 
