@@ -136,7 +136,7 @@ launchFullScreen(document.documentElement); // the whole page
 launchFullScreen(document.getElementById("videoElement")); // any individual element
 </code></pre>
 
-<p>你可以給予整個HTML做整頁的全螢幕，也可以單獨給某個ID的元素，但有一點要注意的是，我在寫範例時需加上一些動作去 <strong>啟動</strong> 全螢幕，例如點集某個button之類的，而不能在一進入頁面就啟用全螢幕模式，這點跟 <strong>另開啟視窗</strong> 有點像，另外在啟用前瀏覽器會詢問你是否允許全螢幕，如下圖</p>
+<p>你可以給予整個HTML做整頁的全螢幕，也可以單獨給某個ID的元素，但有一點要注意的是，我在寫範例時需加上一些動作去 <strong>啟動</strong> 全螢幕，例如點擊某個button之類的，而不能在一進入頁面就啟用全螢幕模式，這點跟 <strong>另開啟視窗</strong> 有點像，另外在啟用前瀏覽器會詢問你是否允許全螢幕，如下圖</p>
 
 <p><img src="https://lh6.googleusercontent.com/--HepWolPOjY/UMe36hSpsNI/AAAAAAAACEA/mMSMIKo40F8/s692/aaa.jpg" /></p>
 
@@ -217,7 +217,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
 <h2>Battery API</h2>
 
-<p>我想這個應該不能理解，可以直接取得你目前設備的電池使用狀況，雖然目前還不普及，但至少已經證明了未來用HTML5技術是有可能對硬體底層做操作:)</p>
+<p>我想這個應該不難理解，可以直接取得你目前設備的電池使用狀況，雖然目前還不普及，但至少已經證明了未來用HTML5技術是有可能對硬體底層做操作:)</p>
 
 <pre><code>// Get the battery!
 var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery;
