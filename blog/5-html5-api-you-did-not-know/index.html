@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[HTML5] 5個你可能不知道的HTML5 API - apa</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="HTML5已經火紅了一陣子，姑且不論他到底能不能主宰未來的網頁技術，達到一統江山，天下太平(?)的目的，至少現在已經越來越多人開始將HTML5應用在實際的專案上，小弟雖然目前還沒大量使用到新技術，但今天還是來分享五個可能比較少人知道的，HTML和JavaScript API， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.rx836.tw/blog/5-html5-api-you-did-not-know/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="apa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+<meta property="og:title" content="[HTML5] 5個你可能不知道的HTML5 API - apa" />
+
+<meta property="og:description" content="HTML5已經火紅了一陣子，姑且不論他到底能不能主宰未來的網頁技術，達到一統江山，天下太平(?)的目的，至少現在已經越來越多人開始將HTML5應用在實際的專案上，小弟雖然目前還沒大量使用到新技術，但今天還是來分享五個可能比較少人知道的，HTML和JavaScript API， &hellip;" />
+
+<meta property="og:url" content="http://blog.rx836.tw/blog/5-html5-api-you-did-not-know/" />  
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">apa</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.rx836.tw" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[HTML5] 5個你可能不知道的HTML5 API</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-12T06:46:00+08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>HTML5已經火紅了一陣子，姑且不論他到底能不能主宰未來的網頁技術，達到一統江山，天下太平(?)的目的，至少現在已經越來越多人開始將HTML5應用在實際的專案上，小弟雖然目前還沒大量使用到新技術，但今天還是來分享五個可能比較少人知道的，HTML和JavaScript API，希望讓大家多了解HTML5還有哪些新玩意</p>
+
+<!--more-->
+
+
+<h2>Fullscreen API</h2>
+
+<p>最近或許在網路上看過一些可以做全螢幕效果的jQuery plugin，實現這個效果用到的就是 <strong>Fullscreen API</strong>，範例如下</p>
+
+<pre><code>function launchFullScreen(element) {
+  if(element.requestFullScreen) {
+    element.requestFullScreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullScreen) {
+    element.webkitRequestFullScreen();
+  }
+}
+
+launchFullScreen(document.documentElement); // the whole page
+launchFullScreen(document.getElementById("videoElement")); // any individual element
+</code></pre>
+
+<p>你可以給予整個HTML做整頁的全螢幕，也可以單獨給某個ID的元素，但有一點要注意的是，我在寫範例時需加上一些動作去 <strong>啟動</strong> 全螢幕，例如點集某個button之類的，而不能在一進入頁面就啟用全螢幕模式，這點跟 <strong>另開啟視窗</strong> 有點像，另外在啟用前瀏覽器會詢問你是否允許全螢幕，如下圖</p>
+
+<p><img src="https://lh6.googleusercontent.com/--HepWolPOjY/UMe36hSpsNI/AAAAAAAACEA/mMSMIKo40F8/s692/aaa.jpg" /></p>
+
+<p>這效果經常用在一些遊戲上面，例如擁有第一人稱視角的射擊遊戲 - <a href="https://developer.mozilla.org/en-US/demos/detail/bananabread" target="_blank">BananaBread</a></p>
+
+<h2>Page Visibility API</h2>
+
+<p><img src="https://lh4.googleusercontent.com/-IDcX0ql8dOs/UMe36kP6YKI/AAAAAAAACD8/Jg5gmM5w4OI/s370/a2.jpg" /></p>
+
+<p>老實說第一次Demo這個API的效果覺得還蠻好笑的&#8230;，就如同範例一樣，他可以讓開發者監控User是不是在此頁籤，可以從範例效果得知，當我離開此頁籤時，HTML Title就會改成 &#8220;我又跳出去了&#8221;，如果回到此頁籤當中，就會改回 &#8220;我又跳進來了&#8221;，其實還蠻欠打的&#8230;，阿不是，是蠻實用的XD</p>
+
+<pre><code>// Adapted slightly from Sam Dutton
+// Set name of hidden property and visibility change event
+// since some browsers only offer vendor-prefixed support
+var hidden, state, visibilityChange; 
+if (typeof document.hidden !== "undefined") {
+  hidden = "hidden";
+  visibilityChange = "visibilitychange";
+  state = "visibilityState";
+} else if (typeof document.mozHidden !== "undefined") {
+  hidden = "mozHidden";
+  visibilityChange = "mozvisibilitychange";
+  state = "mozVisibilityState";
+} else if (typeof document.msHidden !== "undefined") {
+  hidden = "msHidden";
+  visibilityChange = "msvisibilitychange";
+  state = "msVisibilityState";
+} else if (typeof document.webkitHidden !== "undefined") {
+  hidden = "webkitHidden";
+  visibilityChange = "webkitvisibilitychange";
+  state = "webkitVisibilityState";
+}
+
+// Add a listener that constantly changes the title
+document.addEventListener(visibilityChange, function() {
+  if(document[state]=='visible'){
+    document.title = '我又跳進來了';
+  }else if(document[state]=='hidden'){
+    document.title = '我又跳出去了';
+  }
+}, false);
+
+// Set the initial value
+document.title = '我又跳進來了';
+</code></pre>
+
+<h2>getUserMedia API</h2>
+
+<p>這個API很酷的地方在於可以利用一些電腦的視訊媒體做互動!例如像是操作筆電的webcam，搭配&lt;canvas&gt;可以做到拍攝照片的效果</p>
+
+<pre><code>// Put event listeners into place
+window.addEventListener("DOMContentLoaded", function() {
+  // Grab elements, create settings, etc.
+  var canvas = document.getElementById("canvas"),
+    context = canvas.getContext("2d"),
+    video = document.getElementById("video"),
+    videoObj = { "video": true },
+    errBack = function(error) {
+      console.log("Video capture error: ", error.code); 
+    };
+
+  // Put video listeners into place
+  if(navigator.getUserMedia) { // Standard
+    navigator.getUserMedia(videoObj, function(stream) {
+      video.src = stream;
+      video.play();
+    }, errBack);
+  } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+    navigator.webkitGetUserMedia(videoObj, function(stream){
+      video.src = window.webkitURL.createObjectURL(stream);
+      video.play();
+    }, errBack);
+  }
+}, false);
+</code></pre>
+
+<p>可以直接看很強大的 <a href="http://davidwalsh.name/demo/camera.php" target="_blank">Demo</a> 部份(記得使用Google Chrome效果較佳)</p>
+
+<h2>Battery API</h2>
+
+<p>我想這個應該不能理解，可以直接取得你目前設備的電池使用狀況，雖然目前還不普及，但至少已經證明了未來用HTML5技術是有可能對硬體底層做操作:)</p>
+
+<pre><code>// Get the battery!
+var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery;
+
+// A few useful battery properties
+console.warn("Battery charging: ", battery.charging); // true
+console.warn("Battery level: ", battery.level); // 0.58
+console.warn("Battery discharging time: ", battery.dischargingTime);
+
+// Add a few event listeners
+battery.addEventListener("chargingchange", function(e) {
+  console.warn("Battery charge change: ", battery.charging);
+}, false);
+</code></pre>
+
+<p>一樣可以直接看 <a href="http://davidwalsh.name/demo/battery-api.php" target="_blank">Demo</a>，我用筆電開啟Firefox測試果然還蠻準的，真的就是98%</p>
+
+<p><img src="https://lh4.googleusercontent.com/-ZCusQMl_zlw/UMe36s4-QnI/AAAAAAAACEE/Rih2Tvfj3os/s323/a3.jpg" /></p>
+
+<h2>Link Prefetching</h2>
+
+<p>這個API特別的地方在於，假如你先在HTML裡面加上下面這些Tag，瀏覽器就會在背後偷偷的預先載入這些資源，讓你在連結這些link的時候可以有更順暢的體驗</p>
+
+<pre><code>&lt;!-- full page --&gt;
+&lt;link rel="prefetch" href="http://davidwalsh.name/css-enhancements-user-experience" /&gt;
+
+&lt;!-- just an image --&gt;
+&lt;link rel="prefetch" href="http://davidwalsh.name/wp-content/themes/walshbook3/images/sprite.png" /&gt;
+</code></pre>
+
+<p>以上五個是比較少見的HTML5 API，有些雖然瀏覽器的支援普及度不高，但整體來說都是對User好的使用者體驗，提早先熟悉對開發者來說是件好事，希望以後可以真的大量運用在Web應用程式當中</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://davidwalsh.name/more-html5-apis" target="_blank">5 More HTML5 APIs You Didn’t Know Existed</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>	
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-12T06:46:00+08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/html5/'>HTML5</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/css3-scrolling-effect/" title="Previous Post: [CSS] 利用CSS3做scrolling effect">&laquo; [CSS] 利用CSS3做scrolling effect</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://blog.rx836.tw/blog/5-html5-api-you-did-not-know/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (11)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (2)</a></li><li><a href='/blog/categories/javascript'>JavaScript (6)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (10)</a></li><li><a href='/blog/categories/jquery'>jQuery (18)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (6)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (8)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/5-html5-api-you-did-not-know/">[HTML5] 5個你可能不知道的HTML5 API</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/css3-scrolling-effect/">[CSS] 利用CSS3做scrolling effect</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/5-css-properties/">[CSS] 5個對設計師有幫助的CSS屬性</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-plugin-format-number/">[jQ-Plugin] 簡易的數值格式化-Numeral.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/create-lazy-loading/">[jQ-Plugin] 圖片延遲加載-Lazy-Loading</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/5-html5-api-you-did-not-know/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/5-html5-api-you-did-not-know/';
+        var disqus_url = 'http://blog.rx836.tw/blog/5-html5-api-you-did-not-know/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=416172151763823";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
