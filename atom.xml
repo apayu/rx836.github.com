@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-13T11:19:30+08:00</updated>
+  <updated>2012-12-13T11:37:05+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -46,7 +46,7 @@
 }
 </code></pre>
 
-<p>接著是js部份</p>
+<p>接著是js主程式部份</p>
 
 <pre><code>function ajaxLoader (el, options) {
     // Becomes this.options
@@ -96,13 +96,13 @@
 
 <p>大概50行不到的程式碼，這裡說明一下整個運作過程</p>
 
-<p>因為JavaScript並沒有類別，所以這邊用的是建構式函式，之前曾經寫過關於 <a href="http://blog.rx836.tw/blog/javascript-custom-function/">建構式函式</a> 的文章，有興趣的人可以參考看看，我們命名了一個 <strong>ajaxLoader</strong> ，裡面有預設值 <strong>defaults</strong>，是在沒有給予 <strong>options</strong> 時會用到的</p>
+<p>因為JavaScript並沒有類別，所以這邊用的是建構式函式，之前曾經寫過關於 <a href="http://blog.rx836.tw/blog/javascript-custom-function/">建構式函式</a> 的文章，有興趣的人可以參考看看，我們命名了一個function <strong>ajaxLoader</strong>，裡面有預設值 <strong>defaults</strong>，是在沒有給予 <strong>options</strong> 時會用到的</p>
 
 <p>而 <strong>this.container</strong> 就是要被block的元素，<strong>this.init</strong> 裡面包含的是動態加入Ajax loading的效果，可以看到最主要加了一個&lt;div&gt;進去，給予他透明度(opacity)、背景顏色(background-color)，最最最最最最重要的是把 <strong>z-index</strong> 設成99999，這樣才能讓被block的元素確實達到無法操控，在這個&lt;div&gt;裡面還包了一層&lt;div&gt;是放置載入中的轉圈圈圖片</p>
 
 <p><img src="https://lh4.googleusercontent.com/-7nndaD_jRSg/UMlDmhEwXEI/AAAAAAAACE0/Jp_u5yf9blY/s31/spinner_squares_circle.gif" /></p>
 
-<p>所以整個程式碼其實不難，也沒有其他多餘的阿雜，要使用的時候可以這樣寫</p>
+<p>另外 <strong>this.remove</strong> 就是移除效果，所以整個程式碼其實不難，也沒有其他多餘的阿雜，要使用的時候可以這樣寫</p>
 
 <p>css部份</p>
 
@@ -119,9 +119,9 @@
     opacity     : 0.7,
     classOveride    : false
 }
-
+var block;
 $("div").live('click', function(){
-        new ajaxLoader(this, options);
+     block = new ajaxLoader(this, options);
 });
 </code></pre>
 
@@ -135,7 +135,12 @@ $("div").live('click', function(){
 </ul>
 
 
-<p><a href="http://www.aplusdesign.com.au/demos/ajax-loader/index.html" target="_blank">Demo</a></p>
+<p>假如想要移除的話</p>
+
+<pre><code>block.remove();
+</code></pre>
+
+<p>想要看更多用法的話可以看這個  <a href="http://www.aplusdesign.com.au/demos/ajax-loader/index.html" target="_blank">Demo</a></p>
 
 <p>有了這個基本的架構和觀念以後，就可以自己客製化屬於自己的Ajax loading效果，而不必再拘束別人的plugin之下，整個js也輕量許多</p>
 
