@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-12T07:02:07+08:00</updated>
+  <updated>2012-12-13T11:19:30+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,142 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQuery] 自製jQuery Ajax Loader]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-ajax-loader/"/>
+    <updated>2012-12-13T07:01:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-ajax-loader</id>
+    <content type="html"><![CDATA[<p>現代的網頁技術越來越重視Ajax(Asynchronous JavaScript and XML)，很多地方都可以看的到他的身影，最為人所知的就是Google有很多服務都有運用此技術，例如Gmail、Google Map等，在使用Ajax時因為是 <strong>非同步傳輸</strong> 的關係，所以User在傳送資料過程中，可以繼續做其他事情，不過有時候怕User以為按了沒反應認為網頁掛掉，會加上一些Ajax loading來提示網頁還在運作</p>
+
+<!--more-->
+
+
+<p>以前我最常用到的是 <a href="http://www.malsup.com/jquery/block/#overview" target="_blank">jQuery BlockUI Plugin</a>，但畢竟是別人寫的plugin，總是覺得有些功能有點多餘，雖然jQuery BlockUI大小大概只有18kb左右，但還是總會想要更精簡，做更符合自己想要的plugin出來，找了一些資料以後，大概知道一些運作的原理，下面就來筆記</p>
+
+<h2>Start</h2>
+
+<p>首先是html部份</p>
+
+<pre><code>&lt;div&gt;
+內容
+&lt;/div&gt;
+</code></pre>
+
+<p>對..，沒錯，html部份這樣就可以了，其實自製的好處在於是，你不用為了做Ajax loading的效果而特地在HTML上增加額外的元素，所有需要用到的元素都是利用jQuery動態加入，所以保持原本的頁面即可</p>
+
+<p>不過為了展現Demo效果，還是要加上一些css才行</p>
+
+<pre><code>div{
+    background-color: blue;
+    height: 800px;
+    position: relative;
+    width: 100%;
+}
+</code></pre>
+
+<p>接著是js部份</p>
+
+<pre><code>function ajaxLoader (el, options) {
+    // Becomes this.options
+    var defaults = {
+        bgColor         : '#fff',
+        duration        : 800,
+        opacity         : 0.7,
+        classOveride    : false
+    }
+    this.options    = jQuery.extend(defaults, options);
+    this.container  = $(el);
+    this.init = function() {
+        var container = this.container;
+        // Delete any other loaders
+        this.remove();
+        // Create the overlay
+        var overlay = $('&lt;div&gt;&lt;/div&gt;').css({
+                'background-color': this.options.bgColor,
+                'opacity':this.options.opacity,
+                'width':container.width(),
+                'height':container.height(),
+                'position':'absolute',
+                'top':'0px',
+                'left':'0px',
+                'z-index':99999
+        }).addClass('ajax_overlay');
+        // add an overiding class name to set new loader style
+        if (this.options.classOveride) {
+            overlay.addClass(this.options.classOveride);
+        }
+        // insert overlay and loader into DOM
+        container.append(
+            overlay.append($('&lt;div&gt;&lt;/div&gt;').addClass('ajax_loader')).fadeIn(this.options.duration)
+        );
+    };
+    this.remove = function(){
+        var overlay = this.container.children(".ajax_overlay");
+        if (overlay.length) {
+            overlay.fadeOut(this.options.classOveride, function() {
+                overlay.remove();
+            });
+        }
+    }
+    this.init();
+}
+</code></pre>
+
+<p>大概50行不到的程式碼，這裡說明一下整個運作過程</p>
+
+<p>因為JavaScript並沒有類別，所以這邊用的是建構式函式，之前曾經寫過關於 <a href="http://blog.rx836.tw/blog/javascript-custom-function/">建構式函式</a> 的文章，有興趣的人可以參考看看，我們命名了一個 <strong>ajaxLoader</strong> ，裡面有預設值 <strong>defaults</strong>，是在沒有給予 <strong>options</strong> 時會用到的</p>
+
+<p>而 <strong>this.container</strong> 就是要被block的元素，<strong>this.init</strong> 裡面包含的是動態加入Ajax loading的效果，可以看到最主要加了一個&lt;div&gt;進去，給予他透明度(opacity)、背景顏色(background-color)，最最最最最最重要的是把 <strong>z-index</strong> 設成99999，這樣才能讓被block的元素確實達到無法操控，在這個&lt;div&gt;裡面還包了一層&lt;div&gt;是放置載入中的轉圈圈圖片</p>
+
+<p><img src="https://lh4.googleusercontent.com/-7nndaD_jRSg/UMlDmhEwXEI/AAAAAAAACE0/Jp_u5yf9blY/s31/spinner_squares_circle.gif" /></p>
+
+<p>所以整個程式碼其實不難，也沒有其他多餘的阿雜，要使用的時候可以這樣寫</p>
+
+<p>css部份</p>
+
+<pre><code>.ajax_loader {background: url("spinner_squares_circle.gif") no-repeat center center transparent;width:100%;height:100%;}
+</code></pre>
+
+<p>預設的轉圈圈圖片</p>
+
+<p>js部份</p>
+
+<pre><code>var options = {
+    bgColor         : '#fff',
+    duration        : 800,
+    opacity     : 0.7,
+    classOveride    : false
+}
+
+$("div").live('click', function(){
+        new ajaxLoader(this, options);
+});
+</code></pre>
+
+<p><strong>ajaxLoader</strong> 第一個參數可以丟入其他想要被block的元素，第二個就是自訂參數，自訂參數說明如下</p>
+
+<ul>
+<li>bgColor: string – 覆蓋的背景顏色</li>
+<li>duration: number – fadeIn和fadeOut效果延遲時間</li>
+<li>opacity: number – 背景透明度</li>
+<li>classOveride: string – 如果想要別的Ajax loading圖片效果，可以加上自訂的class，然後在css自訂樣式即可</li>
+</ul>
+
+
+<p><a href="http://www.aplusdesign.com.au/demos/ajax-loader/index.html" target="_blank">Demo</a></p>
+
+<p>有了這個基本的架構和觀念以後，就可以自己客製化屬於自己的Ajax loading效果，而不必再拘束別人的plugin之下，整個js也輕量許多</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://www.aplusdesign.com.au/blog/jquery-ajax-loader-spinner/" target="_blank">jQuery Ajax Loader &amp; Spinner</a></p>
+
+<p><a href="http://www.ajaxload.info/" target="_blank">推薦製作gif圖檔的工具-ajaxload.info</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[HTML5] 5個你可能不知道的HTML5 API]]></title>
@@ -2415,122 +2551,6 @@ input[type="checkbox"]:checked + label span {
 <p>參考資料:</p>
 
 <p><a href="http://www.webresourcesdepot.com/jquery-countdown-plugins-for-coming-soon-pages/" target="_blank"></a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[JavaScript] prototype與建構函式和物件]]></title>
-    <link href="http://blog.rx836.tw/blog/javascript-prototype/"/>
-    <updated>2012-11-02T15:11:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/javascript-prototype</id>
-    <content type="html"><![CDATA[<p>今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件方面，那就趁著這個機會再把JavaScript的觀念整理清楚，增強自己的功力，尤其是一直很模糊的「prototype」</p>
-
-<!--more-->
-
-
-<p>在講prototype之前，要先複習一下之前所寫的 <a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a> 和 <a href="http://blog.rx836.tw/blog/javascript-custom-function/" target="_blank">[JavaScript] 建立物件的第三招-自訂建構式函式</a>，這兩篇文章有提到物件和建構式函式(constructor functions)，但其實還有一個叫做prototype也跟他們兩個糾纏不清，形成特殊的三角關係(誤)</p>
-
-<p>首先我們先來看物件</p>
-
-<pre><code>var obj={
-    name : '阿帕',
-    run : function(){
-        //跑跑跑
-    }
-}
-
-console.log(obj.name);
-//阿帕
-obj.run();
-//執行裡面的跑跑跑
-</code></pre>
-
-<p>OK，相信大家對上面這個物件不陌生，但除了以上建立物件的方法，還可以用建構式函式</p>
-
-<pre><code>function Obj(){
-    this.name = '阿帕';
-    this.run = function(){
-        //跑跑跑
-    }
-}
-
-var _obj = new Obj();
-console.log(_obj.name);
-//阿帕
-_obj.run();
-//執行裡面的跑跑跑
-</code></pre>
-
-<p>所以我們可以說，JavaScript利用<strong>建構式實例出一個物件</strong>，那跟prtotype有甚麼關係呢？</p>
-
-<p>其實在建構式函式裡面有個屬性叫做prototype，他就是建構式函式的「原型物件」</p>
-
-<pre><code>function Obj(){
-    this.name = '阿帕';
-    this.run = function(){
-        //跑跑跑
-    }
-}
-
-console.log(Obj.prototype);
-//Obj {} 這也是一個物件，叫原型物件
-</code></pre>
-
-<p>這個原型物件可以做什麼呢？假如我今天用Obj()這個建構式函式實例了a、b、c三個物件，完成以後我還要每個都再加一個屬性height怎麼辦？你可能會這樣寫</p>
-
-<pre><code>function Obj(){
-    this.name = '阿帕';
-    this.run = function(){
-        //跑跑跑
-    }
-}
-
-var a = new Obj();
-var b = new Obj();
-var c = new Obj();
-
-//為每個物件增加屬性
-a.height= 15;
-b.height= 15;
-c.height= 15;
-</code></pre>
-
-<p>但其實你可以這樣寫</p>
-
-<pre><code>function Obj(){
-    this.name = '阿帕';
-    this.run = function(){
-        //跑跑跑
-    }
-}
-
-var a = new Obj();    
-Obj.prototype.height = 15;
-var b = new Obj();    
-var c = new Obj();    
-
-
-console.log(a.height);
-console.log(b.height);
-console.log(c.height);
-</code></pre>
-
-<p>有發現我只要給建構函式Obj的prototype屬性，從Obj實例出來的物件都有相同的屬性，而且不管是先實例出來的a還是後面實例出來的b、c都一樣擁有</p>
-
-<p>為什麼在原型物件Obj.prototype裡面增加屬性，會影響到從Obj建構式裡面實例出來的物件呢？</p>
-
-<p>原來是因為建構函式Obj的屬性prototype是原型物件Obj.prototype，但Obj.prototype裡面也有一個屬性叫做constructor又指回建構函式Obj，所以當Obj.prototype增加屬性的時候，就會連帶增加從建構式函式Obj實例出來的物件</p>
-
-<pre><code>Obj === Obj.prototype.constructor
-</code></pre>
-
-<p>不知道這樣說明，大家清楚嗎:)</p>
-
-<p>參考資料:</p>
-
-<p>自已</p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
