@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-18T16:00:16+08:00</updated>
+  <updated>2012-12-18T16:04:01+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[javascript_documentframent]]></title>
+    <title type="html"><![CDATA[[JavaScript] JS加快效能的好物-DocumentFragments]]></title>
     <link href="http://blog.rx836.tw/blog/javascript-documentframent/"/>
     <updated>2012-12-18T14:38:00+08:00</updated>
     <id>http://blog.rx836.tw/blog/javascript-documentframent</id>

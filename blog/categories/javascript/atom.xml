@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-18T16:00:16+08:00</updated>
+  <updated>2012-12-18T16:04:01+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[JavaScript] JS加快效能的好物-DocumentFragments]]></title>
+    <link href="http://blog.rx836.tw/blog/javascript-documentframent/"/>
+    <updated>2012-12-18T14:38:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/javascript-documentframent</id>
+    <content type="html"><![CDATA[<p>JavaScript裡面有個物件叫DocumentFragments，它不算是新的觀念或新的技術，但我則是最近才認識到他，會想筆記這篇是因為他在DOM這方面的效能頗為出色，不過真的實驗下來好像只有某幾個瀏覽器或是版本才有明顯的效果，User的環境不同好像也會有些許的差異，下面就來看看用法看實際測試的結果</p>
+
+<!--more-->
+
+
+<h2>實驗開始</h2>
+
+<p>假設一個情況，我們有時候可能要大量的動態增加元素，例如很多很多的&lt;div&gt;，我們會這樣寫</p>
+
+<pre><code>function CreateNodes(){
+    for( var i=0; i&lt;10000; i++ ) {
+        var item = document.createElement('div');
+        $(item).text('div-'+i);
+        $(item).css({
+            background: 'blue',
+            padding: 5,
+            margin: 5,
+            float: 'left'
+        });
+        $('body').append(item);
+    }
+}
+</code></pre>
+
+<p>這裡我們利用for迴圈增加了10000個div，不過這裡有個缺點，就是每一次的新增一個div，都會對browser做『更新頁面』這個動作一次，所以如果新增10000個&lt;div&gt;，就會有一萬次的更新，但如果用DocumentFragment的寫法呢？</p>
+
+<pre><code>function CreateFragments(){
+    var fragment = document.createDocumentFragment();
+    for( var i=0; i&lt;10000; i++ ) {
+        var item = document.createElement('div');
+        $(item).text('div-'+i);
+        $(item).css({
+            background: 'blue',
+            padding: 5,
+            margin: 5,
+            float: 'left'
+        });
+        fragment.appendChild(item);
+    }
+    $('body').append(fragment);
+}
+</code></pre>
+
+<p>關鍵點在於多了一個 <strong>fragment</strong> 這個物件，這個物件是一個虛擬的DOM節點，但它可以增加元素在這個虛擬節點上面，就跟正常DOM差不多，但他因為是虛擬的，所以browser並不會做更新這個動作，而最後再把DocumentFragment裡面的元素一次加到body裡面，這有點像是buffer(緩衝區)的效果</p>
+
+<p>最後我用了手邊的瀏覽器測了一下結果</p>
+
+<p>Firefox 17.0.1:</p>
+
+<p>用DocumentFragment反而慢了0.6~0.8秒左右</p>
+
+<p>Google Chrome 23.0.1271.97:</p>
+
+<p>沒有明顯的差別</p>
+
+<p>IE9:</p>
+
+<p>用了DocumentFragment大概10秒左右就可以載完畫面，沒用大概要花上20幾秒...</p>
+
+<h2>結論</h2>
+
+<p>這裡有個<a href="http://jsperf.com/out-of-dom-vs-documentfragment/3" target="_blank">網站</a>裡面有各個瀏覽器版本的測試報告，有興趣的可以參考看看，整體看下來DocumentFragment的確可以有效改善DOM的效能，我的想法是，其實現在的瀏覽器速度越來越快，有時候真的很難感受的到那幾毫秒的差距，但如果要顧慮到支援舊有的瀏覽器，那效能部分可能就要注意一下，不過適時的提醒用戶，想要有順暢的體驗，還是擺上Chrome或Firefox的下載連結其實也是不錯的</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://davidwalsh.name/documentfragment" target="_blank">JavaScript DocumentFragment</a></p>
+
+<p><a href="http://jsperf.com/out-of-dom-vs-documentfragment/3" target="_blank">out of dom vs documentfragment</a></p>
+
+<p><a href="http://www.hujuntao.com/archives/using-documentfragment-speed-up-dom-rendering.html" target="_blank">利用DocumentFragment加快DOM渲染速度</a></p>
+
+<p><a href="http://fstoke.me/blog/?p=2487" target="_blank">使用DocumentFragment來加快DOM操作速度</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[JavaScript] 簡單看命名空間(Namespace)與jQuery原始碼]]></title>
@@ -398,108 +480,6 @@ add(conf)
 <p>參考資料:</p>
 
 <p>JavaScript 設計模式</p>
-
-<p>如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[JavaScript] 建立物件的第三招-自訂建構式函式]]></title>
-    <link href="http://blog.rx836.tw/blog/javascript-custom-function/"/>
-    <updated>2012-09-11T00:43:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/javascript-custom-function</id>
-    <content type="html"><![CDATA[<p>在前面一篇文章<a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a>，裡面有講到關於物件的建立，不過礙於篇幅，只談到<strong>實字模式(literal patterns)</strong>和<strong>建構式函式(constructor functions)</strong>，但其實還有一個建立物件的方法，那就是<strong>自訂建構式函式</strong></p>
-
-<!--more-->
-
-
-<p>用自定義的建構式函式來建立物件，直接用範例來說明</p>
-
-<pre><code>var kitty = new Cat('Kitty');
-var kitty.say(); // "kitty:喵~"
-</code></pre>
-
-<p>跟之前的建構式不同的地方在於，之前是用內建的new Object()，這裡我們是用new Cat()，這種模式很像Java使用一個class Cat來建立物件，語法非常的相似，但其實JavaScript並沒有class，Cat只是一個函式</p>
-
-<p>Cat的建構式定義如下</p>
-
-<pre><code>var Cat = function (name){
-    this.name = name;
-    this.say = function(){
-        return name+":喵~";
-    }
-};
-</code></pre>
-
-<p>但其實真正背後運作的方式是這樣，註解為JavaScript實際上還有做一些我們看不到的事情</p>
-
-<pre><code>var Cat = function (name){
-
-    //建立物件實字, 一個空物件
-    //var this = {};
-
-    //接著替this加入屬性和方法
-    this.name = name;
-    this.say = function(){
-        return name+":喵~";
-    }
-
-    //最後return this
-};
-</code></pre>
-
-<p>整個的流程首先會建立一個空物件，參考至this變數，藉由this的參考，將屬性和方法加入到此物件(this)，最後再將物件隱含的回傳出去(這邊要注意的是，回傳的情況是假設<strong>沒有其他物件被明確的指定回傳</strong>，後面則會提到)</p>
-
-<p>範例中say()是直接加入至this，不過真正實務中，當你每次new Cat()的時候，就會建立一個新函式到記憶體裡面，很明顯的會浪費記憶體效能，所以最好的方式是加入到原型(prototype)中</p>
-
-<pre><code>//只可以重複利用，都應該放進原型裡面
-Cat.prototype.say = function(){
-    return this.name+":喵~";
-};
-</code></pre>
-
-<p>不過這裡有個問題，假如忘記加上new會發生甚麼事情？其實是不會有語法或執行上的錯誤，但卻會導致非預期的錯誤發生，因為沒有加new以後，所有的this都指向全域物件去了！(例如window)</p>
-
-<pre><code>function cat(){
-    this.name = "kitty";
-}
-
-var kitty = new Cat();
-console.log(typeof kitty); // "object" 為物件
-console.log(kitty.name);
-
-var kitty2 = Cat();
-console.log(typeof kitty2); // undefined 忘了new, 不會有物件this回傳, 變成全域
-console.log(window.name); //全域變數
-</code></pre>
-
-<p>不過為了預防這種情況發生，可以利用以下寫法</p>
-
-<pre><code>function cat(){
-
-    //還是一樣會建立一個this
-    //var this = {};
-
-    var _self = {};     
-    _self.name = "kitty";
-
-    //不過return被_self取代了
-    return _self;
-}
-</code></pre>
-
-<p>所以不管User怎麼呼叫，都一定會回傳一個物件，也就是強制new的做法</p>
-
-<pre><code>var kitty = new Cat();  
-console.log(kitty.name); // "kitty"
-
-var kitty2 = Cat(); 
-console.log(kitty2.name); // "kitty"
-</code></pre>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
 
 <p>如有錯誤，歡迎指正</p>
 ]]></content>
