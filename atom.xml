@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-13T11:37:05+08:00</updated>
+  <updated>2012-12-18T16:00:16+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[javascript_documentframent]]></title>
+    <link href="http://blog.rx836.tw/blog/javascript-documentframent/"/>
+    <updated>2012-12-18T14:38:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/javascript-documentframent</id>
+    <content type="html"><![CDATA[<p>JavaScript裡面有個物件叫DocumentFragments，它不算是新的觀念或新的技術，但我則是最近才認識到他，會想筆記這篇是因為他在DOM這方面的效能頗為出色，不過真的實驗下來好像只有某幾個瀏覽器或是版本才有明顯的效果，User的環境不同好像也會有些許的差異，下面就來看看用法看實際測試的結果</p>
+
+<!--more-->
+
+
+<h2>實驗開始</h2>
+
+<p>假設一個情況，我們有時候可能要大量的動態增加元素，例如很多很多的&lt;div&gt;，我們會這樣寫</p>
+
+<pre><code>function CreateNodes(){
+    for( var i=0; i&lt;10000; i++ ) {
+        var item = document.createElement('div');
+        $(item).text('div-'+i);
+        $(item).css({
+            background: 'blue',
+            padding: 5,
+            margin: 5,
+            float: 'left'
+        });
+        $('body').append(item);
+    }
+}
+</code></pre>
+
+<p>這裡我們利用for迴圈增加了10000個div，不過這裡有個缺點，就是每一次的新增一個div，都會對browser做『更新頁面』這個動作一次，所以如果新增10000個&lt;div&gt;，就會有一萬次的更新，但如果用DocumentFragment的寫法呢？</p>
+
+<pre><code>function CreateFragments(){
+    var fragment = document.createDocumentFragment();
+    for( var i=0; i&lt;10000; i++ ) {
+        var item = document.createElement('div');
+        $(item).text('div-'+i);
+        $(item).css({
+            background: 'blue',
+            padding: 5,
+            margin: 5,
+            float: 'left'
+        });
+        fragment.appendChild(item);
+    }
+    $('body').append(fragment);
+}
+</code></pre>
+
+<p>關鍵點在於多了一個 <strong>fragment</strong> 這個物件，這個物件是一個虛擬的DOM節點，但它可以增加元素在這個虛擬節點上面，就跟正常DOM差不多，但他因為是虛擬的，所以browser並不會做更新這個動作，而最後再把DocumentFragment裡面的元素一次加到body裡面，這有點像是buffer(緩衝區)的效果</p>
+
+<p>最後我用了手邊的瀏覽器測了一下結果</p>
+
+<p>Firefox 17.0.1:</p>
+
+<p>用DocumentFragment反而慢了0.6~0.8秒左右</p>
+
+<p>Google Chrome 23.0.1271.97:</p>
+
+<p>沒有明顯的差別</p>
+
+<p>IE9:</p>
+
+<p>用了DocumentFragment大概10秒左右就可以載完畫面，沒用大概要花上20幾秒&#8230;</p>
+
+<h2>結論</h2>
+
+<p>這裡有個<a href="http://jsperf.com/out-of-dom-vs-documentfragment/3" target="_blank">網站</a>裡面有各個瀏覽器版本的測試報告，有興趣的可以參考看看，整體看下來DocumentFragment的確可以有效改善DOM的效能，我的想法是，其實現在的瀏覽器速度越來越快，有時候真的很難感受的到那幾毫秒的差距，但如果要顧慮到支援舊有的瀏覽器，那效能部分可能就要注意一下，不過適時的提醒用戶，想要有順暢的體驗，還是擺上Chrome或Firefox的下載連結其實也是不錯的</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://davidwalsh.name/documentfragment" target="_blank">JavaScript DocumentFragment</a></p>
+
+<p><a href="http://jsperf.com/out-of-dom-vs-documentfragment/3" target="_blank">out of dom vs documentfragment</a></p>
+
+<p><a href="http://www.hujuntao.com/archives/using-documentfragment-speed-up-dom-rendering.html" target="_blank">利用DocumentFragment加快DOM渲染速度</a></p>
+
+<p><a href="http://fstoke.me/blog/?p=2487" target="_blank">使用DocumentFragment來加快DOM操作速度</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQuery] 自製jQuery Ajax Loader]]></title>
@@ -2488,74 +2570,6 @@ input[type="checkbox"]:checked + label span {
 <p>參考資料:</p>
 
 <p><a href="http://www.elijahmanor.com/2012/10/dont-initialize-all-things-in.html" target="_blank">Don&#8217;t Initialize All the Things in jQuery.ready() </a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 倒數計時的plugin介紹]]></title>
-    <link href="http://blog.rx836.tw/blog/jquery-countdown-plugins/"/>
-    <updated>2012-11-05T11:45:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/jquery-countdown-plugins</id>
-    <content type="html"><![CDATA[<p>之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考</p>
-
-<!--more-->
-
-
-<h3>jQuery Countdown Script</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-q5CkXGDfwAo/UJc_Gp1lgEI/AAAAAAAAB2E/gjITVcyHIes/s480/lwt_post1.jpg" /></p>
-
-<p>plugin簡單好設定，還可以在同一個頁面設定好幾個不同的倒數計時，甚至是啟動和暫停</p>
-
-<p><a href="http://www.littlewebthings.com/2010/02/jquery-countdown-script/" target="_blank">範例Demo</a></p>
-
-<h3>Countdown</h3>
-
-<p><img src="https://lh6.googleusercontent.com/-pmIMh95RX54/UJc_Ga3R2dI/AAAAAAAAB2I/TR6Dtq4DHYw/s480/jquery-countdown.gif" /></p>
-
-<p>擁有許多進階的設定，支援時區，多種語言等</p>
-
-<p><a href="http://keith-wood.name/countdown.html" target="_blank">範例Demo</a></p>
-
-<h3>The Final Countdown</h3>
-
-<p><img src="https://lh4.googleusercontent.com/-q5WsQiLTJv4/UJc_FlYN8YI/AAAAAAAAB14/eR6HQ1RxIMo/s403/a1.jpg" /></p>
-
-<p>多種呈現方式，可以隨自己喜歡去做調整，倒數計時的部分甚至連毫秒都可以呈現</p>
-
-<p><a href="https://github.com/hilios/jquery.countdown" target="_blank">範例Demo</a></p>
-
-<h3>KK Countdown</h3>
-
-<p><img src="https://lh6.googleusercontent.com/-MKQU1yoPcpA/UJc_Fn8CqaI/AAAAAAAAB2A/AZs0VgXkuco/s600/2.jpg" /></p>
-
-<p>一樣有多種呈現方式，用時間戳記來給予時間</p>
-
-<p><a href="http://krzysztof-furtak.pl/2010/05/kk-countdown-jquery-plugin/" target="_blank">範例Demo</a></p>
-
-<h3>jQuery Countdown</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-uIiwnxje1y0/UJdAu1w52KI/AAAAAAAAB2g/-ZVyh0o40DA/s520/3.jpg" /></p>
-
-<p>利用圖片來呈現，沒有太多功能可以設定，比較簡單的plugin</p>
-
-<p><a href="http://code.google.com/p/jquery-countdown/" target="_blank">範例Demo</a></p>
-
-<h3>jQuery Countdown Timer</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-fmAgRmTcc40/UJc_FilzH0I/AAAAAAAAB18/qyyvqbxCZfU/s620/jquery-countdown-timer.jpg" /></p>
-
-<p>裡面有相當詳細的教學文，教你怎麼使用他們的plugin</p>
-
-<p><a href="http://tutorialzine.com/2011/12/countdown-jquery/" target="_blank">範例Demo</a></p>
-
-<p>倒數計時自己寫並不難，不過有些很特別的功能或是效果用plugin，倒也可以省下不少時間，所以要用plugin或是自己手刻就看各位開發者自己當下的狀況做選擇:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.webresourcesdepot.com/jquery-countdown-plugins-for-coming-soon-pages/" target="_blank"></a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

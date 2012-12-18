@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[jQuery] AJAX cache讓IE一直抓到舊資料 - apa</title>
+  <title>javascript_documentframent - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了 但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$. &hellip;">
+  <meta name="description" content="JavaScript裡面有個物件叫DocumentFragments，它不算是新的觀念或新的技術，但我則是最近才認識到他，會想筆記這篇是因為他在DOM這方面的效能頗為出色，不過真的實驗下來好像只有某幾個瀏覽器或是版本才有明顯的效果，User的環境不同好像也會有些許的差異， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/jquery-ajax-cache/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/javascript-documentframent/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[jQuery] AJAX cache讓IE一直抓到舊資料 - apa" />
+<meta property="og:title" content="javascript_documentframent - apa" />
 
-<meta property="og:description" content="說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了 但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$. &hellip;" />
+<meta property="og:description" content="JavaScript裡面有個物件叫DocumentFragments，它不算是新的觀念或新的技術，但我則是最近才認識到他，會想筆記這篇是因為他在DOM這方面的效能頗為出色，不過真的實驗下來好像只有某幾個瀏覽器或是版本才有明顯的效果，User的環境不同好像也會有些許的差異， &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/jquery-ajax-cache/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/javascript-documentframent/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[jQuery] AJAX cache讓IE一直抓到舊資料</h1>
+      <h1 class="entry-title">Javascript_documentframent</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-05-29T01:24:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
+<time datetime="2012-12-18T14:38:00+08:00" pubdate data-updated="true">Dec 18<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,25 +113,80 @@
   </header>
 
 
-<div class="entry-content"><p>說真的魔鬼真的藏在細節裡面，很多我們不經意的忽略，都有可能在往後成為災難，我想這已經是幾乎每個開發者一定會經歷的事情，所以這一次，我就遇到災難了</p>
+<div class="entry-content"><p>JavaScript裡面有個物件叫DocumentFragments，它不算是新的觀念或新的技術，但我則是最近才認識到他，會想筆記這篇是因為他在DOM這方面的效能頗為出色，不過真的實驗下來好像只有某幾個瀏覽器或是版本才有明顯的效果，User的環境不同好像也會有些許的差異，下面就來看看用法看實際測試的結果</p>
 
 <!--more-->
 
 
-<p>但好險的是，這次的災難又多虧了Google大神，幫我度過這次難關，事情是這樣的，我用Asp.net做了一個ashx的檔案，前端用Jquery的$.ajax()做AJAX的資料取得，目的是希望User每按一次按鈕就取得一筆新的資料</p>
+<h2>實驗開始</h2>
 
-<p>誰知道在Firefox和Chrome都正常，唯獨只有IE不管怎麼取都是舊的資料，後來看了<a href="http://blog.darkthread.net/" target="_blank">黑暗執行緒</a>的<a href="http://blog.darkthread.net/post-2009-06-03-about-jquery-ajax-cache-option.aspx" target="_blank">關於jQuery AJAX cache參數</a>我才知道，要在$.axaj()裡的參數cache設成false</p>
+<p>假設一個情況，我們有時候可能要大量的動態增加元素，例如很多很多的&lt;div&gt;，我們會這樣寫</p>
 
-<pre><code>cache: false
+<pre><code>function CreateNodes(){
+    for( var i=0; i&lt;10000; i++ ) {
+        var item = document.createElement('div');
+        $(item).text('div-'+i);
+        $(item).css({
+            background: 'blue',
+            padding: 5,
+            margin: 5,
+            float: 'left'
+        });
+        $('body').append(item);
+    }
+}
 </code></pre>
 
-<p>這樣就不會再抓cache而讓資料怎麼抓都抓不到新的</p>
+<p>這裡我們利用for迴圈增加了10000個div，不過這裡有個缺點，就是每一次的新增一個div，都會對browser做『更新頁面』這個動作一次，所以如果新增10000個&lt;div&gt;，就會有一萬次的更新，但如果用DocumentFragment的寫法呢？</p>
 
-<p>另外還有這篇關於GET與POST的文章也很值得一讀!</p>
+<pre><code>function CreateFragments(){
+    var fragment = document.createDocumentFragment();
+    for( var i=0; i&lt;10000; i++ ) {
+        var item = document.createElement('div');
+        $(item).text('div-'+i);
+        $(item).css({
+            background: 'blue',
+            padding: 5,
+            margin: 5,
+            float: 'left'
+        });
+        fragment.appendChild(item);
+    }
+    $('body').append(fragment);
+}
+</code></pre>
 
-<p><a href="http://blog.darkthread.net/blogs/darkthreadtw/archive/2009/04/16/dont-use-get-ajax.aspx">隱含殺機的GET式AJAX資料更新</a></p>
+<p>關鍵點在於多了一個 <strong>fragment</strong> 這個物件，這個物件是一個虛擬的DOM節點，但它可以增加元素在這個虛擬節點上面，就跟正常DOM差不多，但他因為是虛擬的，所以browser並不會做更新這個動作，而最後再把DocumentFragment裡面的元素一次加到body裡面，這有點像是buffer(緩衝區)的效果</p>
 
-<p>以上如有錯誤或疑問，歡迎一起討論喔!</p>
+<p>最後我用了手邊的瀏覽器測了一下結果</p>
+
+<p>Firefox 17.0.1:</p>
+
+<p>用DocumentFragment反而慢了0.6~0.8秒左右</p>
+
+<p>Google Chrome 23.0.1271.97:</p>
+
+<p>沒有明顯的差別</p>
+
+<p>IE9:</p>
+
+<p>用了DocumentFragment大概10秒左右就可以載完畫面，沒用大概要花上20幾秒&#8230;</p>
+
+<h2>結論</h2>
+
+<p>這裡有個<a href="http://jsperf.com/out-of-dom-vs-documentfragment/3" target="_blank">網站</a>裡面有各個瀏覽器版本的測試報告，有興趣的可以參考看看，整體看下來DocumentFragment的確可以有效改善DOM的效能，我的想法是，其實現在的瀏覽器速度越來越快，有時候真的很難感受的到那幾毫秒的差距，但如果要顧慮到支援舊有的瀏覽器，那效能部分可能就要注意一下，不過適時的提醒用戶，想要有順暢的體驗，還是擺上Chrome或Firefox的下載連結其實也是不錯的</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://davidwalsh.name/documentfragment" target="_blank">JavaScript DocumentFragment</a></p>
+
+<p><a href="http://jsperf.com/out-of-dom-vs-documentfragment/3" target="_blank">out of dom vs documentfragment</a></p>
+
+<p><a href="http://www.hujuntao.com/archives/using-documentfragment-speed-up-dom-rendering.html" target="_blank">利用DocumentFragment加快DOM渲染速度</a></p>
+
+<p><a href="http://fstoke.me/blog/?p=2487" target="_blank">使用DocumentFragment來加快DOM操作速度</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -165,23 +220,15 @@
   
 
 
-<time datetime="2012-05-29T01:24:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
+<time datetime="2012-12-18T14:38:00+08:00" pubdate data-updated="true">Dec 18<span>th</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/jquery/'>jQuery</a>
-  
-</span>
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-notes-2/" title="Previous Post: [jQuery]jquery使用筆記(二)-選擇器*開罐器">&laquo; [jQuery]jquery使用筆記(二)-選擇器*開罐器</a>
+        <a class="basic-alignment left" href="/blog/jquery-ajax-loader/" title="Previous Post: [jQuery] 自製jQuery Ajax Loader">&laquo; [jQuery] 自製jQuery Ajax Loader</a>
       
-      
-        <a class="basic-alignment right" href="/blog/book-review-2/" title="Next Post: [好書分享] 疼痛,才叫青春">[好書分享] 疼痛,才叫青春 &raquo;</a>
       
     </p>
   </footer>
@@ -199,7 +246,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/jquery-ajax-cache/" 
+	data-href="http://blog.rx836.tw/blog/javascript-documentframent/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -266,9 +313,9 @@
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-ajax-cache/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-ajax-cache/';
-        var disqus_url = 'http://blog.rx836.tw/blog/jquery-ajax-cache/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-documentframent/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-documentframent/';
+        var disqus_url = 'http://blog.rx836.tw/blog/javascript-documentframent/';
         var disqus_script = 'embed.js';
       
     (function () {
