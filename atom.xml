@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-20T12:33:01+08:00</updated>
+  <updated>2012-12-20T12:35:45+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -84,12 +84,12 @@ function funSource(){
 <p>其他的參數分別為</p>
 
 <ul>
-<li>**prefilled**:預先給予的Tag</li>
-<li>**CapitalizeFirstLetter**:如果為true，會將Tag第一個字轉為大寫，其他為小寫</li>
-<li>**preventSubmitOnEnter**:如果為true，假設&lt;input&gt;在&lt;form&gt;裡面，按下Enter將不會觸發Sibmit</li>
-<li>**typeahead**:如果為true，就會有關鍵字的提示選擇</li>
-<li>**typeaheadAjaxSource**:可以從Server端接收JSON格式的關鍵字提示選擇</li>
-<li>**typeaheadSource**:可以接收陣列或funtion回傳陣列的關鍵字提示選擇</li>
+<li>prefilled:預先給予的Tag</li>
+<li>CapitalizeFirstLetter:如果為true，會將Tag第一個字轉為大寫，其他為小寫</li>
+<li>preventSubmitOnEnter:如果為true，假設&lt;input&gt;在&lt;form&gt;裡面，按下Enter將不會觸發Sibmit</li>
+<li>typeahead:如果為true，就會有關鍵字的提示選擇</li>
+<li>typeaheadAjaxSource:可以從Server端接收JSON格式的關鍵字提示選擇</li>
+<li>typeaheadSource:可以接收陣列或funtion回傳陣列的關鍵字提示選擇</li>
 </ul>
 
 
