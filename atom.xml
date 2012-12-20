@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-20T12:25:24+08:00</updated>
+  <updated>2012-12-20T12:33:01+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -55,7 +55,7 @@
 
 <p><img src="https://lh5.googleusercontent.com/-OR2B3B8UzXs/UNKSYj723cI/AAAAAAAACFg/Pz1flQNbeKg/s149/2012-12-20_113137.jpg" /></p>
 
-<p>接著你在裡面輸入文字，只要<strong>你的焦點離開input</strong>、<strong>按下Enter</strong>或是加上逗號，都會自動幫你生成一個Tag</p>
+<p>接著你在裡面輸入文字，只要<strong>你的焦點離開input</strong>、<strong>按下Enter</strong>或是<strong>加上逗號</strong>，都會自動幫你生成一個Tag</p>
 
 <p><img src="https://lh5.googleusercontent.com/-Rq7wFJw2IH4/UNKSYmV6tWI/AAAAAAAACFk/k9e3c11qyZg/s202/2012-12-20_113346.jpg" /></p>
 
@@ -84,12 +84,12 @@ function funSource(){
 <p>其他的參數分別為</p>
 
 <ul>
-<li>prefilled:預先給予的Tag</li>
-<li>CapitalizeFirstLetter:如果為true，會將Tag第一個字轉為大寫，其他為小寫</li>
-<li>preventSubmitOnEnter:如果為true，假設&lt;input&gt;在&lt;form&gt;裡面，按下Enter將不會觸發Sibmit</li>
-<li>typeahead:如果為true，就會有關鍵字的提示選擇</li>
-<li>typeaheadAjaxSource:可以從Server端接收JSON格式的關鍵字提示選擇</li>
-<li>typeaheadSource:可以接收陣列或funtion回傳陣列的關鍵字提示選擇</li>
+<li>**prefilled**:預先給予的Tag</li>
+<li>**CapitalizeFirstLetter**:如果為true，會將Tag第一個字轉為大寫，其他為小寫</li>
+<li>**preventSubmitOnEnter**:如果為true，假設&lt;input&gt;在&lt;form&gt;裡面，按下Enter將不會觸發Sibmit</li>
+<li>**typeahead**:如果為true，就會有關鍵字的提示選擇</li>
+<li>**typeaheadAjaxSource**:可以從Server端接收JSON格式的關鍵字提示選擇</li>
+<li>**typeaheadSource**:可以接收陣列或funtion回傳陣列的關鍵字提示選擇</li>
 </ul>
 
 
@@ -97,7 +97,7 @@ function funSource(){
 
 <h2>總結</h2>
 
-<p>這是一套蠻方便的plugin，對於他的樣式如果不太喜歡還可以自己進行修改，另外對Tag還想要有更多的其他選擇，也可以參考 <a href="http://ioncache.github.com/Tag-Handler/" target+"_blank">Tag Handler</a>、<a href="http://xoxco.com/projects/code/tagsinput/" target="_blank">jQuery Tags Input Plugin</a> 這些介紹文章</p>
+<p>這是一套蠻方便的plugin，對於他的樣式如果不太喜歡還可以自己進行修改，另外對Tag還想要有更多的其他選擇，也可以參考 <a href="http://ioncache.github.com/Tag-Handler/" target="_blank">Tag Handler</a>、<a href="http://xoxco.com/projects/code/tagsinput/" target="_blank">jQuery Tags Input Plugin</a> 這些參考文章</p>
 
 <h3>參考資料:</h3>
 
