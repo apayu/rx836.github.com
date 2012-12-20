@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[PhoneGap] Android開發Facebook取得Key Hashes - apa</title>
+  <title>[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="之前曾經有寫過一篇關於Facebook web App開發的心得文章，但如果是用PhoneGap來開發Facebook App呢？我想很多人第一個遇到的問題就是，我在Facebook開發者設定是註冊web還是Android？ 一開始我也為這個問題困擾一陣子，但後來仔細想想PhoneGap的原理， &hellip;">
+  <meta name="description" content="如果有在 stackoverflow 上找過答案的朋友，應該對於他們的tag並不陌生，類似這樣的功能在許多blog或是論壇都有，但光是只有Tag這個功能已經不是重點所在，如何讓User有良好的Tag經驗是現今大家所追求的，簡單的說就是使用者經驗(UX)， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/android-facebook-key-hashes/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/jquery-tags-manager/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[PhoneGap] Android開發Facebook取得Key Hashes - apa" />
+<meta property="og:title" content="[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager - apa" />
 
-<meta property="og:description" content="之前曾經有寫過一篇關於Facebook web App開發的心得文章，但如果是用PhoneGap來開發Facebook App呢？我想很多人第一個遇到的問題就是，我在Facebook開發者設定是註冊web還是Android？ 一開始我也為這個問題困擾一陣子，但後來仔細想想PhoneGap的原理， &hellip;" />
+<meta property="og:description" content="如果有在 stackoverflow 上找過答案的朋友，應該對於他們的tag並不陌生，類似這樣的功能在許多blog或是論壇都有，但光是只有Tag這個功能已經不是重點所在，如何讓User有良好的Tag經驗是現今大家所追求的，簡單的說就是使用者經驗(UX)， &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/android-facebook-key-hashes/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/jquery-tags-manager/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[PhoneGap] Android開發Facebook取得Key Hashes</h1>
+      <h1 class="entry-title">[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-11-12T11:38:00+08:00" pubdate data-updated="true">Nov 12<span>th</span>, 2012</time>
+<time datetime="2012-12-20T11:11:00+08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,65 +113,90 @@
   </header>
 
 
-<div class="entry-content"><p>之前曾經有寫過一篇關於Facebook web App開發的<a href="http://blog.rx836.tw/blog/facebook-app-create-getfbid/" target="_blank">心得文章</a>，但如果是用PhoneGap來開發Facebook App呢？我想很多人第一個遇到的問題就是，我在Facebook開發者設定是註冊web還是Android？</p>
+<div class="entry-content"><p><img src="https://lh5.googleusercontent.com/-gxsgoBxzDI8/UNKSYvcQnPI/AAAAAAAACFc/7PiDy2u-3KA/s745/2012-12-20_111514.jpg" /></p>
+
+<p>如果有在 <a href="http://stackoverflow.com/" target="_blank">stackoverflow</a> 上找過答案的朋友，應該對於他們的tag並不陌生，類似這樣的功能在許多blog或是論壇都有，但光是只有Tag這個功能已經不是重點所在，如何讓User有良好的Tag經驗是現今大家所追求的，簡單的說就是使用者經驗(UX)，今天就來介紹一款我個人覺得不錯的jQuery plugin - Tags Manager</p>
 
 <!--more-->
 
 
-<p>一開始我也為這個問題困擾一陣子，但後來仔細想想PhoneGap的原理，在看看Facebook 開者人員的設定，答案就呼之欲出</p>
+<h2>Start</h2>
 
-<p><img src="https://lh4.googleusercontent.com/-Us90e1j38QY/UKCWPyT6CtI/AAAAAAAAB5k/XDg4FiqkaYo/s831/a2.jpg" /></p>
+<p><a href="https://github.com/max-favilli/tagmanager" target="_blank">Download from Github</a></p>
 
-<p>可以看到不管是Website with Facebook Login還是App on Facebook都要輸入網址部分，可是手機的APP沒有網址這部分(我的認知.. 有錯煩請指正)，而且PhoneGap最後還是用手機App包裝起來，所以說到底，他骨子裡還是個手機App</p>
+<p>使用方式相當相當的簡單，從github載下來後，將Tags Manager和所需要的css檔案掛載到網頁裡面，接下來只有兩個步驟</p>
 
-<p>不過這就讓我第一次接觸到Android開發的人撞到牆了，因為我根本就不知道什麼是「Key Hashes」，也不知道應該怎麼取得這個值，所以就上網做了一些功課，整理出一些心得給大家做參考</p>
+<p>第一步驟就是在html裡面加上一個&lt;input&gt;</p>
 
-<p>Key Hashes最主要就是讓Facebook分辨你的App是不是當初設定的那支App，要符合才能對Facebook API進行存取，產生Key Hashes方法如下</p>
-
-<p>1.首先下載<a href="http://sourceforge.net/projects/gnuwin32/files/openssl/0.9.8h-1/openssl-0.9.8h-1-bin.zip/download?use_mirror=nchc" target="_blank">OpenSSL</a></p>
-
-<p>2.將openssl.exe這個檔案放到C:\Program Files\Java\jre6\bin這個資料夾裡面</p>
-
-<p>3.用<strong>系統管理員身分</strong>將cmd.exe打開，並且開始製作「keystore」，語法如下</p>
-
-<pre><code>keytool -genkey -v -keystore apa.keystore -alias apa -keyalg RSA -keysize 2048 -validity 10000
+<pre><code>&lt;input type="text" name="tags" placeholder="Tags" class="tagManager"/&gt;
 </code></pre>
 
-<p>請注意，程式碼中「apa.keystore」和「apa」是自取的名稱，你也可以叫做「abc.keystore」和「abc」</p>
+<p>第二個步驟就是在js加上一段程式碼</p>
 
-<p>每個指令的名稱意思分別為:</p>
-
-<p>-keystore：名稱</p>
-
-<p>-alias：別名</p>
-
-<p>-keyalg：演算法</p>
-
-<p>-validity：有效天數</p>
-
-<p><img src="https://lh5.googleusercontent.com/-DHMUBhM3hrI/UKCWP5a59pI/AAAAAAAAB5g/SKPFMSolbjI/s679/a3.jpg" /></p>
-
-<p>4.產生「keystore」以後，開始取得Hash Key，語法如下</p>
-
-<pre><code>keytool -exportcert -alias apa -keystore apa.keystore | openssl sha1 -binary | openssl base64
+<pre><code>jQuery(".tagManager").tagsManager();
 </code></pre>
 
-<p>一樣注意-alias和-keystore的名稱是剛剛自己取的名稱</p>
+<p>完成，本篇介紹到此結束</p>
 
-<p>最後就會看到類似以下的代碼在視窗上顯示出來</p>
+<p>.</p>
 
-<pre><code>P1suAlHZ3f8RkLibv4MnnI3z2fg=
+<p>.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<p>好啦，真的就只有這兩行，打開網頁後你可以看到會有一個input，裡面有個預設文字Tags</p>
+
+<p><img src="https://lh5.googleusercontent.com/-OR2B3B8UzXs/UNKSYj723cI/AAAAAAAACFg/Pz1flQNbeKg/s149/2012-12-20_113137.jpg" /></p>
+
+<p>接著你在裡面輸入文字，只要<strong>你的焦點離開input</strong>、<strong>按下Enter</strong>或是加上逗號，都會自動幫你生成一個Tag</p>
+
+<p><img src="https://lh5.googleusercontent.com/-Rq7wFJw2IH4/UNKSYmV6tWI/AAAAAAAACFk/k9e3c11qyZg/s202/2012-12-20_113346.jpg" /></p>
+
+<p>而假如要刪除呢？只要對著Tag裡面的小x按下即可，這對於使用者來說非常的方便使用，那對於開發者來說要如何操作呢？</p>
+
+<p>也許會有人問那我要怎麼取得那些Tag的值，如果你有用firebug或是google Chrome(按下F12呼叫開發者環境)，可以看到Tags Manager會在增加Tag的同時，默默的在背後新增一個hidden，並且把值丟到裡面做暫存，所以當開發者想要將Tag的值送到Server端時，可以從這裡取出</p>
+
+<p><img src="https://lh4.googleusercontent.com/-hfXPhL3aF1g/UNKSZaCL9fI/AAAAAAAACFo/aKDNo-6VMj8/s658/2012-12-20_113905.jpg" /></p>
+
+<p>當然，Tag裡面還有很重要的一個功能就是智能輸入，會出現關鍵字的提示，但因為Tags Manager是利用 <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap</a> 裡面的 <a href="http://twitter.github.com/bootstrap/javascript.html#typeahead" target="_blank">typeahead</a> ，所以要用到關鍵字的提示要載入Bootstrap才可以使用，以下就是範例</p>
+
+<pre><code>jQuery(".tagManager").tagsManager({
+    prefilled: ["Pisa", "Rome"],
+    typeahead: true,
+    typeaheadSource: funSource
+});
+
+function funSource(){
+    var ret = ["Manchester", "Astonvilla", "Real Madrid", "Barcelona", "Milan AC", "Internazionale", "Roma AC", "Chelsea"];
+    return ret;
+} 
 </code></pre>
 
-<p>這樣代表你已經成功取得Hash Key囉，將這組Key貼到Facebook開發者人員設定App的地方，大功告成！</p>
+<p>你可以將需要提示的tag寫成一個陣列，將值塞入參數 <strong>typeaheadSource</strong></p>
 
-<p>參考資料:</p>
+<p>其他的參數分別為</p>
 
-<p><a href="http://wazai.net/1921/android%E4%BD%BF%E7%94%A8facebook-sdk%E7%94%B3%E8%AB%8B%E7%AF%87" target="_blank">Android使用Facebook SDK(申請篇)</a></p>
+<ul>
+<li>prefilled:預先給予的Tag</li>
+<li>CapitalizeFirstLetter:如果為true，會將Tag第一個字轉為大寫，其他為小寫</li>
+<li>preventSubmitOnEnter:如果為true，假設&lt;input&gt;在&lt;form&gt;裡面，按下Enter將不會觸發Sibmit</li>
+<li>typeahead:如果為true，就會有關鍵字的提示選擇</li>
+<li>typeaheadAjaxSource:可以從Server端接收JSON格式的關鍵字提示選擇</li>
+<li>typeaheadSource:可以接收陣列或funtion回傳陣列的關鍵字提示選擇</li>
+</ul>
 
-<p><a href="http://wangshifuola.blogspot.tw/2011/06/androidfacebook-sdkpart1.html" target="_blank">Android學習_使用facebook sdk_Part1準備</a></p>
 
-<p><a href="http://wangshifuola.blogspot.tw/2011/06/androidgoogle-map-api-key.html" target="_blank">Android學習_如何申請Google Map API Key(實機用)</a></p>
+<p>這邊只介紹幾個主要的參數，其他還有許多不錯的參數應用可以直接參考 <a href="http://welldonethings.com/tags/manager" target="_blank">Tags Manager</a></p>
+
+<h2>總結</h2>
+
+<p>這是一套蠻方便的plugin，對於他的樣式如果不太喜歡還可以自己進行修改，另外對Tag還想要有更多的其他選擇，也可以參考 <a href="http://ioncache.github.com/Tag-Handler/" target+"_blank">Tag Handler</a>、<a href="http://xoxco.com/projects/code/tagsinput/" target="_blank">jQuery Tags Input Plugin</a> 這些介紹文章</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://welldonethings.com/tags/manager" target="_blank">Tags Manager (a jQuery plugin)</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 </div>
@@ -207,12 +232,12 @@
   
 
 
-<time datetime="2012-11-12T11:38:00+08:00" pubdate data-updated="true">Nov 12<span>th</span>, 2012</time>
+<time datetime="2012-12-20T11:11:00+08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/facebook/'>Facebook</a>, <a class='category' href='/blog/categories/phonegap/'>PhoneGap</a>
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>
   
 </span>
 
@@ -220,10 +245,8 @@
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/android-phonegap-usb-develop/" title="Previous Post: [PhoneGap] 如何搭配平板或手機開發Android">&laquo; [PhoneGap] 如何搭配平板或手機開發Android</a>
+        <a class="basic-alignment left" href="/blog/javascript-documentframent/" title="Previous Post: [JavaScript] DocumentFragments-JS加快效能的好物">&laquo; [JavaScript] DocumentFragments-JS加快效能的好物</a>
       
-      
-        <a class="basic-alignment right" href="/blog/inline-block-display-product-grid-view/" title="Next Post: [CSS] 用inline-block做產品展示頁並且擁有RWD效果">[CSS] 用inline-block做產品展示頁並且擁有RWD效果 &raquo;</a>
       
     </p>
   </footer>
@@ -241,7 +264,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/android-facebook-key-hashes/" 
+	data-href="http://blog.rx836.tw/blog/jquery-tags-manager/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -308,9 +331,9 @@
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/android-facebook-key-hashes/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/android-facebook-key-hashes/';
-        var disqus_url = 'http://blog.rx836.tw/blog/android-facebook-key-hashes/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-tags-manager/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-tags-manager/';
+        var disqus_url = 'http://blog.rx836.tw/blog/jquery-tags-manager/';
         var disqus_script = 'embed.js';
       
     (function () {

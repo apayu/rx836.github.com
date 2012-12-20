@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-18T16:28:14+08:00</updated>
+  <updated>2012-12-20T12:25:24+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-tags-manager/"/>
+    <updated>2012-12-20T11:11:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-tags-manager</id>
+    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-gxsgoBxzDI8/UNKSYvcQnPI/AAAAAAAACFc/7PiDy2u-3KA/s745/2012-12-20_111514.jpg" /></p>
+
+<p>如果有在 <a href="http://stackoverflow.com/" target="_blank">stackoverflow</a> 上找過答案的朋友，應該對於他們的tag並不陌生，類似這樣的功能在許多blog或是論壇都有，但光是只有Tag這個功能已經不是重點所在，如何讓User有良好的Tag經驗是現今大家所追求的，簡單的說就是使用者經驗(UX)，今天就來介紹一款我個人覺得不錯的jQuery plugin - Tags Manager</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p><a href="https://github.com/max-favilli/tagmanager" target="_blank">Download from Github</a></p>
+
+<p>使用方式相當相當的簡單，從github載下來後，將Tags Manager和所需要的css檔案掛載到網頁裡面，接下來只有兩個步驟</p>
+
+<p>第一步驟就是在html裡面加上一個&lt;input&gt;</p>
+
+<pre><code>&lt;input type="text" name="tags" placeholder="Tags" class="tagManager"/&gt;
+</code></pre>
+
+<p>第二個步驟就是在js加上一段程式碼</p>
+
+<pre><code>jQuery(".tagManager").tagsManager();
+</code></pre>
+
+<p>完成，本篇介紹到此結束</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<p>好啦，真的就只有這兩行，打開網頁後你可以看到會有一個input，裡面有個預設文字Tags</p>
+
+<p><img src="https://lh5.googleusercontent.com/-OR2B3B8UzXs/UNKSYj723cI/AAAAAAAACFg/Pz1flQNbeKg/s149/2012-12-20_113137.jpg" /></p>
+
+<p>接著你在裡面輸入文字，只要<strong>你的焦點離開input</strong>、<strong>按下Enter</strong>或是加上逗號，都會自動幫你生成一個Tag</p>
+
+<p><img src="https://lh5.googleusercontent.com/-Rq7wFJw2IH4/UNKSYmV6tWI/AAAAAAAACFk/k9e3c11qyZg/s202/2012-12-20_113346.jpg" /></p>
+
+<p>而假如要刪除呢？只要對著Tag裡面的小x按下即可，這對於使用者來說非常的方便使用，那對於開發者來說要如何操作呢？</p>
+
+<p>也許會有人問那我要怎麼取得那些Tag的值，如果你有用firebug或是google Chrome(按下F12呼叫開發者環境)，可以看到Tags Manager會在增加Tag的同時，默默的在背後新增一個hidden，並且把值丟到裡面做暫存，所以當開發者想要將Tag的值送到Server端時，可以從這裡取出</p>
+
+<p><img src="https://lh4.googleusercontent.com/-hfXPhL3aF1g/UNKSZaCL9fI/AAAAAAAACFo/aKDNo-6VMj8/s658/2012-12-20_113905.jpg" /></p>
+
+<p>當然，Tag裡面還有很重要的一個功能就是智能輸入，會出現關鍵字的提示，但因為Tags Manager是利用 <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap</a> 裡面的 <a href="http://twitter.github.com/bootstrap/javascript.html#typeahead" target="_blank">typeahead</a> ，所以要用到關鍵字的提示要載入Bootstrap才可以使用，以下就是範例</p>
+
+<pre><code>jQuery(".tagManager").tagsManager({
+    prefilled: ["Pisa", "Rome"],
+    typeahead: true,
+    typeaheadSource: funSource
+});
+
+function funSource(){
+    var ret = ["Manchester", "Astonvilla", "Real Madrid", "Barcelona", "Milan AC", "Internazionale", "Roma AC", "Chelsea"];
+    return ret;
+} 
+</code></pre>
+
+<p>你可以將需要提示的tag寫成一個陣列，將值塞入參數 <strong>typeaheadSource</strong></p>
+
+<p>其他的參數分別為</p>
+
+<ul>
+<li>prefilled:預先給予的Tag</li>
+<li>CapitalizeFirstLetter:如果為true，會將Tag第一個字轉為大寫，其他為小寫</li>
+<li>preventSubmitOnEnter:如果為true，假設&lt;input&gt;在&lt;form&gt;裡面，按下Enter將不會觸發Sibmit</li>
+<li>typeahead:如果為true，就會有關鍵字的提示選擇</li>
+<li>typeaheadAjaxSource:可以從Server端接收JSON格式的關鍵字提示選擇</li>
+<li>typeaheadSource:可以接收陣列或funtion回傳陣列的關鍵字提示選擇</li>
+</ul>
+
+
+<p>這邊只介紹幾個主要的參數，其他還有許多不錯的參數應用可以直接參考 <a href="http://welldonethings.com/tags/manager" target="_blank">Tags Manager</a></p>
+
+<h2>總結</h2>
+
+<p>這是一套蠻方便的plugin，對於他的樣式如果不太喜歡還可以自己進行修改，另外對Tag還想要有更多的其他選擇，也可以參考 <a href="http://ioncache.github.com/Tag-Handler/" target+"_blank">Tag Handler</a>、<a href="http://xoxco.com/projects/code/tagsinput/" target="_blank">jQuery Tags Input Plugin</a> 這些介紹文章</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://welldonethings.com/tags/manager" target="_blank">Tags Manager (a jQuery plugin)</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 簡易的數值格式化-Numeral.js]]></title>
@@ -505,74 +599,6 @@ $(element).on('event-name.kwicks', handler);
 <p>參考資料:</p>
 
 <p><a href="http://devsmash.com/projects/kwicks" target="_blank">Kwicks for jQuery</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 倒數計時的plugin介紹]]></title>
-    <link href="http://blog.rx836.tw/blog/jquery-countdown-plugins/"/>
-    <updated>2012-11-05T11:45:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/jquery-countdown-plugins</id>
-    <content type="html"><![CDATA[<p>之前做活動網站常常會使用到「倒數計時」這項功能，因為其實蠻好寫的，所以都是用jQuery手刻比較多，但今天看到一篇文章是收集有關於jQuery Countdown Plugins，看了一下發現有些功能蠻齊全的，就記錄在這裡，供日後參考</p>
-
-<!--more-->
-
-
-<h3>jQuery Countdown Script</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-q5CkXGDfwAo/UJc_Gp1lgEI/AAAAAAAAB2E/gjITVcyHIes/s480/lwt_post1.jpg" /></p>
-
-<p>plugin簡單好設定，還可以在同一個頁面設定好幾個不同的倒數計時，甚至是啟動和暫停</p>
-
-<p><a href="http://www.littlewebthings.com/2010/02/jquery-countdown-script/" target="_blank">範例Demo</a></p>
-
-<h3>Countdown</h3>
-
-<p><img src="https://lh6.googleusercontent.com/-pmIMh95RX54/UJc_Ga3R2dI/AAAAAAAAB2I/TR6Dtq4DHYw/s480/jquery-countdown.gif" /></p>
-
-<p>擁有許多進階的設定，支援時區，多種語言等</p>
-
-<p><a href="http://keith-wood.name/countdown.html" target="_blank">範例Demo</a></p>
-
-<h3>The Final Countdown</h3>
-
-<p><img src="https://lh4.googleusercontent.com/-q5WsQiLTJv4/UJc_FlYN8YI/AAAAAAAAB14/eR6HQ1RxIMo/s403/a1.jpg" /></p>
-
-<p>多種呈現方式，可以隨自己喜歡去做調整，倒數計時的部分甚至連毫秒都可以呈現</p>
-
-<p><a href="https://github.com/hilios/jquery.countdown" target="_blank">範例Demo</a></p>
-
-<h3>KK Countdown</h3>
-
-<p><img src="https://lh6.googleusercontent.com/-MKQU1yoPcpA/UJc_Fn8CqaI/AAAAAAAAB2A/AZs0VgXkuco/s600/2.jpg" /></p>
-
-<p>一樣有多種呈現方式，用時間戳記來給予時間</p>
-
-<p><a href="http://krzysztof-furtak.pl/2010/05/kk-countdown-jquery-plugin/" target="_blank">範例Demo</a></p>
-
-<h3>jQuery Countdown</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-uIiwnxje1y0/UJdAu1w52KI/AAAAAAAAB2g/-ZVyh0o40DA/s520/3.jpg" /></p>
-
-<p>利用圖片來呈現，沒有太多功能可以設定，比較簡單的plugin</p>
-
-<p><a href="http://code.google.com/p/jquery-countdown/" target="_blank">範例Demo</a></p>
-
-<h3>jQuery Countdown Timer</h3>
-
-<p><img src="https://lh5.googleusercontent.com/-fmAgRmTcc40/UJc_FilzH0I/AAAAAAAAB18/qyyvqbxCZfU/s620/jquery-countdown-timer.jpg" /></p>
-
-<p>裡面有相當詳細的教學文，教你怎麼使用他們的plugin</p>
-
-<p><a href="http://tutorialzine.com/2011/12/countdown-jquery/" target="_blank">範例Demo</a></p>
-
-<p>倒數計時自己寫並不難，不過有些很特別的功能或是效果用plugin，倒也可以省下不少時間，所以要用plugin或是自己手刻就看各位開發者自己當下的狀況做選擇:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.webresourcesdepot.com/jquery-countdown-plugins-for-coming-soon-pages/" target="_blank"></a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
