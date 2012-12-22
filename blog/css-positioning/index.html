@@ -9,7 +9,7 @@
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="css Position 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css Position的心得，搭配幾個簡單易懂的範例，讓大家一起成長 Start 首先，css &hellip;">
+  <meta name="description" content="css position 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css position的心得，搭配幾個簡單易懂的範例，讓大家一起成長 Start 首先，css &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -33,7 +33,7 @@
 <meta property="fb:app_id" content="416172151763823" />
 <meta property="og:title" content="[CSS] CSS position 觀念筆記心得 - apa" />
 
-<meta property="og:description" content="css Position 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css Position的心得，搭配幾個簡單易懂的範例，讓大家一起成長 Start 首先，css &hellip;" />
+<meta property="og:description" content="css position 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css position的心得，搭配幾個簡單易懂的範例，讓大家一起成長 Start 首先，css &hellip;" />
 
 <meta property="og:url" content="http://blog.rx836.tw/blog/css-positioning/" />  
 
@@ -113,7 +113,7 @@
   </header>
 
 
-<div class="entry-content"><p><strong>css Position</strong> 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css Position的心得，搭配幾個簡單易懂的範例，讓大家一起成長</p>
+<div class="entry-content"><p><strong>css position</strong> 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css position的心得，搭配幾個簡單易懂的範例，讓大家一起成長</p>
 
 <!--more-->
 
@@ -188,7 +188,7 @@ div2
 
 <p><img src="https://lh5.googleusercontent.com/-brly4x9g8ck/UNVYRm2M0kI/AAAAAAAACGg/MZagmsZ8e4U/s201/2012-12-22_121717.jpg" /></p>
 
-<p>藍色的div從<strong>原本的位置</strong>往右下角位移了，從原始位置的左上角為起點，遠離左邊(left)20px的差距，遠離上面(top)也是20px的差距，但還是保留<strong>原本位置的空間</strong>，注意我這邊特別註明是原本的位置，因為這會跟等下介紹的 <strong>absolute</strong> 有所不同，那有些人或許會有疑問，可以用 <strong>margin</strong> 取代嗎？我們來實驗一下</p>
+<p>藍色的div從<strong>原本的位置</strong>往右下角位移了，從原始位置的左上角為起點，遠離左邊(left)20px的差距，遠離上面(top)也是20px的差距，但還是保留<strong>原本位置的空間</strong>，並且覆蓋到d2，注意我這邊特別註明是原本的位置，因為這會跟等下介紹的 <strong>absolute</strong> 有所不同，那有些人或許會有疑問，可以用 <strong>margin</strong> 取代嗎？我們來實驗一下</p>
 
 <pre><code>#d1{
     width: 100px;
@@ -206,7 +206,7 @@ div2
 
 <p><img src="https://lh5.googleusercontent.com/-mWSgkOP_EZ4/UNVYSFL7X9I/AAAAAAAACGs/jU3lCto1jGM/s217/2012-12-22_122152.jpg" /></p>
 
-<p>有明顯的發現，利用屬性margin做位移，會<strong>影響到其它的元素位置</strong>，這是要特別注意小心的地方，不可不慎</p>
+<p>有明顯的發現，利用屬性margin做位移，元素並沒有覆蓋堆疊的問題，但會<strong>影響到其它的元素位置</strong>，這是要特別注意小心的地方，不可不慎</p>
 
 <h3>absolute</h3>
 
@@ -271,7 +271,7 @@ div2
 
 <p><img src="https://lh6.googleusercontent.com/-pxPW5Q1Kocc/UNVYSScFsqI/AAAAAAAACGw/quewGWodrDc/s330/2012-12-22_124729.jpg" /></p>
 
-<p>會發現藍色的&lt;div&gt;是*從id為d3的&lt;div&gt;左上角開始定位，這代表是說，如果屬性值為absolute的&lt;div&gt;，上面還有被其它元素包住，就要注意位移計算的起始值會有所不同，那如果將relative移除的話呢?</p>
+<p>會發現藍色的&lt;div&gt;是<strong>從id為d3的&lt;div&gt;左上角開始定位</strong>，這代表是說，如果屬性值為absolute的&lt;div&gt;，上面還有被其它元素包住，就要注意位移計算的起始值會有所不同，那如果將relative移除的話呢?</p>
 
 <p><img src="https://lh5.googleusercontent.com/-L0jg9uoCRoI/UNVYS-iDosI/AAAAAAAACG8/_2MhBfq6cA0/s326/2012-12-22_124746.jpg" /></p>
 
