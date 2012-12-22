@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-20T12:35:45+08:00</updated>
+  <updated>2012-12-22T15:04:12+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,207 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] CSS position 觀念筆記心得]]></title>
+    <link href="http://blog.rx836.tw/blog/css-positioning/"/>
+    <updated>2012-12-22T11:30:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css-positioning</id>
+    <content type="html"><![CDATA[<p><strong>css Position</strong> 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css Position的心得，搭配幾個簡單易懂的範例，讓大家一起成長</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>首先，css position 屬性共有四個值，分別為 <strong>static</strong>、<strong>relative</strong>、<strong>absolute</strong>、<strong>fixed</strong>，其中，當你沒有設定position時，預設為static，下面就來介紹這四個值的差別</p>
+
+<h3>static</h3>
+
+<p>就如剛剛所提到的，static是預設值，意思是說，就算你沒宣告position這個屬性，默認還是為static，而通常這時候會影響到元素的位置，就是看它本身是 <strong>block</strong> 或是 <strong>inline</strong>，例如兩個&lt;div&gt;因為是block的關係，所以會上下各占據一行，那如果是兩個&lt;span&gt;，因為是inline，所以會在同一行裡面呈現</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+#s1{
+        background: blue;
+    }
+#s2{
+        background: red;
+    }   
+</code></pre>
+
+<p>html</p>
+
+<pre><code>&lt;div id="d1"&gt;
+div1
+&lt;/div&gt;
+&lt;div id="d2"&gt;
+div2
+&lt;/div&gt;
+&lt;span id="s1"&gt;span1&lt;/span&gt;&lt;span id="s2"&gt;span2&lt;/span&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-k8UTysRkMoQ/UNVYRo_fstI/AAAAAAAACGc/4eVneQSvhDg/s214/2012-12-22_120559.jpg" /></p>
+
+<p><img src="https://lh6.googleusercontent.com/-h58i2I7P0Fg/UNVYRt_asJI/AAAAAAAACGk/BkPXYijQpG0/s99/2012-12-22_120617.jpg" /></p>
+
+<p>特別注意的是，static並不會受 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些屬性值影響</p>
+
+<h3>relative</h3>
+
+<p>假如元素的position屬性值設為relative，就會受到 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些值影響所在位置，利用剛剛的範例，我們增加position屬性值和一些位移看看結果</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p>我們在id為d1的&lt;div&gt;裡面加上了 <strong>position: relative</strong> 和 <strong>top:20px</strong> 還有 <strong>left:20px</strong>，會看到下面如圖的結果</p>
+
+<p><img src="https://lh5.googleusercontent.com/-brly4x9g8ck/UNVYRm2M0kI/AAAAAAAACGg/MZagmsZ8e4U/s201/2012-12-22_121717.jpg" /></p>
+
+<p>藍色的div從<strong>原本的位置</strong>往右下角位移了，從原始位置的左上角為起點，遠離左邊(left)20px的差距，遠離上面(top)也是20px的差距，但還是保留<strong>原本位置的空間</strong>，注意我這邊特別註明是原本的位置，因為這會跟等下介紹的 <strong>absolute</strong> 有所不同，那有些人或許會有疑問，可以用 <strong>margin</strong> 取代嗎？我們來實驗一下</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-mWSgkOP_EZ4/UNVYSFL7X9I/AAAAAAAACGs/jU3lCto1jGM/s217/2012-12-22_122152.jpg" /></p>
+
+<p>有明顯的發現，利用屬性margin做位移，會<strong>影響到其它的元素位置</strong>，這是要特別注意小心的地方，不可不慎</p>
+
+<h3>absolute</h3>
+
+<p><strong>absolute</strong> 跟relative很像，差別在於位移時是從哪個起始點開始算起，剛剛的relative是從原本的位置開始算，而absolute是從<strong>整個頁面的視窗</strong>開始算起，並且並不會保留它原本的<strong>空間</strong>，範例如下</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: absolute;;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-gGhHTnjvx2M/UNVYSRKJwcI/AAAAAAAACGo/bqLVeZYOBok/s128/2012-12-22_123254.jpg" /></p>
+
+<p>有發現藍色的&lt;div&gt;完全無視其它的元素存在，也不會干擾到其它的元素，因為它的原始空間也消失了，自己獨立起來自成一格，看起來還蠻容易了解的，不過有一個地方是初學者很容易混淆的，就是當relative和absolute一起使用時，那情形就會跟我們設想的不太一樣，範例如下</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: absolute;;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+
+#d3{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: solid 1px orange;
+}
+</code></pre>
+
+<p>html</p>
+
+<pre><code>&lt;div id="d3"&gt;
+    &lt;div id="d1"&gt;
+    div1
+    &lt;/div&gt;
+    &lt;div id="d2"&gt;
+    div2
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>這裡多用一個id為d3的&lt;div&gt;包住兩個&lt;div&gt;，d3的position屬性值為relative，此時會看到藍色的&lt;div&gt;屬性值position雖然一樣是absolute，但會看到位移不太一樣了</p>
+
+<p><img src="https://lh6.googleusercontent.com/-pxPW5Q1Kocc/UNVYSScFsqI/AAAAAAAACGw/quewGWodrDc/s330/2012-12-22_124729.jpg" /></p>
+
+<p>會發現藍色的&lt;div&gt;是*從id為d3的&lt;div&gt;左上角開始定位，這代表是說，如果屬性值為absolute的&lt;div&gt;，上面還有被其它元素包住，就要注意位移計算的起始值會有所不同，那如果將relative移除的話呢?</p>
+
+<p><img src="https://lh5.googleusercontent.com/-L0jg9uoCRoI/UNVYS-iDosI/AAAAAAAACG8/_2MhBfq6cA0/s326/2012-12-22_124746.jpg" /></p>
+
+<p>嗯！定位又從頁面視窗的左上角當作起始點囉，如果覺得範例感覺不到效果，可以將top和left的值加大，會更明顯</p>
+
+<h3>fixed</h3>
+
+<p>最後講到的是fixed，它常被用於在Menu bar，位置也是受到 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些值影響，跟absolute類似，但有兩個不一樣的地方</p>
+
+<p>1.它的位移起始的依據永遠都是<strong>視窗頁面</strong>，也就是說就算它有relative的父元素，並不會受到影響</p>
+
+<p>2.它會跟著scroll移動，也就是說當畫面被往下拉時，該元素會跟隨著移到相對的位置</p>
+
+<p>基於以上兩點的特色，我們就可以做出永遠固定在視窗某個地方的元素</p>
+
+<p><img src="https://lh3.googleusercontent.com/-S6zIGb8HXio/UNVYTBy6PLI/AAAAAAAACHA/y94BoXH5TO8/s1075/2012-12-22_143751.jpg" /></p>
+
+<p>像是 <a href="http://pinterest.com/" target="_blank">pinterest</a> 就有用到類似的效果，不過記得要搭配 <strong> z-index</strong> 來做元素堆疊</p>
+
+<h2>結論</h2>
+
+<p>其實網路上有很多很好的文章在討論關於css position的用法和觀念，也有很多很漂亮的排版，但只要掌握好基本觀念，我相信對於那些複雜的layout也可以輕鬆的理解</p>
+
+<p>另外除了上面討論的四個屬性值以外，CSS3其實還有新增另外兩個，分別叫做 <a href="http://www.w3.org/TR/css3-positioning/#center-positioning" target="_blank">position: center</a> 和 <a href="http://www.w3.org/TR/css3-positioning/#page-positioning" target="_blank">position: page</a>，不過因為非主流且各瀏覽器支援程度很低，有興趣的人在自行研究即可</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://blog.teamtreehouse.com/css-positioning?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_34&utm_medium=web" target="_blank">CSS Positioning: A Comprehensive Look</a></p>
+
+<p><a href="http://www.barelyfitz.com/screencast/html-training/css/positioning/" target="_blank">Learn CSS Positioning in Ten Steps(10個步驟學習CSS Position)</a></p>
+
+<p><a href="http://css.1keydata.com/tw/position.php" target="_blank">CSS Position 位置</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CSS] 利用CSS3做scrolling effect]]></title>
@@ -804,122 +1005,6 @@ header:after {
 <p><a href="http://codetheory.in/the-real-beauty-of-css3-box-shadows/" target="_blank">The Real Beauty of CSS3 Box Shadows</a></p>
 
 <p><a href="http://www.w3schools.com/cssref/css3_pr_box-shadow.asp" target="_blank">CSS3 的box-shadow屬性</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS] 拋棄原生checkbox用CSS3自己簡單動手做]]></title>
-    <link href="http://blog.rx836.tw/blog/css3-checkboxes-radiobuttons/"/>
-    <updated>2012-11-16T15:27:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/css3-checkboxes-radiobuttons</id>
-    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-AstthsAdcVk/UKX5J1b1PpI/AAAAAAAAB7U/UxqFI-iYi0g/s166/a.jpg" /></p>
-
-<p>已經用膩原生的checkbox和radiobutton嗎？今天就試著用CSS3來做出不一樣的checkbox和radiobutton吧，而且是不用任何一行JavaScript，重點是，就算IE9以下不支援CSS3也沒關係喔！</p>
-
-<!--more-->
-
-
-<p>在開始之前，先認識一下什麼是 <a href="http://meyerweb.com/eric/articles/webrev/200007a.html" target="_blank">Adjacent-Sibling Selector</a>，這等下會用到，簡單的範例如下</p>
-
-<p>HTML</p>
-
-<pre><code>&lt;div&gt;
-    &lt;span&gt;&lt;/span&gt;
-    &lt;p&gt;apa&lt;/p&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>CSS</p>
-
-<pre><code>span + p{
-    color:red;
-}
-</code></pre>
-
-<p>可以看到這樣寫「apa」就會顯示紅色，「+」的用法就是等於選擇兄弟元素的意思</p>
-
-<p>OK，那我們要怎麼做出不一樣的checkbox和radiobutton呢？先建立HTML部分吧</p>
-
-<pre><code>&lt;input type="checkbox" /&gt;
-&lt;label&gt;Check Box 1&lt;/label&gt;
-</code></pre>
-
-<p>會用label的原因是希望可以在點擊「Check Box 1」也可以選擇checkbox，讓<strong>可點擊的範圍</strong>更大，所以為了有這個效果，我們就需要用到label的屬性「for」</p>
-
-<pre><code>&lt;input type="checkbox" id="c1" name="cc" /&gt;
-&lt;label for="c1"&gt;Check Box 1&lt;/label&gt;
-</code></pre>
-
-<p>會看到for指定的id為input #c1</p>
-
-<p>再來我們可以在label裡面放一個span，為的就是等下可以直接在span加上背景圖，當然你也可以不用span而直接在label放背景圖，不過這樣當調整位置的時候會比較不方便，所以跟放文字的label分開會比較好</p>
-
-<pre><code>&lt;input type="checkbox" id="c1" name="cc" /&gt;
-&lt;label for="c1"&gt;&lt;span&gt;&lt;/span&gt;Check Box 1&lt;/label&gt;
-</code></pre>
-
-<p>接著是CSS部分，首先為了替換掉原生的HTML樣式，我們先將原生的checkbox隱藏起來</p>
-
-<pre><code>input[type="checkbox"] {
-    display:none;
-}
-</code></pre>
-
-<p>這邊要特別注意的是，雖然看不到checkbox，實際上他還是存在喔！一樣還是會有勾選效果，只是看不到而已，隱藏完以後，我們就要將背景圖設置到span裡面</p>
-
-<pre><code>input[type="checkbox"] {
-    display:none;
-}
-input[type="checkbox"] + label span {
-    display:inline-block;
-    width:19px;
-    height:19px;
-    background:url(check_radio_sheet.png) left top no-repeat;
-}
-</code></pre>
-
-<p>有看到選擇器「input[type="checkbox"] + label span」這樣的寫法嗎？這就是之前講的選擇兄弟元素</p>
-
-<p>那圖的部分就可以用CSS Sprite的方式來呈現，把需要的小icon放在同一張圖，利用位移來顯示出想要的部分，將其它不要的部分隱藏0</p>
-
-<p><img src="https://lh5.googleusercontent.com/-VSnKVuXA5k4/UKX5J-71RvI/AAAAAAAAB7Q/hDmvr5xxMjg/s76/check_radio_sheet.png" /></p>
-
-<p>最後，剛剛那個是「尚未選取」的CSS狀態，這邊就把「選取後」的CSS狀態也一併加上吧，也就是CSS3的「:checked」</p>
-
-<pre><code>input[type="checkbox"] {
-    display:none;
-}
-input[type="checkbox"] + label span {
-    display:inline-block;
-    width:19px;
-    height:19px;
-    margin:-1px 4px 0 0;
-    vertical-align:middle;
-    background:url(check_radio_sheet.png) left top no-repeat;
-    cursor:pointer;
-}
-input[type="checkbox"]:checked + label span {
-    background:url(check_radio_sheet.png) -19px top no-repeat;
-}
-</code></pre>
-
-<p>大功告成！很簡單吧？而且不用任何一行JavaScript</p>
-
-<p>原理其實就是將原生的checkbox隱藏起來，再利用CSS的選擇器「:checked」來分辨checkbox目前的狀態(是否選取)，然後換掉相對應的span背景圖，如果不太懂的話，可以先暫時把「display:none」就會比較明瞭囉</p>
-
-<h3>IE9以下不支援CSS3怎麼辦呢？</h3>
-
-<p>不用擔心，這種做法有個好處就是向下兼容，就算沒有支援CSS3，頂多就是恢復到以前原生的樣式，並不會影響使用者喔！</p>
-
-<p><img src="https://lh4.googleusercontent.com/-Uyji0CjOhRU/UKX61r2rp9I/AAAAAAAAB7g/2rQS4EpXUBI/s171/VASV.jpg" /></p>
-
-<p>參考資料:</p>
-
-<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-easy-css3-checkboxes-and-radio-buttons/" target="_blank">Quick Tip: Easy CSS3 Checkboxes and Radio Buttons</a></p>
-
-<p><a href="http://www.w3.org/TR/CSS2/selector.html#adjacent-selectors" target="_blank">Selectors</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[CSS] CSS position 觀念筆記心得 - apa</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="css Position 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css Position的心得，搭配幾個簡單易懂的範例，讓大家一起成長 Start 首先，css &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.rx836.tw/blog/css-positioning/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="apa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+<meta property="og:title" content="[CSS] CSS position 觀念筆記心得 - apa" />
+
+<meta property="og:description" content="css Position 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css Position的心得，搭配幾個簡單易懂的範例，讓大家一起成長 Start 首先，css &hellip;" />
+
+<meta property="og:url" content="http://blog.rx836.tw/blog/css-positioning/" />  
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">apa</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.rx836.tw" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[CSS] CSS Position 觀念筆記心得</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-22T11:30:00+08:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>css Position</strong> 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css Position的心得，搭配幾個簡單易懂的範例，讓大家一起成長</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>首先，css position 屬性共有四個值，分別為 <strong>static</strong>、<strong>relative</strong>、<strong>absolute</strong>、<strong>fixed</strong>，其中，當你沒有設定position時，預設為static，下面就來介紹這四個值的差別</p>
+
+<h3>static</h3>
+
+<p>就如剛剛所提到的，static是預設值，意思是說，就算你沒宣告position這個屬性，默認還是為static，而通常這時候會影響到元素的位置，就是看它本身是 <strong>block</strong> 或是 <strong>inline</strong>，例如兩個&lt;div&gt;因為是block的關係，所以會上下各占據一行，那如果是兩個&lt;span&gt;，因為是inline，所以會在同一行裡面呈現</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+#s1{
+        background: blue;
+    }
+#s2{
+        background: red;
+    }   
+</code></pre>
+
+<p>html</p>
+
+<pre><code>&lt;div id="d1"&gt;
+div1
+&lt;/div&gt;
+&lt;div id="d2"&gt;
+div2
+&lt;/div&gt;
+&lt;span id="s1"&gt;span1&lt;/span&gt;&lt;span id="s2"&gt;span2&lt;/span&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-k8UTysRkMoQ/UNVYRo_fstI/AAAAAAAACGc/4eVneQSvhDg/s214/2012-12-22_120559.jpg" /></p>
+
+<p><img src="https://lh6.googleusercontent.com/-h58i2I7P0Fg/UNVYRt_asJI/AAAAAAAACGk/BkPXYijQpG0/s99/2012-12-22_120617.jpg" /></p>
+
+<p>特別注意的是，static並不會受 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些屬性值影響</p>
+
+<h3>relative</h3>
+
+<p>假如元素的position屬性值設為relative，就會受到 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些值影響所在位置，利用剛剛的範例，我們增加position屬性值和一些位移看看結果</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p>我們在id為d1的&lt;div&gt;裡面加上了 <strong>position: relative</strong> 和 <strong>top:20px</strong> 還有 <strong>left:20px</strong>，會看到下面如圖的結果</p>
+
+<p><img src="https://lh5.googleusercontent.com/-brly4x9g8ck/UNVYRm2M0kI/AAAAAAAACGg/MZagmsZ8e4U/s201/2012-12-22_121717.jpg" /></p>
+
+<p>藍色的div從<strong>原本的位置</strong>往右下角位移了，從原始位置的左上角為起點，遠離左邊(left)20px的差距，遠離上面(top)也是20px的差距，但還是保留<strong>原本位置的空間</strong>，注意我這邊特別註明是原本的位置，因為這會跟等下介紹的 <strong>absolute</strong> 有所不同，那有些人或許會有疑問，可以用 <strong>margin</strong> 取代嗎？我們來實驗一下</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-mWSgkOP_EZ4/UNVYSFL7X9I/AAAAAAAACGs/jU3lCto1jGM/s217/2012-12-22_122152.jpg" /></p>
+
+<p>有明顯的發現，利用屬性margin做位移，會<strong>影響到其它的元素位置</strong>，這是要特別注意小心的地方，不可不慎</p>
+
+<h3>absolute</h3>
+
+<p><strong>absolute</strong> 跟relative很像，差別在於位移時是從哪個起始點開始算起，剛剛的relative是從原本的位置開始算，而absolute是從<strong>整個頁面的視窗</strong>開始算起，並且並不會保留它原本的<strong>空間</strong>，範例如下</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: absolute;;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-gGhHTnjvx2M/UNVYSRKJwcI/AAAAAAAACGo/bqLVeZYOBok/s128/2012-12-22_123254.jpg" /></p>
+
+<p>有發現藍色的&lt;div&gt;完全無視其它的元素存在，也不會干擾到其它的元素，因為它的原始空間也消失了，自己獨立起來自成一格，看起來還蠻容易了解的，不過有一個地方是初學者很容易混淆的，就是當relative和absolute一起使用時，那情形就會跟我們設想的不太一樣，範例如下</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: absolute;;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+
+#d3{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: solid 1px orange;
+}
+</code></pre>
+
+<p>html</p>
+
+<pre><code>&lt;div id="d3"&gt;
+    &lt;div id="d1"&gt;
+    div1
+    &lt;/div&gt;
+    &lt;div id="d2"&gt;
+    div2
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>這裡多用一個id為d3的&lt;div&gt;包住兩個&lt;div&gt;，d3的position屬性值為relative，此時會看到藍色的&lt;div&gt;屬性值position雖然一樣是absolute，但會看到位移不太一樣了</p>
+
+<p><img src="https://lh6.googleusercontent.com/-pxPW5Q1Kocc/UNVYSScFsqI/AAAAAAAACGw/quewGWodrDc/s330/2012-12-22_124729.jpg" /></p>
+
+<p>會發現藍色的&lt;div&gt;是*從id為d3的&lt;div&gt;左上角開始定位，這代表是說，如果屬性值為absolute的&lt;div&gt;，上面還有被其它元素包住，就要注意位移計算的起始值會有所不同，那如果將relative移除的話呢?</p>
+
+<p><img src="https://lh5.googleusercontent.com/-L0jg9uoCRoI/UNVYS-iDosI/AAAAAAAACG8/_2MhBfq6cA0/s326/2012-12-22_124746.jpg" /></p>
+
+<p>嗯！定位又從頁面視窗的左上角當作起始點囉，如果覺得範例感覺不到效果，可以將top和left的值加大，會更明顯</p>
+
+<h3>fixed</h3>
+
+<p>最後講到的是fixed，它常被用於在Menu bar，位置也是受到 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些值影響，跟absolute類似，但有兩個不一樣的地方</p>
+
+<p>1.它的位移起始的依據永遠都是<strong>視窗頁面</strong>，也就是說就算它有relative的父元素，並不會受到影響</p>
+
+<p>2.它會跟著scroll移動，也就是說當畫面被往下拉時，該元素會跟隨著移到相對的位置</p>
+
+<p>基於以上兩點的特色，我們就可以做出永遠固定在視窗某個地方的元素</p>
+
+<p><img src="https://lh3.googleusercontent.com/-S6zIGb8HXio/UNVYTBy6PLI/AAAAAAAACHA/y94BoXH5TO8/s1075/2012-12-22_143751.jpg" /></p>
+
+<p>像是 <a href="http://pinterest.com/" target="_blank">pinterest</a> 就有用到類似的效果，不過記得要搭配 <strong> z-index</strong> 來做元素堆疊</p>
+
+<h2>結論</h2>
+
+<p>其實網路上有很多很好的文章在討論關於css position的用法和觀念，也有很多很漂亮的排版，但只要掌握好基本觀念，我相信對於那些複雜的layout也可以輕鬆的理解</p>
+
+<p>另外除了上面討論的四個屬性值以外，CSS3其實還有新增另外兩個，分別叫做 <a href="http://www.w3.org/TR/css3-positioning/#center-positioning" target="_blank">position: center</a> 和 <a href="http://www.w3.org/TR/css3-positioning/#page-positioning" target="_blank">position: page</a>，不過因為非主流且各瀏覽器支援程度很低，有興趣的人在自行研究即可</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://blog.teamtreehouse.com/css-positioning?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_34&utm_medium=web" target="_blank">CSS Positioning: A Comprehensive Look</a></p>
+
+<p><a href="http://www.barelyfitz.com/screencast/html-training/css/positioning/" target="_blank">Learn CSS Positioning in Ten Steps(10個步驟學習CSS Position)</a></p>
+
+<p><a href="http://css.1keydata.com/tw/position.php" target="_blank">CSS Position 位置</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>	
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-22T11:30:00+08:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/css/'>CSS</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/jquery-tags-manager/" title="Previous Post: [jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager">&laquo; [jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://blog.rx836.tw/blog/css-positioning/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (12)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (2)</a></li><li><a href='/blog/categories/javascript'>JavaScript (7)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (11)</a></li><li><a href='/blog/categories/jquery'>jQuery (19)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (6)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (8)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/css-positioning/">[CSS] CSS position 觀念筆記心得</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-tags-manager/">[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/javascript-documentframent/">[JavaScript] DocumentFragments-JS加快效能的好物</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-ajax-loader/">[jQuery] 自製jQuery Ajax Loader</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/5-html5-api-you-did-not-know/">[HTML5] 5個你可能不知道的HTML5 API</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/css-positioning/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/css-positioning/';
+        var disqus_url = 'http://blog.rx836.tw/blog/css-positioning/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=416172151763823";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

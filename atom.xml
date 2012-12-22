@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-20T12:35:45+08:00</updated>
+  <updated>2012-12-22T15:04:12+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,207 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] CSS position 觀念筆記心得]]></title>
+    <link href="http://blog.rx836.tw/blog/css-positioning/"/>
+    <updated>2012-12-22T11:30:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css-positioning</id>
+    <content type="html"><![CDATA[<p><strong>css Position</strong> 對於初學者來說觀念很容易混淆，我在剛學習時也很常搞不清楚relative和absolute之間的關係，但只要抓到幾個訣竅重點，其實可以很輕鬆的掌握它，這篇是紀錄我自己學習css Position的心得，搭配幾個簡單易懂的範例，讓大家一起成長</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>首先，css position 屬性共有四個值，分別為 <strong>static</strong>、<strong>relative</strong>、<strong>absolute</strong>、<strong>fixed</strong>，其中，當你沒有設定position時，預設為static，下面就來介紹這四個值的差別</p>
+
+<h3>static</h3>
+
+<p>就如剛剛所提到的，static是預設值，意思是說，就算你沒宣告position這個屬性，默認還是為static，而通常這時候會影響到元素的位置，就是看它本身是 <strong>block</strong> 或是 <strong>inline</strong>，例如兩個&lt;div&gt;因為是block的關係，所以會上下各占據一行，那如果是兩個&lt;span&gt;，因為是inline，所以會在同一行裡面呈現</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+#s1{
+        background: blue;
+    }
+#s2{
+        background: red;
+    }   
+</code></pre>
+
+<p>html</p>
+
+<pre><code>&lt;div id="d1"&gt;
+div1
+&lt;/div&gt;
+&lt;div id="d2"&gt;
+div2
+&lt;/div&gt;
+&lt;span id="s1"&gt;span1&lt;/span&gt;&lt;span id="s2"&gt;span2&lt;/span&gt;
+</code></pre>
+
+<p><img src="https://lh6.googleusercontent.com/-k8UTysRkMoQ/UNVYRo_fstI/AAAAAAAACGc/4eVneQSvhDg/s214/2012-12-22_120559.jpg" /></p>
+
+<p><img src="https://lh6.googleusercontent.com/-h58i2I7P0Fg/UNVYRt_asJI/AAAAAAAACGk/BkPXYijQpG0/s99/2012-12-22_120617.jpg" /></p>
+
+<p>特別注意的是，static並不會受 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些屬性值影響</p>
+
+<h3>relative</h3>
+
+<p>假如元素的position屬性值設為relative，就會受到 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些值影響所在位置，利用剛剛的範例，我們增加position屬性值和一些位移看看結果</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p>我們在id為d1的&lt;div&gt;裡面加上了 <strong>position: relative</strong> 和 <strong>top:20px</strong> 還有 <strong>left:20px</strong>，會看到下面如圖的結果</p>
+
+<p><img src="https://lh5.googleusercontent.com/-brly4x9g8ck/UNVYRm2M0kI/AAAAAAAACGg/MZagmsZ8e4U/s201/2012-12-22_121717.jpg" /></p>
+
+<p>藍色的div從<strong>原本的位置</strong>往右下角位移了，從原始位置的左上角為起點，遠離左邊(left)20px的差距，遠離上面(top)也是20px的差距，但還是保留<strong>原本位置的空間</strong>，注意我這邊特別註明是原本的位置，因為這會跟等下介紹的 <strong>absolute</strong> 有所不同，那有些人或許會有疑問，可以用 <strong>margin</strong> 取代嗎？我們來實驗一下</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-mWSgkOP_EZ4/UNVYSFL7X9I/AAAAAAAACGs/jU3lCto1jGM/s217/2012-12-22_122152.jpg" /></p>
+
+<p>有明顯的發現，利用屬性margin做位移，會<strong>影響到其它的元素位置</strong>，這是要特別注意小心的地方，不可不慎</p>
+
+<h3>absolute</h3>
+
+<p><strong>absolute</strong> 跟relative很像，差別在於位移時是從哪個起始點開始算起，剛剛的relative是從原本的位置開始算，而absolute是從<strong>整個頁面的視窗</strong>開始算起，並且並不會保留它原本的<strong>空間</strong>，範例如下</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: absolute;;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+</code></pre>
+
+<p><img src="https://lh5.googleusercontent.com/-gGhHTnjvx2M/UNVYSRKJwcI/AAAAAAAACGo/bqLVeZYOBok/s128/2012-12-22_123254.jpg" /></p>
+
+<p>有發現藍色的&lt;div&gt;完全無視其它的元素存在，也不會干擾到其它的元素，因為它的原始空間也消失了，自己獨立起來自成一格，看起來還蠻容易了解的，不過有一個地方是初學者很容易混淆的，就是當relative和absolute一起使用時，那情形就會跟我們設想的不太一樣，範例如下</p>
+
+<p>css</p>
+
+<pre><code>#d1{
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: absolute;;
+    top: 20px;
+    left: 20px;
+}
+#d2{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+
+#d3{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: solid 1px orange;
+}
+</code></pre>
+
+<p>html</p>
+
+<pre><code>&lt;div id="d3"&gt;
+    &lt;div id="d1"&gt;
+    div1
+    &lt;/div&gt;
+    &lt;div id="d2"&gt;
+    div2
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>這裡多用一個id為d3的&lt;div&gt;包住兩個&lt;div&gt;，d3的position屬性值為relative，此時會看到藍色的&lt;div&gt;屬性值position雖然一樣是absolute，但會看到位移不太一樣了</p>
+
+<p><img src="https://lh6.googleusercontent.com/-pxPW5Q1Kocc/UNVYSScFsqI/AAAAAAAACGw/quewGWodrDc/s330/2012-12-22_124729.jpg" /></p>
+
+<p>會發現藍色的&lt;div&gt;是*從id為d3的&lt;div&gt;左上角開始定位，這代表是說，如果屬性值為absolute的&lt;div&gt;，上面還有被其它元素包住，就要注意位移計算的起始值會有所不同，那如果將relative移除的話呢?</p>
+
+<p><img src="https://lh5.googleusercontent.com/-L0jg9uoCRoI/UNVYS-iDosI/AAAAAAAACG8/_2MhBfq6cA0/s326/2012-12-22_124746.jpg" /></p>
+
+<p>嗯！定位又從頁面視窗的左上角當作起始點囉，如果覺得範例感覺不到效果，可以將top和left的值加大，會更明顯</p>
+
+<h3>fixed</h3>
+
+<p>最後講到的是fixed，它常被用於在Menu bar，位置也是受到 <strong>top</strong>、<strong>bottom</strong>、<strong>left</strong> 和 <strong>right</strong> 這些值影響，跟absolute類似，但有兩個不一樣的地方</p>
+
+<p>1.它的位移起始的依據永遠都是<strong>視窗頁面</strong>，也就是說就算它有relative的父元素，並不會受到影響</p>
+
+<p>2.它會跟著scroll移動，也就是說當畫面被往下拉時，該元素會跟隨著移到相對的位置</p>
+
+<p>基於以上兩點的特色，我們就可以做出永遠固定在視窗某個地方的元素</p>
+
+<p><img src="https://lh3.googleusercontent.com/-S6zIGb8HXio/UNVYTBy6PLI/AAAAAAAACHA/y94BoXH5TO8/s1075/2012-12-22_143751.jpg" /></p>
+
+<p>像是 <a href="http://pinterest.com/" target="_blank">pinterest</a> 就有用到類似的效果，不過記得要搭配 <strong> z-index</strong> 來做元素堆疊</p>
+
+<h2>結論</h2>
+
+<p>其實網路上有很多很好的文章在討論關於css position的用法和觀念，也有很多很漂亮的排版，但只要掌握好基本觀念，我相信對於那些複雜的layout也可以輕鬆的理解</p>
+
+<p>另外除了上面討論的四個屬性值以外，CSS3其實還有新增另外兩個，分別叫做 <a href="http://www.w3.org/TR/css3-positioning/#center-positioning" target="_blank">position: center</a> 和 <a href="http://www.w3.org/TR/css3-positioning/#page-positioning" target="_blank">position: page</a>，不過因為非主流且各瀏覽器支援程度很低，有興趣的人在自行研究即可</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://blog.teamtreehouse.com/css-positioning?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_34&utm_medium=web" target="_blank">CSS Positioning: A Comprehensive Look</a></p>
+
+<p><a href="http://www.barelyfitz.com/screencast/html-training/css/positioning/" target="_blank">Learn CSS Positioning in Ten Steps(10個步驟學習CSS Position)</a></p>
+
+<p><a href="http://css.1keydata.com/tw/position.php" target="_blank">CSS Position 位置</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager]]></title>
@@ -2490,91 +2691,6 @@ input[type="checkbox"]:checked + label span {
 <p><a href="http://developer.android.com/sdk/win-usb.html#WinUsbDriver" target="_blank">Google USB Driver</a></p>
 
 <p><a href="http://www.ibm.com/developerworks/cn/web/wa-mobappdev1/index.html" target="_blank">第 1 部分: Android 上的 PhoneGap 和 Dojo Mobile</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS] Data URI使用心得筆記]]></title>
-    <link href="http://blog.rx836.tw/blog/data-uri-web-desing/"/>
-    <updated>2012-11-07T16:02:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/data-uri-web-desing</id>
-    <content type="html"><![CDATA[<p>Data URI不算新的技術，但他卻是一個可以節省頻寬，增進網頁載入效率的技巧，今天就來實際記錄一下使用的方式，順便比較一下用src指向URL的差別</p>
-
-<!--more-->
-
-
-<p>Data URI是直接在網頁崁入一段Base64編碼，目前IE8+,Firefox, Safari, Opera, Chrome都能正確顯示圖檔和css設定，以下是Base64編碼崁入在網頁的樣子</p>
-
-<pre><code>&lt;img src="data:image/png;base64,&lt;base64 data goes here&gt;" /&gt;
-</code></pre>
-
-<p>HTML碼中＜base64 data goes here＞就是擺放那一長串的文字編碼，現在就來實際操作一下如何使用</p>
-
-<p>首先你必須要準備一張圖檔，如果不想找可以直接到<a href="http://subtlepatterns.com/" target="_blank">Subtle Patterns</a>下載</p>
-
-<p>接著到<a href="http://www.websemantics.co.uk/online_tools/image_to_data_uri_convertor/" target="_blank">websemantics</a>，點選BROWSE選取要轉換成Base64編碼的圖片，按下CONVERT IMAGE</p>
-
-<p><img src="https://lh4.googleusercontent.com/-PmeBE4o7p7s/UJooOcgjcaI/AAAAAAAAB3o/qgNMNlvaSPA/s476/a.jpg" /></p>
-
-<p>之後將網頁拉到最下方，會看到轉換出來的Base64編碼和CSS</p>
-
-<p><img src="https://lh6.googleusercontent.com/-UTJUZpoyHE4/UJooOR2uuQI/AAAAAAAAB3Y/jqioWsQHsw0/s651/b.jpg" /></p>
-
-<p>接著直接將css複製到網頁上，並且增加另外一段css用src做比較</p>
-
-<pre><code>    div.logo-data  {
-        width: 198px;
-        height: 200px;
-        background-repeat: no-repeat;
-        background-image: url(data:image/png;base64,&lt;base64 data goes here&gt;);
-    }   
-    div.logo-img{
-        width: 198px;
-        height: 200px;
-        background-repeat: no-repeat;
-        background-image: url(nasty_fabric.png);            
-    }
-</code></pre>
-
-<p>注意，＜base64 data goes here＞是要放Base64編碼，但因為實在太長了(這也是等下會提到的缺點之一)，所以我這邊用＜base64 data goes here＞代替</p>
-
-<p>再來是HTML部分，我們先看用src直接指向URL的結果</p>
-
-<pre><code>&lt;div class="logo-img"&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>打開Firebug，看看讀取這個網頁會載入些什麼</p>
-
-<p><img src="https://lh4.googleusercontent.com/-0vnZZFDEAb4/UJooOTvo1eI/AAAAAAAAB3c/k8REjQueAvI/s891/c.jpg" /></p>
-
-<p>會看到載入了一個網頁和一個png圖檔，共70kB</p>
-
-<p>接著用Data URI來看看</p>
-
-<pre><code>&lt;div class="logo-data"&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p><img src="https://lh6.googleusercontent.com/-4uQB0YLPq7U/UJooPPLWN0I/AAAAAAAAB3k/74hpcikj_O0/s894/d.jpg" /></p>
-
-<p>一樣的圖片呈現效果，這裡只載入一個網頁，圖片呢？圖片就如剛剛所說的，用base64編碼方式崁入在網頁裡面，所以網頁稍微大了一點點(因為那一長串的字串關係)，但卻可以減少一個HTTP Request</p>
-
-<p>所以使用Data URI的好處就是不用下載圖檔，也不用占用到HTTP Request</p>
-
-<p>但缺點就是除了一開始提到的IE8以上才支援以外，還有因為是崁入到網頁當中，所以如果是動態網頁內容會變化的話，就無法享受到快取的好處，而且整個HTML和css會看起來比較凌亂(一堆編碼)，再加上工作流程上也必須先將圖片處理過後，才能使用，會增加製作的時間</p>
-
-<h3>總結:</h3>
-
-<p>假如你放棄了IE8以下的瀏覽器，或許可以在一些背景圖和一些小icon做一些Data URI的處理，畢竟減少一些頻寬和HTTP Request也對$$也是不無小補:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/the-what-why-and-how-of-data-uris-in-web-design/" target="_blank">The What, Why and How of Data URIs in Web Design</a></p>
-
-<p><a href="http://blog.darkthread.net/post-2010-11-05-data-uri.aspx" target="_blank">淺嚐Data URI</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
