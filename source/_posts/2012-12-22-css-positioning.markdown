@@ -98,7 +98,7 @@ css
 
 ###absolute
 
-**absolute** 跟relative很像，差別在於位移時是從哪個起始點開始算起，剛剛的relative是從原本的位置開始算，而absolute是從**整個頁面的視窗**開始算起，並且並不會保留它原本的**空間**，範例如下
+**absolute** 跟relative很像，差別在於位移時是從哪個起始點開始算起，剛剛的relative是從原本的位置開始算，而<STRIKE>absolute是從**整個頁面的視窗**開始算起</STRIKE>(感謝網友底下留言補充，這邊應該講從最近一個有 "position: relative" 的 parent node 開始算)，並且並不會保留它原本的**空間**，範例如下
 
 	#d1{
 		width: 100px;
