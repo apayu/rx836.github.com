@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-27T17:40:48+08:00</updated>
+  <updated>2012-12-27T17:51:19+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 關於CSS Cursor]]></title>
+    <link href="http://blog.rx836.tw/blog/css-cursor-rule/"/>
+    <updated>2012-12-27T15:09:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css-cursor-rule</id>
+    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-OVdRqH4Q_sA/UNwXOft01eI/AAAAAAAACH4/Kg-eysHdgc8/s461/2012-12-27_152249.jpg" /></p>
+
+<p>在提到CSS Cursor之前，要先說一下我跟CSS Cursor的第一次的認識，在我剛出社會時，做活動網站，常常會使用&lt;div&gt;來當作button來使用，有一天，PM跑過來跟我說，要把那個按鈕的鼠標從箭頭改成指頭，我才了解到鼠標對User的影響</p>
+
+<!--more-->
+
+
+<h2>Cursor</h2>
+
+<p>先來簡單的介紹鼠標的作用，鼠標其實就是輔助你讓你知道現在可以做些甚麼事情，例如當你將滑鼠移到視窗邊緣時，會出現可以<strong>縮放的標誌</strong>，又或是將鼠標移到文字框時，會出現類似「工」型的圖案，意思是你可以在這邊輸入文字</p>
+
+<p><img src="https://lh5.googleusercontent.com/-RdOW3VCBij4/UNwXOavbpLI/AAAAAAAACH8/JaDJMEYNyzM/s600/cursor_inputs.png" /></p>
+
+<p>這在不管是系統的應用程式上，或是網頁瀏覽時，都是很常看到的輔助標誌，但我們今天主要講的是網頁瀏覽時的鼠標應用，在CSS裡面，如果要更改預設的鼠標，語法會是這樣寫</p>
+
+<pre><code>div{
+    cursor:move;
+}
+</code></pre>
+
+<p><strong>cursor</strong> 是屬性名稱，而 <strong>move</strong> 是屬性值，當然，屬性值不只有move可以使用，更多的屬性值可以參考下面那個網站，也是我本人相當推薦的參考網站</p>
+
+<p><a href="http://webdesigntutsplus.s3.amazonaws.com/tuts/405_cursors/table/table.html" target="_blank">CSS Cursor Values Across Browsers and Platforms</a></p>
+
+<p>看過上面那個網站，會發現到，除了瀏覽器的不同以外，就連User所使用的系統不同，也會有不同的結果</p>
+
+<p>那假如不想使用上面那些預設的圖案呢？我有沒有辦法使用自訂的鼠標？答案是有的，語法如下</p>
+
+<pre><code>div{
+    cursor: url('cursor.png'), default;
+}
+</code></pre>
+
+<p>它跟 <strong>font-family</strong> 一樣，都需要有備用的鼠標，假如第一個鼠標不存在或不支援時，還能使用其它鼠標</p>
+
+<p>也可以加上自訂圖案的位移座標</p>
+
+<pre><code>cursor: url('cursor.png') 10 5, default;
+</code></pre>
+
+<p>分別代表x和y，用原始鼠標為起點(0,0)，往左位移10px，往上位移5px</p>
+
+<h2>Cross Browser Cursor Rule</h2>
+
+<p>不過要做到跨瀏覽器有幾點要特別注意的是，IE7、8只支援 <strong>.CUR</strong> 的檔案，所以一般我們都會這樣寫</p>
+
+<pre><code>div{
+    cursor: url('/cursors/cursor.png'),
+                url('/cursors/cursor.cur'),
+                default;
+}       
+</code></pre>
+
+<p>讓非IE的瀏覽器使用第一個.png圖檔，假如是IE就使用.cur圖檔，都無法讀取時就使用default</p>
+
+<p>特別注意的是，假如你的cursor圖檔與css檔是放在不同資料夾的話，IE的CSS Cursor<strong>並不支援相對路徑</strong>，只支援<strong>相對根路徑</strong>或是<strong>絕對路徑</strong>，所以像下面的寫法IE是不支援的</p>
+
+<pre><code>cursor: url(../cursors/cursor.cur);
+</code></pre>
+
+<h2>結論</h2>
+
+<p>現在利用移動設備瀏覽網頁的使用程度上越來越高，觸控式的螢幕輸入占了絕大多數，可能會覺得鼠標的影響已經越來越不重要，但不管如何，除非傳統的web網頁消失，不然建議大家還是要照著Progressive Enhancement(漸進式增強)的原則來設計網頁，達到良好的互動式設計</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/everything-you-need-to-know-about-the-css-cursor-rule/?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_34&utm_medium=web" target="_blank">Everything You Need to Know About the CSS Cursor Rule</a></p>
+
+<p><a href="http://abgne.tw/css/css-mouse-cursor.html" target="_blank">男丁格爾-自訂網頁中的滑鼠游標</a></p>
+
+<p><a href="http://hi.baidu.com/guohuihot/item/c88f6af387dcaec2a835a223" target="_blank">IE不支持CSS相对路径的自定义cursor</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CSS] CSS position 觀念筆記心得]]></title>
@@ -881,130 +962,6 @@ header:after {
 <p><a href="http://wyz.67ge.com/css-triangle/" target="_blank">使用纯CSS实现的各种三角，全浏览器兼容</a></p>
 
 <p><a href="http://www.dearoom.com/blog/jquery%E4%B8%AD-heightwidth-innerheightinnerwidth-outerheightouterwidth%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank">jQuery中 height(width) innerHeight(innerWidth) outerHeight(outerWidth)的区别</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4]]></title>
-    <link href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/"/>
-    <updated>2012-11-26T10:21:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/css3-real-beauty-box-shadows</id>
-    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-gnXY1RrRaSU/ULLgp4EX-6I/AAAAAAAAB84/m3JLnkc5h_E/s125/a.jpg" /></p>
-
-<p>CSS3有許多讓人驚艷的地方，其中之一就是「box-shadow」，在這之前為了做出陰影效果，可能需要一些Photoshop的幫助，但在CSS3卻可以用純CSS來達到這樣的結果，但如果你認為「box-shadow」只能拿來做陰影效果的話，那可就誤會大了，看完這篇文章，你或許會有不同的想法</p>
-
-<!--more-->
-
-
-<p>在此之前，我們先來介紹 <strong>box-shadow</strong> 一些基本的屬性和用法</p>
-
-<p><strong>x-offset</strong>: 水平位移植，必須要指定</p>
-
-<p><strong>y-offset</strong>: 垂直位移植，必須要指定</p>
-
-<p><strong>blur</strong>: 模糊效果，不能為負值，預設為0</p>
-
-<p><strong>spread</strong>: 擴散強度，可以為負值(縮小)，預設為0</p>
-
-<p><strong>color</strong>: 顏色，有些網站可能會寫預設值為黑色，<strong>但一般建議還是要給予顏色，因為有些瀏覽器預設值並不一定為黑色(例如手機)</strong></p>
-
-<p><strong>inset</strong>: 這個值有些人是放在<strong>最前面</strong>，有些是放在<strong>最後面</strong>，兩者皆可，如果有給予這個值box就會在陰影裡面，反之則在外面</p>
-
-<p>以下為box-shadow語法</p>
-
-<pre><code>box-shadow: inset x-offset y-offset blur spread color
-</code></pre>
-
-<p>記得x-offset和y-offset為必要值，其它依照排列，如果只有blur可不填spread，但有spread一定要給blur值(可以為0px)</p>
-
-<p>特別注意的是，<strong>spread</strong>這個屬性值，等等會來好好說明，先來看幾個簡單的範例</p>
-
-<p>以下的範例HTML部分都只有這一行</p>
-
-<pre><code>&lt;div class="shadow"&gt;&lt;/div&gt;
-</code></pre>
-
-<h3>X and Y Offsets</h3>
-
-<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="mo08pkqb" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>這邊建立了一個width和height都為100px的box，然後陰影依照這個box往右位移10px，往下位移10px，且顏色為黑色</p>
-
-<h3>Inset</h3>
-
-<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="eesxhanx" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>如果有給予 <strong>inset</strong>，box就會在陰影裡面</p>
-
-<h3>Blur</h3>
-
-<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="vic8fc7f" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>添加 <strong>Blur</strong> 值，會讓陰影有模糊效果</p>
-
-<h3>Colors</h3>
-
-<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="zcpl4thp" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>也可以加些不一樣的顏色，這裡是給予rgba值</p>
-
-<h3>spread</h3>
-
-<p>剛剛有特別要注意到 <strong>spread</strong> 這個值，原因就是他可以擴展陰影的範圍，可以放大可以縮小，但不能改變形狀，因為陰影的形狀是來自box(就跟人的影子一樣)，也就是box是圓形，陰影就是圓形，是方形就是方形</p>
-
-<pre class="_cssdeck_embed" data-pane="output,css,html" data-user="rx836" data-href="qnznlsof" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>如果spread為5px，那陰影就會擴展5px，如果為-5px，那陰影就會縮減5px，也就是說可以依照需求改變陰影的大小，這樣可以幹嘛呢？可以看看下面這個範例</p>
-
-<pre class="_cssdeck_embed" data-pane="output,css,html" data-user="rx836" data-href="qmbxujts" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>看到了嗎？我可以用<strong>一個div就創造出這麼多個box</strong>，也就是說我可以用一個元素來做出很多意想不到的效果，例如</p>
-
-<p>我可以用一個div畫出一支IPHONE 4</p>
-
-<p><a href="http://cssdeck.com/labs/creating-single-element-iphone-using-css3" target="_blank"><img src="https://lh3.googleusercontent.com/-L9BuoRAjjfE/ULLjV_tNNGI/AAAAAAAAB9Y/SSAO9DOdBMU/s558/rr.jpg" /></a></p>
-
-<p>或用一個div畫出蒙娜麗莎的微笑</p>
-
-<p><a href="http://cssdeck.com/labs/mona-lisa-with-pure-css" target="_blank"><img src="https://lh5.googleusercontent.com/-gzi2x2_clBk/ULLjV4zuCnI/AAAAAAAAB9g/Oo9VmXXkF_E/s535/rr1.jpg" /></a></p>
-
-<p>甚至是利用這個原理，來當作畫Pixel圖案來使用</p>
-
-<p><a href="http://cssdeck.com/labs/create-a-pixel-character-using-css3-box-shadows" target="_blank"><img src="https://lh6.googleusercontent.com/-lnfW4QAeeao/ULLjV84Z0oI/AAAAAAAAB9c/1J0e5V0VjS0/s300/rr2.jpg" /></a></p>
-
-<p>所以好好運用box-shadow，他可以發揮許多意想不到的創意喔</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://codetheory.in/the-real-beauty-of-css3-box-shadows/" target="_blank">The Real Beauty of CSS3 Box Shadows</a></p>
-
-<p><a href="http://www.w3schools.com/cssref/css3_pr_box-shadow.asp" target="_blank">CSS3 的box-shadow屬性</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
