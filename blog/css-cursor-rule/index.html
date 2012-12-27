@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying - apa</title>
+  <title>[CSS] 關於CSS Cursor - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化) Curry這個命名是一個來自Haskell Curry的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹， &hellip;">
+  <meta name="description" content="在提到CSS Cursor之前，要先說一下我跟CSS Cursor的第一次的認識，在我剛出社會時，做活動網站，常常會使用&lt;div&gt;來當作button來使用，有一天，PM跑過來跟我說，要把那個按鈕的鼠標從箭頭改成指頭，我才了解到鼠標對User的影響 Cursor &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/javascript-currying/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/css-cursor-rule/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying - apa" />
+<meta property="og:title" content="[CSS] 關於CSS Cursor - apa" />
 
-<meta property="og:description" content="有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化) Curry這個命名是一個來自Haskell Curry的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹， &hellip;" />
+<meta property="og:description" content="在提到CSS Cursor之前，要先說一下我跟CSS Cursor的第一次的認識，在我剛出社會時，做活動網站，常常會使用&lt;div&gt;來當作button來使用，有一天，PM跑過來跟我說，要把那個按鈕的鼠標從箭頭改成指頭，我才了解到鼠標對User的影響 Cursor &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/javascript-currying/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/css-cursor-rule/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[JavaScript] 如何保留重複參數的函式，不必每次傳遞-Currying</h1>
+      <h1 class="entry-title">[CSS] 關於CSS Cursor</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-10-18T00:01:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+<time datetime="2012-12-27T15:09:00+08:00" pubdate data-updated="true">Dec 27<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,139 +113,69 @@
   </header>
 
 
-<div class="entry-content"><p>有時候我們呼叫某個函式，傳入的參數大多數都是一樣，那我們就可以嘗試保留那些重複的參數，而這個過程就是Currying(Curry化)</p>
+<div class="entry-content"><p><img src="https://lh5.googleusercontent.com/-OVdRqH4Q_sA/UNwXOft01eI/AAAAAAAACH4/Kg-eysHdgc8/s461/2012-12-27_152249.jpg" /></p>
+
+<p>在提到CSS Cursor之前，要先說一下我跟CSS Cursor的第一次的認識，在我剛出社會時，做活動網站，常常會使用&lt;div&gt;來當作button來使用，有一天，PM跑過來跟我說，要把那個按鈕的鼠標從箭頭改成指頭，我才了解到鼠標對User的影響</p>
 
 <!--more-->
 
 
-<p>Curry這個命名是一個來自<a href="http://en.wikipedia.org/wiki/Haskell_Curry" target="_blank">Haskell Curry</a>的數學家的名字所命名，Currying是一種轉換過程，至於該怎麼轉換，後面會跟著介紹，我們先來看看以下這段程式碼</p>
+<h2>Cursor</h2>
 
-<pre><code>function m(x, y){
-    return x * y;
-}
+<p>先來簡單的介紹鼠標的作用，鼠標其實就是輔助你讓你知道現在可以做些甚麼事情，例如當你將滑鼠移到視窗邊緣時，會出現可以<strong>縮放的標誌</strong>，又或是將鼠標移到文字框時，會出現類似「工」型的圖案，意思是你可以在這邊輸入文字</p>
+
+<p><img src="https://lh5.googleusercontent.com/-RdOW3VCBij4/UNwXOavbpLI/AAAAAAAACH8/JaDJMEYNyzM/s600/cursor_inputs.png" /></p>
+
+<p>這在不管是系統的應用程式上，或是網頁瀏覽時，都很常看到的輔助標誌，但我們今天主要講的是網頁瀏覽時的鼠標應用，在CSS裡面，如果要更改預設的鼠標，語法會是這樣寫</p>
+
+<pre><code>cursor:move;
 </code></pre>
 
-<p>這是一段很普通的函式，傳入參數x和y以後做相乘，並且將結果回傳，可是假如有一個情況是，x參數是固定的，y值是動態的，那我們每次呼叫會怎麼做呢？</p>
+<p><strong>cursor</strong> 是屬性名稱，而 <strong>move</strong> 是屬性值，當然，屬性值不只有move可以使用，更多的屬性值可以參考下面那個網站</p>
 
-<pre><code>m(2,1);
-m(2,2);
-m(2,3);
-m(2,4);
-...
+<p><a href="http://webdesigntutsplus.s3.amazonaws.com/tuts/405_cursors/table/table.html" target="_blank">CSS Cursor Values Across Browsers and Platforms</a></p>
+
+<p>會發現到，除了瀏覽器的不同以外，就連User所使用的系統不同，也會有不同的結果</p>
+
+<p>那假如不想使用上面那些預設的圖案呢？我有沒有辦法使用自訂的鼠標？答案是有的，語法如下</p>
+
+<pre><code>cursor: url('cursor.png'), move;
 </code></pre>
 
-<p>這樣看起來雖然不太好，但尚且還可以接受，但如果函式的參數不止兩個呢？</p>
+<p>它跟 <strong>font-family</strong> 一樣，都需要有備用的指標，假如第一個指標不存在或不支援時，還能使用其它指標</p>
 
-<pre><code>function m(x, y, z, p, k, l){
-    return x * y * z * p * k * l;
-}
+<p>也可以加上自訂圖案的位移座標</p>
+
+<pre><code>cursor: url('cursor.png') 10 5, move;
 </code></pre>
 
-<p>然後呼叫的時候，只有l參數變動，其他參數每次都固定&#8230;</p>
+<p>分別代表x和y，用原始鼠標為起點(0,0)，往左位移10px，往上位移5px</p>
 
-<pre><code>m(2,3,4,5,6,1);
-m(2,3,4,5,6,2);
-m(2,3,4,5,6,3);
-m(2,3,4,5,6,4);
-...
+<h2>Cross Browser Cursor Rule</h2>
+
+<p>不過要做到跨瀏覽器有幾點要特別注意的是，IE7、8只支援 <strong>.CUR</strong> 的檔案，所以一般我們都會這樣寫</p>
+
+<pre><code>cursor: url('/cursors/cursor.png'),
+            url('/cursors/cursor.cur'),
+            pointer;
 </code></pre>
 
-<p>這時候就會覺得，一定有什麼方法可以更簡化，少打更多的code，這時候就要將函式進行Currying，首先我們要先寫一個泛用的Currying函式</p>
+<p>特別注意的是，假如你的圖檔是放一個資料夾，css檔是放在另外一個資料夾的話，IE的CSS Cursor並不支援相對路徑，只支援<strong>相對根路徑</strong>或是<strong>絕對路徑</strong>，所以像下面的寫法IE是不支援的</p>
 
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
+<pre><code>cursor: url(../cursors/cursor.cur);
 </code></pre>
 
-<p>然後接著寫</p>
+<h2>結論</h2>
 
-<pre><code>function m(x, y){
-    return x * y;
-}
+<p>不過現在利用移動設備瀏覽網頁的使用上越來越高，觸控式的螢幕輸入占了絕大多數，可能會覺得鼠標的影響已經越來越不重要，但不管如何，除非傳統的web網頁消失，不然還是建議大家還是要照著Progressive Enhancement(漸進式增強)的原則來設計網頁，達到良好的互動式設計</p>
 
-var new_m = currying(m, 5)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
+<h3>參考資料:</h3>
 
-<p>這樣y值不管傳什麼，x值一樣都保持固定的5，程式有點複雜，現在我們就來看看吧，首先來看看變數slice和stored_args分別是什麼</p>
+<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/everything-you-need-to-know-about-the-css-cursor-rule/?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_34&utm_medium=web" target="_blank">Everything You Need to Know About the CSS Cursor Rule</a></p>
 
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    console.log(slice); //function slice() { [native code] }        
-    console.log(stored_args); // [5]        
-}
+<p><a href="http://abgne.tw/css/css-mouse-cursor.html" target="_blank">男丁格爾-自訂網頁中的滑鼠游標</a></p>
 
-function m(x, y){
-    return x * y;
-}
-
-currying(m, 5);​
-</code></pre>
-
-<p>我們可以看到，變數slice存放<a href="http://www.w3school.com.cn/js/jsref_slice_string.asp" target="_blank">slice()</a>方法，因為我們想要將傳進來的參數轉換成陣列，並且將第一個參數去掉(這裡指的第一個參數就是m())，所以最後只剩下一個5的陣列</p>
-
-<pre><code>console.log(stored_args); // [5]
-</code></pre>
-
-<p>接著後面會return一個函式，函式將會重複的參數存在裡面，等於回傳一個新的函式讓User使用，從console.log可以看到變數new_args和args</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        console.log(new_args);//[4] 
-        console.log(args);//[5, 4] 
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y){
-    return x * y;
-}
-
-var new_m = currying(m, 5);
-new_m(4)
-</code></pre>
-
-<p>​
-回傳的函式會放在變數new_m，而這個函式到底在做些甚麼呢？其實就是將新得到的參數(也就是從new_m(4)傳進來的那個4)取出，接著利用concat將新參數和舊參數合在一起，再將合在一起後的參數([5, 4])丟進當初m()這個函式裡面，達成原本要相乘的任務，這樣當函式的參數一多，重複性高時，就可以做優化，例如就如同類似之前提到的y、z、k皆為重覆值，x值為動態</p>
-
-<pre><code>function currying(fn){
-    var slice = Array.prototype.slice,
-        stored_args = slice.call(arguments, 1);
-    return function(){
-        var new_args = slice.call(arguments),
-            args = stored_args.concat(new_args);
-        return fn.apply(null, args);
-    };
-}
-
-function m(x, y, z, k){
-    return x * y * z * k;
-}
-
-var new_m = currying(m, 5, 6, 7)​;
-new_m(4);
-new_m(5);
-new_m(6);
-</code></pre>
-
-<p>重複的事情被取代了，這樣程式碼是不是看起來優化了呢？</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010538538" target="_blank">JavaScript 設計模式</a></p>
+<p><a href="http://hi.baidu.com/guohuihot/item/c88f6af387dcaec2a835a223" target="_blank">IE不支持CSS相对路径的自定义cursor</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 </div>
@@ -281,23 +211,15 @@ new_m(6);
   
 
 
-<time datetime="2012-10-18T00:01:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2012</time>
+<time datetime="2012-12-27T15:09:00+08:00" pubdate data-updated="true">Dec 27<span>th</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
-  
-</span>
 
 
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/phonegap-first/" title="Previous Post: [PhoneGap] 第一次開發PhoneGap教學筆記">&laquo; [PhoneGap] 第一次開發PhoneGap教學筆記</a>
+        <a class="basic-alignment left" href="/blog/css-positioning/" title="Previous Post: [CSS] CSS position 觀念筆記心得">&laquo; [CSS] CSS position 觀念筆記心得</a>
       
-      
-        <a class="basic-alignment right" href="/blog/css3-transitions-guide/" title="Next Post: [CSS3] 認識CSS3 transitions">[CSS3] 認識CSS3 transitions &raquo;</a>
       
     </p>
   </footer>
@@ -315,7 +237,7 @@ new_m(6);
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/javascript-currying/" 
+	data-href="http://blog.rx836.tw/blog/css-cursor-rule/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -382,9 +304,9 @@ new_m(6);
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-currying/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-currying/';
-        var disqus_url = 'http://blog.rx836.tw/blog/javascript-currying/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/css-cursor-rule/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/css-cursor-rule/';
+        var disqus_url = 'http://blog.rx836.tw/blog/css-cursor-rule/';
         var disqus_script = 'embed.js';
       
     (function () {

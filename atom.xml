@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2012-12-24T17:41:02+08:00</updated>
+  <updated>2012-12-27T17:40:48+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 關於CSS Cursor]]></title>
+    <link href="http://blog.rx836.tw/blog/css-cursor-rule/"/>
+    <updated>2012-12-27T15:09:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css-cursor-rule</id>
+    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-OVdRqH4Q_sA/UNwXOft01eI/AAAAAAAACH4/Kg-eysHdgc8/s461/2012-12-27_152249.jpg" /></p>
+
+<p>在提到CSS Cursor之前，要先說一下我跟CSS Cursor的第一次的認識，在我剛出社會時，做活動網站，常常會使用&lt;div&gt;來當作button來使用，有一天，PM跑過來跟我說，要把那個按鈕的鼠標從箭頭改成指頭，我才了解到鼠標對User的影響</p>
+
+<!--more-->
+
+
+<h2>Cursor</h2>
+
+<p>先來簡單的介紹鼠標的作用，鼠標其實就是輔助你讓你知道現在可以做些甚麼事情，例如當你將滑鼠移到視窗邊緣時，會出現可以<strong>縮放的標誌</strong>，又或是將鼠標移到文字框時，會出現類似「工」型的圖案，意思是你可以在這邊輸入文字</p>
+
+<p><img src="https://lh5.googleusercontent.com/-RdOW3VCBij4/UNwXOavbpLI/AAAAAAAACH8/JaDJMEYNyzM/s600/cursor_inputs.png" /></p>
+
+<p>這在不管是系統的應用程式上，或是網頁瀏覽時，都很常看到的輔助標誌，但我們今天主要講的是網頁瀏覽時的鼠標應用，在CSS裡面，如果要更改預設的鼠標，語法會是這樣寫</p>
+
+<pre><code>cursor:move;
+</code></pre>
+
+<p><strong>cursor</strong> 是屬性名稱，而 <strong>move</strong> 是屬性值，當然，屬性值不只有move可以使用，更多的屬性值可以參考下面那個網站</p>
+
+<p><a href="http://webdesigntutsplus.s3.amazonaws.com/tuts/405_cursors/table/table.html" target="_blank">CSS Cursor Values Across Browsers and Platforms</a></p>
+
+<p>會發現到，除了瀏覽器的不同以外，就連User所使用的系統不同，也會有不同的結果</p>
+
+<p>那假如不想使用上面那些預設的圖案呢？我有沒有辦法使用自訂的鼠標？答案是有的，語法如下</p>
+
+<pre><code>cursor: url('cursor.png'), move;
+</code></pre>
+
+<p>它跟 <strong>font-family</strong> 一樣，都需要有備用的指標，假如第一個指標不存在或不支援時，還能使用其它指標</p>
+
+<p>也可以加上自訂圖案的位移座標</p>
+
+<pre><code>cursor: url('cursor.png') 10 5, move;
+</code></pre>
+
+<p>分別代表x和y，用原始鼠標為起點(0,0)，往左位移10px，往上位移5px</p>
+
+<h2>Cross Browser Cursor Rule</h2>
+
+<p>不過要做到跨瀏覽器有幾點要特別注意的是，IE7、8只支援 <strong>.CUR</strong> 的檔案，所以一般我們都會這樣寫</p>
+
+<pre><code>cursor: url('/cursors/cursor.png'),
+            url('/cursors/cursor.cur'),
+            pointer;
+</code></pre>
+
+<p>特別注意的是，假如你的圖檔是放一個資料夾，css檔是放在另外一個資料夾的話，IE的CSS Cursor並不支援相對路徑，只支援<strong>相對根路徑</strong>或是<strong>絕對路徑</strong>，所以像下面的寫法IE是不支援的</p>
+
+<pre><code>cursor: url(../cursors/cursor.cur);
+</code></pre>
+
+<h2>結論</h2>
+
+<p>不過現在利用移動設備瀏覽網頁的使用上越來越高，觸控式的螢幕輸入占了絕大多數，可能會覺得鼠標的影響已經越來越不重要，但不管如何，除非傳統的web網頁消失，不然還是建議大家還是要照著Progressive Enhancement(漸進式增強)的原則來設計網頁，達到良好的互動式設計</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/everything-you-need-to-know-about-the-css-cursor-rule/?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_34&utm_medium=web" target="_blank">Everything You Need to Know About the CSS Cursor Rule</a></p>
+
+<p><a href="http://abgne.tw/css/css-mouse-cursor.html" target="_blank">男丁格爾-自訂網頁中的滑鼠游標</a></p>
+
+<p><a href="http://hi.baidu.com/guohuihot/item/c88f6af387dcaec2a835a223" target="_blank">IE不支持CSS相对路径的自定义cursor</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CSS] CSS position 觀念筆記心得]]></title>
@@ -2614,83 +2687,6 @@ input[type="checkbox"]:checked + label span {
 <p><a href="http://wangshifuola.blogspot.tw/2011/06/androidfacebook-sdkpart1.html" target="_blank">Android學習_使用facebook sdk_Part1準備</a></p>
 
 <p><a href="http://wangshifuola.blogspot.tw/2011/06/androidgoogle-map-api-key.html" target="_blank">Android學習_如何申請Google Map API Key(實機用)</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[PhoneGap] 如何搭配平板或手機開發Android]]></title>
-    <link href="http://blog.rx836.tw/blog/android-phonegap-usb-develop/"/>
-    <updated>2012-11-09T14:32:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/android-phonegap-usb-develop</id>
-    <content type="html"><![CDATA[<p>繼好幾天前開始了<a href="http://blog.rx836.tw/blog/phonegap-first/" target="_blank">第一次的PhoneGap之旅</a>，漸漸的開始慢慢熟悉運作模式，有一直寫下去果然還是有差，當然一路上也一直碰到牆壁和踩到地雷(渾身傷..)，這篇就來記錄怎麼用實機做開發測試，往後也會多寫幾篇關於PhoneGap開發心得文章出來奉獻</p>
-
-<!--more-->
-
-
-<p>雖然之前的文章有提到Android模擬器，但其實每次要把Android模擬器啟動起來還是很不方便，因為總是要等一段時間</p>
-
-<p><img src="https://lh6.googleusercontent.com/-mBxqTZDV0AI/UJy7d2-dqXI/AAAAAAAAB4Y/hRTlohLYjm4/s630/a1.jpg" /></p>
-
-<p>但如果手邊有Android實機的話(不管是平板還是手機)，都可以用下面的方法來做開發測試(可能會因為改版關係略有不同)</p>
-
-<h3>1.找找之前下載的Android SDK</h3>
-
-<p>相信之前在開發Android的時候，會先下載Android SDK，找找那個SDK，裡面的資料會長的像這樣</p>
-
-<p><img src="https://lh5.googleusercontent.com/-ny6p8foNJJQ/UJy7dTQ4C5I/AAAAAAAAB4Q/1rL70M7D2-Y/s232/a2.jpg" /></p>
-
-<h3>2.開啟Eclipse</h3>
-
-<p>找到Android SDK以後，打開Eclipse，選擇「Window」->「Android SDK Manager」</p>
-
-<p><img src="https://lh3.googleusercontent.com/-F24YqktQKuE/UJy7d6jaMCI/AAAAAAAAB4c/5UL63BEf9Zs/s601/a3.jpg" /></p>
-
-<h3>3.安裝「Google USB Driver」</h3>
-
-<p>拉到下面的「Extras」底下有個「Google USB Driver」，勾選並且點選右下角的「install packages&#8230;」，注意，因為我是已經安裝過所以才會變淺色，還沒安裝可以進行點選安裝</p>
-
-<p><img src="https://lh4.googleusercontent.com/-7zkUd652OBw/UJy7eZ6Q1cI/AAAAAAAAB4g/WcSKd8rR0sc/s703/a4.jpg" /></p>
-
-<h3>4.開啟設備上的USB測試功能</h3>
-
-<p>安裝好後接著關閉Eclipse，在來這個步驟，會因為每個人設備不同而稍微有異，舉Nexus 7為例，在「設定」->「開發人員選項」，進去後點右上角的開啟，還有把「USB偵錯模式」勾選起來，其他設備大同小異，接著用USB跟電腦接上，這時電腦會出現安裝驅動程式，先不用管他</p>
-
-<h3>5.安裝你的硬體驅動程式</h3>
-
-<p>接上USB後打開「控制台」->「系統及安全性」->「系統」->「裝置管理員」，會看到可攜式裝置那邊，會有你的設備名稱，並且顯示驚嘆號，在設備上點選右鍵，選擇「更新驅動程式軟體」，接著選擇「瀏覽電腦上的驅動程式軟體」，還記得剛剛安裝的Google USB Driver嗎？位置沒變動會在 Android SDK\extras\google\usb_driver，接著電腦就會自動安裝設備囉~</p>
-
-<h3>6.令人期待的一刻！</h3>
-
-<p>來到最後一個步驟囉，打開Eclipse，編輯AndroidManifest.xml，將以下程式加入到＜application＞這個Tag裡面</p>
-
-<pre><code>android:debuggable="true"
-</code></pre>
-
-<p>接著在上面的選單列選擇「Run」->「Run Configurations」，做一些簡單的設定，選擇頁籤「Target」並且點選「Always prompt to pick device」，最主要是因為這樣每次在Run的時候都可以先選擇設備</p>
-
-<p><img src="https://lh5.googleusercontent.com/-I0yrNYdm1RY/UJy7e8giz5I/AAAAAAAAB40/Hdkv8Ncs-2s/s702/a5.jpg" /></p>
-
-<p>設定好後，點選「Run As」->「Android Application」，如果點選Run As沒有出現Android Application代表你沒有選到專案(看左邊那個紅框)，這也是我一直撞牆的地方&#8230;</p>
-
-<p><img src="https://lh3.googleusercontent.com/-nG-rVob0H0k/UJy7fECMaCI/AAAAAAAAB4w/q1Yp2Is_jQg/s1027/a6.jpg" /></p>
-
-<p>看到你的設備了嗎？別懷疑！直接點選OK開啟吧！</p>
-
-<p><img src="https://lh5.googleusercontent.com/-gHQrLAMHp_0/UJy7ff6GWmI/AAAAAAAAB4s/ZKxtK4zOfLI/s708/a7.jpg" /></p>
-
-<p>有看到你的手機上顯示畫面出來了嗎？！</p>
-
-<p>有的話就恭喜你！成功囉~，一起加入開發Android吧！</p>
-
-<p>假如不幸失敗的話&#8230;，請歡迎留言給我，一起討論(因為你的問題也可能是我的問題..)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://developer.android.com/sdk/win-usb.html#WinUsbDriver" target="_blank">Google USB Driver</a></p>
-
-<p><a href="http://www.ibm.com/developerworks/cn/web/wa-mobappdev1/index.html" target="_blank">第 1 部分: Android 上的 PhoneGap 和 Dojo Mobile</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
