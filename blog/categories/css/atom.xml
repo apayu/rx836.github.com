@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-04T14:57:30+08:00</updated>
+  <updated>2013-01-04T15:09:10+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[[CSS] 用CSS改變scrollbar的樣式]]></title>
+    <title type="html"><![CDATA[[CSS] 用CSS改變scrollbar]]></title>
     <link href="http://blog.rx836.tw/blog/css-styling-scrollbars/"/>
     <updated>2013-01-04T11:03:00+08:00</updated>
     <id>http://blog.rx836.tw/blog/css-styling-scrollbars</id>
@@ -61,7 +61,7 @@
 }
 </code></pre>
 
-<p>css部份我們替div設置了 width 和 height，目的是為了讓內容限制一個範圍，那當超出範圍的部份，我們就設置了另一個屬性 overflow:scroll，告訴瀏覽器做 scrollbar 的處理，所以設置完的顯示結果如下</p>
+<p>CSS部份我們替&lt;div&gt;設置了 width 和 height，目的是為了讓內容限制一個範圍，那當超出範圍的部份，我們就設置了另一個屬性 <strong>overflow:scroll</strong>，告訴瀏覽器做 scrollbar 的處理，所以設置完的顯示結果如下</p>
 
 <p><img src="https://lh4.googleusercontent.com/-yinWVlS8WjI/UOZ8yc9bwmI/AAAAAAAACIs/axfVRTRAXK0/s418/2013-01-04_115358.jpg" /></p>
 
@@ -90,13 +90,13 @@
 
 <p><img src="https://lh4.googleusercontent.com/-GjRmeALubYA/UOZ8yfCuvaI/AAAAAAAACIw/XuFAQAPU8AM/s419/2013-01-04_122330.jpg" /></p>
 
-<p>很醜，但為了讓大家知道每個屬性的效果，所以特地用顏色做區別，還把寬度設為50px，但現實的專案中千萬別這樣做，還是要像前面所說的，符合整體的網站UI設計才行</p>
+<p>很醜，但為了讓大家知道每個屬性的效果，所以特地用顏色做區別，還把寬度設為50px，但現實的專案中千萬別這樣做，還是要像前面所說的，要符合整體的網站UI設計才行</p>
 
 <p>不過以上的寫法只適用於 Webkit browsers</p>
 
 <h2>IE呢？</h2>
 
-<p>其實沒查可能還不知道，IE是第一個支援用css來改變 scrollbar 樣式的瀏覽器，早在IE5.5就可以實做，不過僅限於顏色的改變</p>
+<p>其實沒查可能還不知道，IE是第一個支援用CSS來改變 scrollbar 樣式的瀏覽器，早在IE5.5就可以實做，不過僅限於顏色的改變</p>
 
 <p>用我們剛剛的範例當例子，我們可以這樣寫</p>
 
@@ -111,7 +111,7 @@
 
 <h2>jScrollPane</h2>
 
-<p>不過只有 Webkit 的瀏覽器還有IE的寫法，那Firefox怎麼辦呢？有沒有比較方便的方法可以適用於大多數的瀏覽器，其實是有的，可以嘗試 <a href="http://jscrollpane.kelvinluck.com/" target="_blank">jScrollPane</a> 這個jQuery plugin</p>
+<p>剛剛只談到 Webkit 的瀏覽器還有IE的寫法，那Firefox怎麼辦呢？有沒有比較方便的方法可以適用於大多數的瀏覽器，其實是有的，可以嘗試 <a href="http://jscrollpane.kelvinluck.com/" target="_blank">jScrollPane</a> 這個jQuery plugin</p>
 
 <p>基本的使用方式如下，在網頁裡面載入jQuery和jquery.jscrollpane.min.js還有jquery.jscrollpane.css</p>
 
@@ -151,7 +151,7 @@
 
 <p><img src="https://lh4.googleusercontent.com/-UNhAOrBS60U/UOZ80MiprjI/AAAAAAAACJM/ClXt8YzMY-Q/s420/2013-01-04_144723.jpg" /></p>
 
-<p>原來 jScrollPane 是用&lt;div&bt;做出假的 scrollbar，至於位移的效果就是改變CSS屬性top的值</p>
+<p>原來 jScrollPane 是用&lt;div&gt;做出假的 scrollbar，至於位移的效果就是改變CSS屬性top的值</p>
 
 <h2>結論</h2>
 
