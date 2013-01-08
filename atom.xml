@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-08T14:46:10+08:00</updated>
+  <updated>2013-01-08T14:51:32+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -107,7 +107,7 @@
 
 <p>getWidthFrom: 選擇一個元素做為參考值設定為固定寬度</p>
 
-<h2>結論</h2>
+<h2>想要自己實做的話..</h2>
 
 <p>如果試著去看 source code 的話，會發現實做並不困難，主要就是計算 <strong>scrollTop()</strong> 目前的位置，如果大於某個值就觸發事件，將要固定的元素添加 position:fixed，接著在看要距離上方多少空間就設定多少 top 值，主要的判斷程式碼部分如下，有興趣的人可以再自行參考</p>
 
