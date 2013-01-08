@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-04T15:12:20+08:00</updated>
+  <updated>2013-01-08T14:36:37+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 跟著Pinterest將menu固定起來 - Sticky]]></title>
+    <link href="http://blog.rx836.tw/blog/sticky-object/"/>
+    <updated>2013-01-08T11:11:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/sticky-object</id>
+    <content type="html"><![CDATA[<p>pinterest的網站設計影響了許多人，之前也曾經寫過實做的文章 - <a href="http://blog.rx836.tw/blog/jquery-waterfall-infinitescroll/" target="_blank">做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll</a>，但其實在這種被稱為 Waterfall 的網頁設計底下，還有許多小技巧和應用</p>
+
+<!--more-->
+
+
+<p>其中一個就是將上方的 menu 固定在整個視窗的某個地方，因為像這種無限延伸的設計，不知道整個網頁會長到多長，在User瀏覽網頁時，如果想要中途切換其他頁面，沒有將 menu 固定在視窗的某個區塊，會發現拉回最上方非常的不方便，所以一般來說都會設計成跟著頁面做移動，如下圖</p>
+
+<p>一開始menu固定在上方的某個區塊</p>
+
+<p><img src="https://lh3.googleusercontent.com/-QU3DxU6ccVg/UOu9t-bGOmI/AAAAAAAACKY/y8rQuxSivyA/s671/2013-01-08_114010.jpg" /></p>
+
+<p>當頁面往下拉時，會跟著移動</p>
+
+<p><img src="https://lh5.googleusercontent.com/-A57qEkc8I7s/UOu9tzDm2FI/AAAAAAAACKc/ALiiUe-IdrQ/s589/2013-01-08_114044.jpg" /></p>
+
+<p>要實現這樣的設計並不困難，今天就來介紹一款方便的jQuery plugin - Sticky</p>
+
+<h2>Start</h2>
+
+<p>首先先從github下載js檔回來</p>
+
+<p><a href="https://github.com/garand/sticky" target="_blank"></a></p>
+
+<p>裡面有個檔名為jquery.sticky.js，將他載入到網頁裡面</p>
+
+<p>接著html部份</p>
+
+<pre><code>&lt;p&gt;上方元素&lt;/p&gt;
+&lt;div id="sticker"&gt;
+    &lt;p&gt;我是menu&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;下方元素&lt;/p&gt;
+</code></pre>
+
+<p>id為 sticker 的&lt;div&gt;就是要被固定在上方的元素，為了方便demo，可以給他一些css樣式</p>
+
+<pre><code>body {
+  height: 10000px;
+  padding: 0;
+  margin: 0;
+}
+
+#sticker {
+  background: #bada55;
+  color: white;
+  width: 300px;
+  font-family: Droid Sans;
+  font-size: 40px;
+  line-height: 1.6em;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  border-radius: 50px;
+}
+</code></pre>
+
+<p>而 body 的 height 為1000px是為了等會網頁可以一直往下拉</p>
+
+<p>接著是js部份</p>
+
+<pre><code>$("#sticker").sticky({ topSpacing: 0, center:true, className:"hey" });
+</code></pre>
+
+<p>接下來看展示部份</p>
+
+<p>捲動網頁前</p>
+
+<p><img src="https://lh3.googleusercontent.com/-xma-MsT9Zww/UOu9t_QwQGI/AAAAAAAACKU/cdJD0qMOFNM/s1023/2013-01-08_124326.jpg" /></p>
+
+<p>捲動網頁後</p>
+
+<p><img src="https://lh4.googleusercontent.com/-NJLAKGJfXP0/UOu9u6udgXI/AAAAAAAACKg/VISQuhKeefM/s1003/2013-01-08_124342.jpg" /></p>
+
+<p>會發現 &#8220;我是menu&#8221; 這個區塊會一直固定在網頁上方，達到我們想要的效果</p>
+
+<h2>參數部份</h2>
+
+<p>topSpacing: 元素與頁面頂端有多少固定距離</p>
+
+<p>bottomSpacing: 元素與頁面底端有多少固定距離</p>
+
+<p>className: 當觸發事件時增加的 CSS class, 預設是is-sticky</p>
+
+<p>wrapperClassName: 自訂 wrapper CSS class, 預設是sticky-wrapper</p>
+
+<p>getWidthFrom: 選擇一個元素做為參考值設定為固定寬度</p>
+
+<h2>結論</h2>
+
+<p>如果試著去看 source code 的話，會發現實做並不困難，主要就是計算 scrollTop() 目前的位置，如果大於某個值就觸發事件，將要固定的元素添加 position:fixed，接著在看要距離上方多少空間就設定多少 top 值，主要的判斷程式碼部分如下，可以參考</p>
+
+<pre><code>if (scrollTop &lt;= etse) {
+  if (s.currentTop !== null) {
+    s.stickyElement
+      .css('position', '')
+      .css('top', '');
+    s.stickyElement.parent().removeClass(s.className);
+    s.currentTop = null;
+  }
+}
+else {
+  var newTop = documentHeight - s.stickyElement.outerHeight()
+    - s.topSpacing - s.bottomSpacing - scrollTop - extra;
+  if (newTop &lt; 0) {
+    newTop = newTop + s.topSpacing;
+  } else {
+    newTop = s.topSpacing;
+  }
+  if (s.currentTop != newTop) {
+    s.stickyElement
+      .css('position', 'fixed')
+      .css('top', newTop);
+
+    if (typeof s.getWidthFrom !== 'undefined') {
+      s.stickyElement.css('width', $(s.getWidthFrom).width());
+    }
+
+    s.stickyElement.parent().addClass(s.className);
+    s.currentTop = newTop;
+  }
+}
+</code></pre>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://stickyjs.com/" target="_blank">Sticky</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CSS] 用CSS改變scrollbar]]></title>
@@ -2661,131 +2799,6 @@ input[type="checkbox"]:checked + label span {
 <p><a href="http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-easy-css3-checkboxes-and-radio-buttons/" target="_blank">Quick Tip: Easy CSS3 Checkboxes and Radio Buttons</a></p>
 
 <p><a href="http://www.w3.org/TR/CSS2/selector.html#adjacent-selectors" target="_blank">Selectors</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS] 用inline-block做產品展示頁並且擁有RWD效果]]></title>
-    <link href="http://blog.rx836.tw/blog/inline-block-display-product-grid-view/"/>
-    <updated>2012-11-14T14:09:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/inline-block-display-product-grid-view</id>
-    <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-CMJtAWKTc9c/UKNLl-e4eMI/AAAAAAAAB6c/lFZ01h2vX2k/s975/inline-block-screenshot-1.png" /></p>
-
-<p>相信大家對於這樣的排版並不陌生，這是一個產品的展示頁，文章參考<a href="https://twitter.com/randyhoyt" target="_blank">Randy Hoyt</a>教你如何用inline-block來做設計排版，內容簡單易懂</p>
-
-<!--more-->
-
-
-<p>首先先來認識一下「inline」、「block」、「inline-block」</p>
-
-<h3>display : inline</h3>
-
-<p>像&lt;img&gt;、&lt;span&gt;、&lt;a&gt;預設的display屬性是inline，在網頁上呈現時並不會換行，且不能設定「width」、 「height」 、 「background-image」</p>
-
-<h3>display : block</h3>
-
-<p>像&lt;div&gt;、&lt;p&gt;、&lt;h1&gt;預設的display屬性是block，只要碰到這類元素不管前後都會換行，且預設寬度為最大，但可以設定「width」、 「height」 、 「background-image」等值</p>
-
-<h3>display : inline-block</h3>
-
-<p>從字面上可以很清楚的知道，可以同時擁有inline不會換行的特性，還可以像block一樣設定「width」、 「height」 、 「background-image」等值</p>
-
-<p>OK，接下來在寫HTML之前先用小畫家做一張尺寸為200*300的圖當作產品圖</p>
-
-<p><img src="https://lh4.googleusercontent.com/-_1vY5kEq_nY/UKNMlBPDb4I/AAAAAAAAB6w/0KCoHR7sGUU/s300/a.jpg" /></p>
-
-<p>接著是HTML部分</p>
-
-<pre><code>&lt;ul class="products"&gt;
-    &lt;li&gt;
-        &lt;a href="#"&gt;
-            &lt;img src="a.jpg"&gt;
-            &lt;h4&gt;內衣&lt;/h4&gt;
-            &lt;p&gt;$200.00&lt;/p&gt;
-        &lt;/a&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-        &lt;a href="#"&gt;
-            &lt;img src="a.jpg"&gt;
-            &lt;h4&gt;冬天超級無敵霹靂保暖的阿爾卑斯山羊毛羽絨超薄大衣&lt;/h4&gt;
-            &lt;p&gt;$2.00&lt;/p&gt;
-        &lt;/a&gt;
-    &lt;/li&gt;&lt;!-- more list items --&gt;
-&lt;/ul&gt;
-</code></pre>
-
-<p>CSS部分</p>
-
-<pre><code>ul.products li {
-    width: 200px;
-    display: inline-block;
-}
-</code></pre>
-
-<p>呈現如下</p>
-
-<p><img src="https://lh3.googleusercontent.com/-9nRQw7JS9cU/UKNLk9c2M2I/AAAAAAAAB6I/duH5hR67EQI/s530/c1.jpg" /></p>
-
-<p>會發現好像有點不太對齊，可以使用「vertical-align」CSS屬性</p>
-
-<pre><code>ul.products li {
-    width: 200px;
-    display: inline-block;
-    vertical-align: top;
-}
-</code></pre>
-
-<p><img src="https://lh5.googleusercontent.com/-ak-BlgPF5_o/UKNLk16TvvI/AAAAAAAAB6M/LvJzebhF70o/s533/c2.jpg" /></p>
-
-<p>這樣就可以垂直靠上，不過這裡有個問題，會發現明明我沒設定margin或是padding的屬性，為啥中間會有留白，難道有預設值？其實不是，是因為剛剛在HTML的部分中間留白的關係，也就是說如果在HTML碼部分，在兩個inline-block元素之間有空白的話，會被<strong>顯示出來</strong>，所以為了避免這樣的情形發生，可以改成這樣</p>
-
-<pre><code>&lt;ul class="products"&gt;
-    &lt;li&gt;
-        &lt;a href="#"&gt;
-            &lt;img src="a.jpg"&gt;
-            &lt;h4&gt;內衣&lt;/h4&gt;
-            &lt;p&gt;$200.00&lt;/p&gt;
-        &lt;/a&gt;
-    &lt;/li&gt;&lt;li&gt;
-        &lt;a href="#"&gt;
-            &lt;img src="a.jpg"&gt;
-            &lt;h4&gt;冬天超級無敵霹靂保暖的阿爾卑斯山羊毛羽絨超薄大衣&lt;/h4&gt;
-            &lt;p&gt;$2.00&lt;/p&gt;
-        &lt;/a&gt;
-    &lt;/li&gt;&lt;!-- more list items --&gt;
-&lt;/ul&gt;
-</code></pre>
-
-<p>呈現如下</p>
-
-<p><img src="https://lh3.googleusercontent.com/-A1Un01aXcu4/UKNLlJcCU-I/AAAAAAAAB6Q/hwInTSC84nw/s535/c3.jpg" /></p>
-
-<h2>Responsive</h2>
-
-<p>這樣的寫法還有個好處，就是他擁有最近很火紅的RWD(Responsive Web Design)效果，會依照畫面尺寸大小進行換行</p>
-
-<p><img src="https://lh5.googleusercontent.com/-sUEPvofcsWQ/UKNLl8K_OSI/AAAAAAAAB6g/82TRXLL6RyA/s845/c4.jpg" /></p>
-
-<p>但世界並不會這麼完美&#8230;，每件事情總是會有缺點，這種寫法在大部分的瀏覽器上都可以執行，但IE6和IE7上面會有一些問題，所以如果想要支援較舊的瀏覽器，可以用Hack來解決</p>
-
-<pre><code>ul.products li {
-    width: 200px;
-    display: inline-block;
-    vertical-align: top;
-    *display: inline;
-    *zoom: 1;
-}
-</code></pre>
-
-<p>文章裡面還有提到為什麼不用Float來排版，作者說當高度一致的時候用Float是沒有問題，可是當每個項目高度不一樣的時候，就會出現<strong>重疊</strong>的狀況發生</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://blog.teamtreehouse.com/using-inline-block-to-display-a-product-grid-view" target="_blank">Using inline-block to Display a Product Grid View</a></p>
-
-<p><a href="http://blog.xuite.net/vexed/tech/29221717-CSS+%E5%B1%AC%E6%80%A7+display+%E7%9A%84%E5%80%BC+inline+block+inline-block+none" target="_blank">CSS 屬性 display 的值 inline block inline-block none</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-04T15:12:20+08:00</updated>
+  <updated>2013-01-08T14:36:37+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 跟著Pinterest將menu固定起來 - Sticky]]></title>
+    <link href="http://blog.rx836.tw/blog/sticky-object/"/>
+    <updated>2013-01-08T11:11:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/sticky-object</id>
+    <content type="html"><![CDATA[<p>pinterest的網站設計影響了許多人，之前也曾經寫過實做的文章 - <a href="http://blog.rx836.tw/blog/jquery-waterfall-infinitescroll/" target="_blank">做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll</a>，但其實在這種被稱為 Waterfall 的網頁設計底下，還有許多小技巧和應用</p>
+
+<!--more-->
+
+
+<p>其中一個就是將上方的 menu 固定在整個視窗的某個地方，因為像這種無限延伸的設計，不知道整個網頁會長到多長，在User瀏覽網頁時，如果想要中途切換其他頁面，沒有將 menu 固定在視窗的某個區塊，會發現拉回最上方非常的不方便，所以一般來說都會設計成跟著頁面做移動，如下圖</p>
+
+<p>一開始menu固定在上方的某個區塊</p>
+
+<p><img src="https://lh3.googleusercontent.com/-QU3DxU6ccVg/UOu9t-bGOmI/AAAAAAAACKY/y8rQuxSivyA/s671/2013-01-08_114010.jpg" /></p>
+
+<p>當頁面往下拉時，會跟著移動</p>
+
+<p><img src="https://lh5.googleusercontent.com/-A57qEkc8I7s/UOu9tzDm2FI/AAAAAAAACKc/ALiiUe-IdrQ/s589/2013-01-08_114044.jpg" /></p>
+
+<p>要實現這樣的設計並不困難，今天就來介紹一款方便的jQuery plugin - Sticky</p>
+
+<h2>Start</h2>
+
+<p>首先先從github下載js檔回來</p>
+
+<p><a href="https://github.com/garand/sticky" target="_blank"></a></p>
+
+<p>裡面有個檔名為jquery.sticky.js，將他載入到網頁裡面</p>
+
+<p>接著html部份</p>
+
+<pre><code>&lt;p&gt;上方元素&lt;/p&gt;
+&lt;div id="sticker"&gt;
+    &lt;p&gt;我是menu&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;下方元素&lt;/p&gt;
+</code></pre>
+
+<p>id為 sticker 的&lt;div&gt;就是要被固定在上方的元素，為了方便demo，可以給他一些css樣式</p>
+
+<pre><code>body {
+  height: 10000px;
+  padding: 0;
+  margin: 0;
+}
+
+#sticker {
+  background: #bada55;
+  color: white;
+  width: 300px;
+  font-family: Droid Sans;
+  font-size: 40px;
+  line-height: 1.6em;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  border-radius: 50px;
+}
+</code></pre>
+
+<p>而 body 的 height 為1000px是為了等會網頁可以一直往下拉</p>
+
+<p>接著是js部份</p>
+
+<pre><code>$("#sticker").sticky({ topSpacing: 0, center:true, className:"hey" });
+</code></pre>
+
+<p>接下來看展示部份</p>
+
+<p>捲動網頁前</p>
+
+<p><img src="https://lh3.googleusercontent.com/-xma-MsT9Zww/UOu9t_QwQGI/AAAAAAAACKU/cdJD0qMOFNM/s1023/2013-01-08_124326.jpg" /></p>
+
+<p>捲動網頁後</p>
+
+<p><img src="https://lh4.googleusercontent.com/-NJLAKGJfXP0/UOu9u6udgXI/AAAAAAAACKg/VISQuhKeefM/s1003/2013-01-08_124342.jpg" /></p>
+
+<p>會發現 "我是menu" 這個區塊會一直固定在網頁上方，達到我們想要的效果</p>
+
+<h2>參數部份</h2>
+
+<p>topSpacing: 元素與頁面頂端有多少固定距離</p>
+
+<p>bottomSpacing: 元素與頁面底端有多少固定距離</p>
+
+<p>className: 當觸發事件時增加的 CSS class, 預設是is-sticky</p>
+
+<p>wrapperClassName: 自訂 wrapper CSS class, 預設是sticky-wrapper</p>
+
+<p>getWidthFrom: 選擇一個元素做為參考值設定為固定寬度</p>
+
+<h2>結論</h2>
+
+<p>如果試著去看 source code 的話，會發現實做並不困難，主要就是計算 scrollTop() 目前的位置，如果大於某個值就觸發事件，將要固定的元素添加 position:fixed，接著在看要距離上方多少空間就設定多少 top 值，主要的判斷程式碼部分如下，可以參考</p>
+
+<pre><code>if (scrollTop &lt;= etse) {
+  if (s.currentTop !== null) {
+    s.stickyElement
+      .css('position', '')
+      .css('top', '');
+    s.stickyElement.parent().removeClass(s.className);
+    s.currentTop = null;
+  }
+}
+else {
+  var newTop = documentHeight - s.stickyElement.outerHeight()
+    - s.topSpacing - s.bottomSpacing - scrollTop - extra;
+  if (newTop &lt; 0) {
+    newTop = newTop + s.topSpacing;
+  } else {
+    newTop = s.topSpacing;
+  }
+  if (s.currentTop != newTop) {
+    s.stickyElement
+      .css('position', 'fixed')
+      .css('top', newTop);
+
+    if (typeof s.getWidthFrom !== 'undefined') {
+      s.stickyElement.css('width', $(s.getWidthFrom).width());
+    }
+
+    s.stickyElement.parent().addClass(s.className);
+    s.currentTop = newTop;
+  }
+}
+</code></pre>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://stickyjs.com/" target="_blank">Sticky</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager]]></title>
@@ -449,156 +587,6 @@ $('#email').on('blur', function() {
 <p><a href="http://kicksend.com/join" target="_blank">Demo</a></p>
 
 <p><a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target="_blank">How we decreased sign up confirmation email bounces by 50%</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] Accordion Menu(手風琴)-Kwicks]]></title>
-    <link href="http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks/"/>
-    <updated>2012-11-20T11:52:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks</id>
-    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-_J-W2xu9kk0/UKssWB_LsAI/AAAAAAAAB8I/l5FDpuCO27c/s415/t1.jpg" /></p>
-
-<p><img src="https://lh5.googleusercontent.com/-jKM2KBpI5eM/UKssWHgRekI/AAAAAAAAB8E/hG205WtoTDU/s415/t2.jpg" /></p>
-
-<p>「jQuery accordion menu」，也有人稱呼為手風琴，從上面兩張圖可以看到原本是一個水平的menu，滑鼠移過去指定某個項目，週遭的menu會縮起來，指定的那個項目會展開，因為一開一合的效果很像手風琴，所以才稱呼為「accordion menu」</p>
-
-<!--more-->
-
-
-<p>但這篇不教怎麼自己打造accordion menu，因為自認為功力不夠不敢亂現，網路上也很多那種例如「30種精選jQuery accordion menu」主題的文章，資源非常豐富，但因為實在太多款了，每次要做都還要花時間一個一個去看，所以今天就特別介紹一款叫做 <a href="http://devsmash.com/projects/kwicks" target="_blank">「Kwicks」</a> 的jQuery plugin，也可以簡單達到前面所說的accordion menu效果，這邊就記錄在我的Blog裡面，方便我或網路上的朋友可以參考</p>
-
-<p>最好的介紹就是直接看Demo最快，Kwicks可以做到 <a href="http://devsmash.com/projects/kwicks/examples/horizontal" target="_blank">Horizontal</a>、<a href="http://devsmash.com/projects/kwicks/examples/vertical" target="_blank">vertical</a>、<a href="http://devsmash.com/projects/kwicks/examples/easing" target="_blank">Custom Easing</a> 等效果</p>
-
-<p>要用Kwicks需下載他的plugin還有jQuery</p>
-
-<p><a href="http://jquery.com/" target="_blank" />jQuery >= 1.7</a></p>
-
-<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.js" target="_blank" />jquery.kwicks.js</a></p>
-
-<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.css" target="_blank" />jquery.kwicks.css</a></p>
-
-<p>要注意的是，這版Kwicks是v2.0.0，需用到jQuery 1.7以上，另外如果要用到Custom Easing，還要另外下載jQuery Easing Plugin</p>
-
-<p><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" />jQuery Easing Plugin</a></p>
-
-<p>接著就是HTML部分，很簡潔不複雜</p>
-
-<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-
-<p>就是用一個&lt;ul&gt;元素包裹著&lt;li&gt;，&lt;li&gt;裡面放著就是項目裡面要擺的東西(例如圖片、文字)，&lt;ul&gt;部分必須要添加「kwicks」和「kwicks-horizontal」兩個class，「kwicks」是固定要添加的class，「kwicks-horizontal」是指水平的呈現方式，如果要垂直就用「kwicks-vertical」</p>
-
-<p>jQuery的寫法部分，有分三種</p>
-
-<pre><code>// instantiate kwicks
-$(element).kwicks(opts);
-
-// invoke a method
-$(element).kwicks('method-name' [, param]);
-
-// handle events
-$(element).on('event-name.kwicks', handler);
-</code></pre>
-
-<p>以下是參數設定</p>
-
-<h3>size:(必填)</h3>
-
-<p>設定項目的長或寬，如果isVertical是true的話，這個設定就是高度，其它情況預設就是寬度，特別注意的是這個值會影響到整個accordion menu多高(或多寬)</p>
-
-<h3>maxSize|minSize:(必填)</h3>
-
-<p>展開的最大寬度(或高度)，或是最小寬度(或高度)，你只能選擇填最大或最小，不能兩個都填</p>
-
-<h3>spacing:(Default: 5)</h3>
-
-<p>每個項目之間的距離，預設是5px</p>
-
-<h3>duration:(Default: 500)</h3>
-
-<pre><code>觸發後動畫執行的時間(毫秒)，預設是500毫秒
-</code></pre>
-
-<h3>isVertical:(Default: false)</h3>
-
-<pre><code>是否為垂直menu，預設是false
-</code></pre>
-
-<p>easing:(Default: none)</p>
-
-<pre><code>如果有載入jQuery Easing Plugin，可以設定效果
-</code></pre>
-
-<p>behavior:(Default: none)</p>
-
-<pre><code>初始化的動作
-</code></pre>
-
-<h3>Examples</h3>
-
-<p>HTML</p>
-
-<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
-    &lt;li id='panel-1'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
-    &lt;li id='panel-2'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
-    &lt;li id='panel-3'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
-    &lt;li id='panel-4'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-
-<p>用&lt;ul&gt;、&lt;li&gt;做一個menu，&lt;ul&gt;加上對應的class，&lt;li&gt;裡面放置圖片或文字</p>
-
-<p>CSS</p>
-
-<pre><code>.kwicks {
-    width: 515px;
-    height: 100px;
-}
-.kwicks &gt; li {
-    width: 100px;
-    height: 100px;
-    /* overridden by kwicks but good for when JavaScript is disabled */
-    margin-left: 5px;
-    float: left;
-}
-
-#panel-1 { background-color: #53b388; }
-#panel-2 { background-color: #5a69a9; }
-#panel-3 { background-color: #c26468; }
-#panel-4 { background-color: #bf7cc7; }
-</code></pre>
-
-<p>注意width和height會影響到顯示的結果</p>
-
-<p>JS</p>
-
-<pre><code>$(function() {
-    $('.kwicks').kwicks({
-        size: 100,
-        maxSize : 250,
-        spacing : 5,
-        behavior: 'menu'
-    });
-});
-</code></pre>
-
-<p>size要特別注意的是，越高(or寬)展開的空間就越大，看到的東西就會越多，如何拿捏可以實際在瀏覽器上跑跑看效果</p>
-
-<p>Kwicks還有支援<strong>Methods</strong>和<strong>events</strong>，有興趣的可以直接參考文件(附參考資料)</p>
-
-<p>當然，網路世界的選擇太多了，不一定非要用這個plugin，如果有更好的推薦也歡迎跟我說:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://devsmash.com/projects/kwicks" target="_blank">Kwicks for jQuery</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
