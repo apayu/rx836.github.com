@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-08T14:36:37+08:00</updated>
+  <updated>2013-01-08T14:46:10+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.rx836.tw/blog/sticky-object/"/>
     <updated>2013-01-08T11:11:00+08:00</updated>
     <id>http://blog.rx836.tw/blog/sticky-object</id>
-    <content type="html"><![CDATA[<p>pinterest的網站設計影響了許多人，之前也曾經寫過實做的文章 - <a href="http://blog.rx836.tw/blog/jquery-waterfall-infinitescroll/" target="_blank">做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll</a>，但其實在這種被稱為 Waterfall 的網頁設計底下，還有許多小技巧和應用</p>
+    <content type="html"><![CDATA[<p>pinterest的網站設計影響了許多人，之前也曾經寫過實做的文章 - <a href="http://blog.rx836.tw/blog/jquery-waterfall-infinitescroll/" target="_blank">做出Pinterest效果的介面 用jQuery Masonry + Infinite Scroll</a>，但其實在這種被稱為 Waterfall 的網頁設計底下，還有許多小技巧和應用需要學習</p>
 
 <!--more-->
 
@@ -39,7 +39,7 @@
 
 <p>首先先從github下載js檔回來</p>
 
-<p><a href="https://github.com/garand/sticky" target="_blank"></a></p>
+<p><a href="https://github.com/garand/sticky" target="_blank">DOWNLOAD PLUGIN</a></p>
 
 <p>裡面有個檔名為jquery.sticky.js，將他載入到網頁裡面</p>
 
@@ -76,14 +76,14 @@
 }
 </code></pre>
 
-<p>而 body 的 height 為1000px是為了等會網頁可以一直往下拉</p>
+<p>這邊注意到 body 的 height 為1000px是為了讓網頁可以一直往下拉</p>
 
 <p>接著是js部份</p>
 
 <pre><code>$("#sticker").sticky({ topSpacing: 0, center:true, className:"hey" });
 </code></pre>
 
-<p>接下來看展示部份</p>
+<p>最後來看展示結果</p>
 
 <p>捲動網頁前</p>
 
@@ -93,7 +93,7 @@
 
 <p><img src="https://lh4.googleusercontent.com/-NJLAKGJfXP0/UOu9u6udgXI/AAAAAAAACKg/VISQuhKeefM/s1003/2013-01-08_124342.jpg" /></p>
 
-<p>會發現 "我是menu" 這個區塊會一直固定在網頁上方，達到我們想要的效果</p>
+<p>會發現 "我是menu" 這個區塊會一直固定在網頁上方，達到我們想要的效果，如果圖片說明不清，建議還是實做 Demo 比較清楚XD</p>
 
 <h2>參數部份</h2>
 
@@ -109,7 +109,7 @@
 
 <h2>結論</h2>
 
-<p>如果試著去看 source code 的話，會發現實做並不困難，主要就是計算 scrollTop() 目前的位置，如果大於某個值就觸發事件，將要固定的元素添加 position:fixed，接著在看要距離上方多少空間就設定多少 top 值，主要的判斷程式碼部分如下，可以參考</p>
+<p>如果試著去看 source code 的話，會發現實做並不困難，主要就是計算 <strong>scrollTop()</strong> 目前的位置，如果大於某個值就觸發事件，將要固定的元素添加 position:fixed，接著在看要距離上方多少空間就設定多少 top 值，主要的判斷程式碼部分如下，有興趣的人可以再自行參考</p>
 
 <pre><code>if (scrollTop &lt;= etse) {
   if (s.currentTop !== null) {
