@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[JavaScript] 當函式需要傳遞很多參數時 - apa</title>
+  <title>apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230; 不過，有個方法可以解決這個困擾，就是設定值物件，平常我們使用函式可能會這樣寫 function add( &hellip;">
+  <meta name="description" content="終於&#8230; 在拼命的鬼打牆之下，我終於架好Octopress，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/javascript-simple-object/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/page/8/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[JavaScript] 當函式需要傳遞很多參數時 - apa" />
+<meta property="og:title" content="apa" />
 
-<meta property="og:description" content="有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230; 不過，有個方法可以解決這個困擾，就是設定值物件，平常我們使用函式可能會這樣寫 function add( &hellip;" />
+<meta property="og:description" content="終於&#8230; 在拼命的鬼打牆之下，我終於架好Octopress，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄 " />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/javascript-simple-object/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/page/8/" />  
 
   
   <script type="text/javascript">
@@ -83,12 +83,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">[JavaScript] 當函式需要傳遞很多參數時</h1>
+      <h1 class="entry-title"><a href="/blog/first-octopress/">[Octopress]出生以來第一次使用Octopress for Windows</a></h1>
     
     
       <p class="meta">
@@ -104,124 +107,38 @@
   
 
 
-<time datetime="2012-09-25T00:06:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2012</time>
+<time datetime="2012-04-27T01:55:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2012</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/blog/first-octopress/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230;</p>
+  <div class="entry-content"><p>終於&#8230;</p>
 
-<!--more-->
+<p>在拼命的鬼打牆之下，我終於架好<a href="http://octopress.org/" target="_blank">Octopress</a>，之前原本就想用過Blogger想要當作工作上的筆記來用，久而久之除了介面不好用再加上懶惰的情況下，沒多久就放棄了，接下來換到點部落，剛好遇到他們貼程式碼的BUG，在等他們修復的情況下，我的耐心也隨著時間而流逝放棄</p>
 
-
-<p>不過，有個方法可以解決這個困擾，就是<strong>設定值物件</strong>，平常我們使用函式可能會這樣寫</p>
-
-<pre><code>function add(parameter1, parameter2, parameter3, parameter4, parameter5) {...}
-</code></pre>
-
-<p>可是參數一堆真的會又臭又長，還要注意先後順序，但如果改成這樣寫</p>
-
-<pre><code>var conf = {
-    parameter1: "a",
-    parameter2: "b",
-    parameter3: "c"
-}
-
-add(conf)
-</code></pre>
-
-<p>將參數全部包成一個物件，再傳給函式，不僅可以不用記住先後順序，還可以安全的略過選用參數，也更容易閱讀和維護，當然新增和移除也比較方便</p>
-
-<p>不過缺點就是要特別去知道參數的名稱，而且物件的屬性名稱並無法做最小化處理</p>
-
-<p>不過當你要設定一堆CSS樣式的時候，或是個人資料很多很繁雜的時候，這個方法倒是很好用的:)</p>
-
-<p>參考資料:</p>
-
-<p>JavaScript 設計模式</p>
-
-<p>如有錯誤，歡迎指正</p>
 </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/first-octopress/">more&#8230;</a>
+    </footer>
+  
 
 
-	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>	
+    </article>
+  
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/7/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
-      
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-25T00:06:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
-  
-</span>
-
-
-    </p>
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2-vmware-windows-8/" title="Previous Post: [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]">&laquo; [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/design-thinking/" title="Next Post: [學習筆記] 透過實體活動來學習《設計與思考》">[學習筆記] 透過實體活動來學習《設計與思考》 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-
-  <section>
-    <h1>FB Comments</h1>
-    <div id="facebook_comments" aria-live="polite">
-      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
-<div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/javascript-simple-object/" 
-	data-num-posts="5" 
-	data-width="570">
-</div>
-
-    </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -263,7 +180,6 @@ add(conf)
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -278,11 +194,7 @@ add(conf)
       var disqus_shortname = 'rx836';
       
         
-        // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-simple-object/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-simple-object/';
-        var disqus_url = 'http://blog.rx836.tw/blog/javascript-simple-object/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
