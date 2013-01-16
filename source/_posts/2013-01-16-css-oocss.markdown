@@ -1,0 +1,114 @@
+---
+layout: post
+title: "[CSS] 認識OOCSS"
+date: 2013-01-16 16:15
+comments: true
+categories: 
+---
+
+最近在一些國外文章常看到『OOCSS』，另外也在 <a href="http://www.webconf.tw/" target="_blank">WebConf Taiwan 2013</a> 聽到許多講者分享中提到，所以藉此花了一些時間來認識一下OOCSS，並且紀錄在這裡供大家參考參考
+
+<!--more-->
+
+OOCSS其實就是 Object Oriented CSS，照字面來看就是物件導向的CSS，『物件導向』我想對於程式開發人員來說並不陌生，許多程式語言都有存在這個概念，但對於設計師來說可能就會覺得很陌生，不過要我來解釋的話可能會解釋的不清楚，因為自己都學的不好了...XD，所以決定把wiki大神搬出來給大家參考
+
+<a href="http://zh.wikipedia.org/wiki/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91" target="_blank">關於物件導向程式設計(OOP)</a>
+
+為了怕設計師們直接把這篇文章關掉，我還是要自己解釋一下，其實重點在於"重用"這件事上面，他並不是一個新的語言或是框架，而就只是一個撰寫CSS的方法，讓CSS可以減少代碼，達到優化效能的作用
+
+##OOCSS的兩大原則
+
+###Separate structure and skin
+
+結構(Structure)和樣式(skin)的分離，我們可以嘗試著將共用的屬性部分拉出來獨立一個類別(class)，例如原本的CSS可能長這樣
+
+	#button{
+		width:250px;
+		height:100px;
+		border: solid 2px #ccc;
+		background: red;
+	}
+	
+	#box{
+		width:400x;
+		height:200px;
+		border: solid 2px #ccc;
+		background: red;
+	}
+
+我們發現 button 和 box 都有共同的 border 和 background，所以將它獨立拉出來
+
+	.button{
+		width:250px;
+		height:100px;
+	}
+	
+	.box{
+		width:400x;
+		height:200px;		
+	}
+	
+	.skin{
+		border: solid 2px #ccc;
+		background: red;
+	}
+	
+將所有的元素都用類別(class)設計，重複出現的樣式就獨立到 skin 的類別，這樣就可以減少CSS的代碼，還可以使CSS更加靈活，另外不要直接在例如&lt;img&gt;這樣的tag上直接加樣式
+
+###Separate container and content
+
+將容器(container)和內容(content)分離的好處是，可以把內容放在任何容器裡面都可以，而不會被擺放的位置給拘束，例如像下面的例子
+
+HTML部份
+
+	<div class="head">
+		<p>
+			內容內容內容
+		</p>
+	</div>
+	<div class="foot">
+		<p>
+			內容內容內容
+		</p>
+	</div>
+	
+css部份
+
+	.head p {css code}
+	.foot p {css code}
+
+不過 OOCSS 不建議這麼做，他希望的是建立更多的類別獨立出來
+
+	.head {css code}
+	.foot {css code}
+	.mydata {css code}
+	
+這樣就可以直接在html上添加這些類別
+
+	<div class="head">
+		<p class="mydata">
+			內容內容內容
+		</p>
+	</div>
+	<div class="foot">
+		<p class="mydata">
+			內容內容內容
+		</p>
+	</div>
+	
+另外一樣將把重複的獨立出來，將樣式模組化，這樣不僅不會被局限在某個位置底下(剛剛的 .head p )，也可以達到CSS重複使用
+
+##結論
+
+我想這不是甚麼新的觀念，或許有人已經使用自己可能都不知道，OOCSS的優點就是讓網站效能變好(減少程式碼)，而且易於維護(模組化)，但缺點在撰寫之前需要花點時間規劃模組化，對於小型網站來說成本可能比較高，對於大型網站的優勢反而比較明顯
+
+另外也可以參考這個 <a href="https://github.com/stubbornella/oocss" target="_blank">Object Oriented CSS Framework</a> 
+
+###參考資料:
+
+<a href="http://www.w3cplus.com/css/oocss-concept" target="_blank">OOCSS——概念篇</a>
+
+<a href="https://github.com/stubbornella/oocss/wiki" target="_blank">Object Oriented CSS</a>
+
+內容如有錯誤，歡迎指正
+
