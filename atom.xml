@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-09T17:49:58+08:00</updated>
+  <updated>2013-01-16T18:20:58+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 認識OOCSS]]></title>
+    <link href="http://blog.rx836.tw/blog/css-oocss/"/>
+    <updated>2013-01-16T16:15:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css-oocss</id>
+    <content type="html"><![CDATA[<p>最近在一些國外文章常看到『OOCSS』，另外也在 <a href="http://www.webconf.tw/" target="_blank">WebConf Taiwan 2013</a> 聽到許多講者分享中提到，所以藉此花了一些時間來認識一下OOCSS，並且紀錄在這裡供大家參考參考</p>
+
+<!--more-->
+
+
+<p>OOCSS其實就是 Object Oriented CSS，照字面來看就是物件導向的CSS，『物件導向』我想對於程式開發人員來說並不陌生，許多程式語言都有存在這個概念，但對於設計師來說可能就會覺得很陌生，不過要我來解釋的話可能會解釋的不清楚，因為自己都學的不好了&#8230;XD，所以決定把wiki大神搬出來給大家參考</p>
+
+<p><a href="http://zh.wikipedia.org/wiki/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91" target="_blank">關於物件導向程式設計(OOP)</a></p>
+
+<p>為了怕設計師們直接把這篇文章關掉，我還是要自己解釋一下，其實重點在於&#8221;重用&#8221;這件事上面，他並不是一個新的語言或是框架，而就只是一個撰寫CSS的方法，讓CSS可以減少代碼，達到優化效能的作用</p>
+
+<h2>OOCSS的兩大原則</h2>
+
+<h3>Separate structure and skin</h3>
+
+<p>結構(Structure)和樣式(skin)的分離，我們可以嘗試著將共用的屬性部分拉出來獨立一個類別(class)，例如原本的CSS可能長這樣</p>
+
+<pre><code>#button{
+    width:250px;
+    height:100px;
+    border: solid 2px #ccc;
+    background: red;
+}
+
+#box{
+    width:400x;
+    height:200px;
+    border: solid 2px #ccc;
+    background: red;
+}
+</code></pre>
+
+<p>我們發現 button 和 box 都有共同的 border 和 background，所以將它獨立拉出來</p>
+
+<pre><code>.button{
+    width:250px;
+    height:100px;
+}
+
+.box{
+    width:400x;
+    height:200px;       
+}
+
+.skin{
+    border: solid 2px #ccc;
+    background: red;
+}
+</code></pre>
+
+<p>將所有的元素都用類別(class)設計，重複出現的樣式就獨立到 skin 的類別，這樣就可以減少CSS的代碼，還可以使CSS更加靈活，另外不要直接在例如&lt;img&gt;這樣的tag上直接加樣式</p>
+
+<h3>Separate container and content</h3>
+
+<p>將容器(container)和內容(content)分離的好處是，可以把內容放在任何容器裡面都可以，而不會被擺放的位置給拘束，例如像下面的例子</p>
+
+<p>HTML部份</p>
+
+<pre><code>&lt;div class="head"&gt;
+    &lt;p&gt;
+        內容內容內容
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="foot"&gt;
+    &lt;p&gt;
+        內容內容內容
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>css部份</p>
+
+<pre><code>.head p {css code}
+.foot p {css code}
+</code></pre>
+
+<p>不過 OOCSS 不建議這麼做，他希望的是建立更多的類別獨立出來</p>
+
+<pre><code>.head {css code}
+.foot {css code}
+.mydata {css code}
+</code></pre>
+
+<p>這樣就可以直接在html上添加這些類別</p>
+
+<pre><code>&lt;div class="head"&gt;
+    &lt;p class="mydata"&gt;
+        內容內容內容
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="foot"&gt;
+    &lt;p class="mydata"&gt;
+        內容內容內容
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>另外一樣將把重複的獨立出來，將樣式模組化，這樣不僅不會被局限在某個位置底下(剛剛的 .head p )，也可以達到CSS重複使用</p>
+
+<h2>結論</h2>
+
+<p>我想這不是甚麼新的觀念，或許有人已經使用自己可能都不知道，OOCSS的優點就是讓網站效能變好(減少程式碼)，而且易於維護(模組化)，但缺點在撰寫之前需要花點時間規劃模組化，對於小型網站來說成本可能比較高，對於大型網站的優勢反而比較明顯，如何去使用他就看當下的專案情況如何，掌握以下幾項關鍵原則，可以更容易進入 OOCSS的思維</p>
+
+<p>避免使用後代選擇器(例如 .head p)</p>
+
+<p>避免使用ID</p>
+
+<p>另外可以使用 <a href="http://csslint.net/" target="_blank">CSS LINT</a> 讓CSS代碼更好</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://www.w3cplus.com/css/oocss-concept" target="_blank">OOCSS——概念篇</a></p>
+
+<p><a href="https://github.com/stubbornella/oocss/wiki" target="_blank">Object Oriented CSS</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[學習筆記] 十年長路- 旅遊社群網站的幻夢與真實 - 工頭堅]]></title>
@@ -2585,156 +2709,6 @@ gary.CheckName();
 <p>參考資料:</p>
 
 <p><a href="http://caterpillar.onlyfun.net/Gossip/JavaScript/Namespace.html" target="_blank">JavaScript Essence: 名稱管理</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] Accordion Menu(手風琴)-Kwicks]]></title>
-    <link href="http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks/"/>
-    <updated>2012-11-20T11:52:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/jquery-accordion-plugin-kwicks</id>
-    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-_J-W2xu9kk0/UKssWB_LsAI/AAAAAAAAB8I/l5FDpuCO27c/s415/t1.jpg" /></p>
-
-<p><img src="https://lh5.googleusercontent.com/-jKM2KBpI5eM/UKssWHgRekI/AAAAAAAAB8E/hG205WtoTDU/s415/t2.jpg" /></p>
-
-<p>「jQuery accordion menu」，也有人稱呼為手風琴，從上面兩張圖可以看到原本是一個水平的menu，滑鼠移過去指定某個項目，週遭的menu會縮起來，指定的那個項目會展開，因為一開一合的效果很像手風琴，所以才稱呼為「accordion menu」</p>
-
-<!--more-->
-
-
-<p>但這篇不教怎麼自己打造accordion menu，因為自認為功力不夠不敢亂現，網路上也很多那種例如「30種精選jQuery accordion menu」主題的文章，資源非常豐富，但因為實在太多款了，每次要做都還要花時間一個一個去看，所以今天就特別介紹一款叫做 <a href="http://devsmash.com/projects/kwicks" target="_blank">「Kwicks」</a> 的jQuery plugin，也可以簡單達到前面所說的accordion menu效果，這邊就記錄在我的Blog裡面，方便我或網路上的朋友可以參考</p>
-
-<p>最好的介紹就是直接看Demo最快，Kwicks可以做到 <a href="http://devsmash.com/projects/kwicks/examples/horizontal" target="_blank">Horizontal</a>、<a href="http://devsmash.com/projects/kwicks/examples/vertical" target="_blank">vertical</a>、<a href="http://devsmash.com/projects/kwicks/examples/easing" target="_blank">Custom Easing</a> 等效果</p>
-
-<p>要用Kwicks需下載他的plugin還有jQuery</p>
-
-<p><a href="http://jquery.com/" target="_blank" />jQuery >= 1.7</a></p>
-
-<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.js" target="_blank" />jquery.kwicks.js</a></p>
-
-<p><a href="https://github.com/jmar777/kwicks/blob/v2.0.0/jquery.kwicks.css" target="_blank" />jquery.kwicks.css</a></p>
-
-<p>要注意的是，這版Kwicks是v2.0.0，需用到jQuery 1.7以上，另外如果要用到Custom Easing，還要另外下載jQuery Easing Plugin</p>
-
-<p><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank" />jQuery Easing Plugin</a></p>
-
-<p>接著就是HTML部分，很簡潔不複雜</p>
-
-<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-
-<p>就是用一個&lt;ul&gt;元素包裹著&lt;li&gt;，&lt;li&gt;裡面放著就是項目裡面要擺的東西(例如圖片、文字)，&lt;ul&gt;部分必須要添加「kwicks」和「kwicks-horizontal」兩個class，「kwicks」是固定要添加的class，「kwicks-horizontal」是指水平的呈現方式，如果要垂直就用「kwicks-vertical」</p>
-
-<p>jQuery的寫法部分，有分三種</p>
-
-<pre><code>// instantiate kwicks
-$(element).kwicks(opts);
-
-// invoke a method
-$(element).kwicks('method-name' [, param]);
-
-// handle events
-$(element).on('event-name.kwicks', handler);
-</code></pre>
-
-<p>以下是參數設定</p>
-
-<h3>size:(必填)</h3>
-
-<p>設定項目的長或寬，如果isVertical是true的話，這個設定就是高度，其它情況預設就是寬度，特別注意的是這個值會影響到整個accordion menu多高(或多寬)</p>
-
-<h3>maxSize|minSize:(必填)</h3>
-
-<p>展開的最大寬度(或高度)，或是最小寬度(或高度)，你只能選擇填最大或最小，不能兩個都填</p>
-
-<h3>spacing:(Default: 5)</h3>
-
-<p>每個項目之間的距離，預設是5px</p>
-
-<h3>duration:(Default: 500)</h3>
-
-<pre><code>觸發後動畫執行的時間(毫秒)，預設是500毫秒
-</code></pre>
-
-<h3>isVertical:(Default: false)</h3>
-
-<pre><code>是否為垂直menu，預設是false
-</code></pre>
-
-<p>easing:(Default: none)</p>
-
-<pre><code>如果有載入jQuery Easing Plugin，可以設定效果
-</code></pre>
-
-<p>behavior:(Default: none)</p>
-
-<pre><code>初始化的動作
-</code></pre>
-
-<h3>Examples</h3>
-
-<p>HTML</p>
-
-<pre><code>&lt;ul class='kwicks kwicks-horizontal'&gt;
-    &lt;li id='panel-1'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
-    &lt;li id='panel-2'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
-    &lt;li id='panel-3'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
-    &lt;li id='panel-4'&gt;&lt;img src="pic.jpg" /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-
-<p>用&lt;ul&gt;、&lt;li&gt;做一個menu，&lt;ul&gt;加上對應的class，&lt;li&gt;裡面放置圖片或文字</p>
-
-<p>CSS</p>
-
-<pre><code>.kwicks {
-    width: 515px;
-    height: 100px;
-}
-.kwicks &gt; li {
-    width: 100px;
-    height: 100px;
-    /* overridden by kwicks but good for when JavaScript is disabled */
-    margin-left: 5px;
-    float: left;
-}
-
-#panel-1 { background-color: #53b388; }
-#panel-2 { background-color: #5a69a9; }
-#panel-3 { background-color: #c26468; }
-#panel-4 { background-color: #bf7cc7; }
-</code></pre>
-
-<p>注意width和height會影響到顯示的結果</p>
-
-<p>JS</p>
-
-<pre><code>$(function() {
-    $('.kwicks').kwicks({
-        size: 100,
-        maxSize : 250,
-        spacing : 5,
-        behavior: 'menu'
-    });
-});
-</code></pre>
-
-<p>size要特別注意的是，越高(or寬)展開的空間就越大，看到的東西就會越多，如何拿捏可以實際在瀏覽器上跑跑看效果</p>
-
-<p>Kwicks還有支援<strong>Methods</strong>和<strong>events</strong>，有興趣的可以直接參考文件(附參考資料)</p>
-
-<p>當然，網路世界的選擇太多了，不一定非要用這個plugin，如果有更好的推薦也歡迎跟我說:)</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://devsmash.com/projects/kwicks" target="_blank">Kwicks for jQuery</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
