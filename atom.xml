@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-16T18:20:58+08:00</updated>
+  <updated>2013-01-16T18:27:34+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -119,13 +119,9 @@
 
 <h2>結論</h2>
 
-<p>我想這不是甚麼新的觀念，或許有人已經使用自己可能都不知道，OOCSS的優點就是讓網站效能變好(減少程式碼)，而且易於維護(模組化)，但缺點在撰寫之前需要花點時間規劃模組化，對於小型網站來說成本可能比較高，對於大型網站的優勢反而比較明顯，如何去使用他就看當下的專案情況如何，掌握以下幾項關鍵原則，可以更容易進入 OOCSS的思維</p>
+<p>我想這不是甚麼新的觀念，或許有人已經使用自己可能都不知道，OOCSS的優點就是讓網站效能變好(減少程式碼)，而且易於維護(模組化)，但缺點在撰寫之前需要花點時間規劃模組化，對於小型網站來說成本可能比較高，對於大型網站的優勢反而比較明顯</p>
 
-<p>避免使用後代選擇器(例如 .head p)</p>
-
-<p>避免使用ID</p>
-
-<p>另外可以使用 <a href="http://csslint.net/" target="_blank">CSS LINT</a> 讓CSS代碼更好</p>
+<p>另外也可以參考這個 <a href="https://github.com/stubbornella/oocss" target="_blank">Object Oriented CSS Framework</a></p>
 
 <h3>參考資料:</h3>
 
