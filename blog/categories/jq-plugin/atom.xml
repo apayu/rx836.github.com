@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-18T18:46:26+08:00</updated>
+  <updated>2013-01-19T02:15:15+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -34,7 +34,7 @@
 &lt;/div&gt;
 </code></pre>
 
-<p>可以看到HTML部份相當的簡單，用一個&lt;div&gt;包住一個&lt;img&gt;</p>
+<p>只用一個&lt;div&gt;包住一個&lt;img&gt;</p>
 
 <p>接著是CSS</p>
 
@@ -45,7 +45,7 @@
 }
 </code></pre>
 
-<p>因為我們要自製一個jQuery plugin，方便以後可以重複使用，所以這邊要先建立一個基本的樣板</p>
+<p>因為我們要將效果自製成一個jQuery plugin，方便以後可以重複使用，所以這邊要先建立一個基本的 jQuery plugin 樣板</p>
 
 <pre><code>;(function( $, window ) {
 
@@ -63,7 +63,7 @@
 
         return this.each(function() {
             var $container = $(this); // cache selector for best performance
-            // 程式碼從這裡開始寫          
+            // 主要程式碼從這裡開始寫            
 
         });
     };
@@ -75,11 +75,11 @@
 
 <h3>原理</h3>
 
-<p>做好基本的準備工作以後，我們要來開始撰寫主程式部分，但在撰寫之前，先來說明一下這個效果是如何產生，其實原理很簡單，在效果執行時，會先將原圖的屬性設為 display: none，接著加上&lt;div&gt;並且設定背景圖片，類似拼圖一樣一塊一塊拼出原圖，不太懂的話下面有範例解說</p>
+<p>做好基本的準備工作以後，我們要來開始撰寫主程式部分，但在撰寫之前，先來說明一下這個效果是如何產生，其實原理很簡單，在效果執行時，會先將原圖的屬性設為 <strong>display: none</strong>，接著加上&lt;div&gt;並且設定背景圖片，類似拼圖一樣一塊一塊拼出原圖，如果覺得我描述的不清楚的話，下面有範例可以參考XD</p>
 
 <p><a href="http://jsfiddle.net/rx836/sbBeA/" target="_blank">範例</a></p>
 
-<p>這邊的重點在於 background-position 這個屬性，利用這個屬性做背景圖片的位移，每一個&lt;div&gt;代表著圖片的一個區塊，也許有些人看到這邊已經知道端倪，因為只要把圖片轉換成一個一個的&lt;div&gt;，透過操作每個&lt;div&gt;，就可以做出特效</p>
+<p>這邊的重點在於 <strong>background-position</strong> 這個屬性，利用這個屬性做背景圖片的位移，每一個&lt;div&gt;代表著圖片的一個區塊，也許有些人看到這邊已經知道端倪，因為只要把圖片轉換成一個一個的&lt;div&gt;，透過操作每個&lt;div&gt;，就可以做出特效</p>
 
 <p>接著我們把程式碼寫完，先建立一些變數</p>
 
@@ -90,7 +90,7 @@
     tiles = [], $tiles;
 </code></pre>
 
-<p>接著是建立一塊一塊的磁磚，並且把原圖隱藏，最後加上剛建立好的磁磚磁磚，至於要建立多少個就看當初給予的值</p>
+<p>接著是建立一塊一塊的磁磚，並且把原圖隱藏，最後加上剛建立好的磁磚，至於要建立多少個就看當初給予的值</p>
 
 <pre><code>for ( var i = 0; i &lt; n_tiles; i++ ) {
     tiles.push('&lt;div class="tile"/&gt;');
@@ -102,7 +102,7 @@ $tiles = $( tiles.join('') );
 $img.hide().after( $tiles );
 </code></pre>
 
-<p>接著利用原始圖檔當作磁磚背景圖，在將背景圖做適當的位移，至於要位移多少，就看每個&lt;div&gt;所代表的區塊</p>
+<p>接著利用原始圖檔當作每個磁磚的背景圖，在將背景圖做適當的位移，至於要位移多少，就看每個&lt;div&gt;(也就是每個磁磚)所代表的區塊</p>
 
 <pre><code>//利用原始圖檔當作磁磚背景圖
 $tiles.css({
@@ -119,7 +119,7 @@ $tiles.each(function() {
 });
 </code></pre>
 
-<p>因為要拼成一塊圖片的關係，所以也要利用 float這個屬性</p>
+<p>因為要拼成一塊圖片的關係，所以也要利用 float這個屬性，直接在CSS加上即可</p>
 
 <pre><code>.tile { float: left; }
 </code></pre>
@@ -133,9 +133,11 @@ $tiles.each(function() {
 
 <p><img src="https://lh5.googleusercontent.com/-t0N7b55zbPE/UPkk8Kc6OaI/AAAAAAAACMo/1L6StJdwJ3s/s1026/2013-01-18_180320.jpg" /></p>
 
+<p>就如剛剛所敘述的，<strong>原始圖片已經隱藏，並且用&lt;div&gt;拼湊而出</strong></p>
+
 <h3>製作效果</h3>
 
-<p>知道了原理以後，也把圖片切成一塊一塊的磁磚，接著讓我們繼續把程式碼寫完，接下來是隨機變換的部份</p>
+<p>知道了原理以後，接著讓我們繼續把程式碼繼續寫完，接下來是隨機變換的部份</p>
 
 <pre><code>function range( min, max, rand ) {
   var arr = ( new Array( ++max - min ) )
@@ -148,7 +150,7 @@ $tiles.each(function() {
 }
 </code></pre>
 
-<p>這部份的 code 可以參考 <a href="http://stackoverflow.com/questions/12528886/random-but-just-in-chrome" target="_blank">stackoverflow</a>，簡單來說就是一個產生<strong>特定範圍的隨機排列的數字</strong>，但因為是函式的關係我們要把他跟一開始建立預設值放在一起，剩下的 code 就是處理切換效果的部份</p>
+<p>這部份的 code 可以參考 <a href="http://stackoverflow.com/questions/12528886/random-but-just-in-chrome" target="_blank">stackoverflow</a>，簡單來說就是一個產生<strong>特定範圍的隨機排列的數字</strong>，但因為是函式的關係我們要把他跟一開始<strong>建立預設值 var _defaults 放在一起</strong>，剩下的 code 就是處理切換效果的部份</p>
 
 <pre><code>var tilesArr = range( 0, n_tiles, o.random ),
 tileSpeed = o.speed / n_tiles;              
@@ -164,7 +166,7 @@ $container.on( 'animate', function() {
 });
 </code></pre>
 
-<p>我們將每個磁磚加上 animate，在特定時間內做 opacity 屬性的變化，最後加上一個按鈕做觸發，和套用plugin，看看效果如何</p>
+<p>我們將每個磁磚加上animate，在特定時間內做 opacity 屬性的變化，最後加上一個按鈕做觸發，和套用plugin，看看效果如何</p>
 
 <p>html</p>
 
@@ -178,7 +180,7 @@ $container.on( 'animate', function() {
 });
 </code></pre>
 
-<p>如果對於整個程式碼不太清楚，可以直接看 <a href="http://jsfiddle.net/rx836/jQaJh/2/" target="_blank">範例</a></p>
+<p><a href="http://jsfiddle.net/rx836/jQaJh/2/" target="_blank">完整的範例</a></p>
 
 <h2>結論</h2>
 
