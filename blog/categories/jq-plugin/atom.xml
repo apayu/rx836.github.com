@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-18T18:43:05+08:00</updated>
+  <updated>2013-01-18T18:46:26+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.rx836.tw/blog/jquery-slice-images-into-tiles/"/>
     <updated>2013-01-18T16:36:00+08:00</updated>
     <id>http://blog.rx836.tw/blog/jquery-slice-images-into-tiles</id>
-    <content type="html"><![CDATA[<p><img src="" /></p>
+    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-WH3Ni1ou3Ww/UPkk71vSTvI/AAAAAAAACMk/hcFofq9eTuU/s641/2013-01-18_164425.jpg" /></p>
 
 <p>不知道大家有沒有看過這種切成一塊一塊的轉換圖片，類似磁磚拼貼的效果，最近看到一篇講解教學的文章，自己消化了一下，來分享並且紀錄下來</p>
 
