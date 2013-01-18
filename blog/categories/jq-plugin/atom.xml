@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-16T18:27:34+08:00</updated>
+  <updated>2013-01-18T18:43:05+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,185 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 做出磁磚效果變化的圖片轉換]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-slice-images-into-tiles/"/>
+    <updated>2013-01-18T16:36:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-slice-images-into-tiles</id>
+    <content type="html"><![CDATA[<p><img src="" /></p>
+
+<p>不知道大家有沒有看過這種切成一塊一塊的轉換圖片，類似磁磚拼貼的效果，最近看到一篇講解教學的文章，自己消化了一下，來分享並且紀錄下來</p>
+
+<!--more-->
+
+
+<h2>Start</h2>
+
+<p>首先是HTML部份</p>
+
+<pre><code>&lt;div class="sliced"&gt;
+    &lt;img src="pic.jpg"/&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>可以看到HTML部份相當的簡單，用一個&lt;div&gt;包住一個&lt;img&gt;</p>
+
+<p>接著是CSS</p>
+
+<pre><code>.sliced {
+    position: relative;
+    width: 640px; 
+    height: 400px;
+}
+</code></pre>
+
+<p>因為我們要自製一個jQuery plugin，方便以後可以重複使用，所以這邊要先建立一個基本的樣板</p>
+
+<pre><code>;(function( $, window ) {
+
+    //預設值
+    var _defaults = {
+        x      : 2, // 預設對圖片x軸要切幾塊
+        y      : 2, // 預設對圖片y軸要切幾塊
+        random : true, // 磚塊是否要按照順序切換
+        speed  : 2000 // 效果的速度
+    };              
+
+    $.fn.sliced = function( options ) {
+
+        var o = $.extend( {}, _defaults, options );
+
+        return this.each(function() {
+            var $container = $(this); // cache selector for best performance
+            // 程式碼從這裡開始寫          
+
+        });
+    };
+
+}( jQuery, window ));
+</code></pre>
+
+<p>當然如果想要寫其他 Plugin 的人，也可以使用這個樣板去做修改</p>
+
+<h3>原理</h3>
+
+<p>做好基本的準備工作以後，我們要來開始撰寫主程式部分，但在撰寫之前，先來說明一下這個效果是如何產生，其實原理很簡單，在效果執行時，會先將原圖的屬性設為 display: none，接著加上&lt;div&gt;並且設定背景圖片，類似拼圖一樣一塊一塊拼出原圖，不太懂的話下面有範例解說</p>
+
+<p><a href="http://jsfiddle.net/rx836/sbBeA/" target="_blank">範例</a></p>
+
+<p>這邊的重點在於 background-position 這個屬性，利用這個屬性做背景圖片的位移，每一個&lt;div&gt;代表著圖片的一個區塊，也許有些人看到這邊已經知道端倪，因為只要把圖片轉換成一個一個的&lt;div&gt;，透過操作每個&lt;div&gt;，就可以做出特效</p>
+
+<p>接著我們把程式碼寫完，先建立一些變數</p>
+
+<pre><code>var width = $container.width(),
+    height = $container.height(),
+    $img = $container.find('img'),
+    n_tiles = o.x * o.y,
+    tiles = [], $tiles;
+</code></pre>
+
+<p>接著是建立一塊一塊的磁磚，並且把原圖隱藏，最後加上剛建立好的磁磚磁磚，至於要建立多少個就看當初給予的值</p>
+
+<pre><code>for ( var i = 0; i &lt; n_tiles; i++ ) {
+    tiles.push('&lt;div class="tile"/&gt;');
+}
+
+$tiles = $( tiles.join('') );
+
+//將原圖隱藏並加上磁磚
+$img.hide().after( $tiles );
+</code></pre>
+
+<p>接著利用原始圖檔當作磁磚背景圖，在將背景圖做適當的位移，至於要位移多少，就看每個&lt;div&gt;所代表的區塊</p>
+
+<pre><code>//利用原始圖檔當作磁磚背景圖
+$tiles.css({
+    width: width / o.x,
+    height: height / o.y,
+    backgroundImage: 'url('+ $img.attr('src') +')'
+});    
+
+//替背景圖調整位置
+$tiles.each(function() {
+    var pos = $(this).position();
+    console.log(pos);
+    $(this).css( 'backgroundPosition', -pos.left +'px '+ -pos.top +'px' );
+});
+</code></pre>
+
+<p>因為要拼成一塊圖片的關係，所以也要利用 float這個屬性</p>
+
+<pre><code>.tile { float: left; }
+</code></pre>
+
+<p>到這邊為止，你可以加上下面這段程式碼，看看效果如何</p>
+
+<pre><code>$('.sliced').sliced({ x:4, y:4 }); // 將圖片切成4x4
+</code></pre>
+
+<p>看圖片好像沒什麼改變，但打開firebug看看HTML部份，有發現到不一樣了嗎？</p>
+
+<p><img src="https://lh5.googleusercontent.com/-t0N7b55zbPE/UPkk8Kc6OaI/AAAAAAAACMo/1L6StJdwJ3s/s1026/2013-01-18_180320.jpg" /></p>
+
+<h3>製作效果</h3>
+
+<p>知道了原理以後，也把圖片切成一塊一塊的磁磚，接著讓我們繼續把程式碼寫完，接下來是隨機變換的部份</p>
+
+<pre><code>function range( min, max, rand ) {
+  var arr = ( new Array( ++max - min ) )
+    .join('.').split('.')
+    .map(function( v,i ){ return min + i });
+  return rand
+    ? arr.map(function( v ) { return [ Math.random(), v ] })
+       .sort().map(function( v ) { return v[ 1 ] })
+    : arr;
+}
+</code></pre>
+
+<p>這部份的 code 可以參考 <a href="http://stackoverflow.com/questions/12528886/random-but-just-in-chrome" target="_blank">stackoverflow</a>，簡單來說就是一個產生<strong>特定範圍的隨機排列的數字</strong>，但因為是函式的關係我們要把他跟一開始建立預設值放在一起，剩下的 code 就是處理切換效果的部份</p>
+
+<pre><code>var tilesArr = range( 0, n_tiles, o.random ),
+tileSpeed = o.speed / n_tiles;              
+
+$container.on( 'animate', function() {
+
+    tilesArr.forEach(function( tile, i ) {                  
+        setTimeout(function(){
+            $tiles.eq( tile ).toggleClass( 'tile-animated' );
+        }, i * tileSpeed );
+    });
+
+});
+</code></pre>
+
+<p>我們將每個磁磚加上 animate，在特定時間內做 opacity 屬性的變化，最後加上一個按鈕做觸發，和套用plugin，看看效果如何</p>
+
+<p>html</p>
+
+<pre><code>&lt;button&gt;Toggle&lt;/button&gt;
+</code></pre>
+
+<p>js</p>
+
+<pre><code>$('button').click(function() {
+    $('.sliced').trigger('animate');
+});
+</code></pre>
+
+<p>如果對於整個程式碼不太清楚，可以直接看 <a href="http://jsfiddle.net/rx836/jQaJh/2/" target="_blank">範例</a></p>
+
+<h2>結論</h2>
+
+<p>只要知道是拼圖的概念，就可以知道其實不是針對原圖去做變化，巧妙的利用&lt;div&gt;也可以做出類似flash的效果</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://www.onextrapixel.com/2012/11/23/how-to-slice-images-into-tiles-with-jquery-and-css3-transitions/" target="_blank">How to Slice Images into Tiles with jQuery and CSS3 Transitions</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 跟著Pinterest將menu固定起來 - Sticky]]></title>
@@ -461,132 +640,6 @@ function Numeral (number) {
 <p><a href="http://speckyboy.com/2012/10/18/how-to-create-lazy-loading-images-for-your-website/" target="_blank">How to Create Lazy-Loading Images for your Website</a></p>
 
 <p><a href="http://www.appelsiini.net/projects/lazyload" target="_blank">Lazy Load Plugin for jQuery</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 有效降低會員註冊退信率的mailcheck]]></title>
-    <link href="http://blog.rx836.tw/blog/mailcheck-jquery-plugin/"/>
-    <updated>2012-11-28T12:04:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/mailcheck-jquery-plugin</id>
-    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-dLci9WLFC-8/ULWyqQJ-OxI/AAAAAAAAB_U/odHWaG3jNfE/s482/w.jpg" /></p>
-
-<p>免費檔案分享<a href="http://kicksend.com/" target="_blank">Kicksend</a>有寫一篇文章是關於<a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target=_blank"">如何降低退信率</a>，內容大概是講User註冊會員以後，會發送註冊的確認信，但常常會發生被退信的情況，導致會員收不到信可能必須重新申請一次帳號，不然就是請客服修改E-mail，所以Kicksend為了減少這個困擾就做了分析並且解決問題</p>
-
-<!--more-->
-
-
-<p>Kicksend發現有很多人被退信的原因都是在輸入電子郵件(E-mail)的時候打錯domain，例如“hotmail.con”、“gnail.com”、“yajoo.com”等，這種錯誤有時候用戶自己都不知道，就直接按送出，導致收不到註冊信，所以Kicksend就做了一個設計，在用戶輸入E-mail以後，會檢查E-mail的domain，如果發現疑似錯誤情形，就會跳出建議的選項問用戶要不要更改，做到良好的 <strong>user experience</strong>，用了這個方法以後也確實降低了50%的退信率，無形中也增加了不少用戶，而下面將介紹這套jQuery plugin - <strong>mailcheck</strong></p>
-
-<h2>start</h2>
-
-<p>首先，可以去github載回原始碼</p>
-
-<p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck</a></p>
-
-<p>接著在網頁裡面載入jQuery和mailcheck.min</p>
-
-<pre><code>&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
-&lt;script src="mailcheck.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>html部分，一個text field</p>
-
-<pre><code>&lt;input id="email" name="email" type="text" /&gt;
-</code></pre>
-
-<p>接著是js部份</p>
-
-<pre><code>var domains = ['hotmail.com', 'gmail.com', 'aol.com'];
-var topLevelDomains = ["com", "net", "org"];
-
-var superStringDistance = function(string1, string2) {
-  // a string distance algorithm of your choosing
-}
-
-$('#email').on('blur', function() {
-  $(this).mailcheck({
-    domains: domains,                       // optional
-    topLevelDomains: topLevelDomains,       // optional
-    distanceFunction: superStringDistance,  // optional
-    suggested: function(element, suggestion) {
-      // callback code
-    },
-    empty: function(element) {
-      // callback code
-    }
-  });
-});
-</code></pre>
-
-<p>「domains」、「topLevelDomains」、「distanceFunction」這三個參數都是選填，分別為</p>
-
-<p><strong>domains</strong>: 要比對的domain，例如:yahoo.com、google.com</p>
-
-<p><strong>topLevelDomains</strong>: 允許的topLevelDomain，例如:com、net</p>
-
-<p><strong>distanceFunction</strong>: 自訂用來計算最接近topLevelDomain內容的函式</p>
-
-<p>假設在沒有填寫 <strong>domains</strong> 和 <strong>topLevelDomains</strong> 情況下，會採用預設值，根據source code裡面所寫的預設值為</p>
-
-<p>預設domains</p>
-
-<pre><code>defaultDomains: ["yahoo.com", "google.com", "hotmail.com", "gmail.com", "me.com", "aol.com", "mac.com",
-  "live.com", "comcast.net", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk",
-  "facebook.com", "verizon.net", "sbcglobal.net", "att.net", "gmx.com", "mail.com"]
-</code></pre>
-
-<p>預設topLevelDomains</p>
-
-<pre><code>defaultTopLevelDomains: ["co.uk", "com", "net", "org", "info", "edu", "gov", "mil"]
-</code></pre>
-
-<p>而「suggested」和「empty」則分別是 <strong>輸入錯誤時的callback</strong> 和 <strong>沒填寫E-mail的callback</strong>，所以你可以自行在這裡加上程式碼提醒User輸入錯誤或忘記輸入</p>
-
-<h3>沒有jQuery的情況下</h3>
-
-<p>假如你的專案裡面沒有用到jQuery，也可以單純使用js版本</p>
-
-<pre><code>Kicksend.mailcheck.run({
-  email: yourTextInput.value,
-  domains: domains,                       // optional
-  topLevelDomains: topLevelDomains,       // optional
-  distanceFunction: superStringDistance,  // optional
-  suggested: function(suggestion) {
-    // callback code
-  },
-  empty: function() {
-    // callback code
-  }
-});
-</code></pre>
-
-<p>最後附上有用到mailcheck這項效果的網站</p>
-
-<ul>
-<li><a href="http://kicksend.com/" target="_blank">Kicksend</a></li>
-<li><a href="http://dropbox.com/" target="_blank">Dropbox</a></li>
-<li><a href="http://flotype.com/" target="_blank">Flotype</a></li>
-<li><a href="http://kickstarter.com/" target="_blank">Kickstarter</a></li>
-<li><a href="http://kippt.com/" target="_blank">Kippt</a></li>
-<li><a href="http://minecraft.net/" target="_blank">Minecraft</a></li>
-<li><a href="http://prispy.com/" target="_blank">Prispy</a></li>
-<li><a href="http://sbnation.com/" target="_blank">SB Nation</a></li>
-<li><a href="http://show-space.com/" target="_blank">Show Space</a></li>
-<li><a href="http://theverge.com/" target="_blank">The Verge</a></li>
-<li><a href="http://uber.com/" target="_blank">Uber</a></li>
-</ul>
-
-
-<h3>參考資料:</h3>
-
-<p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck Github</a></p>
-
-<p><a href="http://kicksend.com/join" target="_blank">Demo</a></p>
-
-<p><a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target="_blank">How we decreased sign up confirmation email bounces by 50%</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
