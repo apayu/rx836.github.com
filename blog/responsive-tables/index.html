@@ -9,7 +9,7 @@
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來決定 &hellip;">
+  <meta name="description" content="因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來做決定 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -33,7 +33,7 @@
 <meta property="fb:app_id" content="416172151763823" />
 <meta property="og:title" content="[jQ-Plugin] 輕鬆幫表格做responsive - apa" />
 
-<meta property="og:description" content="因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來決定 &hellip;" />
+<meta property="og:description" content="因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來做決定 &hellip;" />
 
 <meta property="og:url" content="http://blog.rx836.tw/blog/responsive-tables/" />  
 
@@ -113,7 +113,7 @@
   </header>
 
 
-<div class="entry-content"><p>因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來決定</p>
+<div class="entry-content"><p>因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來做決定</p>
 
 <!--more-->
 
@@ -165,9 +165,9 @@
 &lt;/table&gt;
 </code></pre>
 
-<p>可以看到在&lt;thead&gt;底下會有 data-class 和 data-hide 兩個 HTML5 的自訂屬性，如果 data-class=&#8221;expand&#8221; 設在『姓名』那個欄位，代表的意思是會在此欄位建立 icon 圖案 『+』 和 『-』，而 data-hide 指的是該欄位在什麼情況下會隱藏縮排，例如在上面範例中的年齡設為 data-hide=&#8221;phone&#8221;，表示 phone 的寬度下會觸發此事件</p>
+<p>可以看到在&lt;thead&gt;底下會有 data-class 和 data-hide 兩個 HTML5 的自訂屬性，如果 data-class=&#8221;expand&#8221; 設在『姓名』那個欄位，<strong>代表的意思是會在此欄位建立 icon 圖案 『+』 和 『-』</strong>，而 data-hide 指的是<strong>該欄位在什麼情況下會隱藏縮排</strong>，例如在上面範例中的年齡設為 data-hide=&#8221;phone&#8221;，表示在 phone 的寬度下會觸發此事件</p>
 
-<p>那或許會有人疑問，phone和 tablet 的判斷依據是什麼呢？這邊可以直接打開 footable-0.1.js 這支檔案搜尋底下這行原始碼</p>
+<p>那或許會有人疑問，phone和 tablet 的寬度判斷依據是什麼呢？這邊可以直接打開 footable-0.1.js 這支檔案，搜尋底下這行原始碼</p>
 
 <pre><code>options: {
   delay: 100, // The number of millseconds to wait before triggering the react event
@@ -186,7 +186,7 @@
 
 <p><img src="https://lh6.googleusercontent.com/-SenmhgVS_s4/UPz2ku3YqeI/AAAAAAAACNc/vpvMWrwVeFk/s1077/2013-01-21_152914.jpg" /></p>
 
-<p>table寬度小於1024px，大於480px，性別被縮排，姓名多了展開的圖案『+』</p>
+<p>table寬度小於1024px，大於480px，<strong>性別被縮排，姓名多了展開的圖案『+』</strong></p>
 
 <p><img src="https://lh6.googleusercontent.com/-AZyIxH4mZgY/UPz2kr5W8CI/AAAAAAAACNU/wDNk3hkqDNc/s823/2013-01-21_153046.jpg" /></p>
 
