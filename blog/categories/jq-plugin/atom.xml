@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-21T16:15:23+08:00</updated>
+  <updated>2013-01-21T18:12:09+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -68,6 +68,13 @@
     &lt;tr&gt;&lt;td&gt;小英&lt;/td&gt;&lt;td&gt;行政&lt;/td&gt;&lt;td&gt;27&lt;/td&gt;&lt;td&gt;女&lt;/td&gt;&lt;/tr&gt;          
   &lt;/tbody&gt;
 &lt;/table&gt;
+</code></pre>
+
+<p>js部份</p>
+
+<pre><code>$(function() {
+  $('table').footable();
+});
 </code></pre>
 
 <p>可以看到在&lt;thead&gt;底下會有 data-class 和 data-hide 兩個 HTML5 的自訂屬性，如果 data-class="expand" 設在『姓名』那個欄位，<strong>代表的意思是會在此欄位建立 icon 圖案 『+』 和 『-』</strong>，而 data-hide 指的是<strong>該欄位在什麼情況下會隱藏縮排</strong>，例如在上面範例中的年齡設為 data-hide="phone"，表示在 phone 的寬度下會觸發此事件</p>
