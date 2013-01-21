@@ -286,11 +286,15 @@
     </url>
     <url>
         <loc>http://blog.rx836.tw/blog/css-oocss/</loc>
-        <lastmod>2013-01-16T18:27:09+08:00</lastmod>
+        <lastmod>2013-01-21T12:34:23+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.rx836.tw/blog/jquery-slice-images-into-tiles/</loc>
         <lastmod>2013-01-19T02:13:55+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.rx836.tw/blog/responsive-tables/</loc>
+        <lastmod>2013-01-21T16:05:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.rx836.tw/about/</loc>
@@ -298,10 +302,10 @@
     </url>
     <url>
         <loc>http://blog.rx836.tw/blog/archives/</loc>
-        <lastmod>2013-01-19T02:13:55+08:00</lastmod>
+        <lastmod>2013-01-21T16:05:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.rx836.tw/</loc>
-        <lastmod>2013-01-19T02:13:55+08:00</lastmod>
+        <lastmod>2013-01-21T16:05:31+08:00</lastmod>
     </url>
 </urlset>

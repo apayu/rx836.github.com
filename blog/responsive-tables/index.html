@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[jQ-Plugin] 輕鬆幫表格做responsive - apa</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來決定 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.rx836.tw/blog/responsive-tables/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="apa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+<meta property="og:title" content="[jQ-Plugin] 輕鬆幫表格做responsive - apa" />
+
+<meta property="og:description" content="因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來決定 &hellip;" />
+
+<meta property="og:url" content="http://blog.rx836.tw/blog/responsive-tables/" />  
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">apa</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.rx836.tw" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[jQ-Plugin] 輕鬆幫表格做responsive</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-21T12:28:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來決定</p>
+
+<!--more-->
+
+
+<p>例如以文字為主的部落格或是簡單的頁面就很適合做RWD，但介面太複雜或是功能太多，建議還是另外開發專屬的獨立網站，有興趣的人可以參考這篇的 <a href="http://cssindesign.tumblr.com/post/40513264330/responsive-web" target="_blank">實作心得</a>，這邊就不討論太多</p>
+
+<p>今天這篇主要介紹一個jQuery plugin，叫FooTable，利用簡單的幾行程式，就可以將網頁裡面的 table 擁有 RWD 的效果</p>
+
+<h2>Start</h2>
+
+<p>首先要先下載 js 和 css，可以到 github 下載</p>
+
+<p><a href="https://github.com/bradvin/FooTable" target="_blank">DOWNLOAD</a></p>
+
+<p>載回來後會發現裡面有一些 js 和 css檔，還有幾個 demo 範例，但有一些檔案是看情形選擇載入，其中最主要的只有兩個檔案，分別是</p>
+
+<p>footable-0.1.js 和 footable-0.1.css</p>
+
+<p>在網頁裡面載入這兩支檔案和jQuery以後，接下來就來做簡單的範例</p>
+
+<h3>phone和tablet</h3>
+
+<p>FooTable最主要會判斷三種情形，除了一般的 Desktop 以外，還分成 phone 和 tablet，開發人員可以在每個欄位中，選擇要在什麼情況底下做縮排，以下是基本的HTML</p>
+
+<p>HTML部份</p>
+
+<pre><code>&lt;table class="footable"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th data-class="expand"&gt;
+        姓名
+      &lt;/th&gt;
+      &lt;th&gt;
+        職業
+      &lt;/th&gt;
+      &lt;th data-hide="phone"&gt;
+        年齡
+      &lt;/th&gt;
+      &lt;th data-hide="phone,tablet"&gt;
+        性別
+      &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;小馬&lt;/td&gt;&lt;td&gt;司機&lt;/td&gt;&lt;td&gt;59&lt;/td&gt;&lt;td&gt;男&lt;/td&gt;&lt;/tr&gt;          
+    &lt;tr&gt;&lt;td&gt;小陳&lt;/td&gt;&lt;td&gt;保全&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;td&gt;男&lt;/td&gt;&lt;/tr&gt;          
+    &lt;tr&gt;&lt;td&gt;小英&lt;/td&gt;&lt;td&gt;行政&lt;/td&gt;&lt;td&gt;27&lt;/td&gt;&lt;td&gt;女&lt;/td&gt;&lt;/tr&gt;          
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+
+<p>可以看到在&lt;thead&gt;底下會有 data-class 和 data-hide 兩個 HTML5 的自訂屬性，如果 data-class=&#8221;expand&#8221; 設在『姓名』那個欄位，代表的意思是會在此欄位建立 icon 圖案 『+』 和 『-』，而 data-hide 指的是該欄位在什麼情況下會隱藏縮排，例如在上面範例中的年齡設為 data-hide=&#8221;phone&#8221;，表示 phone 的寬度下會觸發此事件</p>
+
+<p>那或許會有人疑問，phone和 tablet 的判斷依據是什麼呢？這邊可以直接打開 footable-0.1.js 這支檔案搜尋底下這行原始碼</p>
+
+<pre><code>options: {
+  delay: 100, // The number of millseconds to wait before triggering the react event
+  breakpoints: { // The different screen resolution breakpoints
+    phone: 480,
+    tablet: 1024
+  },
+...
+...
+}
+</code></pre>
+
+<p>會發現原來 FooTable 預設屬性 phone 的寬度為480px，而 tablet 是1024，所以假設現在 Table 寬度只有 780，那擁有tablet 這個值的欄位就會做隱藏縮排，這些值都可以依照個人需求做修改，說了那麼多怕大家看不懂，那就直接來看結果圖吧</p>
+
+<p>table寬度大於1024px</p>
+
+<p><img src="https://lh6.googleusercontent.com/-SenmhgVS_s4/UPz2ku3YqeI/AAAAAAAACNc/vpvMWrwVeFk/s1077/2013-01-21_152914.jpg" /></p>
+
+<p>table寬度小於1024px，大於480px，性別被縮排，姓名多了展開的圖案『+』</p>
+
+<p><img src="https://lh6.googleusercontent.com/-AZyIxH4mZgY/UPz2kr5W8CI/AAAAAAAACNU/wDNk3hkqDNc/s823/2013-01-21_153046.jpg" /></p>
+
+<p>table寬度小於480px，性別和年齡都被縮排</p>
+
+<p><img src="https://lh4.googleusercontent.com/-taApAI4ZcRk/UPz2ks5zlpI/AAAAAAAACNY/JM2RGkX-BPU/s219/2013-01-21_153224.jpg" /></p>
+
+<p>點擊每一列即可展開看被隱藏的資訊</p>
+
+<p><img src="https://lh3.googleusercontent.com/-PNOSlcS6mhU/UPz2lfqAOvI/AAAAAAAACNg/jhzxH6Y5l_M/s227/2013-01-21_153321.jpg" /></p>
+
+<p>是不是很方便呢？</p>
+
+<h3>搜尋與排序</h3>
+
+<p>除了一般的 table 以外，常用到的『搜尋』和『排序』當然也不可少，FooTable貼心的地方在於已經幫你處理好這方面的需求，只要載入相關的 js 和加上自訂的 data- 屬性就可以完成所要的功能</p>
+
+<p><a href="http://themergency.com/footable-demo/demo-sorting.htm" target="_blank">Sorting demo</a></p>
+
+<p><a href="http://themergency.com/footable-demo/demo-filtering.htm" target="_blank">Filtering demo</a></p>
+
+<p>但比較可惜的地方在於沒有實做分頁這塊，所以如果有這方面需求的朋友，可能要自己另外加上</p>
+
+<h2>總結</h2>
+
+<p>個人覺得這款jQuery plugin做的相當簡單，使用上也十分容易，主要就是在欄位方面加上 data- 屬性，可擴展性也高，可以依照『搜尋』和『排序』的邏輯模式新增自己的功能，在縮排與顯示方面的UI設計也讓人感到實用方便，有興趣的朋友可以參考看看</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://themergency.com/footable/" target="_blank">FooTable</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>	
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-21T12:28:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/jquery-slice-images-into-tiles/" title="Previous Post: [jQ-Plugin] 做出磁磚效果變化的圖片轉換">&laquo; [jQ-Plugin] 做出磁磚效果變化的圖片轉換</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://blog.rx836.tw/blog/responsive-tables/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (15)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (2)</a></li><li><a href='/blog/categories/javascript'>JavaScript (7)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (14)</a></li><li><a href='/blog/categories/jquery'>jQuery (19)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (6)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (9)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/responsive-tables/">[jQ-Plugin] 輕鬆幫表格做responsive</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-slice-images-into-tiles/">[jQ-Plugin] 做出磁磚效果變化的圖片轉換</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/css-oocss/">[CSS] 認識OOCSS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/hpx-life-23/">[學習筆記] 十年長路- 旅遊社群網站的幻夢與真實 - 工頭堅</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/sticky-object/">[jQ-Plugin] 跟著Pinterest將menu固定起來 - Sticky</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/responsive-tables/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/responsive-tables/';
+        var disqus_url = 'http://blog.rx836.tw/blog/responsive-tables/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=416172151763823";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

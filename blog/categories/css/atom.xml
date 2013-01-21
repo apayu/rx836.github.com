@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-19T02:15:15+08:00</updated>
+  <updated>2013-01-21T16:07:21+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS] 認識OOCSS]]></title>
+    <link href="http://blog.rx836.tw/blog/css-oocss/"/>
+    <updated>2013-01-16T16:15:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css-oocss</id>
+    <content type="html"><![CDATA[<p>最近在一些國外文章常看到『OOCSS』，另外也在 <a href="http://www.webconf.tw/" target="_blank">WebConf Taiwan 2013</a> 聽到許多講者分享中提到，所以藉此花了一些時間來認識一下OOCSS，並且紀錄在這裡供大家參考參考</p>
+
+<!--more-->
+
+
+<p>OOCSS其實就是 Object Oriented CSS，照字面來看就是物件導向的CSS，『物件導向』我想對於程式開發人員來說並不陌生，許多程式語言都有存在這個概念，但對於設計師來說可能就會覺得很陌生，不過要我來解釋的話可能會解釋的不清楚，因為自己都學的不好了...XD，所以決定把wiki大神搬出來給大家參考</p>
+
+<p><a href="http://zh.wikipedia.org/wiki/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91" target="_blank">關於物件導向程式設計(OOP)</a></p>
+
+<p>為了怕設計師們直接把這篇文章關掉，我還是要自己解釋一下，其實重點在於"重用"這件事上面，他並不是一個新的語言或是框架，而就只是一個撰寫CSS的方法，讓CSS可以減少代碼，達到優化效能的作用</p>
+
+<h2>OOCSS的兩大原則</h2>
+
+<h3>Separate structure and skin</h3>
+
+<p>結構(Structure)和樣式(skin)的分離，我們可以嘗試著將共用的屬性部分拉出來獨立一個類別(class)，例如原本的CSS可能長這樣</p>
+
+<pre><code>#button{
+    width:250px;
+    height:100px;
+    border: solid 2px #ccc;
+    background: red;
+}
+
+#box{
+    width:400x;
+    height:200px;
+    border: solid 2px #ccc;
+    background: red;
+}
+</code></pre>
+
+<p>我們發現 button 和 box 都有共同的 border 和 background，所以將它獨立拉出來</p>
+
+<pre><code>.button{
+    width:250px;
+    height:100px;
+}
+
+.box{
+    width:400x;
+    height:200px;       
+}
+
+.skin{
+    border: solid 2px #ccc;
+    background: red;
+}
+</code></pre>
+
+<p>將所有的元素都用類別(class)設計，重複出現的樣式就獨立到 skin 的類別，這樣就可以減少CSS的代碼，還可以使CSS更加靈活，另外不要直接在例如&lt;img&gt;這樣的tag上直接加樣式</p>
+
+<h3>Separate container and content</h3>
+
+<p>將容器(container)和內容(content)分離的好處是，可以把內容放在任何容器裡面都可以，而不會被擺放的位置給拘束，例如像下面的例子</p>
+
+<p>HTML部份</p>
+
+<pre><code>&lt;div class="head"&gt;
+    &lt;p&gt;
+        內容內容內容
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="foot"&gt;
+    &lt;p&gt;
+        內容內容內容
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>css部份</p>
+
+<pre><code>.head p {css code}
+.foot p {css code}
+</code></pre>
+
+<p>不過 OOCSS 不建議這麼做，他希望的是建立更多的類別獨立出來</p>
+
+<pre><code>.head {css code}
+.foot {css code}
+.mydata {css code}
+</code></pre>
+
+<p>這樣就可以直接在html上添加這些類別</p>
+
+<pre><code>&lt;div class="head"&gt;
+    &lt;p class="mydata"&gt;
+        內容內容內容
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="foot"&gt;
+    &lt;p class="mydata"&gt;
+        內容內容內容
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>另外一樣將把重複的獨立出來，將樣式模組化，這樣不僅不會被局限在某個位置底下(剛剛的 .head p )，也可以達到CSS重複使用</p>
+
+<h2>結論</h2>
+
+<p>我想這不是甚麼新的觀念，或許有人已經使用自己可能都不知道，OOCSS的優點就是讓網站效能變好(減少程式碼)，而且易於維護(模組化)，但缺點在撰寫之前需要花點時間規劃模組化，對於小型網站來說成本可能比較高，對於大型網站的優勢反而比較明顯</p>
+
+<p>另外也可以參考這個 <a href="https://github.com/stubbornella/oocss" target="_blank">Object Oriented CSS Framework</a></p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://www.w3cplus.com/css/oocss-concept" target="_blank">OOCSS——概念篇</a></p>
+
+<p><a href="https://github.com/stubbornella/oocss/wiki" target="_blank">Object Oriented CSS</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CSS] 用CSS改變scrollbar]]></title>
@@ -554,336 +674,6 @@ header:after {
 <p><a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">CSS3 Box-sizing </a></p>
 
 <p><a href="http://www.w3school.com.cn/css/pr_background-attachment.asp" target="_blank">CSS background-attachment 属性</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS] 5個對設計師有幫助的CSS屬性]]></title>
-    <link href="http://blog.rx836.tw/blog/5-css-properties/"/>
-    <updated>2012-12-05T14:50:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/5-css-properties</id>
-    <content type="html"><![CDATA[<p>如果要寫一個網頁，基本上就是利用HTML+CSS互相搭配(廢話)，網路上的教學也非常的多，除非是剛踏入這一行的新手，不然大部分的人對這都不陌生，不過雖然CSS整體來說並不難，但有幾個特別的屬性他並不是這麼直覺好懂，但卻很適合設計師來學習，所以這篇就來筆記幾個CSS，來幫助釐清觀念</p>
-
-<!--more-->
-
-
-<h2>Clear</h2>
-
-<p>首先來看一個基本的網站架構</p>
-
-<p>HTML</p>
-
-<pre><code>&lt;div id="container"&gt;
-    &lt;h1&gt;網站標題&lt;/h1&gt;
-    &lt;div id="content"&gt;
-        &lt;h2&gt;文章標題&lt;/h2&gt;
-        &lt;p&gt;文章內容文章內容文章內容文章內容文章內容文章內容文章內容文章內容文章內容文章內容&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div id="sidebar"&gt;
-        &lt;h2&gt;側邊欄位1&lt;/h2&gt;
-    &lt;/div&gt;
-    &lt;div id="sidebar2"&gt;
-        &lt;h2&gt;側邊欄位2&lt;/h2&gt;
-    &lt;/div&gt;
-    &lt;div id="footer"&gt;我是footer&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>CSS</p>
-
-<pre><code>#container{
-    background:#0CF;
-    width:450px;
-}
-#content{
-    background:#FC3;
-    width:250px;
-    float:left;
-}
-#sidebar{
-    float:left;
-    background:#360;
-    width:100px;
-}
-#sidebar2{
-    float:left;
-    background:#F0F;
-    width:100px;
-}
-#footer{
-
-}
-</code></pre>
-
-<p>看起來就長的像這樣</p>
-
-<p><img src="https://lh6.googleusercontent.com/-hrlyAdCFVM4/UL9zdLc_WSI/AAAAAAAACBY/obrq-cebCvY/s470/2012-12-05_225116.jpg" /></p>
-
-<p>HTML部份就是利用一個div做為最外層的container，裡面包有content、sidebar和footer，利用CSS的屬性 <strong>float</strong>，將content和sidebar排成水平一直線，這是排版常使用的技巧，可是會發現，footer卻不是心中所想的那樣置底，反而受到float影響而圍繞在其他的div周圍</p>
-
-<h3>如何讓單一的div消除float的影響</h3>
-
-<p>就是 <strong>Clear</strong> 的功效，所以為了讓footer排在應該有的位置，我們可以這樣添加CSS屬性</p>
-
-<pre><code>#footer{
-    clear:both;
-}
-</code></pre>
-
-<p>結果</p>
-
-<p><img src="https://lh6.googleusercontent.com/-j2gYazTo_HE/UL9zdAr8LVI/AAAAAAAACBg/EN-h4zoISdQ/s466/2012-12-05_230147.jpg" /></p>
-
-<p>有發現了嗎？只要簡單的加上clear這個屬性，div就會乖乖地恢復他本來的特性，讓你水平或垂直排列可以隨心所欲</p>
-
-<h2>Box Shadows</h2>
-
-<p>box-shadow這個新的CSS3屬性之前有在<a href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/" target="_blank">文章</a>介紹過，其實他就是利用CSS很方便的做出陰影效果，例如像這樣加上CSS</p>
-
-<pre><code>#content{
-    background:#ccc;
-    width:250px;
-    float:left;
-    padding:5px;
-    -webkit-box-shadow: inset 0px 0px 2px 2px #f00;
-    box-shadow: inset 0px 0px 2px 2px #f00;
-}
-</code></pre>
-
-<p>我們這邊利用box-shadow做出有內嵌效果的div，並且加上5px的內距，會發現整個網站會長成這樣</p>
-
-<p><img src="https://lh5.googleusercontent.com/-dxl0B5r8Ksk/UL9zdMMiRLI/AAAAAAAACBc/lGKF0VdvFo8/s469/2012-12-05_231526.jpg" /></p>
-
-<p>這也是寫CSS常會發生的事情，一個沒注意就破版了，原因是之前設container寬度為450px，content為250px，兩個sidebar分別為100px，這樣加起來是剛好的，但加上了padding的5px以後(有左右兩邊，所以實際是10px)，兩個sidebar必須調整為95，這樣才不會擠壓到</p>
-
-<pre><code>#sidebar{
-    float:left;
-    background:#360;
-    width:95px;
-}
-#sidebar2{
-    float:left;
-    background:#F0F;
-    width:95px;
-}
-</code></pre>
-
-<p><img src="https://lh5.googleusercontent.com/-S0FvavMd3Lo/UL9zdySksMI/AAAAAAAACBk/DnzWTwuLljo/s468/2012-12-05_232026.jpg" /></p>
-
-<p>這樣就正常了，回到剛剛的box-shadow，可以看到為了跨瀏覽器的關係，我們在使用box-shadow會搭配每個瀏覽器的前綴</p>
-
-<pre><code>-webkit-box-shadow: inset 0px 0px 2px 2px #f00;
-</code></pre>
-
-<p>另外box-shadow屬性寫法如下</p>
-
-<pre><code>box-shadow: inset x-offset y-offset blur spread color
-</code></pre>
-
-<p>每個值所代表的意義為</p>
-
-<p><strong>x-offset</strong>: 水平位移植，必須要指定</p>
-
-<p><strong>y-offset</strong>: 垂直位移植，必須要指定</p>
-
-<p><strong>blur</strong>: 模糊效果，不能為負值，預設為0</p>
-
-<p><strong>spread</strong>: 擴散強度，可以為負值(縮小)，預設為0</p>
-
-<p><strong>color</strong>: 顏色，有些網站可能會寫預設值為黑色，<strong>但一般建議還是要給予顏色，因為有些瀏覽器預設值並不一定為黑色(例如手機)</strong></p>
-
-<p><strong>inset</strong>: 這個值有些人是放在<strong>最前面</strong>，有些是放在<strong>最後面</strong>，兩者皆可，如果有給予這個值box就會在陰影裡面，反之則在外面</p>
-
-<p>而除了box-shadow以外，CSS3其實還有針對文字的text-shadow，範例如下</p>
-
-<pre><code>h2{
-    Font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
-    color:#fff;
-    text-shadow: -2px 0px 3px #003366;
-}
-</code></pre>
-
-<p>差別在於text-shadow沒有spread，而效果看起來就像這樣</p>
-
-<p><img src="https://lh5.googleusercontent.com/-2vCt4XwlUoY/UL9zeNS-J5I/AAAAAAAACBo/TMv2Oo5TPAg/s469/2012-12-05_233015.jpg" /></p>
-
-<p>明顯可以看出文字擁有立體的感覺</p>
-
-<h2>CSS Gradients</h2>
-
-<p>用CSS3來表達漸層，用法其實不難，難的是要做到跨瀏覽器不是一件很容易的事情，以下是範例語法</p>
-
-<pre><code>#container{
-    background: #a8e7ff; /* Old browsers */
-    background: -moz-linear-gradient(top,  #a8e7ff 0%, #4096ee 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a8e7ff), color-stop(100%,#4096ee)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #a8e7ff 0%,#4096ee 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #a8e7ff 0%,#4096ee 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #a8e7ff 0%,#4096ee 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #a8e7ff 0%,#4096ee 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a8e7ff', endColorstr='#4096ee',GradientType=0 ); /* IE6-9 */
-}
-</code></pre>
-
-<p><img src="https://lh4.googleusercontent.com/-HaSJlf5Trxc/UL9zec5QzcI/AAAAAAAACBs/ewEGX4ImfBc/s605/2012-12-05_233546.jpg" /></p>
-
-<p>可以看到頁面從淡藍變成深藍，而且是用CSS而不是圖片來達成，但為了配合到每個瀏覽器這裡使用了8行的CSS，每一行的CSS都長的不太一樣，這也是比較令人煩惱的地方，基本的語法如下</p>
-
-<pre><code>(top,  #a8e7ff 0%,#4096ee 100%)
-</code></pre>
-
-<p>這意思就是指漸層的效果是從最上方開始變化到最下方，如果是50%，就是指從中間開始</p>
-
-<h2>Dropdown Menus</h2>
-
-<p>下拉選單是網站常見的元素，可以利用HTML加上CSS來呈現這樣的效果，關鍵點在於 <strong>hover</strong> 和 <strong>display:none</strong>，範例如下</p>
-
-<p>HTML</p>
-
-<pre><code>&lt;div class="menubar"&gt;
-&lt;ul&gt;
-    &lt;li&gt;&lt;a href="#" &gt;Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#" id="current"&gt;Products&lt;/a&gt;
-        &lt;ul&gt; &lt;li&gt;&lt;a href="#"&gt;Sliders&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Galleries&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Apps&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Extensions&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li&gt;&lt;a href="http://blog.rx836.tw/about.html"&gt;About&lt;/a&gt; &lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Company History&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Address&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Customer Service&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>CSS</p>
-
-<pre><code>.menubar{
-    border:none;
-    border:0px;
-    margin:0px;
-    padding:0px;
-    font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
-    font-size:14px;
-    font-weight:bold;
-}
-.menubar ul{
-    background: rgb(109,109,109);
-    height:50px;
-    list-style:none;
-    margin:0;
-    padding:0;
-}
-.menubar li{
-    float:left;
-    padding:0px;
-}
-.menubar li a{
-    background: rgb(109,109,109);
-    color:#cccccc;
-    display:block;
-    font-weight:normal;
-    line-height:50px;
-    margin:0px;
-    padding:0px 25px;
-    text-align:center;
-    text-decoration:none;
-}
-.menubar li a:hover, .menubar ul li:hover a{
-    background: rgb(71,71,71);
-    color:#FFFFFF;
-    text-decoration:none;
-}
-.menubar li ul{
-    background: rgb(109,109,109);
-    display:none;
-    height:auto;
-    padding:0px;
-    margin:0px;
-    border:0px;
-    position:absolute;
-    width:200px;
-    z-index:200;
-    /*top:1em;
-    /*left:0;*/
-}
-.menubar li:hover ul{
-    display:block;
-}
-.menubar li li {
-    background: rgb(109,109,109);
-    display:block;
-    float:none;
-    margin:0px;
-    padding:0px;
-    width:200px;
-}
-.menubar li:hover li a{
-    background:none;
-}
-.menubar li ul a{
-    display:block;
-    height:50px;
-    font-size:12px;
-    font-style:normal;
-    margin:0px;
-    padding:0px 10px 0px 15px;
-    text-align:left;
-}
-.menubar li ul a:hover, .menubar li ul li:hover a{
-    background: rgb(71,71,71);
-    border:0px;
-    color:#ffffff;
-    text-decoration:none;
-}
-.menubar p{
-    clear:left;
-}
-</code></pre>
-
-<p>看起來的效果就像這樣</p>
-
-<p><img src="https://lh4.googleusercontent.com/-bnIvT8x3nww/UL9ze-1MTWI/AAAAAAAACB8/c4k6lL2dy_k/s896/2012-12-05_235741.jpg" /></p>
-
-<p>不用任何一行js就可以做出下拉的選單，而剛剛提到的關鍵點屬性display</p>
-
-<pre><code>.menubar li:hover ul{
-    display:block;
-}
-</code></pre>
-
-<p>利用這個屬性就可以做到將滑鼠移過去的時候，子選單就會呈現出來</p>
-
-<h2>Border Radius</h2>
-
-<p><strong>圓角</strong>也是做網站設計很常用到的元素，利用CSS3的屬性border-radius也可以輕鬆做到，但有些人或許不知道圓角還可以針對四個角做不同的設置，範例如下</p>
-
-<p>CSS</p>
-
-<pre><code>#container{
-    background: #a8e7ff; /* Old browsers */
-    width:600px;
-    -webkit-border-radius: 20px 5px 115px 35px;
-    border-radius: 20px 5px 115px 35px;
-}
-</code></pre>
-
-<p>我們一樣拿剛剛最前面那個範例來說明，效果如下</p>
-
-<p><img src="https://lh3.googleusercontent.com/-xzuDA1ptHRo/UL9zfIUb32I/AAAAAAAACB4/cKv2qf7ahQM/s619/2012-12-06_001054.jpg" /></p>
-
-<p>可以看到四個角給的值不同，圓角的效果也都不同，但特別注意的是，在使用圓角效果時，要注意會不會有破版的情形發生，就如同圖的左下角圓角，跟剛剛提到的padding意思一樣</p>
-
-<p>以上是幾個對設計師來說好用的CSS屬性，希望對大家有幫助</p>
-
-<h3>參考資料:</h3>
-
-<p><a href="http://designfestival.com/5-css-properties-that-give-designers-fits/" target="_blank">5 CSS Properties That Give Designers Fits</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

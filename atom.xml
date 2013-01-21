@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-19T02:15:15+08:00</updated>
+  <updated>2013-01-21T16:07:21+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 輕鬆幫表格做responsive]]></title>
+    <link href="http://blog.rx836.tw/blog/responsive-tables/"/>
+    <updated>2013-01-21T12:28:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/responsive-tables</id>
+    <content type="html"><![CDATA[<p>因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來決定</p>
+
+<!--more-->
+
+
+<p>例如以文字為主的部落格或是簡單的頁面就很適合做RWD，但介面太複雜或是功能太多，建議還是另外開發專屬的獨立網站，有興趣的人可以參考這篇的 <a href="http://cssindesign.tumblr.com/post/40513264330/responsive-web" target="_blank">實作心得</a>，這邊就不討論太多</p>
+
+<p>今天這篇主要介紹一個jQuery plugin，叫FooTable，利用簡單的幾行程式，就可以將網頁裡面的 table 擁有 RWD 的效果</p>
+
+<h2>Start</h2>
+
+<p>首先要先下載 js 和 css，可以到 github 下載</p>
+
+<p><a href="https://github.com/bradvin/FooTable" target="_blank">DOWNLOAD</a></p>
+
+<p>載回來後會發現裡面有一些 js 和 css檔，還有幾個 demo 範例，但有一些檔案是看情形選擇載入，其中最主要的只有兩個檔案，分別是</p>
+
+<p>footable-0.1.js 和 footable-0.1.css</p>
+
+<p>在網頁裡面載入這兩支檔案和jQuery以後，接下來就來做簡單的範例</p>
+
+<h3>phone和tablet</h3>
+
+<p>FooTable最主要會判斷三種情形，除了一般的 Desktop 以外，還分成 phone 和 tablet，開發人員可以在每個欄位中，選擇要在什麼情況底下做縮排，以下是基本的HTML</p>
+
+<p>HTML部份</p>
+
+<pre><code>&lt;table class="footable"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th data-class="expand"&gt;
+        姓名
+      &lt;/th&gt;
+      &lt;th&gt;
+        職業
+      &lt;/th&gt;
+      &lt;th data-hide="phone"&gt;
+        年齡
+      &lt;/th&gt;
+      &lt;th data-hide="phone,tablet"&gt;
+        性別
+      &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;小馬&lt;/td&gt;&lt;td&gt;司機&lt;/td&gt;&lt;td&gt;59&lt;/td&gt;&lt;td&gt;男&lt;/td&gt;&lt;/tr&gt;          
+    &lt;tr&gt;&lt;td&gt;小陳&lt;/td&gt;&lt;td&gt;保全&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;td&gt;男&lt;/td&gt;&lt;/tr&gt;          
+    &lt;tr&gt;&lt;td&gt;小英&lt;/td&gt;&lt;td&gt;行政&lt;/td&gt;&lt;td&gt;27&lt;/td&gt;&lt;td&gt;女&lt;/td&gt;&lt;/tr&gt;          
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+
+<p>可以看到在&lt;thead&gt;底下會有 data-class 和 data-hide 兩個 HTML5 的自訂屬性，如果 data-class=&#8221;expand&#8221; 設在『姓名』那個欄位，代表的意思是會在此欄位建立 icon 圖案 『+』 和 『-』，而 data-hide 指的是該欄位在什麼情況下會隱藏縮排，例如在上面範例中的年齡設為 data-hide=&#8221;phone&#8221;，表示 phone 的寬度下會觸發此事件</p>
+
+<p>那或許會有人疑問，phone和 tablet 的判斷依據是什麼呢？這邊可以直接打開 footable-0.1.js 這支檔案搜尋底下這行原始碼</p>
+
+<pre><code>options: {
+  delay: 100, // The number of millseconds to wait before triggering the react event
+  breakpoints: { // The different screen resolution breakpoints
+    phone: 480,
+    tablet: 1024
+  },
+...
+...
+}
+</code></pre>
+
+<p>會發現原來 FooTable 預設屬性 phone 的寬度為480px，而 tablet 是1024，所以假設現在 Table 寬度只有 780，那擁有tablet 這個值的欄位就會做隱藏縮排，這些值都可以依照個人需求做修改，說了那麼多怕大家看不懂，那就直接來看結果圖吧</p>
+
+<p>table寬度大於1024px</p>
+
+<p><img src="https://lh6.googleusercontent.com/-SenmhgVS_s4/UPz2ku3YqeI/AAAAAAAACNc/vpvMWrwVeFk/s1077/2013-01-21_152914.jpg" /></p>
+
+<p>table寬度小於1024px，大於480px，性別被縮排，姓名多了展開的圖案『+』</p>
+
+<p><img src="https://lh6.googleusercontent.com/-AZyIxH4mZgY/UPz2kr5W8CI/AAAAAAAACNU/wDNk3hkqDNc/s823/2013-01-21_153046.jpg" /></p>
+
+<p>table寬度小於480px，性別和年齡都被縮排</p>
+
+<p><img src="https://lh4.googleusercontent.com/-taApAI4ZcRk/UPz2ks5zlpI/AAAAAAAACNY/JM2RGkX-BPU/s219/2013-01-21_153224.jpg" /></p>
+
+<p>點擊每一列即可展開看被隱藏的資訊</p>
+
+<p><img src="https://lh3.googleusercontent.com/-PNOSlcS6mhU/UPz2lfqAOvI/AAAAAAAACNg/jhzxH6Y5l_M/s227/2013-01-21_153321.jpg" /></p>
+
+<p>是不是很方便呢？</p>
+
+<h3>搜尋與排序</h3>
+
+<p>除了一般的 table 以外，常用到的『搜尋』和『排序』當然也不可少，FooTable貼心的地方在於已經幫你處理好這方面的需求，只要載入相關的 js 和加上自訂的 data- 屬性就可以完成所要的功能</p>
+
+<p><a href="http://themergency.com/footable-demo/demo-sorting.htm" target="_blank">Sorting demo</a></p>
+
+<p><a href="http://themergency.com/footable-demo/demo-filtering.htm" target="_blank">Filtering demo</a></p>
+
+<p>但比較可惜的地方在於沒有實做分頁這塊，所以如果有這方面需求的朋友，可能要自己另外加上</p>
+
+<h2>總結</h2>
+
+<p>個人覺得這款jQuery plugin做的相當簡單，使用上也十分容易，主要就是在欄位方面加上 data- 屬性，可擴展性也高，可以依照『搜尋』和『排序』的邏輯模式新增自己的功能，在縮排與顯示方面的UI設計也讓人感到實用方便，有興趣的朋友可以參考看看</p>
+
+<h3>參考資料:</h3>
+
+<p><a href="http://themergency.com/footable/" target="_blank">FooTable</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 做出磁磚效果變化的圖片轉換]]></title>
@@ -2671,130 +2785,6 @@ $('#email').on('blur', function() {
 <p><a href="http://wyz.67ge.com/css-triangle/" target="_blank">使用纯CSS实现的各种三角，全浏览器兼容</a></p>
 
 <p><a href="http://www.dearoom.com/blog/jquery%E4%B8%AD-heightwidth-innerheightinnerwidth-outerheightouterwidth%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank">jQuery中 height(width) innerHeight(innerWidth) outerHeight(outerWidth)的区别</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS] CSS3 box-shadow-用一個div畫出IPHONE 4]]></title>
-    <link href="http://blog.rx836.tw/blog/css3-real-beauty-box-shadows/"/>
-    <updated>2012-11-26T10:21:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/css3-real-beauty-box-shadows</id>
-    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-gnXY1RrRaSU/ULLgp4EX-6I/AAAAAAAAB84/m3JLnkc5h_E/s125/a.jpg" /></p>
-
-<p>CSS3有許多讓人驚艷的地方，其中之一就是「box-shadow」，在這之前為了做出陰影效果，可能需要一些Photoshop的幫助，但在CSS3卻可以用純CSS來達到這樣的結果，但如果你認為「box-shadow」只能拿來做陰影效果的話，那可就誤會大了，看完這篇文章，你或許會有不同的想法</p>
-
-<!--more-->
-
-
-<p>在此之前，我們先來介紹 <strong>box-shadow</strong> 一些基本的屬性和用法</p>
-
-<p><strong>x-offset</strong>: 水平位移植，必須要指定</p>
-
-<p><strong>y-offset</strong>: 垂直位移植，必須要指定</p>
-
-<p><strong>blur</strong>: 模糊效果，不能為負值，預設為0</p>
-
-<p><strong>spread</strong>: 擴散強度，可以為負值(縮小)，預設為0</p>
-
-<p><strong>color</strong>: 顏色，有些網站可能會寫預設值為黑色，<strong>但一般建議還是要給予顏色，因為有些瀏覽器預設值並不一定為黑色(例如手機)</strong></p>
-
-<p><strong>inset</strong>: 這個值有些人是放在<strong>最前面</strong>，有些是放在<strong>最後面</strong>，兩者皆可，如果有給予這個值box就會在陰影裡面，反之則在外面</p>
-
-<p>以下為box-shadow語法</p>
-
-<pre><code>box-shadow: inset x-offset y-offset blur spread color
-</code></pre>
-
-<p>記得x-offset和y-offset為必要值，其它依照排列，如果只有blur可不填spread，但有spread一定要給blur值(可以為0px)</p>
-
-<p>特別注意的是，<strong>spread</strong>這個屬性值，等等會來好好說明，先來看幾個簡單的範例</p>
-
-<p>以下的範例HTML部分都只有這一行</p>
-
-<pre><code>&lt;div class="shadow"&gt;&lt;/div&gt;
-</code></pre>
-
-<h3>X and Y Offsets</h3>
-
-<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="mo08pkqb" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>這邊建立了一個width和height都為100px的box，然後陰影依照這個box往右位移10px，往下位移10px，且顏色為黑色</p>
-
-<h3>Inset</h3>
-
-<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="eesxhanx" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>如果有給予 <strong>inset</strong>，box就會在陰影裡面</p>
-
-<h3>Blur</h3>
-
-<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="vic8fc7f" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>添加 <strong>Blur</strong> 值，會讓陰影有模糊效果</p>
-
-<h3>Colors</h3>
-
-<pre class="_cssdeck_embed" data-pane="output,css" data-user="rx836" data-href="zcpl4thp" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>也可以加些不一樣的顏色，這裡是給予rgba值</p>
-
-<h3>spread</h3>
-
-<p>剛剛有特別要注意到 <strong>spread</strong> 這個值，原因就是他可以擴展陰影的範圍，可以放大可以縮小，但不能改變形狀，因為陰影的形狀是來自box(就跟人的影子一樣)，也就是box是圓形，陰影就是圓形，是方形就是方形</p>
-
-<pre class="_cssdeck_embed" data-pane="output,css,html" data-user="rx836" data-href="qnznlsof" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>如果spread為5px，那陰影就會擴展5px，如果為-5px，那陰影就會縮減5px，也就是說可以依照需求改變陰影的大小，這樣可以幹嘛呢？可以看看下面這個範例</p>
-
-<pre class="_cssdeck_embed" data-pane="output,css,html" data-user="rx836" data-href="qmbxujts" data-version="0"></pre>
-
-
-<script async src="http://cssdeck.com/assets/js/embed.js"></script>
-
-
-<p>看到了嗎？我可以用<strong>一個div就創造出這麼多個box</strong>，也就是說我可以用一個元素來做出很多意想不到的效果，例如</p>
-
-<p>我可以用一個div畫出一支IPHONE 4</p>
-
-<p><a href="http://cssdeck.com/labs/creating-single-element-iphone-using-css3" target="_blank"><img src="https://lh3.googleusercontent.com/-L9BuoRAjjfE/ULLjV_tNNGI/AAAAAAAAB9Y/SSAO9DOdBMU/s558/rr.jpg" /></a></p>
-
-<p>或用一個div畫出蒙娜麗莎的微笑</p>
-
-<p><a href="http://cssdeck.com/labs/mona-lisa-with-pure-css" target="_blank"><img src="https://lh5.googleusercontent.com/-gzi2x2_clBk/ULLjV4zuCnI/AAAAAAAAB9g/Oo9VmXXkF_E/s535/rr1.jpg" /></a></p>
-
-<p>甚至是利用這個原理，來當作畫Pixel圖案來使用</p>
-
-<p><a href="http://cssdeck.com/labs/create-a-pixel-character-using-css3-box-shadows" target="_blank"><img src="https://lh6.googleusercontent.com/-lnfW4QAeeao/ULLjV84Z0oI/AAAAAAAAB9c/1J0e5V0VjS0/s300/rr2.jpg" /></a></p>
-
-<p>所以好好運用box-shadow，他可以發揮許多意想不到的創意喔</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://codetheory.in/the-real-beauty-of-css3-box-shadows/" target="_blank">The Real Beauty of CSS3 Box Shadows</a></p>
-
-<p><a href="http://www.w3schools.com/cssref/css3_pr_box-shadow.asp" target="_blank">CSS3 的box-shadow屬性</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
