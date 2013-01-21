@@ -56,6 +56,12 @@ HTML部份
       </tbody>
     </table>
 	
+js部份
+
+	$(function() {
+      $('table').footable();
+    });
+	
 可以看到在&lt;thead&gt;底下會有 data-class 和 data-hide 兩個 HTML5 的自訂屬性，如果 data-class="expand" 設在『姓名』那個欄位，**代表的意思是會在此欄位建立 icon 圖案 『+』 和 『-』**，而 data-hide 指的是**該欄位在什麼情況下會隱藏縮排**，例如在上面範例中的年齡設為 data-hide="phone"，表示在 phone 的寬度下會觸發此事件
 
 那或許會有人疑問，phone和 tablet 的寬度判斷依據是什麼呢？這邊可以直接打開 footable-0.1.js 這支檔案，搜尋底下這行原始碼
