@@ -3,7 +3,7 @@ layout: post
 title: "[CSS] 認識OOCSS"
 date: 2013-01-16 16:15
 comments: true
-categories: 
+categories: CSS
 ---
 
 最近在一些國外文章常看到『OOCSS』，另外也在 <a href="http://www.webconf.tw/" target="_blank">WebConf Taiwan 2013</a> 聽到許多講者分享中提到，所以藉此花了一些時間來認識一下OOCSS，並且紀錄在這裡供大家參考參考
