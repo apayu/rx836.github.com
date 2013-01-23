@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-23T22:58:44+08:00</updated>
+  <updated>2013-01-23T23:11:40+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -44,7 +44,7 @@
 &lt;script type="text/javascript" src="js/jquery.dropdown.js"&gt;&lt;/script&gt;
 </code></pre>
 
-<p>會用到 modernizr 是因為在 jquery.dropdown.js 這支檔案裡面有用到判斷，是否支援transition，稍後會提到</p>
+<p>會用到 modernizr 是因為在 jquery.dropdown.js 這支檔案裡面有用到判斷是否支援transition，稍後會提到</p>
 
 <p>接著是html部份</p>
 
@@ -82,13 +82,11 @@
 &lt;/div&gt;
 </code></pre>
 
-<p>所以就可以藉由CSS來自行裝飾，就像下面結果圖一樣</p>
+<p>利用新的html結構就可以藉由CSS來自行裝飾，就像下面結果圖一樣，這邊我是直接用範例所附的css檔</p>
 
 <p><img src="https://lh5.googleusercontent.com/-evzDeROGJXM/UP_5cKXoSNI/AAAAAAAACOc/GgnPHX_BsjQ/s328/2013-01-23_220729.jpg" /></p>
 
 <p><img src="https://lh5.googleusercontent.com/-jM7YmJVygBs/UP_5cFenQ8I/AAAAAAAACOY/PzAILoleuwo/s345/2013-01-23_220659.jpg" /></p>
-
-<p>這邊我是直接用範例所附的css檔</p>
 
 <h3>modernizr</h3>
 
@@ -99,6 +97,13 @@
 <p>IE9沒支援 class 名稱就是 no-csstransitions</p>
 
 <p><img src="https://lh3.googleusercontent.com/-G-9zngyNiH4/UP_5dLraQhI/AAAAAAAACOk/foYV278aKs0/s401/2013-01-23_221500.jpg" /></p>
+
+<p>所以剛提到主程式裡面，判斷的程式碼就像這樣</p>
+
+<pre><code>if( Modernizr.csstransitions ) {
+    setTimeout( function() { self.opts.css( 'transition', 'all ' + self.options.speed + 'ms ' + self.options.easing ); }, 25 );
+}
+</code></pre>
 
 <h3>更不一樣的下拉選單</h3>
 
@@ -117,7 +122,7 @@
 
 <h2>總結</h2>
 
-<p>在使用上會發現一個問題就是，每當網頁載入時，<strong>因為要透過js來做替換html結構</strong>，所以先看到原生的下拉選單元素，然後瞬間才會換成客製化元素，難免會覺得不夠細膩，但假如了解他運作的方式，直接自己製作html而不用經過 jQuery plugin 更換，會是更好的方法</p>
+<p>在使用上會發現一個問題就是，每當網頁載入時，<strong>因為要透過js來做替換html結構</strong>，所以會先看到原生的下拉選單元素，然後瞬間才會換成客製化元素，難免會覺得不夠細膩，但假如了解他運作的方式，直接自己製作html而不用經過 jQuery plugin 更換，會是更好的方法</p>
 
 <h2>參考資料:</h2>
 
