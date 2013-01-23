@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-21T18:12:09+08:00</updated>
+  <updated>2013-01-23T22:58:44+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 用jQuery客製化下拉選單]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-drop-down-lists/"/>
+    <updated>2013-01-23T17:16:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-drop-down-lists</id>
+    <content type="html"><![CDATA[<p>下拉式選單(DropDownList)在表單填寫裡面，是很常用到的網頁元素，但原生的下拉式選單看久了，難免會覺得太過單調，有時為了配合整體網站的設計，會有客製化的需求，而這篇文章主要是介紹如何用 jQuery plugin 客製化下拉選單</p>
+
+<!--more-->
+
+
+<p>另外對客製化 CheckBox 有興趣的朋友，也可以參考 <a href="http://blog.rx836.tw/blog/css3-checkboxes-radiobuttons/" target="_blank">[CSS] 拋棄原生checkbox用CSS3自己簡單動手做</a> 這篇文章</p>
+
+<h2>Start</h2>
+
+<p>這裡我主要用的是 jquery.dropdown.js 這支plugin，首先要先下載js和css回來</p>
+
+<p><a href="http://tympanus.net/Development/SimpleDropDownEffects/SimpleDropDownEffects.zip?84cd58" target="_blank">DOWNLOAD SOURCE</a></p>
+
+<p>在js的資料夾裡面有兩個檔案，分別是</p>
+
+<p>jquery.dropdown.js</p>
+
+<p>modernizr.custom.63321.js</p>
+
+<p>連同 jQuery 載入到網頁裡面</p>
+
+<pre><code>&lt;script src="js/modernizr.custom.63321.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.dropdown.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>會用到 modernizr 是因為在 jquery.dropdown.js 這支檔案裡面有用到判斷，是否支援transition，稍後會提到</p>
+
+<p>接著是html部份</p>
+
+<pre><code>&lt;select id="cd-dropdown" class="cd-select"&gt;
+    &lt;option value="-1" selected&gt;請選擇一種動物&lt;/option&gt;
+    &lt;option value="1" class="icon-monkey"&gt;猴子&lt;/option&gt;
+    &lt;option value="2" class="icon-bear"&gt;熊&lt;/option&gt;
+    &lt;option value="3" class="icon-squirrel"&gt;松鼠&lt;/option&gt;
+    &lt;option value="4" class="icon-elephant"&gt;大象&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+<p>js部份，一行程式碼很簡單明瞭</p>
+
+<pre><code>$( function() {
+
+    $( '#cd-dropdown' ).dropdown();
+
+});
+</code></pre>
+
+<p>css部份</p>
+
+<p>利用 plugin 做客製化下拉選單，關鍵就在於將原生的&lt;select&gt;用jQuery替換掉，仔細看替換掉後的html結構，會發現其實長的像這樣</p>
+
+<pre><code>&lt;div class="cd-dropdown"&gt;
+    &lt;span&gt;請選擇一種動物&lt;/span&gt;
+    &lt;input type="hidden" name="cd-dropdown"&gt;
+    &lt;ul&gt;
+        &lt;li data-value="1"&gt;&lt;span class="icon-monkey"&gt;猴子&lt;/span&gt;&lt;/li&gt;
+        &lt;li data-value="2"&gt;&lt;span class="icon-bear"&gt;熊&lt;/span&gt;&lt;/li&gt;
+        &lt;li data-value="3"&gt;&lt;span class="icon-squirrel"&gt;松鼠&lt;/span&gt;&lt;/li&gt;
+        &lt;li data-value="4"&gt;&lt;span class="icon-elephant"&gt;大象&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>所以就可以藉由CSS來自行裝飾，就像下面結果圖一樣</p>
+
+<p><img src="https://lh5.googleusercontent.com/-evzDeROGJXM/UP_5cKXoSNI/AAAAAAAACOc/GgnPHX_BsjQ/s328/2013-01-23_220729.jpg" /></p>
+
+<p><img src="https://lh5.googleusercontent.com/-jM7YmJVygBs/UP_5cFenQ8I/AAAAAAAACOY/PzAILoleuwo/s345/2013-01-23_220659.jpg" /></p>
+
+<p>這邊我是直接用範例所附的css檔</p>
+
+<h3>modernizr</h3>
+
+<p>前面有提到使用 modernizr 的關係是因為有些瀏覽器不支援transition，但自己要寫那些判斷程式又稍嫌麻煩，而 modernizr 正是解決這方面需求的js函式庫，藉由函式庫我們可以透過 class 的名稱來做判斷，例如 firefox 有支援 transition 的話，在html上會看到 class 名稱為 csstransitions</p>
+
+<p><img src="https://lh4.googleusercontent.com/-7d8Z_8f3zqI/UP_5cDplfCI/AAAAAAAACOU/FuEhK0BRsd4/s452/2013-01-23_221311.jpg" /></p>
+
+<p>IE9沒支援 class 名稱就是 no-csstransitions</p>
+
+<p><img src="https://lh3.googleusercontent.com/-G-9zngyNiH4/UP_5dLraQhI/AAAAAAAACOk/foYV278aKs0/s401/2013-01-23_221500.jpg" /></p>
+
+<h3>更不一樣的下拉選單</h3>
+
+<p>這款 plugin 還有提供一些參數做變化，例如給予的參數值像下面這樣</p>
+
+<pre><code>$( '#cd-dropdown' ).dropdown( {
+    gutter : 5,
+    delay : 40,
+    rotated : 'left'
+} );
+</code></pre>
+
+<p>其中　rotated　就是旋轉的方向，再搭配css就可以做出更有特色的下拉選單</p>
+
+<p><img src="https://lh6.googleusercontent.com/-McvNbs1qkQs/UP_5daenx8I/AAAAAAAACOo/pfBHIHJWFyQ/s471/2013-01-23_223858.jpg" /></p>
+
+<h2>總結</h2>
+
+<p>在使用上會發現一個問題就是，每當網頁載入時，<strong>因為要透過js來做替換html結構</strong>，所以先看到原生的下拉選單元素，然後瞬間才會換成客製化元素，難免會覺得不夠細膩，但假如了解他運作的方式，直接自己製作html而不用經過 jQuery plugin 更換，會是更好的方法</p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://tympanus.net/codrops/2012/11/29/simple-effects-for-drop-down-lists/" target="_blank">SIMPLE EFFECTS FOR DROP-DOWN LISTS</a></p>
+
+<p><a href="http://modernizr.com/" target="_blank">modernizr</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 輕鬆幫表格做responsive]]></title>
@@ -542,164 +658,6 @@ function funSource(){
 <h3>參考資料:</h3>
 
 <p><a href="http://welldonethings.com/tags/manager" target="_blank">Tags Manager (a jQuery plugin)</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 簡易的數值格式化-Numeral.js]]></title>
-    <link href="http://blog.rx836.tw/blog/jquery-plugin-format-number/"/>
-    <updated>2012-12-04T12:34:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/jquery-plugin-format-number</id>
-    <content type="html"><![CDATA[<p>對於將數字或是文字做格式化一直都覺得很阿雜，例如將算出來的數字加個千分位的逗點，或是加個貨幣符號，雖然自己做並不難，但還是希望可以有個plugin能做到這些事情，所以今天就來筆記 Numeral.js  這款plugin</p>
-
-<!--more-->
-
-
-<h2>Start</h2>
-
-<p>用法很簡單容易，先下載 <a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
-
-<p>接著載入到網頁裡面後，js的寫法如下</p>
-
-<pre><code>var string = numeral(1000).format('0,0');
-// 1,000
-</code></pre>
-
-<p>這樣子把數字丟進去以後，在 <strong>format()</strong> 傳入相對應的格式，就可以擁有千分位的逗點，其它還有</p>
-
-<h3>名次</h3>
-
-<pre><code>var string = numeral(12).format('0o');
-//12th
-</code></pre>
-
-<h3>貨幣符號</h3>
-
-<pre><code>var string = numeral(1001).format('$ 0,0[.]00');
-//$ 1,001
-</code></pre>
-
-<h3>Bytes</h3>
-
-<pre><code>var string = numeral(7884486213).format('0.0b');
-//7.3GB
-</code></pre>
-
-<h3>百分率</h3>
-
-<pre><code>var string = numeral(0.974878234).format('0.000%');
-//97.488%
-</code></pre>
-
-<h3>時間</h3>
-
-<pre><code>var string = numeral(238).format('00:00:00');
-//0:03:58
-</code></pre>
-
-<h3>Unformat</h3>
-
-<p>能轉換過去，當然也可以轉換回來</p>
-
-<pre><code>var string = numeral().unformat('12th');
-//12
-</code></pre>
-
-<h3>加減乘除</h3>
-
-<pre><code>var number = numeral(1000);
-
-var added = number.add(10);
-// 1010
-</code></pre>
-
-<p>這功能我是覺得有點多餘XD，去看source也只是做加減乘除，不太需要再多此一舉</p>
-
-<h2>source code</h2>
-
-<p>因為最近想自己嘗試練習多寫一些plugin，所以會去觀摩別人的寫法，numeral.js是一個蠻簡單明瞭的範例，所以大概抓幾個重點出來筆記心得，有興趣的人可以一起看看XD</p>
-
-<p>1.建立一個名為Numeral的函式</p>
-
-<p>數值就是從這邊傳入</p>
-
-<pre><code>// Numeral prototype object
-function Numeral (number) {
-    this._n = number;
-}
-</code></pre>
-
-<p>2.加入一些prototype</p>
-
-<pre><code>numeral.fn = Numeral.prototype = {
-
-    clone : function () {
-        // ...
-    },
-
-    format : function (inputString) {           
-        // ...
-    },
-
-    // ...
-    // ...
-
-    multiply : function (value) {
-        // ...
-    },
-
-    divide : function (value) {
-        // ...
-    },
-
-    difference : function (value) {
-        // ...
-    }
-
-};
-</code></pre>
-
-<p>以上兩個為程式的主體，所以有了這個架構我們就可以這樣寫</p>
-
-<pre><code>numeral(1000).format('0,0');
-</code></pre>
-
-<p>3.其它大部分就是函式的處理</p>
-
-<pre><code>function formatNumeral (n, format) {
-    var output;
-
-    // figure out what kind of format we are dealing with
-    if (format.indexOf('$') &gt; -1) { // currency!!!!!
-        output = formatCurrency(n, format);
-    } else if (format.indexOf('%') &gt; -1) { // percentage
-        output = formatPercentage(n, format);
-    } else if (format.indexOf(':') &gt; -1) { // time
-        output = formatTime(n, format);
-    } else { // plain ol' numbers or bytes
-        output = formatNumber(n, format);
-    }
-
-    // return string
-    return output;
-}
-</code></pre>
-
-<p>會發現傳入的參數為 <strong>n</strong> 和 <strong>format</strong></p>
-
-<p>n就是 <strong>Numeral函式</strong> 本身，裡面帶有傳入的數值和prototype這些東西</p>
-
-<p>format就是要進行什麼樣的格式化</p>
-
-<p>如果format裡面含有$就是要進行貨幣的格式化，有%就是要進行百分比的格式化，其它以此類推</p>
-
-<h3>參考資料:</h3>
-
-<p><a href="https://github.com/adamwdraper/Numeral-js" target="_blank">Github Numeral-js</a></p>
-
-<p><a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[JavaScript] DocumentFragments-JS加快效能的好物 - apa</title>
+  <title>[jQ-Plugin] 用jQuery客製化下拉選單 - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="JavaScript裡面有個物件叫DocumentFragments，它不算是新的觀念或新的技術，但我則是最近才認識到他，會想筆記這篇是因為他在操作DOM這方面的效能頗為出色，不過真的實驗下來好像只有某幾個瀏覽器或是版本才有明顯的效果，User的環境不同好像也會有些許的差異， &hellip;">
+  <meta name="description" content="下拉式選單(DropDownList)在表單填寫裡面，是很常用到的網頁元素，但原生的下拉式選單看久了，難免會覺得太過單調，有時為了配合整體網站的設計，會有客製化的需求，而這篇文章主要是介紹如何用 jQuery plugin 客製化下拉選單 另外對客製化 CheckBox 有興趣的朋友，也可以參考 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/javascript-documentframent/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/jquery-drop-down-lists/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[JavaScript] DocumentFragments-JS加快效能的好物 - apa" />
+<meta property="og:title" content="[jQ-Plugin] 用jQuery客製化下拉選單 - apa" />
 
-<meta property="og:description" content="JavaScript裡面有個物件叫DocumentFragments，它不算是新的觀念或新的技術，但我則是最近才認識到他，會想筆記這篇是因為他在操作DOM這方面的效能頗為出色，不過真的實驗下來好像只有某幾個瀏覽器或是版本才有明顯的效果，User的環境不同好像也會有些許的差異， &hellip;" />
+<meta property="og:description" content="下拉式選單(DropDownList)在表單填寫裡面，是很常用到的網頁元素，但原生的下拉式選單看久了，難免會覺得太過單調，有時為了配合整體網站的設計，會有客製化的需求，而這篇文章主要是介紹如何用 jQuery plugin 客製化下拉選單 另外對客製化 CheckBox 有興趣的朋友，也可以參考 &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/javascript-documentframent/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/jquery-drop-down-lists/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[JavaScript] DocumentFragments-JS加快效能的好物</h1>
+      <h1 class="entry-title">[jQ-Plugin] 用jQuery客製化下拉選單</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-12-18T14:38:00+08:00" pubdate data-updated="true">Dec 18<span>th</span>, 2012</time>
+<time datetime="2013-01-23T17:16:00+08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,80 +113,112 @@
   </header>
 
 
-<div class="entry-content"><p>JavaScript裡面有個物件叫DocumentFragments，它不算是新的觀念或新的技術，但我則是最近才認識到他，會想筆記這篇是因為他在操作DOM這方面的效能頗為出色，不過真的實驗下來好像只有某幾個瀏覽器或是版本才有明顯的效果，User的環境不同好像也會有些許的差異，下面就來看看用法和實際測試的結果</p>
+<div class="entry-content"><p>下拉式選單(DropDownList)在表單填寫裡面，是很常用到的網頁元素，但原生的下拉式選單看久了，難免會覺得太過單調，有時為了配合整體網站的設計，會有客製化的需求，而這篇文章主要是介紹如何用 jQuery plugin 客製化下拉選單</p>
 
 <!--more-->
 
 
-<h2>實驗開始</h2>
+<p>另外對客製化 CheckBox 有興趣的朋友，也可以參考 <a href="http://blog.rx836.tw/blog/css3-checkboxes-radiobuttons/" target="_blank">[CSS] 拋棄原生checkbox用CSS3自己簡單動手做</a> 這篇文章</p>
 
-<p>假設一個情況，我們有時候可能要大量的動態增加元素，例如很多很多的&lt;div&gt;，我們會這樣寫</p>
+<h2>Start</h2>
 
-<pre><code>function CreateNodes(){
-    for( var i=0; i&lt;10000; i++ ) {
-        var item = document.createElement('div');
-        $(item).text('div-'+i);
-        $(item).css({
-            background: 'blue',
-            padding: 5,
-            margin: 5,
-            float: 'left'
-        });
-        $('body').append(item);
-    }
-}
+<p>這裡我主要用的是 jquery.dropdown.js 這支plugin，首先要先下載js和css回來</p>
+
+<p><a href="http://tympanus.net/Development/SimpleDropDownEffects/SimpleDropDownEffects.zip?84cd58" target="_blank">DOWNLOAD SOURCE</a></p>
+
+<p>在js的資料夾裡面有兩個檔案，分別是</p>
+
+<p>jquery.dropdown.js</p>
+
+<p>modernizr.custom.63321.js</p>
+
+<p>連同 jQuery 載入到網頁裡面</p>
+
+<pre><code>&lt;script src="js/modernizr.custom.63321.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.dropdown.js"&gt;&lt;/script&gt;
 </code></pre>
 
-<p>這裡我們利用for迴圈增加了10000個div，不過這裡有個缺點，就是每一次新增一個div，都會對browser做一次『更新頁面』這個動作，所以如果新增10000個&lt;div&gt;，就會有一萬次的更新</p>
+<p>會用到 modernizr 是因為在 jquery.dropdown.js 這支檔案裡面有用到判斷，是否支援transition，稍後會提到</p>
 
-<p>再來我們看看DocumentFragment的寫法</p>
+<p>接著是html部份</p>
 
-<pre><code>function CreateFragments(){
-    var fragment = document.createDocumentFragment();
-    for( var i=0; i&lt;10000; i++ ) {
-        var item = document.createElement('div');
-        $(item).text('div-'+i);
-        $(item).css({
-            background: 'blue',
-            padding: 5,
-            margin: 5,
-            float: 'left'
-        });
-        fragment.appendChild(item);
-    }
-    $('body').append(fragment);
-}
+<pre><code>&lt;select id="cd-dropdown" class="cd-select"&gt;
+    &lt;option value="-1" selected&gt;請選擇一種動物&lt;/option&gt;
+    &lt;option value="1" class="icon-monkey"&gt;猴子&lt;/option&gt;
+    &lt;option value="2" class="icon-bear"&gt;熊&lt;/option&gt;
+    &lt;option value="3" class="icon-squirrel"&gt;松鼠&lt;/option&gt;
+    &lt;option value="4" class="icon-elephant"&gt;大象&lt;/option&gt;
+&lt;/select&gt;
 </code></pre>
 
-<p>關鍵點在於多了一個 <strong>document.createDocumentFragment()</strong> 這個物件，這個物件是一個虛擬的DOM節點，它可以增加元素在這個虛擬節點上面，就跟正常DOM差不多，但因為他是虛擬的，所以browser並不會做更新這個動作，而最後再把DocumentFragment裡面的元素一次加到body裡面，這有點像是buffer(緩衝區)的效果</p>
+<p>js部份，一行程式碼很簡單明瞭</p>
 
-<p>最後我用了手邊的瀏覽器測了一下結果</p>
+<pre><code>$( function() {
 
-<p><strong>Firefox 17.0.1:</strong></p>
+    $( '#cd-dropdown' ).dropdown();
 
-<p>用DocumentFragment反而慢了0.6~0.8秒左右</p>
+});
+</code></pre>
 
-<p><strong>Google Chrome 23.0.1271.97:</strong></p>
+<p>css部份</p>
 
-<p>沒有明顯的差別</p>
+<p>利用 plugin 做客製化下拉選單，關鍵就在於將原生的&lt;select&gt;用jQuery替換掉，仔細看替換掉後的html結構，會發現其實長的像這樣</p>
 
-<p><strong>IE9:</strong></p>
+<pre><code>&lt;div class="cd-dropdown"&gt;
+    &lt;span&gt;請選擇一種動物&lt;/span&gt;
+    &lt;input type="hidden" name="cd-dropdown"&gt;
+    &lt;ul&gt;
+        &lt;li data-value="1"&gt;&lt;span class="icon-monkey"&gt;猴子&lt;/span&gt;&lt;/li&gt;
+        &lt;li data-value="2"&gt;&lt;span class="icon-bear"&gt;熊&lt;/span&gt;&lt;/li&gt;
+        &lt;li data-value="3"&gt;&lt;span class="icon-squirrel"&gt;松鼠&lt;/span&gt;&lt;/li&gt;
+        &lt;li data-value="4"&gt;&lt;span class="icon-elephant"&gt;大象&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
 
-<p>用了DocumentFragment大概10秒左右就可以載完畫面，沒用大概要花上20幾秒&#8230;</p>
+<p>所以就可以藉由CSS來自行裝飾，就像下面結果圖一樣</p>
 
-<h2>結論</h2>
+<p><img src="https://lh5.googleusercontent.com/-evzDeROGJXM/UP_5cKXoSNI/AAAAAAAACOc/GgnPHX_BsjQ/s328/2013-01-23_220729.jpg" /></p>
 
-<p>這裡有個 <a href="http://jsperf.com/out-of-dom-vs-documentfragment/3" target="_blank">網站</a> 裡面有各個瀏覽器版本的測試報告，有興趣的可以參考看看，整體看下來DocumentFragment的確可以有效改善操作DOM的效能，我的想法是，其實現在的瀏覽器速度越來越快，有時候真的很難感受的到那幾毫秒的差距，但如果要顧慮到支援舊有的瀏覽器，那效能部分可能就要注意一下，不過適時的提醒用戶，想要有順暢的體驗，還是擺上Chrome或Firefox的下載連結其實也是不錯的</p>
+<p><img src="https://lh5.googleusercontent.com/-jM7YmJVygBs/UP_5cFenQ8I/AAAAAAAACOY/PzAILoleuwo/s345/2013-01-23_220659.jpg" /></p>
 
-<h3>參考資料:</h3>
+<p>這邊我是直接用範例所附的css檔</p>
 
-<p><a href="http://davidwalsh.name/documentfragment" target="_blank">JavaScript DocumentFragment</a></p>
+<h3>modernizr</h3>
 
-<p><a href="http://jsperf.com/out-of-dom-vs-documentfragment/3" target="_blank">out of dom vs documentfragment</a></p>
+<p>前面有提到使用 modernizr 的關係是因為有些瀏覽器不支援transition，但自己要寫那些判斷程式又稍嫌麻煩，而 modernizr 正是解決這方面需求的js函式庫，藉由函式庫我們可以透過 class 的名稱來做判斷，例如 firefox 有支援 transition 的話，在html上會看到 class 名稱為 csstransitions</p>
 
-<p><a href="http://www.hujuntao.com/archives/using-documentfragment-speed-up-dom-rendering.html" target="_blank">利用DocumentFragment加快DOM渲染速度</a></p>
+<p><img src="https://lh4.googleusercontent.com/-7d8Z_8f3zqI/UP_5cDplfCI/AAAAAAAACOU/FuEhK0BRsd4/s452/2013-01-23_221311.jpg" /></p>
 
-<p><a href="http://fstoke.me/blog/?p=2487" target="_blank">使用DocumentFragment來加快DOM操作速度</a></p>
+<p>IE9沒支援 class 名稱就是 no-csstransitions</p>
+
+<p><img src="https://lh3.googleusercontent.com/-G-9zngyNiH4/UP_5dLraQhI/AAAAAAAACOk/foYV278aKs0/s401/2013-01-23_221500.jpg" /></p>
+
+<h3>更不一樣的下拉選單</h3>
+
+<p>這款 plugin 還有提供一些參數做變化，例如給予的參數值像下面這樣</p>
+
+<pre><code>$( '#cd-dropdown' ).dropdown( {
+    gutter : 5,
+    delay : 40,
+    rotated : 'left'
+} );
+</code></pre>
+
+<p>其中　rotated　就是旋轉的方向，再搭配css就可以做出更有特色的下拉選單</p>
+
+<p><img src="https://lh6.googleusercontent.com/-McvNbs1qkQs/UP_5daenx8I/AAAAAAAACOo/pfBHIHJWFyQ/s471/2013-01-23_223858.jpg" /></p>
+
+<h2>總結</h2>
+
+<p>在使用上會發現一個問題就是，每當網頁載入時，<strong>因為要透過js來做替換html結構</strong>，所以先看到原生的下拉選單元素，然後瞬間才會換成客製化元素，難免會覺得不夠細膩，但假如了解他運作的方式，直接自己製作html而不用經過 jQuery plugin 更換，會是更好的方法</p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://tympanus.net/codrops/2012/11/29/simple-effects-for-drop-down-lists/" target="_blank">SIMPLE EFFECTS FOR DROP-DOWN LISTS</a></p>
+
+<p><a href="http://modernizr.com/" target="_blank">modernizr</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 </div>
@@ -222,12 +254,12 @@
   
 
 
-<time datetime="2012-12-18T14:38:00+08:00" pubdate data-updated="true">Dec 18<span>th</span>, 2012</time>
+<time datetime="2013-01-23T17:16:00+08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>
   
 </span>
 
@@ -235,10 +267,8 @@
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-ajax-loader/" title="Previous Post: [jQuery] 自製jQuery Ajax Loader">&laquo; [jQuery] 自製jQuery Ajax Loader</a>
+        <a class="basic-alignment left" href="/blog/responsive-tables/" title="Previous Post: [jQ-Plugin] 輕鬆幫表格做responsive">&laquo; [jQ-Plugin] 輕鬆幫表格做responsive</a>
       
-      
-        <a class="basic-alignment right" href="/blog/jquery-tags-manager/" title="Next Post: [jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager">[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager &raquo;</a>
       
     </p>
   </footer>
@@ -256,7 +286,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/javascript-documentframent/" 
+	data-href="http://blog.rx836.tw/blog/jquery-drop-down-lists/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -323,9 +353,9 @@
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-documentframent/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-documentframent/';
-        var disqus_url = 'http://blog.rx836.tw/blog/javascript-documentframent/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-drop-down-lists/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-drop-down-lists/';
+        var disqus_url = 'http://blog.rx836.tw/blog/jquery-drop-down-lists/';
         var disqus_script = 'embed.js';
       
     (function () {
