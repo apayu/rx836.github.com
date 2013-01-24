@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-24T15:52:22+08:00</updated>
+  <updated>2013-01-24T15:58:29+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 用jQuery客製化提醒視窗]]></title>
+    <title type="html"><![CDATA[[jQ-Plugin] 用jQuery打造alert、confirm和prompt dialogs]]></title>
     <link href="http://blog.rx836.tw/blog/alert-confirm-prompt/"/>
     <updated>2013-01-24T11:21:00+08:00</updated>
     <id>http://blog.rx836.tw/blog/alert-confirm-prompt</id>
