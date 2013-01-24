@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[JavaScript] 當函式需要傳遞很多參數時 - apa</title>
+  <title>[jQ-Plugin] 用jQuery客製化提醒視窗 - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230; 不過，有個方法可以解決這個困擾，就是設定值物件，平常我們使用函式可能會這樣寫 function add( &hellip;">
+  <meta name="description" content="知名的網路趨勢觀察 Inside 有一篇文章 App 的 「確定」按鈕應該放在左邊還是右邊？，裡面寫到關於使用者設計，iOS與 Android 的不同，我對這方面不是研究者，所以就不針對文章內容做討論，但同樣的事情回到 Web 部分，如果能將我們常看到的 alert 視窗作客製化，引導 User &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/javascript-simple-object/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/alert-confirm-prompt/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[JavaScript] 當函式需要傳遞很多參數時 - apa" />
+<meta property="og:title" content="[jQ-Plugin] 用jQuery客製化提醒視窗 - apa" />
 
-<meta property="og:description" content="有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230; 不過，有個方法可以解決這個困擾，就是設定值物件，平常我們使用函式可能會這樣寫 function add( &hellip;" />
+<meta property="og:description" content="知名的網路趨勢觀察 Inside 有一篇文章 App 的 「確定」按鈕應該放在左邊還是右邊？，裡面寫到關於使用者設計，iOS與 Android 的不同，我對這方面不是研究者，所以就不針對文章內容做討論，但同樣的事情回到 Web 部分，如果能將我們常看到的 alert 視窗作客製化，引導 User &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/javascript-simple-object/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/alert-confirm-prompt/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[JavaScript] 當函式需要傳遞很多參數時</h1>
+      <h1 class="entry-title">[jQ-Plugin] 用jQuery客製化提醒視窗</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-09-25T00:06:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2012</time>
+<time datetime="2013-01-24T11:21:00+08:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,38 +113,93 @@
   </header>
 
 
-<div class="entry-content"><p>有時候我們可能寫了一個函式，但裡面需要傳遞的參數非常的多，這時候除了要小心哪些是必要的哪些是不必要的參數以外，還要注意參數列的順序不能搞混，這真的是會讓人頭昏眼花&#8230;</p>
+<div class="entry-content"><p><img src="https://lh3.googleusercontent.com/-Zmc0Ts3xud4/UQDnKqQMtiI/AAAAAAAACPg/x2E0ljNmpOM/s387/2013-01-24_115500.jpg" /></p>
+
+<p>知名的網路趨勢觀察 Inside 有一篇文章 <a href="http://www.inside.com.tw/2013/01/23/app-dialog-button-design-should-yes-be-right-or-left" target="_blank">App 的 「確定」按鈕應該放在左邊還是右邊？</a>，裡面寫到關於使用者設計，iOS與 Android 的不同，我對這方面不是研究者，所以就不針對文章內容做討論，但同樣的事情回到 Web 部分，如果能將我們常看到的 alert 視窗作客製化，引導 User 做點擊，我想這也是一個不錯的使用者設計</p>
 
 <!--more-->
 
 
-<p>不過，有個方法可以解決這個困擾，就是<strong>設定值物件</strong>，平常我們使用函式可能會這樣寫</p>
+<h2>談原生彈跳視窗</h2>
 
-<pre><code>function add(parameter1, parameter2, parameter3, parameter4, parameter5) {...}
+<p>一般我們常見的內建 confirm 和 alert，因為是原生的視窗元素，有時候難免會跟網站整體的視覺設計很不搭嘎，按鈕文字也無法修改，跟使用者間的互動就來的不是那麼直覺，例如下面的範例圖</p>
+
+<p><img src="https://lh6.googleusercontent.com/-iYqFTOzua-4/UQDnKscNRXI/AAAAAAAACPc/lRsW6cDln3Q/s389/2013-01-24_121937.jpg" /></p>
+
+<p>在填寫完表單以後，跳出了一個提醒視窗告知『獎品將在三天後寄出』，但當你按下『確定』時，心中難免會覺得<strong>要確定的是甚麼</strong>？但如果像下面這張圖一樣，做客製化文字</p>
+
+<p><img src="https://lh6.googleusercontent.com/-ygbraRujwkg/UQDnKjkwBnI/AAAAAAAACPk/mggASJ-uJxM/s582/2013-01-24_122158.jpg" /></p>
+
+<p>User在使用時就不會有那些疑惑存在，至於要怎麼客製化呢？下面是我的使用筆記</p>
+
+<h2>Start</h2>
+
+<p>這裡我使用的 jQuery plugin 是 Alertify，可以到 github 下載source code</p>
+
+<p><a href="https://github.com/fabien-d/alertify.js/" target="_blank">DOWNLOAD SOURCE</a></p>
+
+<p>接著在 lib 資料夾裡面有兩個檔案，分別是 alertify.js 和 alertify.min.js，因為我們要做範例，所以先用方便 Debug 的 alertify.js</p>
+
+<pre><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/alertify.js"&gt;&lt;/script&gt;
 </code></pre>
 
-<p>可是參數一堆真的會又臭又長，還要注意先後順序，但如果改成這樣寫</p>
+<p>接著是css部份</p>
 
-<pre><code>var conf = {
-    parameter1: "a",
-    parameter2: "b",
-    parameter3: "c"
-}
-
-add(conf)
+<pre><code>&lt;link rel="stylesheet" href="themes/alertify.core.css" /&gt;   
+&lt;link rel="stylesheet" href="themes/alertify.default.css" /&gt;
 </code></pre>
 
-<p>將參數全部包成一個物件，再傳給函式，不僅可以不用記住先後順序，還可以安全的略過選用參數，也更容易閱讀和維護，當然新增和移除也比較方便</p>
+<p>如果要符合自己網站的設計，就修改 alertify.default.css 這支檔案即可</p>
 
-<p>不過缺點就是要特別去知道參數的名稱，而且物件的屬性名稱並無法做最小化處理</p>
+<p>最後是js部份</p>
 
-<p>不過當你要設定一堆CSS樣式的時候，或是個人資料很多很繁雜的時候，這個方法倒是很好用的:)</p>
+<pre><code>alertify.alert("獎品將在三天後寄出");
+</code></pre>
 
-<p>參考資料:</p>
+<p>結果圖</p>
 
-<p>JavaScript 設計模式</p>
+<p><img src="https://lh6.googleusercontent.com/-NhnuNSV7ipE/UQDnLpYsIlI/AAAAAAAACPo/ZmiAC0GeGAA/s582/2013-01-24_153113.jpg" /></p>
 
-<p>如有錯誤，歡迎指正</p>
+<p>要修改文字的話</p>
+
+<pre><code>alertify.set({ labels : { ok: "了解", cancel: "取消" } });
+alertify.alert("獎品將在三天後寄出");
+</code></pre>
+
+<p>要做 confirm 視窗的話</p>
+
+<pre><code>alertify.confirm("確定儲存嗎?", function (e) {
+    if (e) {
+        // user clicked "ok"
+    } else {
+        // user clicked "cancel"
+    }
+});
+</code></pre>
+
+<p>結果圖</p>
+
+<p><img src="https://lh3.googleusercontent.com/-pQSeUPBhHZs/UQDnLnRK3yI/AAAAAAAACPs/mR20IrnuxJ4/s589/2013-01-24_153412.jpg" /></p>
+
+<p>比較特別是還可以設置notifications</p>
+
+<pre><code>alertify.success("Success notification");
+</code></pre>
+
+<p>結果圖</p>
+
+<p><img src="https://lh3.googleusercontent.com/-x42wvO7nDIg/UQDnL_RqoFI/AAAAAAAACPw/N26mQw_xs5w/s607/2013-01-24_153713.jpg" /></p>
+
+<h2>結論</h2>
+
+<p>這支 plugin 在使用上容易，而且會在按鈕上加上光暈，引導使用者按下按鈕，客製化的空間也很大，有興趣的朋友可以下載回來試試</p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://fabien-d.github.com/alertify.js/" target="_blank">alertify.js</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -178,12 +233,12 @@ add(conf)
   
 
 
-<time datetime="2012-09-25T00:06:00+08:00" pubdate data-updated="true">Sep 25<span>th</span>, 2012</time>
+<time datetime="2013-01-24T11:21:00+08:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>
   
 </span>
 
@@ -191,10 +246,8 @@ add(conf)
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2-vmware-windows-8/" title="Previous Post: [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]">&laquo; [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]</a>
+        <a class="basic-alignment left" href="/blog/jquery-drop-down-lists/" title="Previous Post: [jQ-Plugin] 用jQuery客製化下拉選單">&laquo; [jQ-Plugin] 用jQuery客製化下拉選單</a>
       
-      
-        <a class="basic-alignment right" href="/blog/design-thinking/" title="Next Post: [學習筆記] 透過實體活動來學習《設計與思考》">[學習筆記] 透過實體活動來學習《設計與思考》 &raquo;</a>
       
     </p>
   </footer>
@@ -212,7 +265,7 @@ add(conf)
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/javascript-simple-object/" 
+	data-href="http://blog.rx836.tw/blog/alert-confirm-prompt/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -279,9 +332,9 @@ add(conf)
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-simple-object/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-simple-object/';
-        var disqus_url = 'http://blog.rx836.tw/blog/javascript-simple-object/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/alert-confirm-prompt/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/alert-confirm-prompt/';
+        var disqus_url = 'http://blog.rx836.tw/blog/alert-confirm-prompt/';
         var disqus_script = 'embed.js';
       
     (function () {

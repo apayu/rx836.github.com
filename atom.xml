@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-23T23:11:40+08:00</updated>
+  <updated>2013-01-24T15:52:22+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 用jQuery客製化提醒視窗]]></title>
+    <link href="http://blog.rx836.tw/blog/alert-confirm-prompt/"/>
+    <updated>2013-01-24T11:21:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/alert-confirm-prompt</id>
+    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-Zmc0Ts3xud4/UQDnKqQMtiI/AAAAAAAACPg/x2E0ljNmpOM/s387/2013-01-24_115500.jpg" /></p>
+
+<p>知名的網路趨勢觀察 Inside 有一篇文章 <a href="http://www.inside.com.tw/2013/01/23/app-dialog-button-design-should-yes-be-right-or-left" target="_blank">App 的 「確定」按鈕應該放在左邊還是右邊？</a>，裡面寫到關於使用者設計，iOS與 Android 的不同，我對這方面不是研究者，所以就不針對文章內容做討論，但同樣的事情回到 Web 部分，如果能將我們常看到的 alert 視窗作客製化，引導 User 做點擊，我想這也是一個不錯的使用者設計</p>
+
+<!--more-->
+
+
+<h2>談原生彈跳視窗</h2>
+
+<p>一般我們常見的內建 confirm 和 alert，因為是原生的視窗元素，有時候難免會跟網站整體的視覺設計很不搭嘎，按鈕文字也無法修改，跟使用者間的互動就來的不是那麼直覺，例如下面的範例圖</p>
+
+<p><img src="https://lh6.googleusercontent.com/-iYqFTOzua-4/UQDnKscNRXI/AAAAAAAACPc/lRsW6cDln3Q/s389/2013-01-24_121937.jpg" /></p>
+
+<p>在填寫完表單以後，跳出了一個提醒視窗告知『獎品將在三天後寄出』，但當你按下『確定』時，心中難免會覺得<strong>要確定的是甚麼</strong>？但如果像下面這張圖一樣，做客製化文字</p>
+
+<p><img src="https://lh6.googleusercontent.com/-ygbraRujwkg/UQDnKjkwBnI/AAAAAAAACPk/mggASJ-uJxM/s582/2013-01-24_122158.jpg" /></p>
+
+<p>User在使用時就不會有那些疑惑存在，至於要怎麼客製化呢？下面是我的使用筆記</p>
+
+<h2>Start</h2>
+
+<p>這裡我使用的 jQuery plugin 是 Alertify，可以到 github 下載source code</p>
+
+<p><a href="https://github.com/fabien-d/alertify.js/" target="_blank">DOWNLOAD SOURCE</a></p>
+
+<p>接著在 lib 資料夾裡面有兩個檔案，分別是 alertify.js 和 alertify.min.js，因為我們要做範例，所以先用方便 Debug 的 alertify.js</p>
+
+<pre><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/alertify.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>接著是css部份</p>
+
+<pre><code>&lt;link rel="stylesheet" href="themes/alertify.core.css" /&gt;   
+&lt;link rel="stylesheet" href="themes/alertify.default.css" /&gt;
+</code></pre>
+
+<p>如果要符合自己網站的設計，就修改 alertify.default.css 這支檔案即可</p>
+
+<p>最後是js部份</p>
+
+<pre><code>alertify.alert("獎品將在三天後寄出");
+</code></pre>
+
+<p>結果圖</p>
+
+<p><img src="https://lh6.googleusercontent.com/-NhnuNSV7ipE/UQDnLpYsIlI/AAAAAAAACPo/ZmiAC0GeGAA/s582/2013-01-24_153113.jpg" /></p>
+
+<p>要修改文字的話</p>
+
+<pre><code>alertify.set({ labels : { ok: "了解", cancel: "取消" } });
+alertify.alert("獎品將在三天後寄出");
+</code></pre>
+
+<p>要做 confirm 視窗的話</p>
+
+<pre><code>alertify.confirm("確定儲存嗎?", function (e) {
+    if (e) {
+        // user clicked "ok"
+    } else {
+        // user clicked "cancel"
+    }
+});
+</code></pre>
+
+<p>結果圖</p>
+
+<p><img src="https://lh3.googleusercontent.com/-pQSeUPBhHZs/UQDnLnRK3yI/AAAAAAAACPs/mR20IrnuxJ4/s589/2013-01-24_153412.jpg" /></p>
+
+<p>比較特別是還可以設置notifications</p>
+
+<pre><code>alertify.success("Success notification");
+</code></pre>
+
+<p>結果圖</p>
+
+<p><img src="https://lh3.googleusercontent.com/-x42wvO7nDIg/UQDnL_RqoFI/AAAAAAAACPw/N26mQw_xs5w/s607/2013-01-24_153713.jpg" /></p>
+
+<h2>結論</h2>
+
+<p>這支 plugin 在使用上容易，而且會在按鈕上加上光暈，引導使用者按下按鈕，客製化的空間也很大，有興趣的朋友可以下載回來試試</p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://fabien-d.github.com/alertify.js/" target="_blank">alertify.js</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 用jQuery客製化下拉選單]]></title>
@@ -2549,132 +2644,6 @@ $("input[type=radio]").prop("checked", true); // Check radio button
 <p><a href="http://api.jquery.com/val/" target="_blank">jQuery API .val()</a></p>
 
 <p><a href="http://api.jquery.com/submit/" target="_blank">jQuery API .submit()</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 有效降低會員註冊退信率的mailcheck]]></title>
-    <link href="http://blog.rx836.tw/blog/mailcheck-jquery-plugin/"/>
-    <updated>2012-11-28T12:04:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/mailcheck-jquery-plugin</id>
-    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-dLci9WLFC-8/ULWyqQJ-OxI/AAAAAAAAB_U/odHWaG3jNfE/s482/w.jpg" /></p>
-
-<p>免費檔案分享<a href="http://kicksend.com/" target="_blank">Kicksend</a>有寫一篇文章是關於<a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target=_blank"">如何降低退信率</a>，內容大概是講User註冊會員以後，會發送註冊的確認信，但常常會發生被退信的情況，導致會員收不到信可能必須重新申請一次帳號，不然就是請客服修改E-mail，所以Kicksend為了減少這個困擾就做了分析並且解決問題</p>
-
-<!--more-->
-
-
-<p>Kicksend發現有很多人被退信的原因都是在輸入電子郵件(E-mail)的時候打錯domain，例如“hotmail.con”、“gnail.com”、“yajoo.com”等，這種錯誤有時候用戶自己都不知道，就直接按送出，導致收不到註冊信，所以Kicksend就做了一個設計，在用戶輸入E-mail以後，會檢查E-mail的domain，如果發現疑似錯誤情形，就會跳出建議的選項問用戶要不要更改，做到良好的 <strong>user experience</strong>，用了這個方法以後也確實降低了50%的退信率，無形中也增加了不少用戶，而下面將介紹這套jQuery plugin - <strong>mailcheck</strong></p>
-
-<h2>start</h2>
-
-<p>首先，可以去github載回原始碼</p>
-
-<p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck</a></p>
-
-<p>接著在網頁裡面載入jQuery和mailcheck.min</p>
-
-<pre><code>&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
-&lt;script src="mailcheck.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>html部分，一個text field</p>
-
-<pre><code>&lt;input id="email" name="email" type="text" /&gt;
-</code></pre>
-
-<p>接著是js部份</p>
-
-<pre><code>var domains = ['hotmail.com', 'gmail.com', 'aol.com'];
-var topLevelDomains = ["com", "net", "org"];
-
-var superStringDistance = function(string1, string2) {
-  // a string distance algorithm of your choosing
-}
-
-$('#email').on('blur', function() {
-  $(this).mailcheck({
-    domains: domains,                       // optional
-    topLevelDomains: topLevelDomains,       // optional
-    distanceFunction: superStringDistance,  // optional
-    suggested: function(element, suggestion) {
-      // callback code
-    },
-    empty: function(element) {
-      // callback code
-    }
-  });
-});
-</code></pre>
-
-<p>「domains」、「topLevelDomains」、「distanceFunction」這三個參數都是選填，分別為</p>
-
-<p><strong>domains</strong>: 要比對的domain，例如:yahoo.com、google.com</p>
-
-<p><strong>topLevelDomains</strong>: 允許的topLevelDomain，例如:com、net</p>
-
-<p><strong>distanceFunction</strong>: 自訂用來計算最接近topLevelDomain內容的函式</p>
-
-<p>假設在沒有填寫 <strong>domains</strong> 和 <strong>topLevelDomains</strong> 情況下，會採用預設值，根據source code裡面所寫的預設值為</p>
-
-<p>預設domains</p>
-
-<pre><code>defaultDomains: ["yahoo.com", "google.com", "hotmail.com", "gmail.com", "me.com", "aol.com", "mac.com",
-  "live.com", "comcast.net", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk",
-  "facebook.com", "verizon.net", "sbcglobal.net", "att.net", "gmx.com", "mail.com"]
-</code></pre>
-
-<p>預設topLevelDomains</p>
-
-<pre><code>defaultTopLevelDomains: ["co.uk", "com", "net", "org", "info", "edu", "gov", "mil"]
-</code></pre>
-
-<p>而「suggested」和「empty」則分別是 <strong>輸入錯誤時的callback</strong> 和 <strong>沒填寫E-mail的callback</strong>，所以你可以自行在這裡加上程式碼提醒User輸入錯誤或忘記輸入</p>
-
-<h3>沒有jQuery的情況下</h3>
-
-<p>假如你的專案裡面沒有用到jQuery，也可以單純使用js版本</p>
-
-<pre><code>Kicksend.mailcheck.run({
-  email: yourTextInput.value,
-  domains: domains,                       // optional
-  topLevelDomains: topLevelDomains,       // optional
-  distanceFunction: superStringDistance,  // optional
-  suggested: function(suggestion) {
-    // callback code
-  },
-  empty: function() {
-    // callback code
-  }
-});
-</code></pre>
-
-<p>最後附上有用到mailcheck這項效果的網站</p>
-
-<ul>
-<li><a href="http://kicksend.com/" target="_blank">Kicksend</a></li>
-<li><a href="http://dropbox.com/" target="_blank">Dropbox</a></li>
-<li><a href="http://flotype.com/" target="_blank">Flotype</a></li>
-<li><a href="http://kickstarter.com/" target="_blank">Kickstarter</a></li>
-<li><a href="http://kippt.com/" target="_blank">Kippt</a></li>
-<li><a href="http://minecraft.net/" target="_blank">Minecraft</a></li>
-<li><a href="http://prispy.com/" target="_blank">Prispy</a></li>
-<li><a href="http://sbnation.com/" target="_blank">SB Nation</a></li>
-<li><a href="http://show-space.com/" target="_blank">Show Space</a></li>
-<li><a href="http://theverge.com/" target="_blank">The Verge</a></li>
-<li><a href="http://uber.com/" target="_blank">Uber</a></li>
-</ul>
-
-
-<h3>參考資料:</h3>
-
-<p><a href="https://github.com/Kicksend/mailcheck" target="_blank">mailcheck Github</a></p>
-
-<p><a href="http://kicksend.com/join" target="_blank">Demo</a></p>
-
-<p><a href="http://blog.kicksend.com/how-we-decreased-sign-up-confirmation-email-bounces-by-50/" target="_blank">How we decreased sign up confirmation email bounces by 50%</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

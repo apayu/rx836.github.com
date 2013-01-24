@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-23T23:11:40+08:00</updated>
+  <updated>2013-01-24T15:52:22+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 用jQuery客製化提醒視窗]]></title>
+    <link href="http://blog.rx836.tw/blog/alert-confirm-prompt/"/>
+    <updated>2013-01-24T11:21:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/alert-confirm-prompt</id>
+    <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-Zmc0Ts3xud4/UQDnKqQMtiI/AAAAAAAACPg/x2E0ljNmpOM/s387/2013-01-24_115500.jpg" /></p>
+
+<p>知名的網路趨勢觀察 Inside 有一篇文章 <a href="http://www.inside.com.tw/2013/01/23/app-dialog-button-design-should-yes-be-right-or-left" target="_blank">App 的 「確定」按鈕應該放在左邊還是右邊？</a>，裡面寫到關於使用者設計，iOS與 Android 的不同，我對這方面不是研究者，所以就不針對文章內容做討論，但同樣的事情回到 Web 部分，如果能將我們常看到的 alert 視窗作客製化，引導 User 做點擊，我想這也是一個不錯的使用者設計</p>
+
+<!--more-->
+
+
+<h2>談原生彈跳視窗</h2>
+
+<p>一般我們常見的內建 confirm 和 alert，因為是原生的視窗元素，有時候難免會跟網站整體的視覺設計很不搭嘎，按鈕文字也無法修改，跟使用者間的互動就來的不是那麼直覺，例如下面的範例圖</p>
+
+<p><img src="https://lh6.googleusercontent.com/-iYqFTOzua-4/UQDnKscNRXI/AAAAAAAACPc/lRsW6cDln3Q/s389/2013-01-24_121937.jpg" /></p>
+
+<p>在填寫完表單以後，跳出了一個提醒視窗告知『獎品將在三天後寄出』，但當你按下『確定』時，心中難免會覺得<strong>要確定的是甚麼</strong>？但如果像下面這張圖一樣，做客製化文字</p>
+
+<p><img src="https://lh6.googleusercontent.com/-ygbraRujwkg/UQDnKjkwBnI/AAAAAAAACPk/mggASJ-uJxM/s582/2013-01-24_122158.jpg" /></p>
+
+<p>User在使用時就不會有那些疑惑存在，至於要怎麼客製化呢？下面是我的使用筆記</p>
+
+<h2>Start</h2>
+
+<p>這裡我使用的 jQuery plugin 是 Alertify，可以到 github 下載source code</p>
+
+<p><a href="https://github.com/fabien-d/alertify.js/" target="_blank">DOWNLOAD SOURCE</a></p>
+
+<p>接著在 lib 資料夾裡面有兩個檔案，分別是 alertify.js 和 alertify.min.js，因為我們要做範例，所以先用方便 Debug 的 alertify.js</p>
+
+<pre><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="lib/alertify.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>接著是css部份</p>
+
+<pre><code>&lt;link rel="stylesheet" href="themes/alertify.core.css" /&gt;   
+&lt;link rel="stylesheet" href="themes/alertify.default.css" /&gt;
+</code></pre>
+
+<p>如果要符合自己網站的設計，就修改 alertify.default.css 這支檔案即可</p>
+
+<p>最後是js部份</p>
+
+<pre><code>alertify.alert("獎品將在三天後寄出");
+</code></pre>
+
+<p>結果圖</p>
+
+<p><img src="https://lh6.googleusercontent.com/-NhnuNSV7ipE/UQDnLpYsIlI/AAAAAAAACPo/ZmiAC0GeGAA/s582/2013-01-24_153113.jpg" /></p>
+
+<p>要修改文字的話</p>
+
+<pre><code>alertify.set({ labels : { ok: "了解", cancel: "取消" } });
+alertify.alert("獎品將在三天後寄出");
+</code></pre>
+
+<p>要做 confirm 視窗的話</p>
+
+<pre><code>alertify.confirm("確定儲存嗎?", function (e) {
+    if (e) {
+        // user clicked "ok"
+    } else {
+        // user clicked "cancel"
+    }
+});
+</code></pre>
+
+<p>結果圖</p>
+
+<p><img src="https://lh3.googleusercontent.com/-pQSeUPBhHZs/UQDnLnRK3yI/AAAAAAAACPs/mR20IrnuxJ4/s589/2013-01-24_153412.jpg" /></p>
+
+<p>比較特別是還可以設置notifications</p>
+
+<pre><code>alertify.success("Success notification");
+</code></pre>
+
+<p>結果圖</p>
+
+<p><img src="https://lh3.googleusercontent.com/-x42wvO7nDIg/UQDnL_RqoFI/AAAAAAAACPw/N26mQw_xs5w/s607/2013-01-24_153713.jpg" /></p>
+
+<h2>結論</h2>
+
+<p>這支 plugin 在使用上容易，而且會在按鈕上加上光暈，引導使用者按下按鈕，客製化的空間也很大，有興趣的朋友可以下載回來試試</p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://fabien-d.github.com/alertify.js/" target="_blank">alertify.js</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 用jQuery客製化下拉選單]]></title>
@@ -569,100 +664,6 @@ else {
 <h3>參考資料:</h3>
 
 <p><a href="http://stickyjs.com/" target="_blank">Sticky</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 輕鬆加入Tag標籤功能的plugin-Tags Manager]]></title>
-    <link href="http://blog.rx836.tw/blog/jquery-tags-manager/"/>
-    <updated>2012-12-20T11:11:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/jquery-tags-manager</id>
-    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-gxsgoBxzDI8/UNKSYvcQnPI/AAAAAAAACFc/7PiDy2u-3KA/s745/2012-12-20_111514.jpg" /></p>
-
-<p>如果有在 <a href="http://stackoverflow.com/" target="_blank">stackoverflow</a> 上找過答案的朋友，應該對於他們的tag並不陌生，類似這樣的功能在許多blog或是論壇都有，但光是只有Tag這個功能已經不是重點所在，如何讓User有良好的Tag經驗是現今大家所追求的，簡單的說就是使用者經驗(UX)，今天就來介紹一款我個人覺得不錯的jQuery plugin - Tags Manager</p>
-
-<!--more-->
-
-
-<h2>Start</h2>
-
-<p><a href="https://github.com/max-favilli/tagmanager" target="_blank">Download from Github</a></p>
-
-<p>使用方式相當相當的簡單，從github載下來後，將Tags Manager和所需要的css檔案掛載到網頁裡面，接下來只有兩個步驟</p>
-
-<p>第一步驟就是在html裡面加上一個&lt;input&gt;</p>
-
-<pre><code>&lt;input type="text" name="tags" placeholder="Tags" class="tagManager"/&gt;
-</code></pre>
-
-<p>第二個步驟就是在js加上一段程式碼</p>
-
-<pre><code>jQuery(".tagManager").tagsManager();
-</code></pre>
-
-<p>完成，本篇介紹到此結束</p>
-
-<p>.</p>
-
-<p>.</p>
-
-<p>.</p>
-
-<p>.</p>
-
-<p>好啦，真的就只有這兩行，打開網頁後你可以看到會有一個input，裡面有個預設文字Tags</p>
-
-<p><img src="https://lh5.googleusercontent.com/-OR2B3B8UzXs/UNKSYj723cI/AAAAAAAACFg/Pz1flQNbeKg/s149/2012-12-20_113137.jpg" /></p>
-
-<p>接著你在裡面輸入文字，只要<strong>你的焦點離開input</strong>、<strong>按下Enter</strong>或是<strong>加上逗號</strong>，都會自動幫你生成一個Tag</p>
-
-<p><img src="https://lh5.googleusercontent.com/-Rq7wFJw2IH4/UNKSYmV6tWI/AAAAAAAACFk/k9e3c11qyZg/s202/2012-12-20_113346.jpg" /></p>
-
-<p>而假如要刪除呢？只要對著Tag裡面的小x按下即可，這對於使用者來說非常的方便使用，那對於開發者來說要如何操作呢？</p>
-
-<p>也許會有人問那我要怎麼取得那些Tag的值，如果你有用firebug或是google Chrome(按下F12呼叫開發者環境)，可以看到Tags Manager會在增加Tag的同時，默默的在背後新增一個hidden，並且把值丟到裡面做暫存，所以當開發者想要將Tag的值送到Server端時，可以從這裡取出</p>
-
-<p><img src="https://lh4.googleusercontent.com/-hfXPhL3aF1g/UNKSZaCL9fI/AAAAAAAACFo/aKDNo-6VMj8/s658/2012-12-20_113905.jpg" /></p>
-
-<p>當然，Tag裡面還有很重要的一個功能就是智能輸入，會出現關鍵字的提示，但因為Tags Manager是利用 <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap</a> 裡面的 <a href="http://twitter.github.com/bootstrap/javascript.html#typeahead" target="_blank">typeahead</a> ，所以要用到關鍵字的提示要載入Bootstrap才可以使用，以下就是範例</p>
-
-<pre><code>jQuery(".tagManager").tagsManager({
-    prefilled: ["Pisa", "Rome"],
-    typeahead: true,
-    typeaheadSource: funSource
-});
-
-function funSource(){
-    var ret = ["Manchester", "Astonvilla", "Real Madrid", "Barcelona", "Milan AC", "Internazionale", "Roma AC", "Chelsea"];
-    return ret;
-} 
-</code></pre>
-
-<p>你可以將需要提示的tag寫成一個陣列，將值塞入參數 <strong>typeaheadSource</strong></p>
-
-<p>其他的參數分別為</p>
-
-<ul>
-<li>prefilled:預先給予的Tag</li>
-<li>CapitalizeFirstLetter:如果為true，會將Tag第一個字轉為大寫，其他為小寫</li>
-<li>preventSubmitOnEnter:如果為true，假設&lt;input&gt;在&lt;form&gt;裡面，按下Enter將不會觸發Sibmit</li>
-<li>typeahead:如果為true，就會有關鍵字的提示選擇</li>
-<li>typeaheadAjaxSource:可以從Server端接收JSON格式的關鍵字提示選擇</li>
-<li>typeaheadSource:可以接收陣列或funtion回傳陣列的關鍵字提示選擇</li>
-</ul>
-
-
-<p>這邊只介紹幾個主要的參數，其他還有許多不錯的參數應用可以直接參考 <a href="http://welldonethings.com/tags/manager" target="_blank">Tags Manager</a></p>
-
-<h2>總結</h2>
-
-<p>這是一套蠻方便的plugin，對於他的樣式如果不太喜歡還可以自己進行修改，另外對Tag還想要有更多的其他選擇，也可以參考 <a href="http://ioncache.github.com/Tag-Handler/" target="_blank">Tag Handler</a>、<a href="http://xoxco.com/projects/code/tagsinput/" target="_blank">jQuery Tags Input Plugin</a> 這些參考文章</p>
-
-<h3>參考資料:</h3>
-
-<p><a href="http://welldonethings.com/tags/manager" target="_blank">Tags Manager (a jQuery plugin)</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>
