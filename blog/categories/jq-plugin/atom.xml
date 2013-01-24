@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-24T15:58:29+08:00</updated>
+  <updated>2013-01-24T16:07:30+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -20,14 +20,14 @@
     <id>http://blog.rx836.tw/blog/alert-confirm-prompt</id>
     <content type="html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/-Zmc0Ts3xud4/UQDnKqQMtiI/AAAAAAAACPg/x2E0ljNmpOM/s387/2013-01-24_115500.jpg" /></p>
 
-<p>知名的網路趨勢觀察 Inside 有一篇文章 <a href="http://www.inside.com.tw/2013/01/23/app-dialog-button-design-should-yes-be-right-or-left" target="_blank">App 的 「確定」按鈕應該放在左邊還是右邊？</a>，裡面寫到關於使用者設計，iOS與 Android 的不同，我對這方面不是研究者，所以就不針對文章內容做討論，但同樣的事情回到 Web 部分，如果能將我們常看到的 alert 視窗作客製化，引導 User 做點擊，我想這也是一個不錯的使用者設計</p>
+<p>知名的網路趨勢觀察 Inside 有一篇文章 <a href="http://www.inside.com.tw/2013/01/23/app-dialog-button-design-should-yes-be-right-or-left" target="_blank">App 的 「確定」按鈕應該放在左邊還是右邊？</a>，裡面寫到關於使用者設計，iOS與 Android 的不同，我對這方面不是研究者，所以就不針對文章內容做討論，但同樣的事情回到 Web 部分，如果能將我們常看到的 alert 視窗做客製化，引導 User 做點擊，或許可以減少使用者誤按的情形發生</p>
 
 <!--more-->
 
 
-<h2>談原生彈跳視窗</h2>
+<h2>原生的彈跳視窗</h2>
 
-<p>一般我們常見的內建 confirm 和 alert，因為是原生的視窗元素，有時候難免會跟網站整體的視覺設計很不搭嘎，按鈕文字也無法修改，跟使用者間的互動就來的不是那麼直覺，例如下面的範例圖</p>
+<p>一般我們常見的內建 confirm 和 alert，因為是原生的視窗元素，有時候難免會跟網站整體的視覺設計很不搭嘎，按鈕文字也無法修改，跟使用者間的互動就不是那麼的直覺，例如下面的範例圖</p>
 
 <p><img src="https://lh6.googleusercontent.com/-iYqFTOzua-4/UQDnKscNRXI/AAAAAAAACPc/lRsW6cDln3Q/s389/2013-01-24_121937.jpg" /></p>
 
@@ -35,15 +35,15 @@
 
 <p><img src="https://lh6.googleusercontent.com/-ygbraRujwkg/UQDnKjkwBnI/AAAAAAAACPk/mggASJ-uJxM/s582/2013-01-24_122158.jpg" /></p>
 
-<p>User在使用時就不會有那些疑惑存在，至於要怎麼客製化呢？下面是我的使用筆記</p>
+<p>User在使用時就不會有那些疑惑存在，整個視窗還可以搭配網站做設計，至於要怎麼客製化呢？下面是我的使用筆記</p>
 
 <h2>Start</h2>
 
-<p>這裡我使用的 jQuery plugin 是 Alertify，可以到 github 下載source code</p>
+<p>這裡我使用的是 Alertify 這款jQuery plugin ，可以到 github 下載source code</p>
 
 <p><a href="https://github.com/fabien-d/alertify.js/" target="_blank">DOWNLOAD SOURCE</a></p>
 
-<p>接著在 lib 資料夾裡面有兩個檔案，分別是 alertify.js 和 alertify.min.js，因為我們要做範例，所以先用方便 Debug 的 alertify.js</p>
+<p>接著在 lib 資料夾裡面有兩個檔案，分別是 alertify.js 和 alertify.min.js，因為我們要做範例，所以使用方便 Debug 的 alertify.js</p>
 
 <pre><code>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="lib/alertify.js"&gt;&lt;/script&gt;
@@ -66,7 +66,7 @@
 
 <p><img src="https://lh6.googleusercontent.com/-NhnuNSV7ipE/UQDnLpYsIlI/AAAAAAAACPo/ZmiAC0GeGAA/s582/2013-01-24_153113.jpg" /></p>
 
-<p>要修改文字的話</p>
+<p>如果要修改文字的話，在前面加上 alertify.set() 的設定</p>
 
 <pre><code>alertify.set({ labels : { ok: "了解", cancel: "取消" } });
 alertify.alert("獎品將在三天後寄出");
@@ -92,13 +92,13 @@ alertify.alert("獎品將在三天後寄出");
 <pre><code>alertify.success("Success notification");
 </code></pre>
 
-<p>結果圖</p>
+<p>在瀏覽器視窗的右下角就會出現notifications，並且會在幾秒後自動消失</p>
 
 <p><img src="https://lh3.googleusercontent.com/-x42wvO7nDIg/UQDnL_RqoFI/AAAAAAAACPw/N26mQw_xs5w/s607/2013-01-24_153713.jpg" /></p>
 
 <h2>結論</h2>
 
-<p>這支 plugin 在使用上容易，而且會在按鈕上加上光暈，引導使用者按下按鈕，客製化的空間也很大，有興趣的朋友可以下載回來試試</p>
+<p>這支 plugin 在使用上相當容易，而且還會在按鈕上加上光暈，引導使用者按下按鈕，樣式不喜歡的話，直接修改css檔案即可，有興趣的朋友可以下載回來試試</p>
 
 <h2>參考資料:</h2>
 
