@@ -9,7 +9,7 @@
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="評分功能常出現在一些商品陳列網站，像這種透過選幾顆星星來做評價，在許多網站都看的到，例如像是 YAHOO! 奇摩電影 就有類似的功能，而這篇就是來介紹如何用 jQuery plugin- jStarbox 來實現這項應用 Start jStarbox檔案不到6k，算是相檔的輕巧，css樣式也不多 &hellip;">
+  <meta name="description" content="評分功能常出現在一些商品陳列網站，像這種透過選幾顆星星來做評價，在許多網站都看的到，例如 YAHOO! 奇摩電影 就有類似的功能，而這篇就是來介紹如何用 jQuery plugin- jStarbox 來實現這項應用 Start jStarbox檔案不到6k，算是相檔的輕巧，css樣式也不多， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -33,7 +33,7 @@
 <meta property="fb:app_id" content="416172151763823" />
 <meta property="og:title" content="[jQ-Plugin] 在網站中加入星星評分效果 - apa" />
 
-<meta property="og:description" content="評分功能常出現在一些商品陳列網站，像這種透過選幾顆星星來做評價，在許多網站都看的到，例如像是 YAHOO! 奇摩電影 就有類似的功能，而這篇就是來介紹如何用 jQuery plugin- jStarbox 來實現這項應用 Start jStarbox檔案不到6k，算是相檔的輕巧，css樣式也不多 &hellip;" />
+<meta property="og:description" content="評分功能常出現在一些商品陳列網站，像這種透過選幾顆星星來做評價，在許多網站都看的到，例如 YAHOO! 奇摩電影 就有類似的功能，而這篇就是來介紹如何用 jQuery plugin- jStarbox 來實現這項應用 Start jStarbox檔案不到6k，算是相檔的輕巧，css樣式也不多， &hellip;" />
 
 <meta property="og:url" content="http://blog.rx836.tw/blog/jquery-star-box/" />  
 
@@ -115,7 +115,7 @@
 
 <div class="entry-content"><p><img src="https://lh4.googleusercontent.com/-p5vCtEt386M/UQdsNizReKI/AAAAAAAACQs/tylpU5zwd60/s188/2013-01-29_114734.jpg" /></p>
 
-<p>評分功能常出現在一些商品陳列網站，像這種透過選幾顆星星來做評價，在許多網站都看的到，例如像是 <a href="http://tw.movie.yahoo.com/" target="_blank">YAHOO! 奇摩電影</a> 就有類似的功能，而這篇就是來介紹如何用 jQuery plugin- jStarbox 來實現這項應用</p>
+<p>評分功能常出現在一些商品陳列網站，像這種透過選幾顆星星來做評價，在許多網站都看的到，例如 <a href="http://tw.movie.yahoo.com/" target="_blank">YAHOO! 奇摩電影</a> 就有類似的功能，而這篇就是來介紹如何用 jQuery plugin- jStarbox 來實現這項應用</p>
 
 <!--more-->
 
@@ -153,28 +153,31 @@
 
 <h3>參數設定</h3>
 
-<p>以下是一些參數的講解，但有些不太懂他的意思就不誤導大家，再請有興趣的各位去 github 上面看</p>
+<p>以下是一些參數的講解，但有些小弟才疏，也不太懂他的意思就不寫出來誤導大家Orz，有興趣的各位再請去 github 上面看</p>
 
-<p>average:可以預設一開始顯示幾顆星星，也可以使用小數點，例如0.4，預設值則是0.5</p>
+<p><strong>average</strong>:可以預設一開始顯示幾顆星星，也可以使用小數點，例如0.4，預設值則是0.5</p>
 
-<p>stars:設定有幾顆星星可以選擇，預設值是5</p>
+<p><strong>stars</strong>:設定有幾顆星星可以選擇，預設值是5</p>
 
-<p>buttons:設定星星可以切割成多少區塊可以選擇，假設有5顆星星，buttons設10，每顆星星就可以選擇半顆或整顆</p>
+<p><strong>buttons</strong>:設定星星可以切割成多少區塊可以選擇，假設有5顆星星，buttons設10，每顆星星就可以選擇半顆或整顆</p>
 
-<p>changeable:設定選擇以後是否還可以改變</p>
+<p><strong>changeable</strong>:設定選擇以後是否還可以改變</p>
 
-<p>也有一些方法可以呼叫，例如如果要得知 User 選了幾顆星星，就可以這樣寫</p>
+<p>也有一些方法可以呼叫，例如要得知 User 選了幾顆星星，就可以這樣寫</p>
 
 <pre><code>$('.btn').click(function(){
     alert($('.starbox').starbox("getValue"));
 });
 </code></pre>
 
-<p>可以把事件寫在某個按鈕裡面，當按下按鈕就秀出值是多少，關鍵在這句 $(&#8216;.starbox&#8217;).starbox(&#8220;getValue&#8221;)</p>
+<p>可以把事件寫在某個按鈕裡面，當按下按鈕就秀出值是多少，關鍵在這句</p>
+
+<pre><code>$('.starbox').starbox("getValue")
+</code></pre>
 
 <h2>小小總結</h2>
 
-<p>如果用 firebug 看套用效果後的 html 結構，不難發現只是在空元素裡面增加幾個&lt;div&gt;，並且設定背景圖做為星星，所以要修改的話只要改範例裡面的圖，和 css 裡面的樣式</p>
+<p>如果用 firebug 看套用效果後的 html 結構，不難發現只是在空元素裡面增加幾個&lt;div&gt;，並且設定背景圖做為星星，所以要修改的話只要改範例裡面的圖，和 css 裡面的樣式即可</p>
 
 <pre><code>.starbox .stars .star_holder .star {
     background-image: url('../images/5-large.png');
