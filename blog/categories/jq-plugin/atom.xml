@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-29T14:44:23+08:00</updated>
+  <updated>2013-02-28T21:01:21+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 利用jQuery做CSS Sprite效果]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-sprite/"/>
+    <updated>2013-02-28T20:53:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-sprite</id>
+    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-NrgYmV2EGjs/US9R96MMebI/AAAAAAAACSw/nQUtJ_0HHqc/s372/css-sprite.gif" /></p>
+
+<p>為了讓網站對Server的請求次數減少，有些人會運用到 <strong>CSS Sprite</strong> 的技巧，將所有的小圖合併成一張大圖，再利用 <strong>background-position</strong> 來進行定位，但事先的圖片合併規劃，為了算那些位置，不免覺得稍嫌麻煩，但其實有快速合併成大圖的方法，之前曾經寫過一篇<a href="http://blog.rx836.tw/blog/introduce-compass/" target="_blank">[CSS] 用了就無法回頭的Compass</a>，有興趣的人可以參考</p>
+
+<!--more-->
+
+
+<p>要運用 CSS Sprite 的技巧，要自己撰寫其實也不難，不過善用 <a href="http://yangkun.github.com/jquery-sprite/#usage" target="_blank">Jquery-sprite</a>，可以更容易來做到這件事情</p>
+
+<h2>Start</h2>
+
+<p>首先可以從 github 下載 js 檔</p>
+
+<p><a href="https://github.com/yangkun/jquery-sprite">DOWNLOAD</a></p>
+
+<p>html部份</p>
+
+<pre><code>&lt;div id="swap"&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>js部份</p>
+
+<pre><code>$('#swap span.google-sprite').each(function(i) {
+    var sprite = $(this).sprite(googleOpts).hover(function() {
+        sprite.col(6);
+    },function() {
+        sprite.col(0);
+    });
+    sprite.row(i);
+});
+</code></pre>
+
+<p>這邊利用 <strong>.each()</strong> 是因為範例有好幾張圖做變化，在每個圖上加上 <strong>.hover()</strong></p>
+
+<h3>當滑鼠移入時</h3>
+
+<p>就會變化到 <strong>sprite.col(6)</strong>，這個指定的位置</p>
+
+<h3>當滑鼠移出時</h3>
+
+<p>就會回到 <strong>sprite.col(0)</strong>，這個指定的位置</p>
+
+<p>原理其實就是在大圖上面將每個小圖畫分位置，利用 row 和 col 的概念來變換相對的位置</p>
+
+<p>想看更多的範例可以參考 <a href="http://yangkun.github.com/jquery-sprite/" target="_blank">這裡</a></p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://yangkun.github.com/jquery-sprite/" target="_blank">Jquery-sprite</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 在網站中加入星星評分效果]]></title>
@@ -435,187 +502,6 @@ alertify.alert("獎品將在三天後寄出");
 <h3>參考資料:</h3>
 
 <p><a href="http://themergency.com/footable/" target="_blank">FooTable</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 做出磁磚效果變化的圖片轉換]]></title>
-    <link href="http://blog.rx836.tw/blog/jquery-slice-images-into-tiles/"/>
-    <updated>2013-01-18T16:36:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/jquery-slice-images-into-tiles</id>
-    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-WH3Ni1ou3Ww/UPkk71vSTvI/AAAAAAAACMk/hcFofq9eTuU/s641/2013-01-18_164425.jpg" /></p>
-
-<p>不知道大家有沒有看過這種切成一塊一塊的轉換圖片，類似磁磚拼貼的效果，最近看到一篇講解教學的文章，自己消化了一下，來分享並且紀錄下來</p>
-
-<!--more-->
-
-
-<h2>Start</h2>
-
-<p>首先是HTML部份</p>
-
-<pre><code>&lt;div class="sliced"&gt;
-    &lt;img src="pic.jpg"/&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>只用一個&lt;div&gt;包住一個&lt;img&gt;</p>
-
-<p>接著是CSS</p>
-
-<pre><code>.sliced {
-    position: relative;
-    width: 640px; 
-    height: 400px;
-}
-</code></pre>
-
-<p>因為我們要將效果自製成一個jQuery plugin，方便以後可以重複使用，所以這邊要先建立一個基本的 jQuery plugin 樣板</p>
-
-<pre><code>;(function( $, window ) {
-
-    //預設值
-    var _defaults = {
-        x      : 2, // 預設對圖片x軸要切幾塊
-        y      : 2, // 預設對圖片y軸要切幾塊
-        random : true, // 磚塊是否要按照順序切換
-        speed  : 2000 // 效果的速度
-    };              
-
-    $.fn.sliced = function( options ) {
-
-        var o = $.extend( {}, _defaults, options );
-
-        return this.each(function() {
-            var $container = $(this); // cache selector for best performance
-            // 主要程式碼從這裡開始寫            
-
-        });
-    };
-
-}( jQuery, window ));
-</code></pre>
-
-<p>當然如果想要寫其他 Plugin 的人，也可以使用這個樣板去做修改</p>
-
-<h3>原理</h3>
-
-<p>做好基本的準備工作以後，我們要來開始撰寫主程式部分，但在撰寫之前，先來說明一下這個效果是如何產生，其實原理很簡單，在效果執行時，會先將原圖的屬性設為 <strong>display: none</strong>，接著加上&lt;div&gt;並且設定背景圖片，類似拼圖一樣一塊一塊拼出原圖，如果覺得我描述的不清楚的話，下面有範例可以參考XD</p>
-
-<p><a href="http://jsfiddle.net/rx836/sbBeA/" target="_blank">範例</a></p>
-
-<p>這邊的重點在於 <strong>background-position</strong> 這個屬性，利用這個屬性做背景圖片的位移，每一個&lt;div&gt;代表著圖片的一個區塊，也許有些人看到這邊已經知道端倪，因為只要把圖片轉換成一個一個的&lt;div&gt;，透過操作每個&lt;div&gt;，就可以做出特效</p>
-
-<p>接著我們把程式碼寫完，先建立一些變數</p>
-
-<pre><code>var width = $container.width(),
-    height = $container.height(),
-    $img = $container.find('img'),
-    n_tiles = o.x * o.y,
-    tiles = [], $tiles;
-</code></pre>
-
-<p>接著是建立一塊一塊的磁磚，並且把原圖隱藏，最後加上剛建立好的磁磚，至於要建立多少個就看當初給予的值</p>
-
-<pre><code>for ( var i = 0; i &lt; n_tiles; i++ ) {
-    tiles.push('&lt;div class="tile"/&gt;');
-}
-
-$tiles = $( tiles.join('') );
-
-//將原圖隱藏並加上磁磚
-$img.hide().after( $tiles );
-</code></pre>
-
-<p>接著利用原始圖檔當作每個磁磚的背景圖，在將背景圖做適當的位移，至於要位移多少，就看每個&lt;div&gt;(也就是每個磁磚)所代表的區塊</p>
-
-<pre><code>//利用原始圖檔當作磁磚背景圖
-$tiles.css({
-    width: width / o.x,
-    height: height / o.y,
-    backgroundImage: 'url('+ $img.attr('src') +')'
-});    
-
-//替背景圖調整位置
-$tiles.each(function() {
-    var pos = $(this).position();
-    console.log(pos);
-    $(this).css( 'backgroundPosition', -pos.left +'px '+ -pos.top +'px' );
-});
-</code></pre>
-
-<p>因為要拼成一塊圖片的關係，所以也要利用 float這個屬性，直接在CSS加上即可</p>
-
-<pre><code>.tile { float: left; }
-</code></pre>
-
-<p>到這邊為止，你可以加上下面這段程式碼，看看效果如何</p>
-
-<pre><code>$('.sliced').sliced({ x:4, y:4 }); // 將圖片切成4x4
-</code></pre>
-
-<p>看圖片好像沒什麼改變，但打開firebug看看HTML部份，有發現到不一樣了嗎？</p>
-
-<p><img src="https://lh5.googleusercontent.com/-t0N7b55zbPE/UPkk8Kc6OaI/AAAAAAAACMo/1L6StJdwJ3s/s1026/2013-01-18_180320.jpg" /></p>
-
-<p>就如剛剛所敘述的，<strong>原始圖片已經隱藏，並且用&lt;div&gt;拼湊而出</strong></p>
-
-<h3>製作效果</h3>
-
-<p>知道了原理以後，接著讓我們繼續把程式碼繼續寫完，接下來是隨機變換的部份</p>
-
-<pre><code>function range( min, max, rand ) {
-  var arr = ( new Array( ++max - min ) )
-    .join('.').split('.')
-    .map(function( v,i ){ return min + i });
-  return rand
-    ? arr.map(function( v ) { return [ Math.random(), v ] })
-       .sort().map(function( v ) { return v[ 1 ] })
-    : arr;
-}
-</code></pre>
-
-<p>這部份的 code 可以參考 <a href="http://stackoverflow.com/questions/12528886/random-but-just-in-chrome" target="_blank">stackoverflow</a>，簡單來說就是一個產生<strong>特定範圍的隨機排列的數字</strong>，但因為是函式的關係我們要把他跟一開始<strong>建立預設值 var _defaults 放在一起</strong>，剩下的 code 就是處理切換效果的部份</p>
-
-<pre><code>var tilesArr = range( 0, n_tiles, o.random ),
-tileSpeed = o.speed / n_tiles;              
-
-$container.on( 'animate', function() {
-
-    tilesArr.forEach(function( tile, i ) {                  
-        setTimeout(function(){
-            $tiles.eq( tile ).toggleClass( 'tile-animated' );
-        }, i * tileSpeed );
-    });
-
-});
-</code></pre>
-
-<p>我們將每個磁磚加上animate，在特定時間內做 opacity 屬性的變化，最後加上一個按鈕做觸發，和套用plugin，看看效果如何</p>
-
-<p>html</p>
-
-<pre><code>&lt;button&gt;Toggle&lt;/button&gt;
-</code></pre>
-
-<p>js</p>
-
-<pre><code>$('button').click(function() {
-    $('.sliced').trigger('animate');
-});
-</code></pre>
-
-<p><a href="http://jsfiddle.net/rx836/jQaJh/2/" target="_blank">完整的範例</a></p>
-
-<h2>結論</h2>
-
-<p>只要知道是拼圖的概念，就可以知道其實不是針對原圖去做變化，巧妙的利用&lt;div&gt;也可以做出類似flash的效果</p>
-
-<h3>參考資料:</h3>
-
-<p><a href="http://www.onextrapixel.com/2012/11/23/how-to-slice-images-into-tiles-with-jquery-and-css3-transitions/" target="_blank">How to Slice Images into Tiles with jQuery and CSS3 Transitions</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

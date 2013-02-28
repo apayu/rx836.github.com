@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一] - apa</title>
+  <title>[jQ-Plugin] 利用jQuery做CSS Sprite效果 - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="因為想參加Microsoft的Apps開發者聯盟，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM 當然前提你必須先把VM給裝起來，網路上教學還蠻多的，這篇就不多加闡述 &hellip;">
+  <meta name="description" content="為了讓網站對Server的請求次數減少，有些人會運用到 CSS Sprite 的技巧，將所有的小圖合併成一張大圖，再利用 background-position 來進行定位，但事先的圖片合併規劃，為了算那些位置，不免覺得稍嫌麻煩，但其實有快速合併成大圖的方法，之前曾經寫過一篇[CSS] &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/vmware-windows-8/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/jquery-sprite/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一] - apa" />
+<meta property="og:title" content="[jQ-Plugin] 利用jQuery做CSS Sprite效果 - apa" />
 
-<meta property="og:description" content="因為想參加Microsoft的Apps開發者聯盟，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM 當然前提你必須先把VM給裝起來，網路上教學還蠻多的，這篇就不多加闡述 &hellip;" />
+<meta property="og:description" content="為了讓網站對Server的請求次數減少，有些人會運用到 CSS Sprite 的技巧，將所有的小圖合併成一張大圖，再利用 background-position 來進行定位，但事先的圖片合併規劃，為了算那些位置，不免覺得稍嫌麻煩，但其實有快速合併成大圖的方法，之前曾經寫過一篇[CSS] &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/vmware-windows-8/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/jquery-sprite/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[一]</h1>
+      <h1 class="entry-title">[jQ-Plugin] 利用jQuery做CSS Sprite效果</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-09-21T17:37:00+08:00" pubdate data-updated="true">Sep 21<span>st</span>, 2012</time>
+<time datetime="2013-02-28T20:53:00+08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,70 +113,65 @@
   </header>
 
 
-<div class="entry-content"><p>因為想參加Microsoft的<a href="http://www.microsoft.com/taiwan/promo/Win8AppFest/">Apps開發者聯盟</a>，但其實是想拼前100名就可以得到快手獎XD，獎品是Windows 8 專業版軟體乙套，所以想來挑戰看看，但要先把windows 8安裝起來，所以這篇紀錄一下安裝過程，用的是VM</p>
+<div class="entry-content"><p><img src="https://lh5.googleusercontent.com/-NrgYmV2EGjs/US9R96MMebI/AAAAAAAACSw/nQUtJ_0HHqc/s372/css-sprite.gif" /></p>
+
+<p>為了讓網站對Server的請求次數減少，有些人會運用到 <strong>CSS Sprite</strong> 的技巧，將所有的小圖合併成一張大圖，再利用 <strong>background-position</strong> 來進行定位，但事先的圖片合併規劃，為了算那些位置，不免覺得稍嫌麻煩，但其實有快速合併成大圖的方法，之前曾經寫過一篇<a href="http://blog.rx836.tw/blog/introduce-compass/" target="_blank">[CSS] 用了就無法回頭的Compass</a>，有興趣的人可以參考</p>
 
 <!--more-->
 
 
-<p>當然前提你必須先把VM給裝起來，網路上<a href="http://blog.xuite.net/yh96301/blog/53120472" target="_blank">教學還蠻多的</a>，這篇就不多加闡述</p>
+<p>要運用 CSS Sprite 的技巧，要自己撰寫其實也不難，不過善用 <a href="http://yangkun.github.com/jquery-sprite/#usage" target="_blank">Jquery-sprite</a>，可以更容易來做到這件事情</p>
 
-<p>一開始首先要去下載微軟所推出的<a href="http://windows.microsoft.com/en-US/windows-8/iso" target="_blank">Windows 8 Consumer Preview(消費者預覽版)</a>，直接下載32-bit (x86)這個版本就可以，但只有English版本，下載完後開啟VM</p>
+<h2>Start</h2>
 
-<h3>2012/09/25 補充</h3>
+<p>首先可以從 github 下載 js 檔</p>
 
-<p>更正一下，如果是要開發Windows 8的應用程式，應該要安裝<a href="http://msdn.microsoft.com/zh-TW/evalcenter/jj554510.aspx" target="_blank">Windows 8 evaluation for developers</a>，這裡的Windows 8版本才對，不然會沒辦法安裝VS 2012開發工具&#8230;，而且還有中文版本，因為安裝程序都一樣，所以文章內容一樣可以參考</p>
+<p><a href="https://github.com/yangkun/jquery-sprite">DOWNLOAD</a></p>
 
-<p>點選『Create a New Virtual Machine』</p>
+<p>html部份</p>
 
-<p><img src="https://lh5.googleusercontent.com/-otZSLwijQ0U/UFyf4XwFSyI/AAAAAAAABkc/FNIph_J7JHs/s657/1.jpg"  /></p>
+<pre><code>&lt;div id="swap"&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
 
-<p>接著點選『I will Install the operating system later』</p>
+<p>js部份</p>
 
-<p><img src="https://lh5.googleusercontent.com/-xeiYkr8fudM/UFyf8en7F3I/AAAAAAAABls/swewFIyCkmE/s659/2.jpg"  /></p>
+<pre><code>$('#swap span.google-sprite').each(function(i) {
+    var sprite = $(this).sprite(googleOpts).hover(function() {
+        sprite.col(6);
+    },function() {
+        sprite.col(0);
+    });
+    sprite.row(i);
+});
+</code></pre>
 
-<p>作業系統選擇『Microsoft Windows』，接著再選擇『Windows 7』，因為VM沒有Windows 8可以選</p>
+<p>這邊利用 <strong>.each()</strong> 是因為範例有好幾張圖做變化，在每個圖上加上 <strong>.hover()</strong></p>
 
-<p><img src="https://lh3.googleusercontent.com/-_Co3ZTLZ3bA/UFygAqiA5CI/AAAAAAAABm0/UixQmOxkxiU/s657/3.jpg"  /></p>
+<h3>當滑鼠移入時</h3>
 
-<p>輸入虛擬機器的名稱，這邊取名『Windows 8』，再選擇要存放的路徑，然後點選『Next』</p>
+<p>就會變化到 <strong>sprite.col(6)</strong>，這個指定的位置</p>
 
-<p><img src="https://lh4.googleusercontent.com/-KRAurNJRvLk/UFygBDKQoII/AAAAAAAABm8/YwQLP43AyUQ/s658/4.jpg"  /></p>
+<h3>當滑鼠移出時</h3>
 
-<p>接著設定虛擬硬碟的大小，並且設定『Store virtual disk as a single files』，將虛擬硬碟存成一個資料夾，按下『Next』</p>
+<p>就會回到 <strong>sprite.col(0)</strong>，這個指定的位置</p>
 
-<p><img src="https://lh3.googleusercontent.com/-EO-2MBYjcEc/UFygBr6bmvI/AAAAAAAABnI/5JjNmotkvEw/s656/5.jpg"  /></p>
+<p>原理其實就是在大圖上面將每個小圖畫分位置，利用 row 和 col 的概念來變換相對的位置</p>
 
-<p>再來準備要來設定記憶體和掛載Windows 8映像檔，選擇『Customize Hardware…』</p>
+<p>想看更多的範例可以參考 <a href="http://yangkun.github.com/jquery-sprite/" target="_blank">這裡</a></p>
 
-<p><img src="https://lh4.googleusercontent.com/-nbky8ASN0ck/UFygBw-01wI/AAAAAAAABnE/dxdanwgZcjg/s660/6.jpg"  /></p>
+<h2>參考資料:</h2>
 
-<p>調整記憶體，一般來說建議為實體記憶體的3分之1至2分之1之間，官方網站是說至少要1G</p>
+<p><a href="http://yangkun.github.com/jquery-sprite/" target="_blank">Jquery-sprite</a></p>
 
-<p><img src="https://lh5.googleusercontent.com/-btOEe35_ToI/UFygCdtCjwI/AAAAAAAABnY/P6JM4vBI9Nc/s656/7.jpg"  /></p>
-
-<p>接著選擇『New CD/DVD』的選項，再點『Use ISO image file:』，再按「Browse…」來選擇映像檔</p>
-
-<p><img src="https://lh6.googleusercontent.com/-WxOQRqu4nF8/UFygCyaFR9I/AAAAAAAABng/uQc30JVd0Oo/s658/8.jpg"  /></p>
-
-<p>選擇好映像檔以後就按下『Close』</p>
-
-<p><img src="https://lh4.googleusercontent.com/-v5ICos8qLUQ/UFygC-8bVNI/AAAAAAAABnc/9rp1LeXOO8I/s661/9.jpg"  /></p>
-
-<p>最後按下『Finish』就新增了一個虛擬機器</p>
-
-<p><img src="https://lh6.googleusercontent.com/-5QYBPsTQNwA/UFyf4pX33AI/AAAAAAAABkg/5rhtXII6H1s/s657/10.jpg"  /></p>
-
-<p>按下『Play virtual machine』，開始來進行安裝囉！</p>
-
-<p><img src="https://lh5.googleusercontent.com/-G0VcZ28gqbA/UFyf4laUtKI/AAAAAAAABkk/jvgPOqPFaOE/s659/11.jpg"  /></p>
-
-<p>因為篇幅有點過長，為了方便閱讀，所以分成兩篇來記錄</p>
-
-<p>參考資料:</p>
-
-<p><a href="http://blog.xuite.net/yh96301/blog/58183942" target="_blank">VMware Player 4.0安裝Windows 8消費者預覽版本(一)</a></p>
-
-<p>如有錯誤，歡迎指正</p>
+<p>內容如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -210,12 +205,12 @@
   
 
 
-<time datetime="2012-09-21T17:37:00+08:00" pubdate data-updated="true">Sep 21<span>st</span>, 2012</time>
+<time datetime="2013-02-28T20:53:00+08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/win8/'>Win8</a>, <a class='category' href='/blog/categories/學習筆記/'>學習筆記</a>
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>
   
 </span>
 
@@ -223,10 +218,8 @@
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-hoverpulse/" title="Previous Post: [jQ-Plugin] hoverpulse 滑鼠移入，圖片縮放">&laquo; [jQ-Plugin] hoverpulse 滑鼠移入，圖片縮放</a>
+        <a class="basic-alignment left" href="/blog/jquery-star-box/" title="Previous Post: [jQ-Plugin] 在網站中加入星星評分效果">&laquo; [jQ-Plugin] 在網站中加入星星評分效果</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2-vmware-windows-8/" title="Next Post: [學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二]">[學習筆記] 簡單容易，如何在VM裝Windows 8來玩玩[二] &raquo;</a>
       
     </p>
   </footer>
@@ -244,7 +237,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/vmware-windows-8/" 
+	data-href="http://blog.rx836.tw/blog/jquery-sprite/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -311,9 +304,9 @@
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/vmware-windows-8/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/vmware-windows-8/';
-        var disqus_url = 'http://blog.rx836.tw/blog/vmware-windows-8/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-sprite/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-sprite/';
+        var disqus_url = 'http://blog.rx836.tw/blog/jquery-sprite/';
         var disqus_script = 'embed.js';
       
     (function () {

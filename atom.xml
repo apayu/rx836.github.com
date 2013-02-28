@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-01-29T14:44:23+08:00</updated>
+  <updated>2013-02-28T21:01:21+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[jQ-Plugin] 利用jQuery做CSS Sprite效果]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-sprite/"/>
+    <updated>2013-02-28T20:53:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-sprite</id>
+    <content type="html"><![CDATA[<p><img src="https://lh5.googleusercontent.com/-NrgYmV2EGjs/US9R96MMebI/AAAAAAAACSw/nQUtJ_0HHqc/s372/css-sprite.gif" /></p>
+
+<p>為了讓網站對Server的請求次數減少，有些人會運用到 <strong>CSS Sprite</strong> 的技巧，將所有的小圖合併成一張大圖，再利用 <strong>background-position</strong> 來進行定位，但事先的圖片合併規劃，為了算那些位置，不免覺得稍嫌麻煩，但其實有快速合併成大圖的方法，之前曾經寫過一篇<a href="http://blog.rx836.tw/blog/introduce-compass/" target="_blank">[CSS] 用了就無法回頭的Compass</a>，有興趣的人可以參考</p>
+
+<!--more-->
+
+
+<p>要運用 CSS Sprite 的技巧，要自己撰寫其實也不難，不過善用 <a href="http://yangkun.github.com/jquery-sprite/#usage" target="_blank">Jquery-sprite</a>，可以更容易來做到這件事情</p>
+
+<h2>Start</h2>
+
+<p>首先可以從 github 下載 js 檔</p>
+
+<p><a href="https://github.com/yangkun/jquery-sprite">DOWNLOAD</a></p>
+
+<p>html部份</p>
+
+<pre><code>&lt;div id="swap"&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="google-sprite"&gt;&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>js部份</p>
+
+<pre><code>$('#swap span.google-sprite').each(function(i) {
+    var sprite = $(this).sprite(googleOpts).hover(function() {
+        sprite.col(6);
+    },function() {
+        sprite.col(0);
+    });
+    sprite.row(i);
+});
+</code></pre>
+
+<p>這邊利用 <strong>.each()</strong> 是因為範例有好幾張圖做變化，在每個圖上加上 <strong>.hover()</strong></p>
+
+<h3>當滑鼠移入時</h3>
+
+<p>就會變化到 <strong>sprite.col(6)</strong>，這個指定的位置</p>
+
+<h3>當滑鼠移出時</h3>
+
+<p>就會回到 <strong>sprite.col(0)</strong>，這個指定的位置</p>
+
+<p>原理其實就是在大圖上面將每個小圖畫分位置，利用 row 和 col 的概念來變換相對的位置</p>
+
+<p>想看更多的範例可以參考 <a href="http://yangkun.github.com/jquery-sprite/" target="_blank">這裡</a></p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://yangkun.github.com/jquery-sprite/" target="_blank">Jquery-sprite</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 在網站中加入星星評分效果]]></title>
@@ -2494,48 +2561,6 @@ function Numeral (number) {
 <p><a href="http://www.appelsiini.net/projects/lazyload" target="_blank">Lazy Load Plugin for jQuery</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[好書分享] 開放式領導]]></title>
-    <link href="http://blog.rx836.tw/blog/book-review-6/"/>
-    <updated>2012-12-01T23:59:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/book-review-6</id>
-    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-HyLDQMw16fo/ULo4id1YO-I/AAAAAAAAB_8/z9LHSm1m9EY/s348/%25E9%2596%258B%25E6%2594%25BE%25E5%25BC%258F%25E9%25A0%2598%25E5%25B0%258E%25E5%25B0%2581%25E9%259D%25A2.jpg" /></p>
-
-<p>這本書其實是從Facebook別人分享得知的，「開放式領導」這個詞，老實說也是我看到書名後，才第一次認識到，很幸運的除了自己看書以外，還很有幸的參加了HPX，其中有一群人組了這本書的讀書會，在最後一次聚會時所分享的結論，讓我更加了解這本書的內容</p>
-
-<!--more-->
-
-
-<p>首先在這本書的封面，其實已經說明了開放式領導的重點，就是</p>
-
-<p><strong>分享</strong></p>
-
-<p><strong>參與</strong></p>
-
-<p><strong>互動</strong></p>
-
-<p>要想朝「開放式領導」方向前進，首先必須要讓整個組織有共同的願景，我個人覺得這非常的重要，如果一家公司沒有共同的方向，會讓底下的員工覺得，今天我為何而做？為何而戰？為何而犧牲假日加班？當心中有很多為什麼的時候，員工會因為猶豫而無法做更多，書中有一段是這麼說的</p>
-
-<p>「當你們分享願景和策略的時候，這些人會主動來找你，問說：『我可以幫你什麼忙？』他們對於這個理念的掌握是出於個人的層次，而且願意傾注全部的心力來支持這項策略」</p>
-
-<h3>分享，是首當要務</h3>
-
-<p>共同的願景之後，就是讓大家一起參與，但「開放式領導」雖然講求開放，但某些情況下還是會有所規範和限制，書中有提到可以運用沙坑公約，也就是建立沙坑範圍，讓大家知道規則是什麼，就跟桌遊一樣，是規則建立起遊戲，因為有了規則，才能讓遊戲進行下去，同時也能避免許多糾紛</p>
-
-<h3>溝通、溝通、再溝通</h3>
-
-<p>建立起彼此的信任，多與每個人互動，聽聽每個人的想法，建立共同的願景、目標，最終一起朝同個方向努力，這是我讀開放式領導這本書的心得感想</p>
-
-<p>另外有興趣的人可以延伸閱讀這本書</p>
-
-<p><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010494708" target="_blank">想好了就豁出去：人生不能只做有把握的事，鞋王謝家華這樣找出勝算</a></p>
-
-<p>因為 開放x創新，而造就了這家公司的成功，可說是開放式領導之典範</p>
-
-<p>如有想法，歡迎一起提出討論</p>
 ]]></content>
   </entry>
   
