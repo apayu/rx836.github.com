@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-02-28T21:01:21+08:00</updated>
+  <updated>2013-02-28T21:05:23+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -31,7 +31,7 @@
 
 <p>首先可以從 github 下載 js 檔</p>
 
-<p><a href="https://github.com/yangkun/jquery-sprite">DOWNLOAD</a></p>
+<p><a href="https://github.com/yangkun/jquery-sprite" target="_blank">DOWNLOAD</a></p>
 
 <p>html部份</p>
 
