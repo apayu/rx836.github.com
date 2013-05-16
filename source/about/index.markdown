@@ -7,7 +7,7 @@ sharing: true
 footer: true
 ---
 
-<img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/572159_100000102681259_312536549_s.jpg" />
+<img src="https://graph.facebook.com/100000102681259/picture?type=large" />
 
 Hello! 我是阿帕 
 
