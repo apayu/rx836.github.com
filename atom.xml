@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-02-28T21:05:23+08:00</updated>
+  <updated>2013-05-16T17:36:13+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,192 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[jquery-plugin-for-pinterest]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-plugin-for-pinterest/"/>
+    <updated>2013-05-16T12:13:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-plugin-for-pinterest</id>
+    <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-3uQelUPbt2g/UZSmojbUPxI/AAAAAAAACcA/uPWSGQBZYoQ/w170-h167-no/2013-05-16_162143.jpg" /></p>
+
+<p>大部分的網站要與社群做結合，多以FB、G+、Twitter、或是微博等為主，但這幾天看到一篇文章，是連結 <strong>pinterest</strong> 來做為分享圖片的對象，在此特別紀錄下來</p>
+
+<!--more-->
+
+
+<p>但為了以後的套用方便，我們可以將這部份的需求寫成一個plugin，至於要做甚麼呢？其實很簡單，就是當滑鼠移到圖片時，右下角浮現出 pinterest 分享圖片的小icon</p>
+
+<p><img src="https://lh6.googleusercontent.com/-3uQelUPbt2g/UZSmojbUPxI/AAAAAAAACcA/uPWSGQBZYoQ/w170-h167-no/2013-05-16_162143.jpg" /></p>
+
+<p>按下以後，就會跳出 pinterest 的登入畫面(假如沒登入的話)，接著就是看要將圖片 pin 到哪個Board</p>
+
+<p><img src="https://lh6.googleusercontent.com/-XgxZfhKtXHg/UZSmpJlu9TI/AAAAAAAACcI/hrXNi19FHlc/w856-h463-no/2013-05-16_162258.jpg" /></p>
+
+<h2>Start</h2>
+
+<p>首先我們需要知道製作 jQuery plugin 的基本樣板</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {                    
+        }, options);
+
+        return this.each(function() {    
+        $.fn.pinterest
+        });
+
+    };
+})( jQuery );
+</code></pre>
+
+<p><strong>$.fn.pinterest</strong>就是呼叫這個 plugin 的名稱，所以也可以取自己喜歡的名稱，接著是準備『分享』的小icon</p>
+
+<p><img src="http://business.pinterest.com/assets/img/builder/builder_opt_1.png" /></p>
+
+<p>不過為了可以方便以後替換，我們可以寫成這樣</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            //做為參數設定
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        return this.each(function() {    
+
+        });
+
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    //不喜歡預設圖可以直接這樣替換
+    $('img#share').pinterest({ button: 'pinterest-alt.png'});
+});
+</code></pre>
+
+<p>接著我們需要添加一些 html 元素到圖片上面，包括分享的小圖片</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        return this.each(function() {    
+            img = $(this);
+            img.wrap('&lt;span class="pin-it" style="position: relative;" /&gt;');
+            img.parent('span.pin-it').append('&lt;img src="' + settings.button + '" style="display: none;position: absolute; bottom: 20px; right: 20px;cursor: hand; cursor: pointer;" /&gt;');
+        });
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    $('img#share').pinterest({ button: 'pinterest-alt.png'});
+});
+</code></pre>
+
+<p>以上程式內容主要是用一個 span 包起來，再將分享小圖片放置在圖片右下角</p>
+
+<p>接著加上 on_click 和 on_hover_in 事件</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        function on_click () {         
+        };
+
+        function on_hover_in() {
+            $(this).siblings('img:first').show(500);
+        };    
+
+        return this.each(function() {    
+            img = $(this);
+            img.wrap('&lt;span class="pin-it" style="position: relative;" /&gt;');
+            img.parent('span.pin-it').append('&lt;img src="' + settings.button + '" style="display: none;position: absolute; bottom: 20px; right: 20px;cursor: hand; cursor: pointer;" /&gt;');
+            img.hover(on_hover_in);
+            img.siblings('img:first').on('click', on_click);
+        });
+
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    $('img#share').pinterest({ button: 'pinterest-small.png'});
+});
+</code></pre>
+
+<p>on_hover_in是讓滑鼠移到圖片時，可以秀出右下角的分享圖片，當然效果可以依照自己喜歡去做修改</p>
+
+<p>至於 on_click 部份，就是將圖片分享致 pinterest</p>
+
+<pre><code>function on_click () {
+    img = $(this).siblings('img:first');
+    description = img.attr('title');
+    url = document.location;
+    media = img.attr('src');
+
+    var pin_url = 'http://pinterest.com/pin/create/button/?url=' + encodeURIComponent( url ) +
+        '&amp;media=' + encodeURIComponent( media ) +
+        '&amp;description=' + encodeURIComponent( description );
+
+    window.open(pin_url, 'Pin - ' + description, 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    $(this).hide(1000);
+};
+</code></pre>
+
+<p>利用 window.open 開啟一個分享視窗，pin_url 裡面的網址搭配參數，分別是</p>
+
+<p>url：從哪個 url 分享而來，利用　document.location　語法取得</p>
+
+<p>media：利用 .attr() 取得該 img 的 src</p>
+
+<p>description：利用 .attr() 取得該 img 的 title</p>
+
+<p>當然，記得使用 encodeURIComponent 做編碼</p>
+
+<p>最後，為了方便 img 的 src 不管是絕對路徑還是相對路徑都可以讓 pinterest 可以使用，要自動加上主機的網址路徑 http://xxx.xxx.com/</p>
+
+<pre><code>function getUrl(src){
+    var url = document.location.toString();
+    var http = /^https?:\/\//i;
+    if (!http.test(src)) {
+        if(src[0] == '/'){
+            url = url.substring(0, url.lastIndexOf('/')) + src;
+        } else {
+            url = url.substring(0, url.lastIndexOf('/')) + '/' + src;
+        }
+    } else {
+        url = src;
+    }
+
+    return url;
+};
+</code></pre>
+
+<p>這樣只要將 media 那邊的程式碼改成</p>
+
+<pre><code>media = getUrl( img.attr('src') );
+</code></pre>
+
+<p>就大功告成了</p>
+
+<p><a href="http://developerdrive.developerdrive.netdna-cdn.com/wp-content/uploads/2013/05/jquery-pinterest1.zip" target=""_blank>完整範例程式碼</a></p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://www.developerdrive.com/2013/05/creating-a-simple-jquery-plugin-for-pinterest/" target="_blank">Creating a simple jQuery plugin for Pinterest</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 利用jQuery做CSS Sprite效果]]></title>
@@ -2496,69 +2682,6 @@ function Numeral (number) {
 <p><a href="https://github.com/adamwdraper/Numeral-js" target="_blank">Github Numeral-js</a></p>
 
 <p><a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 圖片延遲加載-Lazy-Loading]]></title>
-    <link href="http://blog.rx836.tw/blog/create-lazy-loading/"/>
-    <updated>2012-12-03T15:01:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/create-lazy-loading</id>
-    <content type="html"><![CDATA[<p><img src="https://lh4.googleusercontent.com/-9VL-bSTiio8/ULxO_q7aPbI/AAAAAAAACAQ/R6Nns5e2_T0/s551/qwer.jpg" /></p>
-
-<p>延遲加載圖片常用在有大量圖片的網站，在訪客還沒看到的區域先暫停讀取圖片，等到看到特定區域時才將需要的圖片載入，好處是可以減少一開始等待所有圖片載入的時間，避免訪客感到不耐煩而流失，要做到此效果只需要搭配簡單的jQuery plugin，並且在HTML上加點技巧即可，重點是，要加上這個效果對設計師來說並不困難，因為裡面並沒有涉及到太多JavaScript知識</p>
-
-<!--more-->
-
-
-<h2>Start</h2>
-
-<p>首先必須下載jQuery和<a href="https://raw.github.com/tuupola/jquery_lazyload/master/jquery.lazyload.min.js" target="_blank">minified lazyload script</a>，並且加掛在網頁裡面</p>
-
-<pre><code>&lt;script src="jquery.js" type="text/javascript"&gt;&lt;/script&gt;
-&lt;script src="jquery.lazyload.js" type="text/javascript"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>接著我們需要建立一個 1x1 px的灰色小圖，這將會取代尚未讀取到的圖片，來做為延遲加載的效果</p>
-
-<p><img src="https://lh4.googleusercontent.com/-GynYPKkHJnU/ULxbNG8liyI/AAAAAAAACA0/QMBzvG46740/s530/rtyu.jpg" /></p>
-
-<p>接著是HTML部分</p>
-
-<pre><code>&lt;div class="frame"&gt;&lt;img class="lazy" src="img/g.gif" data-original="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/div&gt;
-</code></pre>
-
-<p>這邊特別的是&lt;img&gt;的屬性 <strong>src</strong> 並不是指向原始圖檔，而是 1x1 px的小圖，而原始圖檔擺放的位置在屬性 <strong>data-original</strong> 裡面，另外要給予原始圖檔的 <strong>width</strong> 和 <strong>height</strong>，避免不必要的錯誤發生</p>
-
-<h3>noscript</h3>
-
-<p>在瀏覽器沒有開啟JavaScript的情況下，我們可能也要做一些預防措施，直接將圖片載入，不然使用者看到的圖片都是一片灰</p>
-
-<pre><code>&lt;div class="frame"&gt;&lt;img class="lazy" src="img/g.gif" data-original="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/div&gt;
-&lt;noscript&gt;&lt;img src="img/interior_01.jpg" width="500" height="333" alt="interior shot #1"&gt;&lt;/noscript&gt;
-</code></pre>
-
-<p>接著是JS部分</p>
-
-<pre><code>$("img.lazy").lazyload();
-</code></pre>
-
-<p>大功告成！很容易吧，假如你不太喜歡這麼呆滯的載入圖片，可以加入一些效果，例如 <strong>fadeIn</strong></p>
-
-<pre><code>$("img.lazy").lazyload({
-    effect: "fadeIn"
-});
-</code></pre>
-
-<p>想要看更多運用，可以連到參考資料</p>
-
-<h3>參考資料:</h3>
-
-<p><a href="http://speckyboy.com/2012/10/18/how-to-create-lazy-loading-images-for-your-website/" target="_blank">How to Create Lazy-Loading Images for your Website</a></p>
-
-<p><a href="http://www.appelsiini.net/projects/lazyload" target="_blank">Lazy Load Plugin for jQuery</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

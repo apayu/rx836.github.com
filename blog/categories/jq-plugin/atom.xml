@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQ-Plugin | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/jq-plugin/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-02-28T21:05:23+08:00</updated>
+  <updated>2013-05-16T17:36:13+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,192 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[jquery-plugin-for-pinterest]]></title>
+    <link href="http://blog.rx836.tw/blog/jquery-plugin-for-pinterest/"/>
+    <updated>2013-05-16T12:13:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/jquery-plugin-for-pinterest</id>
+    <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-3uQelUPbt2g/UZSmojbUPxI/AAAAAAAACcA/uPWSGQBZYoQ/w170-h167-no/2013-05-16_162143.jpg" /></p>
+
+<p>大部分的網站要與社群做結合，多以FB、G+、Twitter、或是微博等為主，但這幾天看到一篇文章，是連結 <strong>pinterest</strong> 來做為分享圖片的對象，在此特別紀錄下來</p>
+
+<!--more-->
+
+
+<p>但為了以後的套用方便，我們可以將這部份的需求寫成一個plugin，至於要做甚麼呢？其實很簡單，就是當滑鼠移到圖片時，右下角浮現出 pinterest 分享圖片的小icon</p>
+
+<p><img src="https://lh6.googleusercontent.com/-3uQelUPbt2g/UZSmojbUPxI/AAAAAAAACcA/uPWSGQBZYoQ/w170-h167-no/2013-05-16_162143.jpg" /></p>
+
+<p>按下以後，就會跳出 pinterest 的登入畫面(假如沒登入的話)，接著就是看要將圖片 pin 到哪個Board</p>
+
+<p><img src="https://lh6.googleusercontent.com/-XgxZfhKtXHg/UZSmpJlu9TI/AAAAAAAACcI/hrXNi19FHlc/w856-h463-no/2013-05-16_162258.jpg" /></p>
+
+<h2>Start</h2>
+
+<p>首先我們需要知道製作 jQuery plugin 的基本樣板</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {                    
+        }, options);
+
+        return this.each(function() {    
+        $.fn.pinterest
+        });
+
+    };
+})( jQuery );
+</code></pre>
+
+<p><strong>$.fn.pinterest</strong>就是呼叫這個 plugin 的名稱，所以也可以取自己喜歡的名稱，接著是準備『分享』的小icon</p>
+
+<p><img src="http://business.pinterest.com/assets/img/builder/builder_opt_1.png" /></p>
+
+<p>不過為了可以方便以後替換，我們可以寫成這樣</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            //做為參數設定
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        return this.each(function() {    
+
+        });
+
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    //不喜歡預設圖可以直接這樣替換
+    $('img#share').pinterest({ button: 'pinterest-alt.png'});
+});
+</code></pre>
+
+<p>接著我們需要添加一些 html 元素到圖片上面，包括分享的小圖片</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        return this.each(function() {    
+            img = $(this);
+            img.wrap('&lt;span class="pin-it" style="position: relative;" /&gt;');
+            img.parent('span.pin-it').append('&lt;img src="' + settings.button + '" style="display: none;position: absolute; bottom: 20px; right: 20px;cursor: hand; cursor: pointer;" /&gt;');
+        });
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    $('img#share').pinterest({ button: 'pinterest-alt.png'});
+});
+</code></pre>
+
+<p>以上程式內容主要是用一個 span 包起來，再將分享小圖片放置在圖片右下角</p>
+
+<p>接著加上 on_click 和 on_hover_in 事件</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        function on_click () {         
+        };
+
+        function on_hover_in() {
+            $(this).siblings('img:first').show(500);
+        };    
+
+        return this.each(function() {    
+            img = $(this);
+            img.wrap('&lt;span class="pin-it" style="position: relative;" /&gt;');
+            img.parent('span.pin-it').append('&lt;img src="' + settings.button + '" style="display: none;position: absolute; bottom: 20px; right: 20px;cursor: hand; cursor: pointer;" /&gt;');
+            img.hover(on_hover_in);
+            img.siblings('img:first').on('click', on_click);
+        });
+
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    $('img#share').pinterest({ button: 'pinterest-small.png'});
+});
+</code></pre>
+
+<p>on_hover_in是讓滑鼠移到圖片時，可以秀出右下角的分享圖片，當然效果可以依照自己喜歡去做修改</p>
+
+<p>至於 on_click 部份，就是將圖片分享致 pinterest</p>
+
+<pre><code>function on_click () {
+    img = $(this).siblings('img:first');
+    description = img.attr('title');
+    url = document.location;
+    media = img.attr('src');
+
+    var pin_url = 'http://pinterest.com/pin/create/button/?url=' + encodeURIComponent( url ) +
+        '&amp;media=' + encodeURIComponent( media ) +
+        '&amp;description=' + encodeURIComponent( description );
+
+    window.open(pin_url, 'Pin - ' + description, 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    $(this).hide(1000);
+};
+</code></pre>
+
+<p>利用 window.open 開啟一個分享視窗，pin_url 裡面的網址搭配參數，分別是</p>
+
+<p>url：從哪個 url 分享而來，利用　document.location　語法取得</p>
+
+<p>media：利用 .attr() 取得該 img 的 src</p>
+
+<p>description：利用 .attr() 取得該 img 的 title</p>
+
+<p>當然，記得使用 encodeURIComponent 做編碼</p>
+
+<p>最後，為了方便 img 的 src 不管是絕對路徑還是相對路徑都可以讓 pinterest 可以使用，要自動加上主機的網址路徑 http://xxx.xxx.com/</p>
+
+<pre><code>function getUrl(src){
+    var url = document.location.toString();
+    var http = /^https?:\/\//i;
+    if (!http.test(src)) {
+        if(src[0] == '/'){
+            url = url.substring(0, url.lastIndexOf('/')) + src;
+        } else {
+            url = url.substring(0, url.lastIndexOf('/')) + '/' + src;
+        }
+    } else {
+        url = src;
+    }
+
+    return url;
+};
+</code></pre>
+
+<p>這樣只要將 media 那邊的程式碼改成</p>
+
+<pre><code>media = getUrl( img.attr('src') );
+</code></pre>
+
+<p>就大功告成了</p>
+
+<p><a href="http://developerdrive.developerdrive.netdna-cdn.com/wp-content/uploads/2013/05/jquery-pinterest1.zip" target=""_blank>完整範例程式碼</a></p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://www.developerdrive.com/2013/05/creating-a-simple-jquery-plugin-for-pinterest/" target="_blank">Creating a simple jQuery plugin for Pinterest</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 利用jQuery做CSS Sprite效果]]></title>
@@ -381,127 +567,6 @@ alertify.alert("獎品將在三天後寄出");
 <p><a href="http://tympanus.net/codrops/2012/11/29/simple-effects-for-drop-down-lists/" target="_blank">SIMPLE EFFECTS FOR DROP-DOWN LISTS</a></p>
 
 <p><a href="http://modernizr.com/" target="_blank">modernizr</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 輕鬆幫表格做responsive]]></title>
-    <link href="http://blog.rx836.tw/blog/responsive-tables/"/>
-    <updated>2013-01-21T12:28:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/responsive-tables</id>
-    <content type="html"><![CDATA[<p>因為移動設備的成長，RWD(Responsive web design)這個應用已經在許多網頁上都看的到，除了做一個專屬於 mobile 的網站設計以外，也可以讓一個網站來符合許多螢幕解析度大小，而這兩個方法的優與劣，如何選擇，就看專案當下的情況來做決定</p>
-
-<!--more-->
-
-
-<p>例如以文字為主的部落格或是簡單的頁面就很適合做RWD，但介面太複雜或是功能太多，建議還是另外開發專屬的獨立網站，有興趣的人可以參考這篇的 <a href="http://cssindesign.tumblr.com/post/40513264330/responsive-web" target="_blank">實作心得</a>，這邊就不討論太多</p>
-
-<p>今天這篇主要介紹一個jQuery plugin，叫FooTable，利用簡單的幾行程式，就可以將網頁裡面的 table 擁有 RWD 的效果</p>
-
-<h2>Start</h2>
-
-<p>首先要先下載 js 和 css，可以到 github 下載</p>
-
-<p><a href="https://github.com/bradvin/FooTable" target="_blank">DOWNLOAD</a></p>
-
-<p>載回來後會發現裡面有一些 js 和 css檔，還有幾個 demo 範例，但有一些檔案是看情形選擇載入，其中最主要的只有兩個檔案，分別是</p>
-
-<p>footable-0.1.js 和 footable-0.1.css</p>
-
-<p>在網頁裡面載入這兩支檔案和jQuery以後，接下來就來做簡單的範例</p>
-
-<h3>phone和tablet</h3>
-
-<p>FooTable最主要會判斷三種情形，除了一般的 Desktop 以外，還分成 phone 和 tablet，開發人員可以在每個欄位中，選擇要在什麼情況底下做縮排，以下是基本的HTML</p>
-
-<p>HTML部份</p>
-
-<pre><code>&lt;table class="footable"&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th data-class="expand"&gt;
-        姓名
-      &lt;/th&gt;
-      &lt;th&gt;
-        職業
-      &lt;/th&gt;
-      &lt;th data-hide="phone"&gt;
-        年齡
-      &lt;/th&gt;
-      &lt;th data-hide="phone,tablet"&gt;
-        性別
-      &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;小馬&lt;/td&gt;&lt;td&gt;司機&lt;/td&gt;&lt;td&gt;59&lt;/td&gt;&lt;td&gt;男&lt;/td&gt;&lt;/tr&gt;          
-    &lt;tr&gt;&lt;td&gt;小陳&lt;/td&gt;&lt;td&gt;保全&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;td&gt;男&lt;/td&gt;&lt;/tr&gt;          
-    &lt;tr&gt;&lt;td&gt;小英&lt;/td&gt;&lt;td&gt;行政&lt;/td&gt;&lt;td&gt;27&lt;/td&gt;&lt;td&gt;女&lt;/td&gt;&lt;/tr&gt;          
-  &lt;/tbody&gt;
-&lt;/table&gt;
-</code></pre>
-
-<p>js部份</p>
-
-<pre><code>$(function() {
-  $('table').footable();
-});
-</code></pre>
-
-<p>可以看到在&lt;thead&gt;底下會有 data-class 和 data-hide 兩個 HTML5 的自訂屬性，如果 data-class="expand" 設在『姓名』那個欄位，<strong>代表的意思是會在此欄位建立 icon 圖案 『+』 和 『-』</strong>，而 data-hide 指的是<strong>該欄位在什麼情況下會隱藏縮排</strong>，例如在上面範例中的年齡設為 data-hide="phone"，表示在 phone 的寬度下會觸發此事件</p>
-
-<p>那或許會有人疑問，phone和 tablet 的寬度判斷依據是什麼呢？這邊可以直接打開 footable-0.1.js 這支檔案，搜尋底下這行原始碼</p>
-
-<pre><code>options: {
-  delay: 100, // The number of millseconds to wait before triggering the react event
-  breakpoints: { // The different screen resolution breakpoints
-    phone: 480,
-    tablet: 1024
-  },
-...
-...
-}
-</code></pre>
-
-<p>會發現原來 FooTable 預設屬性 phone 的寬度為480px，而 tablet 是1024，所以假設現在 Table 寬度只有 780，那擁有tablet 這個值的欄位就會做隱藏縮排，這些值都可以依照個人需求做修改，說了那麼多怕大家看不懂，那就直接來看結果圖吧</p>
-
-<p>table寬度大於1024px</p>
-
-<p><img src="https://lh6.googleusercontent.com/-SenmhgVS_s4/UPz2ku3YqeI/AAAAAAAACNc/vpvMWrwVeFk/s1077/2013-01-21_152914.jpg" /></p>
-
-<p>table寬度小於1024px，大於480px，<strong>性別被縮排，姓名多了展開的圖案『+』</strong></p>
-
-<p><img src="https://lh6.googleusercontent.com/-AZyIxH4mZgY/UPz2kr5W8CI/AAAAAAAACNU/wDNk3hkqDNc/s823/2013-01-21_153046.jpg" /></p>
-
-<p>table寬度小於480px，性別和年齡都被縮排</p>
-
-<p><img src="https://lh4.googleusercontent.com/-taApAI4ZcRk/UPz2ks5zlpI/AAAAAAAACNY/JM2RGkX-BPU/s219/2013-01-21_153224.jpg" /></p>
-
-<p>點擊每一列即可展開看被隱藏的資訊</p>
-
-<p><img src="https://lh3.googleusercontent.com/-PNOSlcS6mhU/UPz2lfqAOvI/AAAAAAAACNg/jhzxH6Y5l_M/s227/2013-01-21_153321.jpg" /></p>
-
-<p>是不是很方便呢？</p>
-
-<h3>搜尋與排序</h3>
-
-<p>除了一般的 table 以外，常用到的『搜尋』和『排序』當然也不可少，FooTable貼心的地方在於已經幫你處理好這方面的需求，只要載入相關的 js 和加上自訂的 data- 屬性就可以完成所要的功能</p>
-
-<p><a href="http://themergency.com/footable-demo/demo-sorting.htm" target="_blank">Sorting demo</a></p>
-
-<p><a href="http://themergency.com/footable-demo/demo-filtering.htm" target="_blank">Filtering demo</a></p>
-
-<p>但比較可惜的地方在於沒有實做分頁這塊，所以如果有這方面需求的朋友，可能要自己另外加上</p>
-
-<h2>總結</h2>
-
-<p>個人覺得這款jQuery plugin做的相當簡單，使用上也十分容易，主要就是在欄位方面加上 data- 屬性，可擴展性也高，可以依照『搜尋』和『排序』的邏輯模式新增自己的功能，在縮排與顯示方面的UI設計也讓人感到實用方便，有興趣的朋友可以參考看看</p>
-
-<h3>參考資料:</h3>
-
-<p><a href="http://themergency.com/footable/" target="_blank">FooTable</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

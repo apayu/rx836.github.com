@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>jquery-plugin-for-pinterest - apa</title>
+  <meta name="author" content="阿帕">
+
+  
+  <meta name="description" content="大部分的網站要與社群做結合，多以FB、G+、Twitter、或是微博等為主，但這幾天看到一篇文章，是連結 pinterest 來做為分享圖片的對象，在此特別紀錄下來 但為了以後的套用方便，我們可以將這部份的需求寫成一個plugin，至於要做甚麼呢？其實很簡單，就是當滑鼠移到圖片時，右下角浮現出 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.rx836.tw/blog/jquery-plugin-for-pinterest/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="apa" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<meta property="fb:admins" content="100000102681259"/>
+<meta property="fb:app_id" content="416172151763823" />
+<meta property="og:title" content="jquery-plugin-for-pinterest - apa" />
+
+<meta property="og:description" content="大部分的網站要與社群做結合，多以FB、G+、Twitter、或是微博等為主，但這幾天看到一篇文章，是連結 pinterest 來做為分享圖片的對象，在此特別紀錄下來 但為了以後的套用方便，我們可以將這部份的需求寫成一個plugin，至於要做甚麼呢？其實很簡單，就是當滑鼠移到圖片時，右下角浮現出 &hellip;" />
+
+<meta property="og:url" content="http://blog.rx836.tw/blog/jquery-plugin-for-pinterest/" />  
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31245620-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">apa</a></h1>
+  
+    <h2>Stay Hungry, Stay Foolish</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.rx836.tw" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Jquery-plugin-for-pinterest</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-16T12:13:00+08:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="https://lh6.googleusercontent.com/-3uQelUPbt2g/UZSmojbUPxI/AAAAAAAACcA/uPWSGQBZYoQ/w170-h167-no/2013-05-16_162143.jpg" /></p>
+
+<p>大部分的網站要與社群做結合，多以FB、G+、Twitter、或是微博等為主，但這幾天看到一篇文章，是連結 <strong>pinterest</strong> 來做為分享圖片的對象，在此特別紀錄下來</p>
+
+<!--more-->
+
+
+<p>但為了以後的套用方便，我們可以將這部份的需求寫成一個plugin，至於要做甚麼呢？其實很簡單，就是當滑鼠移到圖片時，右下角浮現出 pinterest 分享圖片的小icon</p>
+
+<p><img src="https://lh6.googleusercontent.com/-3uQelUPbt2g/UZSmojbUPxI/AAAAAAAACcA/uPWSGQBZYoQ/w170-h167-no/2013-05-16_162143.jpg" /></p>
+
+<p>按下以後，就會跳出 pinterest 的登入畫面(假如沒登入的話)，接著就是看要將圖片 pin 到哪個Board</p>
+
+<p><img src="https://lh6.googleusercontent.com/-XgxZfhKtXHg/UZSmpJlu9TI/AAAAAAAACcI/hrXNi19FHlc/w856-h463-no/2013-05-16_162258.jpg" /></p>
+
+<h2>Start</h2>
+
+<p>首先我們需要知道製作 jQuery plugin 的基本樣板</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {                    
+        }, options);
+
+        return this.each(function() {    
+        $.fn.pinterest
+        });
+
+    };
+})( jQuery );
+</code></pre>
+
+<p><strong>$.fn.pinterest</strong>就是呼叫這個 plugin 的名稱，所以也可以取自己喜歡的名稱，接著是準備『分享』的小icon</p>
+
+<p><img src="http://business.pinterest.com/assets/img/builder/builder_opt_1.png" /></p>
+
+<p>不過為了可以方便以後替換，我們可以寫成這樣</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            //做為參數設定
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        return this.each(function() {    
+
+        });
+
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    //不喜歡預設圖可以直接這樣替換
+    $('img#share').pinterest({ button: 'pinterest-alt.png'});
+});
+</code></pre>
+
+<p>接著我們需要添加一些 html 元素到圖片上面，包括分享的小圖片</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        return this.each(function() {    
+            img = $(this);
+            img.wrap('&lt;span class="pin-it" style="position: relative;" /&gt;');
+            img.parent('span.pin-it').append('&lt;img src="' + settings.button + '" style="display: none;position: absolute; bottom: 20px; right: 20px;cursor: hand; cursor: pointer;" /&gt;');
+        });
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    $('img#share').pinterest({ button: 'pinterest-alt.png'});
+});
+</code></pre>
+
+<p>以上程式內容主要是用一個 span 包起來，再將分享小圖片放置在圖片右下角</p>
+
+<p>接著加上 on_click 和 on_hover_in 事件</p>
+
+<pre><code>(function( $ ) {
+    $.fn.pinterest = function(options) {
+
+        var settings = $.extend( {
+            'button' : 'http://business.pinterest.com/assets/img/builder/builder_opt_1.png'
+        }, options);
+
+        function on_click () {         
+        };
+
+        function on_hover_in() {
+            $(this).siblings('img:first').show(500);
+        };    
+
+        return this.each(function() {    
+            img = $(this);
+            img.wrap('&lt;span class="pin-it" style="position: relative;" /&gt;');
+            img.parent('span.pin-it').append('&lt;img src="' + settings.button + '" style="display: none;position: absolute; bottom: 20px; right: 20px;cursor: hand; cursor: pointer;" /&gt;');
+            img.hover(on_hover_in);
+            img.siblings('img:first').on('click', on_click);
+        });
+
+    };
+})( jQuery );
+
+$(document).on('ready', function(){
+    $('img#share').pinterest({ button: 'pinterest-small.png'});
+});
+</code></pre>
+
+<p>on_hover_in是讓滑鼠移到圖片時，可以秀出右下角的分享圖片，當然效果可以依照自己喜歡去做修改</p>
+
+<p>至於 on_click 部份，就是將圖片分享致 pinterest</p>
+
+<pre><code>function on_click () {
+    img = $(this).siblings('img:first');
+    description = img.attr('title');
+    url = document.location;
+    media = img.attr('src');
+
+    var pin_url = 'http://pinterest.com/pin/create/button/?url=' + encodeURIComponent( url ) +
+        '&amp;media=' + encodeURIComponent( media ) +
+        '&amp;description=' + encodeURIComponent( description );
+
+    window.open(pin_url, 'Pin - ' + description, 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    $(this).hide(1000);
+};
+</code></pre>
+
+<p>利用 window.open 開啟一個分享視窗，pin_url 裡面的網址搭配參數，分別是</p>
+
+<p>url：從哪個 url 分享而來，利用　document.location　語法取得</p>
+
+<p>media：利用 .attr() 取得該 img 的 src</p>
+
+<p>description：利用 .attr() 取得該 img 的 title</p>
+
+<p>當然，記得使用 encodeURIComponent 做編碼</p>
+
+<p>最後，為了方便 img 的 src 不管是絕對路徑還是相對路徑都可以讓 pinterest 可以使用，要自動加上主機的網址路徑 http://xxx.xxx.com/</p>
+
+<pre><code>function getUrl(src){
+    var url = document.location.toString();
+    var http = /^https?:\/\//i;
+    if (!http.test(src)) {
+        if(src[0] == '/'){
+            url = url.substring(0, url.lastIndexOf('/')) + src;
+        } else {
+            url = url.substring(0, url.lastIndexOf('/')) + '/' + src;
+        }
+    } else {
+        url = src;
+    }
+
+    return url;
+};
+</code></pre>
+
+<p>這樣只要將 media 那邊的程式碼改成</p>
+
+<pre><code>media = getUrl( img.attr('src') );
+</code></pre>
+
+<p>就大功告成了</p>
+
+<p><a href="http://developerdrive.developerdrive.netdna-cdn.com/wp-content/uploads/2013/05/jquery-pinterest1.zip" target=""_blank>完整範例程式碼</a></p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://www.developerdrive.com/2013/05/creating-a-simple-jquery-plugin-for-pinterest/" target="_blank">Creating a simple jQuery plugin for Pinterest</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+</div>
+
+
+	<div>如果你覺得這篇文章有幫助，請幫我讚聲一下:)</div>	
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">阿帕</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-16T12:13:00+08:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/jquery-sprite/" title="Previous Post: [jQ-Plugin] 利用jQuery做CSS Sprite效果">&laquo; [jQ-Plugin] 利用jQuery做CSS Sprite效果</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+  <section>
+    <h1>FB Comments</h1>
+    <div id="facebook_comments" aria-live="polite">
+      <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
+<div class="fb-comments" 
+	data-href="http://blog.rx836.tw/blog/jquery-plugin-for-pinterest/" 
+	data-num-posts="5" 
+	data-width="570">
+</div>
+
+    </div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/css'>CSS (15)</a></li><li><a href='/blog/categories/facebook'>Facebook (5)</a></li><li><a href='/blog/categories/html5'>HTML5 (2)</a></li><li><a href='/blog/categories/javascript'>JavaScript (7)</a></li><li><a href='/blog/categories/jq-plugin'>jQ-Plugin (19)</a></li><li><a href='/blog/categories/jquery'>jQuery (19)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/phonegap'>PhoneGap (3)</a></li><li><a href='/blog/categories/win8'>Win8 (4)</a></li><li><a href='/blog/categories/好書分享'>好書分享 (6)</a></li><li><a href='/blog/categories/學習筆記'>學習筆記 (9)</a></li></ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/jquery-plugin-for-pinterest/">jquery-plugin-for-pinterest</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-sprite/">[jQ-Plugin] 利用jQuery做CSS Sprite效果</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-star-box/">[jQ-Plugin] 在網站中加入星星評分效果</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/alert-confirm-prompt/">[jQ-Plugin] 用jQuery打造alert、confirm和prompt dialogs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/jquery-drop-down-lists/">[jQ-Plugin] 用jQuery客製化下拉選單</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 阿帕 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rx836';
+      
+        
+        // var disqus_developer = 1;
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-plugin-for-pinterest/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/jquery-plugin-for-pinterest/';
+        var disqus_url = 'http://blog.rx836.tw/blog/jquery-plugin-for-pinterest/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=416172151763823";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
