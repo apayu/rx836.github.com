@@ -1,22 +1,22 @@
 ---
 layout: post
-title: "jquery-plugin-for-pinterest"
+title: "自製 Pinterest 分享圖片 plugin "
 date: 2013-05-16 12:13
 comments: true
 categories: jQ-Plugin
 ---
 
-<img src="https://lh6.googleusercontent.com/-3uQelUPbt2g/UZSmojbUPxI/AAAAAAAACcA/uPWSGQBZYoQ/w170-h167-no/2013-05-16_162143.jpg" />
+<img src="https://si0.twimg.com/profile_images/2725838700/32f4e2dce13c0b983003eaa10efea6a5.png" />
 
-大部分的網站要與社群做結合，多以FB、G+、Twitter、或是微博等為主，但這幾天看到一篇文章，是連結 **pinterest** 來做為分享圖片的對象，在此特別紀錄下來
+大部分的網站要與社群做結合，多以FB、G+、Twitter、或是微博等為主，但這幾天看到一篇文章，是連結 <a href="http://pinterest.com/" target="_blank">Pinterest</a> 來做為分享圖片的對象，在此特別紀錄
 
 <!--more-->
 
-但為了以後的套用方便，我們可以將這部份的需求寫成一個plugin，至於要做甚麼呢？其實很簡單，就是當滑鼠移到圖片時，右下角浮現出 pinterest 分享圖片的小icon
+為了以後重複使用，我們可以將這部份的需求寫成一個plugin，至於要做甚麼呢？其實很簡單，就是當滑鼠移到圖片時，右下角浮現出 Pinterest 分享圖片的小icon
 
 <img src="https://lh6.googleusercontent.com/-3uQelUPbt2g/UZSmojbUPxI/AAAAAAAACcA/uPWSGQBZYoQ/w170-h167-no/2013-05-16_162143.jpg" />
 
-按下以後，就會跳出 pinterest 的登入畫面(假如沒登入的話)，接著就是看要將圖片 pin 到哪個Board
+按下以後，就會跳出 Pinterest 的登入畫面(假如沒登入的話)，接著就是看要將圖片 pin 到哪個Board
 
 <img src="https://lh6.googleusercontent.com/-XgxZfhKtXHg/UZSmpJlu9TI/AAAAAAAACcI/hrXNi19FHlc/w856-h463-no/2013-05-16_162258.jpg" />
 
@@ -58,11 +58,6 @@ categories: jQ-Plugin
 		};
 	})( jQuery );
 
-	$(document).on('ready', function(){
-		//不喜歡預設圖可以直接這樣替換
-		$('img#share').pinterest({ button: 'pinterest-alt.png'});
-	});
-
 
 接著我們需要添加一些 html 元素到圖片上面，包括分享的小圖片
 
@@ -81,11 +76,7 @@ categories: jQ-Plugin
 		};
 	})( jQuery );
 
-	$(document).on('ready', function(){
-		$('img#share').pinterest({ button: 'pinterest-alt.png'});
-	});
-
-以上程式內容主要是用一個 span 包起來，再將分享小圖片放置在圖片右下角
+以上的code主要是替 img 用一個 span 包起來，再將分享小圖片放置在圖片右下角
 
 接著加上 on_click 和 on_hover_in 事件
 
@@ -113,14 +104,10 @@ categories: jQ-Plugin
 
 		};
 	})( jQuery );
-
-	$(document).on('ready', function(){
-		$('img#share').pinterest({ button: 'pinterest-small.png'});
-	});
 	
 on_hover_in是讓滑鼠移到圖片時，可以秀出右下角的分享圖片，當然效果可以依照自己喜歡去做修改
 
-至於 on_click 部份，就是將圖片分享致 pinterest
+至於 on_click 部份，就是將圖片分享至 Pinterest
 
 	function on_click () {
 		img = $(this).siblings('img:first');
@@ -138,15 +125,15 @@ on_hover_in是讓滑鼠移到圖片時，可以秀出右下角的分享圖片，
 
 利用 window.open 開啟一個分享視窗，pin_url 裡面的網址搭配參數，分別是
 
-url：從哪個 url 分享而來，利用　document.location　語法取得
+url：**從哪個 url 分享而來，利用　document.location　語法取得**
 
-media：利用 .attr() 取得該 img 的 src
+media：**利用 .attr() 取得該 img 的 src**
 
-description：利用 .attr() 取得該 img 的 title
+description：**利用 .attr() 取得該 img 的 title**
 
 當然，記得使用 encodeURIComponent 做編碼
 
-最後，為了方便 img 的 src 不管是絕對路徑還是相對路徑都可以讓 pinterest 可以使用，要自動加上主機的網址路徑 http://xxx.xxx.com/
+最後，為了方便 img 的 src 不管是絕對路徑還是相對路徑都可以讓 pinterest 可以使用，要自動加上主機的網址路徑，例如: http://xxx.xxx.com/abc.jpg
 
 	function getUrl(src){
 		var url = document.location.toString();
@@ -168,7 +155,12 @@ description：利用 .attr() 取得該 img 的 title
 
 	media = getUrl( img.attr('src') );
 	
-就大功告成了
+就大功告成了，要使用時
+
+	$(document).on('ready', function(){
+		//不喜歡預設圖可以直接這樣替換
+		$('img#share').pinterest({ button: 'pinterest-alt.png'});
+	});
 
 <a href="http://developerdrive.developerdrive.netdna-cdn.com/wp-content/uploads/2013/05/jquery-pinterest1.zip" target=""_blank>完整範例程式碼</a>
 
