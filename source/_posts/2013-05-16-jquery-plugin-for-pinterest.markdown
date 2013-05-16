@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "自製 Pinterest 分享圖片 plugin "
+title: "[jQ-Plugin] 自製 Pinterest 分享圖片 plugin "
 date: 2013-05-16 12:13
 comments: true
 categories: jQ-Plugin
