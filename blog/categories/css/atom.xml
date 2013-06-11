@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-06-11T17:43:22+08:00</updated>
+  <updated>2013-06-11T18:00:13+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -25,19 +25,19 @@
 <!--more-->
 
 
-<p>但其實在這之前就做過類似的 CSS3 動畫學習筆記 - <a href="http://blog.rx836.tw/blog/css3-transitions-guide/" target="_blank">[CSS3] 認識CSS3 Transitions</a>，原理其實相差不遠
-，不過那時並不知道可以運用在什麼地方，而這次發現可以將轉動的效果，運用在一些點擊的icon上面，讓網站較為活潑，而不再單調，當然，以下的動畫運用Flash也可以簡單的做到，但這
+<p>但其實在這之前就做過類似的 CSS3 動畫學習筆記 - <a href="http://blog.rx836.tw/blog/css3-transitions-guide/" target="_blank">[CSS3] 認識CSS3 Transitions</a>，原理其實相差不
+遠，不過那時並不知道可以運用在什麼地方，而這次發現可以將轉動的效果，運用在一些點擊的icon上面，讓網站較為活潑，而不再單調，當然，以下的動畫運用Flash也可以簡單的做到，但這
 就不在這裡的討論範圍裡面，畢竟條條大路通羅馬</p>
 
 <h2>Start</h2>
 
-<p>我這裡運用的實例是，所謂的 lightbox(燈箱) 上面，常常可以看到在一些活動網站，點擊像活動辦法這種連結，就會有可以出現這樣的呈現方式</p>
+<p>我這裡運用的實例是，所謂的 lightbox(燈箱) 上面，常常可以看到在一些活動網站，點擊像活動辦法這種連結，就會有可能出現這樣的呈現方式</p>
 
 <p><img src="http://farm4.staticflickr.com/3748/9013398826_44a5b35f7e_o.jpg" /></p>
 
 <p>而這時候右上角通常都會有可以關閉的X按鈕，點擊後整個視窗就會消失，但為了讓這個 lightbox 不至於太過呆版，可以在關閉X按鈕上面加點巧思</p>
 
-<p>HTML部份</p>
+<p>首先是HTML部份</p>
 
 <pre><code>&lt;div id="pop"&gt;
     &lt;a id="close"&gt;&lt;/a&gt;
