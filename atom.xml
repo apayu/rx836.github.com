@@ -4,7 +4,7 @@
   <title><![CDATA[apa]]></title>
   <link href="http://blog.rx836.tw/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-05-16T18:23:30+08:00</updated>
+  <updated>2013-06-11T17:43:22+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS3] 利用transform替網頁做小巧思]]></title>
+    <link href="http://blog.rx836.tw/blog/css3-transform/"/>
+    <updated>2013-06-11T17:37:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css3-transform</id>
+    <content type="html"><![CDATA[<p><img src="http://farm4.staticflickr.com/3748/9013398826_44a5b35f7e_o.jpg" /></p>
+
+<p>最近看到一個<a href="http://www.jiawin.com/demos/530/index.html" target="_blank">網站</a>，很酷的將許多CSS3給呈現出來，讓我開始思考怎麼運用在實做的網站上面</p>
+
+<!--more-->
+
+
+<p>但其實在這之前就做過類似的 CSS3 動畫學習筆記 - <a href="http://blog.rx836.tw/blog/css3-transitions-guide/" target="_blank">[CSS3] 認識CSS3 Transitions</a>，原理其實相差不遠
+，不過那時並不知道可以運用在什麼地方，而這次發現可以將轉動的效果，運用在一些點擊的icon上面，讓網站較為活潑，而不再單調，當然，以下的動畫運用Flash也可以簡單的做到，但這
+就不在這裡的討論範圍裡面，畢竟條條大路通羅馬</p>
+
+<h2>Start</h2>
+
+<p>我這裡運用的實例是，所謂的 lightbox(燈箱) 上面，常常可以看到在一些活動網站，點擊像活動辦法這種連結，就會有可以出現這樣的呈現方式</p>
+
+<p><img src="http://farm4.staticflickr.com/3748/9013398826_44a5b35f7e_o.jpg" /></p>
+
+<p>而這時候右上角通常都會有可以關閉的X按鈕，點擊後整個視窗就會消失，但為了讓這個 lightbox 不至於太過呆版，可以在關閉X按鈕上面加點巧思</p>
+
+<p>HTML部份</p>
+
+<pre><code>&lt;div id="pop"&gt;
+    &lt;a id="close"&gt;&lt;/a&gt;
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗   
+&lt;/div&gt;
+</code></pre>
+
+<p>這是一個常見的 lightbox 結構，當然不一定會長這樣</p>
+
+<p>CSS部份</p>
+
+<pre><code>#close {
+    background: url("http://farm8.staticflickr.com/7282/9011998137_f2d70ac0f8_o.png") no-repeat scroll 0 0 transparent;
+    height: 32px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 32px;
+}
+
+#pop {
+    background-color: #C5FF40;
+    height: 150px;
+    padding: 40px 0 0;
+    position: relative;
+    width: 500px;
+}
+</code></pre>
+
+<p>簡單的用一個 &lt;div&gt; 包住內容和x關閉按鈕，關閉按鈕是用 &lt;a&gt; 來做，加上背景圖案，接著就是整個動畫的重點所在</p>
+
+<pre><code>a#close:hover {
+    -webkit-animation:example 1s ease 0s alternate none infinite;
+    -moz-animation:example 1s ease 0s alternate none infinite;
+    animation:example 1s ease 0s alternate none infinite;
+}   
+
+@-webkit-keyframes example { from{-webkit-transform:rotate(0deg); } to{-webkit-transform:rotate(360deg); } }
+@-moz-keyframes example { from{-moz-transform:rotate(0deg); } to{-moz-transform:rotate(360deg); } }
+@keyframes example { from{transform:rotate(0deg); } to{transform:rotate(360deg); } }
+</code></pre>
+
+<p>關鍵在於做 hover 時，觸發 animation，至於裡面的屬性可以參考我之前寫的 <a href="http://blog.rx836.tw/blog/css3-transitions-guide/" target="_blank">文章</a> 或是參考
+<a href="http://www.w3schools.com/css3/" target="_bank">w3schools.com</a>，這裡不多加說明</p>
+
+<p>可以發現當滑鼠移到x關閉按鈕時，會有旋轉的效果</p>
+
+<p><a href="http://jsfiddle.net/sWUVv/" target="_blank">範例</a></p>
+
+<p>這樣不僅可以提升使用者經驗，也可以讓網頁不在單調</p>
+
+<p>當然我相信一定還有許多CSS3應用，等待著你我發掘:)</p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://www.w3schools.com/css3/" target="_blank">CSS3 教程</a></p>
+
+<p><a href="http://www.jiawin.com/demos/530/index.html" target="_blank">http://www.jiawin.com/demos/530/index.html</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[jQ-Plugin] 自製 Pinterest 分享圖片 plugin ]]></title>
@@ -2517,164 +2607,6 @@ header:after {
 <h3>參考資料:</h3>
 
 <p><a href="http://designfestival.com/5-css-properties-that-give-designers-fits/" target="_blank">5 CSS Properties That Give Designers Fits</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[jQ-Plugin] 簡易的數值格式化-Numeral.js]]></title>
-    <link href="http://blog.rx836.tw/blog/jquery-plugin-format-number/"/>
-    <updated>2012-12-04T12:34:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/jquery-plugin-format-number</id>
-    <content type="html"><![CDATA[<p>對於將數字或是文字做格式化一直都覺得很阿雜，例如將算出來的數字加個千分位的逗點，或是加個貨幣符號，雖然自己做並不難，但還是希望可以有個plugin能做到這些事情，所以今天就來筆記 Numeral.js  這款plugin</p>
-
-<!--more-->
-
-
-<h2>Start</h2>
-
-<p>用法很簡單容易，先下載 <a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
-
-<p>接著載入到網頁裡面後，js的寫法如下</p>
-
-<pre><code>var string = numeral(1000).format('0,0');
-// 1,000
-</code></pre>
-
-<p>這樣子把數字丟進去以後，在 <strong>format()</strong> 傳入相對應的格式，就可以擁有千分位的逗點，其它還有</p>
-
-<h3>名次</h3>
-
-<pre><code>var string = numeral(12).format('0o');
-//12th
-</code></pre>
-
-<h3>貨幣符號</h3>
-
-<pre><code>var string = numeral(1001).format('$ 0,0[.]00');
-//$ 1,001
-</code></pre>
-
-<h3>Bytes</h3>
-
-<pre><code>var string = numeral(7884486213).format('0.0b');
-//7.3GB
-</code></pre>
-
-<h3>百分率</h3>
-
-<pre><code>var string = numeral(0.974878234).format('0.000%');
-//97.488%
-</code></pre>
-
-<h3>時間</h3>
-
-<pre><code>var string = numeral(238).format('00:00:00');
-//0:03:58
-</code></pre>
-
-<h3>Unformat</h3>
-
-<p>能轉換過去，當然也可以轉換回來</p>
-
-<pre><code>var string = numeral().unformat('12th');
-//12
-</code></pre>
-
-<h3>加減乘除</h3>
-
-<pre><code>var number = numeral(1000);
-
-var added = number.add(10);
-// 1010
-</code></pre>
-
-<p>這功能我是覺得有點多餘XD，去看source也只是做加減乘除，不太需要再多此一舉</p>
-
-<h2>source code</h2>
-
-<p>因為最近想自己嘗試練習多寫一些plugin，所以會去觀摩別人的寫法，numeral.js是一個蠻簡單明瞭的範例，所以大概抓幾個重點出來筆記心得，有興趣的人可以一起看看XD</p>
-
-<p>1.建立一個名為Numeral的函式</p>
-
-<p>數值就是從這邊傳入</p>
-
-<pre><code>// Numeral prototype object
-function Numeral (number) {
-    this._n = number;
-}
-</code></pre>
-
-<p>2.加入一些prototype</p>
-
-<pre><code>numeral.fn = Numeral.prototype = {
-
-    clone : function () {
-        // ...
-    },
-
-    format : function (inputString) {           
-        // ...
-    },
-
-    // ...
-    // ...
-
-    multiply : function (value) {
-        // ...
-    },
-
-    divide : function (value) {
-        // ...
-    },
-
-    difference : function (value) {
-        // ...
-    }
-
-};
-</code></pre>
-
-<p>以上兩個為程式的主體，所以有了這個架構我們就可以這樣寫</p>
-
-<pre><code>numeral(1000).format('0,0');
-</code></pre>
-
-<p>3.其它大部分就是函式的處理</p>
-
-<pre><code>function formatNumeral (n, format) {
-    var output;
-
-    // figure out what kind of format we are dealing with
-    if (format.indexOf('$') &gt; -1) { // currency!!!!!
-        output = formatCurrency(n, format);
-    } else if (format.indexOf('%') &gt; -1) { // percentage
-        output = formatPercentage(n, format);
-    } else if (format.indexOf(':') &gt; -1) { // time
-        output = formatTime(n, format);
-    } else { // plain ol' numbers or bytes
-        output = formatNumber(n, format);
-    }
-
-    // return string
-    return output;
-}
-</code></pre>
-
-<p>會發現傳入的參數為 <strong>n</strong> 和 <strong>format</strong></p>
-
-<p>n就是 <strong>Numeral函式</strong> 本身，裡面帶有傳入的數值和prototype這些東西</p>
-
-<p>format就是要進行什麼樣的格式化</p>
-
-<p>如果format裡面含有$就是要進行貨幣的格式化，有%就是要進行百分比的格式化，其它以此類推</p>
-
-<h3>參考資料:</h3>
-
-<p><a href="https://github.com/adamwdraper/Numeral-js" target="_blank">Github Numeral-js</a></p>
-
-<p><a href="http://numeraljs.com/" target="_blank">Numeral.js</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

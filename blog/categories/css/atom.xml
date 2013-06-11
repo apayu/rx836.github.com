@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | apa]]></title>
   <link href="http://blog.rx836.tw/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://blog.rx836.tw/"/>
-  <updated>2013-05-16T18:23:30+08:00</updated>
+  <updated>2013-06-11T17:43:22+08:00</updated>
   <id>http://blog.rx836.tw/</id>
   <author>
     <name><![CDATA[阿帕]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CSS3] 利用transform替網頁做小巧思]]></title>
+    <link href="http://blog.rx836.tw/blog/css3-transform/"/>
+    <updated>2013-06-11T17:37:00+08:00</updated>
+    <id>http://blog.rx836.tw/blog/css3-transform</id>
+    <content type="html"><![CDATA[<p><img src="http://farm4.staticflickr.com/3748/9013398826_44a5b35f7e_o.jpg" /></p>
+
+<p>最近看到一個<a href="http://www.jiawin.com/demos/530/index.html" target="_blank">網站</a>，很酷的將許多CSS3給呈現出來，讓我開始思考怎麼運用在實做的網站上面</p>
+
+<!--more-->
+
+
+<p>但其實在這之前就做過類似的 CSS3 動畫學習筆記 - <a href="http://blog.rx836.tw/blog/css3-transitions-guide/" target="_blank">[CSS3] 認識CSS3 Transitions</a>，原理其實相差不遠
+，不過那時並不知道可以運用在什麼地方，而這次發現可以將轉動的效果，運用在一些點擊的icon上面，讓網站較為活潑，而不再單調，當然，以下的動畫運用Flash也可以簡單的做到，但這
+就不在這裡的討論範圍裡面，畢竟條條大路通羅馬</p>
+
+<h2>Start</h2>
+
+<p>我這裡運用的實例是，所謂的 lightbox(燈箱) 上面，常常可以看到在一些活動網站，點擊像活動辦法這種連結，就會有可以出現這樣的呈現方式</p>
+
+<p><img src="http://farm4.staticflickr.com/3748/9013398826_44a5b35f7e_o.jpg" /></p>
+
+<p>而這時候右上角通常都會有可以關閉的X按鈕，點擊後整個視窗就會消失，但為了讓這個 lightbox 不至於太過呆版，可以在關閉X按鈕上面加點巧思</p>
+
+<p>HTML部份</p>
+
+<pre><code>&lt;div id="pop"&gt;
+    &lt;a id="close"&gt;&lt;/a&gt;
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗   
+&lt;/div&gt;
+</code></pre>
+
+<p>這是一個常見的 lightbox 結構，當然不一定會長這樣</p>
+
+<p>CSS部份</p>
+
+<pre><code>#close {
+    background: url("http://farm8.staticflickr.com/7282/9011998137_f2d70ac0f8_o.png") no-repeat scroll 0 0 transparent;
+    height: 32px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 32px;
+}
+
+#pop {
+    background-color: #C5FF40;
+    height: 150px;
+    padding: 40px 0 0;
+    position: relative;
+    width: 500px;
+}
+</code></pre>
+
+<p>簡單的用一個 &lt;div&gt; 包住內容和x關閉按鈕，關閉按鈕是用 &lt;a&gt; 來做，加上背景圖案，接著就是整個動畫的重點所在</p>
+
+<pre><code>a#close:hover {
+    -webkit-animation:example 1s ease 0s alternate none infinite;
+    -moz-animation:example 1s ease 0s alternate none infinite;
+    animation:example 1s ease 0s alternate none infinite;
+}   
+
+@-webkit-keyframes example { from{-webkit-transform:rotate(0deg); } to{-webkit-transform:rotate(360deg); } }
+@-moz-keyframes example { from{-moz-transform:rotate(0deg); } to{-moz-transform:rotate(360deg); } }
+@keyframes example { from{transform:rotate(0deg); } to{transform:rotate(360deg); } }
+</code></pre>
+
+<p>關鍵在於做 hover 時，觸發 animation，至於裡面的屬性可以參考我之前寫的 <a href="http://blog.rx836.tw/blog/css3-transitions-guide/" target="_blank">文章</a> 或是參考
+<a href="http://www.w3schools.com/css3/" target="_bank">w3schools.com</a>，這裡不多加說明</p>
+
+<p>可以發現當滑鼠移到x關閉按鈕時，會有旋轉的效果</p>
+
+<p><a href="http://jsfiddle.net/sWUVv/" target="_blank">範例</a></p>
+
+<p>這樣不僅可以提升使用者經驗，也可以讓網頁不在單調</p>
+
+<p>當然我相信一定還有許多CSS3應用，等待著你我發掘:)</p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://www.w3schools.com/css3/" target="_blank">CSS3 教程</a></p>
+
+<p><a href="http://www.jiawin.com/demos/530/index.html" target="_blank">http://www.jiawin.com/demos/530/index.html</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CSS] 認識OOCSS]]></title>
@@ -570,110 +660,6 @@ div2
 <p><a href="http://www.barelyfitz.com/screencast/html-training/css/positioning/" target="_blank">Learn CSS Positioning in Ten Steps(10個步驟學習CSS Position)</a></p>
 
 <p><a href="http://css.1keydata.com/tw/position.php" target="_blank">CSS Position 位置</a></p>
-
-<p>內容如有錯誤，歡迎指正</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CSS] 利用CSS3做scrolling effect]]></title>
-    <link href="http://blog.rx836.tw/blog/css3-scrolling-effect/"/>
-    <updated>2012-12-11T07:05:00+08:00</updated>
-    <id>http://blog.rx836.tw/blog/css3-scrolling-effect</id>
-    <content type="html"><![CDATA[<p><img src="https://lh6.googleusercontent.com/-URpPFCw8GZY/UMZ5NsXYJuI/AAAAAAAACC4/Bjab2PYz86w/s1077/2012-12-11_071208.jpg" /></p>
-
-<p>今天看到一篇文章介紹美國 <a href="http://www.ebay.com/new" target="_blank">ebay</a> 網站的scrolling effect，觀念其實蠻簡單的，重點是我原本以為需要用到js才能達到，但後來發現根本連一行js都不用寫，只需要用到CSS3即可，這邊就來筆記一下過程</p>
-
-<!--more-->
-
-
-<h2>Start</h2>
-
-<p>一開始先準備三張可以延伸到整個螢幕大小的照片，如果手邊沒有，可以直接使用文章裡面的<a href="pepsized.com/wp-content/uploads/2012/11/lavender.zip" target="_blank">Demo</a>，就有現成的圖片可以練習，另外下面都是用Demo裡面的檔案做講解</p>
-
-<p>HTML部份</p>
-
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html class="no-js" lang="en"&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8"&gt;
-&lt;title&gt;From love for lavender&lt;/title&gt;
-&lt;!-- 略... --&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;header class=" content"&gt;
-        &lt;div class="wrapper"&gt;
-                &lt;h1&gt;From love for lavender&lt;/h1&gt;
-                &lt;p&gt;&lt;span&gt;Lavender&lt;/span&gt; (botanic name Lavandula) is a ....
-                &lt;/p&gt;
-        &lt;/div&gt;
-&lt;/header&gt;
-
-&lt;section class="content" id="oil"&gt;
-        &lt;div class="wrapper"&gt;
-                &lt;p&gt;&lt;span&gt;Lavender oil&lt;/span&gt; is an ... &lt;/p&gt;
-        &lt;/div&gt;
-&lt;/section&gt;
-&lt;!-- 略... --&gt;
-&lt;footer&gt;
-        &lt;div class=wrapper&gt;
-                 "From love for lavender" has been built ...
-        &lt;/div&gt;
-&lt;/footer&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>HTML部份就是常見的HTML5的架構，有&lt;header&gt;、&lt;section&gt;和&lt;footer&gt;，每個裡面都包含有一個class為 "wrapper" 的&lt;div&gt;</p>
-
-<p>再來是基本的CSS部份</p>
-
-<pre><code>.wrapper {
-    width: 100%;
-    margin: 0 auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box; 
-}
-</code></pre>
-
-<p>會看到有一個比較少見的屬性叫 <strong>box-sizing</strong>，他是CSS3的屬性，如果我們設box-sizing為 <strong>border-box</strong>，意思就是指width和height的部份都包含了 <strong>padding</strong> 和 <strong>border</strong>，詳細的屬性說明可以參考 <a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">這篇</a></p>
-
-<p>接著是scrolling effect部份</p>
-
-<pre><code>section:after, header:after {
-    content: "";
-    display: block;
-    height: 400px;
-    width: 100%;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6); 
-}
-
-header:after {
-  background-image: url(../images/lavenderbg1.jpg); }
-#oil:after {
-  background-image: url(../images/lavenderbg2.jpg); }
-#culinary:after {
-  background-image: url(../images/lavenderbg3.jpg); }
-#dried:after {
-  background-image: url(../images/lavenderbg4.jpg); }
-</code></pre>
-
-<p>因為沒有用到js的關係，但我們又想在HTML上新增元素，所以我們可以利用CSS的pseudo-elements <strong>:after</strong>，他會幫我們在元素後面加上新的元素上去，並且擁有 <strong>background</strong>，另外，我們將屬性 <strong>background-attachment</strong> 設定為fixed，這也是scrolling effect的重點所在，意思就是指<strong>當頁面滾動時，背景圖並不會跟著移動</strong></p>
-
-<p>這樣就大功告成囉，有沒有覺得效果很不錯呢？</p>
-
-<h3>參考資料:</h3>
-
-<p><a href="http://pepsized.com/how-to-recreate-the-new-e-bay-site-scrolling-effect/?utm_source=CSS+Weekly&utm_campaign=CSS_Weekly_Issue_33&utm_medium=web" target="_blank">How to recreate the new e-bay site scrolling effect</a></p>
-
-<p><a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank">CSS3 Box-sizing </a></p>
-
-<p><a href="http://www.w3school.com.cn/css/pr_background-attachment.asp" target="_blank">CSS background-attachment 属性</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 ]]></content>

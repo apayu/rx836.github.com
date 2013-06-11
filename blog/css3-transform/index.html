@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[好書分享] 疼痛,才叫青春 - apa</title>
+  <title>[CSS3] 利用transform替網頁做小巧思 - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="作者:金蘭都 出版者:圓神出版社有限公司 這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的 人生時鐘:你現在的人生是幾點? 雖然他是寫給剛畢業的新鮮人或是大學生為主， &hellip;">
+  <meta name="description" content="最近看到一個網站，很酷的將許多CSS3給呈現出來，讓我開始思考怎麼運用在實做的網站上面 但其實在這之前就做過類似的 CSS3 動畫學習筆記 - [CSS3] 認識CSS3 Transitions，原理其實相差不遠
+，不過那時並不知道可以運用在什麼地方，而這次發現可以將轉動的效果， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/book-review-2/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/css3-transform/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +32,12 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[好書分享] 疼痛,才叫青春 - apa" />
+<meta property="og:title" content="[CSS3] 利用transform替網頁做小巧思 - apa" />
 
-<meta property="og:description" content="作者:金蘭都 出版者:圓神出版社有限公司 這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的 人生時鐘:你現在的人生是幾點? 雖然他是寫給剛畢業的新鮮人或是大學生為主， &hellip;" />
+<meta property="og:description" content="最近看到一個網站，很酷的將許多CSS3給呈現出來，讓我開始思考怎麼運用在實做的網站上面 但其實在這之前就做過類似的 CSS3 動畫學習筆記 - [CSS3] 認識CSS3 Transitions，原理其實相差不遠
+，不過那時並不知道可以運用在什麼地方，而這次發現可以將轉動的效果， &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/book-review-2/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/css3-transform/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +90,7 @@
   
   <header>
     
-      <h1 class="entry-title">[好書分享] 疼痛,才叫青春</h1>
+      <h1 class="entry-title">[CSS3] 利用transform替網頁做小巧思</h1>
     
     
       <p class="meta">
@@ -104,7 +106,7 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2013-06-11T17:37:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,30 +115,88 @@
   </header>
 
 
-<div class="entry-content"><p><img src="https://lh3.googleusercontent.com/-wMTQWX9wU4I/UIo1zLeJljI/AAAAAAAABv8/BEBJHR0RgiM/s300/20120514190058837_300.jpg" /></p>
+<div class="entry-content"><p><img src="http://farm4.staticflickr.com/3748/9013398826_44a5b35f7e_o.jpg" /></p>
 
-<p>作者:金蘭都</p>
-
-<p>出版者:圓神出版社有限公司</p>
+<p>最近看到一個<a href="http://www.jiawin.com/demos/530/index.html" target="_blank">網站</a>，很酷的將許多CSS3給呈現出來，讓我開始思考怎麼運用在實做的網站上面</p>
 
 <!--more-->
 
 
-<p>這是一本韓國人所寫的書，會先這樣講不是因為台灣和韓國之間的特殊情誼，而是因為書中是在韓國背景底下所感受到的，當然跟台灣有些許的不同，但整體的觀念其實是通用的</p>
+<p>但其實在這之前就做過類似的 CSS3 動畫學習筆記 - <a href="http://blog.rx836.tw/blog/css3-transitions-guide/" target="_blank">[CSS3] 認識CSS3 Transitions</a>，原理其實相差不遠
+，不過那時並不知道可以運用在什麼地方，而這次發現可以將轉動的效果，運用在一些點擊的icon上面，讓網站較為活潑，而不再單調，當然，以下的動畫運用Flash也可以簡單的做到，但這
+就不在這裡的討論範圍裡面，畢竟條條大路通羅馬</p>
 
-<h2>人生時鐘:你現在的人生是幾點?</h2>
+<h2>Start</h2>
 
-<p>雖然他是寫給剛畢業的新鮮人或是大學生為主，但我認為裡面有很多觀念其實在不管哪個階段，都很受用，例如書本一開始所提的<strong>人生時鐘</strong>，這是我以前沒聽過的觀念，作者說如果把你的人生換算成一天，你認為現在是幾點?用平均每人壽命80歲來算，我今年26歲，算一算大概七點五十分左右，連八點都不到，才剛正要一天的開始，用這樣的算法來想你的人生，你會認為做任何事都會太晚嗎?</p>
+<p>我這裡運用的實例是，所謂的 lightbox(燈箱) 上面，常常可以看到在一些活動網站，點擊像活動辦法這種連結，就會有可以出現這樣的呈現方式</p>
 
-<h2>你想要新人獎還是主角獎?</h2>
+<p><img src="http://farm4.staticflickr.com/3748/9013398826_44a5b35f7e_o.jpg" /></p>
 
-<p>我曾經也這麼執著過，認為早點畢業，早點當兵，早點工作，早點存到人生第一桶金，早點功成名就，想要年紀輕輕就要得到許多，但卻沒有想過，看的是這一生，而不是這個當下，應該要趁年輕累積好實力，而不是年輕就想著收穫</p>
+<p>而這時候右上角通常都會有可以關閉的X按鈕，點擊後整個視窗就會消失，但為了讓這個 lightbox 不至於太過呆版，可以在關閉X按鈕上面加點巧思</p>
 
-<p>這本書算是心靈雞湯，有許多的觀念我們都曾經聽過也曉得，但工作的日子久了，或是一段時間過後，我們都忘了當初的我們，當累了的時候，又或著是突然找不到方向，看看這種寫給年輕人的書，想想年輕的自己，或許可以找回熱情和活力，整理腳步，再一次的出發</p>
+<p>HTML部份</p>
 
-<p>這是值得購買的一本書，值得你時常拿出來翻翻，提醒自己</p>
+<pre><code>&lt;div id="pop"&gt;
+    &lt;a id="close"&gt;&lt;/a&gt;
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗
+    我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗我是一個pop視窗   
+&lt;/div&gt;
+</code></pre>
 
-<p>如果有不一樣的想法，歡迎一起討論</p>
+<p>這是一個常見的 lightbox 結構，當然不一定會長這樣</p>
+
+<p>CSS部份</p>
+
+<pre><code>#close {
+    background: url("http://farm8.staticflickr.com/7282/9011998137_f2d70ac0f8_o.png") no-repeat scroll 0 0 transparent;
+    height: 32px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 32px;
+}
+
+#pop {
+    background-color: #C5FF40;
+    height: 150px;
+    padding: 40px 0 0;
+    position: relative;
+    width: 500px;
+}
+</code></pre>
+
+<p>簡單的用一個 &lt;div&gt; 包住內容和x關閉按鈕，關閉按鈕是用 &lt;a&gt; 來做，加上背景圖案，接著就是整個動畫的重點所在</p>
+
+<pre><code>a#close:hover {
+    -webkit-animation:example 1s ease 0s alternate none infinite;
+    -moz-animation:example 1s ease 0s alternate none infinite;
+    animation:example 1s ease 0s alternate none infinite;
+}   
+
+@-webkit-keyframes example { from{-webkit-transform:rotate(0deg); } to{-webkit-transform:rotate(360deg); } }
+@-moz-keyframes example { from{-moz-transform:rotate(0deg); } to{-moz-transform:rotate(360deg); } }
+@keyframes example { from{transform:rotate(0deg); } to{transform:rotate(360deg); } }
+</code></pre>
+
+<p>關鍵在於做 hover 時，觸發 animation，至於裡面的屬性可以參考我之前寫的 <a href="http://blog.rx836.tw/blog/css3-transitions-guide/" target="_blank">文章</a> 或是參考
+<a href="http://www.w3schools.com/css3/" target="_bank">w3schools.com</a>，這裡不多加說明</p>
+
+<p>可以發現當滑鼠移到x關閉按鈕時，會有旋轉的效果</p>
+
+<p><a href="http://jsfiddle.net/sWUVv/" target="_blank">範例</a></p>
+
+<p>這樣不僅可以提升使用者經驗，也可以讓網頁不在單調</p>
+
+<p>當然我相信一定還有許多CSS3應用，等待著你我發掘:)</p>
+
+<h2>參考資料:</h2>
+
+<p><a href="http://www.w3schools.com/css3/" target="_blank">CSS3 教程</a></p>
+
+<p><a href="http://www.jiawin.com/demos/530/index.html" target="_blank">http://www.jiawin.com/demos/530/index.html</a></p>
+
+<p>內容如有錯誤，歡迎指正</p>
 </div>
 
 
@@ -170,12 +230,12 @@
   
 
 
-<time datetime="2012-06-10T03:06:00+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+<time datetime="2013-06-11T17:37:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/好書分享/'>好書分享</a>
+    <a class='category' href='/blog/categories/css/'>CSS</a>
   
 </span>
 
@@ -183,10 +243,8 @@
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jquery-ajax-cache/" title="Previous Post: [jQuery] AJAX cache讓IE一直抓到舊資料">&laquo; [jQuery] AJAX cache讓IE一直抓到舊資料</a>
+        <a class="basic-alignment left" href="/blog/jquery-plugin-for-pinterest/" title="Previous Post: [jQ-Plugin] 自製 Pinterest 分享圖片 plugin ">&laquo; [jQ-Plugin] 自製 Pinterest 分享圖片 plugin </a>
       
-      
-        <a class="basic-alignment right" href="/blog/book-review-3/" title="Next Post: [好書分享] 預見未來">[好書分享] 預見未來 &raquo;</a>
       
     </p>
   </footer>
@@ -204,7 +262,7 @@
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/book-review-2/" 
+	data-href="http://blog.rx836.tw/blog/css3-transform/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -271,9 +329,9 @@
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/book-review-2/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/book-review-2/';
-        var disqus_url = 'http://blog.rx836.tw/blog/book-review-2/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/css3-transform/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/css3-transform/';
+        var disqus_url = 'http://blog.rx836.tw/blog/css3-transform/';
         var disqus_script = 'embed.js';
       
     (function () {
