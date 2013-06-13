@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[JavaScript] prototype與建構函式和物件 - apa</title>
+  <title>[jQ-Plugin] 如何減少User密碼輸入錯誤? - apa</title>
   <meta name="author" content="阿帕">
 
   
-  <meta name="description" content="今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件方面，那就趁著這個機會再把JavaScript的觀念整理清楚，增強自己的功力，尤其是一直很模糊的「prototype」 在講prototype之前， &hellip;">
+  <meta name="description" content="&#8220;Becaues life&#8217;s too short waste time re-typing passwords&#8221; 生命短暫，別浪費時間重新輸入你的密碼 在製作登入頁面時，常會使用到 &lt;input type=&#8221;password&#8221 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.rx836.tw/blog/javascript-prototype/">
+  <link rel="canonical" href="http://blog.rx836.tw/blog/hide-show-passwords/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -31,11 +31,11 @@
 
 <meta property="fb:admins" content="100000102681259"/>
 <meta property="fb:app_id" content="416172151763823" />
-<meta property="og:title" content="[JavaScript] prototype與建構函式和物件 - apa" />
+<meta property="og:title" content="[jQ-Plugin] 如何減少User密碼輸入錯誤? - apa" />
 
-<meta property="og:description" content="今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件方面，那就趁著這個機會再把JavaScript的觀念整理清楚，增強自己的功力，尤其是一直很模糊的「prototype」 在講prototype之前， &hellip;" />
+<meta property="og:description" content="&#8220;Becaues life&#8217;s too short waste time re-typing passwords&#8221; 生命短暫，別浪費時間重新輸入你的密碼 在製作登入頁面時，常會使用到 &lt;input type=&#8221;password&#8221 &hellip;" />
 
-<meta property="og:url" content="http://blog.rx836.tw/blog/javascript-prototype/" />  
+<meta property="og:url" content="http://blog.rx836.tw/blog/hide-show-passwords/" />  
 
   
   <script type="text/javascript">
@@ -88,7 +88,7 @@
   
   <header>
     
-      <h1 class="entry-title">[JavaScript] Prototype與建構函式和物件</h1>
+      <h1 class="entry-title">[jQ-Plugin] 如何減少User密碼輸入錯誤?</h1>
     
     
       <p class="meta">
@@ -104,7 +104,7 @@
   
 
 
-<time datetime="2012-11-02T15:11:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
+<time datetime="2013-06-13T18:35:00+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,112 +113,100 @@
   </header>
 
 
-<div class="entry-content"><p>今年開始陸陸續續的開始參加一些讀書會，其中有一本是關於HTML5，裡面有些章節是談到JavaScript，剛好我導讀其中一章講關於自定物件方面，那就趁著這個機會再把JavaScript的觀念整理清楚，增強自己的功力，尤其是一直很模糊的「prototype」</p>
+<div class="entry-content"><p><img src="http://farm8.staticflickr.com/7394/9032388794_c9ce2d4e25_o.jpg" /></p>
+
+<p>&#8220;Becaues life&#8217;s too short waste time re-typing passwords&#8221;</p>
+
+<p>生命短暫，別浪費時間重新輸入你的密碼</p>
 
 <!--more-->
 
 
-<p>在講prototype之前，要先複習一下之前所寫的 <a href="http://blog.rx836.tw/blog/javascript-patterns-1/" target="_blank">[JavaScript] 談物件, 實字與建構式</a> 和 <a href="http://blog.rx836.tw/blog/javascript-custom-function/" target="_blank">[JavaScript] 建立物件的第三招-自訂建構式函式</a>，這兩篇文章有提到物件和建構式函式(constructor functions)，但其實還有一個叫做prototype也跟他們兩個糾纏不清，形成特殊的三角關係(誤)</p>
+<p>在製作登入頁面時，常會使用到 &lt;input  type=&#8221;password&#8221; &gt; 這個輸入密碼的 HTML 控制項，預設的情況下，當你在密碼輸入框輸入密碼時，都會出現‧‧‧</p>
 
-<p>首先我們先來看物件</p>
+<p>，好處是可以防止旁人知道你輸入的密碼是什麼，但好意有時候會讓人覺得不方便，尤其這個狀況發生在移動裝置時</p>
 
-<pre><code>var obj={
-    name : '阿帕',
-    run : function(){
-        //跑跑跑
-    }
+<p>怎麼說呢？原因出在於移動裝置設備通常因為螢幕尺寸大小的關係，鍵盤通常不好點擊，以 IPHONE 為例，當我想點 G 的時候，可能因為我的手指肥大，而點到旁邊</p>
+
+<p>的H，雖然每次點擊時，輸入框上面會秀出當下所按的字母，但總是有時候會忽略的時候，如果突然手一個不順，自己到底有沒有輸入正確，恐怕很難曉得，所以如果</p>
+
+<p>能讓使用者選擇切換，是否可以看的到密碼，或許是個不錯的使用者體驗</p>
+
+<h2>Start</h2>
+
+<p>詳細的範例可以從 github</p>
+
+<p><a href="https://github.com/cloudfour/hideShowPassword#hideshow-password-plugin-for-jqueryzepto" target="_balnk">Download</a></p>
+
+<p>這裡做個簡單的範例</p>
+
+<p>HTML部份</p>
+
+<pre><code>&lt;div class='bogus-wrapper'&gt;&lt;notextile&gt;&lt;figure&gt;
+  &lt;div class="login"&gt;
+    &lt;input type="text" placeholder="Username" &gt;
+    &lt;input id="password-1" type="password" placeholder="Password"&gt;
+  &lt;/div&gt;
+  &lt;figcaption&gt;Inner toggle styled as icon.&lt;/figcaption&gt;
+&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
+</code></pre>
+
+<p>CSS部份</p>
+
+<pre><code>.hideShowPassword-toggle {
+    background-image: url(img/wink.svg);
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 100%;
+    overflow: hidden;
+    text-indent: -9999em;
+    width: 44px;
 }
-
-console.log(obj.name);
-//阿帕
-obj.run();
-//執行裡面的跑跑跑
 </code></pre>
 
-<p>OK，相信大家對上面這個物件不陌生，但除了以上建立物件的方法，還可以用建構式函式</p>
+<p>這裡最主要是幫切換的按鈕做修飾，如同github裡面的範例一樣加上圖片</p>
 
-<pre><code>function Obj(){
-    this.name = '阿帕';
-    this.run = function(){
-        //跑跑跑
-    }
-}
+<p>js部份</p>
 
-var _obj = new Obj();
-console.log(_obj.name);
-//阿帕
-_obj.run();
-//執行裡面的跑跑跑
+<pre><code>&lt;script type="text/javascript" src="vendor/jquery.js"&gt;&lt;/script&gt; 
+&lt;script src="hideShowPassword.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    // Example 1
+    $('#password-1').hideShowPassword({
+      // Creates a wrapper and toggle element with minimal styles.
+      innerToggle: true
+    });
+&lt;/script&gt;
 </code></pre>
 
-<p>所以我們可以說，JavaScript利用<strong>建構式實例出一個物件</strong>，那跟prtotype有甚麼關係呢？</p>
+<p>以上是簡單的實做範例，會出現一個眼睛讓你做切換是否顯示密碼</p>
 
-<p>其實在建構式函式裡面有個屬性叫做prototype，他就是建構式函式的「原型物件」</p>
+<p><img src="http://farm6.staticflickr.com/5451/9032954004_208664f24e_o.jpg" /></p>
 
-<pre><code>function Obj(){
-    this.name = '阿帕';
-    this.run = function(){
-        //跑跑跑
-    }
-}
+<p>還有其他 methods 可以應用</p>
 
-console.log(Obj.prototype);
-//Obj {} 這也是一個物件，叫原型物件
+<pre><code>$('#password').showPassword(); // Reveal
+$('#password').hidePassword(); // Hide
+$('#password').togglePassword(); // Toggle
 </code></pre>
 
-<p>這個原型物件可以做什麼呢？假如我今天用Obj()這個建構式函式實例了a、b、c三個物件，完成以後我還要每個都再加一個屬性height怎麼辦？你可能會這樣寫</p>
+<p>或是</p>
 
-<pre><code>function Obj(){
-    this.name = '阿帕';
-    this.run = function(){
-        //跑跑跑
-    }
-}
-
-var a = new Obj();
-var b = new Obj();
-var c = new Obj();
-
-//為每個物件增加屬性
-a.height= 15;
-b.height= 15;
-c.height= 15;
+<pre><code>$('#password').hideShowPassword(true); // Reveal
+$('#password').hideShowPassword(false); // Hide
+$('#password').hideShowPassword('toggle'); // Toggle
 </code></pre>
 
-<p>但其實你可以這樣寫</p>
+<p>利用這些可以自己用 checkbox 來切換，做出一樣的效果</p>
 
-<pre><code>function Obj(){
-    this.name = '阿帕';
-    this.run = function(){
-        //跑跑跑
-    }
-}
+<p>這裡有 <a href="file:///C:/Users/rx836/Desktop/hideShowPassword-master/index.html" target="_blank">完整的範例</a> 可以看</p>
 
-var a = new Obj();    
-Obj.prototype.height = 15;
-var b = new Obj();    
-var c = new Obj();    
+<h2>參考資料:</h2>
 
+<p><a href="http://blog.cloudfour.com/hide-show-passwords-plugin/" target="_blank">Hide/Show Passwords: The Missing Plugin</a></p>
 
-console.log(a.height);
-console.log(b.height);
-console.log(c.height);
-</code></pre>
-
-<p>有發現我只要給建構函式Obj的prototype屬性，從Obj實例出來的物件都有相同的屬性，而且不管是先實例出來的a還是後面實例出來的b、c都一樣擁有</p>
-
-<p>為什麼在原型物件Obj.prototype裡面增加屬性，會影響到從Obj建構式裡面實例出來的物件呢？</p>
-
-<p>原來是因為建構函式Obj的屬性prototype是原型物件Obj.prototype，但Obj.prototype裡面也有一個屬性叫做constructor又指回建構函式Obj，所以當Obj.prototype增加屬性的時候，就會連帶增加從建構式函式Obj實例出來的物件</p>
-
-<pre><code>Obj === Obj.prototype.constructor
-</code></pre>
-
-<p>不知道這樣說明，大家清楚嗎:)</p>
-
-<p>參考資料:</p>
-
-<p>自已</p>
+<p><a href="http://www.lukew.com/ff/entry.asp?1653" target="_blank">Mobile Design Details: Hide/Show Passwords</a></p>
 
 <p>內容如有錯誤，歡迎指正</p>
 </div>
@@ -254,12 +242,12 @@ console.log(c.height);
   
 
 
-<time datetime="2012-11-02T15:11:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
+<time datetime="2013-06-13T18:35:00+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+    <a class='category' href='/blog/categories/jq-plugin/'>jQ-Plugin</a>
   
 </span>
 
@@ -267,10 +255,8 @@ console.log(c.height);
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/first-amazon-web-services/" title="Previous Post: [學習筆記] 免費玩Amazon Web Service(AWS) EC2">&laquo; [學習筆記] 免費玩Amazon Web Service(AWS) EC2</a>
+        <a class="basic-alignment left" href="/blog/css3-transform/" title="Previous Post: [CSS3] 利用transform替網頁做小巧思">&laquo; [CSS3] 利用transform替網頁做小巧思</a>
       
-      
-        <a class="basic-alignment right" href="/blog/jquery-countdown-plugins/" title="Next Post: [jQ-Plugin] 倒數計時的plugin介紹">[jQ-Plugin] 倒數計時的plugin介紹 &raquo;</a>
       
     </p>
   </footer>
@@ -288,7 +274,7 @@ console.log(c.height);
     <div id="facebook_comments" aria-live="polite">
       <noscript>Please enable JavaScript to view the comments powered by facebook</noscript>
 <div class="fb-comments" 
-	data-href="http://blog.rx836.tw/blog/javascript-prototype/" 
+	data-href="http://blog.rx836.tw/blog/hide-show-passwords/" 
 	data-num-posts="5" 
 	data-width="570">
 </div>
@@ -355,9 +341,9 @@ console.log(c.height);
       
         
         // var disqus_developer = 1;
-        //var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-prototype/';
-		var disqus_identifier = 'http://blog.rx836.tw/blog/javascript-prototype/';
-        var disqus_url = 'http://blog.rx836.tw/blog/javascript-prototype/';
+        //var disqus_identifier = 'http://blog.rx836.tw/blog/hide-show-passwords/';
+		var disqus_identifier = 'http://blog.rx836.tw/blog/hide-show-passwords/';
+        var disqus_url = 'http://blog.rx836.tw/blog/hide-show-passwords/';
         var disqus_script = 'embed.js';
       
     (function () {
